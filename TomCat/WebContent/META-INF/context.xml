@@ -1,0 +1,11 @@
+<Context>
+	<Resource
+		name = "jdbc/mySQL"
+		auth = "Container"
+		type = "javax.sql.DataSource"
+		driverClassName = "com.mysql.jdbc.Driver"
+		url = "jdbc:mysql://localhost:3306/pretomcat"
+		username = "root"
+		password = "1234"
+	/>
+</Context>
