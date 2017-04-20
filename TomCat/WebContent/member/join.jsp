@@ -34,7 +34,7 @@
 			
 			/* join.jsp */			
 			div.join_div {
-				width: 700px;
+ 				width: 100%; 
 				margin: 0 auto;
 			}
 			div.join_div form {

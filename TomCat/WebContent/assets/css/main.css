@@ -2926,11 +2926,11 @@
 	.navPanelToggle {
 		text-decoration: none;
 		text-decoration: none;
-		height: 100%;
+		height: 100px;
 		left: 0;
 		position: absolute;
 		top: 0;
-		width: 8%;	/* 브라우저 크기 줄었을때 옆에서 메뉴 뜨게하는 클릭이벤트 적용되는 범위  (수정전 기본값 100%) */
+		width: 15%;	/* 釉뚮씪�슦�� �겕湲� 以꾩뿀�쓣�븣 �쁿�뿉�꽌 硫붾돱 �쑉寃뚰븯�뒗 �겢由��씠踰ㅽ듃 �쟻�슜�릺�뒗 踰붿쐞  (�닔�젙�쟾 湲곕낯媛� 100%) */
 		display: none;
 	}
 
