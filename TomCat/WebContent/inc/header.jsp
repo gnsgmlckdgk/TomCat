@@ -32,6 +32,8 @@
 		<!-- 추가한 js -->
 		
 	</head>
+	
+<body>
 <!-- Header -->
 <header id="header">
 	<h1>
