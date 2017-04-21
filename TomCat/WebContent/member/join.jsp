@@ -31,19 +31,14 @@
 			.clear {
 				clear: both;
 			}
-			
 			/* join.jsp */		
-			div.container_main {
-				width: 1000px;
-				margin: 0 auto;
-			}
-				
 			div.join_div {
- 				width: 100%; 
+ 				width: 70%; 
 				margin: 0 auto;
 			}
 			div.join_div form {
 				border: 3px solid #ccc;
+				min-width: 270px;
 				padding: 30px;
 			}
 			
@@ -52,6 +47,7 @@
 			}
 			
 			div.join_div input {
+				min-width: 200px;
 				margin-bottom: 15px;
 			}
 			div.join_div .email_btn {
@@ -60,8 +56,14 @@
 					margin-right: 15px;
 			}
 			div.join_div .email_check_input {
-				width: 240px;
+				width: 200px;
 				height: 40px;
+			}
+			
+			div.join_div .radio_box {
+				width: 200px;
+				margin-top: -17px;
+				margin-left: 20px;
 			}
 			
 			div.join_div div.join_btn {
@@ -85,7 +87,7 @@
 
 		<!-- Main -->
 			<section id="main" class="wrapper">
-				<div class="container_main">
+				<div class="container">
 				
 					<!-- 회원가입 -->
 					<div class="join_div">
@@ -110,12 +112,16 @@
 								<input type="text" name="nick" id="nick" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용" >
 							
 							<label for="gender">성별</label> 
+							<div class="radio_box">
 								<input type="radio" id="priority-normal man" name="pregender" value="남"  checked="checked">
 									<label for="priority-normal man">남</label>
 								<input type="radio" id="priority-normal woman" name="pregender" value="여" >
 									<label for="priority-normal woman">여</label><br>
 								<input type="hidden" name="gender" id="gender" value="" >	<!-- 암호화 후 넘길때 여기로 덮어쓰고 넘김 -->
+							</div>
 								
+							<div class="clear"></div>
+							
 							<label for="tel" >연락처</label> 
 								<input type="text" name="tel" id="tel" placeholder=" ' - '문자 생략, 예)01000000000" >
 							
