@@ -32,7 +32,12 @@
 				clear: both;
 			}
 			
-			/* join.jsp */			
+			/* join.jsp */		
+			div.container_main {
+				width: 1000px;
+				margin: 0 auto;
+			}
+				
 			div.join_div {
  				width: 100%; 
 				margin: 0 auto;
@@ -80,7 +85,7 @@
 
 		<!-- Main -->
 			<section id="main" class="wrapper">
-				<div class="container">
+				<div class="container_main">
 				
 					<!-- 회원가입 -->
 					<div class="join_div">
