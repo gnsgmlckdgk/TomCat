@@ -98,7 +98,7 @@
 							<label for="id">아이디</label> 
 								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." >
 							<input type="button" value="인증번호 전송" class="button alt small email_btn" >	<!-- 이메일 인증하기 -->
-							<input type="text" name="email_check" class="email_check_input" placeholder="인증번호를 입력하세요." >	
+							<input type="text" name="email_check" class="email_check_input" placeholder="인증번호를 입력" >	
 								
 							<div class="clear"></div>
 								
