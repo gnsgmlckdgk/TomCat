@@ -8,8 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href="./MemberJoin.me";
+		location.href="./Main.me";
 	</script>
 </body>
 </html>
-

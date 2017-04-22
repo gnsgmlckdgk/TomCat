@@ -4,7 +4,7 @@
 <!-- Header -->
 <header id="header">
 	<h1>
-		<strong><a href="index.html">Before</a></strong> you go...
+		<a href="index.html"><strong>Before</strong> you go...</a>
 	</h1>
 	<nav id="nav">
 		<ul>
