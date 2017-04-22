@@ -110,6 +110,7 @@
 								<input type="text" name="name" id="name" maxlength="16" >
 							<label for="nick">닉네임</label> 
 								<input type="text" name="nick" id="nick" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용" >
+								<input type="button" name="nick_check" value="닉네임 중복확인" class="button alt small" >
 							
 							<label for="gender">성별</label> 
 							<div class="radio_box">
@@ -145,5 +146,4 @@
 		<!-- Footer -->
 		<jsp:include page="../inc/footer.jsp" />
 		
-	</body>
-</html>
+		
