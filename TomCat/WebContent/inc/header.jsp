@@ -37,8 +37,8 @@
 <!-- Header -->
 <header id="header">
 	<h1>
-		<a href="index.html"><strong>Before</strong> you go...</a>
-		<strong><a href="index.html">사이트이름오는자리(메인으로 링크)</a></strong>
+		<a href="./Main.me"><strong>Before</strong> you go...</a>
+		
 	</h1>
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
