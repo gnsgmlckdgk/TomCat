@@ -20,10 +20,16 @@
 	</ul>
 	
 	<br>
-	
+	아래는 연습용 버튼입니다.
 	<ul class="actions"> <!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
-		<li><a href="./planRegion.pl?region='부산 여행'" class="button special big">부산 여행 get값 지역페이지</a></li>
+		
+		<li><a href="./planRegion.pl?region=부산" class="button special big">부산 get값 지역페이지</a></li>
+		<li><form action="./planRegion.pl" method="get">
+			<input type="text" name="region" placeholder="암거나 검색">
+			<input type="submit" value="검색" class="button special">
+		</form></li>
+		
 	</ul><!-- 테스트용 버튼들 끝. -->
 	</section>
 
