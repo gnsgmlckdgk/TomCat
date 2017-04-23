@@ -9,7 +9,7 @@
 	<section id="banner">
 	<h2>TomCat</h2>
 	<p>
-		Lorem ipsum dolor sit amet nullam consequat <br /> interdum vivamus
+		임시 메인화면 입니다. <br /> interdum vivamus
 		donce sed libero.
 	</p>
 	<ul class="actions">
@@ -21,9 +21,10 @@
 	
 	<br>
 	
-	<ul class="actions">
+	<ul class="actions"> <!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
-	</ul>
+		<li><a href="./planRegion.pl" class="button special big">지역페이지</a></li>
+	</ul><!-- 테스트용 버튼들 끝. -->
 	</section>
 
 	<!-- One -->
