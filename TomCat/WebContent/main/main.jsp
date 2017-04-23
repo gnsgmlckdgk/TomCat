@@ -23,7 +23,7 @@
 	
 	<ul class="actions"> <!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
-		<li><a href="./planRegion.pl" class="button special big">지역페이지</a></li>
+		<li><a href="./planRegion.pl?region='부산 여행'" class="button special big">부산 여행 get값 지역페이지</a></li>
 	</ul><!-- 테스트용 버튼들 끝. -->
 	</section>
 
