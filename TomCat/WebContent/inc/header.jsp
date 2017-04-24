@@ -28,7 +28,7 @@
 		
 		<!-- 추가한 css -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css" />
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />	<!-- ?ver=1 은 이클립스에서 수정한거 있을때 서버가 인식을 잘 못해서 넣음 -->
 		
 		<!-- 추가한 js -->
 		

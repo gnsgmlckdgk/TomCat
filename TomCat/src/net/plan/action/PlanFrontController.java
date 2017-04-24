@@ -21,7 +21,7 @@ public class PlanFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 		
-		if(command.equals("/PlanRegion.pl")) {	// 회원가입 입력 페이지
+		if(command.equals("/PlanRegion.pl")) {
 			forward = new ActionForward();
 			forward.setPath("./plan/planRegion.jsp");
 			forward.setRedirect(false);
