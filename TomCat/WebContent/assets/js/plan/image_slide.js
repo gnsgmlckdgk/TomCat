@@ -12,5 +12,5 @@ function carousel() {
 		myIndex = 1
 	}
 	x[myIndex - 1].style.display = "block";
-	setTimeout(carousel, 3000); // Change image every 1 seconds
+	setTimeout(carousel, 2000); // Change image every 1 seconds
 }// 이미지 슬라이드 스크립트 끝
