@@ -8,15 +8,17 @@
 <!-- Banner -->
 <!-- <section id="banner"> -->
 
-<%String region = request.getParameter("region"); %>
+<%
+	String region = request.getParameter("region");
+%>
 
 <%-- 	<h2><%=region %></h2> --%>
 <!-- 	<p> -->
 <!-- 		지역 목록의 링크 <br /> 타고오는 페이지 -->
 <!-- 	</p> -->
-	<!-- 	<ul class="actions"> -->
-	<!-- 		<li><a href="#" class="button special big">함께해요</a></li> -->
-	<!-- 	</ul> -->
+<!-- 	<ul class="actions"> -->
+<!-- 		<li><a href="#" class="button special big">함께해요</a></li> -->
+<!-- 	</ul> -->
 <!-- </section> -->
 
 <!-- One -->
@@ -25,13 +27,19 @@
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 				<header class="major">
-					<h2><%=region %> 설명</h2>
-					<p>Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor</p>
+					<h2><%=region%>
+						설명
+					</h2>
+					<p>
+						Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
+					</p>
 				</header>
 			</div>
 			<div class="6u$ 12u$(medium)">
-				<p>http://blog.acronym.co.kr/337 <br>
-				https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95</p>
+				<p>
+					http://blog.acronym.co.kr/337 <br>
+					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
+				</p>
 				<p>이 부분까지 위키피디아에서 파싱?</p>
 			</div>
 		</div>
@@ -48,13 +56,19 @@
 		<div class="row 150%">
 			<div class="6u 12u$(xsmall)">
 				<div class="image fit captioned">
-					<img src="./images/pic02.jpg" alt="" />
+					<img class="img_sld1 w3-animate-fading" src="./images/pic02.jpg" alt="" />
+					<img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" />
+
+					<!-- mySlides 클래스에 대한 이미지 슬라이드 시작 -->
+					<script src="./assets/js/plan/image_slide.js"></script>
+					<!-- mySlides 클래스에 대한 이미지 슬라이드 끝 -->
+
 					<h3>Lorem ipsum dolor sit amet.</h3>
 				</div>
 			</div>
 			<div class="6u$ 12u$(xsmall)">
 				<div class="image fit captioned">
-					<img src="./images/pic03.jpg" alt="" />
+					<img src="./images/pic03.jpg" alt="" />					
 					<h3>Illum, maiores tempora cupid?</h3>
 				</div>
 			</div>
@@ -70,21 +84,23 @@
 <section id="three" class="wrapper style1">
 	<div class="container">
 		<header class="major special">
-			<h2><%=region %> 사진</h2>
+			<h2><%=region%>
+				사진
+			</h2>
 			<p>Feugiat sed lorem ipsum magna</p>
 		</header>
 
 		<div class="feature-grid">
 
 			<!-- 이미지 서치 시작.-->
-			
+
 			<script src="./assets/js/plan/daumSearch3.js"></script>
 
 			<div id="daumForm">
-				<input id="daumSearch" type="hidden" value="<%=region %>+여행"
+				<input id="daumSearch" type="hidden" value="<%=region%>+여행"
 					onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
-<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
-<!-- 					type="submit" value="검색" /> -->
+				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
+				<!-- 					type="submit" value="검색" /> -->
 			</div>
 
 			<div id="daumView">
