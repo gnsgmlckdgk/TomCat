@@ -1,4 +1,7 @@
 
+// 닉네임 중복확인 했는지 여부 판단해주는 변수, 0이면 안한상태 또는 다시입력한 상태, 1이면 사용 가능한 닉네임인 상태
+var check = 0;
+
 // 이메일 인증번호 인증
 function emailCheckNumber() {
 	
@@ -16,12 +19,12 @@ function emailCheckNumber() {
 						$('#randomNum').val(data);	// 인증번호(hidden) 폼에 인증번호를 넣음
 					}
 			});
-		alert("인증번호 전송완료");
+		alert("인증번호 전송완료\n서버 상태에따라 시간이 지연될 수 있습니다.");
 	});
 	
 }
 
-// 닉네임 중복확인(버튼 눌렀을때)
+// 닉네임 중복확인
 function nickOverlapCheck() {
 	
 	$(document).ready(function(){
@@ -44,6 +47,7 @@ function nickOverlapCheck() {
 					return false;
 				}else if(data==1) {
 					alert("사용가능한 닉네임 입니다.");
+					check = 1;
 				}else {
 					alert("닉네임 중복확인 오류");
 					return false;
@@ -54,35 +58,15 @@ function nickOverlapCheck() {
 	
 }
 
-// 닉네임 중복확인만(회원가입 버튼 눌렀을때)
-function nickOverlapCheck2() {
-
-	$(document).ready(function(){
-		
-		// 닉네임 폼 입력 값 가져오기
-		var nick = $('#nick').val();
-		if(nick=="") {
-			alert("닉네임을 입력해주세요.");
-			return false;
-		}
-
-		// DB에서 중복확인
-		$.ajax('./member/joinCheck/nickOverlapCheck.jsp?nick='+nick, {
-			success: function(data) {
-				 if(data==0) {
-					alert("이미 있는 닉네임 입니다.");
-					return false;
-				}
-			}
-		});
-	});
-
+function check_change() {
+	check = 0;
 }
 
 // RSA암호화 및 제약조건
 function validateEncryptedForm() {
+
     var id = document.fr.id.value;
-    var emailCheckNumber = document.fr.email_check.value;							// 입력한 인증번호
+    var emailCheckNumber = document.fr.email_check.value;										// 입력한 인증번호
     var certificationNumber = document.getElementById("randomNum").value;		// 이메일로 보낸 인증번호
     var pass = document.fr.pass.value;
     var pass2 = document.fr.pass2.value;
@@ -140,7 +124,10 @@ function validateEncryptedForm() {
     	}
     	
     	// 닉네임 중복확인
-    	nickOverlapCheck2();
+    	if(check==0) {
+    		alert("닉네임 중복확인을 해주세요.");
+    		return false;
+    	}
     	
     try {
     	// 공개키 가져오기
@@ -159,14 +146,19 @@ function validateEncryptedForm() {
         var securedTel = rsa.encrypt(tel);
         
         // 암호화된 값들을 다시 폼에 덮어쓴다.
-        document.fr.id.value = securedId;
-        document.fr.pass.value = securedPass;
-        document.fr.pass2.value = securedPass2;
-        document.fr.nick.value = securedNick;
-        document.fr.gender.value = securedGender;
-        document.fr.tel.value = securedTel;
-        
-        return true;
+        if(check==1) {
+        	document.fr.id.value = securedId;
+            document.fr.pass.value = securedPass;
+            document.fr.pass2.value = securedPass2;
+            document.fr.nick.value = securedNick;
+            document.fr.gender.value = securedGender;
+            document.fr.tel.value = securedTel;
+            
+            return true;
+            
+        }else {
+        	return false;
+        }
         
     } catch(err) {
         alert(err);
