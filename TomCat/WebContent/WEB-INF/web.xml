@@ -15,7 +15,7 @@
 
 	<!-- Connection Pool -->
 	<resource-ref>
-		<description>preTomcat(본격적인 작업전 미리 만들어 놓는 DB)</description>
+		<description>Tomcat DB</description>
 		<res-ref-name>jdbc/mySQL</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>

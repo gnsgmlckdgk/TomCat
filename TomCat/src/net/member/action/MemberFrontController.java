@@ -21,7 +21,7 @@ public class MemberFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 		
-		if(command.equals("/Main.me")) {	// 회원가입 입력 페이지
+		if(command.equals("/Main.me")) {	// 메인 페이지
 			forward = new ActionForward();
 			forward.setPath("./main/main.jsp");
 			forward.setRedirect(false);

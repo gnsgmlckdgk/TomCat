@@ -1,4 +1,23 @@
 
+// 이메일 인증번호 인증
+function emailCheckNumber() {
+	
+	// 메일 전송하고 인증번호 폼에 초기화
+	$(document).ready(function(){
+		
+		var id = $('#id').val();	// 사용자가 입력한 이메일주소(아이디)
+		
+		// 여기문제잇음
+		$.ajax('./member/mailAuthentication.jsp?id='+id, {
+					success: function(data) {
+						$('#randomNum').val(data);	// 인증번호(hidden) 폼에 인증번호를 넣음
+					}
+			});
+		alert("인증번호전송완료");
+	});
+	
+}
+
 // RSA암호화
 function validateEncryptedForm() {
     var id = document.fr.id.value;
