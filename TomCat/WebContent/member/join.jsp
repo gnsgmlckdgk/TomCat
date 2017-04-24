@@ -15,7 +15,7 @@
 						<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return validateEncryptedForm()" >
 							
 							<label for="id">아이디</label> 
-								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." >
+								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." onchange="re_requestEmailCheck()">
 							<input type="button" value="인증번호 전송" onclick="emailCheckNumber()" class="button alt small email_btn" >	<!-- 이메일 인증하기 -->
 							<input type="text" id="randomNum" value="" >	<!-- 입력해야할 인증번호 -->
 							<input type="text" name="email_check" class="email_check_input" placeholder="인증번호 입력" >	

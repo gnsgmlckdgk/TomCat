@@ -2,7 +2,7 @@
 // 닉네임 중복확인 했는지 여부 판단해주는 변수, 0이면 안한상태 또는 다시입력한 상태, 1이면 사용 가능한 닉네임인 상태
 var check = 0;
 
-// 이메일 인증번호 인증
+// 아이디(이메일) 인증번호 인증
 function emailCheckNumber() {
 	
 	// 메일 전송하고 인증번호 폼에 초기화
@@ -16,12 +16,23 @@ function emailCheckNumber() {
 
 		$.ajax('./member/joinCheck/mailAuthentication.jsp?id='+id, {
 					success: function(data) {
-						$('#randomNum').val(data);	// 인증번호(hidden) 폼에 인증번호를 넣음
+						if(data==-1) {
+							alert("이미 사용중인 아이디 입니다.\n다른 아이디를 사용해 주세요.");
+						}else {
+							$('#randomNum').val(data);	// 인증번호(hidden) 폼에 인증번호를 넣음
+							alert("인증번호 전송완료\n서버 상태에 따라 인증번호 도착이 늦어질 수 있습니다.");
+						}	
 					}
 			});
-		alert("인증번호 전송완료\n서버 상태에따라 시간이 지연될 수 있습니다.");
 	});
 	
+}
+
+// 아이디(이메일) 재입력 시 다시 인증번호 받게 설정
+function re_requestEmailCheck() {
+	$(document).ready(function(){
+		$('#randomNum').val('');
+	});
 }
 
 // 닉네임 중복확인
@@ -58,6 +69,7 @@ function nickOverlapCheck() {
 	
 }
 
+// 닉네임 재입력 시 다시 중복확인 하게 설정
 function check_change() {
 	check = 0;
 }

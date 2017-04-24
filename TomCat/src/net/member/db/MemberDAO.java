@@ -25,6 +25,42 @@ public class MemberDAO {
 		return con;
 	}
 	
+	// 아이디(이메일) 중복체크
+	public int idOverlapCheck(String id) {
+		int check = 0;	// 0은 중복, 1은 사용가능
+		
+		try {
+			con = getConnection();
+			
+			sql = "select count(id) as count from member where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt("count") > 0) {	// 아이디 중복
+					check = 0;
+				}else {										// 아이디 사용가능
+					check = 1;
+				}
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return check;
+	}
+	
 	// 닉네임 중복체크
 	public int nickOverlapCheck(String nick) {
 		int check = -1;	// -1: 정규표현식 오류, 0: 중복, 1: 사용가능
