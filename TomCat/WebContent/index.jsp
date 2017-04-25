@@ -15,6 +15,9 @@
 	//join
 	//location.href="./MemberJoin.me";	
 	
+	//myplan
+	//locatio.href="./MyPlan.map"
+	
 	</script>
 </body>
 </html>

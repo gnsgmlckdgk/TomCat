@@ -50,6 +50,7 @@
 		<li><a href="elements.html">인생샷그램?</a></li>
 		<li><a href="elements.html">여행일정플랜</a></li>
 		<li><a href="elements.html">여행일정Q&A</a></li>
+		<li><a href="elements.html">여행일정관리</a></li>
 
 		<li><a href="elements.html"><span class="login_txt">로그인</span></a></li>
 	</ul>
