@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 
+/* 로그인/회원가입 링크 */
+.login_txt:hover {
+	cursor: pointer;
+}
+
 /* 팝업창 뜰때 팝업 이외의 화면은 가려주는 div */
 div#loginPopContainer {
 	position: fixed;

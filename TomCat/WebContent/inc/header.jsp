@@ -32,7 +32,7 @@
 		
 		<!-- 추가한 js -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>
+			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
 			
 	</head>
 	
@@ -58,7 +58,7 @@
 			if(id==null){ %>
 				<li><a onclick="popupToggle()"><span class="login_txt">로그인/회원가입</span></a></li>
 			<%}else { %>
-					<li><a href="#" ><span class="login_txt">마이페이지(추가예정)</span></a></li>
+					<li><a href="#" ><span>마이페이지(추가예정)</span></a></li>
 					<!-- 로그아웃은 어디넣을지 고민좀 해야겠습니다. -->
 				<%} %>
 			

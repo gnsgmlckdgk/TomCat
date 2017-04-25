@@ -13,6 +13,7 @@ function popupToggle() {
 				}
 			});
 			
+			$('#id_login').val('');	// 폼에 있는 값 지우기
 			$('#loginPopContainer').css('display', 'block');
 			$('#loginPop').css('display', 'block');
 		}else {	// 팝업 숨김
