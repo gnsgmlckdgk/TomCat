@@ -11,10 +11,7 @@
 	
 	//main
 	location.href="./Main.me";
-	
-	//join
-	//location.href="./MemberJoin.me";	
-	
+
 	</script>
 </body>
 </html>

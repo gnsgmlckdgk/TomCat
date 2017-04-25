@@ -1,5 +1,7 @@
 package net.member.db;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -142,5 +144,78 @@ public class MemberDAO {
 		
 	}
 
+	// 로그인 인증
+	public int memberLogin(String id, String pass) {
+		
+		// -1 아이디없음, 0 비밀번호 틀림, 1 비밀번호 맞음
+		int check = -1;
+		
+		try {
+			
+			con = getConnection();
+			
+			// DB의 pass가 단방향 암호화 SHA-256으로 되어있기때문에 매개변수 pass를 SHA-256암호화 후 비교한다.
+			sql = "select pass from member where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				String passSHA = txtSHA256(pass);	// SHA256 암호화
+				if(rs.getString("pass").equals(passSHA)) {
+					check = 1;
+				}else {	// 비밀번호 틀림
+					check = 0;
+				}
+			}else {	// 아이디 없음
+				check = -1;
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return check;
+	}
+	
+	// SHA256 암호화(비밀번호 확인 시 필요)
+	public String txtSHA256(String str){
+	
+		String SHA = ""; 
+	
+		try{
+			MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
+			sh.update(str.getBytes());
+			byte byteData[] = sh.digest();
+			StringBuffer sb = new StringBuffer(); 
+			for(int i = 0 ; i < byteData.length ; i++){
+				sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+			}
+			SHA = sb.toString();
+
+		}catch(NoSuchAlgorithmException e){
+			System.out.println("SHA256암호화 오류");
+			e.printStackTrace(); 
+			SHA = null; 
+		}
+			return SHA;
+	}
 	
 }
+
+
+
+
+
+
+
+
