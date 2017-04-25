@@ -1,3 +1,5 @@
+<%@page import="net.plan.db.PlanImageBean"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -12,16 +14,7 @@
 	String region = request.getParameter("region");
 %>
 
-<%-- 	<h2><%=region %></h2> --%>
-<!-- 	<p> -->
-<!-- 		지역 목록의 링크 <br /> 타고오는 페이지 -->
-<!-- 	</p> -->
-<!-- 	<ul class="actions"> -->
-<!-- 		<li><a href="#" class="button special big">함께해요</a></li> -->
-<!-- 	</ul> -->
-<!-- </section> -->
-
-<!-- One -->
+<!-- One 지역명 및 설명-->
 <section id="one" class="wrapper style1">
 	<div class="container 75%">
 		<div class="row 200%">
@@ -47,36 +40,100 @@
 </section>
 
 <!-- Two -->
+
+<%
+	List planImageList = (List) request.getAttribute("boardList");
+	int count = ((Integer) request.getAttribute("count")).intValue();
+	String pageNum = (String) request.getAttribute("pageNum");
+	int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
+	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
+%>
+
 <section id="two" class="wrapper style2 special">
 	<div class="container">
 		<header class="major">
 			<h2>관광지 . 맛집 . 숙소</h2>
-			<p>개발자의 추천</p><br><br>
-			<input type="button" value="전체" name="filter">
-			<input type="button" value="관광지" name="filter">
-			<input type="button" value="맛집" name="filter">
-			<input type="button" value="숙소" name="filter">
+			<p><%=count%>개의 추천지역이
+				<%=region%>에 있습니다!
+			</p>
+			<br> <br> <input type="button" value="전체" name="filter">
+			<input type="button" value="관광지" name="filter"> <input
+				type="button" value="맛집" name="filter"> <input type="button"
+				value="숙소" name="filter">
 		</header>
 		<div class="row 150%">
+
+			<%
+				if (2 == 3) {
+					for (int i = 0; i < planImageList.size(); i++) {
+						PlanImageBean pib = (PlanImageBean) planImageList.get(i);
+			%>
+
 			<div class="6u 12u$(xsmall)">
 				<div class="image fit captioned">
-					<img class="img_sld1 w3-animate-fading" src="./images/pic02.jpg" alt="" />
-					<img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" />
+
+					<img class="img_sld1 w3-animate-fading"
+						src="./upload/<%=pib.getFile()%>" alt="" />
+					<!-- 					<img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
-					<script src="./assets/js/plan/image_slide.js"></script>
+					<!-- 					<script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
 
-					<h3>[<%=region %> 맛집] Maiores</h3>
+					<h3>
+						[<%=region%>
+						<%=pib.getType()%>]
+						<%=pib.getImg_info()%>
+					</h3>
 				</div>
 			</div>
-			<div class="6u$ 12u$(xsmall)">
-				<div class="image fit captioned">
-					<img src="./images/pic03.jpg" alt="" />					
-					<h3>[<%=region %> 맛집] Maiores</h3>
-				</div>
-			</div>
+
+			<%
+				}
+				}
+			%>
+
 		</div>
+
+		<%
+			if (count != 0) {
+				//전체 페이지수 구하기 게시판 
+				//글 50개 한화면에 보여줄 글개수 10개일경우 => 전체 5 페이지
+				//글 56개 한화면에 보여줄 글개수 10개일경우 => 전체 6 페이지
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				//한 화면에 보여줄 페이지 번호 개수
+				int pageBlock = 10;
+				//시작페이지 번호 1~10 => 1    11~20 => 11   21~30 => 21
+				int startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
+				//		1		  = ((     2          - 1)/pageBlock)*pageBlock+1;
+				//		1		  = ((     9          - 1)/pageBlock)*pageBlock+1;
+				//		11		  = ((     12          - 1)/pageBlock)*pageBlock+1;
+				//		11		  = ((     19          - 1)/pageBlock)*pageBlock+1;
+				//끝페이지 번호
+				int endPage = startPage + pageBlock - 1;
+				if (endPage > pageCount) {
+					endPage = pageCount;
+				}
+				//이전
+				if (startPage > pageBlock) {
+		%><a href="./P.pl?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+		<%
+			}
+				// 1~10
+				for (int i = startPage; i <= endPage; i++) {
+		%><a href="./BoardList.pl?pageNum=<%=i%>">[<%=i%>]
+		</a>
+		<%
+			}
+				//다음
+				if (endPage < pageCount) {
+		%><a href="./BoardList.pl?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+		<%
+			}
+
+			}
+		%>
+
 		<ul class="actions">
 			<li><a href="#" class="button special big">Nulla luctus</a></li>
 			<li><a href="#" class="button big">Sed vulputate</a></li>
