@@ -29,11 +29,15 @@
 				</header>
 			</div>
 			<div class="6u$ 12u$(medium)">
-				<p>
-					http://blog.acronym.co.kr/337 <br>
-					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-				</p>
-				<p>이 부분까지 위키피디아에서 파싱?</p>
+			<!-- 수현씨 지도 부분 -->
+				<div style="border: 5px solid red">
+					<p>
+						http://blog.acronym.co.kr/337 <br>
+						https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
+					</p>
+					<p>이 부분까지 위키피디아에서 파싱?</p>
+				</div>
+				<!-- 수현씨 지도 부분 끝 -->
 			</div>
 		</div>
 	</div>
@@ -64,35 +68,34 @@
 		<div class="row 150%">
 
 			<%
-				if (2 == 3) {
+				//planImageList를 뿌려준다.
+				if (planImageList != null) {
 					for (int i = 0; i < planImageList.size(); i++) {
 						PlanImageBean pib = (PlanImageBean) planImageList.get(i);
 			%>
-
 			<div class="6u 12u$(xsmall)">
 				<div class="image fit captioned">
-
 					<img class="img_sld1 w3-animate-fading"
 						src="./upload/<%=pib.getFile()%>" alt="" />
-					<!-- 					<img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
+					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
-					<!-- 					<script src="./assets/js/plan/image_slide.js"></script> -->
+					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
-
 					<h3>
 						[<%=region%>
 						<%=pib.getType()%>]
-						<%=pib.getImg_info()%>
+						<%=pib.getImg_info()%><br>
+						<ul class="actions">
+							<li><a href="#" class="button special icon fa-download">찜</a></li>
+						</ul>
 					</h3>
 				</div>
 			</div>
-
 			<%
 				}
 				}
 			%>
-
 		</div>
 
 		<%
@@ -116,28 +119,23 @@
 				}
 				//이전
 				if (startPage > pageBlock) {
-		%><a href="./P.pl?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+		%><a href="./PlanRegion.pl?pageNum=<%=startPage - pageBlock%>">[이전]</a>
 		<%
 			}
 				// 1~10
 				for (int i = startPage; i <= endPage; i++) {
-		%><a href="./BoardList.pl?pageNum=<%=i%>">[<%=i%>]
+		%><a href="./PlanRegion.pl?pageNum=<%=i%>">[<%=i%>]
 		</a>
 		<%
 			}
 				//다음
 				if (endPage < pageCount) {
-		%><a href="./BoardList.pl?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+		%><a href="./PlanRegion.pl?pageNum=<%=startPage + pageBlock%>">[다음]</a>
 		<%
 			}
 
 			}
 		%>
-
-		<ul class="actions">
-			<li><a href="#" class="button special big">Nulla luctus</a></li>
-			<li><a href="#" class="button big">Sed vulputate</a></li>
-		</ul>
 	</div>
 </section>
 
