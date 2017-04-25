@@ -33,6 +33,7 @@
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
+
 				<iframe
 				  width="600"
 				  height="450"
@@ -44,6 +45,7 @@
 					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
 				</p>
 				<p>이 부분까지 위키피디아에서 파싱?</p>
+
 				</div>
 			<!-- 수현씨 지도 부분 끝 -->
 		</div>
@@ -67,10 +69,18 @@
 			<p><%=count%>개의 추천지역이
 				<%=region%>에 있습니다!
 			</p>
-			<br> <br> <input type="button" value="전체" name="filter">
-			<input type="button" value="관광지" name="filter"> <input
-				type="button" value="맛집" name="filter"> <input type="button"
-				value="숙소" name="filter">
+			<br> <input type="button" class="button alt fit"
+				onclick="location.href='#'" value="내가 작성하기" /> <br>
+			<%
+				if (count != 0) {
+			%>
+			<input type="button" value="전체" name="spotFilter"> <input
+				type="button" value="관광지" name="spotFilter"> <input
+				type="button" value="맛집" name="spotFilter"> <input type="button"
+				value="숙소" name="spotFilter">
+			<%
+				}
+			%>
 		</header>
 		<div class="row 150%">
 
@@ -83,7 +93,8 @@
 			<div class="6u 12u$(xsmall)">
 				<div class="image fit captioned">
 					<img class="img_sld1 w3-animate-fading"
-						src="./upload/<%=pib.getFile()%>" alt="" />
+						src="./upload/<%=pib.getFile()%>"
+						alt="<%=region%> <%=pib.getType()%>" />
 					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
@@ -91,7 +102,7 @@
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
 					<h3>
 						[<%=region%>
-						<%=pib.getType()%>]
+						<%=pib.getType()%>]<br>
 						<%=pib.getImg_info()%><br>
 						<ul class="actions">
 							<li><a href="#" class="button special icon fa-download">찜</a></li>
