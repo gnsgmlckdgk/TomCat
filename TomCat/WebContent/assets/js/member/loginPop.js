@@ -26,8 +26,8 @@ function popupToggle() {
 /* 로그인 인증 */
 function validateEncryptedLoginForm() {
 
-	var id = document.fr.id.value;
-	var pass = document.fr.pass.value;
+	var id = document.login_form.id_login.value;
+	var pass = document.login_form.pass_login.value;
 	
 	if(id=="" || pass==""){
 		alert("아이디/비밀번호를 입력해주세요.");
@@ -35,19 +35,19 @@ function validateEncryptedLoginForm() {
 	}
 	
 	// 공개키 가져오기
-    var rsaPublicKeyModulus = document.getElementById("rsaPublicKeyModulus").value;
-    var rsaPublicKeyExponent = document.getElementById("rsaPublicKeyExponent").value;
+    var rsaPublicKeyModulusLogin = document.getElementById("rsaPublicKeyModulusLogin").value;
+    var rsaPublicKeyExponentLogin = document.getElementById("rsaPublicKeyExponentLogin").value;
     
     var rsa = new RSAKey();
-    rsa.setPublic(rsaPublicKeyModulus, rsaPublicKeyExponent);
+    rsa.setPublic(rsaPublicKeyModulusLogin, rsaPublicKeyExponentLogin);
     
     // 사용자ID와 비밀번호를 RSA로 암호화한다.(이름은 암호화 제외)
     var securedId = rsa.encrypt(id);
     var securedPass = rsa.encrypt(pass);
     
     // 암호화된 값을 다시 폼에 넣는다.
-    document.fr.id.value = securedId;
-    document.fr.pass.value = securedPass;
+    document.login_form.id_login.value = securedId;
+    document.login_form.pass_login.value = securedPass;
     
     return true;
 }

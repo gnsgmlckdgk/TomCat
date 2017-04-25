@@ -4,6 +4,9 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 추가한 스크립트 -->
+<script type="text/javascript" src="./assets/js/member/join.js"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+
 		<!-- Main -->
 			<section id="main" class="wrapper">
 				<div class="container">

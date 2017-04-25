@@ -35,8 +35,8 @@ public class MemberLoginKeySetting {
 		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
 
 		// request에 공개키 담기
-		request.setAttribute("publicKeyModulus", publicKeyModulus);
-		request.setAttribute("publicKeyExponent", publicKeyExponent);
+		request.setAttribute("publicKeyModulusLogin", publicKeyModulus);
+		request.setAttribute("publicKeyExponentLogin", publicKeyExponent);
 	}
 	
 }

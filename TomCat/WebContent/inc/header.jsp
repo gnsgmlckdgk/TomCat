@@ -21,15 +21,13 @@
         	<script type="text/javascript" src="./assets/js/rsa/rsa.js"></script>
        		<script type="text/javascript" src="./assets/js/rsa/prng4.js"></script>
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
-        	<script type="text/javascript" src="./assets/js/member/join.js"></script>	<!-- 회원가입 제약조건 및 암호화 -->
-			
-			
+        	
 		<!-- 스타일 불러오기 -->
 		<link rel="stylesheet" href="./assets/css/main.css" />
 		
 		<!-- 추가한 css -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />	<!-- ?ver=1 은 이클립스에서 수정한거 있을때 서버가 인식을 잘 못해서 넣음 -->
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=2" />
 		
 		<!-- 추가한 js -->
@@ -76,9 +74,10 @@
 <div id="loginPopContainer" onclick="popupToggle()"></div>
 <!-- 로그인 팝업창 -->
 <div id="loginPop">
-	<form action="./MemberLoginAction.me" post="post" name="fr" id="login_form" onsubmit="return validateEncryptedLoginForm()">
-		<input type="email" name="id" id="id"  placeholder="이메일을 입력하세요." >
-		<input type="password" name="pass" id="pass" placeholder="비밀번호를 입력하세요."><br>
+	<form action="./MemberLoginAction.me" post="post" name="login_form" id="login_form" onsubmit="return validateEncryptedLoginForm()">
+		
+		<input type="email" name="id_login" id="id_login"  placeholder="이메일을 입력하세요." >
+		<input type="password" name="pass_login" id="pass_login" placeholder="비밀번호를 입력하세요."><br>
 
 		<input type="submit" class="button special loginBtn" value="로그인" >
 		

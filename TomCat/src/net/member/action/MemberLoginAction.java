@@ -22,8 +22,8 @@ public class MemberLoginAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		// 파라미터 값 가져오기
-		String securedId = request.getParameter("id");
-		String securedPass = request.getParameter("pass");
+		String securedId = request.getParameter("id_login");
+		String securedPass = request.getParameter("pass_login");
 		
 		// RSA암호화 한 값 복호화
         HttpSession session = request.getSession();

@@ -8,5 +8,5 @@
     keySet.ketSet(request);	// request에 공개키 담음
     %>
     
-<input type="hidden" id="rsaPublicKeyModulus" value="<%=request.getAttribute("publicKeyModulus")%>" />
-<input type="hidden" id="rsaPublicKeyExponent" value="<%=request.getAttribute("publicKeyExponent")%>" />
+<input type="hidden" id="rsaPublicKeyModulusLogin" value="<%=request.getAttribute("publicKeyModulusLogin")%>" />
+<input type="hidden" id="rsaPublicKeyExponentLogin" value="<%=request.getAttribute("publicKeyExponentLogin")%>" />
