@@ -51,7 +51,11 @@
 	<div class="container">
 		<header class="major">
 			<h2>관광지 . 맛집 . 숙소</h2>
-			<p>개발자의 추천</p>
+			<p>개발자의 추천</p><br><br>
+			<input type="button" value="전체" name="filter">
+			<input type="button" value="관광지" name="filter">
+			<input type="button" value="맛집" name="filter">
+			<input type="button" value="숙소" name="filter">
 		</header>
 		<div class="row 150%">
 			<div class="6u 12u$(xsmall)">
@@ -59,17 +63,17 @@
 					<img class="img_sld1 w3-animate-fading" src="./images/pic02.jpg" alt="" />
 					<img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" />
 
-					<!-- mySlides 클래스에 대한 이미지 슬라이드 시작 -->
+					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
 					<script src="./assets/js/plan/image_slide.js"></script>
-					<!-- mySlides 클래스에 대한 이미지 슬라이드 끝 -->
+					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
 
-					<h3>Lorem ipsum dolor sit amet.</h3>
+					<h3>[<%=region %> 맛집] Maiores</h3>
 				</div>
 			</div>
 			<div class="6u$ 12u$(xsmall)">
 				<div class="image fit captioned">
 					<img src="./images/pic03.jpg" alt="" />					
-					<h3>Illum, maiores tempora cupid?</h3>
+					<h3>[<%=region %> 맛집] Maiores</h3>
 				</div>
 			</div>
 		</div>
