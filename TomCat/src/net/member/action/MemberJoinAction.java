@@ -22,9 +22,9 @@ public class MemberJoinAction implements Action {
 		
         // 이동정보 객체 반환
         ActionForward forward = new ActionForward();
-        // 확인을 위해서 임시로 페이지 지정
-        forward.setPath("./MemberTest.me");
-        forward.setRedirect(false);
+        // 로그인 페이지로 이동
+        forward.setPath("./MemberLogin.me");
+        forward.setRedirect(true);
 		
 		return forward;
 	}
@@ -72,14 +72,15 @@ public class MemberJoinAction implements Action {
             Timestamp reg_date = new Timestamp(System.currentTimeMillis());
             mb.setReg_date(reg_date);
             mb.setProfile(null);
+            mb.setAuth(1);		// 처음가입땐 무조건 1(일반사용자)
             
             // DB작업
             MemberDAO mdao = new MemberDAO();
             mdao.insertMember(mb);
             
             // 세션값 생성
-            session.setAttribute("id", id);
-            session.setAttribute("nick", nick);
+            session.setAttribute("id", id);				// 아이디
+            session.setAttribute("nick", nick);		// 닉네임
             
         } catch (Exception ex) {
             throw new ServletException(ex.getMessage(), ex);

@@ -11,6 +11,7 @@ public class MemberBean {
 	private String tel;
 	private Timestamp reg_date;
 	private String profile;
+	private int auth;	// 0: 관리자, 1: 일반사용자, 2: 제휴업체(?)
 	
 	public String getId() {
 		return id;
@@ -59,5 +60,11 @@ public class MemberBean {
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	public void setAuth(int auth) {
+		this.auth = auth;
+	}
+	public int getAuth() {
+		return auth;
 	}
 }

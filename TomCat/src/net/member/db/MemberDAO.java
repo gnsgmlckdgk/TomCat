@@ -3,6 +3,7 @@ package net.member.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Pattern;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -22,6 +23,84 @@ public class MemberDAO {
 		con = ds.getConnection();
 		
 		return con;
+	}
+	
+	// 아이디(이메일) 중복체크
+	public int idOverlapCheck(String id) {
+		int check = 0;	// 0은 중복, 1은 사용가능
+		
+		try {
+			con = getConnection();
+			
+			sql = "select count(id) as count from member where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt("count") > 0) {	// 아이디 중복
+					check = 0;
+				}else {										// 아이디 사용가능
+					check = 1;
+				}
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return check;
+	}
+	
+	// 닉네임 중복체크
+	public int nickOverlapCheck(String nick) {
+		int check = -1;	// -1: 정규표현식 오류, 0: 중복, 1: 사용가능
+		
+		// 정규표현식 검사
+		// 영문, 한글 시작 영문,숫자,한글 조합 가능 2~9자
+		if(!Pattern.matches("^[a-z|A-Z|가-힣][a-z|A-Z|0-9|가-힣]{1,8}", nick)) {		// 정규표현식에 맞지 않으면
+			return check;	// -1 반환
+		}
+		
+		// 중복검사
+		try{
+			con = getConnection();
+			
+			sql = "select count(id) as count from member where nick=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nick);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt("count") == 0) {
+					check = 1;
+				}else if(rs.getInt("count")>0) {
+					check = 0;
+				}
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return check;
 	}
 	
 	// 회원가입
@@ -45,7 +124,7 @@ public class MemberDAO {
 			ps.setString(6, mb.getTel());		// 암호화키 임시로 tel로 해놓음
 			ps.setTimestamp(7, mb.getReg_date());
 			ps.setString(8, mb.getProfile());
-			ps.setInt(9, 0);
+			ps.setInt(9, mb.getAuth());		// 처음 가입땐 1(일반사용자)
 			
 			ps.executeUpdate();
 			
@@ -53,12 +132,15 @@ public class MemberDAO {
 			e.printStackTrace();
 		}finally {
 			try{
-				
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
 	}
+
 	
 }

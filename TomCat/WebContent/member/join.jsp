@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-		<!-- Header -->
-		<jsp:include page="../inc/header.jsp" />
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
 
 		<!-- Main -->
 			<section id="main" class="wrapper">
@@ -15,22 +15,22 @@
 						<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return validateEncryptedForm()" >
 							
 							<label for="id">아이디</label> 
-								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." >
+								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." onchange="re_requestEmailCheck()">
 							<input type="button" value="인증번호 전송" onclick="emailCheckNumber()" class="button alt small email_btn" >	<!-- 이메일 인증하기 -->
-							<input type="hidden" value=""  id="randomNum">	<!-- 입력해야할 인증번호 -->
+							<input type="text" id="randomNum" value="" >	<!-- 입력해야할 인증번호 -->
 							<input type="text" name="email_check" class="email_check_input" placeholder="인증번호 입력" >	
 								
 							<div class="clear"></div>
 								
 							<label for="pass">비밀번호</label> 
-								<input type="password" name="pass" id="pass" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용" >
+								<input type="password" name="pass" id="pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용" >
 							<label for="">비밀번호 확인</label> 
-								<input type="password" name="pass2" id="pass2" >
+								<input type="password" name="pass2" id="pass2" maxlength="16">
 							<label for="name">이름</label> 
-								<input type="text" name="name" id="name" maxlength="16" >
+								<input type="text" name="name" id="name">
 							<label for="nick">닉네임</label> 
-								<input type="text" name="nick" id="nick" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용" >
-								<input type="button" name="nick_check" value="닉네임 중복확인" class="button alt small" >
+								<input type="text" name="nick" id="nick" maxlength="16" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"  onchange="check_change()">
+								<input type="button" name="nick_check" value="닉네임 중복확인" onclick="nickOverlapCheck()" class="button alt small" >
 							
 							<label for="gender">성별</label> 
 							<div class="radio_box">
@@ -44,7 +44,7 @@
 							<div class="clear"></div>
 							
 							<label for="tel" >연락처</label> 
-								<input type="text" name="tel" id="tel" placeholder=" ' - '문자 생략, 예)01000000000" >
+								<input type="text" name="tel" id="tel" maxlength="20" placeholder=" ' - '문자 생략, 예)01000000000" >
 							
 							<!-- 공개키 -->
 							<input type="hidden" id="rsaPublicKeyModulus" value="<%=request.getAttribute("publicKeyModulus") %>">
@@ -63,7 +63,7 @@
 				</div>	<!-- container -->
 		</section>
 		
-		<!-- Footer -->
-		<jsp:include page="../inc/footer.jsp" />
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />
 		
 		

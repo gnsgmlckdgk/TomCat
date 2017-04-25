@@ -31,6 +31,10 @@ div.join_div .email_btn {
 	margin-right: 15px;
 }
 
+div.join_div #randomNum {
+	display: none;	
+}
+
 div.join_div .email_check_input {
 	width: 200px;
 	height: 40px;
