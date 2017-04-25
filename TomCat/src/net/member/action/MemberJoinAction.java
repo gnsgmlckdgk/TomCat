@@ -78,10 +78,6 @@ public class MemberJoinAction implements Action {
             MemberDAO mdao = new MemberDAO();
             mdao.insertMember(mb);
             
-            // 세션값 생성
-            session.setAttribute("id", id);				// 아이디
-            session.setAttribute("nick", nick);		// 닉네임
-            
         } catch (Exception ex) {
             throw new ServletException(ex.getMessage(), ex);
         }
