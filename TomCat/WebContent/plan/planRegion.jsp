@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="./assets/css/map/map.css" />
 <%
 	String region = request.getParameter("region");
-	String id = (String)session.getAttribute("id");
+	String id = (String) session.getAttribute("id");
 %>
 
 
@@ -28,24 +28,24 @@
 					</h2>
 					<p>
 						Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
-					</p><br>
+					</p>
+					<br>
 					<p>
-					http://blog.acronym.co.kr/337 <br>
-					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-				</p><br>
-				<p>이 부분까지 위키피디아에서 파싱???</p>
-				
+						http://blog.acronym.co.kr/337 <br>
+						https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
+					</p>
+					<br>
+					<p>이 부분까지 위키피디아에서 파싱???</p>
+
 				</header>
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
-				<iframe
-				  width="600"
-				  height="450"
-				  frameborder="0" style="border:0"
-				  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region %>" allowfullscreen>
-				</iframe>
-				</div>
+				<iframe width="600em" height="400em" frameborder="0"
+					style="border: 0"
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>"
+					allowfullscreen> </iframe>
+			</div>
 			<!-- 수현씨 지도 부분 끝 -->
 		</div>
 	</div>
@@ -54,7 +54,7 @@
 <!-- Two -->
 
 <%
-	List planImageList = (List) request.getAttribute("boardList");
+	List planImageList = (List) request.getAttribute("planImageList");
 	int count = ((Integer) request.getAttribute("count")).intValue();
 	String pageNum = (String) request.getAttribute("pageNum");
 	int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
@@ -75,8 +75,8 @@
 			%>
 			<input type="button" value="전체" name="spotFilter"> <input
 				type="button" value="관광지" name="spotFilter"> <input
-				type="button" value="맛집" name="spotFilter"> <input type="button"
-				value="숙소" name="spotFilter">
+				type="button" value="맛집" name="spotFilter"> <input
+				type="button" value="숙소" name="spotFilter">
 			<%
 				}
 			%>
@@ -93,16 +93,13 @@
 				<div class="image fit captioned">
 					<img class="img_sld1 w3-animate-fading"
 						src="./upload/<%=pib.getFile()%>"
-						alt="<%=region%> <%=pib.getType()%>" />
+						alt="<%=region%> <%=pib.getType()%> <%=pib.getImg_info() %>" />
 					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
 					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
-					<h3>
-						[<%=region%>
-						<%=pib.getType()%>]<br>
-						<%=pib.getImg_info()%><br>
+					<h3> [<%=region%> <%=pib.getType()%>]<br><%=pib.getImg_info()%><br>
 						<ul class="actions">
 							<li><a href="#" class="button special icon fa-download">찜</a></li>
 						</ul>
@@ -114,7 +111,6 @@
 				}
 			%>
 		</div>
-
 		<%
 			if (count != 0) {
 				//전체 페이지수 구하기 게시판 
@@ -136,21 +132,24 @@
 				}
 				//이전
 				if (startPage > pageBlock) {
-		%><a href="./PlanRegion.pl?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+		%><a
+			href="./PlanRegion.pl?pageNum=<%=startPage - pageBlock%>&region=<%=region%>">[이전]</a>
 		<%
 			}
 				// 1~10
 				for (int i = startPage; i <= endPage; i++) {
-		%><a href="./PlanRegion.pl?pageNum=<%=i%>">[<%=i%>]
-		</a>
-		<%
+					if (Integer.parseInt(pageNum) != i) {
+		%><a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[<%=i%>]</a><%
+			} else {
+		%>[<%=i%>]<%
 			}
+				}
 				//다음
 				if (endPage < pageCount) {
-		%><a href="./PlanRegion.pl?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+		%><a
+			href="./PlanRegion.pl?pageNum=<%=startPage + pageBlock%>&region=<%=region%>">[다음]</a>
 		<%
 			}
-
 			}
 		%>
 	</div>
@@ -163,7 +162,7 @@
 			<h2><%=region%>
 				사진
 			</h2>
-			<p>Feugiat sed lorem ipsum magna</p>
+<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
 		</header>
 
 		<div class="feature-grid">
