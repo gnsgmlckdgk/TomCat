@@ -69,6 +69,23 @@
 
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
+<%
+	// 아이디, 비밀번호 입력 후 틀렸을때 다시 팝업창 띄우기 위해 변수 생성
+	String loginCheckStr = request.getParameter("loginCheck");
+	int loginCheck;
+	if(loginCheckStr!=null) {
+		loginCheck = Integer.parseInt(loginCheckStr);
+	}else {
+		loginCheck = 1;
+	}
+	if(loginCheck==0 || loginCheck==-1) {
+		%>
+			<script type="text/javascript">
+				popupToggle();
+			</script>
+		<%
+	}
+%>
 
 <!-- 로그인 팝업창 뜰때 배경 -->
 <div id="loginPopContainer" onclick="popupToggle()"></div>
