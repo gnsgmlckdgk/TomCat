@@ -55,11 +55,12 @@
 			<li><a href="elements.html">여행일정플래너</a></li>
 			<li><a href="elements.html">여행일정Q&A</a></li>
 			<li><a href="elements.html">인생샷그램</a></li>
+			<li><a href="elements.html">내일정관리</a></li>
 			<%
 			if(id==null){ %>
 				<li><a onclick="popupToggle()"><span class="login_txt">로그인/회원가입</span></a></li>
 			<%}else { %>
-					<li><a href="#" ><span>마이페이지(추가예정)</span></a></li>
+					<li><a href="#" ><span>회원관리</span></a></li>
 					<!-- 로그아웃은 어디넣을지 고민좀 해야겠습니다. -->
 				<%} %>
 			
