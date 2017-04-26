@@ -210,6 +210,54 @@ public class MemberDAO {
 			return SHA;
 	}
 	
+	// 회원정보 가져오기
+	public MemberBean getMember(String id) {
+		
+		MemberBean mb = new MemberBean();
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select id, pass, name, nick, gender, AES_DECRYPT(UNHEX(tel), 'tel') as tel, reg_date, profile, auth"
+					+ " from member where id = ?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {	// 아이디가 있으면
+				
+				mb.setId(id);
+				mb.setPass(rs.getString("pass"));
+				mb.setName(rs.getString("name"));
+				mb.setNick(rs.getString("nick"));
+				mb.setGender(rs.getString("gender"));
+				mb.setTel(rs.getString("tel"));
+				mb.setReg_date(rs.getTimestamp("reg_date"));
+				mb.setProfile(rs.getString("profile"));
+				mb.setAuth(rs.getInt("auth"));
+				
+			}else {	// 아이디가 없으면
+				return mb;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return mb;
+	}
+	
 }
 
 

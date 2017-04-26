@@ -37,10 +37,11 @@
 	</head>
 	
 <body>
-<!-- 세션값 가져오기 -->
+
 <%
+	// 세션값 가져오기
 	String id = (String)session.getAttribute("id");
-	System.out.println("세션 id: " + id);	// 디버깅 용
+	String nick = (String)session.getAttribute("nick");	// 닉네임
 %>
 
 <!-- Header -->
