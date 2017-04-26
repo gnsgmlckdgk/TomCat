@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<%String id = (String)session.getAttribute("id");
+String nick = (String)session.getAttribute("nick");%>
 	<!-- Header -->
 	<jsp:include page="../inc/header.jsp" />
 
@@ -9,8 +10,7 @@
 	<section id="banner">
 	<h2>TomCat</h2>
 	<p>
-		임시 메인화면 입니다. <br /> interdum vivamus
-		donce sed libero.
+		임시 메인화면 입니다. <br /> 현재 session의 id는 <%=id %>, nick은 <%=nick %>입니다.
 	</p>
 	<ul class="actions">
 		<li><a href="#" class="button special big">함께해요</a></li>
@@ -25,9 +25,8 @@
 	<ul class="actions"> <!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
 		
-		<li><a href="./PlanRegion.pl?region=부산" class="button special big">부산 get값 지역페이지</a></li>
 		<li><form action="./PlanRegion.pl" method="get">
-			<input type="text" name="region" placeholder="암거나 검색">
+			<input type="text" name="region" style="background-color: white" placeholder="암거나 검색">
 			<input type="submit" value="검색" class="button special">
 		</form></li>
 		

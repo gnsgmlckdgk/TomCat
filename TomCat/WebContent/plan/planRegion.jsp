@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="./assets/css/map/map.css" />
 <%
 	String region = request.getParameter("region");
+	String id = (String)session.getAttribute("id");
 %>
 
 
