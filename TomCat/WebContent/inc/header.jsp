@@ -62,7 +62,7 @@
 				<li><a onclick="popupToggle()"><span class="login_txt">로그인/회원가입</span></a></li>
 			<%}else { %>
 					<li><a href="#" ><span>회원관리</span></a></li>
-					<!-- 로그아웃은 어디넣을지 고민좀 해야겠습니다. -->
+					<!-- 로그아웃은 회원관리 페이지에 -->
 				<%} %>
 			
 		</ul>
