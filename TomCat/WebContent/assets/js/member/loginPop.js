@@ -14,11 +14,17 @@ function popupToggle() {
 			});
 			
 			$('#id_login').val('');	// 폼에 있는 값 지우기
+			$('#pass_login').val('');	// 폼에 있는 값 지우기
 			$('#loginPopContainer').css('display', 'block');
 			$('#loginPop').css('display', 'block');
+			
 		}else {	// 팝업 숨김
 			$('#loginPopContainer').css('display', 'none');
 			$('#loginPop').css('display', 'none');
+			
+			// 공개키 hidden태그 지우기
+			$('#rsaPublicKeyModulusLogin').remove();
+			$('#rsaPublicKeyExponentLogin').remove();
 		}
 	});
 	

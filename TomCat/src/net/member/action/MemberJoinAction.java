@@ -23,7 +23,7 @@ public class MemberJoinAction implements Action {
         // 이동정보 객체 반환
         ActionForward forward = new ActionForward();
         // 로그인 페이지로 이동
-        forward.setPath("./MemberLogin.me");
+        forward.setPath("./Main.me");
         forward.setRedirect(true);
 		
 		return forward;
