@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.naming.Context;
@@ -256,6 +258,42 @@ public class MemberDAO {
 		}
 		
 		return mb;
+	}
+	
+	// 읽어버린 아이디 찾기
+	public List<String> getLostMemberId(String name, String tel) {
+	
+		List<String> idList = new ArrayList<String>();
+
+		try {
+			
+			con = getConnection();
+			
+			sql = "select id from member where name=? && AES_DECRYPT(UNHEX(tel), tel) = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, tel);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				idList.add(rs.getString("id"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return idList;
+		
 	}
 	
 }
