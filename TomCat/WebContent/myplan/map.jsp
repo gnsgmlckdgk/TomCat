@@ -8,60 +8,9 @@
 	<title>Tomcat</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- 스타일 불러오기 -->
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<style>
-      #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
-
-      #right-panel select {
-        width: 100%;
-      }
-
-      #right-panel i {
-        font-size: 12px;
-      }
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-        float: left;
-        width: 70%;
-        height: 100%;
-        margin-left: 100px;
-        margin-bottom: 100px;
-      }
-      #right-panel {
-        margin: 20px;
-        border-width: 2px;
-        width: 20%;
-        height: 400px;
-        float: left;
-        text-align: left;
-        padding-top: 0;
-      }
-      #directions-panel {
-        margin-top: 10px;
-        background-color: #FFEE77;
-        padding: 10px;
-      }
-      .clear {
-		clear:both;
-	  }
-	  h2 {
-	      padding: 186px 30px 30px 111px;
-	      font-size: 50px;
-	  }
-    </style>
+	<link rel="stylesheet" href="./assets/css/map/map.css" />
 	</head>
 	<body>	
 	<div class="clear"></div>
