@@ -40,6 +40,7 @@
 <!-- 세션값 가져오기 -->
 <%
 	String id = (String)session.getAttribute("id");
+	System.out.println("세션 id: " + id);	// 디버깅 용
 %>
 
 <!-- Header -->

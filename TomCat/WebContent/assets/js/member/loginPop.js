@@ -6,12 +6,17 @@ function popupToggle() {
 		// 팝업 띄움
 		if($('#loginPopContainer').css('display')=="none") {
 			
-			// 공개키 가져오기(RSA암호화 준비)
-			$.ajax('./member/loginPop.jsp', {
-				success: function(data){
-					$('#login_form').append(data);
-				}
-			});
+			// 현재 페이지 정보, 회원가입 페이지에서 로그인 링크 누르면 공개키가 또 생성되서 오류 발생하기 때문에 현재페이지 정보 얻어와서 처리
+			var pageLocation = window.location.pathname;
+			// 회원가입 페이지에서 로그인 팝업을 띄운경우 공개키, 개인키가 새로 생성되지 않게 하기
+			if(pageLocation!="/TomCat/MemberJoin.me") {
+				// 공개키 가져오기(RSA암호화 준비)
+				$.ajax('./member/loginPop.jsp', {
+					success: function(data){
+						$('#login_form').append(data);
+					}
+				});
+			}
 			
 			$('#id_login').val('');	// 폼에 있는 값 지우기
 			$('#pass_login').val('');	// 폼에 있는 값 지우기
