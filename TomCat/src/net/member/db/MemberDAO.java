@@ -261,26 +261,31 @@ public class MemberDAO {
 	}
 	
 	// 읽어버린 아이디 찾기
-	public List<String> getLostMemberId(String name, String tel) {
+	public List<MemberBean> getFinderMemberId(String name, String tel) {
 	
-		List<String> idList = new ArrayList<String>();
-
-		try {
-			
+		List<MemberBean> idList = new ArrayList<MemberBean>();
+		
+		try {			
 			con = getConnection();
 			
-			sql = "select id from member where name=? && AES_DECRYPT(UNHEX(tel), tel) = ?";
+			sql = "select id, reg_date from member where name=? && AES_DECRYPT(UNHEX(tel), 'tel') = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, tel);
 			
 			rs = ps.executeQuery();
 			
+			MemberBean mb;
 			while(rs.next()) {
-				idList.add(rs.getString("id"));
+				mb = new MemberBean();
+				mb.setId(rs.getString("id"));
+				mb.setReg_date(rs.getTimestamp("reg_date"));
+				
+				idList.add(mb);
 			}
 			
 		}catch(Exception e) {
+			System.out.println("MemberDAO클래스 getFinderMemberId() 예외 오류");
 			e.printStackTrace();
 		}finally {
 			try{
