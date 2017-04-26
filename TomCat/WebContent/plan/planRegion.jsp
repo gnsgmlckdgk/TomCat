@@ -33,7 +33,6 @@
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
-
 				<iframe
 				  width="600"
 				  height="450"
