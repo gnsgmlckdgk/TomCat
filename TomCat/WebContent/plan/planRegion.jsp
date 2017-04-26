@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="./assets/css/map/map.css" />
 <%
 	String region = request.getParameter("region");
+	String id = (String)session.getAttribute("id");
 %>
 
 
@@ -27,7 +28,12 @@
 					</h2>
 					<p>
 						Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
-					</p>
+					</p><br>
+					<p>
+					http://blog.acronym.co.kr/337 <br>
+					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
+				</p><br>
+				<p>이 부분까지 위키피디아에서 파싱???</p>
 				
 				</header>
 			</div>
@@ -37,14 +43,8 @@
 				  width="600"
 				  height="450"
 				  frameborder="0" style="border:0"
-				  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=Busan+Korea" allowfullscreen>
+				  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region %>" allowfullscreen>
 				</iframe>
-				<p>
-					http://blog.acronym.co.kr/337 <br>
-					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-				</p>
-				<p>이 부분까지 위키피디아에서 파싱?</p>
-
 				</div>
 			<!-- 수현씨 지도 부분 끝 -->
 		</div>

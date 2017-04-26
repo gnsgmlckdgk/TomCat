@@ -1,8 +1,7 @@
 package net.member.action;
 
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.PrivateKey;
-import java.sql.Timestamp;
 
 import javax.crypto.Cipher;
 import javax.servlet.ServletException;
@@ -13,39 +12,21 @@ import javax.servlet.http.HttpSession;
 import net.member.db.MemberBean;
 import net.member.db.MemberDAO;
 
-public class MemberJoinAction implements Action {
+public class MemberLoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		processRequest(request, response);
+		int check = -1;
 		
-        // 이동정보 객체 반환
-        ActionForward forward = new ActionForward();
-        // 로그인 페이지로 이동
-        forward.setPath("./Main.me?loginCheck=0");
-        forward.setRedirect(true);
+		// 한글처리
+		request.setCharacterEncoding("utf-8");
 		
-		return forward;
-	}
-	
-	 /**
-     * 암호화된 비밀번호를 복호화 한다.
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    	// 한글처리
-    	request.setCharacterEncoding("utf-8");
-    	
-    	// 파라미터 값 가져오기
-        String securedId = request.getParameter("id");
-        String securedPass = request.getParameter("pass");
-        String name = request.getParameter("name");
-        String securedNick = request.getParameter("nick");
-        String securedGender = request.getParameter("gender");
-        String securedTel = request.getParameter("tel");
-        
-        // 세션에 저장된 개인키 가져오기
+		// 파라미터 값 가져오기
+		String securedId = request.getParameter("id_login");
+		String securedPass = request.getParameter("pass_login");
+		
+		// RSA암호화 한 값 복호화
         HttpSession session = request.getSession();
         PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
         session.removeAttribute("__rsaPrivateKey__"); // 키의 재사용을 막는다. 항상 새로운 키를 받도록 강제.
@@ -54,36 +35,58 @@ public class MemberJoinAction implements Action {
             throw new RuntimeException("암호화 비밀키 정보를 찾을 수 없습니다.");
         }
         try {
-        	// 암호화된 값들 복호화
             String id = decryptRsa(privateKey, securedId);
             String pass = decryptRsa(privateKey, securedPass);
-            String nick = decryptRsa(privateKey, securedNick);
-            String gender = decryptRsa(privateKey, securedGender);
-            String tel = decryptRsa(privateKey, securedTel);
             
-            // 빈에 담기
-            MemberBean mb = new MemberBean();
-            mb.setId(id);
-            mb.setPass(pass);
-            mb.setName(name);
-            mb.setNick(nick);
-            mb.setGender(gender);
-            mb.setTel(tel);
-            Timestamp reg_date = new Timestamp(System.currentTimeMillis());
-            mb.setReg_date(reg_date);
-            mb.setProfile(null);
-            mb.setAuth(1);		// 처음가입땐 무조건 1(일반사용자)
-            
-            // DB작업
+            // DB에서 확인
             MemberDAO mdao = new MemberDAO();
-            mdao.insertMember(mb);
+            check = mdao.memberLogin(id, pass);
+            
+            if(check==1) {
+            	// 세션값 생성
+            	session.setAttribute("id", id);	// 아이디
+            	
+            	MemberBean mb = mdao.getMember(id);
+            	session.setAttribute("nick", mb.getNick());	// 닉네임
+            }
             
         } catch (Exception ex) {
+        	System.out.println("복호화 과정 오류");
             throw new ServletException(ex.getMessage(), ex);
         }
+        
+        // 인증 확인 후 이동
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        if(check == 1){
+        	out.println("<script>");
+        	out.println("alert('인증완료');");
+        	out.println("");
+        	out.println("location.href='./Main.me?loginCheck=1';");
+        	out.println("</script>");
+        	out.close();
+        	
+        }else if(check == 0) {
+        	out.println("<script>");
+        	out.println("alert('비밀번호가 일치하지 않습니다.');");
+        	out.println("location.href='./Main.me?loginCheck="+check+"';");
+        	out.println("</script>");
+        	out.close();
+        	
+        }else {
+        	out.println("<script>");
+        	out.println("alert('아이디가 존재하지 않습니다.');");
+        	out.println("location.href='./Main.me?loginCheck="+check+"';");
+        	out.println("</script>");
+        	out.close();
+        }
+        
+        // 이동정보 없음(script로 이동함)
+        return null;
     }
-
-    private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
+	
+	private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
         System.out.println("will decrypt : " + securedValue);
         Cipher cipher = Cipher.getInstance("RSA");
         byte[] encryptedBytes = hexToByteArray(securedValue);
@@ -108,5 +111,5 @@ public class MemberJoinAction implements Action {
         }
         return bytes;
     }
-	
 }
+
