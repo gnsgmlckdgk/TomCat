@@ -32,7 +32,7 @@
 					http://blog.acronym.co.kr/337 <br>
 					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
 				</p><br>
-				<p>이 부분까지 위키피디아에서 파싱?</p>
+				<p>이 부분까지 위키피디아에서 파싱???</p>
 				
 				</header>
 			</div>
