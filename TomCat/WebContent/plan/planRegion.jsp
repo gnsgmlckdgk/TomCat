@@ -2,27 +2,19 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-
 <!-- Banner -->
 <!-- <section id="banner"> -->
-
-
 <%
 	String region = request.getParameter("region");
 	String id = (String) session.getAttribute("id");
 %>
-
-
 <!-- One 지역명 및 설명-->
-<section id="one" class="wrapper style1">
+<section id="banner">
 	<div class="container 75%">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-				<header class="major">
 					<h2><%=region%>
 						설명
 					</h2>
@@ -51,9 +43,7 @@
 		</div>
 	</div>
 </section>
-
 <!-- Two -->
-
 <%
 	List planImageList = (List) request.getAttribute("planImageList");
 	int count = ((Integer) request.getAttribute("count")).intValue();
@@ -61,7 +51,6 @@
 	int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
 	int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 %>
-
 <section id="two" class="wrapper style2 special">
 	<div class="container">
 		<header class="major">
@@ -94,13 +83,15 @@
 				<div class="image fit captioned">
 					<img class="img_sld1 w3-animate-fading"
 						src="./upload/<%=pib.getFile()%>"
-						alt="<%=region%> <%=pib.getType()%> <%=pib.getImg_info() %>" />
+						alt="<%=region%> <%=pib.getType()%> <%=pib.getImg_info()%>" />
 					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
 					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
-					<h3> [<%=region%> <%=pib.getType()%>]<br><%=pib.getImg_info()%><br>
+					<h3>
+						[<%=region%>
+						<%=pib.getType()%>]<br><%=pib.getImg_info()%><br>
 						<ul class="actions">
 							<li><a href="#" class="button special icon fa-download">찜</a></li>
 						</ul>
@@ -140,7 +131,9 @@
 				// 1~10
 				for (int i = startPage; i <= endPage; i++) {
 					if (Integer.parseInt(pageNum) != i) {
-		%><a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[<%=i%>]</a><%
+		%><a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[<%=i%>]
+		</a>
+		<%
 			} else {
 		%>[<%=i%>]<%
 			}
@@ -163,7 +156,7 @@
 			<h2><%=region%>
 				사진
 			</h2>
-<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
+			<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
 		</header>
 
 		<div class="feature-grid">
