@@ -20,6 +20,14 @@ function popupToggle() {
 			
 			$('#id_login').val('');	// 폼에 있는 값 지우기
 			$('#pass_login').val('');	// 폼에 있는 값 지우기
+			
+			var documentWidth = document.documentElement.clientWidth;
+			var documentHeight = document.documentElement.clientHeight;
+			var willLeft = documentWidth / 2 - ($('#loginPop').attr('width')/2);
+			var willTop = documentHeight / 2 - ($('#loginPop').attr('height')/2);
+			
+			$('#loginPop').css({ 'left': willLeft, 'top': willTop });
+			
 			$('#loginPopContainer').css('display', 'block');
 			$('#loginPop').css('display', 'block');
 			
@@ -72,6 +80,13 @@ function idFinderPopup() {
 
 }
 
+/* 비밀번호 찾기 팝업 브라우져 */
+function passFinderPopup() {
+
+	window.open('./MemberPassFinder.me',  '_blank', 
+	'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+	
+}
 
 
 

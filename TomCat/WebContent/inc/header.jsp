@@ -32,7 +32,7 @@
 		
 		<!-- 추가한 js -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=2"></script>	<!-- 로그인 스크립트 -->
 			
 	</head>
 	
@@ -105,7 +105,7 @@
 		
 		<div id="login_txt">
 			<a onclick="idFinderPopup();" ><span class="login_txt">아이디 찾기</span></a> || 
-			<a href="비밀번호 찾기 페이지">비밀번호 찾기</a><br>
+			<a onclick="passFinderPopup();"><span class="login_txt">비밀번호 찾기</span></a><br>
 		</div>
 		
 		<br>

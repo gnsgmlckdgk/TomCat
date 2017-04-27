@@ -29,7 +29,7 @@ public class MemberDAO {
 		return con;
 	}
 	
-	// 아이디(이메일) 중복체크
+	// 아이디(이메일) 중복체크 및 존재여부(추가기능)
 	public int idOverlapCheck(String id) {
 		int check = 0;	// 0은 중복, 1은 사용가능
 		
@@ -43,13 +43,12 @@ public class MemberDAO {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				if(rs.getInt("count") > 0) {	// 아이디 중복
+				if(rs.getInt("count") > 0) {	// 아이디 중복, 아이디 존재
 					check = 0;
-				}else {										// 아이디 사용가능
+				}else {										// 아이디 사용가능, 아이디 존재안함
 					check = 1;
 				}
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -301,7 +300,38 @@ public class MemberDAO {
 		
 	}
 	
-}
+	// 읽어버린 비밀번호 찾기, 비밀번호 변경
+	public void updatePass(String id, String pass) {
+		
+		try {
+			
+			con = getConnection();
+			
+			// 임시비밀번호 SHA256 암호화
+			sql = "update member set pass = SHA2(?, 256) where id = ? ";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, pass);
+			ps.setString(2, id);
+			
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+} // class
 
 
 
