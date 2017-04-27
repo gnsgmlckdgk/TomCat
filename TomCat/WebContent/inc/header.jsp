@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>회원가입</title>
+		<title>Before you go</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
@@ -29,11 +29,16 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=3" />
-		
+			
+			<!-- plan -->
+			<link rel="stylesheet" href="./assets/css/plan/planMain.css" />
+			
 		<!-- 추가한 js -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=2"></script>	<!-- 로그인 스크립트 -->
 			
+			<!-- plan -->
+			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
 	</head>
 	
 <body>
@@ -53,7 +58,7 @@
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
 			<li><a href="generic.html">함께해요</a></li>
-			<li><a href="elements.html">여행일정플래너</a></li>
+			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="elements.html">여행일정Q&A</a></li>
 			<li><a href="elements.html">인생샷그램</a></li>
 			<li><a href="elements.html">내일정관리</a></li>
