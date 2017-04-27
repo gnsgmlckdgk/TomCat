@@ -65,7 +65,7 @@
 			<li><a href="elements.html">내일정관리</a></li>
 			<%
 			if(id==null){ %>
-				<li><a onclick="popupToggle()"><span class="login_txt" id="popup_txt">로그인/회원가입</span></a></li>
+				<li><a onclick="popupToggle()"><span class="login_txt" >로그인/회원가입</span></a></li>
 			<%}else { %>
 					<li><a href="#" ><span>회원관리</span></a></li>
 					<!-- 로그아웃은 회원관리 페이지에 -->
