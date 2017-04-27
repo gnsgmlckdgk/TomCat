@@ -15,7 +15,8 @@ String nick = (String)session.getAttribute("nick");%>
 	<ul class="actions">
 		<li><a href="#" class="button special big">함께해요</a></li>
 		<li><a href="./PlanMain.pl" class="button special big">여행 일정 플래너</a></li>
-		<li><a href="#" class="button special big">인생샷그램</a></li>
+		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
+		
 		<li><a href="./MyPlan.map" class="button special big">여행일정관리</a></li>
 		<li><a href="#" class="button special big">Q & A</a></li>
 	</ul>
