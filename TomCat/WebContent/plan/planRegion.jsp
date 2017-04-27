@@ -10,10 +10,10 @@
 <!-- Banner -->
 <!-- <section id="banner"> -->
 
-<link rel="stylesheet" href="./assets/css/map/map.css" />
+
 <%
 	String region = request.getParameter("region");
-	String id = (String)session.getAttribute("id");
+	String id = (String) session.getAttribute("id");
 %>
 
 
@@ -28,25 +28,26 @@
 					</h2>
 					<p>
 						Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
-					</p><br>
+					</p>
+					<br>
 					<p>
-					http://blog.acronym.co.kr/337 <br>
-					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-				</p><br>
-				<p>이 부분까지 위키피디아에서 파싱???</p>
-				
+						http://blog.acronym.co.kr/337 <br>
+						https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
+					</p>
+					<br>
+					<p>이 부분까지 위키피디아에서 파싱???</p>
+
+
 				</header>
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
-				<iframe
-				  width="600"
-				  height="450"
-				  frameborder="0" style="border:0"
-				  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region %>" allowfullscreen>
-				</iframe>
-				</div>
+				<iframe width="600" height="450" frameborder="0" style="border: 0"
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>"
+					allowfullscreen> </iframe>
+			</div>
 			<!-- 수현씨 지도 부분 끝 -->
+
 		</div>
 	</div>
 </section>
@@ -75,8 +76,8 @@
 			%>
 			<input type="button" value="전체" name="spotFilter"> <input
 				type="button" value="관광지" name="spotFilter"> <input
-				type="button" value="맛집" name="spotFilter"> <input type="button"
-				value="숙소" name="spotFilter">
+				type="button" value="맛집" name="spotFilter"> <input
+				type="button" value="숙소" name="spotFilter">
 			<%
 				}
 			%>
