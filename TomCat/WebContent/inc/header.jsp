@@ -24,18 +24,19 @@
         	
 		<!-- 스타일 불러오기 -->
 		<link rel="stylesheet" href="./assets/css/main.css" />
+		<link rel="stylesheet" href="./assets/css/animate/animate.css" />	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />
-			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=2" />
+			<link rel="stylesheet" href="./assets/css/member/join.css" />
+			<link rel="stylesheet" href="./assets/css/member/loginPop.css" />
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css" />
 			
 		<!-- 추가한 js -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=4"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
@@ -64,7 +65,7 @@
 			<li><a href="elements.html">내일정관리</a></li>
 			<%
 			if(id==null){ %>
-				<li><a onclick="popupToggle()"><span class="login_txt">로그인/회원가입</span></a></li>
+				<li><a onclick="popupToggle()"><span class="login_txt" id="popup_txt">로그인/회원가입</span></a></li>
 			<%}else { %>
 					<li><a href="#" ><span>회원관리</span></a></li>
 					<!-- 로그아웃은 회원관리 페이지에 -->
