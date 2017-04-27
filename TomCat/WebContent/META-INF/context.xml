@@ -4,7 +4,8 @@
 		auth = "Container"
 		type = "javax.sql.DataSource"
 		driverClassName = "com.mysql.jdbc.Driver"
-		url = "jdbc:mysql://loststars.cafe24.com:3306/loststars"
+
+		url = "jdbc:mysql://loststars.cafe24.com/loststars"
 		username = "loststars"
 		password = "tomcatdb2017"
 	/>
