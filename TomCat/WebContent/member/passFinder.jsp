@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>아이디 찾기</title>
+<title>비밀번호 찾기</title>
 
 <!-- Scripts -->
 		<script src="./assets/js/jquery.min.js"></script>
@@ -15,18 +15,15 @@
         	
 		<!-- 스타일 불러오기 -->
 		<link rel="stylesheet" href="./assets/css/main.css" />
-
-	<!-- 추가한 스크립트 -->
+		
+		<!-- 추가한 스크립트 -->
 	<script type="text/javascript">
-		function idFind() {
-			
- 			// 자바스크립트가 먼저 실행되고 그 다음 jquery가 실행됨(이제알음...)
+		function passFind() {
 		
-			var name = document.getElementById("name").value;
-			var tel = document.getElementById("tel").value;
+			var id = document.getElementById("id").value;
 		
-			if(!name || !tel) {
-				alert("이름 또는 연락처를 입력해주세요.");
+			if(!id) {
+				alert("아이디(이메일)를 입력해주세요.");
 				return false;
 			}else {
 				return true;
@@ -35,7 +32,7 @@
 		}
 	</script>
 
-	<!-- 추가한 스타일 -->
+<!-- 추가한 스타일 -->
 	<style type="text/css">
 		div#container {
 			width: 550px;
@@ -56,23 +53,17 @@
 
 </head>
 <body>
-	<!-- 아이디 찾는 페이지 -->
-	<!-- 팝업 브라우저 창 띄워서 할거라 include 안함 -->
 	
 	<div id="container">
-		<h4>아이디 찾기</h4>
-		<form action="./MemberIdFinderAction.me" name="id_finder_form" method="post" onsubmit="return idFind();">
+		<h4>비밀번호 찾기</h4>
+		<form action="./MemberPassFinderAction.me" name="pass_finder_form" method="post" onsubmit="return passFind();">
 		
-			<label for="name">이름</label>
-				<input type="text" name="name" id="name" placeholder="회원가입시 작성한 이름">
+			<label for="id">아이디</label>
+				<input type="email" name="id" id="id" placeholder="아아디(이메일)을 입력">
 		
-			<label for="tel">연락처</label>
-				<input type="text" name="tel" id="tel" placeholder="회원가입시 작성한 연락처( '-' 문자생략)">
-		
-			<input type="submit" value="아이디 찾기">
+			<input type="submit" value="비밀번호 찾기">
 		</form>
 	</div>
-	
 	
 </body>
 </html>

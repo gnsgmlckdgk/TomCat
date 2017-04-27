@@ -1,5 +1,6 @@
 package net.member.action;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -11,19 +12,79 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-/* SMTP서버와 관련된 정보를 지정 */
-public class MailAuthentication {
+import net.member.db.MemberDAO;
 
-	public int sendMail(String email) throws MessagingException {
+/* 비밀번호 찾기 */
+public class MemberPassFinderAction implements Action {
+
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 임시 비밀번호 만들어서 DB에 업데이트 하고 메일로 보냄
 		
-		int certificationNumber = (int)(Math.random() * 90000 + 10000);	// 인증번호
+		// 임시 비밀번호 만들기
+		char[] charSet = new char[] {
+				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+		
+		StringBuffer sb = new StringBuffer();	// 임시비밀번호
+		for(int i=0; i < 10; i++) {
+			// 랜덤 비밀번호 생성
+			int index = (int)(Math.random() * charSet.length);
+			sb.append(charSet[index]);
+		}
+		
+		System.out.println(sb.toString());	// 디버깅
+		
+		// 아이디가 존재하는지 여부
+		String id = request.getParameter("id");	// 입력한 아이디(이메일)
+		MemberDAO mdao = new MemberDAO();
+		int check = mdao.idOverlapCheck(id);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(check == 1) {	// 입력한 아이디 없음
+			
+			out.println("<script>");
+			out.println("alert('존재하지 않는 아이디 입니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			
+			return null;
+			
+		}else {	// check == 0 입력한 아이디 있음
+			
+			// 메일로 임시 비밀번호 보내기
+			MailSendRandomPass mrp = new MailSendRandomPass();
+			mrp.sendMail(id, sb.toString());
+			
+			// DB에서도 비밀번호 변경
+			mdao.updatePass(id, sb.toString());
+			
+			// 이동정보 반환
+			ActionForward forward = new ActionForward();
+			forward.setPath("./member/passFinderResult.jsp");
+			forward.setRedirect(false);
+			
+			return forward;
+		}
+	}
+}
+
+class MailSendRandomPass {
+
+	public void sendMail(String email, String randomPass) throws MessagingException {
 		
 		String from = "overtimearmy@gmail.com";	// 보내는 사람
 		String to = email;	// 받는 사람
 		String cc = "";	// 참조(필요없어서 비워둠)
-		String subject = "BEFORE YOU GO 회원가입 인증번호";	// 제목
-		String content = "안녕하세요! BEFORE YOU GO입니다.\n인증번호는 다음과 같습니다.\n인증번호: " + certificationNumber;	// 내용
+		String subject = "BEFORE YOU GO 임시 비밀번호";	// 제목
+		String content = "안녕하세요! BEFORE YOU GO입니다.\n임시 비밀번호: " + randomPass 
+				+ "\n개인정보 보안을 위해 로그인 후 반드시 비밀번호 변경을 해주시기 바랍니다.";	// 내용
 		
 		// Properties 설정
 		// 프로퍼티 값 인스턴스 생성과 기본세션(SMTP 서버 호스트 지정)
@@ -48,7 +109,7 @@ public class MailAuthentication {
 		  * getPasswordAuthentication() 메소드만 override 하면 된다.
 		  * 머 사실 다른 메소드는 final 메소드여서 override 할 수 조차 없다. -ㅅ-;
 		  */
-		Authenticator auth = new SMTPAuthenticator(); 
+		Authenticator auth = new SMTPAuthenticatorPass(); 
 		Session mailSession = Session.getDefaultInstance(props, auth);
 		
 		// create a message
@@ -69,14 +130,12 @@ public class MailAuthentication {
 		
 		Transport.send(message);		// 메일 보내기
 		
-		System.out.println("메일 전송완료");
-		
-		return certificationNumber;
+		System.out.println("임시 비밀번호 메일 전송완료");
 	}
 }
 
 /* 보내는 메일 인증 */
-class SMTPAuthenticator extends Authenticator {
+class SMTPAuthenticatorPass extends Authenticator {
 	 
     protected PasswordAuthentication getPasswordAuthentication() {
          String username = "overtimearmy@gmail.com"; // gmail 사용자;
@@ -84,4 +143,3 @@ class SMTPAuthenticator extends Authenticator {
          return new PasswordAuthentication(username, password);
     }
 }
-
