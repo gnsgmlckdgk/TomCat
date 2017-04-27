@@ -15,7 +15,7 @@
 
 	<!-- Connection Pool -->
 	<resource-ref>
-		<description>Tomcat DB</description>
+		<description>LostStars DB</description>
 		<res-ref-name>jdbc/mySQL</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
