@@ -113,11 +113,13 @@ public class MemberDAO {
 		// 비밀번호 단방향 암호화(SHA-256)
 		// 전화번호 양방향 암호화(AES)
 		
+		// MySQL버전이 낮아져 PASSWORD() 함수로 암호화 하는 방식으로 변경
+		
 		try {
 			con = getConnection();
 			
 			sql = "insert into member(id, pass, name, nick, gender, tel, reg_date, profile, auth) "
-					+ "values(?, SHA2(?, 256), ?, ?, ?, HEX(AES_ENCRYPT(?, 'tel')), ?, ?, ?)";
+					+ "values(?,PASSWORD(?), ?, ?, ?, HEX(AES_ENCRYPT(?, 'tel')), ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mb.getId());
 			ps.setString(2, mb.getPass());
@@ -156,13 +158,33 @@ public class MemberDAO {
 			con = getConnection();
 			
 			// DB의 pass가 단방향 암호화 SHA-256으로 되어있기때문에 매개변수 pass를 SHA-256암호화 후 비교한다.
+			// MySQL 버전이 낮아져 PASSWORD() 함수를 사용한 암호화 방식으로 변경
 			sql = "select pass from member where id=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
 			
 			rs = ps.executeQuery();
 			
-			if(rs.next()) {
+			if(rs.next()) {	// 아이디 있음
+				
+				sql = "select id from member where pass = PASSWORD(?)";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, pass);
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {	// 비밀번호 맞음
+					check = 1;
+				}else {	// 비밀번호 틀림
+					check = 0;
+				}
+				
+			}else {	// 아이디 없음
+				check = -1;
+			}
+			
+			// SHA256 방식
+			/*if(rs.next()) {
 				String passSHA = txtSHA256(pass);	// SHA256 암호화
 				if(rs.getString("pass").equals(passSHA)) {
 					check = 1;
@@ -171,8 +193,7 @@ public class MemberDAO {
 				}
 			}else {	// 아이디 없음
 				check = -1;
-			}
-			
+			}*/	
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -188,7 +209,10 @@ public class MemberDAO {
 		return check;
 	}
 	
-	// SHA256 암호화(비밀번호 확인 시 필요)
+	// DB 서버 호스팅하면서 MySQL 버전이 낮아져 불가피하게 SHA256에서 PASSWORD() 함수를 쓰는 방식으로 변경
+	// PASSWORD() 함수로 암호화 하는 것은 MySQL 사용자 자체의 계정 및 비밀번호를 관리하기 위한 함수여서 일반 서비스용 계정 및 암호를 관리하는 용도로는 적합하지 않다. ㅠㅠ
+	
+/*	// SHA256 암호화(비밀번호 확인 시 필요)
 	public String txtSHA256(String str){
 	
 		String SHA = ""; 
@@ -209,7 +233,7 @@ public class MemberDAO {
 			SHA = null; 
 		}
 			return SHA;
-	}
+	}*/
 	
 	// 회원정보 가져오기
 	public MemberBean getMember(String id) {
@@ -308,7 +332,8 @@ public class MemberDAO {
 			con = getConnection();
 			
 			// 임시비밀번호 SHA256 암호화
-			sql = "update member set pass = SHA2(?, 256) where id = ? ";
+			// MySQL 버전이 낮아져 PASSWORD() 방식으로 변경
+			sql = "update member set pass = PASSWORD(?) where id = ? ";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, pass);
 			ps.setString(2, id);
