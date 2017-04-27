@@ -63,3 +63,20 @@ function validateEncryptedLoginForm() {
     
     return true;
 }
+
+/* 아이디 찾기 팝업 브라우져 */
+function idFinderPopup() {
+	
+	window.open('./MemberIdFinder.me',  '_blank', 
+			'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+
+}
+
+
+
+
+
+
+
+
+

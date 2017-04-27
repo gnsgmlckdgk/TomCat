@@ -55,7 +55,7 @@
 <!-- Two -->
 
 <%
-	List planImageList = (List) request.getAttribute("boardList");
+	List planImageList = (List) request.getAttribute("planImageList");
 	int count = ((Integer) request.getAttribute("count")).intValue();
 	String pageNum = (String) request.getAttribute("pageNum");
 	int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
@@ -94,16 +94,13 @@
 				<div class="image fit captioned">
 					<img class="img_sld1 w3-animate-fading"
 						src="./upload/<%=pib.getFile()%>"
-						alt="<%=region%> <%=pib.getType()%>" />
+						alt="<%=region%> <%=pib.getType()%> <%=pib.getImg_info() %>" />
 					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
 					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
-					<h3>
-						[<%=region%>
-						<%=pib.getType()%>]<br>
-						<%=pib.getImg_info()%><br>
+					<h3> [<%=region%> <%=pib.getType()%>]<br><%=pib.getImg_info()%><br>
 						<ul class="actions">
 							<li><a href="#" class="button special icon fa-download">찜</a></li>
 						</ul>
@@ -115,7 +112,6 @@
 				}
 			%>
 		</div>
-
 		<%
 			if (count != 0) {
 				//전체 페이지수 구하기 게시판 
@@ -137,21 +133,24 @@
 				}
 				//이전
 				if (startPage > pageBlock) {
-		%><a href="./PlanRegion.pl?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+		%><a
+			href="./PlanRegion.pl?pageNum=<%=startPage - pageBlock%>&region=<%=region%>">[이전]</a>
 		<%
 			}
 				// 1~10
 				for (int i = startPage; i <= endPage; i++) {
-		%><a href="./PlanRegion.pl?pageNum=<%=i%>">[<%=i%>]
-		</a>
-		<%
+					if (Integer.parseInt(pageNum) != i) {
+		%><a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[<%=i%>]</a><%
+			} else {
+		%>[<%=i%>]<%
 			}
+				}
 				//다음
 				if (endPage < pageCount) {
-		%><a href="./PlanRegion.pl?pageNum=<%=startPage + pageBlock%>">[다음]</a>
+		%><a
+			href="./PlanRegion.pl?pageNum=<%=startPage + pageBlock%>&region=<%=region%>">[다음]</a>
 		<%
 			}
-
 			}
 		%>
 	</div>
@@ -164,7 +163,7 @@
 			<h2><%=region%>
 				사진
 			</h2>
-			<p>Feugiat sed lorem ipsum magna</p>
+<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
 		</header>
 
 		<div class="feature-grid">
