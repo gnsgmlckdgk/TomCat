@@ -25,6 +25,8 @@ String nick = (String)session.getAttribute("nick");%>
 	<ul class="actions"> <!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
 		
+		<li><a href="./PlanNation.pl?nation='한국'" class="button special big">한국 국가페이지</a></li>
+		
 		<li><form action="./PlanRegion.pl" method="get">
 			<input type="text" name="region" style="background-color: white" placeholder="암거나 검색">
 			<input type="submit" value="검색" class="button special">
@@ -49,11 +51,7 @@ String nick = (String)session.getAttribute("nick");%>
 					reprehenderit deleniti voluptatibus harum magna, doloremque alias
 					quisquam minus, eaque. Feugiat quod, nesciunt! Iste quos ipsam,
 					iusto sit esse.</p>
-				<p>Dolorum aspernatur maxime libero ratione quidem distinctio,
-					placeat fugiat laborum voluptatum enim neque soluta vel sunt id ex
-					veritatis. Labore rerum, odit sapiente, alias mollitia magnam
-					exercitationem modi amet earum quia atque ipsum voluptas asperiores
-					quas laboriosam.</p>
+
 			</div>
 		</div>
 	</div>
