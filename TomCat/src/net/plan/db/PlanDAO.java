@@ -22,7 +22,7 @@ public class PlanDAO {
 		//Context 객체 생성
 		Context init = new InitialContext();
 		//DateSource = 디비연동 이름 불러오기
-		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mysqlDB");
+		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mySQL");
 		//con = DataSource
 		con = ds.getConnection();
 		return con;
@@ -36,11 +36,14 @@ public class PlanDAO {
 			con = getConnection();
 			//num 게시판 글번호 구하기
 			//sql 함수 최대값 구하기 max()
+			
 			sql = "select count(num) from images";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()) count = rs.getInt(1);
-			//3. sql insert  디비날짜 now()			
+			
+			if(rs.next()){count = rs.getInt(1);}
+			
+			//3. sql insert  디비날짜 now()
 		}catch (Exception e){
 			e.printStackTrace();
 		}finally{
@@ -53,7 +56,7 @@ public class PlanDAO {
 	
 	public List<PlanImageBean> getPlanList(int startRow, int pageSize){
 		ResultSet rs = null;
-		List<PlanImageBean> boardList = new ArrayList<PlanImageBean>();
+		List<PlanImageBean> planImageList = new ArrayList<PlanImageBean>();
 		try{
 			
 			//1,2디비연결 메서드호출
@@ -75,7 +78,7 @@ public class PlanDAO {
 				pib.setTravel_id(rs.getInt(6));
 				pib.setNick(rs.getString(7));
 				pib.setImg_info(rs.getString(8));				
-				boardList.add(pib);
+				planImageList.add(pib);
 			}
 
 		}catch (Exception e){
@@ -85,7 +88,7 @@ public class PlanDAO {
 			if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
 			if (con != null) {try {con.close();} catch (SQLException ex) {	}}
 		}
-		return boardList;
+		return planImageList;
 	} //getBoardList() end
 	
 }

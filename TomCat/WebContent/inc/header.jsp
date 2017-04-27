@@ -28,7 +28,7 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />
-			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=2" />
+			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=3" />
 		
 		<!-- 추가한 js -->
 			<!-- member -->
@@ -37,10 +37,11 @@
 	</head>
 	
 <body>
-<!-- 세션값 가져오기 -->
+
 <%
+	// 세션값 가져오기
 	String id = (String)session.getAttribute("id");
-	System.out.println("세션 id: " + id);	// 디버깅 용
+	String nick = (String)session.getAttribute("nick");	// 닉네임
 %>
 
 <!-- Header -->
@@ -61,7 +62,7 @@
 				<li><a onclick="popupToggle()"><span class="login_txt">로그인/회원가입</span></a></li>
 			<%}else { %>
 					<li><a href="#" ><span>회원관리</span></a></li>
-					<!-- 로그아웃은 어디넣을지 고민좀 해야겠습니다. -->
+					<!-- 로그아웃은 회원관리 페이지에 -->
 				<%} %>
 			
 		</ul>
@@ -71,6 +72,8 @@
 
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
+
+<!-- 로그인 팝업 창 -->
 <%
 	// 아이디, 비밀번호 입력 후 틀렸을때 다시 팝업창 띄우기 위해 변수 생성
 	String loginCheckStr = request.getParameter("loginCheck");
@@ -101,7 +104,7 @@
 		<input type="submit" class="button special loginBtn" value="로그인" >
 		
 		<div id="login_txt">
-			<a href="아이디 찾기 페이지" >아이디 찾기</a> || 
+			<a onclick="idFinderPopup();" ><span class="login_txt">아이디 찾기</span></a> || 
 			<a href="비밀번호 찾기 페이지">비밀번호 찾기</a><br>
 		</div>
 		

@@ -22,33 +22,56 @@ public class MemberFrontController extends HttpServlet {
 		Action action = null;
 		
 		if(command.equals("/Main.me")) {	// 메인 페이지
+			
 			forward = new ActionForward();
 			forward.setPath("./main/main.jsp");
 			forward.setRedirect(false);
 		
 		}else if(command.equals("/MemberJoin.me")) {	// 회원가입 입력 페이지
+			
 			action = new MemberJoinKeySetting();
 			try {
 				forward = action.execute(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
 		}else if(command.equals("/MemberJoinAction.me")) {		// 회원가입 DB작업
+			
 			action = new MemberJoinAction();
 			try {
 				forward = action.execute(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
 		}else if(command.equals("/MemberLoginAction.me")) {		// 로그인 처리
+			
 			action = new MemberLoginAction();
 			try {
 				forward = action.execute(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
+		}else if(command.equals("/MemberIdFinder.me")) {	// 아이디 찾기 입력 페이지(팝업 브라우저)
+			
+			forward = new ActionForward();
+			forward.setPath("./member/idFinder.jsp");
+			forward.setRedirect(false);
+			
+		}else if(command.equals("/MemberIdFinderAction.me")) {	// 아이디 찾기 처리(팝업 브라우저)
+			
+			action = new MemberIdFinderAction();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
-		
 		// 이동
 		if(forward!=null) {
 			if(forward.isRedirect()) {	// response방식
