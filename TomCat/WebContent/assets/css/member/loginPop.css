@@ -30,8 +30,8 @@ div#loginPop {
 	min-width: 450px;	/* 가로 최소값 */
 	min-height: 300px;	/* 세로 최소값 */
 	background-color: white;
-	/* left: 35%;
-	top: 30%; */
+	left: 35%;
+	top: 30%;
 	
 	font-size: 0.9em;
 	z-index: 10;

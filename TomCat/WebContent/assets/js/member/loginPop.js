@@ -21,13 +21,6 @@ function popupToggle() {
 			$('#id_login').val('');	// 폼에 있는 값 지우기
 			$('#pass_login').val('');	// 폼에 있는 값 지우기
 			
-			var documentWidth = document.documentElement.clientWidth;
-			var documentHeight = document.documentElement.clientHeight;
-			var willLeft = documentWidth / 2 - ($('#loginPop').attr('width')/2);
-			var willTop = documentHeight / 2 - ($('#loginPop').attr('height')/2);
-			
-			$('#loginPop').css({ 'left': willLeft, 'top': willTop });
-			
 			$('#loginPopContainer').css('display', 'block');
 			$('#loginPop').css('display', 'block');
 			

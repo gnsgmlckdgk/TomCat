@@ -28,14 +28,14 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=1" />
-			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=3" />
+			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=2" />
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css" />
 			
 		<!-- 추가한 js -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=2"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=4"></script>	<!-- 로그인 스크립트 -->
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
