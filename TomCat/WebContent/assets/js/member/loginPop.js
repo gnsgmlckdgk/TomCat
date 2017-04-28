@@ -89,7 +89,7 @@ function passFinderPopup() {
 	window.open('./MemberPassFinder.me',  '_blank', 
 	'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
 	
-}
+}z
 
 
 

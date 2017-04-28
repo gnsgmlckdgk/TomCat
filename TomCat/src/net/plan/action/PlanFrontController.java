@@ -43,15 +43,25 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+
+		}else if(command.equals("/PlanSearch.pl")){
+			action = new PlanSearchAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
 		} else if (command.equals("/PlanSpotWrite.pl")){
 			forward = new ActionForward();
 			forward.setPath("./plan/planSpotWrite.jsp");
 			forward.setRedirect(false);
+
 		}
 		
 		
-		
-		
+
+
 		if (forward != null) {
 			if (forward.isRedirect()) { // response방식
 				response.sendRedirect(forward.getPath());

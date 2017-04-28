@@ -1,3 +1,5 @@
+<%@page import="net.member.db.MemberDAO"%>
+<%@page import="net.member.db.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,6 +32,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css" />
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css" />
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=1" />
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css" />
@@ -37,6 +40,7 @@
 		<!-- 추가한 js -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 로그인 스크립트 -->
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
@@ -66,7 +70,7 @@
 			if(id==null){ %>
 				<li><a onclick="popupToggle()"><span class="login_txt" >로그인/회원가입</span></a></li>
 			<%}else { %>
-					<li><a href="#" ><span>회원관리</span></a></li>
+					<li><a onclick="memberManagerPopup()"><span class="login_txt"><%=nick %></span></a></li>
 					<!-- 로그아웃은 회원관리 페이지에 -->
 				<%} %>
 			
@@ -116,6 +120,53 @@
 		<br>
 		아직 아이디가 없으십니까? <a href="./MemberJoin.me" onclick="popupToggle()">회원가입</a>
 		
-	</form>
-	
+	</form>	
 </div>
+
+<!-- 회원관리/로그아웃 선택 팝업 메뉴 -->
+<%
+	if(nick!=null) {	// 로그인 되어 있을때만
+			MemberDAO mdao = new MemberDAO();
+			MemberBean mb = mdao.getMember(id);
+			String profile = mb.getProfile();
+		%>
+			<div id="memberManagerNav">
+			<%
+				// 기본 프로필 사진 임시로 일단 이거 쓸게요...
+				String profileImage;
+				if(profile==null) {	// 설정한 프로필 사진이 없으면
+						if(mb.getGender().equals("남")) {
+							profileImage = "./images/member/남자 기본 프로필.png";
+							
+						}else {	// 성별: 여
+							profileImage = "./images/member/여자 기본 프로필.png";
+						}
+					%>
+					<img src="<%=profileImage %>"  width="100px" height="100px"><!-- 프로필 사진 -->
+					<%
+				}else {	// 설정한 프로필 사진이 있으면
+					%>
+					<img src="http://placehold.it/100x100"  width="100px" height="100px"><!-- 프로필 사진 -->
+					<%
+				}
+			%>
+				<ul>
+					<li><a href="#">정보관리</a></li>
+					<li><a href="./MemberLogout.me">로그아웃</a></li>
+				</ul>
+			</div>
+		<%	
+	}
+%>
+
+
+
+
+
+
+
+
+
+
+
+
