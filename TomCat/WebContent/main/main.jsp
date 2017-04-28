@@ -31,6 +31,7 @@ String nick = (String)session.getAttribute("nick");%>
 			<input type="text" name="region" style="background-color: white" placeholder="암거나 검색">
 			<input type="submit" value="검색" class="button special">
 		</form></li>
+		<li><a href="./PlanSpotWrite.pl" class="button special big">추천장소입력</a></li>
 		
 	</ul><!-- 테스트용 버튼들 끝. -->
 	</section>
