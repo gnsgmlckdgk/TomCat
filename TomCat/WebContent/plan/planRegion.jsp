@@ -58,8 +58,13 @@
 			<p><%=count%>개의 추천지역이
 				<%=region%>에 있습니다!
 			</p>
-			<br> <input type="button" class="button alt fit"
-				onclick="location.href='#'" value="내가 작성하기" /> <br>
+			<br>
+				<form action="./PlanSpotWrite.pl" method="post">
+					<input type="hidden" name="region" value=<%=region %> />
+					<input type="submit" value="내가 작성하기"/>
+				</form>
+				 <br>
+				
 			<%
 				if (count != 0) {
 			%>
@@ -67,9 +72,18 @@
 				type="button" value="관광지" name="spotFilter"> <input
 				type="button" value="맛집" name="spotFilter"> <input
 				type="button" value="숙소" name="spotFilter">
+				<br>
+				<div style="width: 70%; margin: auto;">
+				<form action="#" method="get">
+					<input style="float: left; width: 65%;" type="text" placeholder="찾아보기" name="search"> &nbsp; <input style="float: left; width: 30%" type="submit" value="검색"> 
+				</form>
+			</div>
+				
 			<%
 				}
 			%>
+			
+			
 		</header>
 		<div class="row 150%">
 

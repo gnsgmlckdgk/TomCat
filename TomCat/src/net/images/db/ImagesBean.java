@@ -9,10 +9,6 @@ public class ImagesBean {
 	private String city_code;
 	private int travel_id;
 	private String nick;
-	
-	
-	
-	
 	public int getNum() {
 		return num;
 	}

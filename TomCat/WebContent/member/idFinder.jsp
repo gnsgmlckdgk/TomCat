@@ -20,7 +20,7 @@
 	<script type="text/javascript">
 		function idFind() {
 			
-			// 자바스크립트가 먼저 실행되고 그 다음 jquery가 실행됨(이제알음...)
+ 			// 자바스크립트가 먼저 실행되고 그 다음 jquery가 실행됨(이제알음...)
 		
 			var name = document.getElementById("name").value;
 			var tel = document.getElementById("tel").value;
@@ -31,7 +31,7 @@
 			}else {
 				return true;
 			}
-			
+
 		}
 	</script>
 

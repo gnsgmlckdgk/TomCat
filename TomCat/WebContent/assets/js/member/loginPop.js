@@ -3,6 +3,7 @@
 function popupToggle() {
 	
 	$(document).ready(function(){
+		
 		// 팝업 띄움
 		if($('#loginPopContainer').css('display')=="none") {
 			
@@ -20,18 +21,28 @@ function popupToggle() {
 			
 			$('#id_login').val('');	// 폼에 있는 값 지우기
 			$('#pass_login').val('');	// 폼에 있는 값 지우기
+			
+			$('#loginPop').fadeIn(600, function(){	// 페이드 인 애니메이션
+				$('#loginPop').css('display', 'block');
+			});
 			$('#loginPopContainer').css('display', 'block');
-			$('#loginPop').css('display', 'block');
 			
-		}else {	// 팝업 숨김
+			
+		}else if($('#loginPopContainer').css('display')=="block") {	// 팝업 숨김
+			
+			$('#loginPop').fadeOut(600, function(){	// 페이드 아웃 애니메이션
+				$('#loginPop').css('display', 'none');
+			});
 			$('#loginPopContainer').css('display', 'none');
-			$('#loginPop').css('display', 'none');
-			
+
 			// 공개키 hidden태그 지우기
 			$('#rsaPublicKeyModulusLogin').remove();
 			$('#rsaPublicKeyExponentLogin').remove();
 		}
-	});
+		
+	});		// ready
+	
+	
 	
 }
 
@@ -72,6 +83,13 @@ function idFinderPopup() {
 
 }
 
+/* 비밀번호 찾기 팝업 브라우져 */
+function passFinderPopup() {
+
+	window.open('./MemberPassFinder.me',  '_blank', 
+	'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+	
+}z
 
 
 

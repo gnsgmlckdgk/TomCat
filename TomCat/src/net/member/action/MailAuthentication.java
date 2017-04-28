@@ -22,8 +22,8 @@ public class MailAuthentication {
 		String from = "overtimearmy@gmail.com";	// 보내는 사람
 		String to = email;	// 받는 사람
 		String cc = "";	// 참조(필요없어서 비워둠)
-		String subject = "TomCat 회원가입 인증번호";	// 제목
-		String content = "안녕하세요! TomCat입니다.\n인증번호는 다음과 같습니다.\n인증번호: " + certificationNumber;	// 내용
+		String subject = "BEFORE YOU GO 회원가입 인증번호";	// 제목
+		String content = "안녕하세요! BEFORE YOU GO입니다.\n인증번호는 다음과 같습니다.\n인증번호: " + certificationNumber;	// 내용
 		
 		// Properties 설정
 		// 프로퍼티 값 인스턴스 생성과 기본세션(SMTP 서버 호스트 지정)

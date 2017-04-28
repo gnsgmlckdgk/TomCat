@@ -22,9 +22,12 @@ public class MyPlanFrontController extends HttpServlet {
 		Action action = null;
 		
 		if(command.equals("/MyPlan.map")) {
-			forward = new ActionForward();
-			forward.setPath("/myplan/map.jsp");
-			forward.setRedirect(false);
+			action = new MyPlanAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		
 		}
 		

@@ -6,7 +6,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- Banner -->
 <!-- <section id="banner"> -->
-<link rel="stylesheet" href="./assets/css/map/map.css" />
+
 <%
 	String nation = request.getParameter("nation");
 	String id = (String) session.getAttribute("id");
