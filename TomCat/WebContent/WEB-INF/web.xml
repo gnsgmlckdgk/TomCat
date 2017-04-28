@@ -50,5 +50,16 @@
 		<servlet-name>MyPlanFrontController</servlet-name>
 		<url-pattern>*.map</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Instagram -->
+	<servlet>
+		<servlet-name>InstagramFrontController</servlet-name>
+		<servlet-class>net.board.action.BoardFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InstagramFrontController</servlet-name>
+		<url-pattern>*.bo</url-pattern>
+	</servlet-mapping>
+
 
 </web-app>
