@@ -43,7 +43,7 @@
 			
 			<tr>
 				<td>국가 : <select name="nation">
-					<option value="kr">한국 kr 맞는가?</option>
+					<option value="kr">한국 kr 맞는가??</option>
 					<option value="jp">일본 jp 맞는가?</option>
 				</select></td>
 				<td>지역 : <select name="region">
