@@ -6,40 +6,40 @@
 }
 
 /* 회원정보로 들어가기전 팝업 메뉴 */
-div#memberManagerNav {
+div.memberManagerNav {
 	padding: 0;
 	margin: 0;
 	
-	border: 3px solid #ccc;
+	border: 2px solid #000;
 	background-color: white;
 	
 	position: fixed;
 	right: 5px;
 	top: 6em;
 	
-	width: 300px;
-	height: 105px;
+	width: 305px;
+	height: 110px;
 	
 	display: none;
 	z-index: 9;
 }
 
-div#memberManagerNav img {
+div.memberManagerNav img {
 	float: left;
 }
 
-div#memberManagerNav ul {
+div.memberManagerNav ul {
 	float: left;
 	padding: 0;
 }
 
-div#memberManagerNav li {
+div.memberManagerNav li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-div#memberManagerNav li a {
+div.memberManagerNav li a {
 	display: block;
 	border: 1px solid #ccc;
 	
@@ -53,7 +53,7 @@ div#memberManagerNav li a {
 	color: #888;
 }
 
-div#memberManagerNav li a:hover {
+div.memberManagerNav li a:hover {
 	background-color: #f0f0f0;
 }
 

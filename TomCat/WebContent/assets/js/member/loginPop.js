@@ -22,7 +22,7 @@ function popupToggle() {
 			$('#id_login').val('');	// 폼에 있는 값 지우기
 			$('#pass_login').val('');	// 폼에 있는 값 지우기
 			
-			$('#loginPop').fadeIn(600, function(){	// 페이드 인 애니메이션
+			$('#loginPop').fadeIn(200, function(){	// 페이드 인 애니메이션
 				$('#loginPop').css('display', 'block');
 			});
 			$('#loginPopContainer').css('display', 'block');
@@ -30,7 +30,7 @@ function popupToggle() {
 			
 		}else if($('#loginPopContainer').css('display')=="block") {	// 팝업 숨김
 			
-			$('#loginPop').fadeOut(600, function(){	// 페이드 아웃 애니메이션
+			$('#loginPop').fadeOut(200, function(){	// 페이드 아웃 애니메이션
 				$('#loginPop').css('display', 'none');
 			});
 			$('#loginPopContainer').css('display', 'none');
@@ -41,9 +41,6 @@ function popupToggle() {
 		}
 		
 	});		// ready
-	
-	
-	
 }
 
 /* 로그인 인증 */

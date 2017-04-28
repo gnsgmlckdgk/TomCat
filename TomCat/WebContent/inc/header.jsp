@@ -13,7 +13,6 @@
 		
 		<!-- Scripts -->
 		<script src="./assets/js/jquery.min.js"></script>
-		<script src="./assets/js/jquery-3.2.0.js"></script>
 		<script src="./assets/js/skel.min.js"></script>
 		<script src="./assets/js/util.js"></script>
 		<script src="./assets/js/main.js"></script>
@@ -25,25 +24,26 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css" />
-		<link rel="stylesheet" href="./assets/css/animate/animate.css" />	<!-- 애니메이트 css -->
+		<link rel="stylesheet" href="./assets/css/main.css"/>
+		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css" />
-			<link rel="stylesheet" href="./assets/css/member/loginPop.css" />
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=1" />
+			<link rel="stylesheet" href="./assets/css/member/join.css"/>
+			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css"/>
 			
 			<!-- plan -->
-			<link rel="stylesheet" href="./assets/css/plan/planMain.css" />
+			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
 			
 		<!-- 추가한 js -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
-			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
+			
 	</head>
 	
 <body>
@@ -68,15 +68,12 @@
 			<li><a href="elements.html">인생샷그램</a></li>
 			<%
 			if(id==null){ %>
-				<li><a onclick="popupToggle()"><span class="login_txt" >로그인/회원가입</span></a></li>
+				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
-					<li><a onclick="memberManagerPopup()"><span class="login_txt"><%=nick %></span></a></li>
-					<!-- 로그아웃은 회원관리 페이지에 -->
+					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>
-			
 		</ul>
 	</nav>
-	
 </header>
 
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
@@ -130,7 +127,9 @@
 			MemberBean mb = mdao.getMember(id);
 			String profile = mb.getProfile();
 		%>
-			<div id="memberManagerNav">
+		<div class="memberManagerNavPopupToggle" style="display:none;"></div>	<!-- 애니메이트 이벤트 토글 하기 위해 만든것, 화면에 출력 안됨 -->
+			<div class="memberManagerNav">
+			
 			<%
 				// 기본 프로필 사진 임시로 일단 이거 쓸게요...
 				String profileImage;
@@ -158,6 +157,7 @@
 		<%	
 	}
 %>
+
 
 
 
