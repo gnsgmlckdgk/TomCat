@@ -62,7 +62,6 @@
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="elements.html">여행일정Q&A</a></li>
 			<li><a href="elements.html">인생샷그램</a></li>
-			<li><a href="elements.html">내일정관리</a></li>
 			<%
 			if(id==null){ %>
 				<li><a onclick="popupToggle()"><span class="login_txt" >로그인/회원가입</span></a></li>

@@ -16,8 +16,6 @@ String nick = (String)session.getAttribute("nick");%>
 		<li><a href="#" class="button special big">함께해요</a></li>
 		<li><a href="./PlanMain.pl" class="button special big">여행 일정 플래너</a></li>
 		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
-		
-		<li><a href="./MyPlan.map" class="button special big">여행일정관리</a></li>
 		<li><a href="#" class="button special big">Q & A</a></li>
 	</ul>
 	
@@ -28,6 +26,7 @@ String nick = (String)session.getAttribute("nick");%>
 		
 		<li><a href="./PlanNation.pl?nation='한국'" class="button special big">한국 국가페이지</a></li>
 		
+		<li><a href="./MyPlan.map" class="button special big">여행일정관리</a></li>
 		<li><form action="./PlanRegion.pl" method="get">
 			<input type="text" name="region" style="background-color: white" placeholder="암거나 검색">
 			<input type="submit" value="검색" class="button special">
