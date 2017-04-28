@@ -7,7 +7,7 @@ function CountryList(){ /*국가리스트 출력*/
 				for(i=1;i<=5;i++){
 				if(item.continent==i){
 					$('.'+country[i-1]).append( function(){
-						var con = '<div><a href=./plan/planSearch.jsp?search='+'"'+item.country+'"'+'>'+item.country+'</a><span>'+item.EnName+'</span></div>';
+						var con = '<div><a href=./PlanSearch.pl?check=1&search='+'"'+item.country+'"'+'>'+item.country+'</a><span>'+item.EnName+'</span></div>';
 						return con;
 					}); 	
 				}//if

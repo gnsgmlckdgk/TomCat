@@ -43,7 +43,16 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		}else if(command.equals("/PlanSearch.pl")){
+			action = new PlanSearchAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
+		
+		
 		if (forward != null) {
 			if (forward.isRedirect()) { // response방식
 				response.sendRedirect(forward.getPath());
