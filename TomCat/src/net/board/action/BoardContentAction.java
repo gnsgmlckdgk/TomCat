@@ -54,12 +54,16 @@ public class BoardContentAction implements Action{
 			replylist=rdao.getReplyList(startrow, pageSize,num);
 		}
 		
+		int replycount=rdao.replyCount(num);
+
+		
 		request.setAttribute("rl", replylist);
 		request.setAttribute("count", count);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startrow", startrow);
 		request.setAttribute("endRow", endRow);		
+		request.setAttribute("replycount", replycount);
 		
 		
 		forward.setPath("./instagram/content.jsp");

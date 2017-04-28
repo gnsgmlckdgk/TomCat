@@ -20,6 +20,7 @@ display:none;
 function func1(re_num){	
 	
 	$(document).ready(function() {	
+
 		var x=document.getElementById('replytextarea');
 		x.style.display='display';		
 			$('.replyreply'+re_num).toggle('slow',function(){
@@ -34,9 +35,9 @@ function func1(re_num){
 </head>
 <body>
 
-	<%
+	<%	
 		boardBean bb = (boardBean) request.getAttribute("bb");
-	ReplyBean rb=new ReplyBean();
+		ReplyBean rb=new ReplyBean();
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 	%>
@@ -73,8 +74,15 @@ function func1(re_num){
 
 
 
-	<!--리플 -->
+	<!--리플 -->	
 	<%
+		ReplyDAO rdao = new ReplyDAO();	
+		int recount=((Integer)request.getAttribute("replycount")).intValue();
+		if(recount!=0){
+		
+	
+
+	
 		List replylist = (List) request.getAttribute("rl");
 	
 		int count = ((Integer) request.getAttribute("count")).intValue();
@@ -83,7 +91,6 @@ function func1(re_num){
 		int startrow = ((Integer) request.getAttribute("startrow")).intValue();
 		int endRow = ((Integer) request.getAttribute("endRow")).intValue();
 
-		ReplyDAO rdao = new ReplyDAO();
 	%>
 	<table border="1">
 		<tr>
@@ -112,9 +119,8 @@ function func1(re_num){
 		
 <input type="button" value="댓글수정" onclick="location.href='./ReplyUpdate.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
 <input type="button" value="댓글삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
-<%-- <input type="button" value="대댓글" onclick="location.href='./ReplyReply.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'"> --%>
 <%int re_num=rb.getRe_num(); %>
-<input  type="button" value="대댓글" onclick="func1(<%=re_num%>)">
+<input type="button" value="대댓글" onclick="func1(<%=re_num%>)">
 
 		</td>
 		
@@ -123,32 +129,35 @@ function func1(re_num){
 		
 <!-- 		대댓글창 -->
 		<tr id="replytextarea" class="replyreply<%=re_num %>"><td colspan="5">
-				<form action="ReplyWriteAction.re" method="post" name="fr">
+				<form action="ReplyReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=rb.getNick() %>" name="nick"> 
 					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
+					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">					
 					<input type="hidden" value="<%=rb.getRe_lev() %>" name="re_lev">
 					<input type="hidden" value="<%=rb.getRe_seq() %>" name="re_seq">
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					댓글 <textarea rows="2" cols="100" name="content"></textarea>
-					<input type="submit" value="입력">
-				</form>			
+					<input type="submit" value="입력"><%=rb.getRe_ref() %>
+				</form>		
+				
 		
 		</td></tr>
 		<%} %>
 		
+		
 <!-- 		댓글창 -->
-		<tr>
+		<tr id="replytextarea2">
 			<td colspan="6">
 
 				<form action="ReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=rb.getNick() %>" name="nick"> 
 					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
+					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">								
 					<input type="hidden" value="<%=rb.getRe_lev() %>" name="re_lev">
 					<input type="hidden" value="<%=rb.getRe_seq() %>" name="re_seq">
-					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">
-										
+					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					댓글
 					<textarea rows="2" cols="80" name="content"></textarea>
@@ -157,7 +166,6 @@ function func1(re_num){
 
 			</td>
 		</tr>
-		
 
 		
 	</table>
@@ -199,6 +207,7 @@ function func1(re_num){
 	<%
 			}		
 	}
+		}
 	%>
 		
 

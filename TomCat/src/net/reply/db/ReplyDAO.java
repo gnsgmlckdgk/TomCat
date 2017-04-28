@@ -38,24 +38,18 @@ public class ReplyDAO {
 			rs = pstmt.executeQuery();						
 			
 			 if(rs.next()){re_num=rs.getInt(1)+1;}
-			 System.out.println(re_num);
-			 
-			 sql="update gram_reply set re_seq=re_seq+1 where num=? and re_seq>?";			
-			 pstmt = con.prepareStatement(sql);
-			 pstmt.setInt(1,rb.getNum());
-			 pstmt.setInt(2,rb.getRe_seq());
-			 
-			 pstmt.executeUpdate();
-	
+			 System.out.println(re_num);			 
 
-			sql = "insert into gram_reply(num,content,re_lev,re_seq,nick,date,re_num) " + "values(?,?,?,?,?,now(),?)";
+
+			sql = "insert into gram_reply(num,content,re_ref,re_lev,re_seq,nick,date,re_num) " + "values(?,?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, rb.getNum()); // 일반글의 글번호
-			pstmt.setString(2, rb.getContent());			
-			pstmt.setInt(3, rb.getRe_lev()+1); // re_lev 답변글 들여쓰기, 일반글 들여쓰기 없음값 0
-			pstmt.setInt(4, rb.getRe_seq()+1);// re_seq 답변글 순서, 일반글 순서 맨위값 0
-			pstmt.setString(5, rb.getNick());
-			pstmt.setInt(6, re_num);
+			pstmt.setString(2, rb.getContent());
+			pstmt.setInt(3, re_num);//re_ref 답변글 그룹==일반글의 글번호
+			pstmt.setInt(4,0); // re_lev 답변글 들여쓰기, 일반글 들여쓰기 없음값 0
+			pstmt.setInt(5,0);// re_seq 답변글 순서, 일반글 순서 맨위값 0
+			pstmt.setString(6, rb.getNick());
+			pstmt.setInt(7, re_num);
 
 			pstmt.executeUpdate();
 			 
@@ -90,7 +84,7 @@ public class ReplyDAO {
 		try {
 			con = getConnection();
 
-			sql = "select count(re_num) from gram_reply where num=?";
+			sql = "select count(*) from gram_reply where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -131,7 +125,7 @@ public class ReplyDAO {
 			con = getConnection();
 			// num 게시판 글번호 구하기
 			// sql 함수 최대값 구하기 max()
-			sql = "select * from gram_reply where num=? order by re_num desc, re_seq asc limit ?, ? ";
+			sql = "select * from gram_reply where num=? order by re_ref desc, re_seq asc limit ?, ? ";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, startRow - 1);
@@ -146,6 +140,7 @@ public class ReplyDAO {
 				rb.setNick(rs.getString(5));
 				rb.setDate(rs.getDate(6));
 				rb.setRe_num(rs.getInt(7));
+				rb.setRe_ref(rs.getInt(8));
 				
 				replyList.add(rb);
 			}
@@ -178,7 +173,6 @@ public class ReplyDAO {
 	public ReplyBean getReply(int re_num) {		
 		ReplyBean rb = new ReplyBean();
 		try {
-			System.out.println("getReply메소드호출");
 			con = getConnection();
 			sql = "select * from gram_reply where re_num=?";
 			pstmt = con.prepareStatement(sql);
@@ -291,7 +285,66 @@ public class ReplyDAO {
 		}
 	}// updateReply() end
 	
+
+	public void insertRepleyReply(ReplyBean rb) {		
+		int re_num=0;
+
+		try {
+			System.out.println("insertRepleyReply의 re_ref의값:"+rb.getRe_ref());
+			con = getConnection();
+
+			sql = "select max(re_num) from gram_reply";			
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();						
+			
+			 if(rs.next()){re_num=rs.getInt(1)+1;}
+
+			 System.out.println(rb.getRe_ref()+"여기는DAO에 insertRepleyReply메소드 입니당");
+			 
+			 sql="update gram_reply set re_seq=re_seq+1 where re_ref=? and re_seq>?";			
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setInt(1,rb.getRe_ref());
+			 pstmt.setInt(2,rb.getRe_seq());
+			 
+			 pstmt.executeUpdate();
 	
+
+			sql = "insert into gram_reply(num,content,re_ref,re_lev,re_seq,nick,re_num,date) " + "values(?,?,?,?,?,?,?,now())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rb.getNum()); // 일반글의 글번호
+			pstmt.setString(2, rb.getContent());	
+			pstmt.setInt(3, rb.getRe_ref());//re_ref 기존글 그룹번호 같게함
+			pstmt.setInt(4, rb.getRe_lev()+1); // re_lev 답변글 들여쓰기, 일반글 들여쓰기 없음값 0
+			pstmt.setInt(5, rb.getRe_seq()+1);// re_seq 답변글 순서, 일반글 순서 맨위값 0			
+			pstmt.setString(6, rb.getNick());
+			pstmt.setInt(7, re_num);
+
+			pstmt.executeUpdate();
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		
+		}
+	}// insertRepley() end
 	
 	
 	

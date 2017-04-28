@@ -40,7 +40,6 @@ public class BoardFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/BoardList.bo")) {
-			System.out.println("./BoardList.bo");
 			action = new BoardListAction();
 			try {
 				forward = action.execute(request, response);

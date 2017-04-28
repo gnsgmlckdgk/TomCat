@@ -52,12 +52,21 @@ public class ReplyFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();}
+		} else if (command.equals("/ReplyReplyWriteAction.re")) {
+			action= new ReplyReplyWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();}
+			
+			
 		} else if (command.equals("/ReplyReply.re")) {
 			forward = new ActionForward();
 			forward.setPath("./instagram/replyreplyform.jsp");
 			forward.setRedirect(false);
 		}
 			
+
 
 
 	if(forward!=null)

@@ -27,7 +27,7 @@ public class ReplyWriteAction implements Action{
 		rb.setNum(num);
 		rb.setContent(request.getParameter("content"));
 		rb.setNick(request.getParameter("nick"));
-
+		rb.setRe_lev(Integer.parseInt(request.getParameter("re_ref")));
 		rb.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
 		rb.setRe_num(Integer.parseInt(request.getParameter("re_num")));
 		rb.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
