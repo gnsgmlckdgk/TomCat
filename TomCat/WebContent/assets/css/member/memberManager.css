@@ -1,11 +1,10 @@
 /* 회원정보 관리에 관한 스타일 */
 
-
 .clear {
 	float: clear;
 }
 
-/* 회원정보로 들어가기전 팝업 메뉴 */
+/* 회원정보로 들어가기전 팝업 메뉴 시작 */
 div.memberManagerNav {
 	padding: 0;
 	margin: 0;
@@ -56,6 +55,111 @@ div.memberManagerNav li a {
 div.memberManagerNav li a:hover {
 	background-color: #f0f0f0;
 }
+
+/* 회원정보로 들어가기전 팝업 메뉴 끝 */
+
+/* --------------------------------------- */
+
+/* 회원정보 관리 페이지  시작 */
+
+/* 서브메뉴 */
+div#submenu {
+	border: 1px solid #ccc;
+	
+	width: 200px;
+	min-height: 480px;
+	float: left;
+	
+	margin-top: 40px;
+	padding: 1px;
+}
+
+div#submenu ul {
+	padding: 0;
+	margin: 0;
+	
+	font-size: 14px;
+	font-family: "나눔 고딕", "맑은고딕", sans-serif;
+
+	list-style: none;
+}
+
+div#submenu li {
+	padding: 0;
+	margin: 0;
+}
+
+div#submenu li a {
+	border-bottom: 1px solid #ccc;
+	
+	text-decoration: none;
+	color: #0366d6;
+	
+	display: block;
+	margin: 0;
+
+	padding: 5px 0 5px 5px;
+	margin: 0;
+}
+
+div#submenu li a:hover {
+	background-color: #f0f0f0;
+	color: #FF5E00;
+	font-weight: bold;
+}
+
+div#submenu li hr {
+	margin: 20px 7px 20px 7px;
+	background-color: #ccc;
+}
+
+/* 컨텐츠 부분 공통 */
+div.content {	
+	border: 1px solid #ccc;
+	margin: 0 0 50px 20px;
+	padding: 0;
+	float: left;
+	
+	width: 1100px;
+	min-height: 600px;
+	
+	padding: 30px;
+}
+
+/* 회원정보 */
+div.content_member_info {
+	border: 1px solid red;	/* 영역확인용 */
+	
+}
+div.content_member_info h1 {
+	border: 1px solid blue;	/* 영역확인용 */
+	
+}
+
+
+/* 비밀번호 변경 */
+div.content_member_passUpdate {
+	border: 1px solid red;	/* 영역확인용 */
+
+}
+div.content_member_passUpdate h1 {
+	border: 1px solid blue;	/* 영역확인용 */
+
+}
+
+
+/* 회원정보 관리 페이지  끝 */
+
+
+
+
+
+
+
+
+
+
+
 
 
 

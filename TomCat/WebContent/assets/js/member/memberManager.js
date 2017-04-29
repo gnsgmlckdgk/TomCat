@@ -16,7 +16,7 @@ $(document).ready(function(){
 		}
 	});
 				
-		$('section').click(function(){
+		$('section, footer, article').click(function(){
 			var dis = $('.memberManagerNavPopupToggle').css('display');
 			
 			if(dis == "block") {

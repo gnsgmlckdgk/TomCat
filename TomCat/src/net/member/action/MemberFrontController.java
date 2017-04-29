@@ -28,7 +28,6 @@ public class MemberFrontController extends HttpServlet {
 			forward.setRedirect(false);
 		
 		}else if(command.equals("/MemberJoin.me")) {	// 회원가입 입력 페이지
-			
 			action = new MemberJoinKeySetting();
 			
 			try {
@@ -39,7 +38,6 @@ public class MemberFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MemberJoinAction.me")) {		// 회원가입 DB작업
-			
 			action = new MemberJoinAction();
 			
 			try {
@@ -50,7 +48,6 @@ public class MemberFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MemberLoginAction.me")) {		// 로그인 처리
-			
 			action = new MemberLoginAction();
 			
 			try {
@@ -67,7 +64,6 @@ public class MemberFrontController extends HttpServlet {
 			forward.setRedirect(false);
 			
 		}else if(command.equals("/MemberIdFinderAction.me")) {	// 아이디 찾기 처리(팝업 브라우저)
-			
 			action = new MemberIdFinderAction();
 			
 			try {
@@ -84,7 +80,6 @@ public class MemberFrontController extends HttpServlet {
 			forward.setRedirect(false);
 			
 		}else if(command.equals("/MemberPassFinderAction.me")) {	// 비밀번호 찾기 처리(팝업 브라우저)
-			
 			action = new MemberPassFinderAction();
 			
 			try {
@@ -93,8 +88,7 @@ public class MemberFrontController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/MemberLogout.me")) {	// 로그아웃 처리
-			
+		}else if(command.equals("/MemberLogout.me")) {	// 로그아웃 처리
 			action = new MemberLogoutAction();
 			
 			try {
@@ -104,7 +98,20 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/MemberInfo.me")) {	// 회원정보 페이지
+			// 임시로 이동
+			forward = new ActionForward();
+			forward.setPath("./member/memberInfo.jsp");
+			forward.setRedirect(false);
+			
+		}else if(command.equals("/MemberPassUpdate.me")) {	// 비밀번호 변경
+			// 임시로 이동
+			forward = new ActionForward();
+			forward.setPath("./member/memberPassUpdate.jsp");
+			forward.setRedirect(false);
 		}
+		
+		
 		
 		// 이동
 		if(forward!=null) {
