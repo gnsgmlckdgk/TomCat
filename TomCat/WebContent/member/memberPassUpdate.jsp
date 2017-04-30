@@ -16,8 +16,34 @@
 		<div class="content">
 			<div class="content_member_passUpdate">
 				<h1>비밀번호 변경</h1>
-			</div>
-		</div>
+				
+				<div class="pass_form">
+					
+					<form action="" method="post">
+						<table>	
+							<tr>
+								<th>현재 비밀번호</th>
+								<td><input type="password" name="cur_pass"></td>
+							</tr>
+							<tr>
+								<th>새로운 비밀번호</th>
+								<td><input type="password" name="pass"></td>
+							</tr>
+							<tr>
+								<th>새로운 비밀번호</th>
+								<td><input type="password" name="pass2"></td>
+							</tr>
+						</table>
+						<div class="form_btn">
+							<input type="submit" value="수정">
+							<input type="reset" value="되돌리기">
+						</div>
+					</form>
+					
+				</div>	<!-- info_form -->
+				
+			</div> <!-- content_member_info -->
+		</div>	<!-- content -->
 	
 	</div>
 </section>
