@@ -16,14 +16,11 @@ public class MyPlanAction implements Action{
 		
 		MyPlanDAO mpdo = new MyPlanDAO();
 		
-		List<MyPlanBean> MyPlan = mpdo.MyPlan();
-
-		
-		request.setAttribute("MyPlan", MyPlan);
+	
 	
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./myplan/map.jsp");
+		forward.setPath("./myplan/myplan.jsp");
 		return forward;
 
 	}

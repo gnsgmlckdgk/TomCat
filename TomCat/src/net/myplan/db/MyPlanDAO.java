@@ -27,7 +27,10 @@ public class MyPlanDAO {
 		return con;
 	}
 	
-	public List<MyPlanBean> MyPlan(){
+	
+/* map DAO 추후사용예정
+ * 
+ * 	public List<MyPlanBean> MyPlan(){
 
 		List<MyPlanBean> MyPlan = new ArrayList<MyPlanBean>();
 		
@@ -65,12 +68,9 @@ public class MyPlanDAO {
 		
 		return MyPlan;
 		
-	}
+	}*/
 
-	private void add(MyPlanBean mb) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 
 }
