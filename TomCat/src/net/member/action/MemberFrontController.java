@@ -98,7 +98,7 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/MemberInfo.me")) {	// 회원정보 페이지
+		}else if(command.equals("/MemberInfo.me")) {		// 회원정보 페이지
 
 			// 회원정보 가져오기
 			action = new MemberInfoAction();
@@ -107,10 +107,19 @@ public class MemberFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 				
 			}catch(Exception e) {
-				System.out.println("MemberForntController MemberInfo.me 오류");
+				System.out.println("MemberForntController MemberInfo.me 예외 발생");
+				e.printStackTrace();
+				
+			}
+		}else if(command.equals("/MemberUpdate.me")) {	// 회원정보 수정 처리
+			
+			try {
+				
+				
+				
+			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			
 			
 		}else if(command.equals("/MemberPassUpdate.me")) {	// 비밀번호 변경
 			// 임시로 이동

@@ -155,7 +155,31 @@ div.content_member_info .info_form input[type="text"] {
 div.content_member_info .info_form img {
 	border: 1px solid #f0f0f0;
 	margin: 0;
+	float: left;
 }
+
+div.content_member_info .info_form img#right_arrow {	/* 미리보기 이미지 가르키는 화살표 div */
+	width: 60px;
+	height: 60px;
+	border: none;
+	
+	position: relative;
+	left: 50px;
+	
+	display: none;
+}
+
+div.content_member_info .info_form div#previewImg {	/* 이미지 바뀔때 미리보기 div */
+	width: 70px;
+	height: 70px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+	
+	position: absolute;
+	left: 400px;
+	
+	display: none;
+}
+
 div.content_member_info .info_form .form_btn {
 	text-align: center;
 	padding: 10px;
@@ -163,6 +187,8 @@ div.content_member_info .info_form .form_btn {
 div.content_member_info .info_form .form_btn input[type="submit"] {
 	margin-right: 40px;
 }
+
+
 
 /* 비밀번호 변경 */
 div.content_member_passUpdate {
