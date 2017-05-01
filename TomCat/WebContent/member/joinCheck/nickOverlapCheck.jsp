@@ -6,8 +6,8 @@
     MemberDAO mdao = new MemberDAO();
     
     String nick = request.getParameter("nick");
-    int check = mdao.nickOverlapCheck(nick);    
+    int check = mdao.nickOverlapCheck(nick);
     %>
     
-    <%=check %>
+    <%=check%>
     

@@ -164,14 +164,14 @@ div.content_member_info .info_form img#right_arrow {	/* 미리보기 이미지 �
 	border: none;
 	
 	position: relative;
-	left: 50px;
+	left: 40px;
 	
 	display: none;
 }
 
 div.content_member_info .info_form div#previewImg {	/* 이미지 바뀔때 미리보기 div */
-	width: 70px;
-	height: 70px;
+	width: 100px;
+	height: 100px;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
 	
 	position: absolute;

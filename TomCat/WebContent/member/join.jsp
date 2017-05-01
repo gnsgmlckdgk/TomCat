@@ -30,7 +30,7 @@
 							<label for="">비밀번호 확인</label> 
 								<input type="password" name="pass2" id="pass2" maxlength="16">
 							<label for="name">이름</label> 
-								<input type="text" name="name" id="name">
+								<input type="text" name="name" id="name" maxlength="30">
 							<label for="nick">닉네임</label> 
 								<input type="text" name="nick" id="nick" maxlength="16" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"  onchange="check_change()">
 								<input type="button" name="nick_check" value="닉네임 중복확인" onclick="nickOverlapCheck()" class="button alt small" >

@@ -36,7 +36,7 @@
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
 			
-		<!-- 추가한 js(스트립트는 태그 id나 명이 겹칠수 있어서 사용하는 jsp파일에서 외부 스크립트를 불러오게 하는게 좋을거 같아요.) -->
+		<!-- 추가한 js -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
 			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
