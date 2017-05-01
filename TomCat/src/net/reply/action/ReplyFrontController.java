@@ -53,11 +53,11 @@ public class ReplyFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();}
 		} else if (command.equals("/ReplyReplyWriteAction.re")) {
-			action= new ReplyReplyWriteAction();
+			/*action= new ReplyReplyWriteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();}
+				e.printStackTrace();}*/
 			
 			
 		} else if (command.equals("/ReplyReply.re")) {

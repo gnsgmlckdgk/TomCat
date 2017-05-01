@@ -31,7 +31,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=3"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=5"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
@@ -50,7 +50,7 @@
 
 <%
 	// 세션값 가져오기
-	String id = (String)session.getAttribute("id");
+	String id = (String)session.getAttribute("id");			// 아이디
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 %>
 
