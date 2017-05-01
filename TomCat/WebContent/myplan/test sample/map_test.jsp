@@ -10,7 +10,7 @@
 
 %>
 <!-- Header -->
-<jsp:include page="../inc/header.jsp" />
+<jsp:include page="/../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="./assets/css/map/map.css" />
@@ -129,5 +129,5 @@
 </body>
 <div class="clear"></div>
 <!-- Footer -->
-<jsp:include page="../inc/footer.jsp" />
+<jsp:include page="/../inc/footer.jsp" />
 </html>
