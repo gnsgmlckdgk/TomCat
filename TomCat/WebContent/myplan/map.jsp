@@ -8,7 +8,7 @@
 <%
 	List<MyPlanBean> MyPlanList = (List)request.getAttribute("MyPlan");
 
-	%>
+%>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
@@ -30,18 +30,23 @@
 	<div id="map"></div>
 	<div id="right-panel">
 		<div>
-			<b>출발지</b> <select name="name">
-				<option value=1 <c:if test="${name == 1}">selected</c:if>>해운대</option>
-				<option value=2 <c:if test="${name == 2}">selected</c:if>>용두산</option>
-				<option value=3 <c:if test="${name == 3}">selected</c:if>>태종대</option>
-			</select> <b>경유지</b><br> <select name="name">
-				<option value=1 <c:if test="${name == 1}">selected</c:if>>해운대</option>
-				<option value=2 <c:if test="${name == 2}">selected</c:if>>용두산</option>
-				<option value=3 <c:if test="${name == 3}">selected</c:if>>태종대</option>
-			</select> <b>도착지</b> <select name="name">
-				<option value=1 <c:if test="${name == 1}">selected</c:if>>해운대</option>
-				<option value=2 <c:if test="${name == 2}">selected</c:if>>용두산</option>
-				<option value=3 <c:if test="${name == 3}">selected</c:if>>태종대</option>
+			<b>출발지</b> 
+			<select name=<%="name"%>">
+				<option >해운대</option>
+				<option >용두산</option>
+				<option >태종대</option>
+			</select> 
+			<b>경유지</b><br> 
+			<select name=<%="name"%>>
+				<option >해운대</option>
+				<option >용두산</option>
+				<option >태종대</option>
+			</select> 
+			<b>도착지</b> 
+			<select name=<%="name"%>>
+				<option >해운대</option>
+				<option >용두산</option>
+				<option >태종대</option>
 			</select> <br> <input type="submit" id="submit" value="여행 경로보기">&nbsp;&nbsp;<input
 				type="submit" value="일정에 추가하기">
 		</div>
@@ -65,11 +70,9 @@
 	    calculateAndDisplayRoute(directionsService, directionsDisplay);
 	  });
 	}
-		<%
-			if(MyPlanList != null){
-				for(int i=0;i<MyPlanList.size(); i++){
-				MyPlanBean mpb = (MyPlanBean)MyPlanList.get(i);
-		%>
+	
+	
+	
 
 	      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	        var waypts = [];
@@ -83,22 +86,18 @@
 	          }
 	        }
 			
-			
+			<%
+			if(MyPlanList != null){
+				for(int i=0;i<MyPlanList.size(); i++){
+				MyPlanBean mpb = (MyPlanBean)MyPlanList.get(i);
+			%>
 	        directionsService.route({
 	          origin: <%=mpb.getLatitude()%>,<%=mpb.getLongitude()%>,
 	          destination: <%=mpb.getLatitude()%>,<%=mpb.getLongitude()%>,
 	          waypoints: waypts,
 	          optimizeWaypoints: true,
 	          travelMode: 'DRIVING'
-	        },
-	
-		<%
-			}
-			}
-
-		%>
-			
-	 	function(response, status) {
+	        },function(response, status) {
 	          if (status === 'OK') {
 	            directionsDisplay.setDirections(response);
 	            var route = response.routes[0];
@@ -115,9 +114,13 @@
 	            }
 	          } else {
 	            window.alert('Directions request failed due to ' + status);
-	          }
-	        });
-	      }
+		          }
+		        });
+		      }
+					<%
+				}
+				}
+				%>
     </script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&callback=initMap">

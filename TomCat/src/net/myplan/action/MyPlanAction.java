@@ -23,7 +23,7 @@ public class MyPlanAction implements Action{
 	
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./myplan/map_test.jsp");
+		forward.setPath("./myplan/map.jsp");
 		return forward;
 
 	}
