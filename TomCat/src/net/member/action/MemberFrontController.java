@@ -99,10 +99,18 @@ public class MemberFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MemberInfo.me")) {	// 회원정보 페이지
-			// 임시로 이동
-			forward = new ActionForward();
-			forward.setPath("./member/memberInfo.jsp");
-			forward.setRedirect(false);
+
+			// 회원정보 가져오기
+			action = new MemberInfoAction();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				System.out.println("MemberForntController MemberInfo.me 오류");
+				e.printStackTrace();
+			}
+			
 			
 		}else if(command.equals("/MemberPassUpdate.me")) {	// 비밀번호 변경
 			// 임시로 이동
