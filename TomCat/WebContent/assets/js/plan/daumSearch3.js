@@ -161,8 +161,8 @@ var daumSearch = {
            a.className = 'image rounded';
            var img = document.createElement('img'); 
             
-           //a.target = '_blank'; //img 하이퍼링크 타겟
-           //a.href = z.image; //img 하이퍼링크 대상 경로
+           a.target = '_blank'; //img 하이퍼링크 타겟
+           a.href = z.image; //img 하이퍼링크 대상 경로
            //a.href = 'http://naver.com';	//img 하이퍼링크 테스트
            
            //img.height = 100; //이미지 높이

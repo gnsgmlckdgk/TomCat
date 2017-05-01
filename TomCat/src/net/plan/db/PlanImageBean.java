@@ -10,6 +10,8 @@ public class PlanImageBean {
 	private int travel_id; 
 	private String nick; 
 	private String img_info;
+	
+	
 	public int getNum() {
 		return num;
 	}
