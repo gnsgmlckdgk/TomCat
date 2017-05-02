@@ -59,6 +59,7 @@ public class MemberUpdateAction implements Action {
 		out.println("alert('회원정보 수정이 완료되었습니다.');");
 		out.println("location.href='./MemberInfo.me';");
 		out.println("</script>");
+		out.close();
 		
 		return null;
 	}

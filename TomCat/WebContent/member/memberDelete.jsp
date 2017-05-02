@@ -17,7 +17,17 @@
 		<div class="content">
 			<div class="content_member_memberDelete">
 				<h1>회원 탈퇴</h1>
-
+				
+				<form action="./MemberDeleteAction.me" method="post" >
+					<label for="pass">비밀번호</label><input type="password" name="pass" id="pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용">
+				
+				<!-- RSA암호화 공개키 -->
+				<input type="hidden" id="delete_publicKeyModulus" value="<%=request.getAttribute("updatePass_publicKeyModulus") %>">
+				<input type="hidden" id="delete_publicKeyExponent" value="<%=request.getAttribute("updatePass_publicKeyExponent") %>">
+				
+					<input type="submit" value="회원탈퇴">
+				
+				</form>
 				
 			</div> <!-- content_member_info -->
 		</div>	<!-- content -->

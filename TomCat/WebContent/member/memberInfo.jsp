@@ -195,7 +195,7 @@
 								'nick' : nick	
 							},
 							dataType : 'text',
-							url : './member/joinCheck/nickOverlapCheck2.jsp',
+							url : './member/updateCheck/nickOverlapCheck.jsp',
 							async : false, // 동기방식으로
 							success : function(data) {
 								check = data;
