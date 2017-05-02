@@ -1,43 +1,38 @@
 package net.reply.action;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.board.db.boardBean;
-import net.reply.action.Action;
-import net.reply.action.ActionForward;
 
 import net.reply.db.ReplyBean;
 import net.reply.db.ReplyDAO;
 
-public class ReplyWriteAction implements Action{
+public class ReplyReplyWriteAction implements Action{
+	
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("ReplyWriteAction execute()");
+		System.out.println("ReplyReplyWriteAction execute()");
+		
 		request.setCharacterEncoding("UTF-8");
 		
 
 		ReplyDAO rdao = new ReplyDAO();
 		ReplyBean rb = new ReplyBean();
-		
-		boardBean bb=new boardBean();
-		bb.setSubject(request.getParameter("subject"));
+		System.out.println("ReplyReplyWriteAction의 re_ref의 값:"+rb.getRe_ref());
 		
 		String pageNum = request.getParameter("pageNum");		
 		int num=Integer.parseInt(request.getParameter("num"));
-		System.out.println("num의 값"+num);
 		
-		rb.setNum(num);		
+		rb.setNum(num);
 		rb.setContent(request.getParameter("content"));
 		rb.setNick(request.getParameter("nick"));
-		rb.setRe_lev(Integer.parseInt(request.getParameter("re_ref")));
+
+		rb.setRe_ref(Integer.parseInt(request.getParameter("re_ref")));
 		rb.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
 		rb.setRe_num(Integer.parseInt(request.getParameter("re_num")));
 		rb.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
 
-		rdao.insertRepley(rb);
+		rdao.insertRepleyReply(rb);
 
 		ActionForward forward = new ActionForward();
 		forward.setPath("./BoardContent.bo?num="+num+"&pageNum="+pageNum);
@@ -47,7 +42,5 @@ public class ReplyWriteAction implements Action{
 	}
 
 }
-
-
 
 

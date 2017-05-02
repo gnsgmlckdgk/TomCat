@@ -14,11 +14,8 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-
-<!-- 추가한 스크립트 -->
-<script type="text/javascript" src="./assets/js/member/join.js"></script>	<!-- 회원가입 제약조건 및 암호화 -->
-
-
+<link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
+<div class="wrap">
 	<%
 
 	List boardList=(List)request.getAttribute("bl");
@@ -35,17 +32,21 @@
 	
 
 	
+			 
 			 %>
-		<a href="./BoardWrite.bo">인생샷 공유해요~</a>
+		<a href="./BoardWrite.bo" class="button fit" >인생샷 공유해요~</a>
+	
+		
 		
 
-		
-			<table>
+	<div class="table-wrapper">
+			<table class="alt" id="border">
 		<%
 		int boardcount=bdao.getBoardcount();
 		if(boardcount!=0){
 		
 			for(int i=0;i<boardList.size();i++){
+				
 				//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
 			boardBean bb=(boardBean)boardList.get(i);
 			%>
@@ -60,12 +61,12 @@
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
 			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300></a>
 			</td></tr>
-					
 		<%
 			}
 			%>
 			
 	</table>
+	</div>
 	<%
 	//페이지 출력
 	if(count!=0){
@@ -100,7 +101,7 @@
 	}
 	%>
 
-
+</div>
 </body>
 		
 <!-- Footer -->
