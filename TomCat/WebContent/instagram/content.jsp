@@ -78,11 +78,7 @@ function func1(re_num){
 	<%
 		ReplyDAO rdao = new ReplyDAO();	
 		int recount=((Integer)request.getAttribute("replycount")).intValue();
-		if(recount!=0){
 		
-	
-
-	
 		List replylist = (List) request.getAttribute("rl");
 	
 		int count = ((Integer) request.getAttribute("count")).intValue();
@@ -90,6 +86,8 @@ function func1(re_num){
 		int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 		int startrow = ((Integer) request.getAttribute("startrow")).intValue();
 		int endRow = ((Integer) request.getAttribute("endRow")).intValue();
+	
+		if(recount!=0){
 
 	%>
 	<table border="1">
@@ -151,7 +149,7 @@ function func1(re_num){
 		<tr id="replytextarea2">
 			<td colspan="6">
 
-				<form action="ReplyWriteAction.re" method="post" name="fr">
+				<form action="./ReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=rb.getNick() %>" name="nick"> 
 					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
 					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">								
@@ -173,7 +171,7 @@ function func1(re_num){
 <!-- 리플 페이징 -->
 
 		
-		<%
+		<% 
 	//페이지 출력
 	if(count!=0){
 		//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
@@ -205,12 +203,26 @@ function func1(re_num){
 			
 			
 	<%
-			}		
-	}
+				}		
+			}
 		}
-	%>
-		
-
+		if(recount==0){
+			%>
+					<form action="./ReplyWriteAction.re" method="post" name="fr">
+					<input type="hidden" value="<%=bb.getSubject()%>" name="nick">							
+					<input type="hidden" value="<%=rb.getNick() %>" name="nick"> 
+					<input type="hidden" value="<%=num%>" name="num"> 
+					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">								
+					<input type="hidden" value="<%=rb.getRe_lev() %>" name="re_lev">
+					<input type="hidden" value="<%=rb.getRe_seq() %>" name="re_seq">
+					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
+					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
+					
+					댓글
+					<textarea rows="2" cols="80" name="content"></textarea>
+					<input type="submit" value="입력">
+				</form>
+				<%}%>
 
 	<!--리플 -->
 

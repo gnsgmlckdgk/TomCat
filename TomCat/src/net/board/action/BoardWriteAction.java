@@ -26,7 +26,7 @@ public class BoardWriteAction implements Action{
 		
 		BoardDAO bdao=new BoardDAO();
 		boardBean bb=new boardBean();
-		bb.setNick(multi.getParameter("nick_name"));
+		bb.setNick(multi.getParameter("nick"));
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
 		bb.setImage1(multi.getFilesystemName("image1"));
