@@ -80,7 +80,7 @@
 			
 			<tr>
 				<td colspan="3">작성란<br>
-				<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea></td>
+				<textarea name="smarteditor" id="smarteditor" rows="10" cols="100"></textarea></td>
 			<tr>
 		</table>
 
