@@ -19,21 +19,29 @@
 				
 				<div class="pass_form">
 					
-					<form action="" method="post" onsubmit="return updatePassCheck()">
+					<form action="./MemberPassUpdateAction.me" method="post" onsubmit="return updatePassCheck()">
 						<table>	
 							<tr>
 								<th>현재 비밀번호</th>
 								<td><input type="password" name="cur_pass" id="cur_pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용"></td>
 							</tr>
 							<tr>
+								<th></th><td></td>	<!-- 구분 행 -->
+							</tr>
+							<tr>
 								<th>새로운 비밀번호</th>
 								<td><input type="password" name="new_pass" id="new_pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용"></td>
 							</tr>
 							<tr>
-								<th>새로운 비밀번호</th>
+								<th>비밀번호 재입력</th>
 								<td><input type="password" name="new_pass2" id="new_pass2" maxlength="16"></td>
 							</tr>
 						</table>
+						
+						<!-- RSA암호화 공개키 -->
+						<input type="hidden" id="updatePass_publicKeyModulus" value="<%=request.getAttribute("updatePass_publicKeyModulus") %>">
+						<input type="hidden" id=updatePass_publicKeyExponent value="<%=request.getAttribute("updatePass_publicKeyExponent") %>">
+						
 						<div class="form_btn">
 							<input type="submit" value="수정">
 							<input type="reset" value="되돌리기">
@@ -67,6 +75,37 @@
 								return false;
 							}
 							
+							// 비밀번호 일치 여부 확인
+							if(new_pass != new_pass2) {
+								alert("새로운 비밀번호가 일치하지 않습니다.");
+								$('#new_pass2').focus();
+								return false;
+							}
+							
+							// RSA암호화
+							 try {
+    							// 공개키 가져오기
+        						var rsaPublicKeyModulus = document.getElementById("updatePass_publicKeyModulus").value;
+       							var rsaPublicKeyExponent = document.getElementById("updatePass_publicKeyExponent").value;
+        
+        						var rsa = new RSAKey();
+       							rsa.setPublic(rsaPublicKeyModulus, rsaPublicKeyExponent);
+        
+        						// 사용자ID와 비밀번호를 RSA로 암호화한다.(이름은 암호화 제외)
+        						var securedCurPass = rsa.encrypt(cur_pass);
+       							var securedNewPass = rsa.encrypt(new_pass);
+        						var securedNewPass2 = rsa.encrypt(new_pass2);
+								
+        						// 기존 폼에 암호화 된 값을 재입력
+        						$('#cur_pass').val(securedCurPass);		// 아이디의 현재 비밀번호
+    							$('#new_pass').val(securedNewPass);		// 새로운 비밀번호
+    							$('#new_pass2').val(securedNewPass2);
+        						
+    							return true;
+    							
+							 }catch(err) {
+							 	alert(err);
+						  	 }
 						}
 					
 					</script>

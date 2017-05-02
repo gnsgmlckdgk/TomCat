@@ -121,11 +121,28 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/MemberPassUpdate.me")) {	// 비밀번호 변경
-			// 임시로 이동
-			forward = new ActionForward();
-			forward.setPath("./member/memberPassUpdate.jsp");
-			forward.setRedirect(false);
+		}else if(command.equals("/MemberPassUpdate.me")) {	// 비밀번호 변경 페이지
+			// 비밀번호 변경 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
+			action = new MemberPassUpdateKeySetting();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}			
+			
+		}else if(command.equals("/MemberPassUpdateAction.me")) {	// 비밀번호 변경 처리
+			// 비밀번호 변경
+			action = new MemberPassUpdateAction();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		

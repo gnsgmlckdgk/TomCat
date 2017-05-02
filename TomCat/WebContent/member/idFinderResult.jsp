@@ -28,6 +28,15 @@
 		
 		</script>
 		
+		<!-- 추가한 스타일 -->
+		<style type="text/css">
+			input[type="button"] {
+				display: block;
+				margin: 0 auto;
+			}
+		
+		</style>
+		
 </head>
 <body>
 	<!-- 찾은 아이디 리스트를 출력하는 페이지 -->

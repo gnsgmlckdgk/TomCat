@@ -350,7 +350,7 @@ public class MemberDAO {
 			}
 			
 		}catch(Exception e) {
-			System.out.println("MemberDAO클래스 getFinderMemberId() 예외발생");
+			System.out.println("MemberDAO->getFinderMemberId()에서 예외발생");
 			e.printStackTrace();
 		}finally {
 			try{
@@ -366,9 +366,10 @@ public class MemberDAO {
 		
 	}
 	
-	// 읽어버린 비밀번호 찾기, 비밀번호 변경
+	// 읽어버린 비밀번호 찾기
 	public void updatePass(String id, String pass) {
 		
+		// 임시비밀번호를 메일로 보내고 DB에서도 비밀번호를 수정한다.
 		try {
 			
 			con = getConnection();
@@ -397,6 +398,49 @@ public class MemberDAO {
 		}
 		
 	}
+	
+	// 비밀번호 변경
+	public int updatePass(String id, String cur_pass, String new_pass) {
+			
+		int check = 0;	// 0: 비밀번호 일치하지 않음, 1: 비밀번호 일치
+			
+		try {
+				
+			con = getConnection();
+				
+			// 비밀번호 맞는지 확인
+			// MySQL 버전이 낮아져 PASSWORD() 방식으로 변경
+			sql = "select id from member where pass=PASSWORD(?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, cur_pass);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {	// 이 비밀번호를 쓰는 아이디는 있음
+				if(rs.getString("id").equals(id)) {	// 로그인한 아이디가 쓰는 비밀번호와 일치
+					sql = "update member set pass = PASSWORD(?) where id = ?";
+					ps = con.prepareStatement(sql);
+					ps.setString(1, new_pass);
+					ps.setString(2, id);
+					
+					ps.executeUpdate();
+						
+						check = 1;
+						
+					}else {	// 비밀번호가 일치하지 않음
+						return check;
+					}
+					
+				}else {	// 이 비밀번호를 쓰는 아이디 없음
+					return check;
+				}
+				
+			}catch(Exception e) {
+				System.out.println("MemberDAO->updatePass()에서 예외발생");
+				e.printStackTrace();
+			}
+			
+			return check;
+		}
 	
 	// 회원정보 수정
 	public void updateMember(MemberBean mb) {
@@ -431,7 +475,7 @@ public class MemberDAO {
 			}
 			
 		}catch(Exception e){
-			System.out.println("MemberDAO클래스 updateMember() 예외발생");
+			System.out.println("MemberDAO->updateMember에서 예외발생");
 			e.printStackTrace();
 		}finally {
 			try{
@@ -444,8 +488,7 @@ public class MemberDAO {
 		}
 		
 	}
-	
-	
+
 } // class
 
 

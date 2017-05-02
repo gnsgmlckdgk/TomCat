@@ -31,7 +31,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=1"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
