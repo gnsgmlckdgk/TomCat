@@ -36,8 +36,8 @@ function popupToggle() {
 			$('#loginPopContainer').css('display', 'none');
 
 			// 공개키 hidden태그 지우기
-			$('#rsaPublicKeyModulusLogin').remove();
-			$('#rsaPublicKeyExponentLogin').remove();
+			$('#login_publicKeyModulus').remove();
+			$('#login_publicKeyExponent').remove();
 		}
 		
 	});		// ready
@@ -55,11 +55,11 @@ function validateEncryptedLoginForm() {
 	}
 	
 	// 공개키 가져오기
-    var rsaPublicKeyModulusLogin = document.getElementById("rsaPublicKeyModulusLogin").value;
-    var rsaPublicKeyExponentLogin = document.getElementById("rsaPublicKeyExponentLogin").value;
+    var login_publicKeyModulus = document.getElementById("login_publicKeyModulus").value;
+    var login_publicKeyExponent = document.getElementById("login_publicKeyExponent").value;
     
     var rsa = new RSAKey();
-    rsa.setPublic(rsaPublicKeyModulusLogin, rsaPublicKeyExponentLogin);
+    rsa.setPublic(login_publicKeyModulus, login_publicKeyExponent);
     
     // 사용자ID와 비밀번호를 RSA로 암호화한다.(이름은 암호화 제외)
     var securedId = rsa.encrypt(id);

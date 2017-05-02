@@ -201,28 +201,18 @@ public class MemberDAO {
 			
 			// DB의 pass가 단방향 암호화 SHA-256으로 되어있기때문에 매개변수 pass를 SHA-256암호화 후 비교한다.
 			// MySQL 버전이 낮아져 PASSWORD() 함수를 사용한 암호화 방식으로 변경
-			sql = "select pass from member where id=?";
+			sql = "select id from member where pass=PASSWORD(?)";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setString(1, pass);
 			
 			rs = ps.executeQuery();
 			
-			if(rs.next()) {	// 아이디 있음
-				
-				sql = "select id from member where pass = PASSWORD(?)";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, pass);
-				
-				rs = ps.executeQuery();
-				
-				if(rs.next()) {	// 비밀번호 맞음
+			while(rs.next()) {
+				if(rs.getString("id").equals(id)) {
 					check = 1;
-				}else {	// 비밀번호 틀림
+				}else {
 					check = 0;
 				}
-				
-			}else {	// 아이디 없음
-				check = -1;
 			}
 			
 			// SHA256 방식
@@ -403,7 +393,7 @@ public class MemberDAO {
 	public int updatePass(String id, String cur_pass, String new_pass) {
 			
 		int check = 0;	// 0: 비밀번호 일치하지 않음, 1: 비밀번호 일치
-			
+		
 		try {
 				
 			con = getConnection();
@@ -415,7 +405,7 @@ public class MemberDAO {
 			ps.setString(1, cur_pass);
 			rs = ps.executeQuery();
 			
-			if(rs.next()) {	// 이 비밀번호를 쓰는 아이디는 있음
+			while(rs.next()) {	// 이 비밀번호를 쓰는 아이디는 있음
 				if(rs.getString("id").equals(id)) {	// 로그인한 아이디가 쓰는 비밀번호와 일치
 					sql = "update member set pass = PASSWORD(?) where id = ?";
 					ps = con.prepareStatement(sql);
@@ -424,15 +414,9 @@ public class MemberDAO {
 					
 					ps.executeUpdate();
 						
-						check = 1;
-						
-					}else {	// 비밀번호가 일치하지 않음
-						return check;
-					}
-					
-				}else {	// 이 비밀번호를 쓰는 아이디 없음
-					return check;
+					check = 1;	
 				}
+			}
 				
 			}catch(Exception e) {
 				System.out.println("MemberDAO->updatePass()에서 예외발생");

@@ -5,7 +5,7 @@
 <jsp:include page="../inc/header.jsp" />
 
 <!-- 추가한 스크립트 -->
-<script type="text/javascript" src="./assets/js/member/join.js"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+<script type="text/javascript" src="./assets/js/member/join.js?ver=10"></script>	<!-- 회원가입 제약조건 및 암호화 -->
 
 		<!-- Main -->
 			<section id="main" class="wrapper">
@@ -50,8 +50,8 @@
 								<input type="text" name="tel" id="tel" maxlength="20" placeholder=" ' - '문자 생략, 예)01000000000" >
 							
 							<!-- 공개키 -->
-							<input type="hidden" id="rsaPublicKeyModulus" value="<%=request.getAttribute("publicKeyModulus") %>">
-							<input type="hidden" id="rsaPublicKeyExponent" value="<%=request.getAttribute("publicKeyExponent") %>">
+							<input type="hidden" id="join_publicKeyModulus" value="<%=request.getAttribute("publicKeyModulus") %>">
+							<input type="hidden" id="join_publicKeyExponent" value="<%=request.getAttribute("publicKeyExponent") %>">
 							
 							<!-- 버튼 -->
 							<div class="join_btn">	

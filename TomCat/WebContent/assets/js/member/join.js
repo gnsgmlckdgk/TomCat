@@ -143,8 +143,8 @@ function validateEncryptedForm() {
     	
     try {
     	// 공개키 가져오기
-        var rsaPublicKeyModulus = document.getElementById("rsaPublicKeyModulus").value;
-        var rsaPublicKeyExponent = document.getElementById("rsaPublicKeyExponent").value;
+        var rsaPublicKeyModulus = document.getElementById("join_publicKeyModulus").value;
+        var rsaPublicKeyExponent = document.getElementById("join_publicKeyExponent").value;
         
         var rsa = new RSAKey();
         rsa.setPublic(rsaPublicKeyModulus, rsaPublicKeyExponent);
