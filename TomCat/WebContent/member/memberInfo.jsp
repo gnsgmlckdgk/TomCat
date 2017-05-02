@@ -21,7 +21,7 @@
 				// 세션값 없으면 Main으로
 				String id = (String)session.getAttribute("id");
 				if(id==null) {
-					response.sendRedirect("Main.me");
+					response.sendRedirect("./Main.me");
 				}
 				
 				// 회원정보 가져오기
@@ -38,7 +38,7 @@
 							<tr><th>이름</th>
 								<td><input type="text" value="<%=mb.getName() %>" name="name" id="name" maxlength="30"></td></tr>
 							<tr><th>닉네임</th>
-								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="16"></td></tr>
+								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="16" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"></td></tr>
 							<tr><th>성별</th>
 								<td>
 									<input type="radio" id="priority-normal man" name="gender" value="남" <%if(mb.getGender().equals("남")){ %>checked<%} %>>
@@ -47,7 +47,7 @@
 									<label for="priority-normal woman">여</label>
 								</td></tr>
 							<tr><th>전화</th>
-								<td><input type="text" value="<%=mb.getTel() %>" name="tel" id="tel" maxlength="20"></td></tr>
+								<td><input type="text" value="<%=mb.getTel() %>" name="tel" id="tel" maxlength="20" placeholder=" ' - '문자 생략, 예)01000000000"></td></tr>
 							<tr><th>프로필사진</th>
 								<td>
 									<input type="file" value="<%=mb.getProfile() %>" name="profile" id="profile" onchange="loadImageFile()">
