@@ -92,8 +92,8 @@
 				MyPlanBean mpb = (MyPlanBean)MyPlanList.get(i);
 			%>
 	        directionsService.route({
-	          origin: <%=mpb.getLatitude()%>,<%=mpb.getLongitude()%>,
-	          destination: <%=mpb.getLatitude()%>,<%=mpb.getLongitude()%>,
+	          /* origin: 
+	          destination:, */
 	          waypoints: waypts,
 	          optimizeWaypoints: true,
 	          travelMode: 'DRIVING'

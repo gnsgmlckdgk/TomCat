@@ -1,70 +1,109 @@
 package net.myplan.admin.db;
 
+import java.util.Date;
+
 public class MyPlanBean {
+	private int myplans_id;
+	private String id;
+	private int plan_nr;
 	private int travel_id;
-	private String type;
-	private String country_code;
-	private String city_code;
-	private String name;
-	private String latitude;
-	private String longitude;
-	private String info;
-	private String address;
+	private int item_nr;
+	private String firstday;
+	private String lastday;
+	private int day_nr;
+	private String day_night;
+	private float user_lat;
+	private float user_lng;
+	private String date;
+	private String memo;
+	private int plan_done_nr;
 	
+	public int getMyplans_id() {
+		return myplans_id;
+	}
+	public void setMyplans_id(int myplans_id) {
+		this.myplans_id = myplans_id;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getPlan_nr() {
+		return plan_nr;
+	}
+	public void setPlan_nr(int plan_nr) {
+		this.plan_nr = plan_nr;
+	}
 	public int getTravel_id() {
 		return travel_id;
 	}
 	public void setTravel_id(int travel_id) {
 		this.travel_id = travel_id;
 	}
-	public String getType() {
-		return type;
+	public int getItem_nr() {
+		return item_nr;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setItem_nr(int item_nr) {
+		this.item_nr = item_nr;
 	}
-	public String getCountry_code() {
-		return country_code;
+	public String getFirstday() {
+		return firstday;
 	}
-	public void setCountry_code(String country_code) {
-		this.country_code = country_code;
+	public void setFirstday(String firstday) {
+		this.firstday = firstday;
 	}
-	public String getCity_code() {
-		return city_code;
+	public String getLastday() {
+		return lastday;
 	}
-	public void setCity_code(String city_code) {
-		this.city_code = city_code;
+	public void setLastday(String lastday) {
+		this.lastday = lastday;
 	}
-	public String getName() {
-		return name;
+	public int getDay_nr() {
+		return day_nr;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setDay_nr(int day_nr) {
+		this.day_nr = day_nr;
 	}
-	public String getLatitude() {
-		return latitude;
+	public String getDay_night() {
+		return day_night;
 	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
+	public void setDay_night(String day_night) {
+		this.day_night = day_night;
 	}
-	public String getLongitude() {
-		return longitude;
+	public float getUser_lat() {
+		return user_lat;
 	}
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setUser_lat(float user_lat) {
+		this.user_lat = user_lat;
 	}
-	public String getInfo() {
-		return info;
+	public float getUser_lng() {
+		return user_lng;
 	}
-	public void setInfo(String info) {
-		this.info = info;
+	public void setUser_lng(float user_lng) {
+		this.user_lng = user_lng;
 	}
-	public String getAddress() {
-		return address;
+	public String getDate() {
+		return date;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDate(String date) {
+		this.date = date;
 	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	public int getPlan_done_nr() {
+		return plan_done_nr;
+	}
+	public void setPlan_done_nr(int plan_done_nr) {
+		this.plan_done_nr = plan_done_nr;
+	}
+	
+
 	
 	
 }
