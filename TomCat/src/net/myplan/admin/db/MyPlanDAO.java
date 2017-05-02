@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -37,7 +38,7 @@ public class MyPlanDAO {
 			//1,2 디비연결
 			con=getConnection();
 			//num구하기
-			sql="select max(travel_id) from travel";
+			sql="select max(myplans_id) from myplans";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
@@ -46,17 +47,27 @@ public class MyPlanDAO {
 				num=1;
 			}
 			//3 sql insert
-			sql="insert into travel(travel_id,type,country_code,city_code,name,latitude,longitude,info,address) values(?,?,?,?,?,?,?,?,?)";
+			sql="insert into travel(myplans_id, id, plan_nr, travel_id, item_nr, "
+					+ "firstday, lastday, day_nr, day_night, user_lat, user_lng,"
+					+ "date, memo, plan_done_nr) "
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, mplBean.getTravel_id());
-			pstmt.setString(2, mplBean.getType());
-			pstmt.setString(3, mplBean.getCountry_code());
-			pstmt.setString(4, mplBean.getCity_code());
-			pstmt.setString(5, mplBean.getName());
-			pstmt.setString(6, mplBean.getLatitude());
-			pstmt.setString(7, mplBean.getLongitude());
-			pstmt.setString(8, mplBean.getInfo());
-			pstmt.setString(9, mplBean.getAddress());
+			pstmt.setInt(1, mplBean.getMyplans_id());
+			pstmt.setString(2, mplBean.getId());
+			pstmt.setInt(3, mplBean.getPlan_nr());
+			pstmt.setInt(4, mplBean.getTravel_id());
+			pstmt.setInt(5, mplBean.getItem_nr());
+			pstmt.setString(6, mplBean.getFirstday());
+			pstmt.setString(7, mplBean.getLastday());
+			pstmt.setInt(8, mplBean.getDay_nr());
+			pstmt.setString(9, mplBean.getDay_night());
+			pstmt.setFloat(10, mplBean.getUser_lat());
+			pstmt.setFloat(11, mplBean.getUser_lng());
+			pstmt.setString(12, mplBean.getDate());
+			pstmt.setString(13, mplBean.getMemo());
+			pstmt.setInt(14, mplBean.getPlan_done_nr());
+			
+		
 		
 			//4 실행
 			pstmt.executeUpdate();
@@ -80,7 +91,7 @@ public class MyPlanDAO {
 			//1,2 디비연결
 			con=getConnection();
 			//3 sql
-			sql="select * from travel";
+			sql="select * from myplans";
 			pstmt=con.prepareStatement(sql);
 			//4 rs 실행 저장
 			rs=pstmt.executeQuery();
@@ -88,15 +99,20 @@ public class MyPlanDAO {
 			//  rs => 자바빈 멤버변수 저장 => goodsList 한칸 저장
 			while(rs.next()){
 				MyPlanBean mpl =new MyPlanBean();
+				mpl.setMyplans_id(rs.getInt("myplans_id"));
+				mpl.setId(rs.getString("id"));
+				mpl.setPlan_nr(rs.getInt("plan_nr"));
 				mpl.setTravel_id(rs.getInt("travel_id"));
-				mpl.setType(rs.getString("type"));
-				mpl.setCountry_code(rs.getString("country_code"));
-				mpl.setCity_code(rs.getString("city_code"));
-				mpl.setName(rs.getString("name"));
-				mpl.setLatitude(rs.getString("latitude"));
-				mpl.setLongitude(rs.getString("longitude"));
-				mpl.setInfo(rs.getString("info"));
-				mpl.setAddress(rs.getString("address"));
+				mpl.setItem_nr(rs.getInt("item_nr"));
+				mpl.setFirstday(rs.getString("firstday"));
+				mpl.setLastday(rs.getString("lastday"));
+				mpl.setDay_nr(rs.getInt("day_nr"));
+				mpl.setDay_night(rs.getString("day_night"));
+				mpl.setUser_lat(rs.getFloat("user_lat"));
+				mpl.setUser_lng(rs.getFloat("user_lng"));
+				mpl.setDate(rs.getString("date"));
+				mpl.setMemo(rs.getString("memo"));
+				mpl.setPlan_done_nr(rs.getInt("plan_done_nr"));
 				//자바빈 => 배열 한칸 저장
 				myplanList.add(mpl);
 			}

@@ -24,15 +24,20 @@ public class TravelDataAction implements Action{
 		//자바빈 파일 생성 
 		MyPlanBean mplBean=new MyPlanBean();
 		// 폼 => 자바빈 저장
-		
-		mplBean.setType(multi.getParameter("type"));
-		mplBean.setCountry_code(multi.getParameter("country_code"));
-		mplBean.setCity_code(multi.getParameter("city_code"));
-		mplBean.setName(multi.getParameter("name"));
-		mplBean.setLatitude(multi.getParameter("latitude"));
-		mplBean.setLongitude(multi.getParameter("longitude"));
-		mplBean.setInfo(multi.getParameter("info"));
-		mplBean.setAddress(multi.getParameter("address"));
+		mplBean.setMyplans_id(Integer.parseInt(multi.getParameter("myplans_id")));
+		mplBean.setId(multi.getParameter("id"));
+		mplBean.setPlan_nr(Integer.parseInt(multi.getParameter("plan_nr")));
+		mplBean.setTravel_id(Integer.parseInt(multi.getParameter("travel_id")));
+		mplBean.setItem_nr(Integer.parseInt(multi.getParameter("item_nr")));
+		mplBean.setFirstday(multi.getParameter("firstday"));
+		mplBean.setLastday(multi.getParameter("lastday"));
+		mplBean.setDay_nr(Integer.parseInt(multi.getParameter("day_nr")));
+		mplBean.setDay_night(multi.getParameter("day_night"));
+		mplBean.setUser_lat(Float.parseFloat(multi.getParameter("user_lat")));
+		mplBean.setUser_lng(Float.parseFloat(multi.getParameter("user_lng")));
+		mplBean.setDate(multi.getParameter("date"));
+		mplBean.setMemo(multi.getParameter("memo"));
+		mplBean.setPlan_done_nr(Integer.parseInt(multi.getParameter("plan_done_nr")));
 		System.out.println(realPath);
 		
 		// 디비 파일 만들기 
