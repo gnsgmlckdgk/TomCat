@@ -1,5 +1,7 @@
 package net.plan.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,10 +22,18 @@ public class PlanSpotWriteAction implements Action {
 		request.getParameter("smarteditor");
 		System.out.println(request.getParameter("smarteditor"));
 		
-		
+		//임시 페이지 보내기 index.jsp
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('콘솔창 확인 ㄱㄱ');");
+		out.println("location.href='./index.jsp'");
+		out.println("</script>");
+		out.close();
+		//임시 페이지 보내기 index.jsp
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./plan/planWriteTest.jsp");
+		forward.setPath("./plan/planRegion.jsp");
 		forward.setRedirect(false);
 
 		return forward;

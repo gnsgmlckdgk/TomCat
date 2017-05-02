@@ -106,6 +106,48 @@ public class MemberDAO {
 		return check;
 	}
 	
+	// 닉네임 중복체크2(같은 id의 닉네임은 중복되도 중복아님)
+		public int nickOverlapCheck2(String id, String nick) {
+			int check = -1;	// -1: 정규표현식 오류, 0: 중복, 1: 사용가능
+			
+			// 정규표현식 검사
+			// 영문, 한글 시작 영문,숫자,한글 조합 가능 2~9자
+			if(!Pattern.matches("^[a-z|A-Z|가-힣][a-z|A-Z|0-9|가-힣]{1,8}", nick)) {		// 정규표현식에 맞지 않으면
+				return check;	// -1 반환
+			}
+			
+			// 중복검사
+			try{
+				con = getConnection();
+				
+				sql = "select id count from member where nick=? && !(id=?)";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, nick);
+				ps.setString(2, id);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					check = 0;
+				}else {
+					check = 1;
+				}
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try{
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return check;
+		}
+	
 	// 회원가입
 	public void insertMember(MemberBean mb) {
 		
@@ -308,7 +350,7 @@ public class MemberDAO {
 			}
 			
 		}catch(Exception e) {
-			System.out.println("MemberDAO클래스 getFinderMemberId() 예외 오류");
+			System.out.println("MemberDAO클래스 getFinderMemberId() 예외발생");
 			e.printStackTrace();
 		}finally {
 			try{
@@ -355,6 +397,54 @@ public class MemberDAO {
 		}
 		
 	}
+	
+	// 회원정보 수정
+	public void updateMember(MemberBean mb) {
+		
+		try {
+			con = getConnection();
+			
+			if(mb.getProfile()==null) {	// 프로필 사진 변경을 안했으면
+
+				sql = "update member set name=?, nick=?, gender=?, tel=HEX(AES_ENCRYPT(?, 'tel')) where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, mb.getName());
+				ps.setString(2, mb.getNick());
+				ps.setString(3, mb.getGender());
+				ps.setString(4, mb.getTel());
+				ps.setString(5, mb.getId());
+				
+				ps.executeUpdate();
+				
+			}else {	// 프로필 사진 변경을 했으면
+				
+				sql = "update member set name=?, nick=?, gender=?, tel=HEX(AES_ENCRYPT(?, 'tel')), profile=? where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, mb.getName());
+				ps.setString(2, mb.getNick());
+				ps.setString(3, mb.getGender());
+				ps.setString(4, mb.getTel());
+				ps.setString(5, mb.getProfile());
+				ps.setString(6, mb.getId());
+				
+				ps.executeUpdate();
+			}
+			
+		}catch(Exception e){
+			System.out.println("MemberDAO클래스 updateMember() 예외발생");
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	
 } // class
 

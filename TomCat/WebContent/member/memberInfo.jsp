@@ -34,7 +34,7 @@
 					<form action="./MemberUpdate.me" method="post" enctype="multipart/form-data" onsubmit="return updateCheck();">
 						<table>	
 							<tr><th>아이디</th>
-								<td><input type="text" value="<%=mb.getId() %>" name="id" readonly></td></tr>
+								<td><input type="text" value="<%=mb.getId() %>" name="id" id="id" readonly></td></tr>
 							<tr><th>이름</th>
 								<td><input type="text" value="<%=mb.getName() %>" name="name" id="name" maxlength="30"></td></tr>
 							<tr><th>닉네임</th>
@@ -58,7 +58,7 @@
 											<%
 										}else {
 											%>./images/member/여자 기본 프로필.png<%} 
-										}else {%> <%=mb.getProfile() %> <%} %>" width="100px" height="100px" id="profileImg">
+										}else {%> ./upload/images/profileImg/<%=mb.getProfile() %> <%} %>" width="100px" height="100px" id="profileImg">
 										
 										
 										<img src="./images/member/오른쪽 화살표.png" id="right_arrow" >
@@ -144,7 +144,8 @@
 
 					// 수정완료 전 체크
 					function updateCheck() {
-						// 이름, 닉네임, 성별, 전화, 프로필사진
+						// 아이디, 이름, 닉네임, 성별, 전화, 프로필사진
+						var id = document.getElementById("id").value;
 						var name = document.getElementById("name").value;
 						var nick = document.getElementById("nick").value;
 						var gender = document.getElementsByName("gender");
@@ -189,10 +190,11 @@
 						$.ajax({ // ajax는 비동기방식, ajax의 실행여부와는 상관없이 밑의 코드가 계속 실행됨
 							type : 'POST',
 							data : {
-								'nick' : nick
+								'id' : id,
+								'nick' : nick	
 							},
 							dataType : 'text',
-							url : './member/joinCheck/nickOverlapCheck.jsp',
+							url : './member/joinCheck/nickOverlapCheck2.jsp',
 							async : false, // 동기방식으로
 							success : function(data) {
 								check = data;
@@ -200,13 +202,13 @@
 						});
 
 						if (check == 0) {
-							alert("이미 사용중인 아이디 입니다.");
+							alert("이미 사용중인 닉네임 입니다.");
 							return false;
 						} else {
 							return true;
 						}
-
 					}
+
 					</script>
 					
 				</div>	<!-- info_form -->

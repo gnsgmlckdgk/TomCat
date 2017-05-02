@@ -99,7 +99,6 @@ public class MemberFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MemberInfo.me")) {		// 회원정보 페이지
-
 			// 회원정보 가져오기
 			action = new MemberInfoAction();
 			
@@ -112,10 +111,11 @@ public class MemberFrontController extends HttpServlet {
 				
 			}
 		}else if(command.equals("/MemberUpdate.me")) {	// 회원정보 수정 처리
+			// 회원정보 수정
+			action = new MemberUpdateAction();
 			
 			try {
-				
-				
+				forward = action.execute(request, response);
 				
 			}catch(Exception e) {
 				e.printStackTrace();

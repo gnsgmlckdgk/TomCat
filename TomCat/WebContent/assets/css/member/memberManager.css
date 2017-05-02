@@ -17,7 +17,7 @@ div.memberManagerNav {
 	top: 6em;
 	
 	width: 305px;
-	height: 110px;
+	height: 124px;
 	
 	display: none;
 	z-index: 9;
@@ -28,8 +28,11 @@ div.memberManagerNav img {
 }
 
 div.memberManagerNav ul {
-	float: left;
+	position: absolute;
 	padding: 0;
+
+	left: 105px;
+	top: 10px;
 }
 
 div.memberManagerNav li {
