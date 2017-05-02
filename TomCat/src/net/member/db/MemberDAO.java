@@ -472,6 +472,51 @@ public class MemberDAO {
 		}
 		
 	}
+	
+	// 회원 탈퇴
+	public int deleteMember(String id, String pass) {
+		
+		int check = 0;	// 0: 비밀번호 틀림, 1: 탈퇴 완료
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select id from member where pass=PASSWORD(?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, pass);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getString("id").equals(id)) {	// 비밀번호의 아이디들 중 로그인한 아이디와 같은 아이디가 있는지 확인
+					check = 1;
+					
+					sql="delete from member where id=?";
+					ps = con.prepareStatement(sql);
+					ps.setString(1, id);
+					
+					ps.executeUpdate();
+					
+				}else {
+					check = 0;
+				}
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return check;
+	}
 
 } // class
 

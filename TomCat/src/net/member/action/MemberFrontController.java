@@ -151,11 +151,37 @@ public class MemberFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 				
 			}catch(Exception e) {
+				System.out.println("MemberForntController MemberPassUpdateAction.me 예외 발생");
 				e.printStackTrace();
 			}
 			
 		}else if(command.equals("/MemberDelete.me")) {	// 회원탈퇴 페이지
 			// 회원탈퇴 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
+			rsa_key = new RSAKeySetting();
+			
+			try {
+				rsa_key.keySetting(request);
+
+				forward = new ActionForward();
+				forward.setPath("./member/memberDelete.jsp");
+				forward.setRedirect(false);
+				
+			}catch(Exception e) {
+				System.out.println("MemberForntController MemberDelete.me 예외 발생");
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/MemberDeleteAction.me")) {	// 회원탈퇴 처리
+			
+			action = new MemberDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				System.out.println("MemberForntController MemberDeleteAction.me 예외 발생");
+				e.printStackTrace();
+			}
 			
 		}
 		
