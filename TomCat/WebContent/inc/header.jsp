@@ -31,12 +31,12 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=7"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
 			
-		<!-- 추가한 js -->
+		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
 			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
@@ -145,7 +145,7 @@
 					<%
 				}else {	// 설정한 프로필 사진이 있으면
 					%>
-					<img src="http://placehold.it/100x100"  width="100px" height="100px"><!-- 프로필 사진 -->
+					<img src="./upload/images/profileImg/<%=profile %>"  width="100px" height="120px"><!-- 프로필 사진 -->
 					<%
 				}
 			%>
