@@ -1,4 +1,3 @@
-<%@page import="net.myplan.db.MyPlanBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -10,10 +9,9 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 
 <body>
-<h1>여행장소 db 입력용 임시 페이지</h1>
+<h1>여행장소 db 입력용</h1>
 
-<form action="TravelDataAction.jsp" method="post" name="fr">
-
+<form action="./TravelDataAction.pln" method="post" name="fr" enctype="multipart/form-data">
 <select id="type"  name="type">
   <option value="">장소타입 선택</option>
   <option value="">------------</option>
@@ -80,6 +78,7 @@ marker 가 뜨면 마우스 우클릭하여 "이곳이 궁금한가요?" 클릭�
 주소 : <input type="text" name="address"><br>
 
 <input type="submit" value="정보저장">
+
 </form>
 </body>
 

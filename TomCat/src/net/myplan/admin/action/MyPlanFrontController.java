@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 public class MyPlanFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +27,7 @@ public class MyPlanFrontController extends HttpServlet {
 			forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./myplan/TravelDataAdmin.jsp");
-		}else if(command.equals("/TravelDataAction.ag")){
+		}else if(command.equals("/TravelDataAction.pln")){
 			// GoodsAddAction
 			action=new TravelDataAction();
 			try {
@@ -34,7 +35,16 @@ public class MyPlanFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/MyPlan.pln")){
+			//  MyPlanListAction
+			action=new MyPlanListAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		
 		
 		if(forward!=null) {
