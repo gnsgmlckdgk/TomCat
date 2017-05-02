@@ -1,4 +1,4 @@
-package net.myplan.action;
+package net.myplan.admin.action;
 
 import java.io.IOException;
 
@@ -22,14 +22,18 @@ public class MyPlanFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 		
-		if(command.equals("/MyPlan.pln")) {
-			action = new MyPlanAction();
-			try{
-				forward = action.execute(request, response);
-			}catch(Exception e){
+		if(command.equals("/TravelDataAdmin.pln")){
+			forward=new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("./myplan/TravelDataAdmin.jsp");
+		}else if(command.equals("/TravelDataAction.ag")){
+			// GoodsAddAction
+			action=new TravelDataAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
 		}
 		
 		

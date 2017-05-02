@@ -12,7 +12,7 @@
 <body>
 <h1>여행장소 db 입력용 임시 페이지</h1>
 
-<form action="TravelDataPro.jsp" method="post" name="fr">
+<form action="TravelDataAction.jsp" method="post" name="fr">
 
 <select id="type"  name="type">
   <option value="">장소타입 선택</option>

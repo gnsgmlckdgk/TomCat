@@ -1,4 +1,4 @@
-package net.myplan.db;
+package net.myplan.admin.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,10 +27,11 @@ public class MyPlanDAO {
 		return con;
 	}
 
-			
-		/* map DAO 추후사용예정
-		 * 
-		 * 	public List<MyPlanBean> MyPlan(){
+	
+	
+/* map DAO 추후사용예정
+ * 
+ * 	public List<MyPlanBean> MyPlan(){
 
 		List<MyPlanBean> MyPlan = new ArrayList<MyPlanBean>();
 		
@@ -68,7 +69,7 @@ public class MyPlanDAO {
 		
 		return MyPlan;
 		
-		}*/
+	}*/
 
 	
 	
