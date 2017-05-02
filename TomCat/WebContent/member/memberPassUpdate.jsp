@@ -40,7 +40,7 @@
 						
 						<!-- RSA암호화 공개키 -->
 						<input type="hidden" id="updatePass_publicKeyModulus" value="<%=request.getAttribute("updatePass_publicKeyModulus") %>">
-						<input type="hidden" id=updatePass_publicKeyExponent value="<%=request.getAttribute("updatePass_publicKeyExponent") %>">
+						<input type="hidden" id="updatePass_publicKeyExponent" value="<%=request.getAttribute("updatePass_publicKeyExponent") %>">
 						
 						<div class="form_btn">
 							<input type="submit" value="수정">

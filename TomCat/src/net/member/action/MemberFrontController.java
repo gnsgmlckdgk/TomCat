@@ -143,6 +143,9 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/MemberDelete.me")) {	// 회원탈퇴 페이지
+			// 회원탈퇴 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
+			
 		}
 		
 		
