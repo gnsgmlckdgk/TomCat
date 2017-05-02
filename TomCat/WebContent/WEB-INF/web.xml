@@ -48,7 +48,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyPlanFrontController</servlet-name>
-		<url-pattern>*.map</url-pattern>
+		<url-pattern>*.pln</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Instagram -->

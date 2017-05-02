@@ -30,6 +30,8 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			
+			
 		}else if(command.equals("/PlanMain.pl")){
 			forward = new ActionForward();
 			forward.setPath("./plan/planMain.jsp");
@@ -43,6 +45,7 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			
 
 		}else if(command.equals("/PlanSearch.pl")){
 			action = new PlanSearchAction();
@@ -57,10 +60,21 @@ public class PlanFrontController extends HttpServlet {
 			forward.setPath("./plan/planSpotWrite.jsp");
 			forward.setRedirect(false);
 
+		} 
+		
+		
+		
+		else if(command.equals("/PlanSpotWriteAction.pl")){
+			action = new PlanSpotWriteAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 		
-
+		
 
 		if (forward != null) {
 			if (forward.isRedirect()) { // response방식

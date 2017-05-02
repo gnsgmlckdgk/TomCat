@@ -28,8 +28,7 @@ CREATE TABLE `board` (
   `content` varchar(2000) DEFAULT NULL,
   `readcount` int(11) DEFAULT NULL,
   `re_ref` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `ip` varchar(30) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `file` varchar(100) DEFAULT NULL,
   `pageNum` int(11) DEFAULT NULL,
   `nick_name` varchar(20) DEFAULT NULL,
@@ -44,6 +43,7 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
+INSERT INTO `board` VALUES (1,'ghg','hgh',0,0,'2017-04-28 17:41:51',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,6 +98,7 @@ CREATE TABLE `city` (
 
 LOCK TABLES `city` WRITE;
 /*!40000 ALTER TABLE `city` DISABLE KEYS */;
+INSERT INTO `city` VALUES ('busan','busan','부산','kr'),('cebu','cebu','세부','ph'),('jeju','jeju','제주','kr'),('manila','manila','마닐라','ph'),('osaca','osaca','오사카','jp'),('seoul','seoul','서울','kr'),('tokyo','tokyo','도쿄','jp');
 /*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,6 +124,7 @@ CREATE TABLE `country` (
 
 LOCK TABLES `country` WRITE;
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
+INSERT INTO `country` VALUES ('jp','japan','일본','asia'),('kr','korea','대한민국','asia'),('ph','philippines','필리핀','asia');
 /*!40000 ALTER TABLE `country` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,13 +197,15 @@ DROP TABLE IF EXISTS `images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `images` (
-  `id` int(11) NOT NULL,
+  `nick` varchar(20) NOT NULL,
   `type` varchar(20) NOT NULL,
   `file` varchar(255) NOT NULL,
   `country_code` varchar(20) DEFAULT NULL,
   `city_code` varchar(20) DEFAULT NULL,
   `travel_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `num` int(11) DEFAULT NULL,
+  `img_info` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`nick`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -275,6 +279,42 @@ INSERT INTO `member` VALUES ('ghkdckdgk2@naver.com','c9fe854ea69fc0a252340e15286
 UNLOCK TABLES;
 
 --
+-- Table structure for table `myplans`
+--
+
+DROP TABLE IF EXISTS `myplans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `myplans` (
+  `myplans_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(20) NOT NULL,
+  `plan_nr` int(11) DEFAULT NULL,
+  `travel_id` int(11) DEFAULT NULL,
+  `item_nr` int(11) DEFAULT NULL,
+  `firstday` date DEFAULT NULL,
+  `lastday` date DEFAULT NULL,
+  `day_nr` int(11) DEFAULT NULL,
+  `day_night` char(2) DEFAULT NULL,
+  `user_lat` float(10,6) DEFAULT NULL,
+  `user_lng` float(10,6) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `memo` varchar(3000) DEFAULT NULL,
+  `plan_done_nr` int(11) DEFAULT NULL,
+  PRIMARY KEY (`myplans_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `myplans`
+--
+
+LOCK TABLES `myplans` WRITE;
+/*!40000 ALTER TABLE `myplans` DISABLE KEYS */;
+INSERT INTO `myplans` VALUES (1,'test1',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(2,'test1',1,3,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(3,'test1',1,2,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(4,'test1',1,5,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(5,'test1',1,6,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(6,'test2',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(7,'test2',1,3,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(8,'test2',1,2,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(9,'test2',1,5,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(10,'test2',1,6,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(11,'test1',2,6,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(12,'test1',2,5,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(13,'test1',2,4,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(14,'test1',2,3,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(15,'test1',2,2,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(16,'test1',2,1,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(17,'test2',2,5,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(18,'test2',2,4,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(19,'test2',2,3,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(20,'test2',2,2,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(21,'test2',2,1,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0);
+/*!40000 ALTER TABLE `myplans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `travel`
 --
 
@@ -282,7 +322,7 @@ DROP TABLE IF EXISTS `travel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `travel` (
-  `travel_id` int(11) NOT NULL,
+  `travel_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(20) NOT NULL,
   `country_code` varchar(20) DEFAULT NULL,
   `city_code` varchar(20) DEFAULT NULL,
@@ -296,7 +336,7 @@ CREATE TABLE `travel` (
   KEY `city_code` (`city_code`),
   CONSTRAINT `travel_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `country` (`country_code`),
   CONSTRAINT `travel_ibfk_2` FOREIGN KEY (`city_code`) REFERENCES `city` (`city_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,6 +345,7 @@ CREATE TABLE `travel` (
 
 LOCK TABLES `travel` WRITE;
 /*!40000 ALTER TABLE `travel` DISABLE KEYS */;
+INSERT INTO `travel` VALUES (1,'p','kr','busan','자갈치',35.096706,129.030487,'부산 자갈치시장은 국제시장, 부평깡통시장과 함께 부산을 대표하는 전통시장이다. 자갈치 아지매로 상징되는 한국의 대표적인 어시장으로 부산의 관광 명소 중 하나이며, 회를 비롯한 다양한 해산물을 만날 수 있다.','부산광역시 중구 자갈치해안로 52'),(2,'p','kr','busan','용두산',35.100647,129.032623,'용두산공원은 부산광역시 중구에 있는 공원으로 부산시설공단에서 관리하고 있다. 용두산으로 불리는 언덕이 공원이고, 정상에는 부산타워가 있다. 부산 남부의 남포동에 인접하고, 공원으로 올라가는 길은 대청동에서 중앙성당으로 올라가는 길이 있고, 중앙동에서 부산호텔 근처에서 올라가는 계단이 있고, 광복동에서는 에스컬레이터로 올라갈 수 있다. 부산항이나 영도를 바라볼 수 있고 또 부산타워의 아래에는 이순신의 동상이 우뚝 솟아 있다.','부산광역시 중구 광복동 용두산길 37-55'),(3,'p','kr','busan','태종대',35.053280,129.087204,'태종대는 부산 영도구 동삼동에 있는 명승지이다. 영도의 남동쪽 끝에 위치하는 해발 고도 200m 이하의 구릉 지역으로, 부산 일대에서 보기 드문 울창한 숲과 기암 괴석으로 된 해식 절벽 및 푸른 바다 등이 조화를 이룬다. 맑은 날에는 일본 쓰시마섬도 볼 수 있다.','부산광역시 영도구 동삼2동 전망로 24'),(16,'h','kr','busan','조선비치호텔',35.156189,129.153976,'조선비치호텔임당','부산광역시 해운대구 우1동 동백로 67');
 /*!40000 ALTER TABLE `travel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,4 +392,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-21 17:44:10
+-- Dump completed on 2017-05-02  9:21:35
