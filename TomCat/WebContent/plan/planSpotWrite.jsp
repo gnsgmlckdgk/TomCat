@@ -16,11 +16,6 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
-<!-- 사마트 에디터 2.0 스크립트 -->
-<script type="text/javascript" src="./assets/smart_editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
-<!-- 사마트 에디터 2.0 스크립트 끝 -->
 
 <!-- Banner -->
 <section id="banner">
@@ -69,18 +64,8 @@
 			</tr>
 			
 			<tr>
-				<td colspan="3">메인 이미지 : <input type="file" name="file1"></td>
-			</tr>
-			<tr>
-				<td colspan="3">이미지 2 : <input type="file" name="file2"></td>
-			</tr>
-			<tr>
-				<td colspan="3">이미지 3 : <input type="file" name="file3"></td>
-			</tr>
-			
-			<tr>
 				<td colspan="3">작성란<br>
-				<textarea name="smarteditor" id="smarteditor" rows="10" cols="100"></textarea></td>
+				<textarea style="width: 100%" rows="10" name="content" id="textAreaContent" cols="80"></textarea></td>
 			<tr>
 		</table>
 
@@ -88,7 +73,7 @@
 
 
 		<ul class="actions">
-			<li><input type="button" value="작성완료" class="button special" id="savebutton"></li>
+			<li><input type="submit" value="작성완료" class="button special" id="savebutton"></li>
 			<li><input type="reset" value="RESET"></li>
 		</ul>
 
@@ -98,38 +83,43 @@
 
 </section>
 
+ 
+<!-- Smart Editor -->
+
+<script type="text/javascript" src="./assets/smart_editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="./assets/smart_editor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-
-$(function(){
-    //전역변수선언
-    var editor_object = [];
+ 
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+    oAppRef: oEditors,
+    elPlaceHolder: "textAreaContent",
+    sSkinURI: "./assets/smart_editor/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
+});
+ 
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+function submitContents(elClickedObj) {
+    // 에디터의 내용이 textarea에 적용된다.
+    oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+ 
+    // 에디터의 내용에 대한 값 검증은 이곳에서
+    // document.getElementById("textAreaContent").value를 이용해서 처리한다.
+  
+    try {
+        elClickedObj.form.submit();
+    } catch(e) {
      
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: editor_object,
-        elPlaceHolder: "smarteditor",
-        sSkinURI: "./assets/smart_editor/SmartEditor2Skin.html",
-        htParams : {
-            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseToolbar : true,            
-            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseVerticalResizer : true,    
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseModeChanger : true,
-        }
-    });
-     
-    //전송버튼 클릭이벤트
-    $("#savebutton").click(function(){
-        //id가 smarteditor인 textarea에 에디터에서 대입
-        editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-         
-        // 이부분에 에디터 validation 검증
-         
-        //폼 submit
-        $("#fr").submit();
-    })
-})
+    }
+}
+ 
+// textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = '<img src="<%=request.getContextPath()%>/upload/images/planSpotWrite/'+filepath+'">';
+    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
+}
+ 
 </script>
 
 
