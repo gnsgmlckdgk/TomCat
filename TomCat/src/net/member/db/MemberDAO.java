@@ -518,6 +518,33 @@ public class MemberDAO {
 		return check;
 	}
 	
+	// 회원 탈퇴(관리자가 회원관리 페이지에서 삭제시키기 때문에 id만 필요)
+		public void deleteMember(String id) {
+
+			try {
+				
+				con = getConnection();
+				
+				sql = "delete from member where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+				
+				// 일단 삭제안되게 막아둠
+				ps.executeUpdate();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try{
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	
 	// 가입된 회원수 구하기
 	public int getCountMember() {
 		

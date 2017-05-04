@@ -50,7 +50,7 @@ public class MemberManager implements Action {
 		
 		// 이동정보
 		ActionForward forward = new ActionForward();
-		forward.setPath("./member/memberManager.jsp");
+		forward.setPath("./member/memberManager.jsp?pageNum="+pageNum);
 		forward.setRedirect(false);
 		
 		return forward;

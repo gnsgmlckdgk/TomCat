@@ -17,6 +17,15 @@
 		
 		<!-- 컨텐츠 -->
 		<%
+			// 세션값 가져오기
+			String id = (String)session.getAttribute("id");	// 관리자 아이디
+			
+			// 현제 페이지 번호
+			String pageNum = request.getParameter("pageNum");
+			if(pageNum==null) {
+				pageNum = "1";
+			}
+		
 			// 회원리스트 가져오기
 			List<MemberBean> memberList = (List)request.getAttribute("memberList");
 			MemberBean mb = null;
@@ -35,21 +44,39 @@
 								mb = memberList.get(i);
 								%>
 								<tr>
+									<td> <img src="./upload/images/profileImg/<%=mb.getProfile() %>" width="100px" height="100px"> </td>
+									<td><%=mb.getId() %>(<%=mb.getNick() %>)</td>
 									<td>
-									
-									<img src="./upload/images/profileImg/<%=mb.getProfile() %>" width="100px" height="100px">
-									
-									</td>
-									
-									<td><%=mb.getId() %>(<%=mb.getNick() %>)</td><td>회원탈퇴버튼</td><td>권한설정 select박스</td>
+										<%
+										if(id.equals(mb.getId())) {	// 현재 로그인한 관리자 아이디와 가져온 관리자 아이디와 같다면
+										%>
+											<a href="./MemberDelete.me">탈퇴</a>	<!-- 회원탈퇴 페이지로 -->
+										<%	
+										}else {
+											%>
+												<a href="javascript:deleteMemberPass('<%=mb.getId() %>')">탈퇴</a>
+											<%
+										}
+										%>
+									</td>	
+									<td>권한설정 select박스</td>
 								</tr>
 								<%
 							}
 						}
 						%>
-						
 					</table>
-				
+					
+					<script type="text/javascript">
+					/* 관리자가 회원을 탈퇴시킬때 비밀번호 한번더 확인 */
+					function deleteMemberPass(id) {
+						
+						window.open('./AdminPassCertification.me?id='+id+'&pageNum=<%=pageNum %>', '_blank', 
+						'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+
+					}	
+					</script>
+					
 			</div> <!-- content_member_info -->
 		</div>	<!-- content -->
 	
