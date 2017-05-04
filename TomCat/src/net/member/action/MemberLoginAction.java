@@ -48,6 +48,7 @@ public class MemberLoginAction implements Action {
             	
             	MemberBean mb = mdao.getMember(id);
             	session.setAttribute("nick", mb.getNick());	// 닉네임
+            	session.setAttribute("auth", Integer.toString(mb.getAuth()));	// 권한
             }
             
         } catch (Exception ex) {

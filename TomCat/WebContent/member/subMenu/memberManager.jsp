@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%
+	String auth_str = (String)session.getAttribute("auth");
+	if(auth_str==null) {
+		response.sendRedirect("./Main.me");
+	}
+	int auth = Integer.parseInt(auth_str);
+%>
+
 <!-- 서브메뉴 -->
 <div id="submenu">
 	<ul>
@@ -9,7 +17,13 @@
 		<li><a href="#">내가 쓴 게시글 관리</a></li>
 		<li><a href="#">내가 쓴 댓글 관리</a></li>
 		<li><a href="./MemberDelete.me">회원탈퇴</a></li>
-		<li style="margin-top: 160px; border-bottom: 1px solid #ccc;">관리자 전용</li>
-		<li><a href="#">회원관리</a></li>
+		<%
+		if(auth==0) {	// 관리자 전용
+		%>
+			<li style="margin-top: 160px; border-bottom: 1px solid #ccc;">관리자 전용</li>
+			<li><a href="./MemberManager.me?pageNum=1">회원관리</a></li>
+		<%
+		}
+		%>
 	</ul>
 </div>
