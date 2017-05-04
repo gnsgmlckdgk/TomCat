@@ -207,8 +207,13 @@ public class MyPlanBasketDAO {
 				}
 				return vector;
 						
-				}
 				
+			}
+
+
+			public MyPlanBasketBean get(int num) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 			
 		/*	
