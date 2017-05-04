@@ -44,7 +44,7 @@
 	<!-- Planner -->
 	<servlet>
 		<servlet-name>MyPlanFrontController</servlet-name>
-		<servlet-class>net.myplan.basket.action.MyPlanFrontController</servlet-class>
+		<servlet-class>net.myplanBasket.action.MyPlanFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyPlanFrontController</servlet-name>
@@ -53,11 +53,11 @@
 
 	<!-- TravelDataAdmin -->
 	<servlet>
-		<servlet-name>TravelDataFrontController</servlet-name>
-		<servlet-class>net.travel.admin.action.TravelDataFrontController</servlet-class>
+		<servlet-name>TravelFrontController</servlet-name>
+		<servlet-class>net.travel.admin.action.TravelFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>TravelDataFrontController</servlet-name>
+		<servlet-name>TravelFrontController</servlet-name>
 		<url-pattern>*.td</url-pattern>
 	</servlet-mapping>
 	

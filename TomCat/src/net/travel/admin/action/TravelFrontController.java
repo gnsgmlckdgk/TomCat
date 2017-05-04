@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-public class TravelDataFrontController extends HttpServlet {
+public class TravelFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -27,9 +27,9 @@ public class TravelDataFrontController extends HttpServlet {
 			forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./TravelAdmin/TravelAdmin.jsp");
-		}else if(command.equals("/TravelDataAction.td")){
+		}else if(command.equals("/TravelAdminAction.td")){  /*추후 체크(주소확인)해볼것*/
 			// GoodsAddAction
-			action=new TravelDataAction();
+			action=new TravelAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
