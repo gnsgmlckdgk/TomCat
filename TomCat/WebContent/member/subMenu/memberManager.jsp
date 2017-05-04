@@ -17,13 +17,16 @@
 		<li><a href="#">내가 쓴 게시글 관리</a></li>
 		<li><a href="#">내가 쓴 댓글 관리</a></li>
 		<li><a href="./MemberDelete.me">회원탈퇴</a></li>
+
 		<%
 		if(auth==0) {	// 관리자 전용
 		%>
 			<li style="margin-top: 160px; border-bottom: 1px solid #ccc;">관리자 전용</li>
 			<li><a href="./MemberManager.me?pageNum=1">회원관리</a></li>
+			<li><a href="./TravelAdmin.td">관리자여행DB입력</a></li>
 		<%
 		}
 		%>
+
 	</ul>
 </div>

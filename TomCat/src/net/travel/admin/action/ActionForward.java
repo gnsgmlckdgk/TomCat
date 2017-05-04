@@ -1,4 +1,4 @@
-package net.myplan.admin.action;
+package net.travel.admin.action;
 
 // 이동정보 담는 클래스
 public class ActionForward {

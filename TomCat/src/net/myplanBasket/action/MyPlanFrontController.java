@@ -1,4 +1,4 @@
-package net.myplan.admin.action;
+package net.myplanBasket.action;
 
 import java.io.IOException;
 
@@ -8,56 +8,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-public class MyPlanFrontController extends HttpServlet {
-
+public class MyPlanFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String uriPath = request.getRequestURI();
-		String contextPath = request.getContextPath();
-		String command = uriPath.substring(contextPath.length());
-		
-		// 이동정보 담는 객체
-		ActionForward forward = null;
-		// 처리담당 객체
-		Action action = null;
-		
-		if(command.equals("/TravelDataAdmin.pln")){
-			forward=new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("./myplan/TravelDataAdmin.jsp");
-		}else if(command.equals("/TravelDataAction.pln")){
-			// GoodsAddAction
-			action=new TravelDataAction();
+		//가상주소 가져오기
+		//  http://localhost:8080/Model2/BasketAdd.ba
+		//  /Model2/BasketAdd.ba
+		String requestURI=request.getRequestURI();
+		//  /Model2
+		String contextPath=request.getContextPath();
+		//  /BasketAdd.ba
+		String command=requestURI.substring(contextPath.length());
+		//주소비교하기
+		Action action=null;
+		ActionForward forward=null;
+		if(command.equals("/MyPlan.pln")){
+			//  BasketAddAction
+			action=new MyPlanBasketListAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/MyPlan.pln")){
-			//  MyPlanListAction
-			action=new MyPlanListAction();
+		}else if(command.equals("/BasketList.pln")){
+			//  BasketListAction
+			action=new MyPlanBasketListAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		if(forward!=null) {
-			if(forward.isRedirect()) {	// response방식
+		//이동
+		if(forward!=null){
+			if(forward.isRedirect()){
 				response.sendRedirect(forward.getPath());
-			}else {	// forward방식
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+			}else{
+				RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
 		}
-		
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);

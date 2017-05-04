@@ -1,11 +1,11 @@
-package net.myplan.admin.action;
+package net.travel.admin.action;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.myplan.admin.db.MyPlanDAO;
+import temp.MyPlanDAO;
 
 
 public class MyPlanListAction implements Action{
@@ -20,7 +20,7 @@ public class MyPlanListAction implements Action{
 		//이동 ./myplan/myplan.jsp
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./myplan/myplan.jsp");
+		forward.setPath("./TravelAdmin/TravelAdmin.jsp");
 		return forward;
 	}
 }

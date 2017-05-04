@@ -1,4 +1,4 @@
-package net.myplan.admin.db;
+package temp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

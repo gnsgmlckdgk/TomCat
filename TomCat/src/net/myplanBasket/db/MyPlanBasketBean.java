@@ -1,8 +1,8 @@
-package net.myplan.admin.db;
+package net.myplanBasket.db;
 
 import java.util.Date;
 
-public class MyPlanBean {
+public class MyPlanBasketBean {
 	private int myplans_id;
 	private String id;
 	private int plan_nr;
@@ -104,6 +104,5 @@ public class MyPlanBean {
 	}
 	
 
-	
-	
+	  
 }
