@@ -37,7 +37,7 @@ public class MemberLoginAction implements Action {
         try {
             String id = decryptRsa(privateKey, securedId);
             String pass = decryptRsa(privateKey, securedPass);
-            
+
             // DB에서 확인
             MemberDAO mdao = new MemberDAO();
             check = mdao.memberLogin(id, pass);
@@ -45,6 +45,8 @@ public class MemberLoginAction implements Action {
             if(check==1) {
             	// 세션값 생성
             	session.setAttribute("id", id);	// 아이디
+            	
+            	System.out.println("aa");
             	
             	MemberBean mb = mdao.getMember(id);
             	session.setAttribute("nick", mb.getNick());	// 닉네임

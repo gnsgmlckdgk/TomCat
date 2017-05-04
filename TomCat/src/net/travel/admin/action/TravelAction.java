@@ -11,7 +11,7 @@ import net.travel.admin.db.TravelAdminDAO;
 import net.travel.admin.db.TravelBean;
 
 
-public class TravelDataAction implements Action{
+public class TravelAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, 

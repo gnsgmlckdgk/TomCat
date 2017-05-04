@@ -23,13 +23,13 @@ public class MyPlanFrontController extends HttpServlet{
 		ActionForward forward=null;
 		if(command.equals("/MyPlan.pln")){
 			//  BasketAddAction
-			action=new MyPlanBasketAddAction();
+			action=new MyPlanBasketListAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/BasketList.ba")){
+		}else if(command.equals("/BasketList.pln")){
 			//  BasketListAction
 			action=new MyPlanBasketListAction();
 			try {

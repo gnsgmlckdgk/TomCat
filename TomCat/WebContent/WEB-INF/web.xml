@@ -53,33 +53,31 @@
 
 	<!-- TravelDataAdmin -->
 	<servlet>
-		<servlet-name>TravelDataFrontController</servlet-name>
-		<servlet-class>net.travel.admin.action.TravelDataFrontController</servlet-class>
+		<servlet-name>TravelFrontController</servlet-name>
+		<servlet-class>net.travel.admin.action.TravelFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>TravelDataFrontController</servlet-name>
+		<servlet-name>TravelFrontController</servlet-name>
 		<url-pattern>*.td</url-pattern>
 	</servlet-mapping>
 	
-	
 	<!-- Instagram -->
-  
-    <servlet>
-  <servlet-name>BoardFrontController</servlet-name>
-  <servlet-class>net.board.action.BoardFrontController</servlet-class>  
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>BoardFrontController</servlet-name>
-  <url-pattern>*.bo</url-pattern>
-  </servlet-mapping> 
-  
-      <servlet>
-  <servlet-name>ReplyFrontController</servlet-name>
-  <servlet-class>net.reply.action.ReplyFrontController</servlet-class>  
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>ReplyFrontController</servlet-name>
-  <url-pattern>*.re</url-pattern>
-  </servlet-mapping> 
+	<servlet>
+		<servlet-name>BoardFrontController</servlet-name>
+		<servlet-class>net.board.action.BoardFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BoardFrontController</servlet-name>
+		<url-pattern>*.bo</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ReplyFrontController</servlet-name>
+		<servlet-class>net.reply.action.ReplyFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReplyFrontController</servlet-name>
+		<url-pattern>*.re</url-pattern>
+	</servlet-mapping>
 
 </web-app>

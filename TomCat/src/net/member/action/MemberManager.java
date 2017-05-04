@@ -45,12 +45,19 @@ public class MemberManager implements Action {
 		
 		
 		/* 페이징 처리하기 */
+		// 필요한 페이지 수 구하기
+		
+		
+		// 시작 페이지 구하기
+		
+		
+		// 끝 페이지 구하기
 		
 		
 		
 		// 이동정보
 		ActionForward forward = new ActionForward();
-		forward.setPath("./member/memberManager.jsp");
+		forward.setPath("./member/memberManager.jsp?pageNum="+pageNum);
 		forward.setRedirect(false);
 		
 		return forward;
