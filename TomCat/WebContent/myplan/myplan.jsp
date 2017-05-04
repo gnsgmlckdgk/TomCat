@@ -1,3 +1,4 @@
+<%@page import="net.myplan.admin.db.MyPlanDAO"%>
 <%@page import="net.myplan.admin.db.MyPlanBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +11,19 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 
 <body>
+<%
+String id = (String)session.getAttribute("id");
+if(id==null){
+ response.sendRedirect("./MemberLoing.me");
+}
+
+MyPlanDAO mpd = new MyPlanDAO();
+
+MyPlanBean mpl = mpd.(MyPlanBean)getMyPlanList(id);
+
+
+%>
+
 
 <%
 // request.setAttribute("myplanList", myplanList);
