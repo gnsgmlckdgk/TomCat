@@ -20,7 +20,7 @@ public class MyPlanListAction implements Action{
 		//이동 ./myplan/myplan.jsp
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./admin/myplan.jsp");
+		forward.setPath("./TravelAdmin/TravelAdmin.jsp");
 		return forward;
 	}
 }

@@ -23,7 +23,7 @@
 		%>
 			<li style="margin-top: 160px; border-bottom: 1px solid #ccc;">관리자 전용</li>
 			<li><a href="./MemberManager.me?pageNum=1">회원관리</a></li>
-			<li><a href="./TravelDataAdmin.td">관리자여행DB입력</a></li>
+			<li><a href="./TravelAdmin.td">관리자여행DB입력</a></li>
 		<%
 		}
 		%>

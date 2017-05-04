@@ -54,7 +54,7 @@
 	<!-- TravelDataAdmin -->
 	<servlet>
 		<servlet-name>TravelDataFrontController</servlet-name>
-		<servlet-class>net.admin.action.TravelDataFrontController</servlet-class>
+		<servlet-class>net.travel.admin.action.TravelDataFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>TravelDataFrontController</servlet-name>

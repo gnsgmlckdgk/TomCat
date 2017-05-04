@@ -23,10 +23,10 @@ public class TravelDataFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 		
-		if(command.equals("/TravelDataAdmin.td")){
+		if(command.equals("./TravelAdmin.td")){
 			forward=new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./admin/TravelDataAdmin.jsp");
+			forward.setPath("./TravelAdmin/TravelAdmin.jsp");
 		}else if(command.equals("/TravelDataAction.td")){
 			// GoodsAddAction
 			action=new TravelDataAction();

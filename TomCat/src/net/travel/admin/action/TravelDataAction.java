@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import temp.MyPlanBean;
-import temp.MyPlanDAO;
+import net.travel.admin.db.TravelAdminDAO;
+import net.travel.admin.db.TravelBean;
+
 
 public class TravelDataAction implements Action{
 
@@ -22,34 +23,29 @@ public class TravelDataAction implements Action{
 		MultipartRequest multi=new MultipartRequest(request, realPath,maxSize,"utf-8",new DefaultFileRenamePolicy());
 		// 자바빈 파일 만들기
 		//자바빈 파일 생성 
-		MyPlanBean mplBean=new MyPlanBean();
+		TravelBean tBean = new TravelBean();
 		// 폼 => 자바빈 저장
-		mplBean.setMyplans_id(Integer.parseInt(multi.getParameter("myplans_id")));
-		mplBean.setId(multi.getParameter("id"));
-		mplBean.setPlan_nr(Integer.parseInt(multi.getParameter("plan_nr")));
-		mplBean.setTravel_id(Integer.parseInt(multi.getParameter("travel_id")));
-		mplBean.setItem_nr(Integer.parseInt(multi.getParameter("item_nr")));
-		mplBean.setFirstday(multi.getParameter("firstday"));
-		mplBean.setLastday(multi.getParameter("lastday"));
-		mplBean.setDay_nr(Integer.parseInt(multi.getParameter("day_nr")));
-		mplBean.setDay_night(multi.getParameter("day_night"));
-		mplBean.setUser_lat(Float.parseFloat(multi.getParameter("user_lat")));
-		mplBean.setUser_lng(Float.parseFloat(multi.getParameter("user_lng")));
-		mplBean.setDate(multi.getParameter("date"));
-		mplBean.setMemo(multi.getParameter("memo"));
-		mplBean.setPlan_done_nr(Integer.parseInt(multi.getParameter("plan_done_nr")));
+
+		tBean.setType(multi.getParameter("type"));
+		tBean.setCountry_code(multi.getParameter("country_code"));
+		tBean.setCity_code(multi.getParameter("city_code"));
+		tBean.setName(multi.getParameter("name"));
+		tBean.setLatitude(Float.parseFloat(multi.getParameter("latitude")));
+		tBean.setLongitude(Float.parseFloat(multi.getParameter("longitude")));
+		tBean.setInfo(multi.getParameter("info"));
+		tBean.setAddress(multi.getParameter("address"));
 		System.out.println(realPath);
 		
 		// 디비 파일 만들기 
 		// 객체 생성 
-		MyPlanDAO mpl = new MyPlanDAO();
+		TravelAdminDAO mpl = new TravelAdminDAO();
 		//객체 생성 메서드호출 
-		mpl.insertMyplan(mplBean);
+		mpl.insertTravel(tBean);
 		// 이동 ./MyPlan.pln 
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./MyPlan.pln");
+		forward.setPath("./TravelAdmin.td");
 		return forward;
 	}
 
