@@ -29,7 +29,7 @@
 		
 		<!-- 추가한 css -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css"/>
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
 			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=4"/>
 			
