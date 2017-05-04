@@ -11,12 +11,13 @@
 
 <body>
 
+
 <%
 // request.setAttribute("myplanList", myplanList);
 List myplanList=(List)request.getAttribute("myplanList");
 %>
 <h1>나의 여행 일정</h1>
-<h3><a href="./TravelDataAdmin.pln">여행등록</a></h3>
+<h3><a href="./.pln">여행등록</a></h3>
 <table border="1">
 <tr><td>myplans_id</td><td>id</td><td>plan_nr</td><td>travel_id</td><td>item_nr</td>
 <td>firstday</td><td>lastday</td><td>day_nr</td><td>day_night</td><td>user_lat</td>
