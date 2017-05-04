@@ -210,6 +210,7 @@ public class MemberDAO {
 			while(rs.next()) {
 				if(rs.getString("id").equals(id)) {
 					check = 1;
+					return check;
 				}else {
 					check = 0;
 				}
