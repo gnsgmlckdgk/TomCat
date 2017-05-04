@@ -1,3 +1,4 @@
+<%@page import="net.myplan.admin.db.MyPlanDAO"%>
 <%@page import="net.myplan.admin.db.MyPlanBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +11,19 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 
 <body>
+<%
+String id = (String)session.getAttribute("id");
+if(id==null){
+ response.sendRedirect("./MemberLoing.me");
+}
+
+MyPlanDAO mpd = new MyPlanDAO();
+
+MyPlanBean mpl = mpd.(MyPlanBean)getMyPlanList(id);
+
+
+%>
+
 
 
 <%
@@ -22,10 +36,10 @@ List myplanList=(List)request.getAttribute("myplanList");
 <tr><td>myplans_id</td><td>id</td><td>plan_nr</td><td>travel_id</td><td>item_nr</td>
 <td>firstday</td><td>lastday</td><td>day_nr</td><td>day_night</td><td>user_lat</td>
 <td>user_lng</td><td>date</td><td>memo</td><td>plan_done_nr</td><td>수정/삭제</td></tr>
-   <%
+  	<%
    for(int i=0;i<myplanList.size();i++){
 	   MyPlanBean mpl=(MyPlanBean)myplanList.get(i);
-	   %>
+	%>
 <tr><td><%=mpl.getMyplans_id() %></td><td><%=mpl.getId() %></td>
 <td><%=mpl.getPlan_nr() %></td><td><%=mpl.getTravel_id() %></td>
 <td><%=mpl.getItem_nr() %></td><td><%=mpl.getFirstday() %></td>
@@ -35,10 +49,20 @@ List myplanList=(List)request.getAttribute("myplanList");
 <td><%=mpl.getMemo() %></td><td><%=mpl.getPlan_done_nr() %></td>
 <td><a href="./?num=<%=mpl.getId()%>">수정</a>
     /<a href="./?num=<%=mpl.getId()%>">삭제</a></td></tr>	   
-	   <%
-   }
-   %>
+	   
+ 
 </table>
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ
+    &q=<%=mpl.getUser_lat() %>,<%=mpl.getUser_lng() %>" allowfullscreen>
+</iframe>
+	<%
+ 	 }
+   %>
+   
 </body>
 
 <div class="clear"></div>

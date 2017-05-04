@@ -91,7 +91,7 @@ public class MyPlanDAO {
 			//1,2 디비연결
 			con=getConnection();
 			//3 sql
-			sql="select * from myplans";
+			sql="select * from myplans where id=?";
 			pstmt=con.prepareStatement(sql);
 			//4 rs 실행 저장
 			rs=pstmt.executeQuery();

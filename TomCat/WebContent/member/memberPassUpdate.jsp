@@ -39,8 +39,8 @@
 						</table>
 						
 						<!-- RSA암호화 공개키 -->
-						<input type="hidden" id="updatePass_publicKeyModulus" value="<%=request.getAttribute("updatePass_publicKeyModulus") %>">
-						<input type="hidden" id="updatePass_publicKeyExponent" value="<%=request.getAttribute("updatePass_publicKeyExponent") %>">
+						<input type="hidden" id="updatePass_publicKeyModulus" value="<%=request.getAttribute("publicKeyModulus") %>">
+						<input type="hidden" id="updatePass_publicKeyExponent" value="<%=request.getAttribute("publicKeyExponent") %>">
 						
 						<div class="form_btn">
 							<input type="submit" value="수정">
@@ -85,11 +85,11 @@
 							// RSA암호화
 							 try {
     							// 공개키 가져오기
-        						var rsaPublicKeyModulus = document.getElementById("updatePass_publicKeyModulus").value;
-       							var rsaPublicKeyExponent = document.getElementById("updatePass_publicKeyExponent").value;
+        						var updatePass_publicKeyModulus = document.getElementById("updatePass_publicKeyModulus").value;
+       							var updatePass_publicKeyExponent = document.getElementById("updatePass_publicKeyExponent").value;
         
         						var rsa = new RSAKey();
-       							rsa.setPublic(rsaPublicKeyModulus, rsaPublicKeyExponent);
+       							rsa.setPublic(updatePass_publicKeyModulus, updatePass_publicKeyExponent);
         
         						// 사용자ID와 비밀번호를 RSA로 암호화한다.(이름은 암호화 제외)
         						var securedCurPass = rsa.encrypt(cur_pass);

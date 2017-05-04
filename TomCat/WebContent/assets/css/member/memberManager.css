@@ -226,6 +226,35 @@ div.content_member_passUpdate .pass_form .form_btn {
 div.content_member_passUpdate .pass_form .form_btn input[type="submit"] {
 	margin-right: 40px;
 }
+
+
+/* 회원 탈퇴 */
+div.content_member_memberDelete {
+	border: 1px solid #ccc;
+}
+
+div.content_member_memberDelete h1 {
+	font-size: 1.4em;
+	background-color: #D4F4FA;
+	padding: 12px;
+}
+
+div.content_member_memberDelete .pass_form {
+	width: 60%;
+	min-width: 450px;
+	padding: 30px;
+	margin: 0 auto;
+}
+
+div.content_member_memberDelete .pass_form label {
+	font-size: 1.2em;
+}
+
+div.content_member_memberDelete .pass_form input[type="submit"] {
+	display: block;
+	margin: 30px auto;
+}
+
 /* 회원정보 관리 페이지  끝 */
 
 

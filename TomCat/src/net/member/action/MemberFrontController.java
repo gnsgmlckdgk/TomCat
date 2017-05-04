@@ -20,6 +20,8 @@ public class MemberFrontController extends HttpServlet {
 		ActionForward forward = null;
 		// 처리담당 객체
 		Action action = null;
+		// RSA암호화 키 생성
+		RSAKeySetting rsa_key;
 		
 		if(command.equals("/Main.me")) {	// 메인 페이지
 			
@@ -28,10 +30,15 @@ public class MemberFrontController extends HttpServlet {
 			forward.setRedirect(false);
 		
 		}else if(command.equals("/MemberJoin.me")) {	// 회원가입 입력 페이지
-			action = new MemberJoinKeySetting();
+			
+			rsa_key = new RSAKeySetting();
 			
 			try {
-				forward = action.execute(request, response);
+				rsa_key.keySetting(request);
+				
+				forward = new ActionForward();
+				forward.setPath("./member/join.jsp");
+				forward.setRedirect(false);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -123,10 +130,14 @@ public class MemberFrontController extends HttpServlet {
 			
 		}else if(command.equals("/MemberPassUpdate.me")) {	// 비밀번호 변경 페이지
 			// 비밀번호 변경 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
-			action = new MemberPassUpdateKeySetting();
+			rsa_key = new RSAKeySetting();
 			
 			try {
-				forward = action.execute(request, response);
+				rsa_key.keySetting(request);
+				
+				forward = new ActionForward();
+				forward.setPath("./member/memberPassUpdate.jsp");
+				forward.setRedirect(false);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -140,11 +151,37 @@ public class MemberFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 				
 			}catch(Exception e) {
+				System.out.println("MemberForntController MemberPassUpdateAction.me 예외 발생");
 				e.printStackTrace();
 			}
 			
 		}else if(command.equals("/MemberDelete.me")) {	// 회원탈퇴 페이지
 			// 회원탈퇴 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
+			rsa_key = new RSAKeySetting();
+			
+			try {
+				rsa_key.keySetting(request);
+
+				forward = new ActionForward();
+				forward.setPath("./member/memberDelete.jsp");
+				forward.setRedirect(false);
+				
+			}catch(Exception e) {
+				System.out.println("MemberForntController MemberDelete.me 예외 발생");
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/MemberDeleteAction.me")) {	// 회원탈퇴 처리
+			
+			action = new MemberDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				System.out.println("MemberForntController MemberDeleteAction.me 예외 발생");
+				e.printStackTrace();
+			}
 			
 		}
 		
