@@ -108,10 +108,7 @@ public class TravelAdminDAO {
 	}*/
 	
 	// 여행정보 저장
-	public void insertTravel(TravelBean tBean) {
-
-
-		
+	public void insertTravel(TravelBean tBean) {		
 		try {
 			con = getConnection();
 				

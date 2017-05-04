@@ -26,35 +26,27 @@ public class MyPlanBasketAddAction implements Action{
 		//객체생성 BasketBean basketbean 
 		MyPlanBasketBean basketbean =new MyPlanBasketBean();
 		//폼 => 자바빈 저장  num  amount size color  id
-		private int myplans_id;
-		private String id;
-		private int plan_nr;
-		private int travel_id;
-		private int item_nr;
-		private String firstday;
-		private String lastday;
-		private int day_nr;
-		private String day_night;
-		private float user_lat;
-		private float user_lng;
-		private String date;
-		private String memo;
-		private int plan_done_nr;
 		
 		basketbean.setId(request.getParameter("id"));
 		basketbean.setPlan_nr(Integer.parseInt(request.getParameter("plan_nr")));
 		basketbean.setTravel_id(Integer.parseInt(request.getParameter("travel_id")));
 		basketbean.setItem_nr(Integer.parseInt(request.getParameter("item_nr")));
-		basketbean.setB_g_color(request.getParameter("color"));
-		basketbean.setB_g_size(request.getParameter("size"));
-		basketbean.setB_m_id(id);
+		basketbean.setFirstday(request.getParameter("firstday"));
+		basketbean.setLastday(request.getParameter("lastday"));
+		basketbean.setDay_nr(Integer.parseInt(request.getParameter("day_nr")));
+		basketbean.setDay_night(request.getParameter("day_night"));
+		basketbean.setUser_lat(Float.parseFloat(request.getParameter("user_lat")));
+		basketbean.setUser_lng(Float.parseFloat(request.getParameter("user_lng")));
+		basketbean.setDate(request.getParameter("date"));
+		basketbean.setMemo(request.getParameter("memo"));
+		basketbean.setPlan_done_nr(Integer.parseInt(request.getParameter("plan_done_nr")));
 		
 		//디비 파일 만들기 net.basket.db BasketDAO
 		//객체 생성 basketdao
 		MyPlanBasketDAO basketdao=new MyPlanBasketDAO();
 		//int check=상품 중복체크 중복이면 수량 update <= 1
 		//      checkGoods(BasketBean basketbean)
-		int check=basketdao.checkGoods(basketbean);
+		int check=basketdao.checkBasket(basketbean);
 		if(check!=1){
 		//메서드호출 basketAdd(basketbean)
 		basketdao.basketAdd(basketbean);

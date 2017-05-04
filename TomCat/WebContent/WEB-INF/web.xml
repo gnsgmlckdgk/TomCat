@@ -44,7 +44,7 @@
 	<!-- Planner -->
 	<servlet>
 		<servlet-name>MyPlanFrontController</servlet-name>
-		<servlet-class>net.myplan.basket.action.MyPlanFrontController</servlet-class>
+		<servlet-class>net.myplanBasket.action.MyPlanFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyPlanFrontController</servlet-name>
