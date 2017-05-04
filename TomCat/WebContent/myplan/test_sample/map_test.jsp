@@ -1,4 +1,4 @@
-<%@page import="net.myplan.admin.db.MyPlanBean"%>
+<%@page import="net.admin.action.db.MyPlanBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

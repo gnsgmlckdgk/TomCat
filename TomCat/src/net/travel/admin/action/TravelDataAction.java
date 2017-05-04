@@ -1,4 +1,4 @@
-package net.myplan.admin.action;
+package net.travel.admin.action;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import net.myplan.admin.db.MyPlanBean;
-import net.myplan.admin.db.MyPlanDAO;
+import temp.MyPlanBean;
+import temp.MyPlanDAO;
 
 public class TravelDataAction implements Action{
 

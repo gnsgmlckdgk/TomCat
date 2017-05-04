@@ -1,4 +1,4 @@
-package net.myplan.admin.action;
+package net.travel.admin.action;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-public class MyPlanFrontController extends HttpServlet {
+public class TravelDataFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -23,11 +23,11 @@ public class MyPlanFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 		
-		if(command.equals("/TravelDataAdmin.pln")){
+		if(command.equals("/TravelDataAdmin.td")){
 			forward=new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("./myplan/TravelDataAdmin.jsp");
-		}else if(command.equals("/TravelDataAction.pln")){
+			forward.setPath("./admin/TravelDataAdmin.jsp");
+		}else if(command.equals("/TravelDataAction.td")){
 			// GoodsAddAction
 			action=new TravelDataAction();
 			try {
@@ -35,16 +35,7 @@ public class MyPlanFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/MyPlan.pln")){
-			//  MyPlanListAction
-			action=new MyPlanListAction();
-			try {
-				forward=action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
-		
 		
 		
 		if(forward!=null) {

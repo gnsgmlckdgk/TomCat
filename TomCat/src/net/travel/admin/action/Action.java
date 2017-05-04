@@ -1,4 +1,4 @@
-package net.myplan.admin.action;
+package net.travel.admin.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

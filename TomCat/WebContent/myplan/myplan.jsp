@@ -1,5 +1,4 @@
-<%@page import="net.myplan.admin.db.MyPlanDAO"%>
-<%@page import="net.myplan.admin.db.MyPlanBean"%>
+<%@page import="net.admin.action.db.MyPlanBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,9 +16,7 @@ if(id==null){
  response.sendRedirect("./MemberLoing.me");
 }
 
-MyPlanDAO mpd = new MyPlanDAO();
 
-MyPlanBean mpl = mpd.(MyPlanBean)getMyPlanList(id);
 
 
 %>
@@ -30,8 +27,8 @@ MyPlanBean mpl = mpd.(MyPlanBean)getMyPlanList(id);
 // request.setAttribute("myplanList", myplanList);
 List myplanList=(List)request.getAttribute("myplanList");
 %>
-<h1>나의 여행 일정</h1>
-<h3><a href="./.pln">여행등록</a></h3>
+<h1>여행장바구니</h1>
+<h3><a href="./.pln">일정만들기</a></h3>
 <table border="1">
 <tr><td>myplans_id</td><td>id</td><td>plan_nr</td><td>travel_id</td><td>item_nr</td>
 <td>firstday</td><td>lastday</td><td>day_nr</td><td>day_night</td><td>user_lat</td>

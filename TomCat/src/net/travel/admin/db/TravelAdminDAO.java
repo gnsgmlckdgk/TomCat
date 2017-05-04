@@ -1,4 +1,4 @@
-package TravelData;
+package net.travel.admin.db;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +13,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class TravelDataDAO {
+public class TravelAdminDAO {
 	
 	Connection con = null;
 	PreparedStatement ps = null;
@@ -108,7 +108,7 @@ public class TravelDataDAO {
 	}*/
 	
 	// 여행정보 저장
-	public void insertTravel(TravelDataBean tdb) {
+	public void insertTravel(TravelBean tdb) {
 
 
 		

@@ -44,12 +44,23 @@
 	<!-- Planner -->
 	<servlet>
 		<servlet-name>MyPlanFrontController</servlet-name>
-		<servlet-class>net.myplan.admin.action.MyPlanFrontController</servlet-class>
+		<servlet-class>net.myplan.basket.action.MyPlanFrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyPlanFrontController</servlet-name>
 		<url-pattern>*.pln</url-pattern>
 	</servlet-mapping>
+
+	<!-- TravelDataAdmin -->
+	<servlet>
+		<servlet-name>TravelDataFrontController</servlet-name>
+		<servlet-class>net.admin.action.TravelDataFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TravelDataFrontController</servlet-name>
+		<url-pattern>*.td</url-pattern>
+	</servlet-mapping>
+	
 	
 	<!-- Instagram -->
   
