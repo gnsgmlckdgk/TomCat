@@ -31,7 +31,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=3"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
@@ -51,7 +51,7 @@
 <%
 	// 세션값 가져오기
 	String id = (String)session.getAttribute("id");			// 아이디
-	String nick = (String)session.getAttribute("nick");	// 닉네임
+	String nick = (String)session.getAttribute("nick");		// 닉네임
 %>
 
 <!-- Header -->
@@ -131,23 +131,9 @@
 			<div class="memberManagerNav">
 			
 			<%
-				// 기본 프로필 사진 임시로 일단 이거 쓸게요...
-				String profileImage;
-				if(profile==null) {	// 설정한 프로필 사진이 없으면
-						if(mb.getGender().equals("남")) {
-							profileImage = "./images/member/남자 기본 프로필.png";
-							
-						}else {	// 성별: 여
-							profileImage = "./images/member/여자 기본 프로필.png";
-						}
-					%>
-					<img src="<%=profileImage %>"  width="100px" height="100px"><!-- 프로필 사진 -->
-					<%
-				}else {	// 설정한 프로필 사진이 있으면
-					%>
-					<img src="./upload/images/profileImg/<%=profile %>"  width="100px" height="120px"><!-- 프로필 사진 -->
-					<%
-				}
+				%>
+				<img src="./upload/images/profileImg/<%=profile %>"  width="100px" height="120px"><!-- 프로필 사진 -->
+				<%
 			%>
 				<ul>
 					<li><a href="./MemberInfo.me">정보관리</a></li>

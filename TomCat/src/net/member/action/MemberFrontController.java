@@ -183,6 +183,17 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/MemberManager.me")) {	// 회원관리 페이지(관리자 전용)
+			
+			action = new MemberManager();
+			
+			try {
+				forward = action.execute(request, response); 
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		
