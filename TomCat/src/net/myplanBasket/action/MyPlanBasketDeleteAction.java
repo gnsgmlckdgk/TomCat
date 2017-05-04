@@ -26,7 +26,7 @@ public class MyPlanBasketDeleteAction implements Action{
 		// 디비객체 생성 basketdao
 		MyPlanBasketDAO basketdao=new MyPlanBasketDAO();
 		//메서드호출 basketDelete(b_num)
-		basketdao.basketDelete(b_num);
+		//basketdao.basketDelete(b_num);
 		//이동 ./BasketList.ba
 		forward.setRedirect(true);
 		forward.setPath("./BasketList.ba");

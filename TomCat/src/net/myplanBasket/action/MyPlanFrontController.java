@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.admin.goods.action.AdminGoodsModifyForm;
+import net.admin.goods.action.GoodsModifyAction;
+
 public class MyPlanFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//가상주소 가져오기
@@ -37,7 +40,24 @@ public class MyPlanFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/MyPlanModify.pln")){
+			//  AdminGoodsModifyForm
+			action=new MyPlanModifyForm();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/GoodsModifyAction.ag")){
+			// GoodsModifyAction
+			action=new MyPlanModifyAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		//이동
 		if(forward!=null){
 			if(forward.isRedirect()){

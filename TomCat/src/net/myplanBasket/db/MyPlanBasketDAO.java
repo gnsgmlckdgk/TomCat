@@ -32,35 +32,46 @@ public class MyPlanBasketDAO {
 				con=ds.getConnection();
 				return con;
 			}
-			
-/*			//basketAdd(basketbean)
+
+
+			//basketAdd(basketbean)
 			public void basketAdd(MyPlanBasketBean basketbean){
 				Connection con=null;
 				PreparedStatement pstmt=null;
 				ResultSet rs=null;
 				String sql="";
-				int b_num=0;
+				int myplans_id=0;
 				try {
 					//1,2 디비연결
 					con=getConnection();
 					// num 구하기  max(num)+1
-					sql="select max(b_num) from basket";
+					sql="select max(myplans_id) from myplans";
 					pstmt=con.prepareStatement(sql);
 					rs=pstmt.executeQuery();
 					if(rs.next()){
-						b_num=rs.getInt(1)+1;
+						myplans_id =rs.getInt(1)+1;
 					}else{
-						b_num=1;
+						myplans_id=1;
 					}
 					//3 sql insert  now()
-					sql="insert into basket values(?,?,?,?,?,?,now())";
+					sql="insert into myplans values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 					pstmt=con.prepareStatement(sql);
-					pstmt.setInt(1, b_num);
-					pstmt.setString(2, basketbean.getB_m_id());
-					pstmt.setInt(3, basketbean.getB_g_num());
-					pstmt.setInt(4, basketbean.getB_g_amount());
-					pstmt.setString(5, basketbean.getB_g_size());
-					pstmt.setString(6, basketbean.getB_g_color());
+					pstmt.setInt(1, myplans_id);
+					pstmt.setString(2, basketbean.getId());
+					pstmt.setInt(3, basketbean.getPlan_nr());
+					pstmt.setInt(4, basketbean.getTravel_id());
+					pstmt.setInt(5, basketbean.getItem_nr());
+					pstmt.setString(6, basketbean.getFirstday());
+					pstmt.setString(7, basketbean.getLastday());
+					pstmt.setInt(8, basketbean.getDay_nr());
+					pstmt.setString(9, basketbean.getDay_night());
+					pstmt.setFloat(10, basketbean.getUser_lat());
+					pstmt.setFloat(11, basketbean.getUser_lng());
+					pstmt.setString(12, basketbean.getDate());
+					pstmt.setString(13, basketbean.getMemo());
+					pstmt.setInt(14, basketbean.getPlan_done_nr());
+					
+					
 					//4 실행
 					pstmt.executeUpdate();
 				} catch (Exception e) {
@@ -72,8 +83,9 @@ public class MyPlanBasketDAO {
 				}
 			}
 			
+			
 			//checkGoods(basketbean)
-			public int checkGoods(MyPlanBasketBean basketbean){
+			public int checkBasket(MyPlanBasketBean basketbean){
 				Connection con=null;
 				PreparedStatement pstmt=null;
 				ResultSet rs=null;
@@ -83,13 +95,17 @@ public class MyPlanBasketDAO {
 					//1,2 디비연결
 					con=getConnection();
 					// 3 select
-					// 조건 b_m_id b_g_num b_g_size b_g_color
-					sql="select * from basket where b_m_id=? and b_g_num=? and b_g_size=? and b_g_color=?";
+					// 조건 
+					sql="select * from myplans where id=? and plan_nr=? and travel_id=? "
+							+ "and user_lat=? and user_lng=? and date=?";
 					pstmt=con.prepareStatement(sql);
-					pstmt.setString(1, basketbean.getB_m_id());
-					pstmt.setInt(2, basketbean.getB_g_num());
-					pstmt.setString(3, basketbean.getB_g_size());
-					pstmt.setString(4, basketbean.getB_g_color());
+					pstmt.setString(1, basketbean.getId());
+					pstmt.setInt(2, basketbean.getPlan_nr());
+					pstmt.setInt(3, basketbean.getTravel_id());
+					pstmt.setFloat(4, basketbean.getUser_lat());
+					pstmt.setFloat(5, basketbean.getUser_lng());
+					pstmt.setString(6, basketbean.getDate());
+					
 					// 4 rs 실행저장
 					rs=pstmt.executeQuery();
 					// 5 rs 데이터 있으면 check=1
@@ -99,13 +115,11 @@ public class MyPlanBasketDAO {
 					//    4 실행
 					if(rs.next()){
 						check=1;
-						sql="update basket set b_g_amount=b_g_amount+? where b_m_id=? and b_g_num=? and b_g_size=? and b_g_color=?";
+						sql="update myplans set myplans_id=myplans_id+? where travel_id=? and date=? ";
 						pstmt=con.prepareStatement(sql);
-						pstmt.setInt(1, basketbean.getB_g_amount());
-						pstmt.setString(2, basketbean.getB_m_id());
-						pstmt.setInt(3, basketbean.getB_g_num());
-						pstmt.setString(4, basketbean.getB_g_size());
-						pstmt.setString(5, basketbean.getB_g_color());
+						pstmt.setInt(1, basketbean.getTravel_id());
+						pstmt.setString(2, basketbean.getDate());
+					
 						pstmt.executeUpdate();
 					}
 				}catch(Exception e){
@@ -115,11 +129,16 @@ public class MyPlanBasketDAO {
 					if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 					if(con!=null)try{con.close();}catch(SQLException ex){}
 				}
-				
+			
 				return check;
-			}*/
+			}
+			
+
+
+
 			
 			//getBasketList(id)
+			
 			public Vector getBasketList(String id){
 				Connection con=null;
 				PreparedStatement pstmt=null;
@@ -146,47 +165,40 @@ public class MyPlanBasketDAO {
 					//  4 rs2  pstmt2 실행저장   
 					//  5 rs2데이터 있으면 상품 자바빈 객체 생성
 					//  rs2=>자바빈 저장 => goodsList한칸 저장
-					while(rs.next()){
-				/*		private int myplans_id;
-						private String id;
-						private int plan_nr;
-						private int travel_id;
-						private int item_nr;
-						private String firstday;
-						private String lastday;
-						private int day_nr;
-						private String day_night;
-						private float user_lat;
-						private float user_lng;
-						private String date;
-						private String memo;
-						private int plan_done_nr;*/
-						MyPlanBasketBean bb=new MyPlanBasketBean();
-						bb.setB_date(rs.getDate("b_date"));
-						bb.setB_g_amount(rs.getInt("b_g_amount"));
-						bb.setB_g_color(rs.getString("b_g_color"));
-						bb.setB_g_num(rs.getInt("b_g_num"));
-						bb.setB_g_size(rs.getString("b_g_size"));
-						bb.setB_m_id(rs.getString("b_m_id"));
-						bb.setB_num(rs.getInt("b_num"));
-						basketList.add(bb);
+					while(rs.next()){		
+						MyPlanBasketBean mpbb=new MyPlanBasketBean();
+						mpbb.setId(rs.getString("id"));
+						mpbb.setPlan_nr(rs.getInt("plan_nr"));
+						mpbb.setTravel_id(rs.getInt("travel_id"));
+						mpbb.setItem_nr(rs.getInt("item_nr"));
+						mpbb.setFirstday(rs.getString("firstday"));
+						mpbb.setLastday(rs.getString("lastday"));
+						mpbb.setDay_nr(rs.getInt("day_nr"));
+						mpbb.setDay_night(rs.getString("day_night"));
+						mpbb.setUser_lat(rs.getFloat("user_lat"));
+						mpbb.setUser_lng(rs.getFloat("user_lng"));
+						mpbb.setDate(rs.getString("date"));
+						mpbb.setMemo(rs.getString("memo"));
+						mpbb.setPlan_done_nr(rs.getInt("plan_done_nr"));
+						basketList.add(mpbb);
+						
 						sql="select * from goods where num=?";
 						pstmt2=con.prepareStatement(sql);
 						pstmt2.setInt(1, bb.getB_g_num());
 						rs2=pstmt2.executeQuery();
 						if(rs2.next()){
-						/*	GoodsBean gb=new GoodsBean();
-							gb.setPrice(rs2.getInt("price"));
-							gb.setName(rs2.getString("name"));
-							gb.setImage(rs2.getString("image"));
-							goodsList.add(gb);*/
+							MyPlanBasketBean mpbb = new MyPlanBasketBean();
+							mpbb.setPrice(rs2.getInt("price"));
+							mpbb.setName(rs2.getString("name"));
+							mpbb.setImage(rs2.getString("image"));
+							goodsList.add(mpbb);
+						
 						}
-					}
 					// vector 첫번째 칸 basketList 저장
 					// vector 두번째 칸 goodsList 저장
 					vector.add(basketList);
 					vector.add(goodsList);
-				} catch (Exception e) {
+				}catch (Exception e) {
 					e.printStackTrace();
 				}finally{
 					if(rs!=null)try{rs.close();}catch(SQLException ex){}
@@ -194,6 +206,14 @@ public class MyPlanBasketDAO {
 					if(con!=null)try{con.close();}catch(SQLException ex){}
 				}
 				return vector;
+						
+				
+			}
+
+
+			public MyPlanBasketBean get(int num) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 			
 		/*	
@@ -243,10 +263,13 @@ public class MyPlanBasketDAO {
 					if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
 					if(con!=null)try{con.close();}catch(SQLException ex){}
 				}
+			
 			}
 			*/
-}//클래스
+
+			//클래스
 
 
-
-
+			
+			
+}
