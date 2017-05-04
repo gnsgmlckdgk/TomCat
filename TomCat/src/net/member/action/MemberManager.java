@@ -27,13 +27,13 @@ public class MemberManager implements Action {
 		if(pageNum==null) {
 			pageNum = "1";
 		}
-		int currentPageNum = Integer.parseInt(pageNum);
+		int currentPage = Integer.parseInt(pageNum);
 		
 		// 한 페이지에 출력할 게시글의 갯수 설정
 		int pageSize = 10;
 		
 		// 시작 행 구하기
-		int startRow = (currentPageNum - 1) * pageSize + 1;
+		int startRow = (currentPage - 1) * pageSize + 1;
 		
 		// 회원 리스트 가져오기
 		List<MemberBean> memberList = null;
@@ -45,15 +45,26 @@ public class MemberManager implements Action {
 		
 		
 		/* 페이징 처리하기 */
-		// 필요한 페이지 수 구하기
+		// 한 페이지에 보여줄 페이지 링크 갯수
+		int pageBlock = 10;
 		
+		// 필요한 페이지 수 구하기
+		int pageCount = (count/pageSize)+(count%pageSize==0?0:1);
 		
 		// 시작 페이지 구하기
-		
+		int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
 		
 		// 끝 페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		};
 		
-		
+		// request에 페이지 값들 담기
+		request.setAttribute("pageBlock", pageBlock);	// 한페이지에 보여줄 페이지 수
+		request.setAttribute("pageCount", pageCount);	// 총 필요한 페이지 수
+		request.setAttribute("startPage", startPage);	// 시작 페이지
+		request.setAttribute("endPage", endPage);	// 끝 페이지
 		
 		// 이동정보
 		ActionForward forward = new ActionForward();

@@ -256,6 +256,40 @@ div.content_member_memberDelete .pass_form input[type="submit"] {
 	margin: 30px auto;
 }
 
+
+/* 회원관리 페이지(관리자 전용, memberManager.jsp) */
+div.content_member_memberManager {
+	border: 1px solid #ccc;
+	margin: 0;
+	padding: 0 0 30px 0;
+}
+div.content_member_memberManager a {
+	text-decoration: none;
+}
+div.content_member_memberManager h1 {
+	font-size: 1.4em;
+	background-color: #D4F4FA;
+	padding: 12px;
+}
+div.content_member_memberManager table {
+	margin-top: -25px;
+}
+div.content_member_memberManager .page {
+	text-align: center;
+}
+div.content_member_memberManager .page a{
+	border: 1px solid #ccc;
+	padding: 4px 7px;
+
+	font-size: 1.2em;
+	font-weight: bold;
+}
+div.content_member_memberManager .page a:hover {
+	background-color: #f0f0f0;
+	color: orange;
+}
+
+
 /* 회원정보 관리 페이지  끝 */
 
 

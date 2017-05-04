@@ -25,6 +25,7 @@
 			if(pageNum==null) {
 				pageNum = "1";
 			}
+			int currentPage = Integer.parseInt(pageNum);
 		
 			// 회원리스트 가져오기
 			List<MemberBean> memberList = (List)request.getAttribute("memberList");
@@ -67,17 +68,38 @@
 						%>
 					</table>
 					
+					<%
+					// 페이징
+					int pageBlock = Integer.parseInt(String.valueOf(request.getAttribute("pageBlock")));
+					int pageCount = Integer.parseInt(String.valueOf(request.getAttribute("pageCount")));
+					int startPage = Integer.parseInt(String.valueOf(request.getAttribute("startPage")));
+					int endPage = Integer.parseInt(String.valueOf(request.getAttribute("endPage")));
+					%>
+					<div class="page">
+						<%
+						if(currentPage > pageBlock) {
+							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>">[이전]</a><%	
+						}
+						for(int i=startPage; i<=endPage; i++) {
+							%><%if(currentPage==i){%>
+							<a href="./MemberManager.me?pageNum=<%=pageNum %>" style="font-weight: bold; background-color: #f0f0f0;"><%=i %></a>
+							<%}else {%><a href="./MemberManager.me?pageNum=<%=pageNum %>"><%=i %></a><%}%><%
+						}
+						if(pageCount > endPage) {
+							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>">[다음]</a><%
+						}
+						%>
+					</div>
+					
 					<script type="text/javascript">
 					/* 관리자가 회원을 탈퇴시킬때 비밀번호 한번더 확인 */
 					function deleteMemberPass(id) {
-						
 						window.open('./AdminPassCertification.me?id='+id+'&pageNum=<%=pageNum %>', '_blank', 
 						'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
-
 					}	
 					</script>
 					
-			</div> <!-- content_member_info -->
+			</div> <!-- content_member_memberManager -->
 		</div>	<!-- content -->
 	
 	</div>
