@@ -4,8 +4,8 @@
 		auth = "Container"
 		type = "javax.sql.DataSource"
 		driverClassName = "com.mysql.jdbc.Driver"
-		url = "jdbc:mysql://localhost:3306/tomcat"
+		url = "jdbc:mysql://localhost:9080/tomcat"
 		username = "root"
-		password = "1234"
+		password = "1111"
 	/>
 </Context>
