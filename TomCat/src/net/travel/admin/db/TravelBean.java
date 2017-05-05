@@ -1,6 +1,5 @@
 package net.travel.admin.db;
 
-import java.sql.Timestamp;
 
 public class TravelBean {
 	private String type;// p: 명소(place)  r:맛집(restaurent), h: 호텔(hotel)

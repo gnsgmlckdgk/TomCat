@@ -1,7 +1,5 @@
 package net.myplanBasket.db;
 
-import java.util.Date;
-
 public class MyPlanBasketBean {
 	private int myplans_id;
 	private String id;
