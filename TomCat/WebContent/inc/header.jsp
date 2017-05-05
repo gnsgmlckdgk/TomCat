@@ -73,7 +73,7 @@
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>
 		</ul>
-	</nav>
+	</nav> 
 </header>
 
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
