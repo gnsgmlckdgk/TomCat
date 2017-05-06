@@ -575,8 +575,45 @@ public class MemberDAO {
 		return count;
 	}
 	
+	// 가입된 회원수 구하기(검색값)
+		public int getCountMember(String search, String search_sel) {
+			
+			int count = 0;
+			try {
+				
+				con = getConnection();
+				
+				if("id_search".equals(search_sel)) {	// 아이디로 검색
+					sql = "select count(id) as count from member where id like ?"; 
+				}else {	// 닉네임으로 검색
+					sql = "select count(id) as count from member where nick like ?"; 
+				}
+				
+				ps = con.prepareStatement(sql);
+				ps.setString(1, "%"+search+"%");
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					count = rs.getInt("count");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try{
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return count;
+		}
+	
 	// 회원 리스트 가져오기
-	public List<MemberBean> getMemberList(int startRow, int pageSize) {
+	public List<MemberBean> getMemberList(int startRow, int pageSize, String search, String search_sel) {
 		
 		List<MemberBean> memberList = new ArrayList<MemberBean>();
 		MemberBean mb = null;
@@ -585,11 +622,18 @@ public class MemberDAO {
 			
 			con = getConnection();
 			
-			sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
-					+ "limit ?, ?";
+			if("id_search".equals(search_sel)) {	// 아이디로 검색
+				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+						+ "where id like ? limit ?, ?";
+			}else {	// 닉네임으로 검색
+				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+						+ "where nick like ? limit ?, ?";
+			}
+			
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, startRow-1);
-			ps.setInt(2, pageSize);
+			ps.setString(1, "%"+search+"%");
+			ps.setInt(2, startRow-1);
+			ps.setInt(3, pageSize);
 			
 			rs = ps.executeQuery();
 			
