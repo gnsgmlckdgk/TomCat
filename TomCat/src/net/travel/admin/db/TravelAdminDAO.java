@@ -1,4 +1,4 @@
-package TravelData;
+package net.travel.admin.db;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +13,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class TravelDataDAO {
+public class TravelAdminDAO {
 	
 	Connection con = null;
 	PreparedStatement ps = null;
@@ -108,24 +108,21 @@ public class TravelDataDAO {
 	}*/
 	
 	// 여행정보 저장
-	public void insertTravel(TravelDataBean tdb) {
-
-
-		
+	public void insertTravel(TravelBean tBean) {		
 		try {
 			con = getConnection();
 				
 			sql = "insert into travel(type, country_code, city_code, name, latitude, longitude, info, address)"
 					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, tdb.getType());
-			ps.setString(2, tdb.getCountry_code());
-			ps.setString(3, tdb.getCity_code());
-			ps.setString(4, tdb.getName());
-			ps.setFloat(5, tdb.getLatitude());
-			ps.setFloat(6, tdb.getLongitude());
-			ps.setString(7, tdb.getInfo());
-			ps.setString(8, tdb.getAddress());
+			ps.setString(1, tBean.getType());
+			ps.setString(2, tBean.getCountry_code());
+			ps.setString(3, tBean.getCity_code());
+			ps.setString(4, tBean.getName());
+			ps.setFloat(5, tBean.getLatitude());
+			ps.setFloat(6, tBean.getLongitude());
+			ps.setString(7, tBean.getInfo());
+			ps.setString(8, tBean.getAddress());
 			
 			ps.executeUpdate();
 

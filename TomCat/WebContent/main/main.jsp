@@ -26,7 +26,6 @@ String nick = (String)session.getAttribute("nick");%>
 		
 		<li><a href="./PlanNation.pl?nation='한국'" class="button special big">한국 국가페이지</a></li>
 		
-		<li><a href="./TravelDataAdmin.pln" class="button special big">여행장소DB입력</a></li>
 		<li><a href="./MyPlan.pln" class="button special big">나의일정관리</a></li>
 		<li><form action="./PlanRegion.pl" method="get">
 			<input type="text" name="region" style="background-color: white" placeholder="암거나 검색">

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MemberFrontController extends HttpServlet {
-   
+      
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String uriPath = request.getRequestURI();
@@ -183,6 +183,44 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/MemberManager.me")) {	// 회원관리 페이지(관리자 전용)
+			
+			action = new MemberManager();
+			
+			try {
+				forward = action.execute(request, response); 
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/AdminPassCertification.me")) {	// 회원관리페이지에서 탈퇴 눌렀을때 비밀번호 인증하는 팝업
+			// 관리자 비밀번호 인증 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
+			rsa_key = new RSAKeySetting();
+			
+			try {
+				rsa_key.keySetting(request);
+				
+				forward = new ActionForward();
+				forward.setPath("./member/adminPassCertification.jsp");
+				forward.setRedirect(false);
+				
+			}catch(Exception e) {
+				System.out.println("MemberForntController AdminPassCertification.me 예외 발생");
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/MemberDeleteManager.me")) {	// 회원관리 페이지에서 관리자가 회원 삭제하는 처리
+			
+			action = new MemberDeleteManager();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		
@@ -196,7 +234,7 @@ public class MemberFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-		
+					
 	}
 	
 	@Override

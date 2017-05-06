@@ -13,7 +13,7 @@
 				
 					<!-- 회원가입 -->
 					<div class="join_div">
-						<h2>회원가입</h2>
+						<h1>회원가입</h1>
 							<h4 style="color: #ccc;">★ 모든 입력란에 입력해주세요.</h4>
 						<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return validateEncryptedForm()" >
 							

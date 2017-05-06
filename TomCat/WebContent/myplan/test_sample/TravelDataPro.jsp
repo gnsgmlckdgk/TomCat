@@ -1,7 +1,4 @@
 
-<%@page import="TravelData.TravelDataDAO"%>
-<%@page import="TravelData.TravelDataBean"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,7 +38,7 @@ String lng=request.getParameter("longitude");
 //자바파일  패키지  member 자바파일 MemberBean
 
 //자바빈 객체생성=> 생성자호출 => 기억공간할당,초기값 할당  mb
-TravelDataBean td=new TravelDataBean();
+/* TravelDataBean td=new TravelDataBean();
 td.setType(type);
 td.setCountry_code(country_code);
 td.setCity_code(city_code);
@@ -49,20 +46,20 @@ td.setName(name);
 td.setLatitude(latitude);
 td.setLongitude(longitude); 
 td.setInfo(info);
-td.setAddress(address);
+td.setAddress(address); */
 
 %>
-<jsp:useBean id="tdb" class="TravelData.TravelDataBean"/>
+<%-- <jsp:useBean id="tdb" class="TravelData.TravelDataBean"/> --%>
 <jsp:setProperty property="*" name="tdb"/>
 <%
 //디비작업
 //자바파일  패키지  member 자바파일 MemberDAO
 
 //디비 객체생성=> 생성자호출 => 기억공간할당,초기값 할당  mdao
-TravelDataDAO tdao=new TravelDataDAO();
+//TravelDataDAO tdao=new TravelDataDAO();
 
 // 회원가입하는 insertMember(자바빈의 주소값) 메서드 호출
-tdao.insertTravel(tdb);
+//tdao.insertTravel(tdb);
 %>
 <script type="text/javascript">
 	alert("DB저장 성공");

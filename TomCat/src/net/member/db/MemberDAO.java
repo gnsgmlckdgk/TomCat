@@ -1,7 +1,5 @@
 package net.member.db;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -210,6 +208,7 @@ public class MemberDAO {
 			while(rs.next()) {
 				if(rs.getString("id").equals(id)) {
 					check = 1;
+					return check;
 				}else {
 					check = 0;
 				}
@@ -516,6 +515,113 @@ public class MemberDAO {
 		}
 		
 		return check;
+	}
+	
+	// 회원 탈퇴(관리자가 회원관리 페이지에서 삭제시키기 때문에 id만 필요)
+		public void deleteMember(String id) {
+
+			try {
+				
+				con = getConnection();
+				
+				sql = "delete from member where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+				
+				// 일단 삭제안되게 막아둠
+				ps.executeUpdate();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try{
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	
+	// 가입된 회원수 구하기
+	public int getCountMember() {
+		
+		int count = 0;
+		try {
+			
+			con = getConnection();
+			
+			sql = "select count(id) as count from member";
+			ps = con.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	
+	// 회원 리스트 가져오기
+	public List<MemberBean> getMemberList(int startRow, int pageSize) {
+		
+		List<MemberBean> memberList = new ArrayList<MemberBean>();
+		MemberBean mb = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					+ "limit ?, ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, startRow-1);
+			ps.setInt(2, pageSize);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				mb = new MemberBean();
+				
+				mb.setId(rs.getString("id"));
+				mb.setPass(rs.getString("pass"));
+				mb.setName(rs.getString("name"));
+				mb.setNick(rs.getString("nick"));
+				mb.setGender(rs.getString("gender"));
+				mb.setTel(rs.getString("tel"));
+				mb.setReg_date(rs.getTimestamp("reg_date"));
+				mb.setProfile(rs.getString("profile"));
+				mb.setAuth(rs.getInt("auth"));
+				
+				memberList.add(mb);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return memberList;
 	}
 
 } // class

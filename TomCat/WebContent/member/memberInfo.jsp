@@ -52,15 +52,8 @@
 								<td>
 									<input type="file" value="<%=mb.getProfile() %>" name="profile" id="profile" onchange="loadImageFile()">
 									<p>추천 사이즈: 100 x 120</p>
-									<img src="<%if(mb.getProfile()==null){ 
-										if(mb.getGender().equals("남")) {
-											%>
-											./images/member/남자 기본 프로필.png
-											<%
-										}else {
-											%>./images/member/여자 기본 프로필.png<%} 
-										}else {%> ./upload/images/profileImg/<%=mb.getProfile() %> <%} %>" width="100px" height="120px" id="profileImg">
-										
+									
+										<img src="./upload/images/profileImg/<%=mb.getProfile() %>" width="100px" height="120px" id="profileImg">
 										
 										<img src="./images/member/오른쪽 화살표.png" id="right_arrow" >
 										<div id="previewImg"></div>

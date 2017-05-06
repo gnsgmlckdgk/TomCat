@@ -11,7 +11,7 @@
 <body>
 <h1>여행장소 db 입력용</h1>
 
-<form action="./TravelDataAction.pln" method="post" name="fr" enctype="multipart/form-data">
+<form action="./TravelDataAction.td" method="post" name="fr" enctype="multipart/form-data">
 <select id="type"  name="type">
   <option value="">장소타입 선택</option>
   <option value="">------------</option>
