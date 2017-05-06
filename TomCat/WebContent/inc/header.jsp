@@ -51,7 +51,13 @@
 <%
 	// 세션값 가져오기
 	String id = (String)session.getAttribute("id");			// 아이디
+	if(id==null) {
+		id="";
+	}
 	String nick = (String)session.getAttribute("nick");		// 닉네임
+	if(nick==null) {
+		nick = "";
+	}
 %>
 
 <!-- Header -->
@@ -67,7 +73,7 @@
 			<li><a href="elements.html">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
-			if(id==null){ %>
+			if("".equals(id)){ %>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
@@ -122,7 +128,7 @@
 
 <!-- 회원관리/로그아웃 선택 팝업 메뉴 -->
 <%
-	if(nick!=null) {	// 로그인 되어 있을때만
+	if(!"".equals(nick)) {	// 로그인 되어 있을때만
 			MemberDAO mdao = new MemberDAO();
 			MemberBean mb = mdao.getMember(id);
 			String profile = mb.getProfile();

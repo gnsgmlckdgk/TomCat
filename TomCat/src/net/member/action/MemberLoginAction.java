@@ -52,7 +52,9 @@ public class MemberLoginAction implements Action {
             }
             
         } catch (Exception ex) {
+        	// 가끔 오류가 나던데 그때 메인으로 다시 이동...
         	System.out.println("복호화 과정 오류");
+        	response.sendRedirect("./Main.me");
             throw new ServletException(ex.getMessage(), ex);
         }
         

@@ -262,6 +262,7 @@ div.content_member_memberManager {
 	border: 1px solid #ccc;
 	margin: 0;
 	padding: 0 0 30px 0;
+	min-width: 720px;
 }
 div.content_member_memberManager a {
 	text-decoration: none;
@@ -270,9 +271,10 @@ div.content_member_memberManager h1 {
 	font-size: 1.4em;
 	background-color: #D4F4FA;
 	padding: 12px;
+	margin: 0;
 }
 div.content_member_memberManager table {
-	margin-top: -25px;
+	min-width: 600px;
 }
 div.content_member_memberManager th {
 	text-align: center;
@@ -315,7 +317,7 @@ div.content_member_memberManager .auth_select_box select:hover {
 	cursor: pointer;
 }
 div.content_member_memberManager .auth_select_box div {
-	width: 200px;
+	width: 135px;
 	margin: 0 0 0 30px;
 	padding: 5px 0 5px 20px;
 }
@@ -325,13 +327,59 @@ div.content_member_memberManager .auth_select_box label {
 }
 div.content_member_memberManager select {
 	margin: 0;
-	width: 90px;
+	width: 110px;
 	height: 40px;
 }
 div.content_member_memberManager option {
 	height: 20px;
 }
 
+div.content_member_memberManager div.search_div {
+	position: relative;
+	
+	width: 490px;
+	height: 60px;
+	
+	float: right;
+}
+div.content_member_memberManager div.search_div select {
+	float: left;
+	width: 100px;
+	height: 30px;
+	
+	margin-right: 1px;
+	padding-left: 10px;
+	
+	font-size: 14px;
+}
+div.content_member_memberManager div.search_div input[type="text"] {
+	float: left;
+	
+	width: 240px;
+	height: 30px;
+	padding-left: 30px;
+	
+	font-size: 0.8em;
+}
+div.content_member_memberManager div.search_div img.search_img {
+	position: absolute;
+	
+	width: 20px;
+	height: 20px;
+	
+	margin: 5px 0 5px 5px;
+	left: 101px;
+}
+div.content_member_memberManager div.search_div input[type="submit"] {
+	width: 120px;
+	height: 30px;
+
+	line-height: 0;
+	font-size: 14px;
+	text-align: center;
+	
+	margin-left: 10px;
+}
 
 /* 회원정보 관리 페이지  끝 */
 

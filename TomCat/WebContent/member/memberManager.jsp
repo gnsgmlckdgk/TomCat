@@ -17,6 +17,9 @@
 		
 		<!-- 컨텐츠 -->
 		<%
+			// 한글처리
+			request.setCharacterEncoding("UTF-8");
+		
 			// 세션값 가져오기
 			String id = (String)session.getAttribute("id");	// 관리자 아이디
 			if(id==null) {
@@ -30,26 +33,41 @@
 			}
 			int currentPage = Integer.parseInt(pageNum);
 		
+			// 검색값 가져오기
+			String search = request.getParameter("search");
+			if(search==null) {
+				search="";
+			}
+			String search_sel = request.getParameter("search_sel");	// 검색 방법
+			if(search_sel==null) {
+				search_sel = "id_search";
+			}
+			
+			// 파라미터값 가져오기
+			int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 전체 회원 수
+			
 			// 회원리스트 가져오기
 			List<MemberBean> memberList = (List)request.getAttribute("memberList");
 			MemberBean mb = null;
+			
 		%>
 		<div class="content">
 			<div class="content_member_memberManager">
-				<h1>회원 관리</h1>
+				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> )</h1>
 					
 					<table>
 						<tr>
-							<th>프로필사진</th><th>아이디(닉네임)</th><th>회원탈퇴</th><th>권한설정</th>
+							<th>프로필사진</th><th>아이디(닉네임)</th><td>닉네임</td><th>회원탈퇴</th><th>권한설정</th>
 						</tr>
 						<%
-						if(memberList.size() != 0) {
+						if(count>0) {
 							for(int i=0; i<memberList.size(); i++) {
 								mb = memberList.get(i);
 								%>
 								<tr>
 									<td class="img_td"> <img src="./upload/images/profileImg/<%=mb.getProfile() %>"> </td>
-									<td class="id_td"><span><%=mb.getId() %>(<%=mb.getNick() %>)</span></td>
+									<td class="id_td"><span><%=mb.getId() %></span></td>
+									<td class="nick_td"><%=mb.getNick() %></td>
 									<td class="delete_td">
 										<%
 										if(id.equals(mb.getId())) {	// 현재 로그인한 관리자 아이디와 가져온 관리자 아이디와 같다면
@@ -64,9 +82,8 @@
 										%>
 									</td>	
 									<td class="auth_select_box">
-										<div>
-										<label>권한</label>
-										<select name="auth" id="<%=mb.getId() %>" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
+										<div class="select-wrapper">
+										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
 											<option value="admin" <%if(mb.getAuth()==0){%>selected style="font-weight: bold;"<%}%>>관리자</option>
 											<option value="user" <%if(mb.getAuth()==1){%>selected style="font-weight: bold;"<%}%>>사용자</option>
 										</select>
@@ -76,8 +93,23 @@
 								<%
 							}
 						}
+						
 						%>
 					</table>
+					
+					<div class="search_div">
+						<form action="./MemberManager.me?pageNum=1" method="post">
+							<select name="search_sel" id="category">
+								<option value="id_search" <%if("id_search".equals(search_sel)){%>selected<%} %>>아이디 검색</option>
+								<option value="nick_search" <%if("nick_search".equals(search_sel)){%>selected<%} %>>닉네임 검색</option>
+							</select>
+							<img src="./images/member/search_l2.png" class="search_img">
+							<input type="text" name="search" value="<%=search %>" placeholder="search...">
+							<input type="submit" value="검색" class="button alt">
+						</form>
+					</div>
+					
+					<div class="clear"></div>
 					
 					<%
 					// 페이징
@@ -89,15 +121,15 @@
 					<div class="page">
 						<%
 						if(currentPage > pageBlock) {
-							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>">[이전]</a><%	
+							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>&search=<%=search%>">[이전]</a><%	
 						}
 						for(int i=startPage; i<=endPage; i++) {
 							%><%if(currentPage==i){%>
-							<a href="./MemberManager.me?pageNum=<%=pageNum %>" style="font-weight: bold; background-color: #f0f0f0;"><%=i %></a>
-							<%}else {%><a href="./MemberManager.me?pageNum=<%=pageNum %>"><%=i %></a><%}%><%
+							<a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>" style="background-color: #f0f0f0;"><%=i %></a>
+							<%}else {%><a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>"><%=i %></a><%}%><%
 						}
 						if(pageCount > endPage) {
-							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>">[다음]</a><%
+							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>&search=<%=search%>">[다음]</a><%
 						}
 						%>
 					</div>
