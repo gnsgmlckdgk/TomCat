@@ -35,8 +35,9 @@ public class MyPlanBasketListAction implements Action{
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("goodsList", goodsList);
 		//이동   ./goods_order/goods_basket.jsp
+		System.out.println("myplanbasketlistaction 진입");
 		forward.setRedirect(false);
-		forward.setPath("./goods_order/goods_basket.jsp");
+		forward.setPath("./myplan/myplan.jsp");
 		return forward;
 	}
 }

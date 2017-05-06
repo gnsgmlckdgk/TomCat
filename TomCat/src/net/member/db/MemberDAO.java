@@ -190,8 +190,8 @@ public class MemberDAO {
 	// 로그인 인증
 	public int memberLogin(String id, String pass) {
 		
-		// -1 아이디없음, 0 비밀번호 틀림, 1 비밀번호 맞음
-		int check = -1;
+		// 0 아이디 또는 비밀번호 틀림, 1 비밀번호 맞음
+		int check = 0;
 		
 		try {
 			
@@ -622,6 +622,36 @@ public class MemberDAO {
 		}
 		
 		return memberList;
+	}
+	
+	// 권한 변경
+	public void authUpdate(String id, String auth) {
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "update member set auth=? where id=?";
+			ps = con.prepareStatement(sql);
+			if(auth.equals("admin")) {	// 관리자
+				ps.setInt(1, 0);
+			}else if(auth.equals("user")) {	// 사용자
+				ps.setInt(1, 1);
+			}
+			ps.setString(2, id);
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 } // class

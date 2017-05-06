@@ -12,6 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.travel.admin.db.TravelBean;
+
 
 public class MyPlanBasketDAO {
 	//디비연결
@@ -28,7 +30,7 @@ public class MyPlanBasketDAO {
 				//커넥션풀 : 데이터베이스와 연결된 Connection 객체를 미리 생성하여
 				//풀속에 저장해 두고 필요할때마다 이 풀에 접근하여 Connection객체 사용
 				Context init=new InitialContext();
-				DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/mysqlDB");
+				DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/mySQL");
 				con=ds.getConnection();
 				return con;
 			}
@@ -149,11 +151,12 @@ public class MyPlanBasketDAO {
 				Vector vector=new Vector();
 				List basketList=new ArrayList();
 				List goodsList=new ArrayList();
+
 				try {
 					//1,2 디비연결
 					con=getConnection();
 					//3 sql id에 해당하는 장바구니 정보 가져오기
-					sql="select * from basket where id=?";
+					sql="select * from myplans where id=?";
 					pstmt=con.prepareStatement(sql);
 					pstmt.setString(1, id);
 					//4 rs 실행 저장
@@ -182,22 +185,30 @@ public class MyPlanBasketDAO {
 						mpbb.setPlan_done_nr(rs.getInt("plan_done_nr"));
 						basketList.add(mpbb);
 						
-						sql="select * from goods where num=?";
+						sql="select * from travel where travel_id=?";
 						pstmt2=con.prepareStatement(sql);
-						pstmt2.setInt(1, bb.getB_g_num());
+						pstmt2.setInt(1, mpbb.getTravel_id());
 						rs2=pstmt2.executeQuery();
 						if(rs2.next()){
-							MyPlanBasketBean mpbb = new MyPlanBasketBean();
-							mpbb.setPrice(rs2.getInt("price"));
-							mpbb.setName(rs2.getString("name"));
-							mpbb.setImage(rs2.getString("image"));
-							goodsList.add(mpbb);
+							TravelBean tb = new TravelBean();
+							tb.setType(rs2.getString("type"));
+							tb.setCountry_code(rs2.getString("country_code"));
+							tb.setCity_code(rs2.getString("city_code"));
+							tb.setName(rs2.getString("name"));
+							tb.setLatitude(rs2.getFloat("latitude"));
+							tb.setLongitude(rs2.getFloat("longitude"));
+							tb.setInfo(rs2.getString("info"));
+							tb.setAddress(rs2.getString("address"));
+							goodsList.add(tb);
+						}
 						
 						}
 					// vector 첫번째 칸 basketList 저장
 					// vector 두번째 칸 goodsList 저장
 					vector.add(basketList);
 					vector.add(goodsList);
+					System.out.println(basketList.size());
+					System.out.println(goodsList.size());
 				}catch (Exception e) {
 					e.printStackTrace();
 				}finally{

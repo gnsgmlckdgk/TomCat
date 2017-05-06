@@ -31,7 +31,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=4"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=5"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
@@ -73,7 +73,7 @@
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>
 		</ul>
-	</nav>
+	</nav> 
 </header>
 
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>

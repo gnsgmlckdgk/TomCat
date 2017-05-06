@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.admin.goods.action.AdminGoodsModifyForm;
-import net.admin.goods.action.GoodsModifyAction;
 
 public class MyPlanFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,14 +24,6 @@ public class MyPlanFrontController extends HttpServlet{
 		ActionForward forward=null;
 		if(command.equals("/MyPlan.pln")){
 			//  BasketAddAction
-			action=new MyPlanBasketListAction();
-			try {
-				forward=action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if(command.equals("/BasketList.pln")){
-			//  BasketListAction
 			action=new MyPlanBasketListAction();
 			try {
 				forward=action.execute(request, response);
