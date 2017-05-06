@@ -19,6 +19,9 @@
 		<%
 			// 세션값 가져오기
 			String id = (String)session.getAttribute("id");	// 관리자 아이디
+			if(id==null) {
+				response.sendRedirect("./Main.me");
+			}
 			
 			// 현제 페이지 번호
 			String pageNum = request.getParameter("pageNum");
@@ -45,22 +48,30 @@
 								mb = memberList.get(i);
 								%>
 								<tr>
-									<td> <img src="./upload/images/profileImg/<%=mb.getProfile() %>" width="100px" height="100px"> </td>
-									<td><%=mb.getId() %>(<%=mb.getNick() %>)</td>
-									<td>
+									<td class="img_td"> <img src="./upload/images/profileImg/<%=mb.getProfile() %>"> </td>
+									<td class="id_td"><span><%=mb.getId() %>(<%=mb.getNick() %>)</span></td>
+									<td class="delete_td">
 										<%
 										if(id.equals(mb.getId())) {	// 현재 로그인한 관리자 아이디와 가져온 관리자 아이디와 같다면
 										%>
-											<a href="./MemberDelete.me">탈퇴</a>	<!-- 회원탈퇴 페이지로 -->
+											<span><a href="./MemberDelete.me">탈퇴</a></span>	<!-- 회원탈퇴 페이지로 -->
 										<%	
 										}else {
 											%>
-												<a href="javascript:deleteMemberPass('<%=mb.getId() %>')">탈퇴</a>
+												<span><a href="javascript:deleteMemberPass('<%=mb.getId() %>')">탈퇴</a></span>
 											<%
 										}
 										%>
 									</td>	
-									<td>권한설정 select박스</td>
+									<td class="auth_select_box">
+										<div>
+										<label>권한</label>
+										<select name="auth" id="<%=mb.getId() %>" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
+											<option value="admin" <%if(mb.getAuth()==0){%>selected style="font-weight: bold;"<%}%>>관리자</option>
+											<option value="user" <%if(mb.getAuth()==1){%>selected style="font-weight: bold;"<%}%>>사용자</option>
+										</select>
+										</div>
+									</td>
 								</tr>
 								<%
 							}
@@ -96,7 +107,27 @@
 					function deleteMemberPass(id) {
 						window.open('./AdminPassCertification.me?id='+id+'&pageNum=<%=pageNum %>', '_blank', 
 						'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
-					}	
+					}
+					
+					/* 권한 설정이 변경되었을때 */
+					function auth_change(id, auth) {
+						
+						// DB 권한을 변경함
+						$.ajax({
+							type: 'POST',
+							url: './MemberAuthChange.me',
+							data: {'id' : id, 'auth' : auth},
+							dataType: 'text',
+							async: false,
+							success: function(data){
+								console.log(data);
+							},
+							error: function(error){
+								alert(error);
+							}
+						});
+					}
+					
 					</script>
 					
 			</div> <!-- content_member_memberManager -->

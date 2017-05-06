@@ -274,6 +274,25 @@ div.content_member_memberManager h1 {
 div.content_member_memberManager table {
 	margin-top: -25px;
 }
+div.content_member_memberManager th {
+	text-align: center;
+	font-size: 1.2em;
+	padding-top: 10px;
+}
+div.content_member_memberManager td {
+	padding: 0px;
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+div.content_member_memberManager td.id_td span {
+	display: block;
+}
+div.content_member_memberManager img {
+	width: 50px;
+	height: 50px;
+	margin: 0 0 -19px 0;
+}
 div.content_member_memberManager .page {
 	text-align: center;
 }
@@ -287,6 +306,30 @@ div.content_member_memberManager .page a{
 div.content_member_memberManager .page a:hover {
 	background-color: #f0f0f0;
 	color: orange;
+}
+div.content_member_memberManager .auth_select_box {
+	width: 200px;
+}
+div.content_member_memberManager .auth_select_box select:hover {
+	background-color: #D4F4FA;
+	cursor: pointer;
+}
+div.content_member_memberManager .auth_select_box div {
+	width: 200px;
+	margin: 0 0 0 30px;
+	padding: 5px 0 5px 20px;
+}
+div.content_member_memberManager .auth_select_box label {
+	margin: 1px 20px 0 0;
+	float: left;
+}
+div.content_member_memberManager select {
+	margin: 0;
+	width: 90px;
+	height: 40px;
+}
+div.content_member_memberManager option {
+	height: 20px;
 }
 
 

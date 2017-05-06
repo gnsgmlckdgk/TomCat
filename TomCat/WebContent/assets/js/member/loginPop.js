@@ -35,9 +35,6 @@ function popupToggle() {
 			});
 			$('#loginPopContainer').css('display', 'none');
 
-			// 공개키 hidden태그 지우기
-			$('#login_publicKeyModulus').remove();
-			$('#login_publicKeyExponent').remove();
 		}
 		
 	});		// ready
