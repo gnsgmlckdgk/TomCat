@@ -19,7 +19,7 @@ public class MyPlanBasketListAction implements Action{
 		ActionForward forward=new ActionForward();
 		if(id==null){
 			forward.setRedirect(true);
-			forward.setPath("./MemberLogin.me");
+			forward.setPath("./MemberLoginAction.me");
 			return forward;
 		}
 		//BasketDAO 객체 생성 basketdao

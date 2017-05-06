@@ -13,17 +13,17 @@ public class MyPlanModifyForm implements Action{
 			HttpServletResponse response) throws Exception {
 		System.out.println("MyPlanModifyForm");
 		//int num가져오기
-		int num=Integer.parseInt(request.getParameter("num"));
+		int myplans_id=Integer.parseInt(request.getParameter("myplans_id"));
 		//디비객체 생성 agdao
-		MyPlanBasketDAO agdao=new MyPlanBasketDAO();
+		MyPlanBasketDAO mpbdao=new MyPlanBasketDAO();
 		//GoodsBean goodsbean = 메서드호출 getGoods(num)
-		MyPlanBasketBean myplanbasketbean=agdao.get(num);
+		MyPlanBasketBean myplanbasketbean=mpbdao.get(myplans_id);
 		//저장 goodsbean
 		request.setAttribute("myplanbasketbean", myplanbasketbean);
 		//이동 ./admingoods/admin_goods_modify.jsp
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./admingoods/admin_goods_modify.jsp");
+		forward.setPath("./myplan/myplanmodify.jsp");
 		return forward;
 	}
 }

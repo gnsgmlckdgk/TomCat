@@ -11,12 +11,14 @@ import java.util.Vector;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
 import net.travel.admin.db.TravelBean;
 
 
 public class MyPlanBasketDAO {
-	//디비연결
+	private static final MyPlanBasketBean MyPlanBasketBean = null;
+
+
+			//디비연결
 			private Connection getConnection() throws Exception{
 				Connection con=null;
 //				String url="jdbc:mysql://localhost:3306/jspdb";
@@ -222,14 +224,8 @@ public class MyPlanBasketDAO {
 			}
 
 
-			public MyPlanBasketBean get(int num) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-		/*	
-			//basketDelete(b_num);
-			public void basketDelete(int b_num){
+			//modifyGoods(GoodsBean goodsbean)
+			public void modifyMyPlan(MyPlanBasketBean myplanbean){
 				Connection con=null;
 				PreparedStatement pstmt=null;
 				ResultSet rs=null;
@@ -237,11 +233,24 @@ public class MyPlanBasketDAO {
 				try {
 					//1,2 디비연결
 					con=getConnection();
-					//3 sql b_num 에 해당하는 장바구니 삭제
-					sql="delete from basket where b_num=?";
+					//3 sql  num 에 해당하는
+					sql="update myplans set plan_nr=?,item_nr=?,firstday=?,lastday=?,"
+							+ "day_nr=?,day_night=?,user_lat=?,user_lng=?,date=?,memo=?,plan_done_nr=? "
+							+ "where myplans_id=?";
 					pstmt=con.prepareStatement(sql);
-					pstmt.setInt(1, b_num);
-					//4 실행
+					pstmt.setInt(1, myplanbean.getPlan_nr());
+					pstmt.setInt(2, myplanbean.getItem_nr());
+					pstmt.setString(3, myplanbean.getFirstday());
+					pstmt.setString(4, myplanbean.getLastday());
+					pstmt.setInt(5, myplanbean.getDay_nr());
+					pstmt.setString(6, myplanbean.getDay_night());
+					pstmt.setFloat(7, myplanbean.getUser_lat());
+					pstmt.setFloat(8, myplanbean.getUser_lng());
+					pstmt.setString(9, myplanbean.getDate());
+					pstmt.setString(10, myplanbean.getMemo());
+					pstmt.setInt(11, myplanbean.getPlan_done_nr());
+					pstmt.setInt(12, myplanbean.getMyplans_id());
+					//4실행
 					pstmt.executeUpdate();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -251,34 +260,55 @@ public class MyPlanBasketDAO {
 					if(con!=null)try{con.close();}catch(SQLException ex){}
 				}
 			}
-			
-			//deleteBasket(String id)
-			public void deleteBasket(String id){
-				Connection con=null;
-				PreparedStatement pstmt=null;
-				ResultSet rs=null;
-				String sql="";
-				try {
-					//1,2 디비연결
-					con=getConnection();
-					//3 sql delete  b_m_id해당하는 장바구니 삭제
-					sql="delete from basket where b_m_id=?";
-					pstmt=con.prepareStatement(sql);
-					pstmt.setString(1, id);
-					//4 실행
-					pstmt.executeUpdate();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}finally{
-					if(rs!=null)try{rs.close();}catch(SQLException ex){}
-					if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
-					if(con!=null)try{con.close();}catch(SQLException ex){}
-				}
-			
-			}
-			*/
 
-			//클래스
+
+			public MyPlanBasketBean get(int myplans_id) {
+				// TODO Auto-generated method stub
+				Connection con=null;
+				PreparedStatement pstmt=null;
+				ResultSet rs=null;
+				String sql="";
+				MyPlanBasketBean mypalnbasketbean=null;
+				try {
+					//1,2 디비연결
+					con=getConnection();
+					//3 sql num에 해당하는 상품정보 가져오기
+					sql="select * from myplans where myplans_id=?";
+					pstmt=con.prepareStatement(sql);
+					pstmt.setInt(1, myplans_id);
+					//4 rs 실행 저장
+					rs=pstmt.executeQuery();
+					//5 데이터 있으면 자바빈객체 생성
+					// rs => 자바빈 저장 
+					if(rs.next()){
+						mypalnbasketbean=new MyPlanBasketBean();
+						mypalnbasketbean.setId(rs.getString("id"));
+						mypalnbasketbean.setPlan_nr(rs.getInt("plan_nr"));
+						mypalnbasketbean.setTravel_id(rs.getInt("travel_id"));
+						mypalnbasketbean.setItem_nr(rs.getInt("item_nr"));
+						mypalnbasketbean.setFirstday(rs.getString("firstday"));
+						mypalnbasketbean.setLastday(rs.getString("lastday"));
+						mypalnbasketbean.setDay_nr(rs.getInt("day_nr"));
+						mypalnbasketbean.setDay_night(rs.getString("day_night"));
+						mypalnbasketbean.setUser_lat(rs.getFloat("user_lat"));
+						mypalnbasketbean.setUser_lng(rs.getFloat("user_lng"));
+						mypalnbasketbean.setDate(rs.getString("date"));
+						mypalnbasketbean.setMemo(rs.getString("memo"));
+						mypalnbasketbean.setPlan_done_nr(rs.getInt("plan_done_nr"));
+						}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					if(rs!=null)try{rs.close();}catch(SQLException ex){}
+					if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+					if(con!=null)try{con.close();}catch(SQLException ex){}
+				}
+				
+				return MyPlanBasketBean;
+			}
+
+			
+	
 
 
 			
