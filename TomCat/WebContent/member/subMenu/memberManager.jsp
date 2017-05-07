@@ -13,7 +13,6 @@
 	}
 	int auth = Integer.parseInt(auth_str);
 %>
-
 <!-- 서브메뉴 -->
 <div id="submenu">
 	<ul>

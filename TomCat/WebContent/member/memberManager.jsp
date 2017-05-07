@@ -9,9 +9,8 @@
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Main -->
-<section id="main" class="wrapper">
+<section id="main" class="wrapper memberManager">
 	<div class="container">
-
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
 		

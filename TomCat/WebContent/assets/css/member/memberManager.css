@@ -68,6 +68,16 @@ div.memberManagerNav li a:hover {
 /* 회원정보 관리 페이지  시작 */
 
 /* 메인 전체 */
+section.memberManager {
+	margin-top: -10px;
+	
+	/* 배경이미지(뭐 넣을지 결정 못함) */
+	background-image: url("../../../images/member/back/beatenberg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment: fixed;
+}
+
 div.container {
 	position: relative;
 	min-height: 600px;
@@ -82,8 +92,9 @@ div#submenu {
 
 	position: absolute;
 
-/* 	margin-top: 40px; */
 	padding: 1px;
+	
+	background-color: #fff;
 }
 
 div#submenu ul {
@@ -126,16 +137,14 @@ div#submenu li hr {
 }
 
 /* 컨텐츠 부분 공통 */
-
-div.content {	
+div.content {
+	background-color: #fff;
 	padding: 0;
 
 	width: 80%;
 	min-width: 600px;
-	min-height: 400px;
 	
 	position: relative;
-	
 	left: 230px;
 }
 
