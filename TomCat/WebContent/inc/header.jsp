@@ -24,14 +24,14 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=1"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=5"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=1"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>
@@ -68,10 +68,11 @@
 	
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
-			<li><a href="generic.html">함께해요</a></li>
+			<li><a href="#">함께해요</a></li>
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
-			<li><a href="elements.html">여행일정Q&A</a></li>
+			<li><a href="#">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
+			<li><a href="#">마이페이지</a></li>
 			<%
 			if("".equals(id)){ %>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
