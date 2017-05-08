@@ -47,7 +47,7 @@
 <section id="two" class="wrapper style2 special">
 	<div class="container">
 		<header class="major">
-			<h2>관광지 . 맛집 . 숙소</h2>
+			<h2>지역 리스트</h2>
 			<p>
 				<%=nation%>에 있습니다!
 			</p>
