@@ -69,7 +69,7 @@ div.memberManagerNav li a:hover {
 
 /* 메인 전체 */
 section.memberManager {
-	margin-top: -35px;
+	margin-top: -25px;
 	
 	background-image: url("../../../images/member/back/landscape.jpg");
 	background-repeat: no-repeat;

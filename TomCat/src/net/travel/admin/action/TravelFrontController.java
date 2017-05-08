@@ -27,6 +27,7 @@ public class TravelFrontController extends HttpServlet {
 			forward=new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("./TravelAdmin/TravelAdmin.jsp");
+			
 		}else if(command.equals("/TravelAdminAction.td")){  /*추후 체크(주소확인)해볼것*/
 			// GoodsAddAction
 			action=new TravelAction();

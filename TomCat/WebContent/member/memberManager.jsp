@@ -56,7 +56,7 @@
 					
 					<table>
 						<tr>
-							<th>프로필사진</th><th>아이디(닉네임)</th><td>닉네임</td><th>회원탈퇴</th><th>권한설정</th>
+							<th>프로필사진</th><th>아이디</th><th>닉네임</th><th>회원탈퇴</th><th>권한설정</th>
 						</tr>
 						<%
 						if(count>0) {

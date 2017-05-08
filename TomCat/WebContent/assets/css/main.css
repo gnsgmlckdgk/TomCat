@@ -2553,6 +2553,14 @@
 
 /* Section/Article */
 
+	/* 추가한거 s */
+	/* 첫번째 section이 header랑 조금 떨어져 있어서 */
+	section {
+		position: relative;
+		top: -10px;
+	}
+	/* 추가한거 e */
+
 	section.special, article.special {
 		text-align: center;
 	}
