@@ -1,4 +1,4 @@
-
+<%@page import="temp.MyPlanBean"%>
 <%@page import="net.travel.admin.db.TravelBean"%>
 <%@page import="net.myplanBasket.db.MyPlanBasketBean"%>
 <%@page import="java.util.List"%>
@@ -11,17 +11,20 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/myplanModify.css" />
-<body>
-<%
-//request.setAttribute("basketList", basketList);
-//request.setAttribute("goodsList", goodsList);
-List basketList=(List)request.getAttribute("basketList");
-List goodsList=(List)request.getAttribute("goodsList");
-MyPlanBasketBean mpbb = (MyPlanBasketBean)request.getAttribute("myplanbasketbean");
-%>
-<h1>일정편집<%=basketList.size()%><%=goodsList.size()%></h1>
 
-<table class="tg">
+<body>
+	<%
+		List basketList=(List)request.getAttribute("basketList");
+		List goodsList=(List)request.getAttribute("goodsList");
+		String id = (String) session.getAttribute("id");	
+		MyPlanBasketBean mpbb = (MyPlanBasketBean)request.getAttribute("mpbb");
+		System.out.println("jsp진입");
+	%>
+
+<h1>일정편집</h1>
+<form action="./MyPlanModifyAction.pln" method="post">
+<input type="hidden">
+<table border="1" class="tg">
   <tr>
     <th class="tg-031e" rowspan="2">1일차</th>
     <th class="tg-031e">낮</th>
@@ -48,10 +51,11 @@ MyPlanBasketBean mpbb = (MyPlanBasketBean)request.getAttribute("myplanbasketbean
   <tr>
     <th class="tg-yw4l">밤</th>
     <td class="tg-yw4l">일정추가6</td>
-  </tr>
-</table> 
-<tr><td colspan="2"><input type="submit" value="상품수정">
-<input type="reset" value="다시등록"></td></tr> 
+  </tr> 
+  <tr><td colspan="3"><input type="submit" value="일정수정">
+<input type="reset" value="다시등록"></td></tr>
+</table>
+</form>
 </body>
 
 <div class="clear"></div>

@@ -38,7 +38,7 @@ public class MyPlanFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/MyPlanModifyAction.ag")){
+		}else if(command.equals("/MyPlanModifyAction.pln")){
 			// GoodsModifyAction
 			action=new MyPlanModifyAction();
 			try {

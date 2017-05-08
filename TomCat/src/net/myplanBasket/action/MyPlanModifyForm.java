@@ -1,29 +1,45 @@
 package net.myplanBasket.action;
 
+import java.util.List;
+import java.util.Vector;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.myplanBasket.db.MyPlanBasketBean;
 import net.myplanBasket.db.MyPlanBasketDAO;
 
-
-public class MyPlanModifyForm implements Action{
+public class MyPlanModifyForm implements Action {
 	@Override
-	public ActionForward execute(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("MyPlanModifyForm");
-		//int num가져오기
-		int myplans_id=Integer.parseInt(request.getParameter("myplans_id"));
-		//디비객체 생성 agdao
-		MyPlanBasketDAO mpbdao=new MyPlanBasketDAO();
-		//GoodsBean goodsbean = 메서드호출 getGoods(num)
-		MyPlanBasketBean myplanbasketbean=mpbdao.get(myplans_id);
-		//저장 goodsbean
-		request.setAttribute("myplanbasketbean", myplanbasketbean);
-		//이동 ./admingoods/admin_goods_modify.jsp
-		ActionForward forward=new ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("./myplan/myplanModify.jsp");
-		return forward;
+		//세션 가져오기
+				HttpSession session=request.getSession();
+				String id=(String)session.getAttribute("id");
+				//세션값 없으면  ./MemberLogin.me
+				ActionForward forward=new ActionForward();
+				if(id==null){
+					forward.setRedirect(true);
+					forward.setPath("./MemberLoginAction.me");
+					return forward;
+				}
+				//BasketDAO 객체 생성 basketdao
+				MyPlanBasketDAO basketdao=new MyPlanBasketDAO();
+				//Vector vector= 메서드호출  getBasketList(String id)
+				//  => Vector vector=new Vector();
+				Vector vector=basketdao.getBasketList(id);
+				//List basketList = vector 첫번째데이터
+				List basketList=(List)vector.get(0);
+				//List goodsList = vector 두번째데이터
+				List goodsList=(List)vector.get(1);
+				// 저장 basketList goodsList
+				request.setAttribute("basketList", basketList);
+				request.setAttribute("goodsList", goodsList);
+				//이동   ./goods_order/goods_basket.jsp
+				System.out.println("myplanbasketModifyfrom 진입");
+				forward.setRedirect(false);
+				forward.setPath("./myplan/myplanModify.jsp");
+				return forward;
 	}
 }
