@@ -1,11 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!-- 추가한 스크립트 -->
-<script type="text/javascript" src="./assets/js/member/join.js?ver=10"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+<%-- <!-- Header -->
+<jsp:include page="../inc/header.jsp" /> --%>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Before you go</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- Scripts -->
+		<script src="./assets/js/jquery.min.js"></script>
+		<script src="./assets/js/skel.min.js"></script>
+		<script src="./assets/js/util.js"></script>
+		<script src="./assets/js/main.js"></script>
+		
+			<!-- RSA -->
+			<script type="text/javascript" src="./assets/js/rsa/jsbn.js"></script>
+        	<script type="text/javascript" src="./assets/js/rsa/rsa.js"></script>
+       		<script type="text/javascript" src="./assets/js/rsa/prng4.js"></script>
+       		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
+       		
+       	<!-- 스타일 불러오기 -->
+		<link rel="stylesheet" href="./assets/css/main.css?ver=2"/>
+		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
+
+		<!-- 추가한 스타일 -->
+			<!-- member -->
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
+
+		<!-- 추가한 스크립트 -->
+			<!-- plan -->
+			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
+			<script type="text/javascript" src="./assets/js/member/join.js?ver=10"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+
+</head>
+	
+<body>
+
+<!-- Header -->
+<header id="header">
+	<h1>
+		<a href="./Main.me"><strong>Before</strong> you go...</a>
+	</h1>
+	
+	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
+		<ul>
+			<li><a href="#">함께해요</a></li>
+			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
+			<li><a href="#">여행일정Q&A</a></li>
+			<li><a href="./BoardList.bo">인생샷그램</a></li>
+		</ul>
+	</nav> 
+</header>
+
+<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
 		<!-- Main -->
 			<section id="main" class="wrapper">
