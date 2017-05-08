@@ -52,11 +52,11 @@
 		%>
 		<div class="content">
 			<div class="content_member_memberManager">
-				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> )</h1>
+				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> ) ※테스트하려고 pageSize=2로 해둠</h1>
 					
 					<table>
 						<tr>
-							<th>프로필사진</th><th>아이디(닉네임)</th><td>닉네임</td><th>회원탈퇴</th><th>권한설정</th>
+							<th>프로필사진</th><th>아이디</th><th>닉네임</th><th>회원탈퇴</th><th>권한설정</th>
 						</tr>
 						<%
 						if(count>0) {
