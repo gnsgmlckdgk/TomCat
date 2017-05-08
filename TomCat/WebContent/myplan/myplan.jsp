@@ -19,25 +19,7 @@ List basketList=(List)request.getAttribute("basketList");
 List goodsList=(List)request.getAttribute("goodsList");
 %>
 <h1>여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1>
-<table border="1">
-<tr><td>myplans_id</td><td>id</td>
-<td>plan_nr</td><td>travel_id</td>
-<td>item_nr</td><td>name</td>
-<td>address</td></tr>
-  	<%
-   for(int i=0;i<basketList.size();i++){
-	   MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
-		TravelBean tb=(TravelBean)goodsList.get(i);
-	%>
-<tr><td><%=mpbb.getMyplans_id() %></td><td><%=mpbb.getId() %></td>
-<td><%=mpbb.getPlan_nr() %></td><td><%=mpbb.getTravel_id() %></td>
-<td><%=mpbb.getItem_nr() %></td><td><%=tb.getName()%></td>
-<td><%=tb.getAddress()%></td>
-<td><a href="./MyPlanModify.pln?myplans_id=<%=mpbb.getMyplans_id()%>">일정만들기편집</a>/<a href="./MyPlanDelete.ag?myplans_id=<%=mpbb.getMyplans_id()%>">삭제</a></td></tr>	   
-	<%
- 	 }
-   %>
-</table>
+
 
 </body>
 
