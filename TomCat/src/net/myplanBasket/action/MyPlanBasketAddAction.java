@@ -48,11 +48,7 @@ public class MyPlanBasketAddAction implements Action {
 			basketbean.setDate(request.getParameter("date"));
 			basketbean.setMemo(request.getParameter("memo"));
 			basketbean.setPlan_done_nr(Integer.parseInt(request.getParameter("plan_done_nr")));
-		}
-		
-		System.out.println("test " +travel_id);
-		System.out.println("test " +basketbean.getTravel_id());
-		
+		}		
 		
 		// 디비 파일 만들기 net.basket.db BasketDAO
 		// 객체 생성 basketdao
