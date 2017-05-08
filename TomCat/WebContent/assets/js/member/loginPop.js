@@ -33,11 +33,13 @@ function popupToggle() {
 			
 		}else if($('#loginPopContainer').css('display')=="block") {	// 팝업 숨김
 			
+			$('#login_publicKeyModulus').remove();
+			$('#login_publicKeyExponent').remove();
+			
 			$('#loginPop').fadeOut(200, function(){	// 페이드 아웃 애니메이션
 				$('#loginPop').css('display', 'none');
 			});
 			$('#loginPopContainer').css('display', 'none');
-
 		}
 		
 	});		// ready
