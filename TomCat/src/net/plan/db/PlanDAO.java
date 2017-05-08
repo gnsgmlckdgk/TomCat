@@ -28,7 +28,8 @@ public class PlanDAO {
 		return con;
 	}
 	
-	public int getTravelCount(){
+	public int getTravelCount(String region){
+		
 		ResultSet rs = null;
 		int count = 0;
 		try{			
@@ -37,8 +38,9 @@ public class PlanDAO {
 			//num 게시판 글번호 구하기
 			//sql 함수 최대값 구하기 max()
 			
-			sql = "select count(travel_id) from travel";
+			sql = "select count(travel_id) from travel where address like ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + region + "%" );
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){count = rs.getInt(1);}
@@ -54,7 +56,7 @@ public class PlanDAO {
 		return count;
 	}// getBoardCount() end
 	
-	public List<PlanTravelBean> getTravelList(int startRow, int pageSize){
+	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region){
 		ResultSet rs = null;
 		List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
 		try{
@@ -63,11 +65,14 @@ public class PlanDAO {
 			con = getConnection();
 			//num 게시판 글번호 구하기
 			//sql 함수 최대값 구하기 max()
-			sql = "select * from travel order by travel_id desc limit ?, ?";
+			sql = "select * from travel where address like ? order by travel_id desc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow-1);
-			pstmt.setInt(2, pageSize);
+			pstmt.setString(1, "%" + region + "%");
+			pstmt.setInt(2, startRow-1);
+			pstmt.setInt(3, pageSize);
+			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()){
 				PlanTravelBean ptb = new PlanTravelBean();
 				ptb.setTravel_id(rs.getInt(1));
@@ -79,6 +84,7 @@ public class PlanDAO {
 				ptb.setLongitude(rs.getFloat(7));
 				ptb.setInfo(rs.getString(8));
 				ptb.setAddress(rs.getString(9));				
+				ptb.setFile(rs.getString(10));
 				planTravelList.add(ptb);
 			}
 
