@@ -73,7 +73,7 @@
 				type="button" value="관광지" name="spotFilter"> <input
 				type="button" value="맛집" name="spotFilter"> <input
 				type="button" value="숙소" name="spotFilter">
-				<br>
+				<br><br>
 				<div style="width: 70%; margin: auto;">
 				<form action="#" method="get">
 					<input style="float: left; width: 65%;" type="text" placeholder="찾아보기" name="search"> &nbsp; <input style="float: left; width: 30%" type="submit" value="검색"> 
@@ -103,8 +103,7 @@
 					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
 					<h3>
-						[<%=region%>
-						<%=ptb.getType()%>]<br><%=ptb.getName()%><br>
+						[ <%=ptb.getType()%> ]<br><%=ptb.getName()%><br>
 						<%=ptb.getInfo() %>
 						<ul class="actions">
 							<li><a href="#" class="button special icon fa-download">찜</a></li>
@@ -145,11 +144,11 @@
 				// 1~10
 				for (int i = startPage; i <= endPage; i++) {
 					if (Integer.parseInt(pageNum) != i) {
-		%><a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[<%=i%>]
-		</a>
+		%> <a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[ <%=i%> ]
+		</a> 
 		<%
 			} else {
-		%>[<%=i%>]<%
+		%>[ <%=i%> ]<%
 			}
 				}
 				//다음

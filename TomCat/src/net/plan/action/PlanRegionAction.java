@@ -32,10 +32,10 @@ public class PlanRegionAction implements Action {
 		PlanDAO pdao = new PlanDAO();
 		
 		//DB에 등록된 글의 개수.
-		int count = pdao.getTravelCount();
+		int count = pdao.getTravelCount(region);
 		
 		// 한페이지에 보여줄 글의 개수
-		int pageSize = 10;
+		int pageSize = 4;
 
 		// 현페이지가 몇페이지인지 가져오기(기본 1페이지)
 		String pageNum = request.getParameter("pageNum");
@@ -51,7 +51,7 @@ public class PlanRegionAction implements Action {
 
 		List<PlanTravelBean> planTravelList = null;
 		if (count != 0)
-			planTravelList = pdao.getTravelList(startRow, pageSize);
+			planTravelList = pdao.getTravelList(startRow, pageSize, region);
 		
 		request.setAttribute("planTravelList", planTravelList);
 		request.setAttribute("count", count);

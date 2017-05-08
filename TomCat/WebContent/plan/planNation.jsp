@@ -63,10 +63,10 @@
 					DB에서 받아오기? 직접 코딩하기?
 					<br><br><br>
 					
-						<a href="./PlanRegion.pl?region='서울'" class="button special big">서울</a><br>
-						<a href="./PlanRegion.pl?region='대전'" class="button special big">대전</a><br>
-						<a href="./PlanRegion.pl?region='대구'" class="button special big">대구</a><br>
-						<a href="./PlanRegion.pl?region='부산'" class="button special big">부산</a><br>
+						<a href="./PlanRegion.pl?region=서울" class="button special big">서울</a><br>
+						<a href="./PlanRegion.pl?region=대전" class="button special big">대전</a><br>
+						<a href="./PlanRegion.pl?region=대구" class="button special big">대구</a><br>
+						<a href="./PlanRegion.pl?region=부산" class="button special big">부산</a><br>
 					</h3>
 				</div>
 
