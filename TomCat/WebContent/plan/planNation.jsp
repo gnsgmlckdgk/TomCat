@@ -1,4 +1,4 @@
-<%@page import="net.plan.db.PlanImageBean"%>
+
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,7 +17,7 @@
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 				<h2><%=nation%>
-					설명
+					
 				</h2>
 				<p>
 					Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
@@ -47,7 +47,7 @@
 <section id="two" class="wrapper style2 special">
 	<div class="container">
 		<header class="major">
-			<h2>관광지 . 맛집 . 숙소</h2>
+			<h2>지역 리스트</h2>
 			<p>
 				<%=nation%>에 있습니다!
 			</p>

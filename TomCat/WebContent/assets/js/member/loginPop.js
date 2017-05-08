@@ -12,7 +12,10 @@ function popupToggle() {
 			// 회원가입 페이지에서 로그인 팝업을 띄운경우 공개키, 개인키가 새로 생성되지 않게 하기
 			if(pageLocation!="/TomCat/MemberJoin.me") {
 				// 공개키 가져오기(RSA암호화 준비)
-				$.ajax('./member/loginPop.jsp', {
+				$.ajax({
+					type: 'post',
+					url: './member/loginPop.jsp',
+					async: false,
 					success: function(data){
 						$('#login_form').append(data);
 					}
@@ -30,11 +33,13 @@ function popupToggle() {
 			
 		}else if($('#loginPopContainer').css('display')=="block") {	// 팝업 숨김
 			
+			$('#login_publicKeyModulus').remove();
+			$('#login_publicKeyExponent').remove();
+			
 			$('#loginPop').fadeOut(200, function(){	// 페이드 아웃 애니메이션
 				$('#loginPop').css('display', 'none');
 			});
 			$('#loginPopContainer').css('display', 'none');
-
 		}
 		
 	});		// ready

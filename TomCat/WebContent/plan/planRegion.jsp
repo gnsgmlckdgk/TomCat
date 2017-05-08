@@ -1,4 +1,5 @@
-<%@page import="net.plan.db.PlanImageBean"%>
+<%@page import="net.plan.db.PlanTravelBean"%>
+
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -16,7 +17,7 @@
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 					<h2><%=region%>
-						설명
+						
 					</h2>
 					<p>
 						Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
@@ -45,7 +46,7 @@
 </section>
 <!-- Two -->
 <%
-	List planImageList = (List) request.getAttribute("planImageList");
+	List planTravelList = (List) request.getAttribute("planTravelList");
 	int count = ((Integer) request.getAttribute("count")).intValue();
 	String pageNum = (String) request.getAttribute("pageNum");
 	int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
@@ -89,15 +90,13 @@
 
 			<%
 				//planImageList를 뿌려준다.
-				if (planImageList != null) {
-					for (int i = 0; i < planImageList.size(); i++) {
-						PlanImageBean pib = (PlanImageBean) planImageList.get(i);
+				if (planTravelList != null) {
+					for (int i = 0; i < planTravelList.size(); i++) {
+						PlanTravelBean ptb = (PlanTravelBean) planTravelList.get(i);
 			%>
 			<div class="6u 12u$(xsmall)">
 				<div class="image fit captioned">
-					<img class="img_sld1 w3-animate-fading"
-						src="./upload/<%=pib.getFile()%>"
-						alt="<%=region%> <%=pib.getType()%> <%=pib.getImg_info()%>" />
+					
 					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
@@ -105,7 +104,8 @@
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
 					<h3>
 						[<%=region%>
-						<%=pib.getType()%>]<br><%=pib.getImg_info()%><br>
+						<%=ptb.getType()%>]<br><%=ptb.getName()%><br>
+						<%=ptb.getInfo() %>
 						<ul class="actions">
 							<li><a href="#" class="button special icon fa-download">찜</a></li>
 						</ul>
