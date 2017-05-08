@@ -11,9 +11,17 @@ public class PlanTravelBean {
 	private float longitude;
 	private String info;
 	private String address;
+	private String file;
 	
 	
 	
+	
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
 	public int getTravel_id() {
 		return travel_id;
 	}

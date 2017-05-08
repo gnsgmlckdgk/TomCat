@@ -102,11 +102,11 @@
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
 					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
-					<h3>
+					<h3><img src=<%=ptb.getFile() %> alt=<%=ptb.getName() %>><br>
 						[ <%=ptb.getType()%> ]<br><%=ptb.getName()%><br>
 						<%=ptb.getInfo() %>
 						<ul class="actions">
-							<li><a href="#" class="button special icon fa-download">찜</a></li>
+							<li><a href="./MyPlanBasketAdd.pln?travel_id=<%=ptb.getTravel_id() %>" class="button special icon fa-download">찜</a></li>
 						</ul>
 					</h3>
 				</div>

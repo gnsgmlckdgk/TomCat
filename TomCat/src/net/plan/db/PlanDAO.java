@@ -84,6 +84,7 @@ public class PlanDAO {
 				ptb.setLongitude(rs.getFloat(7));
 				ptb.setInfo(rs.getString(8));
 				ptb.setAddress(rs.getString(9));				
+				ptb.setFile(rs.getString(10));
 				planTravelList.add(ptb);
 			}
 
