@@ -72,11 +72,11 @@
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="#">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
-			<li><a href="#">마이페이지</a></li>
 			<%
 			if("".equals(id)){ %>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
+					<li><a href="#">마이페이지</a></li>
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>
 		</ul>
