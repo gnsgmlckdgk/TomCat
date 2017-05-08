@@ -11,6 +11,9 @@
 	
 	location.href="./Main.me";
 
+	
+	
+	
 	</script>
 </body>
 </html>

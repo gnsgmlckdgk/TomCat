@@ -2,13 +2,17 @@
     pageEncoding="UTF-8"%>
 
 <%
+	String id = (String)session.getAttribute("id");
+	if(id==null) {
+		response.sendRedirect("./Main.me");
+	}
+
 	String auth_str = (String)session.getAttribute("auth");
 	if(auth_str==null) {
 		response.sendRedirect("./Main.me");
 	}
 	int auth = Integer.parseInt(auth_str);
 %>
-
 <!-- 서브메뉴 -->
 <div id="submenu">
 	<ul>

@@ -68,6 +68,15 @@ div.memberManagerNav li a:hover {
 /* 회원정보 관리 페이지  시작 */
 
 /* 메인 전체 */
+section.memberManager {
+	margin-top: -25px;
+	
+	background-image: url("../../../images/member/back/landscape.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
 div.container {
 	position: relative;
 	min-height: 600px;
@@ -79,11 +88,12 @@ div#submenu {
 	
 	width: 200px;
 	min-height: 480px;
-
 	position: absolute;
-
-/* 	margin-top: 40px; */
 	padding: 1px;
+	
+	background-color: #fff;
+	
+	opacity: 0.92;
 }
 
 div#submenu ul {
@@ -126,17 +136,17 @@ div#submenu li hr {
 }
 
 /* 컨텐츠 부분 공통 */
-
-div.content {	
+div.content {
+	background-color: #fff;
 	padding: 0;
 
 	width: 80%;
 	min-width: 600px;
-	min-height: 400px;
 	
 	position: relative;
-	
 	left: 230px;
+	
+	opacity: 0.95;
 }
 
 /* 회원정보 */
@@ -254,6 +264,131 @@ div.content_member_memberDelete .pass_form label {
 div.content_member_memberDelete .pass_form input[type="submit"] {
 	display: block;
 	margin: 30px auto;
+}
+
+
+/* 회원관리 페이지(관리자 전용, memberManager.jsp) */
+div.content_member_memberManager {
+	border: 1px solid #ccc;
+	margin: 0;
+	padding: 0 0 30px 0;
+	min-width: 720px;
+}
+div.content_member_memberManager a {
+	text-decoration: none;
+}
+div.content_member_memberManager h1 {
+	font-size: 1.4em;
+	background-color: #D4F4FA;
+	padding: 12px;
+	margin: 0;
+}
+div.content_member_memberManager table {
+	min-width: 600px;
+}
+div.content_member_memberManager th {
+	text-align: center;
+	font-size: 1.2em;
+	padding-top: 10px;
+}
+div.content_member_memberManager td {
+	padding: 0px;
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+div.content_member_memberManager td.id_td span {
+	display: block;
+}
+div.content_member_memberManager img {
+	width: 50px;
+	height: 50px;
+	margin: 0 0 -19px 0;
+}
+div.content_member_memberManager .page {
+	text-align: center;
+}
+div.content_member_memberManager .page a{
+	border: 1px solid #ccc;
+	padding: 4px 7px;
+
+	font-size: 1.2em;
+	font-weight: bold;
+}
+div.content_member_memberManager .page a:hover {
+	background-color: #f0f0f0;
+	color: orange;
+}
+div.content_member_memberManager .auth_select_box {
+	width: 200px;
+}
+div.content_member_memberManager .auth_select_box select:hover {
+	background-color: #D4F4FA;
+	cursor: pointer;
+}
+div.content_member_memberManager .auth_select_box div {
+	width: 135px;
+	margin: 0 0 0 30px;
+	padding: 5px 0 5px 20px;
+}
+div.content_member_memberManager .auth_select_box label {
+	margin: 1px 20px 0 0;
+	float: left;
+}
+div.content_member_memberManager select {
+	margin: 0;
+	width: 110px;
+	height: 40px;
+}
+div.content_member_memberManager option {
+	height: 20px;
+}
+
+div.content_member_memberManager div.search_div {
+	position: relative;
+	
+	width: 490px;
+	height: 60px;
+	
+	float: right;
+}
+div.content_member_memberManager div.search_div select {
+	float: left;
+	width: 100px;
+	height: 30px;
+	
+	margin-right: 1px;
+	padding-left: 10px;
+	
+	font-size: 14px;
+}
+div.content_member_memberManager div.search_div input[type="text"] {
+	float: left;
+	
+	width: 240px;
+	height: 30px;
+	padding-left: 30px;
+	
+	font-size: 0.8em;
+}
+div.content_member_memberManager div.search_div img.search_img {
+	position: absolute;
+	
+	width: 20px;
+	height: 20px;
+	
+	margin: 5px 0 5px 5px;
+	left: 101px;
+}
+div.content_member_memberManager div.search_div input[type="submit"] {
+	width: 120px;
+	height: 30px;
+
+	line-height: 0;
+	font-size: 14px;
+	text-align: center;
+	
+	margin-left: 10px;
 }
 
 /* 회원정보 관리 페이지  끝 */

@@ -1,7 +1,5 @@
 package net.member.db;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -192,8 +190,8 @@ public class MemberDAO {
 	// 로그인 인증
 	public int memberLogin(String id, String pass) {
 		
-		// -1 아이디없음, 0 비밀번호 틀림, 1 비밀번호 맞음
-		int check = -1;
+		// 0 아이디 또는 비밀번호 틀림, 1 비밀번호 맞음
+		int check = 0;
 		
 		try {
 			
@@ -577,8 +575,45 @@ public class MemberDAO {
 		return count;
 	}
 	
+	// 가입된 회원수 구하기(검색값)
+		public int getCountMember(String search, String search_sel) {
+			
+			int count = 0;
+			try {
+				
+				con = getConnection();
+				
+				if("id_search".equals(search_sel)) {	// 아이디로 검색
+					sql = "select count(id) as count from member where id like ?"; 
+				}else {	// 닉네임으로 검색
+					sql = "select count(id) as count from member where nick like ?"; 
+				}
+				
+				ps = con.prepareStatement(sql);
+				ps.setString(1, "%"+search+"%");
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					count = rs.getInt("count");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try{
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return count;
+		}
+	
 	// 회원 리스트 가져오기
-	public List<MemberBean> getMemberList(int startRow, int pageSize) {
+	public List<MemberBean> getMemberList(int startRow, int pageSize, String search, String search_sel) {
 		
 		List<MemberBean> memberList = new ArrayList<MemberBean>();
 		MemberBean mb = null;
@@ -587,11 +622,18 @@ public class MemberDAO {
 			
 			con = getConnection();
 			
-			sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
-					+ "limit ?, ?";
+			if("id_search".equals(search_sel)) {	// 아이디로 검색
+				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+						+ "where id like ? limit ?, ?";
+			}else {	// 닉네임으로 검색
+				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+						+ "where nick like ? limit ?, ?";
+			}
+			
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, startRow-1);
-			ps.setInt(2, pageSize);
+			ps.setString(1, "%"+search+"%");
+			ps.setInt(2, startRow-1);
+			ps.setInt(3, pageSize);
 			
 			rs = ps.executeQuery();
 			
@@ -624,6 +666,36 @@ public class MemberDAO {
 		}
 		
 		return memberList;
+	}
+	
+	// 권한 변경
+	public void authUpdate(String id, String auth) {
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "update member set auth=? where id=?";
+			ps = con.prepareStatement(sql);
+			if(auth.equals("admin")) {	// 관리자
+				ps.setInt(1, 0);
+			}else if(auth.equals("user")) {	// 사용자
+				ps.setInt(1, 1);
+			}
+			ps.setString(2, id);
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 } // class

@@ -46,15 +46,15 @@ public class MemberLoginAction implements Action {
             	// 세션값 생성
             	session.setAttribute("id", id);	// 아이디
             	
-            	System.out.println("aa");
-            	
             	MemberBean mb = mdao.getMember(id);
             	session.setAttribute("nick", mb.getNick());	// 닉네임
             	session.setAttribute("auth", Integer.toString(mb.getAuth()));	// 권한
             }
             
         } catch (Exception ex) {
+        	// 가끔 오류가 나던데 그때 메인으로 다시 이동...
         	System.out.println("복호화 과정 오류");
+        	response.sendRedirect("./Main.me");
             throw new ServletException(ex.getMessage(), ex);
         }
         
@@ -69,19 +69,13 @@ public class MemberLoginAction implements Action {
         	out.println("</script>");
         	out.close();
         	
-        }else if(check == 0) {
+        }else {
         	out.println("<script>");
-        	out.println("alert('비밀번호가 일치하지 않습니다.');");
+        	out.println("alert('아이디 또는 비밀번호가 일치하지 않습니다.');");
         	out.println("location.href='./Main.me?loginCheck="+check+"';");
         	out.println("</script>");
         	out.close();
         	
-        }else {
-        	out.println("<script>");
-        	out.println("alert('아이디가 존재하지 않습니다.');");
-        	out.println("location.href='./Main.me?loginCheck="+check+"';");
-        	out.println("</script>");
-        	out.close();
         }
         
         // 이동정보 없음(script로 이동함)

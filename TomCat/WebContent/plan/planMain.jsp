@@ -4,7 +4,80 @@
 <!-- 헤더 -->
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 대륙지도js -->
+  <link rel="stylesheet" media="all" href="./assets/css/plan/jquery-jvectormap.css"/>
+
+  <script src="./assets/js/plan/jquery-1.8.2.js"></script>
+  <script src="./assets/js/plan/jquery-jvectormap.js"></script>
+  <script src="./assets/js/plan/jquery-mousewheel.js"></script>
+
+  <script src="./assets/js/plan/src/jvectormap.js"></script>
+
+  <script src="./assets/js/plan/src/abstract-element.js"></script>
+  <script src="./assets/js/plan/src/abstract-canvas-element.js"></script>
+  <script src="./assets/js/plan/src/abstract-shape-element.js"></script>
+
+  <script src="./assets/js/plan/src/svg-element.js"></script>
+  <script src="./assets/js/plan/src/svg-group-element.js"></script>
+  <script src="./assets/js/plan/src/svg-canvas-element.js"></script>
+  <script src="./assets/js/plan/src/svg-shape-element.js"></script>
+  <script src="./assets/js/plan/src/svg-path-element.js"></script>
+  <script src="./assets/js/plan/src/svg-circle-element.js"></script>
+  <script src="./assets/js/plan/src/svg-image-element.js"></script>
+  <script src="./assets/js/plan/src/svg-text-element.js"></script>
+
+  <script src="./assets/js/plan/src/vml-element.js"></script>
+  <script src="./assets/js/plan/src/vml-group-element.js"></script>
+  <script src="./assets/js/plan/src/vml-canvas-element.js"></script>
+  <script src="./assets/js/plan/src/vml-shape-element.js"></script>
+  <script src="./assets/js/plan/src/vml-path-element.js"></script>
+  <script src="./assets/js/plan/src/vml-circle-element.js"></script>
+  <script src="./assets/js/plan/src/vml-image-element.js"></script>
+
+  <script src="./assets/js/plan/src/map-object.js"></script>
+  <script src="./assets/js/plan/src/region.js"></script>
+  <script src="./assets/js/plan/src/marker.js"></script>
+
+  <script src="./assets/js/plan/src/vector-canvas.js"></script>
+  <script src="./assets/js/plan/src/simple-scale.js"></script>
+  <script src="./assets/js/plan/src/ordinal-scale.js"></script>
+  <script src="./assets/js/plan/src/numeric-scale.js"></script>
+  <script src="./assets/js/plan/src/color-scale.js"></script>
+  <script src="./assets/js/plan/src/legend.js"></script>
+  <script src="./assets/js/plan/src/data-series.js"></script>
+  <script src="./assets/js/plan/src/proj.js"></script>
+  <script src="./assets/js/plan/src/map.js"></script>
+
+  <script src="./assets/js/plan/world/jquery-jvectormap-asia-mill.js"></script>
+  <script src="./assets/js/plan/world/jquery-jvectormap-europe-mill.js"></script>
+  <script src="./assets/js/plan/world/jquery-jvectormap-north_america-mill.js"></script>
+  <script src="./assets/js/plan/world/jquery-jvectormap-oceania-mill.js"></script>
+  <script src="./assets/js/plan/world/jquery-jvectormap-south_america-mill.js"></script>
+
+ <script src="./assets/js/plan/planMain_Map.js"></script>
+ 
 <!-- 메인 -->
+
+
+<!-- 아시아 -->
+
+  <div id="map1" style="width: 60em; height: 30em;"></div>
+
+<!-- 유럽 -->
+
+  <div id="map2" style="width: 60em; height: 30em;"></div>
+
+<!-- 남태평양 -->
+
+  <div id="map3" style="width: 60em; height: 30em;"></div>
+
+<!-- 북미 -->
+
+  <div id="map4" style="width: 60em; height: 30em;"></div>  
+
+<!-- 중남미 -->
+
+  <div id="map5" style="width: 60em; height: 30em;"></div>  
 
 <!-- 대륙별 국가리스트 출력 -->
 <script>
@@ -77,15 +150,17 @@
 		<div class="countryList" >
 			<h2>국가 리스트</h2>
 			<%
+				String[] asia={"asia","europe","oceania","north","south"};
 				for (int j = 0; j < 5; j++) {
 			%>
-			<h3><%=cont[j]%></h3>
+			<h3><%=cont[j]+"  "%><a onclick="popupToggle_<%=asia[j]%>()">>>지도로보기</a></h3>
 			<div class="<%=cont[j]%>"></div>
 			<div class="clear"></div>
 			<%
 				}
 			%>
 		</div>
+		<div id="countryMap_back" onclick="popupToggle_map()"></div>
 	</div>
 </section>
 

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
 public class MyPlanFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//가상주소 가져오기
@@ -31,14 +30,6 @@ public class MyPlanFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/BasketList.pln")){
-			//  BasketListAction
-			action=new MyPlanBasketListAction();
-			try {
-				forward=action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}else if(command.equals("/MyPlanModify.pln")){
 			//  AdminGoodsModifyForm
 			action=new MyPlanModifyForm();
@@ -47,7 +38,7 @@ public class MyPlanFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/GoodsModifyAction.ag")){
+		}else if(command.equals("/MyPlanModifyAction.ag")){
 			// GoodsModifyAction
 			action=new MyPlanModifyAction();
 			try {
