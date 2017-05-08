@@ -1,4 +1,3 @@
-
 <%@page import="net.travel.admin.db.TravelBean"%>
 <%@page import="net.myplanBasket.db.MyPlanBasketBean"%>
 <%@page import="java.util.List"%>
@@ -34,8 +33,8 @@ List goodsList=(List)request.getAttribute("goodsList");
 <td><%=mpbb.getItem_nr() %></td><td><%=tb.getName()%></td>
 <td>
 <iframe
-  width="600"
-  height="450"
+  width="300"
+  height="300"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ
     &q=<%=mpbb.getUser_lat() %>,<%=mpbb.getUser_lng() %>" allowfullscreen>
@@ -45,8 +44,8 @@ List goodsList=(List)request.getAttribute("goodsList");
 <td><a href="./MyPlanModify.pln?myplans_id=<%=mpbb.getMyplans_id()%>">일정만들기편집</a>/<a href="./MyPlanDelete.ag?myplans_id=<%=mpbb.getMyplans_id()%>">삭제</a></td></tr>	   
 	<%
  	 }
-   %></table>
-
+   %>
+</table>
 </body>
 
 <div class="clear"></div>
