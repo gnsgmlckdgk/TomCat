@@ -1,4 +1,4 @@
-<%@page import="net.plan.db.PlanImageBean"%>
+
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,7 +17,7 @@
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 				<h2><%=nation%>
-					설명
+					
 				</h2>
 				<p>
 					Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor

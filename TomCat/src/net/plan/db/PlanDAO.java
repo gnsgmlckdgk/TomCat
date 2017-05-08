@@ -28,7 +28,7 @@ public class PlanDAO {
 		return con;
 	}
 	
-	public int getPlanCount(){
+	public int getTravelCount(){
 		ResultSet rs = null;
 		int count = 0;
 		try{			
@@ -37,7 +37,7 @@ public class PlanDAO {
 			//num 게시판 글번호 구하기
 			//sql 함수 최대값 구하기 max()
 			
-			sql = "select count(num) from images";
+			sql = "select count(travel_id) from travel";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -54,31 +54,32 @@ public class PlanDAO {
 		return count;
 	}// getBoardCount() end
 	
-	public List<PlanImageBean> getPlanList(int startRow, int pageSize){
+	public List<PlanTravelBean> getTravelList(int startRow, int pageSize){
 		ResultSet rs = null;
-		List<PlanImageBean> planImageList = new ArrayList<PlanImageBean>();
+		List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
 		try{
 			
 			//1,2디비연결 메서드호출
 			con = getConnection();
 			//num 게시판 글번호 구하기
 			//sql 함수 최대값 구하기 max()
-			sql = "select * from images order by num desc limit ?, ?";
+			sql = "select * from travel order by travel_id desc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow-1);
 			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				PlanImageBean pib = new PlanImageBean();
-				pib.setNum(rs.getInt(1));
-				pib.setType(rs.getString(2));
-				pib.setFile(rs.getString(3));
-				pib.setCountry_code(rs.getString(4));
-				pib.setCity_code(rs.getString(5));
-				pib.setTravel_id(rs.getInt(6));
-				pib.setNick(rs.getString(7));
-				pib.setImg_info(rs.getString(8));				
-				planImageList.add(pib);
+				PlanTravelBean ptb = new PlanTravelBean();
+				ptb.setTravel_id(rs.getInt(1));
+				ptb.setType(rs.getString(2));
+				ptb.setConuntry_code(rs.getString(3));
+				ptb.setCity_code(rs.getString(4));
+				ptb.setName(rs.getString(5));
+				ptb.setLatitude(rs.getFloat(6));
+				ptb.setLongitude(rs.getFloat(7));
+				ptb.setInfo(rs.getString(8));
+				ptb.setAddress(rs.getString(9));				
+				planTravelList.add(ptb);
 			}
 
 		}catch (Exception e){
@@ -88,7 +89,7 @@ public class PlanDAO {
 			if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
 			if (con != null) {try {con.close();} catch (SQLException ex) {	}}
 		}
-		return planImageList;
+		return planTravelList;
 	} //getBoardList() end
 	
 }
