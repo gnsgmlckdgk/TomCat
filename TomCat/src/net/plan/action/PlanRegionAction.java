@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.plan.db.PlanDAO;
-import net.plan.db.PlanImageBean;
+import net.plan.db.PlanTravelBean;
 
 public class PlanRegionAction implements Action {
 
@@ -32,7 +32,7 @@ public class PlanRegionAction implements Action {
 		PlanDAO pdao = new PlanDAO();
 		
 		//DB에 등록된 글의 개수.
-		int count = pdao.getPlanCount();
+		int count = pdao.getTravelCount();
 		
 		// 한페이지에 보여줄 글의 개수
 		int pageSize = 10;
@@ -49,11 +49,11 @@ public class PlanRegionAction implements Action {
 		// 끝행구하기
 		int endRow = currentPage * pageSize;
 
-		List<PlanImageBean> planImageList = null;
+		List<PlanTravelBean> planTravelList = null;
 		if (count != 0)
-			planImageList = pdao.getPlanList(startRow, pageSize);
+			planTravelList = pdao.getTravelList(startRow, pageSize);
 		
-		request.setAttribute("planImageList", planImageList);
+		request.setAttribute("planTravelList", planTravelList);
 		request.setAttribute("count", count);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageSize", pageSize);

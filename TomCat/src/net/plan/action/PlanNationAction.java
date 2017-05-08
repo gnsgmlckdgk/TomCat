@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.plan.db.PlanDAO;
-import net.plan.db.PlanImageBean;
 
 public class PlanNationAction implements Action {
 
