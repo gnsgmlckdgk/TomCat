@@ -58,7 +58,7 @@ List goodsList=(List)request.getAttribute("goodsList");
 
 	<div class="container">
 		<div class="myplan-list">
-			<h3>나의 여행 일정 목록 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln">수정</a>]</h3>
+			<h3>나의 여행 일정 목록 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=?">수정</a>]</h3>
 			
 				<ul class="actions small">
 					<li><a href="#" class="button special small">일정A</a></li>
