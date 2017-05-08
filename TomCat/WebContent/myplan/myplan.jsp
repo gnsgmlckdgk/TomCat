@@ -10,6 +10,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
+
 <body>
 
  <style>
@@ -53,6 +54,7 @@
 List basketList=(List)request.getAttribute("basketList");
 List goodsList=(List)request.getAttribute("goodsList");
 %>
+
 
 	<div class="container">
 		<div class="myplan-list">
@@ -233,6 +235,7 @@ List goodsList=(List)request.getAttribute("goodsList");
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHAu8kwLgLcIk1oWIKpJhyOQQTK6RBLNI&v=3&callback=initMap">
     </script>
  </body>
+
 
 <div class="clear"></div>
 <!-- Footer -->
