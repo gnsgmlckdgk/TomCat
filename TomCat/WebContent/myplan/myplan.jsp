@@ -11,7 +11,6 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 
-
 <body>
 <%
 //request.setAttribute("basketList", basketList);
