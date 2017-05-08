@@ -1,5 +1,6 @@
 package net.member.db;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.util.regex.Pattern;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 public class MemberDAO {
@@ -426,13 +428,14 @@ public class MemberDAO {
 		}
 	
 	// 회원정보 수정
-	public void updateMember(MemberBean mb) {
+	public void updateMember(MemberBean mb, HttpServletRequest request) {
 		
 		try {
 			con = getConnection();
 			
 			if(mb.getProfile()==null) {	// 프로필 사진 변경을 안했으면
 
+				// 회원정보 수정
 				sql = "update member set name=?, nick=?, gender=?, tel=HEX(AES_ENCRYPT(?, 'tel')) where id=?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, mb.getName());
@@ -445,6 +448,18 @@ public class MemberDAO {
 				
 			}else {	// 프로필 사진 변경을 했으면
 				
+				// 기존의 프로필 이미지는 삭제(물리적 위치에 있는 이미지 파일)
+				sql = "select profile from member where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, mb.getId());
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					String realPath = request.getRealPath("/upload/images/profileImg/");
+					File f = new File(realPath+rs.getString("profile"));
+					f.delete();
+				}
+				
+				// 회원정보 수정
 				sql = "update member set name=?, nick=?, gender=?, tel=HEX(AES_ENCRYPT(?, 'tel')), profile=? where id=?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, mb.getName());

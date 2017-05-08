@@ -46,8 +46,11 @@ public class MemberUpdateAction implements Action {
 		
 		// DB수정 작업
 		MemberDAO mdao = new MemberDAO();
-		mdao.updateMember(mb);
-		
+		try {
+			mdao.updateMember(mb, request);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		// 세션값 변경
 		HttpSession session = request.getSession();
 		session.setAttribute("nick", mb.getNick());
