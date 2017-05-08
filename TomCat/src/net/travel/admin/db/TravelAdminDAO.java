@@ -14,19 +14,60 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class TravelAdminDAO {
-	
-	Connection con = null;
-	PreparedStatement ps = null;
-	ResultSet rs = null;
-	String sql = "";
-	
 	// Connection pool
 	private Connection getConnection() throws Exception {
+		Connection con = null;
 		Context init = new InitialContext();
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/mySQL");
 		con = ds.getConnection();
-		
 		return con;
+	}
+
+	// 여행정보 저장
+	public void insertTravel(TravelBean tBean) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "";
+		int num=0;
+		try {
+			con = getConnection();
+			
+			sql="select max(num) from travel";
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			if(rs.next()){
+				num=rs.getInt(1)+1;
+			}else{
+				num=1;
+			}
+			
+			sql = "insert into travel(type,country_code,city_code,name,latitude,longitude,info,address)"
+					+ "values(?,?,?,?,?,?,?,?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, tBean.getType());
+			ps.setString(2, tBean.getCountry_code());
+			ps.setString(3, tBean.getCity_code());
+			ps.setString(4, tBean.getName());
+			ps.setFloat(5, tBean.getLatitude());
+			ps.setFloat(6, tBean.getLongitude());
+			ps.setString(7, tBean.getInfo());
+			ps.setString(8, tBean.getAddress());
+			
+			ps.executeUpdate();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 /*	// 아이디(이메일) 중복체크
@@ -107,38 +148,6 @@ public class TravelAdminDAO {
 		return check;
 	}*/
 	
-	// 여행정보 저장
-	public void insertTravel(TravelBean tBean) {		
-		try {
-			con = getConnection();
-				
-			sql = "insert into travel(type, country_code, city_code, name, latitude, longitude, info, address)"
-					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, tBean.getType());
-			ps.setString(2, tBean.getCountry_code());
-			ps.setString(3, tBean.getCity_code());
-			ps.setString(4, tBean.getName());
-			ps.setFloat(5, tBean.getLatitude());
-			ps.setFloat(6, tBean.getLongitude());
-			ps.setString(7, tBean.getInfo());
-			ps.setString(8, tBean.getAddress());
-			
-			ps.executeUpdate();
-
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try{
-				if(rs!=null) rs.close();
-				if(ps!=null) ps.close();
-				if(con!=null) con.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
 /*
 	// 로그인 인증
 	public int memberLogin(String id, String pass) {

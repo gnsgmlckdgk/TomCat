@@ -11,7 +11,7 @@ public class MyPlanModifyAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		System.out.println("GoodsModifyAction");
+		System.out.println("MyPlanModifyAction");
 		//한글처리
 		request.setCharacterEncoding("utf-8");
 		//자바빈 객체 생성 goodsbean

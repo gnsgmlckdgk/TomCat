@@ -23,7 +23,7 @@ public class MyPlanModifyForm implements Action{
 		//이동 ./admingoods/admin_goods_modify.jsp
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./myplan/myplanmodify.jsp");
+		forward.setPath("./myplan/myplanModify.jsp");
 		return forward;
 	}
 }
