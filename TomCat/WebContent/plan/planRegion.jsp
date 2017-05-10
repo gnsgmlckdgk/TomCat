@@ -144,7 +144,8 @@
 							
 						}
 					});
-					$.toast('<h4>나의 일정에 추가되었습니다.</h4>', { type: 'success', duration: 3000 } );
+					alert("나의 일정에 등록되었습니다.");
+// 					$.toast('<h4>나의 일정에 추가되었습니다.</h4>', { type: 'success', duration: 3000 } );
 				}
 			</script>
 
