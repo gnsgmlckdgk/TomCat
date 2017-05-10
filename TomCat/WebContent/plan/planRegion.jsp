@@ -16,19 +16,19 @@
 	<div class="container 75%">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-					<h2><%=region%>
-						
-					</h2>
-					<p>
-						Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
-					</p>
-					<br>
-					<p>
-						http://blog.acronym.co.kr/337 <br>
-						https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-					</p>
-					<br>
-					<p>이 부분까지 위키피디아에서 파싱???</p>
+				<h2><%=region%>
+
+				</h2>
+				<p>
+					Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
+				</p>
+				<br>
+				<p>
+					http://blog.acronym.co.kr/337 <br>
+					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
+				</p>
+				<br>
+				<p>이 부분까지 위키피디아에서 파싱???</p>
 
 
 				</header>
@@ -60,33 +60,35 @@
 				<%=region%>에 있습니다!
 			</p>
 			<br>
-				<form action="./PlanSpotWrite.pl" method="post">
-					<input type="hidden" name="region" value=<%=region %> />
-					<input type="submit" value="내가 작성하기"/>
-				</form>
-				 <br>
-				
+			<form action="./PlanSpotWrite.pl" method="post">
+				<input type="hidden" name="region" value=<%=region%> /> <input
+					type="submit" value="내가 작성하기" />
+			</form>
+			<br>
+
 			<%
 				if (count != 0) {
 			%>
 			<input type="button" value="전체" name="spotFilter"> <input
 				type="button" value="관광지" name="spotFilter"> <input
 				type="button" value="맛집" name="spotFilter"> <input
-				type="button" value="숙소" name="spotFilter">
-				<br><br>
-				<div style="width: 70%; margin: auto;">
+				type="button" value="숙소" name="spotFilter"> <br> <br>
+			<div style="width: 70%; margin: auto;">
 				<form action="#" method="get">
-					<input style="float: left; width: 65%;" type="text" placeholder="찾아보기" name="search"> &nbsp; <input style="float: left; width: 30%" type="submit" value="검색"> 
+					<input style="float: left; width: 65%;" type="text"
+						placeholder="찾아보기" name="search"> &nbsp; <input
+						style="float: left; width: 30%" type="submit" value="검색">
 				</form>
 			</div>
-				
+
 			<%
 				}
 			%>
-			
-			
+
 		</header>
 		<div class="row 150%">
+
+
 
 			<%
 				//planImageList를 뿌려준다.
@@ -96,23 +98,57 @@
 			%>
 			<div class="6u 12u$(xsmall)">
 				<div class="image fit captioned">
-					
+
 					<!-- <img class="img_sld1 w3-animate-fading" src="./images/pic03.jpg" alt="" /> -->
 
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 시작 -->
 					<!-- <script src="./assets/js/plan/image_slide.js"></script> -->
 					<!-- img_sld1 클래스에 대한 이미지 슬라이드 끝 -->
-					<h3><img src=<%=ptb.getFile() %> alt=<%=ptb.getName() %>><br>
-						[ <%=ptb.getType()%> ]<br><%=ptb.getName()%><br>
-						<%=ptb.getInfo() %>
+
+					<h3>
+						<img src=<%=ptb.getFile()%> alt=<%=ptb.getName()%>><br>
+						[
+						<%=ptb.getType()%>
+						]<br><%=ptb.getName()%><br>
+						<%=ptb.getInfo()%>
 						<ul class="actions">
-							<li><a href="./MyPlanBasketAdd.pln?travel_id=<%=ptb.getTravel_id() %>" class="button special icon fa-download">찜</a></li>
+							<li><input type="button" name="zzim"
+								onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜"
+								class="button special icon fa-download" />
+								<%--<a href="./MyPlanBasketAdd.pln?travel_id=<%=ptb.getTravel_id()%>" --%>
+								<!--class="button special icon fa-download">찜</a> --></li>
 						</ul>
 					</h3>
 				</div>
 			</div>
 			<%
 				}
+			%>
+
+<script type="text/javascript" src="./assets/js/jquery.toast.min.js"></script> 
+
+
+			<script type="text/javascript">
+				function zzim_add(travel_id) {
+					
+					$.ajax({
+						type : 'POST',
+						url : './MyPlanBasketAdd.pln',
+						data : {
+							'travel_id' : travel_id
+						},
+						dataType : 'text',
+						async : false,
+						success : function(data) {
+							console.log(data)
+							
+						}
+					});
+					$.toast('<h4>나의 일정에 추가되었습니다.</h4>', { type: 'success', duration: 3000 } );
+				}
+			</script>
+
+			<%
 				}
 			%>
 		</div>
@@ -144,11 +180,15 @@
 				// 1~10
 				for (int i = startPage; i <= endPage; i++) {
 					if (Integer.parseInt(pageNum) != i) {
-		%> <a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[ <%=i%> ]
-		</a> 
+		%>
+		<a href="./PlanRegion.pl?pageNum=<%=i%>&region=<%=region%>">[ <%=i%>
+			]
+		</a>
 		<%
 			} else {
-		%>[ <%=i%> ]<%
+		%>[
+		<%=i%>
+		]<%
 			}
 				}
 				//다음
