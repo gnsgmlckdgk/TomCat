@@ -1,4 +1,5 @@
 
+<%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,7 +9,7 @@
 <!-- <section id="banner"> -->
 
 <%
-	String nation = request.getParameter("nation");
+	String nation = request.getParameter("nation");	// 국가명
 	String id = (String) session.getAttribute("id");
 %>
 <!-- One 지역명 및 설명-->
@@ -29,9 +30,7 @@
 				</p>
 				<br>
 				<p>이 부분까지 위키피디아에서 파싱???</p>
-
-
-				</header>
+				
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
@@ -43,38 +42,47 @@
 		</div>
 	</div>
 </section>
-<!-- Two -->
-<section id="two" class="wrapper style2 special">
+
+<!-- Two 국가의 지역 리스트 -->
+<section id="nation_two" class="wrapper style2 special">
+<%
+	List<PlanCityBean> pcbList = (List)request.getAttribute("pcbList");
+	PlanCityBean pcb = null;
+
+	int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 게시글 갯수
+	String pageNum = (String)request.getAttribute("pageNum");						// 현재 페이지
+
+%>
 	<div class="container">
-		<header class="major">
-			<h2>지역 리스트</h2>
-			<p>
-				<%=nation%>에 있습니다!
-			</p>
-
-		</header>
-		<div class="row 150%">
-			<div class="6u 12u$(xsmall)">
-				<div class="image fit captioned">
-					<h3>
-					
-						민정씨 국가 리스트 참조해서 지역 리스트 만들 부분. 갤러리 형식? 게시판 형식?
-					<br>
-					DB에서 받아오기? 직접 코딩하기?
-					<br><br><br>
-					
-						<a href="./PlanRegion.pl?region=서울" class="button special big">서울</a><br>
-						<a href="./PlanRegion.pl?region=대전" class="button special big">대전</a><br>
-						<a href="./PlanRegion.pl?region=대구" class="button special big">대구</a><br>
-						<a href="./PlanRegion.pl?region=부산" class="button special big">부산</a><br>
-					</h3>
-				</div>
-
-			</div>
+		<h2><%=nation%> 여행지(공사중...)</h2>
+		
+		<div class="city_list_div">
+			<table>
+			<%
+			if(count>0) {
+				for(int i=0; i<pcbList.size(); i++) {
+					pcb = pcbList.get(i);
+					%>
+					<tr onclick="그 지역의 페이지로 이동">
+					<td class="img_td">이미지 오는 자리</td>
+					<td class="txt_td">
+						<p style="font-size: 1.2em; font-weight: bold;"><%=pcb.getName() %></p>
+						<p style="font-size: 0.7em;"><%=pcb.getEn_name() %></p>
+						<p style="font-size: 1.0em;"><%=pcb.getInfo() %></p>
+					</td>
+					</tr>
+					<%
+				}
+			}else {
+				%>
+				<tr>
+				<th colspan="2">정보가 없습니다...</th>
+				</tr>
+				<%
+			}
+			%>
+			</table>
 		</div>
-
-	</div>
-
 	</div>
 </section>
 

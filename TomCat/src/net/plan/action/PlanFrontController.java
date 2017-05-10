@@ -22,7 +22,7 @@ public class PlanFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 
-		if (command.equals("/PlanRegion.pl")) {
+		if (command.equals("/PlanRegion.pl")) {	// 지역 페이지 이동
 			action = new PlanRegionAction();
 			try {
 				forward = action.execute(request, response);
@@ -30,22 +30,18 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
-			
-		}else if(command.equals("/PlanMain.pl")){
+		}else if(command.equals("/PlanMain.pl")){	// 여행일정플래너 메인 페이지 이동
 			forward = new ActionForward();
 			forward.setPath("./plan/planMain.jsp");
 			forward.setRedirect(false);
 
-		} else if (command.equals("/PlanNation.pl")){
+		} else if (command.equals("/PlanNation.pl")){	// 국가 페이지 이동
 			action = new PlanNationAction();
 			try {
 				forward = action.execute(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-
-			
 
 		}else if(command.equals("/PlanSearch.pl")){
 			action = new PlanSearchAction();

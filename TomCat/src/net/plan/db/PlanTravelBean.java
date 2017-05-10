@@ -13,9 +13,6 @@ public class PlanTravelBean {
 	private String address;
 	private String file;
 	
-	
-	
-	
 	public String getFile() {
 		return file;
 	}
