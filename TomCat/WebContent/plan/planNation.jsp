@@ -50,8 +50,11 @@
 	PlanCityBean pcb = null;
 
 	int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 게시글 갯수
-	String pageNum = (String)request.getAttribute("pageNum");						// 현재 페이지
-
+	String pageNum = request.getParameter("pageNum");	// 현재 페이지
+	if(pageNum==null) {
+		pageNum="1";
+	}
+	int currentPage = Integer.parseInt(pageNum);
 %>
 	<div class="container">
 		<h2><%=nation%> 주요 도시</h2>
@@ -80,10 +83,28 @@
 				</tr>
 				<%
 			}
+			// 페이징
+			int pageCount = Integer.parseInt(String.valueOf(request.getAttribute("pageCount")));
+			int pageBlock = Integer.parseInt(String.valueOf(request.getAttribute("pageBlock")));
+			int startPage = Integer.parseInt(String.valueOf(request.getAttribute("startPage")));
+			int endPage = Integer.parseInt(String.valueOf(request.getAttribute("endPage")));
 			%>
 			</table>
-		</div>
-	</div>
+			<div class="page">
+				<%
+				if(currentPage > pageBlock) {
+					%><a href="./PlanNation.pl?nation=<%=nation %>&pageNum=<%=startPage-pageBlock%>">[이전]</a><%	
+				}
+				for(int i=startPage; i<=endPage; i++) {
+					%><a href="./PlanNation.pl?nation=<%=nation %>&pageNum=<%=i%>" <%if(currentPage==i) { %>style="color: #000; background-color: #f0f0f0;"<%}%>><%=i %></a><%
+				}
+				if(pageCount > endPage) {
+					%><a href="./PlanNation.pl?nation=<%=nation %>&pageNum=<%=startPage+pageBlock%>">[다음]</a><%
+				}
+				%>
+			</div>
+		</div>	<!-- city_list_div -->
+	</div>	<!-- container -->
 </section>
 
 <!-- Three -->
@@ -93,7 +114,7 @@
 			<h2><%=nation %>
 				사진
 			</h2>
-			<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
+			<!-- <p>Feugiat sed lorem ipsum magna</p> -->
 		</header>
 
 		<div class="feature-grid">

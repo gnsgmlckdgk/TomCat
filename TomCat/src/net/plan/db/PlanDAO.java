@@ -32,9 +32,14 @@ public class PlanDAO {
 	
 	/* 국가 페이지 */
 	// 국가의 도시 리스트 갯수
-	public int getCityCount(String nation) {
+	public int getCityCount(String str) {
 		int count = 0;
 		String country_code;
+		
+		String nation = str;
+		if("한국".equals(nation)) {
+			nation = "대한민국";
+		}
 		
 		System.out.println("DAO getCityCount()의 nation: " + nation);
 		
@@ -80,10 +85,15 @@ public class PlanDAO {
 	}
 	
 	// 국가페이지의 도시리스트 가져오기
-	public List<PlanCityBean> getCityList(String nation, int startRow, int pageSize) {
+	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
 		
 		String country_code = "";
 		List<PlanCityBean> list = new ArrayList<PlanCityBean>();
+		
+		String nation = str;
+		if("한국".equals(nation)) {
+			nation = "대한민국";
+		}
 		
 		try {
 			con = getConnection();

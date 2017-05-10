@@ -23,6 +23,7 @@ public class PlanNationAction implements Action {
 		//객체 생성
 		PlanDAO pdao = new PlanDAO();
 		
+		/* 게시글 가져오기 */
 		//DB에 등록된 글의 개수.
 		int count = pdao.getCityCount(nation);
 		
@@ -50,12 +51,30 @@ public class PlanNationAction implements Action {
 		
 		// 게시글 출력에 필요한 파라미터
 		request.setAttribute("count", count);
-		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("currentPage", currentPage);
 
+		/* 페이징 */
+		// 필요한 전체 페이지 수
+		int pageCount = count/pageSize + (count%pageSize==0 ? 0:1);
+		// 한페이지에 출력할 페이지 수
+		int pageBlock = 5;
+		// 시작 페이지
+		int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;;
+		// 끝 페이지
+		int endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// 페이징에 필요한 값들 담기
+		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("pageBlock", pageBlock);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		
 		ActionForward forward = new ActionForward();
-		forward.setPath("./plan/planNation.jsp");
+		forward.setPath("./plan/planNation.jsp?pageNum="+pageNum);
 		forward.setRedirect(false);
 
 		return forward;
