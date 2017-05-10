@@ -11,20 +11,17 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/myplanModify.css" />
-
 <body>
 	<%
-		List basketList=(List)request.getAttribute("basketList");
-		List goodsList=(List)request.getAttribute("goodsList");
-		String id = (String) session.getAttribute("id");
-		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
-		
+	List basketList=(List)request.getAttribute("basketList");
+	List goodsList=(List)request.getAttribute("goodsList");
+	String id = (String) session.getAttribute("id");
+	int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 	%>
-
 <h1>일정편집</h1>
 <form action="./MyPlanModifyAction.pln" method="post">
-<input type="hidden">
-<table border="1" class="tg">
+<input type="hidden" >
+<table border="1" class="tg" >
 
 	
 	<%if(plan_nr==1){%>일정A<%} %>
@@ -123,7 +120,8 @@
 	<option value="shoes" <%if(tb.getName().equals("부산시민공원")){%>selected<%}%>>부산시민공원</option>
 	</select></td>
 	</tr>
-	
+	<tr><td colspan="7"><a href="./MyPlanModifyAction.pln?id=<%=mpbb.getId()%>">수정</a>
+	/삭제</tr>
  	<%
 	}
 	}
@@ -131,8 +129,7 @@
   	%>
 	
 
-	<tr><td colspan="7"><input type="submit" value="일정수정">
-	<input type="reset" value="다시등록"></td></tr>
+	
 </table>
 </form>
 </body>
