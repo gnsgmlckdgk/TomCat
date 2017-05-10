@@ -52,18 +52,19 @@
 <%
 List basketList=(List)request.getAttribute("basketList");
 List goodsList=(List)request.getAttribute("goodsList");
+int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 %>
 <h1>여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1>
 
 
 	<div class="container">
 		<div class="myplan-list">
-			<h3>나의 여행 일정 목록 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=?">수정</a>]</h3>
+			<h3>나의 여행 일정 목록 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">수정</a>]</h3>
 			
 				<ul class="actions small">
-					<li><a href="#" class="button special small">일정A</a></li>
-					<li><a href="#" class="button small">일정B</a></li>
-					<li><a href="#" class="button alt small">일정C</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small">일정A</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=2" class="button small">일정B</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a></li>
 				</ul>
 		<div>
 		    	<table border="1">
@@ -74,6 +75,7 @@ List goodsList=(List)request.getAttribute("goodsList");
 			 	  for(int i=0;i<basketList.size();i++){
 					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 					TravelBean tb=(TravelBean)goodsList.get(i);
+					if(mpbb.getPlan_nr()== plan_nr){
 				%>
 					<tr>
 						<td><%=mpbb.getPlan_nr() %></td>
@@ -81,6 +83,7 @@ List goodsList=(List)request.getAttribute("goodsList");
 						<td><%=tb.getName()%></td>
 					</tr>	   
 				<%
+					}
 		 		 }
 		  	 	%></table>
 			</div>
