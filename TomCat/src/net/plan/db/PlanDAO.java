@@ -32,9 +32,11 @@ public class PlanDAO {
 	
 	/* 국가 페이지 */
 	// 국가의 도시 리스트 갯수
-	public int getCityCount(String nation) {	
+	public int getCityCount(String nation) {
 		int count = 0;
 		String country_code;
+		
+		System.out.println("DAO getCityCount()의 nation: " + nation);
 		
 		try {
 			con = getConnection();

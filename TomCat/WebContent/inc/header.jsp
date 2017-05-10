@@ -31,7 +31,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=4"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=5"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
@@ -43,7 +43,7 @@
 			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
-			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
+			<script type="text/javascript" src="./assets/js/plan/planMain.js?ver=30"></script>
 			
 	</head>
 	

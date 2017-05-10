@@ -63,8 +63,8 @@
 				for(int i=0; i<pcbList.size(); i++) {
 					pcb = pcbList.get(i);
 					%>
-					<tr onclick="그 지역의 페이지로 이동">
-					<td class="img_td">이미지 오는 자리</td>
+					<tr>
+					<td class="img_td" onload="setNationImg();"></td>
 					<td class="txt_td">
 						<p style="font-size: 1.2em; font-weight: bold;"><%=pcb.getName() %></p>
 						<p style="font-size: 0.7em;"><%=pcb.getEn_name() %></p>
@@ -84,6 +84,12 @@
 			</table>
 		</div>
 	</div>
+	<script type="text/javascript">
+		// img_td의 배경이미지 설정
+		function setNationImg() {
+			alert("aa");
+		}
+	</script>
 </section>
 
 <!-- Three -->
