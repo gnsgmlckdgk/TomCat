@@ -51,7 +51,7 @@ public class MemberManager implements Action {
 		int currentPage = Integer.parseInt(pageNum);
 		
 		// 한 페이지에 출력할 게시글의 갯수 설정
-		int pageSize = 2;
+		int pageSize = 5;
 		
 		// 시작 행 구하기
 		int startRow = (currentPage - 1) * pageSize + 1;

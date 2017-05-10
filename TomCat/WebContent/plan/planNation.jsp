@@ -54,7 +54,7 @@
 
 %>
 	<div class="container">
-		<h2><%=nation%> 여행지(공사중...)</h2>
+		<h2><%=nation%> 주요 도시</h2>
 		
 		<div class="city_list_div">
 			<table>
@@ -64,11 +64,11 @@
 					pcb = pcbList.get(i);
 					%>
 					<tr>
-					<td class="img_td" onload="setNationImg();"></td>
+					<td class="img_td" style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
 					<td class="txt_td">
-						<p style="font-size: 1.2em; font-weight: bold;"><%=pcb.getName() %></p>
+						<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName() %></p>
 						<p style="font-size: 0.7em;"><%=pcb.getEn_name() %></p>
-						<p style="font-size: 1.0em;"><%=pcb.getInfo() %></p>
+						<p style="font-size: 1.0em; color: #6B66FF;"><%=pcb.getInfo() %></p>
 					</td>
 					</tr>
 					<%
@@ -84,12 +84,6 @@
 			</table>
 		</div>
 	</div>
-	<script type="text/javascript">
-		// img_td의 배경이미지 설정
-		function setNationImg() {
-			alert("aa");
-		}
-	</script>
 </section>
 
 <!-- Three -->
