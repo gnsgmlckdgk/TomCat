@@ -71,7 +71,7 @@ $("#city_code").chained("#country_code");
 장소소개 : <input type="text" name="info"><br>
 
 lat : <input type="text" name="latitude"><br>
-lng : <input type="text" name="longitude"><br> 
+lng : <input type="text" name="longitude"> <br>
 lat,lng 값은 <a href="https://www.google.co.kr/maps" target="blank">구글맵</a>에서 특정 장소 검색후 <br>
 marker 가 뜨면 마우스 우클릭하여 "이곳이 궁금한가요?" 클릭하면 lat, lng 정보 확인가능<br>
 화면 좌측에 해당장소의 주소 복사해서 아래 주소칸에 넣으세요<br>
