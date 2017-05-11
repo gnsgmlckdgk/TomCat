@@ -70,6 +70,7 @@
 		<servlet-name>BoardFrontController</servlet-name>
 		<url-pattern>*.bo</url-pattern>
 	</servlet-mapping>
+	<!-- 인생샷그램 댓글~-->
 
 	<servlet>
 		<servlet-name>ReplyFrontController</servlet-name>
@@ -80,6 +81,7 @@
 		<url-pattern>*.re</url-pattern>
 	</servlet-mapping>
 
+	<!-- 인생샷그램 좋아용-->
 
 	<servlet>
 		<servlet-name>LikeFrontController</servlet-name>

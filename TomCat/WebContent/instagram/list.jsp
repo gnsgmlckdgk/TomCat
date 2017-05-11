@@ -77,11 +77,13 @@ if(id!=null){
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
 			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300></a>
 			</td></tr>
+		<%if(id!=null){	//아이디가 not null일때만 좋아요/좋아요취소버튼 출력%>			
 			<tr>
 			<td colspan="4">
 			
 <!-- 			====================좋아요================= -->
 <%
+
 if(likecount%2==0){
 %>
 			<form action="./LikeaddAction.lk" method="post" name="fr" id="like">
@@ -110,7 +112,8 @@ if(likecount%2==0){
 			</td>
 			</tr>
 		<%
-			}
+			}//좋아요 취소 종료
+			}//아이디가 not null이면
 			%>
 			
 	</table>
