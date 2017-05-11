@@ -1,4 +1,4 @@
-/*국가리스트 출력*/
+/*국가리스트 출력
 function CountryList(){ 
 	country = new Array("아시아", "유럽", "남태평양", "북미", "중남미");
 	var i=0;
@@ -17,7 +17,7 @@ function CountryList(){
 			});
 		});
 	});
-}
+}*/
 
 /*검색 폼제어*/
 function checkSearch(){
