@@ -12,7 +12,7 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/map.css" />
-<<<<<<< HEAD
+
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -24,10 +24,10 @@ $(document).ready(function(){
 });
 </script>
 </head>
-=======
+
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat.git
+
 <body>
 	<%
 		String auth = (String)request.getAttribute("auth");
@@ -126,7 +126,7 @@ $(document).ready(function(){
 		
 
 		<div id="map"></div>
-	</div>
+	
 
 	<script>
       var map;
