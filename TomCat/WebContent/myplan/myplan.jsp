@@ -12,7 +12,17 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/map.css" />
-
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#pln_hide1').click(function(){
+		$('#tb1').toggle('fast',function(){
+		});
+	});
+});
+</script>
+</head>
 <body>
 	<%
 		String id = (String) request.getParameter("id");
@@ -34,40 +44,41 @@
 	<div class="container">
 		<div class="myplan-list">
 
-			<h3><a href="./MyPlan.pln?plan_nr=100">나의 여행 일정 목록</a> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">수정</a>]</h3>
+			<h3><a href="./MyPlan.pln?plan_nr=100">전체 일정 보기</a> |
+			<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">일정수정</a></h3>
+			<h5><a href="#">출발일</a>&nbsp;&nbsp;<img src="myplan/pn_cal_btn.png"></h5>
 			
-				<ul class="actions small">
-					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small">일정A</a></li>
-					<li><a href="./MyPlan.pln?plan_nr=2" class="button small">일정B</a></li>
-					<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a></li>
-				</ul>
-		<div>
-		    	<table border="1">
-		 			<tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
-		 			
-			
-			  	<%
-			 	  for(int i=0;i<basketList.size();i++){
-					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
-					TravelBean tb=(TravelBean)goodsList.get(i);
-						if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
-						%>
-						
-						<tr>
-						<td><%=mpbb.getPlan_nr() %></td>
-						<td><%=mpbb.getItem_nr() %></td>
-						<td><%=tb.getName()%></td>
-
-					</tr>	   
-						
-									
-				<%
-				
-		 		 }
-		  	 	%></table>
-
-			</div>
-		</div>
+					<ul class="actions small">
+					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small" id="pln_hide1">일정A</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=2" class="button small" id="pln_hide2">일정B</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small" id="pln_hide3">일정C</a></li>
+					</ul>
+				<table border="1" id="tb1">
+					<tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>	   				
+		  	 	</table>
+		  	 
+				<div>
+		    	<table border="1" id="tb2">
+			 		<tr><td>plan_nr</td><td>item_nr</td><td>name</td><td>추가</td></tr>
+				  	<%
+				 	  for(int i=0;i<basketList.size();i++){
+						MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
+						TravelBean tb=(TravelBean)goodsList.get(i);
+							if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
+							%>
+							
+							<tr>
+							<td><%=mpbb.getPlan_nr() %></td>
+							<td><%=mpbb.getItem_nr() %></td>
+							<td><%=tb.getName()%></td>
+							<td><a href="./MyPlan.pln?plan_nr=<%=plan_nr%>" ><img src="myplan/spot_to_inspot_a.png"></a></td>
+							</tr>	   
+					<%
+			 		 }
+			  	 	%>
+		  	 	</table>
+				</div>
+				</div>
 		<div id="map"></div>
 	</div>
 
