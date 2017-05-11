@@ -11,8 +11,10 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/map/map.css" />
 
 <body>
+
 
 	<style>
 .container {
@@ -70,42 +72,39 @@
 
 	<div class="container">
 		<div class="myplan-list">
-			<h3>
-				나의 여행 일정 목록 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a
-					href="./MyPlanModify.pln?plan_nr=<%=plan_nr%>">수정</a>]
-			</h3>
 
-			<ul class="actions small">
-				<li><a href="./MyPlan.pln?plan_nr=1"
-					class="button special small">일정A</a></li>
-				<li><a href="./MyPlan.pln?plan_nr=2" class="button small">일정B</a></li>
-				<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a></li>
-			</ul>
-			<div>
-				<table border="1">
-					<tr>
-						<td>plan_nr</td>
-						<td>item_nr</td>
-						<td>name</td>
-					</tr>
-
-
-					<%
-						for (int i = 0; i < basketList.size(); i++) {
-							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-							TravelBean tb = (TravelBean) goodsList.get(i);
-							if (mpbb.getPlan_nr() == plan_nr) {
-					%>
-					<tr>
-						<td><%=mpbb.getPlan_nr()%></td>
-						<td><%=mpbb.getItem_nr()%></td>
+			<h3><a href="./MyPlan.pln?plan_nr=100">나의 여행 일정 목록</a> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">수정</a>]</h3>
+			
+				<ul class="actions small">
+					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small">일정A</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=2" class="button small">일정B</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a></li>
+				</ul>
+		<div>
+		    	<table border="1">
+		 			<tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
+		 			
+			
+			  	<%
+			 	  for(int i=0;i<basketList.size();i++){
+					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
+					TravelBean tb=(TravelBean)goodsList.get(i);
+						if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
+						%>
+						
+						<tr>
+						<td><%=mpbb.getPlan_nr() %></td>
+						<td><%=mpbb.getItem_nr() %></td>
 						<td><%=tb.getName()%></td>
-					</tr>
-					<%
-						}
-						}
-					%>
-				</table>
+
+					</tr>	   
+						
+									
+				<%
+				
+		 		 }
+		  	 	%></table>
+
 			</div>
 		</div>
 		<div id="map"></div>
@@ -133,64 +132,69 @@
        var largeInfowindow = new google.maps.InfoWindow();
        var highlightedIcon = makeMarkerIcon('FFFF24');
      
-              <%String MarkerColor;
-			String TitlePlan;
 
-			for (int i = 0; i < basketList.size(); i++) {
-				MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-				TravelBean tb = (TravelBean) goodsList.get(i);
+              <%
+		String MarkerColor;
+	 	String TitlePlan;
+       
+	 	for(int i=0;i<basketList.size();i++){
+	 	 	MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
+	 	 	TravelBean tb=(TravelBean)goodsList.get(i);
+		 	 	if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
+	 		
+ 	 		
+	 	 	switch (mpbb.getPlan_nr()) {
+	 	 	case 1 : MarkerColor="6799FF"; //light blue
+	 	 			 TitlePlan="A"; 
+	 	 			 break;	
+	 	 	case 2 : MarkerColor="F361DC"; //pink
+	 	 			 TitlePlan="B"; 
+	 	 			 break;	
+	 	 	case 3 : MarkerColor="8041D9"; //purple
+	 	 			 TitlePlan="C"; 
+	 	 			 break;	
+	 	 	case 4 : MarkerColor="47C83E"; //green
+	 	 			 TitlePlan="D"; 
+	 	 			 break;	
+			default: MarkerColor="F15F5F"; //red
+					 TitlePlan="E"; 
+					 break;	
+	 	 	}
+	 	 	
+	 	   %>
 
-				switch (mpbb.getPlan_nr()) {
-					case 1 :
-						MarkerColor = "6799FF"; //light blue
-						TitlePlan = "A";
-						break;
-					case 2 :
-						MarkerColor = "F361DC"; //pink
-						TitlePlan = "B";
-						break;
-					case 3 :
-						MarkerColor = "8041D9"; //purple
-						TitlePlan = "C";
-						break;
-					case 4 :
-						MarkerColor = "47C83E"; //green
-						TitlePlan = "D";
-						break;
-					default :
-						MarkerColor = "F15F5F"; //red
-						TitlePlan = "E";
-						break;
-				}%>
 	        var defaultIcon = makeMarkerIcon('<%=MarkerColor%>');
 	    
 
          	var lat = <%=tb.getLatitude()%>;
 	    	var lng = <%=tb.getLongitude()%>;
 	    	var position = new google.maps.LatLng(lat,lng); 
-	    	var title = '일정<%=TitlePlan%>-'+'<%=i + 1%>'+'번째 방문지: '+'<%=tb.getName()%>';
-			// Create a marker per location, and put into markers array.
-			var marker = new google.maps.Marker({
-				position : position,
-				title : title,
-				animation : google.maps.Animation.DROP,
-				icon : defaultIcon,
-				id :
-	<%=i%>
-		});
 
-			// Push the marker to our array of markers.
-			markers.push(marker);
-			// Create an onclick event to open the large infowindow at each marker.
-			marker.addListener('click', function() {
-				populateInfoWindow(this, largeInfowindow);
-			});
-	<%}%>
-		showListings();
+	    	var title = '일정<%=TitlePlan%>-'+'<%=i+1%>'+'번째 방문지: '+'<%=tb.getName()%>';
+         // Create a marker per location, and put into markers array.
+          var marker = new google.maps.Marker({
+        	position: position,
+            title: title,
+            animation: google.maps.Animation.DROP,
+            icon: defaultIcon,
+            id: <%=i%>
+          });
+         
+          // Push the marker to our array of markers.
+          markers.push(marker);
+          // Create an onclick event to open the large infowindow at each marker.
+          marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow);
+          });
+      	<%
+	 	 
+	 	}%> 
+       showListings();
+      
+        }//function initMap() 
+         
+	// This function will loop through the markers array and display them all.
 
-		}//function initMap() 
-
-		// This function will loop through the markers array and display them all.
 		function showListings() {
 			var bounds = new google.maps.LatLngBounds();
 			for (var i = 0; i < markers.length; i++) {
