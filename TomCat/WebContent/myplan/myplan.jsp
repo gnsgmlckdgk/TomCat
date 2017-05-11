@@ -12,7 +12,6 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/map.css" />
-
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -24,10 +23,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
-
-
 <body>
 	<%
 		String auth = (String)request.getAttribute("auth");
@@ -42,9 +38,8 @@ $(document).ready(function(){
 		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1> --%>
 
 
-	<div class="container">
+		<div class="container">
 		<div class="myplan-list">
-
 			<h3><a href="./MyPlan.pln?plan_nr=100">전체 일정 보기</a> |
 			<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">일정수정</a></h3>
 			<h5><a href="#">출발일</a>&nbsp;&nbsp;<img src="myplan/pn_cal_btn.png"></h5>
@@ -80,12 +75,10 @@ $(document).ready(function(){
 			  	 	%>
 		  	 	</table>
 				</div>
-				</div>
-
 			
-		<div>
-		
-		    	<table border="1"> <tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
+
+
+		    <%-- 	<table border="1"> <tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
 		    	
 			  	<%
 			 	  for(int i=0;i<basketList.size();i++){
@@ -105,7 +98,7 @@ $(document).ready(function(){
 				<%
 				
 		 		 }
-		  	 	%></table>
+		  	 	%></table>  --%>
 		  	 	
 		  	 	<%if(basketList.size()==0){
 		  	 	 %>아직 일정을 추가하지 않으셨군요! <br>
@@ -120,13 +113,11 @@ $(document).ready(function(){
 				
 		 		 }
 		  	 	%>
-		  	 	
+		  	 </div>	
+		  	 <div id="map"></div>
 			</div>
-		</div>
-		
-
-		<div id="map"></div>
 	
+			
 
 	<script>
       var map;
