@@ -58,7 +58,7 @@
 			for (int i = 0; i < pcbList.size(); i++) {
 				pcb = pcbList.get(i);
 	%>
-	<tr>
+	<tr onclick="location.href='./PlanRegion.pl?region=<%=pcb.getName()%>';">
 		<td class="img_td"
 			style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
