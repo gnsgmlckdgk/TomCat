@@ -1,4 +1,4 @@
-/*국가리스트 출력*/
+/*국가리스트 출력
 function CountryList(){ 
 	country = new Array("아시아", "유럽", "남태평양", "북미", "중남미");
 	var i=0;
@@ -8,7 +8,8 @@ function CountryList(){
 				for(i=1;i<=5;i++){
 				if(item.continent==i){
 					$('.'+country[i-1]).append( function(){
-						var con = '<div><a href=./PlanSearch.pl?check=1&search='+'"'+item.country+'"'+'>'+item.country+'</a><span>'+item.EnName+'</span></div>';
+						var con = '<div><a href=./PlanSearch.pl?check=1&search='+item.country+'>'+item.country+'</a><span>'+item.EnName+'</span></div>';
+
 						return con;
 					}); 	
 				}//if
@@ -16,7 +17,7 @@ function CountryList(){
 			});
 		});
 	});
-}
+}*/
 
 /*검색 폼제어*/
 function checkSearch(){
@@ -102,14 +103,14 @@ function popupToggle_oceania() {
 	});	
 }
 
-/* 대륙지도 팝업(중남미) */
+/* 대륙지도 팝업(북미) */
 function popupToggle_north() {
 	
 	$(document).ready(function(){	
 		// 팝업 띄움
 		if($('#countryMap_back').css('display')=="none") {
-			$('#map4').fadeIn(200, function(){	// 페이드 인 애니메이션
-				$('#map4').css('display', 'block');
+			$('#map5').fadeIn(200, function(){	// 페이드 인 애니메이션
+				$('#map5').css('display', 'block');
 			});
 			$('#countryMap_back').css('display', 'block');
 			
@@ -117,14 +118,14 @@ function popupToggle_north() {
 	});	
 }
 
-/* 대륙지도 팝업(북미) */
+/* 대륙지도 팝업(남미) */
 function popupToggle_south() {
 	
 	$(document).ready(function(){	
 		// 팝업 띄움
 		if($('#countryMap_back').css('display')=="none") {
-			$('#map5').fadeIn(200, function(){	// 페이드 인 애니메이션
-				$('#map5').css('display', 'block');
+			$('#map4').fadeIn(200, function(){	// 페이드 인 애니메이션
+				$('#map4').css('display', 'block');
 			});
 			$('#countryMap_back').css('display', 'block');
 			

@@ -10,6 +10,9 @@
 
 <!-- 추가한 스크립트 -->
 <script type="text/javascript" src="./assets/js/member/join.js"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+<link rel="stylesheet" href="./assets/css/instagram/replyupdate.css"/>	
+		
+		<section id="wrapper">
 
 	<%
 	//out.println("replyupdateform.jsp");
@@ -74,7 +77,7 @@
 	
 		</table>
 	</form>
-		
+		</section>
 
 
 	<!--리플 -->

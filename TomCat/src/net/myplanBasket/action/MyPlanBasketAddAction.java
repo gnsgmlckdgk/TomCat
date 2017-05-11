@@ -35,6 +35,8 @@ public class MyPlanBasketAddAction implements Action {
 
 		basketbean.setId(id);
 		basketbean.setTravel_id(travel_id);
+		
+		
 
 		if (request.getParameter("plan_nr") != null) {
 			basketbean.setPlan_nr(Integer.parseInt(request.getParameter("plan_nr")));

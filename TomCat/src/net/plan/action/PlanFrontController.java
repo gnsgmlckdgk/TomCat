@@ -22,7 +22,7 @@ public class PlanFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 
-		if (command.equals("/PlanRegion.pl")) {
+		if (command.equals("/PlanRegion.pl")) {	// 지역 페이지 이동
 			action = new PlanRegionAction();
 			try {
 				forward = action.execute(request, response);
@@ -30,22 +30,19 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
-			
-		}else if(command.equals("/PlanMain.pl")){
-			forward = new ActionForward();
-			forward.setPath("./plan/planMain.jsp");
-			forward.setRedirect(false);
-
-		} else if (command.equals("/PlanNation.pl")){
-			action = new PlanNationAction();
-			try {
+		}else if(command.equals("/PlanMain.pl")){	// 여행일정플래너 메인 페이지 이동
+			action = new PlanMainAction();
+			try{
 				forward = action.execute(request, response);
-			}catch(Exception e) {
+			}catch(Exception e){
 				e.printStackTrace();
-			}
+			}	
 
+		} else if (command.equals("/PlanNation.pl")){	// 국가 페이지 이동
 			
+			forward = new ActionForward();
+			forward.setPath("./plan/planNation.jsp");
+			forward.setRedirect(false);
 
 		}else if(command.equals("/PlanSearch.pl")){
 			action = new PlanSearchAction();
@@ -66,6 +63,35 @@ public class PlanFrontController extends HttpServlet {
 		
 		else if(command.equals("/PlanSpotWriteAction.pl")){
 			action = new PlanSpotWriteAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		
+		}
+		
+		else if(command.equals("/countryAdd.pl")){
+			action = new CountryListAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/CounAdd.pl")){
+			action = new CountryAddAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		
+		else if(command.equals("/CityAdd.pl")){
+			action = new CityAddAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){

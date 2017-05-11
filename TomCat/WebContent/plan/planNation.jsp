@@ -1,4 +1,5 @@
 
+<%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,7 +9,7 @@
 <!-- <section id="banner"> -->
 
 <%
-	String nation = request.getParameter("nation");
+	String nation = request.getParameter("nation");	// 국가명
 	String id = (String) session.getAttribute("id");
 %>
 <!-- One 지역명 및 설명-->
@@ -29,9 +30,7 @@
 				</p>
 				<br>
 				<p>이 부분까지 위키피디아에서 파싱???</p>
-
-
-				</header>
+				
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
@@ -43,40 +42,63 @@
 		</div>
 	</div>
 </section>
-<!-- Two -->
-<section id="two" class="wrapper style2 special">
+
+
+
+
+
+<!-- Two 국가의 지역 리스트 -->
+<section id="nation_two" class="wrapper style2 special">
+
+<!-- Two 섹션 스크립트 -->
+<script type="text/javascript">
+// 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
+$(window).load(function() {
+	$.ajax({
+		type: 'post',
+		url: './plan/planNationCityList.jsp',
+		data : {nation:'<%=nation%>', pageNum:'1'},
+		success: function(data) {
+			$('.city_list_div').append(data);
+		},
+		error: function(xhr, status, error) {
+	        alert(error);
+	    }   
+	});
+});
+
+// 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
+function cityListChange(pageNum) {
+	
+		var search = $('#search').val();
+	
+		$.ajax({
+			type: 'post',
+			url: './plan/planNationCityList.jsp',
+			data : {nation:'<%=nation%>', pageNum: pageNum, search: search},
+			success: function(data) {
+				$('.city_list_div').empty();
+				$('.city_list_div').append(data);
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+		    }   
+		});
+}
+</script>
+
 	<div class="container">
-		<header class="major">
-			<h2>지역 리스트</h2>
-			<p>
-				<%=nation%>에 있습니다!
-			</p>
-
-		</header>
-		<div class="row 150%">
-			<div class="6u 12u$(xsmall)">
-				<div class="image fit captioned">
-					<h3>
-					
-						민정씨 국가 리스트 참조해서 지역 리스트 만들 부분. 갤러리 형식? 게시판 형식?
-					<br>
-					DB에서 받아오기? 직접 코딩하기?
-					<br><br><br>
-					
-						<a href="./PlanRegion.pl?region=서울" class="button special big">서울</a><br>
-						<a href="./PlanRegion.pl?region=대전" class="button special big">대전</a><br>
-						<a href="./PlanRegion.pl?region=대구" class="button special big">대구</a><br>
-						<a href="./PlanRegion.pl?region=부산" class="button special big">부산</a><br>
-					</h3>
-				</div>
-
-			</div>
-		</div>
-
-	</div>
-
-	</div>
+		<h2><%=nation%> 주요 도시</h2>
+		<hr>
+		<div class="city_list_div">	<!-- 도시 리스트 -->
+			<!-- 도시리스트 테이블 오는 자리 -->
+		</div>	<!-- city_list_div -->
+	</div>	<!-- container -->
 </section>
+
+
+
+
 
 <!-- Three -->
 <section id="three" class="wrapper style1">
@@ -85,7 +107,7 @@
 			<h2><%=nation %>
 				사진
 			</h2>
-			<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
+			<!-- <p>Feugiat sed lorem ipsum magna</p> -->
 		</header>
 
 		<div class="feature-grid">
@@ -113,7 +135,7 @@
 
 
 	</div>
-	</div>
+	
 </section>
 
 <!-- Four -->

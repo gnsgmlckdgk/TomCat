@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 public class MyPlanFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//가상주소 가져오기
@@ -20,8 +21,8 @@ public class MyPlanFrontController extends HttpServlet{
 		//  /BasketAdd.ba
 		String command=requestURI.substring(contextPath.length());
 		//주소비교하기
-		Action action=null;
-		ActionForward forward=null;
+		Action action = null;
+		ActionForward forward = null;
 		if(command.equals("/MyPlan.pln")){
 			//  BasketAddAction
 			action=new MyPlanBasketListAction();
@@ -54,6 +55,18 @@ public class MyPlanFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/PayAction.pln")){
+			//  AdminGoodsModifyForm
+			action=new Pay();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/Pay.pln")){
+			forward = new ActionForward();
+			forward.setPath("./myplan/payPlanC.jsp");
+			forward.setRedirect(false);
 		}
 		
 		//이동

@@ -22,6 +22,7 @@ function func1(re_num){
 	$(document).ready(function() {	
 
 		var x=document.getElementById('replytextarea');
+		
 		x.style.display='display';		
 			$('.replyreply'+re_num).toggle('slow',function(){
 				
@@ -30,52 +31,69 @@ function func1(re_num){
 	});
 	
 	}
+	
+function func2(){
+	alert("정말 삭제하시겠습니까?");		
+}
 </script>
 
-</head>
-<body>
-
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
+<link rel="stylesheet" href="./assets/css/instagram/content.css"/>	
 	<%	
+	
+	String id = (String)session.getAttribute("id");			// 아이디
+	String nick = (String)session.getAttribute("nick");	// 닉네임
+	
+	
+	
 		boardBean bb = (boardBean) request.getAttribute("bb");
 		ReplyBean rb=new ReplyBean();
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 	%>
-	<h1>글내용 보기</h1>
-	<table border="1">
+	<section id="wrapper">
+	
+	<h1><%=nick %>님의 멋진 인생샷♡</h1>
+	<table class="table1">
 		<tr>
 			<td colspan="2"><%=bb.getSubject()%></td>
-			<td><%=bb.getNick()%></td>
+			<td><%=nick%></td>
 			<td><%=bb.getDate()%></td>
 		</tr>
 		<tr>
 			<td colspan="4"><a href="./upload/<%=bb.getImage1()%>"><%=bb.getImage1()%></a></td>
 		</tr>
 		<tr>
-			<td colspan="4"><img src="./upload/<%=bb.getImage1()%>"
-				width=400 height=400></td>
+			<td colspan="4">
+			
+			<img src="./upload/<%=bb.getImage1()%>"
+				width=400 height=400 onerror="this.src='./instagram/noimage.png'"></td>
 		</tr>
 		<tr>
 			<td colspan="4"><%=bb.getContent()%></td>
 		</tr>
 	</table>
+	<%if(bb.getNick().equals(nick)){%>
+	
 	<input type="button" value="글수정"
 		onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
-	<!-- http://localhost:8080/Study.jsp/board/////////updateForm.jsp?num=21&pageNum=1 -->
 
-	<input type="button" value="글삭제"
-		onclick="location.href='./BoardDelete.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
+					<input type="hidden" value="<%=num%>" name="num"> 															
+					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
+					<input type="submit" value="글삭제">
+				</form>
+
+		<%} %>
 
 	<input type="button" value="글목록 "
 		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">
 
 
-
-
-
-
 	<!--리플 -->	
 	<%
+	
 		ReplyDAO rdao = new ReplyDAO();	
 		int recount=((Integer)request.getAttribute("replycount")).intValue();
 		
@@ -90,7 +108,7 @@ function func1(re_num){
 		if(recount!=0){
 
 	%>
-	<table border="1">
+	<table class="table2">
 		<tr>
 			<td colspan="2">닉네임</td>
 			<td colspan="2">답 글</td>
@@ -104,7 +122,7 @@ function func1(re_num){
 		<%
 		int wid=0;
 		if(rb.getRe_lev()>0){
-			wid=20*rb.getRe_lev();
+			wid=40*rb.getRe_lev();
 			%>
 			<img src="./instagram/level.gif" width="<%=wid%>" height="15">
 			<img src="./instagram/re.gif">
@@ -113,12 +131,18 @@ function func1(re_num){
 		<%=rb.getNick() %>		
 		</td>
 
-		<td colspan="2"><%=rb.getContent() %>
-		
-<input type="button" value="댓글수정" onclick="location.href='./ReplyUpdate.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
-<input type="button" value="댓글삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
-<%int re_num=rb.getRe_num(); %>
-<input type="button" value="대댓글" onclick="func1(<%=re_num%>)">
+	<td colspan="2"><%=rb.getContent() %>
+	
+<%if(rb.getNick().equals(nick)){%>
+<input type="text" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
+<%int re_num=rb.getRe_num(); %>	
+<input type="text" id="txt" value="수정" onclick="location.href='./ReplyUpdate.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
+<%}
+
+
+if(id!=null){%>
+<input type="text" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
+<%} %>
 
 		</td>
 		
@@ -126,9 +150,9 @@ function func1(re_num){
 		</tr>	
 		
 <!-- 		대댓글창 -->
-		<tr id="replytextarea" class="replyreply<%=re_num %>"><td colspan="5">
+		<tr id="replytextarea" class="replyreply<%=rb.getRe_num() %>"><td colspan="5">
 				<form action="ReplyReplyWriteAction.re" method="post" name="fr">
-					<input type="hidden" value="<%=rb.getNick() %>" name="nick"> 
+					<input type="hidden" value="<%=nick %>" name="nick"> 
 					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
 					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">					
 					<input type="hidden" value="<%=rb.getRe_lev() %>" name="re_lev">
@@ -136,8 +160,8 @@ function func1(re_num){
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
-					댓글 <textarea rows="2" cols="100" name="content"></textarea>
-					<input type="submit" value="입력"><%=rb.getRe_ref() %>
+					<textarea rows="2" cols="100" name="content"></textarea>
+					<input type="submit" id="submit" value="입력"><%=rb.getRe_ref() %>
 				</form>		
 				
 		
@@ -146,20 +170,21 @@ function func1(re_num){
 		
 		
 <!-- 		댓글창 -->
+
 		<tr id="replytextarea2">
 			<td colspan="6">
 
 				<form action="./ReplyWriteAction.re" method="post" name="fr">
-					<input type="hidden" value="<%=rb.getNick() %>" name="nick"> 
-					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
+					<input type="hidden" value="<%=nick%>" name="nick"> 
+					<input type="hidden" value="<%=num%>" name="num"> 
 					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">								
 					<input type="hidden" value="<%=rb.getRe_lev() %>" name="re_lev">
 					<input type="hidden" value="<%=rb.getRe_seq() %>" name="re_seq">
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
-					댓글
+					
 					<textarea rows="2" cols="80" name="content"></textarea>
-					<input type="submit" value="입력">
+					<input type="submit" id="submit" value="입력">
 				</form>
 
 			</td>
@@ -169,9 +194,7 @@ function func1(re_num){
 	</table>
 
 <!-- 리플 페이징 -->
-
-		
-		<% 
+		<% 		
 	//페이지 출력
 	if(count!=0){
 		//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
@@ -192,8 +215,7 @@ function func1(re_num){
 		}
 		//1...10
 		for(int i=startPage;i<=endPage;i++){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=i%>">[<%=i%>]
-	</a>
+			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=i%>">[<%=i%>]</a>
 	<%
 		}
 		//다음
@@ -205,6 +227,7 @@ function func1(re_num){
 	<%
 				}		
 			}
+		
 		}
 		if(recount==0){
 			%>
@@ -218,13 +241,17 @@ function func1(re_num){
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
-					댓글
+					
 					<textarea rows="2" cols="80" name="content"></textarea>
 					<input type="submit" value="입력">
 				</form>
 				<%}%>
 
 	<!--리플 -->
+</section>
 
 </body>
 </html>
+		
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />

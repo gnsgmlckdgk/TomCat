@@ -23,24 +23,29 @@ document.fr.submit();
 }
 
 </script>
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
+<link rel="stylesheet" href="./assets/css/instagram/writeForm.css"/>	
 
-</head>
-<body>
+
+<section class="wrapper">
   
-	
-	<h1>글쓰기</h1>
+	<%
+	String nick = (String)session.getAttribute("nick");	// 닉네임
+	%>
+	<div id="form">
 		<form action="./BoardWriteAction.bo" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
 <!-- 		닉네임 세션값 생성해서 readonly로 설정하기 -->
-		글쓴이:<input type="text" name="nick"><br>		
+<br> 
+		글쓴이:<input type="text" name="nick" value=<%=nick %> readonly><br>		
 		제목:<input type="text" name="subject"><br>
 		내용:<textarea rows="10" cols="20" name="content"></textarea><br>
-		파일첨부:<input type="file" name="image1"><br>
-		
-		<input type="submit" value="글쓰기"><br> 
+		<input type="file" name="image1"><br><br>	
+		<input id="submit" type="submit" value="글쓰기"><br> 
 	</form>
+	</div>
 
-
+</section>
 </body>
-
-</body>
-</html>
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />

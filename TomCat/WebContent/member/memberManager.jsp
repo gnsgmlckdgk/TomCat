@@ -52,11 +52,11 @@
 		%>
 		<div class="content">
 			<div class="content_member_memberManager">
-				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> ) ※테스트하려고 pageSize=2로 해둠</h1>
+				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> )</h1>
 					
 					<table>
 						<tr>
-							<th>프로필사진</th><th>아이디</th><th>닉네임</th><th>회원탈퇴</th><th>권한설정</th>
+							<th>프로필 이미지</th><th>아이디</th><th>닉네임</th><th>회원탈퇴</th><th>권한설정</th>
 						</tr>
 						<%
 						if(count>0) {
@@ -64,7 +64,7 @@
 								mb = memberList.get(i);
 								%>
 								<tr>
-									<td class="img_td"> <img src="./upload/images/profileImg/<%=mb.getProfile() %>"> </td>
+									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
 									<td class="id_td"><span><%=mb.getId() %></span></td>
 									<td class="nick_td"><%=mb.getNick() %></td>
 									<td class="delete_td">
@@ -157,6 +157,11 @@
 								alert(error);
 							}
 						});
+					}
+					
+					/* 프로필 이미지가 실제 경로에 없으면 */
+					function imgError() {
+						alert("aa");
 					}
 					
 					</script>
