@@ -10,7 +10,7 @@ public class Pay implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		System.out.println("Pay");
+		System.out.println("Pay 실행!");
 		//한글처리
 		request.setCharacterEncoding("utf-8");
 				
@@ -24,7 +24,7 @@ public class Pay implements Action{
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./MyPlan.pln");
+		forward.setPath("./MyPlan.pln?plan_nr=100");
 		return forward;
 	}
 }

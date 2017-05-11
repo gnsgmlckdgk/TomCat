@@ -194,7 +194,7 @@ public class MyPlanBasketDAO {
 			
 			con = getConnection();
 			
-			sql = "select auth from member where id=?";
+			sql = "select gold from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			// 4 rs 실행저장
@@ -203,9 +203,7 @@ public class MyPlanBasketDAO {
 			check = rs.getInt(1);
 			
 			if(check==1){
-				auth = "관리자";
-			} else if(check==2){
-				auth="유료회원";
+				auth = "유료회원";
 			}
 			
 		} catch (Exception e) {
