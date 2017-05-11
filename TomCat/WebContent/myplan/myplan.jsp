@@ -14,53 +14,10 @@
 <link rel="stylesheet" href="assets/css/map/map.css" />
 
 <body>
-
-
-	<style>
-.container {
-	height: 100%;
-	position: relative;
-}
-
-#map {
-	bottom: 0px;
-	height: 100%;
-	left: 375px;
-	position: absolute;
-	right: 0px;
-	border: 1px solid #999999;
-	border-radius: 10px;
-}
-
-.myplan-list {
-	background: #fff;
-	border: 1px solid #999;
-	border-radius: 3px;
-	height: 100%;
-	line-height: 35px;
-	padding: 10px 10px 30px 10px;
-	text-align: left;
-	width: 353px;
-}
-
-#pano {
-	width: 220px;
-	height: 220px;
-}
-
-.text {
-	font-size: 12px;
-}
-</style>
-
 	<%
-		String id = (String) request.getParameter("id");
-		String nick = (String) request.getParameter("nick");
 
-// 		if (id == null) {
-// 			response.sendRedirect("./Main.me?loginCheck=0");
-// 			out.print("로그인이 되지 않았습니다.");
-// 		}
+		String auth = (String)request.getAttribute("auth");
+
 
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
@@ -89,7 +46,7 @@
 			 	  for(int i=0;i<basketList.size();i++){
 					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 					TravelBean tb=(TravelBean)goodsList.get(i);
-						if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
+						if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
 						%>
 						
 						<tr>
@@ -269,29 +226,11 @@
 		
 	</script>
 
-	<!-- 결제 테스트 구역(코드 보안을 해지한 상태.) -->
-
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-		target="_top">
-		<input type="hidden" name="cmd" value="_xclick">
-		<input type="hidden" name="business" value="37UUQW9BH8GDA">
-		<input type="hidden" name="custom" value="<%=id%>">
-		<input type="hidden" name="lc" value="GA">
-		<input type="hidden" name="item_name" value="샘플 바로 구매 버튼">
-		<input type="hidden" name="amount" value="0.01">
-		<input type="hidden" name="currency_code" value="USD">
-		<input type="hidden" name="button_subtype" value="services">
-		<input type="hidden" name="no_note" value="0">
-		<input type="hidden" name="cn" value="판매자를 위한 특수 지침을 추가하세요.">
-		<input type="hidden" name="no_shipping" value="2">
-		<input type="hidden" name="rm" value="1">
-		<input type="hidden" name="return" value="http://localhost:9080/TomCat/MyPlan.pln?plan_nr=1">
-		<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-		<img alt="" border="0" src="https://www.paypalobjects.com/ko_KR/i/scr/pixel.gif" width="1" height="1">
-	</form>
-
-
+	<!-- 결제 테스트 구역 -->
+결제 테스트 구역.<br>
+<a href="./MyPlan.pln?plan_nr=3" class="button alt small">유료 test 버튼</a>
+<%=auth %>
+<br>결제 테스트 구역 끝.
 	<!-- 결제 테스트 구역 끝 -->
 
 

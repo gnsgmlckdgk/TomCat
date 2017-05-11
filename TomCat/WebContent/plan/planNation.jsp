@@ -45,64 +45,48 @@
 
 <!-- Two 국가의 지역 리스트 -->
 <section id="nation_two" class="wrapper style2 special">
-<%
-	List<PlanCityBean> pcbList = (List)request.getAttribute("pcbList");
-	PlanCityBean pcb = null;
 
-	int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 게시글 갯수
-	String pageNum = request.getParameter("pageNum");	// 현재 페이지
-	if(pageNum==null) {
-		pageNum="1";
-	}
-	int currentPage = Integer.parseInt(pageNum);
-%>
+<!-- Two 섹션 스크립트 -->
+<script type="text/javascript">
+
+// 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
+$(window).load(function() {
+	$.ajax({
+		type: 'post',
+		url: './plan/planNationCityList.jsp',
+		data : {nation:'<%=nation%>', pageNum:'1'},
+		success: function(data) {
+			$('.city_list_div').append(data);
+		},
+		error: function(xhr, status, error) {
+	        alert(error);
+	    }   
+	});
+});
+
+// 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
+function cityListChange(pageNum) {
+	
+		$.ajax({
+			type: 'post',
+			url: './plan/planNationCityList.jsp',
+			data : {nation:'<%=nation%>', pageNum: pageNum},
+			success: function(data) {
+				$('.city_list_div').empty();
+				$('.city_list_div').append(data);
+			},
+			error: function(xhr, status, error) {
+				alert("code:"+status+"\n"+"message: 8번째 페이지 이동시 멈춤..."+"\n"+"error:"+error);
+		    }   
+		});
+}
+
+</script>
+
 	<div class="container">
 		<h2><%=nation%> 주요 도시</h2>
-		
-		<div class="city_list_div">
-			<table>
-			<%
-			if(count>0) {
-				for(int i=0; i<pcbList.size(); i++) {
-					pcb = pcbList.get(i);
-					%>
-					<tr>
-					<td class="img_td" style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
-					<td class="txt_td">
-						<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName() %></p>
-						<p style="font-size: 0.7em;"><%=pcb.getEn_name() %></p>
-						<p style="font-size: 1.0em; color: #6B66FF;"><%=pcb.getInfo() %></p>
-					</td>
-					</tr>
-					<%
-				}
-			}else {
-				%>
-				<tr>
-				<th colspan="2">정보가 없습니다...</th>
-				</tr>
-				<%
-			}
-			// 페이징
-			int pageCount = Integer.parseInt(String.valueOf(request.getAttribute("pageCount")));
-			int pageBlock = Integer.parseInt(String.valueOf(request.getAttribute("pageBlock")));
-			int startPage = Integer.parseInt(String.valueOf(request.getAttribute("startPage")));
-			int endPage = Integer.parseInt(String.valueOf(request.getAttribute("endPage")));
-			%>
-			</table>
-			<div class="page">
-				<%
-				if(currentPage > pageBlock) {
-					%><a href="./PlanNation.pl?nation=<%=nation %>&pageNum=<%=startPage-pageBlock%>">[이전]</a><%	
-				}
-				for(int i=startPage; i<=endPage; i++) {
-					%><a href="./PlanNation.pl?nation=<%=nation %>&pageNum=<%=i%>" <%if(currentPage==i) { %>style="color: #000; background-color: #f0f0f0;"<%}%>><%=i %></a><%
-				}
-				if(pageCount > endPage) {
-					%><a href="./PlanNation.pl?nation=<%=nation %>&pageNum=<%=startPage+pageBlock%>">[다음]</a><%
-				}
-				%>
-			</div>
+		<div class="city_list_div">	<!-- 도시 리스트 -->
+			<!-- 도시리스트 테이블 오는 자리 -->
 		</div>	<!-- city_list_div -->
 	</div>	<!-- container -->
 </section>
@@ -142,7 +126,7 @@
 
 
 	</div>
-	</div>
+	
 </section>
 
 <!-- Four -->
