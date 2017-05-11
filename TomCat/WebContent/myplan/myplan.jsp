@@ -14,45 +14,6 @@
 <link rel="stylesheet" href="assets/css/map/map.css" />
 
 <body>
-
-
-	<style>
-.container {
-	height: 100%;
-	position: relative;
-}
-
-#map {
-	bottom: 0px;
-	height: 100%;
-	left: 375px;
-	position: absolute;
-	right: 0px;
-	border: 1px solid #999999;
-	border-radius: 10px;
-}
-
-.myplan-list {
-	background: #fff;
-	border: 1px solid #999;
-	border-radius: 3px;
-	height: 100%;
-	line-height: 35px;
-	padding: 10px 10px 30px 10px;
-	text-align: left;
-	width: 353px;
-}
-
-#pano {
-	width: 220px;
-	height: 220px;
-}
-
-.text {
-	font-size: 12px;
-}
-</style>
-
 	<%
 		String id = (String) request.getParameter("id");
 		String nick = (String) request.getParameter("nick");
@@ -89,7 +50,7 @@
 			 	  for(int i=0;i<basketList.size();i++){
 					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 					TravelBean tb=(TravelBean)goodsList.get(i);
-						if(plan_nr != mpbb.getPlan_nr() && plan_nr!=100) continue;
+						if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
 						%>
 						
 						<tr>
