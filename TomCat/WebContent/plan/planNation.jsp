@@ -43,12 +43,15 @@
 	</div>
 </section>
 
+
+
+
+
 <!-- Two 국가의 지역 리스트 -->
 <section id="nation_two" class="wrapper style2 special">
 
 <!-- Two 섹션 스크립트 -->
 <script type="text/javascript">
-
 // 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
 $(window).load(function() {
 	$.ajax({
@@ -67,20 +70,21 @@ $(window).load(function() {
 // 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
 function cityListChange(pageNum) {
 	
+		var search = $('#search').val();
+	
 		$.ajax({
 			type: 'post',
 			url: './plan/planNationCityList.jsp',
-			data : {nation:'<%=nation%>', pageNum: pageNum},
+			data : {nation:'<%=nation%>', pageNum: pageNum, search: search},
 			success: function(data) {
 				$('.city_list_div').empty();
 				$('.city_list_div').append(data);
 			},
 			error: function(xhr, status, error) {
-				alert("code:"+status+"\n"+"message: 8번째 페이지 이동시 멈춤..."+"\n"+"error:"+error);
+				alert(error);
 		    }   
 		});
 }
-
 </script>
 
 	<div class="container">
@@ -91,6 +95,10 @@ function cityListChange(pageNum) {
 		</div>	<!-- city_list_div -->
 	</div>	<!-- container -->
 </section>
+
+
+
+
 
 <!-- Three -->
 <section id="three" class="wrapper style1">
