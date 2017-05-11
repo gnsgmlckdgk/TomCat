@@ -57,10 +57,10 @@
 		String id = (String) request.getParameter("id");
 		String nick = (String) request.getParameter("nick");
 
-		if (id == null) {
-			response.sendRedirect("./Main.me?loginCheck=0");
-			out.print("로그인이 되지 않았습니다.");
-		}
+// 		if (id == null) {
+// 			response.sendRedirect("./Main.me?loginCheck=0");
+// 			out.print("로그인이 되지 않았습니다.");
+// 		}
 
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
