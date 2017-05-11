@@ -31,9 +31,12 @@ public class PlanFrontController extends HttpServlet {
 			}
 
 		}else if(command.equals("/PlanMain.pl")){	// 여행일정플래너 메인 페이지 이동
-			forward = new ActionForward();
-			forward.setPath("./plan/planMain.jsp");
-			forward.setRedirect(false);
+			action = new PlanMainAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}	
 
 		} else if (command.equals("/PlanNation.pl")){	// 국가 페이지 이동
 			
@@ -60,6 +63,35 @@ public class PlanFrontController extends HttpServlet {
 		
 		else if(command.equals("/PlanSpotWriteAction.pl")){
 			action = new PlanSpotWriteAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		
+		}
+		
+		else if(command.equals("/countryAdd.pl")){
+			action = new CountryListAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/CounAdd.pl")){
+			action = new CountryAddAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		
+		else if(command.equals("/CityAdd.pl")){
+			action = new CityAddAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){
