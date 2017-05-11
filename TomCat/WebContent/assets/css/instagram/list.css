@@ -9,17 +9,31 @@
 }
 
 #like{
-color:black;
-background-color: pink;
-}
+background-color: #ff6699;
+	}
 
 #dislike
 {	
-background-color: blue;	
-border-radius: 20px;	
+background-color: #996699;
 }
 
-#likenum{
-	background-image: url(''./instagram/heart.png'')
-	
+.button{
+	width:48em;
+	z-index:2;
+	background-color:#333;
+	border: 2px solid #333;
+	color:#fff;
+	line-height:50px;	
 }
+.button:hover{
+	background-color: #fff;
+	border-color:#59b1eb;
+	color:#59bleb;
+	}
+	.button::before,
+	.button::after{
+	top:0;
+	width:50%;
+	height:100%;
+	background-color
+	}

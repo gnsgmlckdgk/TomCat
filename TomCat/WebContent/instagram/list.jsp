@@ -43,7 +43,7 @@
 if(id!=null){
 			 %>
 			 
-		<a href="./BoardWrite.bo" class="button fit" >인생샷 공유해요~</a>
+		<a href="./BoardWrite.bo" class="button" >인생샷 공유해요~</a><br>
 	<%} %>
 		
 		
@@ -86,22 +86,25 @@ if(id!=null){
 
 if(likecount%2==0){
 %>
-			<form action="./LikeaddAction.lk" method="post" name="fr" id="like">
-			<input type="submit"  value="좋아요: )">	<%=likecountall %>
+			<form action="./LikeaddAction.lk" method="post" name="fr" >
+			<input type="submit" id="like" value="좋아요: )">	
+				<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>
+			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="nick" value="<%=nick%>">
-			<input type="hidden" name="pageNum"value="<%=pageNum%>">	
+			<input type="hidden" name="pageNum"value="<%=pageNum%>">				
 				
 			</form>
-			<%} %>
+			<%} %>			
 						
-<!-- 			====================좋아요취소=============== -->
+<!-- 			====================좋아요s취소=============== -->
 
 		<%if(likecount%2!=0){		
 		%>
 		
 			<form action="./DislikeaddAction.lk" method="post" name="fr">		
-			<input type="submit" id="dislike" value="좋아요취소 " >	<%=likecountall %>
+			<input type="submit" id="dislike" value="좋아요취소 ">
+			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>					
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="nick" value="<%=nick%>">
 			<input type="hidden" name="pageNum"value="<%=pageNum%>">			
