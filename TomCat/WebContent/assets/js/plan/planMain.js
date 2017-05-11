@@ -103,14 +103,14 @@ function popupToggle_oceania() {
 	});	
 }
 
-/* 대륙지도 팝업(중남미) */
+/* 대륙지도 팝업(북미) */
 function popupToggle_north() {
 	
 	$(document).ready(function(){	
 		// 팝업 띄움
 		if($('#countryMap_back').css('display')=="none") {
-			$('#map4').fadeIn(200, function(){	// 페이드 인 애니메이션
-				$('#map4').css('display', 'block');
+			$('#map5').fadeIn(200, function(){	// 페이드 인 애니메이션
+				$('#map5').css('display', 'block');
 			});
 			$('#countryMap_back').css('display', 'block');
 			
@@ -118,14 +118,14 @@ function popupToggle_north() {
 	});	
 }
 
-/* 대륙지도 팝업(북미) */
+/* 대륙지도 팝업(남미) */
 function popupToggle_south() {
 	
 	$(document).ready(function(){	
 		// 팝업 띄움
 		if($('#countryMap_back').css('display')=="none") {
-			$('#map5').fadeIn(200, function(){	// 페이드 인 애니메이션
-				$('#map5').css('display', 'block');
+			$('#map4').fadeIn(200, function(){	// 페이드 인 애니메이션
+				$('#map4').css('display', 'block');
 			});
 			$('#countryMap_back').css('display', 'block');
 			
