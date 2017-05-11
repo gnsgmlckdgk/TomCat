@@ -20,6 +20,8 @@ public class MemberDeleteAction implements Action {
 		// 비밀번호 복호화
 		int check = deleteMember(request);
 		
+		System.out.println("회원탈퇴 DAO 반환 check: " + check);
+		
 		// 이동
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

@@ -36,12 +36,10 @@ public class PlanFrontController extends HttpServlet {
 			forward.setRedirect(false);
 
 		} else if (command.equals("/PlanNation.pl")){	// 국가 페이지 이동
-			action = new PlanNationAction();
-			try {
-				forward = action.execute(request, response);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			
+			forward = new ActionForward();
+			forward.setPath("./plan/planNation.jsp");
+			forward.setRedirect(false);
 
 		}else if(command.equals("/PlanSearch.pl")){
 			action = new PlanSearchAction();

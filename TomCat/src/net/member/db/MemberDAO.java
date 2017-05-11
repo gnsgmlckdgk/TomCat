@@ -422,6 +422,14 @@ public class MemberDAO {
 			}catch(Exception e) {
 				System.out.println("MemberDAO->updatePass()에서 예외발생");
 				e.printStackTrace();
+			}finally {
+				try{
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 			return check;
@@ -454,9 +462,12 @@ public class MemberDAO {
 				ps.setString(1, mb.getId());
 				rs = ps.executeQuery();
 				if(rs.next()) {
-					String realPath = request.getRealPath("/upload/images/profileImg/");
-					File f = new File(realPath+rs.getString("profile"));
-					f.delete();
+					// 기본 프로필 사진일때는 삭제하지 않음
+					if(!("basic/man.png".equals(rs.getString("profile"))) || !("basic/woman.png".equals(rs.getString("profile"))) ) {
+						String realPath = request.getRealPath("/upload/images/profileImg/");
+						File f = new File(realPath+rs.getString("profile"));
+						f.delete();
+					}
 				}
 				
 				// 회원정보 수정
@@ -511,6 +522,8 @@ public class MemberDAO {
 					ps.setString(1, id);
 					
 					ps.executeUpdate();
+					
+					return check;
 					
 				}else {
 					check = 0;
