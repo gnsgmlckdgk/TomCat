@@ -10,44 +10,10 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/map/map.css" />
 
 <body>
 
- <style>
-	.container {
-        height: 100%;
-        position: relative;
-      }
-       #map {
-        bottom:0px;
-        height: 100%;
-        left: 375px;
-        position: absolute;
-        right: 0px;
-        border: 1px solid #999999;
-        border-radius: 10px;
-      } 
-
-      .myplan-list {
-        background: #fff;
-        border: 1px solid #999;
-        border-radius: 3px;
-        height: 100%;
-        line-height: 35px;
-        padding: 10px 10px 30px 10px;
-        text-align: left;
-        width: 353px;
-      }
-
-      #pano {
-        width: 220px;
-        height: 220px;
-      }
-
-      .text {
-        font-size: 12px;
-      }
-  </style>
 
 <%
 List basketList=(List)request.getAttribute("basketList");
