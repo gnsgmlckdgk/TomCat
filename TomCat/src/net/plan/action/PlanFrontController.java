@@ -72,12 +72,26 @@ public class PlanFrontController extends HttpServlet {
 		}
 		
 		else if(command.equals("/countryAdd.pl")){
-			forward = new ActionForward();
-			forward.setPath("./plan/countryAdd.jsp");
-			forward.setRedirect(false);
+			action = new CountryListAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
+		
 		else if(command.equals("/CounAdd.pl")){
 			action = new CountryAddAction();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		
+		else if(command.equals("/CityAdd.pl")){
+			action = new CityAddAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){
