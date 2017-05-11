@@ -52,7 +52,7 @@ public class PlanDAO {
 			pstmt.setString(1, nation);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {	// 검색된 국가가 있으면
+			if(rs.next()) {	// DB에 국가가 있으면
 				country_code = rs.getString("country_code");
 				
 				sql = "select count(*) as count from city where country_code=?";
@@ -64,6 +64,7 @@ public class PlanDAO {
 				if(rs.next()) {
 					count = rs.getInt("count");
 				}
+				
 			}else {	// 검색된 국가가 없으면
 				return count;
 			}
@@ -83,6 +84,63 @@ public class PlanDAO {
 		
 		return count;
 	}
+	
+	// 국가의 도시 리스트 갯수(검색값)
+		public int getCityCount(String str, String search) {
+			int count = 0;
+			String country_code;
+			
+			String nation = str;
+			if("한국".equals(nation)) {
+				nation = "대한민국";
+			}
+			
+			System.out.println("DAO getCityCount()의 nation: " + nation);
+			
+			try {
+				con = getConnection();
+				
+				// country_code 값 가져오기
+				sql = "select country_code from country where name=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, nation);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {	// DB에 국가가 있으면
+					country_code = rs.getString("country_code");
+					
+					sql = "select count(*) as count from city where country_code=? "
+							+ "&& (name like ? || en_name like ?)";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, country_code);
+					pstmt.setString(2, "%"+search+"%");
+					pstmt.setString(3, "%"+search+"%");
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						count = rs.getInt("count");
+					}
+					
+				}else {	// 검색된 국가가 없으면
+					return count;
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				
+			}finally {
+				try {
+					if(rs!=null) rs.close();
+					if(pstmt!=null) pstmt.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return count;
+		}
 	
 	// 국가페이지의 도시리스트 가져오기
 	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
@@ -147,6 +205,71 @@ public class PlanDAO {
 		return list;
 	}
 	
+	// 국가페이지의 도시리스트 가져오기(검색값)
+		public List<PlanCityBean> getCityList(String str, int startRow, int pageSize, String search) {
+			
+			String country_code = "";
+			List<PlanCityBean> list = new ArrayList<PlanCityBean>();
+			
+			String nation = str;
+			if("한국".equals(nation)) {
+				nation = "대한민국";
+			}
+			
+			try {
+				con = getConnection();
+				
+				// country_code 값 가져오기
+				sql = "select country_code from country where name=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, nation);
+				rs = pstmt.executeQuery();
+							
+				if(rs.next()) {	// 검색된 국가가 있으면
+					country_code = rs.getString("country_code");
+					
+					sql = "select city_code, name, en_name, info, country_code from city where country_code = ? "
+							+ "&& (name like ? || en_name like ? ) limit ?, ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, country_code);
+					pstmt.setString(2, "%"+search+"%");
+					pstmt.setString(3, "%"+search+"%");
+					pstmt.setInt(4, startRow-1);
+					pstmt.setInt(5, pageSize);
+					
+					rs = pstmt.executeQuery();
+					
+					PlanCityBean pcb = null;
+					while(rs.next()) {
+						pcb = new PlanCityBean();
+						
+						pcb.setCity_code(rs.getString("city_code"));
+						pcb.setName(rs.getString("name"));
+						pcb.setEn_name(rs.getString("en_name"));
+						pcb.setInfo(rs.getString("info"));
+						pcb.setCountry_code(rs.getString("country_code"));
+						
+						list.add(pcb);
+					}
+					
+				}else {
+					return null;
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs!=null) rs.close();
+					if(pstmt!=null) pstmt.close();
+					if(con!=null) con.close();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return list;
+		}
 	
 	/* 지역페이지? */
 	public int getTravelCount(String region){

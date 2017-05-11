@@ -47,6 +47,35 @@ section#nation_two .city_list_div p {
 	padding: 0;
 	margin: 0;
 }
+
+section#nation_two div.search_div {	/* 검색 */
+	float: right;
+	position: relative;
+	
+	width: 420px;
+	
+}
+section#nation_two div.search_div img {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	
+	left: 5px;
+	top: 5px;
+}
+section#nation_two div.search_div input[type="text"] {
+	float: left;
+	display: block;
+	width: 300px;
+	height: 35px;
+	padding-left: 40px;
+}
+section#nation_two div.search_div input[type="submit"] {
+	width: 100px;
+	height: 35px;
+	font-size: 0.8em;
+}
+
 section#nation_two .city_list_div .page a {
 	font-size: 1.4em;
 	font-weight: bold;

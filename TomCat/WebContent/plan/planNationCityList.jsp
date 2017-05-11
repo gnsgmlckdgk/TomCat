@@ -6,14 +6,23 @@
 
 <%
 	//파라미터 값 가져오기.
-	String nation = request.getParameter("nation"); // 검색한 값, 리스트의 링크 값
+	String nation = request.getParameter("nation"); // 리스트의 링크 값
+	String search = request.getParameter("search");	// 검색값
+	if(search==null) {
+		search="";
+	}
 	
 	//객체 생성
 	PlanDAO pdao = new PlanDAO();
 
 	/* 게시글 가져오기 */
 	//DB에 등록된 글의 개수.
-	int count = pdao.getCityCount(nation);
+	int count = 0;
+	if("".equals(search)) {	// 검색값이 없으면
+		count = pdao.getCityCount(nation);
+	}else {	// 검색값이 있으면
+		count = pdao.getCityCount(nation, search); 
+	}
 
 	// 한페이지에 보여줄 글의 개수
 	int pageSize = 5;
@@ -33,7 +42,11 @@
 	// 도시 리스트 가져오기
 	List<PlanCityBean> pcbList = null;
 	if (count > 0) {
-		pcbList = pdao.getCityList(nation, startRow, pageSize);
+		if("".equals(search)) {	// 검색값 없으면
+			pcbList = pdao.getCityList(nation, startRow, pageSize);
+		}else {	// 검색값 있으면
+			pcbList = pdao.getCityList(nation, startRow, pageSize, search);
+		}	
 	}
 
 	/* 페이징 */
@@ -77,7 +90,18 @@
 	<%
 		}
 	%>
-</table>
+</table>   
+
+<!-- 검색폼 -->
+<div class="search_div">
+	<form action="javascript:cityListChange('<%=pageNum %>');" method="post">
+		<img src="./images/member/search_l2.png" class="search_img">
+		<input type="text" name="search" id="search" value="<%=search %>" placeholder="search...">
+		<input type="submit" value="검색" class="button alt">
+	</form>
+</div>
+					
+<div class="clear"></div>
 
 <%
 	// 페이징
@@ -85,17 +109,17 @@
 <div class="page">
 	<%
 		if (currentPage > pageBlock) {
-	%><a href="javascript:cityListChange('<%=startPage - pageBlock%>');">[이전]</a>
+	%><a href="javascript:cityListChange('<%=startPage - pageBlock%>', '<%=search%>');">[이전]</a>
 	<%
 		}
 		for (int i = startPage; i <= endPage; i++) {
-	%><a href="javascript:cityListChange('<%=i%>');"
+	%><a href="javascript:cityListChange('<%=i%>', '<%=search%>');"
 		<%if (currentPage == i) {%>
 		style="background-color: #ccc;" <%}%>><%=i%></a>
 	<%
 		}
 		if (pageCount > endPage) {
-	%><a href="javascript:cityListChange('<%=startPage + pageBlock%>');">[다음]</a>
+	%><a href="javascript:cityListChange('<%=startPage + pageBlock%>', '<%=search%>');">[다음]</a>
 	<%
 		}
 	%>
