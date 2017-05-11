@@ -85,6 +85,7 @@ function cityListChange(pageNum) {
 
 	<div class="container">
 		<h2><%=nation%> 주요 도시</h2>
+		<hr>
 		<div class="city_list_div">	<!-- 도시 리스트 -->
 			<!-- 도시리스트 테이블 오는 자리 -->
 		</div>	<!-- city_list_div -->

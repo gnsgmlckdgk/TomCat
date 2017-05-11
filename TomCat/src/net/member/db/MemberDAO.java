@@ -360,7 +360,7 @@ public class MemberDAO {
 	// 읽어버린 비밀번호 찾기
 	public void updatePass(String id, String pass) {
 		
-		// 임시비밀번호를 메일로 보내고 DB에서도 비밀번호를 수정한다.
+		// 임시비밀번호를 메일로 보내고 DB에서도 비밀번호를 한다.
 		try {
 			
 			con = getConnection();
@@ -436,7 +436,7 @@ public class MemberDAO {
 		}
 	
 	// 회원정보 수정
-	public void updateMember(MemberBean mb, HttpServletRequest request) {
+	public void updateMember(MemberBean mb, String realPath) {
 		
 		try {
 			con = getConnection();
@@ -463,10 +463,12 @@ public class MemberDAO {
 				rs = ps.executeQuery();
 				if(rs.next()) {
 					// 기본 프로필 사진일때는 삭제하지 않음
-					if(!("basic/man.png".equals(rs.getString("profile"))) || !("basic/woman.png".equals(rs.getString("profile"))) ) {
-						String realPath = request.getRealPath("/upload/images/profileImg/");
-						File f = new File(realPath+rs.getString("profile"));
+					if("basic/man.png".equals(rs.getString("profile")) || "basic/woman.png".equals(rs.getString("profile")) ) {
+						System.out.println("기본 프로필이라 삭제 안함");
+					}else {
+						File f = new File(realPath+"/"+rs.getString("profile"));
 						f.delete();
+						System.out.println("프로필 이미지 삭제 성공");
 					}
 				}
 				
@@ -499,7 +501,7 @@ public class MemberDAO {
 	}
 	
 	// 회원 탈퇴
-	public int deleteMember(String id, String pass) {
+	public int deleteMember(String id, String pass, String realPath) {
 		
 		int check = 0;	// 0: 비밀번호 틀림, 1: 탈퇴 완료
 		
@@ -516,6 +518,22 @@ public class MemberDAO {
 			while(rs.next()) {
 				if(rs.getString("id").equals(id)) {	// 비밀번호의 아이디들 중 로그인한 아이디와 같은 아이디가 있는지 확인
 					check = 1;
+					
+					// 기존의 프로필 이미지는 삭제(물리적 위치에 있는 이미지 파일)
+					sql = "select profile from member where id=?";
+					ps = con.prepareStatement(sql);
+					ps.setString(1, id);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						// 기본 프로필 사진일때는 삭제하지 않음
+						if("basic/man.png".equals(rs.getString("profile")) || "basic/woman.png".equals(rs.getString("profile")) ) {
+							System.out.println("기본 프로필이라 삭제 안함");
+						}else {
+							File f = new File(realPath+rs.getString("profile"));
+							f.delete();
+							System.out.println("프로필 이미지 삭제 성공");
+						}
+					}
 					
 					sql="delete from member where id=?";
 					ps = con.prepareStatement(sql);
@@ -545,12 +563,28 @@ public class MemberDAO {
 		return check;
 	}
 	
-	// 회원 탈퇴(관리자가 회원관리 페이지에서 삭제시키기 때문에 id만 필요)
-		public void deleteMember(String id) {
+	// 회원 탈퇴(관리자가 회원관리 페이지에서 삭제시키기 때문에 id랑 프로필사진 경로만 필요)
+		public void deleteMember(String id, String realPath) {
 
 			try {
 				
 				con = getConnection();
+				
+				// 기존의 프로필 이미지는 삭제(물리적 위치에 있는 이미지 파일)
+				sql = "select profile from member where id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					// 기본 프로필 사진일때는 삭제하지 않음
+					if("basic/man.png".equals(rs.getString("profile")) || "basic/woman.png".equals(rs.getString("profile")) ) {
+						System.out.println("기본 프로필이라 삭제 안함");
+					}else {
+						File f = new File(realPath+rs.getString("profile"));
+						f.delete();
+						System.out.println("프로필 이미지 삭제 성공");
+					}
+				}
 				
 				sql = "delete from member where id=?";
 				ps = con.prepareStatement(sql);

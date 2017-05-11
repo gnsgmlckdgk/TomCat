@@ -12,11 +12,12 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/map.css" />
+<link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 
 <body>
 	<%
-
 		String auth = (String)request.getAttribute("auth");
+		String id = (String)request.getAttribute("id");
 
 
 		List basketList = (List) request.getAttribute("basketList");
@@ -254,8 +255,76 @@
 
 	<!-- 결제 테스트 구역 -->
 결제 테스트 구역.<br>
-<a href="./MyPlan.pln?plan_nr=3" class="button alt small">유료 test 버튼</a>
-<%=auth %>
+<%if(auth.equals("무료회원")){%>
+	<%=auth %>일때 나오는 버튼.
+	
+	<script type="text/javascript">
+	
+	function dialog() {
+
+	    var dialogBox = $('.dialog'),
+	        dialogTrigger = $('.dialog__trigger'),
+	        dialogClose = $('.dialog__close'),
+	        dialogTitle = $('.dialog__title'),
+	        dialogContent = $('.dialog__content'),
+	        dialogAction = $('.dialog__action');
+
+	    // Open the dialog
+	    dialogTrigger.on('click', function(e) {
+	        dialogBox.toggleClass('dialog--active');
+	        e.stopPropagation()
+	    });
+
+	    // Close the dialog - click close button
+	    dialogClose.on('click', function() {
+	        dialogBox.removeClass('dialog--active');
+	    });
+
+	    // Close the dialog - press escape key // key#27
+	    $(document).keyup(function(e) {
+	        if (e.keyCode === 27) {
+	            dialogBox.removeClass('dialog--active');
+	        }
+	    });
+
+	    // Close dialog - click outside
+	    $(document).on("click", function(e) {
+	        if ($(e.target).is(dialogBox) === false &&
+	            $(e.target).is(dialogTitle) === false &&
+// 	            $(e.target).is(dialogContent) === false &&
+	            $(e.target).is(dialogAction) === false) {
+	            dialogBox.removeClass("dialog--active");
+	        }
+	    });
+
+	};
+
+	// Run function when the document has loaded
+	$(function() {
+	    dialog();
+	});
+	
+	</script>
+	
+	<button class="dialog__trigger button alt small">일정C</button>
+	
+	<div class="dialog">
+		<span class="dialog__close">&#x2715;</span>
+  		<h2 class="dialog__title">"일정C"는 골드멤버에 한해 사용가능합니다.</h2>
+  		<p class="dialog__content">test</p>
+  			
+  		<input type="button" class="dialog__action" onclick="location.href='./Pay.pln'" value="골드 멤버 되기 &#8594;">
+  		
+  		
+	</div>  
+
+<%} else {%>
+	<%=auth %>일때 나오는 버튼.
+
+	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
+	
+<%} %>
+
 <br>결제 테스트 구역 끝.
 	<!-- 결제 테스트 구역 끝 -->
 

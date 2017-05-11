@@ -149,6 +149,12 @@ div.content {
 	opacity: 0.9;
 }
 
+section.memberManager input:FOCUS {	/* 회원관리 페이지의 모든 input:focus */
+	font-weight: bold;
+	color: blue;
+}
+
+
 /* 회원정보 */
 div.content_member_info {
 	border: 1px solid #ccc;
@@ -168,7 +174,6 @@ div.content_member_info .info_form input[type="text"] {
 	border: 1px solid #ccc;
 	background-color: rgba(255, 255, 255, 0.1);
 }
-
 div.content_member_info .info_form p {	/* 프로필사진 추천 사이즈 팁 */
 	margin-bottom: 0;
 }
