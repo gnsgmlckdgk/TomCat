@@ -49,12 +49,14 @@ section#nation_two .city_list_div p {
 }
 section#nation_two .city_list_div .page a {
 	font-size: 1.4em;
+	font-weight: bold;
 	text-decoration: none;
 	border: 1px solid #ccc;
 	padding: 3px 6px;
 }
 section#nation_two .city_list_div .page a:hover {
 	background-color: #f0f0f0;
+	color: #FF8224;
 }
 
 
