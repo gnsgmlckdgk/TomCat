@@ -23,15 +23,18 @@ document.fr.submit();
 }
 
 </script>
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
 
-</head>
-<body>
+<section class="container">
   
-	
+	<%
+	String nick = (String)session.getAttribute("nick");	// 닉네임
+	%>
 	<h1>글쓰기</h1>
 		<form action="./BoardWriteAction.bo" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
 <!-- 		닉네임 세션값 생성해서 readonly로 설정하기 -->
-		글쓴이:<input type="text" name="nick"><br>		
+		글쓴이:<input type="text" name="nick" value=<%=nick %> readonly><br>		
 		제목:<input type="text" name="subject"><br>
 		내용:<textarea rows="10" cols="20" name="content"></textarea><br>
 		파일첨부:<input type="file" name="image1"><br>
@@ -39,8 +42,7 @@ document.fr.submit();
 		<input type="submit" value="글쓰기"><br> 
 	</form>
 
-
+</section>
 </body>
-
-</body>
-</html>
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />

@@ -54,6 +54,14 @@ public class MyPlanFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/Pay.pln")){
+			//  AdminGoodsModifyForm
+			action=new Pay();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		//이동
