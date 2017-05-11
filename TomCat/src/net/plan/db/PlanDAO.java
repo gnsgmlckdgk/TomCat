@@ -287,7 +287,7 @@ public class PlanDAO {
 			
 		}
 		
-		//국가 추가하기
+	//국가 추가하기
 		public void insertCountry(PlanCountryBean pcb){
 			PlanCountryBean cb = null;
 			Connection con = null;
@@ -337,6 +337,13 @@ public class PlanDAO {
 			}
 			
 		}
+		
+		//국가 리스트 개수
+		public int getCountryCount(){
+			int count=0;
+			return count;
+		}
+		
 		
 	
 }
