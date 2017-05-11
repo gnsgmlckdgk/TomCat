@@ -23,8 +23,8 @@
 		List goodsList = (List) request.getAttribute("goodsList");
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 	%>
-	<h1>
-		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1>
+<%-- 	<h1>
+		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1> --%>
 
 
 	<div class="container">
@@ -38,10 +38,10 @@
 					<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a></li>
 				</ul>
 		<div>
-		    	<table border="1">
-		 			<tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
-		 			
-			
+		
+		
+		    	<table border="1"> <tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
+		    	
 			  	<%
 			 	  for(int i=0;i<basketList.size();i++){
 					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
@@ -61,6 +61,24 @@
 				
 		 		 }
 		  	 	%></table>
+		  	 	
+		  	 	<%if(basketList.size()==0){
+		  	 	 %>아직 일정을 추가하지 않으셨군요! <br>
+		  	 	 여행지를 검색해서 찜해보세요. <br><br>
+		  	 	 
+		  	 	 여행지가 추가되면서,<br>
+		  	 	 일정별로 방문순서를 계획할 수 있어요<br><br>
+		  	 	 
+		  	 	 또한 여행경로도 확인 가능하다는 사실!<br>
+		  	 	 그 놀라운 서비스를 확인하러 Go~ Go~<br>
+		  	 	 <%
+				
+		 		 }
+		  	 	%>
+		  	 	
+		  	 	
+		  	 	 
+		  	 	    
 
 			</div>
 		</div>
@@ -93,7 +111,8 @@
               <%
 		String MarkerColor;
 	 	String TitlePlan;
-       
+	 	if(basketList.size()!=0){
+	  	
 	 	for(int i=0;i<basketList.size();i++){
 	 	 	MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 	 	 	TravelBean tb=(TravelBean)goodsList.get(i);
@@ -145,9 +164,16 @@
           });
       	<%
 	 	 
-	 	}%> 
+	 	}//for문
+	 
+	 	%> 
+	 	
        showListings();
-      
+     	<%
+    	
+   		}//if 문
+	 	%> 
+	
         }//function initMap() 
          
 	// This function will loop through the markers array and display them all.
