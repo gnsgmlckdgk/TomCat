@@ -25,7 +25,7 @@ int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 
 	<div class="container">
 		<div class="myplan-list">
-			<h3>나의 여행 일정 목록 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">수정</a>]</h3>
+			<h3><a href="./MyPlan.pln?plan_nr=100">나의 여행 일정 목록</a> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;[<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">수정</a>]</h3>
 			
 				<ul class="actions small">
 					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small">일정A</a></li>
@@ -41,15 +41,18 @@ int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 			 	  for(int i=0;i<basketList.size();i++){
 					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 					TravelBean tb=(TravelBean)goodsList.get(i);
-					if(mpbb.getPlan_nr()== plan_nr){
-				%>
-					<tr>
+						if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
+						%>
+						
+						<tr>
 						<td><%=mpbb.getPlan_nr() %></td>
 						<td><%=mpbb.getItem_nr() %></td>
 						<td><%=tb.getName()%></td>
 					</tr>	   
+						
+									
 				<%
-					}
+				
 		 		 }
 		  	 	%></table>
 			</div>
@@ -86,7 +89,9 @@ int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 	 	for(int i=0;i<basketList.size();i++){
 	 	 	MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 	 	 	TravelBean tb=(TravelBean)goodsList.get(i);
- 	 	 	
+		 	 	if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
+	 		
+ 	 		
 	 	 	switch (mpbb.getPlan_nr()) {
 	 	 	case 1 : MarkerColor="6799FF"; //light blue
 	 	 			 TitlePlan="A"; 
@@ -104,6 +109,7 @@ int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 					 TitlePlan="E"; 
 					 break;	
 	 	 	}
+	 	 	
 	 	   %>
 	        var defaultIcon = makeMarkerIcon('<%=MarkerColor%>');
 	    
@@ -127,7 +133,9 @@ int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
           marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
           });
-      	<%}%> 
+      	<%
+	 	 
+	 	}%> 
        showListings();
       
         }//function initMap() 
