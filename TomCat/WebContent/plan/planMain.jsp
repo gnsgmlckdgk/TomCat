@@ -71,11 +71,11 @@
 
   <div id="map3" style="width: 60em; height: 30em;"></div>
 
-<!-- 북미 -->
+<!-- 남미 -->
 
   <div id="map4" style="width: 60em; height: 30em;"></div>  
 
-<!-- 중남미 -->
+<!-- 북미 -->
 
   <div id="map5" style="width: 60em; height: 30em;"></div>  
 
@@ -86,7 +86,7 @@
 
 <%
 	/* 대륙 리스트 */
-	String[] cont = { "아시아", "유럽", "남태평양", "북미", "중남미" };
+	String[] cont = { "아시아", "유럽", "남태평양", "중남미", "북미" };
 %>
 
 <div class="clear"></div>
@@ -118,8 +118,8 @@
 					<li><a href="#">아시아</a></li>
 					<li><a href="#">유럽</a></li>
 					<li><a href="#">남태평양</a></li>
-					<li><a href="#">북미</a></li>
 					<li><a href="#">중남미</a></li>
+					<li><a href="#">북미</a></li>
 				</ul>
 			</div>
 		
@@ -150,7 +150,7 @@
 		<div class="countryList" >
 			<h2>국가 리스트</h2>
 			<%
-				String[] asia={"asia","europe","oceania","north","south"};
+				String[] asia={"asia","europe","oceania","south","north"};
 				for (int j = 0; j < 5; j++) {
 			%>
 			<h3><%=cont[j]+"  "%><a onclick="popupToggle_<%=asia[j]%>()">>>지도로보기</a></h3>

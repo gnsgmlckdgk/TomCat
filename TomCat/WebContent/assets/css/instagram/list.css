@@ -1,14 +1,39 @@
 @CHARSET "UTF-8";
 
-/* .wrap{ */
-/* 	width: 500px; */
-/* 	min-height: 780px; */
-/* 	margin: 0 auto; */
-	
-/* } */
-
-#border{
-	border:2px solid black;
-	border-radius: 10px;	
-	
+#border{	
+	width:40%;
+	margin:auto;
+	background-color: white;
+	opacity: 0.85;
+	border-radius: 20px;
 }
+
+#like{
+background-color: #ff6699;
+	}
+
+#dislike
+{	
+background-color: #996699;
+}
+
+.button{
+	width:48em;
+	z-index:2;
+	background-color:#333;
+	border: 2px solid #333;
+	color:#fff;
+	line-height:50px;	
+}
+.button:hover{
+	background-color: #fff;
+	border-color:#59b1eb;
+	color:#59bleb;
+	}
+	.button::before,
+	.button::after{
+	top:0;
+	width:50%;
+	height:100%;
+	background-color
+	}
