@@ -9,9 +9,13 @@
 
 	<!-- 입력란 들어갈 곳. -->
 
+<link rel="stylesheet" href="assets/css/myplan/payPlanC.css" />
+
 <%
 String id = (String) session.getAttribute("id");
 String nick = (String) session.getAttribute("nick");
+int gold_price = 100000; 
+int discount_price = 0;
 %>
 
 <form action="./PayAction.pln" method="post">
@@ -20,7 +24,7 @@ String nick = (String) session.getAttribute("nick");
 		<h4>결제하실 정보</h4>
 		<table>
 			<tr>
-				<th>상품명/선택사항</th>
+				<th>선택사항</th>
 				<th>상품금액</th>
 				<th>수량</th>
 				<th>할인</th>
@@ -30,11 +34,11 @@ String nick = (String) session.getAttribute("nick");
 			</tr>
 			<tr>
 				<td>일정C</td>
-				<td>100,000원</td>
+				<td><%=gold_price %></td>
 				<td>1</td>
 				<td>-</td>
-				<td>-</td>
-				<td><b>100,000원</b></td>
+				<td><%=discount_price %></td>
+				<td><b><%=gold_price - discount_price %></b></td>
 				<td>-</td>
 			</tr>
 		</table>
@@ -52,11 +56,11 @@ String nick = (String) session.getAttribute("nick");
 						</tr>
 						<tr>
 							<td>이메일</td>
-							<td><input type="email" name="email"></td>
+							<td><input type="text" name="email"></td>
 						</tr>
 						<tr>
 							<td>휴대폰 번호</td>
-							<td><input type="number" name="email"></td>
+							<td><input type="text" name="email"></td>
 						</tr>
 					</table>
 				</td>
@@ -72,7 +76,7 @@ String nick = (String) session.getAttribute("nick");
 						</tr>
 						<tr>
 							<td>휴대폰 번호</td>
-							<td><input type="number" name="email"></td>
+							<td><input type="text" name="email"></td>
 						</tr>
 						<tr>
 							<td>받으실 주소</td>
@@ -98,7 +102,36 @@ String nick = (String) session.getAttribute("nick");
 		
 	
 	</div>
-	<input type="submit" value="구매하기">
+	
+	
+	<div class="banner">
+		<h4>최종 결제 정보</h4>
+		<hr>
+		<table>
+			<tr>
+				<th>상품금액</th>
+				<td><%=gold_price %></td>
+			</tr>
+			<tr>
+				<th>쿠폰/할인금액</th>
+				<td><%=discount_price %></td>
+			</tr>
+			<tr>
+				<th>포인트/예치금 사용</th>
+				<td></td>
+			</tr>
+			<tr>
+				<th>배송비</th>
+				<td></td>
+			</tr>
+			<tr><th colspan="2">총 결제금액</th></tr>
+			<tr><th colspan="2"><%=gold_price-discount_price %></th></tr>
+		</table>
+		<br>
+		<input type="submit" value="구매하기">
+	</div>
+	
+	
 </form>
 
 	
