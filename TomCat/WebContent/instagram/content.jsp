@@ -32,10 +32,8 @@ function func1(re_num){
 	
 	}
 	
-function func2(num,pageNum){
-	alert("정말 삭제하시겠습니까?");	
-	location.href("./BoardDeleteAction.bo?num="+num+"&pageNum="+pageNum);
-	
+function func2(){
+	alert("정말 삭제하시겠습니까?");		
 }
 </script>
 
@@ -54,10 +52,10 @@ function func2(num,pageNum){
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 	%>
-	<section id="banner">
+	<section id="wrapper">
 	
-	<h1>글내용 보기</h1>
-	<table id="table">
+	<h1><%=nick %>님의 멋진 인생샷♡</h1>
+	<table class="table1">
 		<tr>
 			<td colspan="2"><%=bb.getSubject()%></td>
 			<td><%=nick%></td>
@@ -67,8 +65,10 @@ function func2(num,pageNum){
 			<td colspan="4"><a href="./upload/<%=bb.getImage1()%>"><%=bb.getImage1()%></a></td>
 		</tr>
 		<tr>
-			<td colspan="4"><img src="./upload/<%=bb.getImage1()%>"
-				width=400 height=400></td>
+			<td colspan="4">
+			
+			<img src="./upload/<%=bb.getImage1()%>"
+				width=400 height=400 onerror="this.src='./instagram/noimage.png'"></td>
 		</tr>
 		<tr>
 			<td colspan="4"><%=bb.getContent()%></td>
@@ -78,22 +78,17 @@ function func2(num,pageNum){
 	
 	<input type="button" value="글수정"
 		onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
-	<!-- http://localhost:8080/Study.jsp/board/////////updateForm.jsp?num=21&pageNum=1 -->
 
-<!-- 	<input type="button" value="글삭제" -->
-<%-- 		onclick="location.href='./BoardDelete.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'"> --%>
-<input type="button" value="글삭제"
-		onclick="func2(<%=bb.getNum()%>,<%=pageNum %>)">
-
+				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
+					<input type="hidden" value="<%=num%>" name="num"> 															
+					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
+					<input type="submit" value="글삭제">
+				</form>
 
 		<%} %>
 
 	<input type="button" value="글목록 "
 		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">
-
-
-
-
 
 
 	<!--리플 -->	
@@ -113,7 +108,7 @@ function func2(num,pageNum){
 		if(recount!=0){
 
 	%>
-	<table border="1">
+	<table class="table2">
 		<tr>
 			<td colspan="2">닉네임</td>
 			<td colspan="2">답 글</td>
@@ -165,8 +160,8 @@ if(id!=null){%>
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
-					댓글 <textarea rows="2" cols="100" name="content"></textarea>
-					<input type="submit" value="입력"><%=rb.getRe_ref() %>
+					<textarea rows="2" cols="100" name="content"></textarea>
+					<input type="submit" id="submit" value="입력"><%=rb.getRe_ref() %>
 				</form>		
 				
 		
@@ -187,9 +182,9 @@ if(id!=null){%>
 					<input type="hidden" value="<%=rb.getRe_seq() %>" name="re_seq">
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
-					댓글
+					
 					<textarea rows="2" cols="80" name="content"></textarea>
-					<input type="submit" value="입력">
+					<input type="submit" id="submit" value="입력">
 				</form>
 
 			</td>
@@ -246,7 +241,7 @@ if(id!=null){%>
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
-					댓글
+					
 					<textarea rows="2" cols="80" name="content"></textarea>
 					<input type="submit" value="입력">
 				</form>

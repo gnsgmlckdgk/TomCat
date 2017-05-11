@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+.wrapper{
+			background-attachment: fixed;
+			background-image: url("../instagram/forest.png");
+			background-position: center center;
+			background-size: cover;
+		}
+		
+		
+#form{
+	text-align:center;	
+	font-size:1.5em;
+	font-weight:bold;	
+	padding:3px;
+	width: 70%;
+	margin: auto;
+	auto;
+	background-color: white;
+	opacity: 0.85;
+	border-radius: 20px;	
+}
+
+#submit{
+	background-color: #ff6699;	
+}

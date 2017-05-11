@@ -9,8 +9,9 @@
 
 <!-- 추가한 스크립트 -->
 <script type="text/javascript" src="./assets/js/member/join.js"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+<link rel="stylesheet" href="./assets/css/instagram/updateForm.css"/>	
 
-<section class="container">
+<section class="wrapper">
 <%
 //int num,String pageNum 파라미터 가져오기
 String pageNum = request.getParameter("pageNum");
@@ -22,7 +23,7 @@ boardBean bb=bdao.getBoard(num);
 %>
 
 	<h1>인생샷그램 글수정</h1>
-		<form action="./BoardUpdateAction.bo?num=<%=num %>&pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
+		<form id="form" action="./BoardUpdateAction.bo?num=<%=num %>&pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
 <!-- 		hidden으로 숨겨서 num값 넘겨주기 -->
 		<input type="hidden" name="num" value="<%=num%>">
 		

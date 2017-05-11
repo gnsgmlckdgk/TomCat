@@ -18,8 +18,8 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
+<section class="wrapper">
 
-	<section id="banner">
 	
 	<%
 	String id = (String)session.getAttribute("id");			// 아이디
@@ -43,8 +43,10 @@
 if(id!=null){
 			 %>
 			 
-		<a href="./BoardWrite.bo" class="button" >인생샷 공유해요~</a><br>
+		<a href="./BoardWrite.bo" class="button" >인생샷 공유해요</a>
+	<br><br>
 	<%} %>
+	
 		
 		
 
@@ -67,7 +69,7 @@ if(id!=null){
 				
 			%>
 		<tr>
-			<td colspan="4"><%=bb.getSubject() %>(<%=rdao.replyCount(bb.getNum()) %>)</td>
+			<td colspan="4"><%=bb.getSubject() %>(댓글:<%=rdao.replyCount(bb.getNum()) %>)</td>
 			</tr>		
 			<tr><td>닉네임:</td><td><%=bb.getNick()%></td>
 			<td>업로드날짜:</td><td><%=bb.getDate() %></td>
@@ -75,11 +77,12 @@ if(id!=null){
 			<tr>
 			<td colspan="4">
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300></a>
+			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./instagram/noimage.png'">
+			</a>
 			</td></tr>
 		<%if(id!=null){	//아이디가 not null일때만 좋아요/좋아요취소버튼 출력%>			
-			<tr>
-			<td colspan="4">
+			<tr >
+			<td colspan="4" class="bottomline">
 			
 <!-- 			====================좋아요================= -->
 <%
@@ -88,7 +91,7 @@ if(likecount%2==0){
 %>
 			<form action="./LikeaddAction.lk" method="post" name="fr" >
 			<input type="submit" id="like" value="좋아요: )">	
-				<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>
+				<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>	
 			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="nick" value="<%=nick%>">
@@ -97,9 +100,9 @@ if(likecount%2==0){
 			</form>
 			<%} %>			
 						
-<!-- 			====================좋아요s취소=============== -->
+<!-- 			====================좋아요취소=============== -->
 
-		<%if(likecount%2!=0){		
+		<%if(likecount%2!=0){			
 		%>
 		
 			<form action="./DislikeaddAction.lk" method="post" name="fr">		
@@ -115,7 +118,7 @@ if(likecount%2==0){
 			</td>
 			</tr>
 		<%
-			}//좋아요 취소 종료
+			}//좋아요 취소 종료		
 			}//아이디가 not null이면
 			%>
 			
