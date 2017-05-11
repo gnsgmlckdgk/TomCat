@@ -29,18 +29,19 @@ public class TravelAdminDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "";
-		int num=0;
+
+		/*int num=0;*/
 		try {
 			con = getConnection();
 			
-			sql="select max(num) from travel";
+			/*sql="select max(num) from travel";
 			ps=con.prepareStatement(sql);
 			rs=ps.executeQuery();
 			if(rs.next()){
 				num=rs.getInt(1)+1;
 			}else{
 				num=1;
-			}
+			}*/
 			
 			sql = "insert into travel(type,country_code,city_code,name,latitude,longitude,info,address)"
 					+ "values(?,?,?,?,?,?,?,?)";

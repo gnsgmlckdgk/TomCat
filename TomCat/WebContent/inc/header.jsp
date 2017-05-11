@@ -31,7 +31,7 @@
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=5"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=6"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
