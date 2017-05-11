@@ -1,14 +1,25 @@
 @CHARSET "UTF-8";
 
-/* .wrap{ */
-/* 	width: 500px; */
-/* 	min-height: 780px; */
-/* 	margin: 0 auto; */
-	
-/* } */
+#border{	
+	width:40%;
+	margin:auto;
+	background-color: white;
+	opacity: 0.85;
+	border-radius: 20px;
+}
 
-#border{
-	border:2px solid black;
-	border-radius: 10px;	
+#like{
+color:black;
+background-color: pink;
+}
+
+#dislike
+{	
+background-color: blue;	
+border-radius: 20px;	
+}
+
+#likenum{
+	background-image: url(''./instagram/heart.png'')
 	
 }

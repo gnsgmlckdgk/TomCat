@@ -2,6 +2,10 @@ package net.board.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import net.board.db.boardBean;
 import net.board.db.BoardDAO;
 
@@ -15,6 +19,9 @@ public class BoardUpdate implements Action{
 		ActionForward forward=new ActionForward();
 		request.setCharacterEncoding("utf-8");
 
+		request.setCharacterEncoding("utf-8");
+
+		
 		BoardDAO bdao=new BoardDAO();
 		
 		int num=Integer.parseInt(request.getParameter("num"));

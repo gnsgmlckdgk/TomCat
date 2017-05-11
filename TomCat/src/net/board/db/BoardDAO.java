@@ -23,7 +23,7 @@ public class BoardDAO {
 	private Connection getConnection() throws Exception {
 		Connection con=null;
 		Context init=new InitialContext();
-		DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/mysqlDB");
+		DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/mySQL");
 		con=ds.getConnection();
 		return con;
 	}
@@ -231,7 +231,7 @@ public class BoardDAO {
 	
 	
 
-	public void deleteboard(boardBean bb){
+	public void deleteboard(int num){
 		
 		
 		Connection con = null;
@@ -243,7 +243,7 @@ public class BoardDAO {
 
 					sql = "delete from gram where num=?";
 					pstmt = con.prepareStatement(sql);
-					pstmt.setInt(1, bb.getNum());
+					pstmt.setInt(1, num);
 					pstmt.executeUpdate();
 					System.out.println("정보삭제됨");
 			

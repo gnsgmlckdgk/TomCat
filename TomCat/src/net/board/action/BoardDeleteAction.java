@@ -20,9 +20,12 @@ public class BoardDeleteAction implements Action{
 		
 		BoardDAO bdao=new BoardDAO();
 		boardBean bb=new boardBean();
-		bb.setNum(Integer.parseInt(request.getParameter("num")));
+		//bb.setNum(Integer.parseInt(request.getParameter("num")));
+		int num=Integer.parseInt(request.getParameter("num"));
 		
-		bdao.deleteboard(bb);
+		
+		System.out.println("딜릿액션에서의 num의 값"+num);
+		bdao.deleteboard(num);
 				
 		
 			response.setContentType("text/html; charset=UTF-8");

@@ -28,12 +28,28 @@ public class BoardUpdateAction implements Action{
 		BoardDAO bdao=new BoardDAO();
 		boardBean bb=new boardBean();
 		
+
+		
 		String pageNum=multi.getParameter("pageNum");
 		bb.setNum(Integer.parseInt(multi.getParameter("num")));		
-		bb.setNick(multi.getParameter("nick_name"));
+		bb.setNick(multi.getParameter("nick"));
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
-		bb.setImage1(multi.getFilesystemName("image1"));
+		String image1=multi.getFilesystemName("image1");
+		bb.setImage1(image1);
+			
+		if(image1!=null){
+			bb.setImage1(multi.getFilesystemName("image1"));	
+			}
+		
+		else{
+			bb.setImage1(multi.getParameter("image2"));	
+		}
+		
+		System.out.println("nick의값:"+bb.getNick());
+		System.out.println("ct의값:"+bb.getContent());
+		System.out.println("이미지1의값:"+bb.getImage1());	
+		
 		
 		bdao.updateBoard(bb);
 

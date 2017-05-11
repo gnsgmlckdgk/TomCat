@@ -1,5 +1,8 @@
 <%-- <%@page import="java.sql.Statement"%> --%>
 
+<%@page import="net.like.db.LikeDAO"%>
+<%@page import="net.like.db.LikeBean"%>
+<%@page import="net.member.db.MemberBean"%>
 <%@page import="net.reply.db.ReplyDAO"%>
 <%@page import="com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection"%>
 <%@page import="net.board.db.boardBean"%>
@@ -15,8 +18,13 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
-<div class="wrap">
+
+	<section id="banner">
+	
 	<%
+	String id = (String)session.getAttribute("id");			// 아이디
+	String nick = (String)session.getAttribute("nick");	// 닉네임
+		
 
 	List boardList=(List)request.getAttribute("bl");
 	
@@ -32,16 +40,18 @@
 	
 
 	
-			 
+if(id!=null){
 			 %>
+			 
 		<a href="./BoardWrite.bo" class="button fit" >인생샷 공유해요~</a>
-	
+	<%} %>
 		
 		
 
 	<div class="table-wrapper">
 			<table class="alt" id="border">
 		<%
+		
 		int boardcount=bdao.getBoardcount();
 		if(boardcount!=0){
 		
@@ -49,6 +59,12 @@
 				
 				//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
 			boardBean bb=(boardBean)boardList.get(i);
+				
+			LikeBean lb=new LikeBean();
+			LikeDAO ldao=new LikeDAO();
+			int likecountall=ldao.getLikecountall(bb.getNum());
+			int likecount=ldao.getLikecount(bb.getNum(), nick);
+				
 			%>
 		<tr>
 			<td colspan="4"><%=bb.getSubject() %>(<%=rdao.replyCount(bb.getNum()) %>)</td>
@@ -61,6 +77,38 @@
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
 			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300></a>
 			</td></tr>
+			<tr>
+			<td colspan="4">
+			
+<!-- 			====================좋아요================= -->
+<%
+if(likecount%2==0){
+%>
+			<form action="./LikeaddAction.lk" method="post" name="fr" id="like">
+			<input type="submit"  value="좋아요: )">	<%=likecountall %>
+			<input type="hidden" name="num" value="<%=bb.getNum()%>">
+			<input type="hidden" name="nick" value="<%=nick%>">
+			<input type="hidden" name="pageNum"value="<%=pageNum%>">	
+				
+			</form>
+			<%} %>
+						
+<!-- 			====================좋아요취소=============== -->
+
+		<%if(likecount%2!=0){		
+		%>
+		
+			<form action="./DislikeaddAction.lk" method="post" name="fr">		
+			<input type="submit" id="dislike" value="좋아요취소 " >	<%=likecountall %>
+			<input type="hidden" name="num" value="<%=bb.getNum()%>">
+			<input type="hidden" name="nick" value="<%=nick%>">
+			<input type="hidden" name="pageNum"value="<%=pageNum%>">			
+			
+			</form>	
+			<%} %>
+			
+			</td>
+			</tr>
 		<%
 			}
 			%>
@@ -100,8 +148,8 @@
 	}
 	}
 	%>
+</section>
 
-</div>
 </body>
 		
 <!-- Footer -->
