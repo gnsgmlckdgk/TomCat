@@ -41,7 +41,7 @@ int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 			 	  for(int i=0;i<basketList.size();i++){
 					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 					TravelBean tb=(TravelBean)goodsList.get(i);
-						if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
+						if(plan_nr != mpbb.getPlan_nr() && plan_nr!=100) continue;
 						%>
 						
 						<tr>
