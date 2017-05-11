@@ -72,9 +72,9 @@ public class MemberJoinAction implements Action {
             Timestamp reg_date = new Timestamp(System.currentTimeMillis());
             mb.setReg_date(reg_date);
             if(gender.equals("남")) {	// 남자
-            	mb.setProfile("남자 기본 프로필.png");
-            }else {	// 여자
-            	mb.setProfile("여자 기본 프로필.png");
+            	mb.setProfile("basic/man.png");
+            }else if(gender.equals("여")){	// 여자
+            	mb.setProfile("basic/woman.png");
             }
             mb.setAuth(1);		// 처음가입땐 무조건 1(일반사용자)
             

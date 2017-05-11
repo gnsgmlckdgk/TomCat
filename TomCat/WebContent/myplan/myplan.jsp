@@ -12,6 +12,7 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/map.css" />
+<<<<<<< HEAD
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -23,22 +24,22 @@ $(document).ready(function(){
 });
 </script>
 </head>
+=======
+<link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
+
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat.git
 <body>
 	<%
-		String id = (String) request.getParameter("id");
-		String nick = (String) request.getParameter("nick");
+		String auth = (String)request.getAttribute("auth");
+		String id = (String)request.getAttribute("id");
 
-// 		if (id == null) {
-// 			response.sendRedirect("./Main.me?loginCheck=0");
-// 			out.print("로그인이 되지 않았습니다.");
-// 		}
 
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 	%>
-	<h1>
-		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1>
+<%-- 	<h1>
+		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1> --%>
 
 
 	<div class="container">
@@ -48,6 +49,7 @@ $(document).ready(function(){
 			<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">일정수정</a></h3>
 			<h5><a href="#">출발일</a>&nbsp;&nbsp;<img src="myplan/pn_cal_btn.png"></h5>
 			
+
 					<ul class="actions small">
 					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small" id="pln_hide1">일정A</a></li>
 					<li><a href="./MyPlan.pln?plan_nr=2" class="button small" id="pln_hide2">일정B</a></li>
@@ -79,6 +81,50 @@ $(document).ready(function(){
 		  	 	</table>
 				</div>
 				</div>
+
+			
+		<div>
+		
+		    	<table border="1"> <tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
+		    	
+			  	<%
+			 	  for(int i=0;i<basketList.size();i++){
+					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
+					TravelBean tb=(TravelBean)goodsList.get(i);
+						if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
+						%>
+						
+						<tr>
+						<td><%=mpbb.getPlan_nr() %></td>
+						<td><%=mpbb.getItem_nr() %></td>
+						<td><%=tb.getName()%></td>
+
+					</tr>	   
+						
+									
+				<%
+				
+		 		 }
+		  	 	%></table>
+		  	 	
+		  	 	<%if(basketList.size()==0){
+		  	 	 %>아직 일정을 추가하지 않으셨군요! <br>
+		  	 	 여행지를 검색해서 찜해보세요. <br><br>
+		  	 	 
+		  	 	 여행지가 추가되면서,<br>
+		  	 	 일정별로 방문순서를 계획할 수 있어요<br><br>
+		  	 	 
+		  	 	 또한 여행경로도 확인 가능하다는 사실!<br>
+		  	 	 그 놀라운 서비스를 확인하러 Go~ Go~<br>
+		  	 	 <%
+				
+		 		 }
+		  	 	%>
+		  	 	
+			</div>
+		</div>
+		
+
 		<div id="map"></div>
 	</div>
 
@@ -108,7 +154,8 @@ $(document).ready(function(){
               <%
 		String MarkerColor;
 	 	String TitlePlan;
-       
+	 	if(basketList.size()!=0){
+	  	
 	 	for(int i=0;i<basketList.size();i++){
 	 	 	MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
 	 	 	TravelBean tb=(TravelBean)goodsList.get(i);
@@ -160,9 +207,16 @@ $(document).ready(function(){
           });
       	<%
 	 	 
-	 	}%> 
+	 	}//for문
+	 
+	 	%> 
+	 	
        showListings();
-      
+     	<%
+    	
+   		}//if 문
+	 	%> 
+	
         }//function initMap() 
          
 	// This function will loop through the markers array and display them all.
@@ -241,29 +295,79 @@ $(document).ready(function(){
 		
 	</script>
 
-	<!-- 결제 테스트 구역(코드 보안을 해지한 상태.) -->
+	<!-- 결제 테스트 구역 -->
+결제 테스트 구역.<br>
+<%if(auth.equals("무료회원")){%>
+	<%=auth %>일때 나오는 버튼.
+	
+	<script type="text/javascript">
+	
+	function dialog() {
 
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-		target="_top">
-		<input type="hidden" name="cmd" value="_xclick">
-		<input type="hidden" name="business" value="37UUQW9BH8GDA">
-		<input type="hidden" name="custom" value="<%=id%>">
-		<input type="hidden" name="lc" value="GA">
-		<input type="hidden" name="item_name" value="샘플 바로 구매 버튼">
-		<input type="hidden" name="amount" value="0.01">
-		<input type="hidden" name="currency_code" value="USD">
-		<input type="hidden" name="button_subtype" value="services">
-		<input type="hidden" name="no_note" value="0">
-		<input type="hidden" name="cn" value="판매자를 위한 특수 지침을 추가하세요.">
-		<input type="hidden" name="no_shipping" value="2">
-		<input type="hidden" name="rm" value="1">
-		<input type="hidden" name="return" value="http://localhost:9080/TomCat/MyPlan.pln?plan_nr=1">
-		<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-		<img alt="" border="0" src="https://www.paypalobjects.com/ko_KR/i/scr/pixel.gif" width="1" height="1">
-	</form>
+	    var dialogBox = $('.dialog'),
+	        dialogTrigger = $('.dialog__trigger'),
+	        dialogClose = $('.dialog__close'),
+	        dialogTitle = $('.dialog__title'),
+	        dialogContent = $('.dialog__content'),
+	        dialogAction = $('.dialog__action');
 
+	    // Open the dialog
+	    dialogTrigger.on('click', function(e) {
+	        dialogBox.toggleClass('dialog--active');
+	        e.stopPropagation()
+	    });
 
+	    // Close the dialog - click close button
+	    dialogClose.on('click', function() {
+	        dialogBox.removeClass('dialog--active');
+	    });
+
+	    // Close the dialog - press escape key // key#27
+	    $(document).keyup(function(e) {
+	        if (e.keyCode === 27) {
+	            dialogBox.removeClass('dialog--active');
+	        }
+	    });
+
+	    // Close dialog - click outside
+	    $(document).on("click", function(e) {
+	        if ($(e.target).is(dialogBox) === false &&
+	            $(e.target).is(dialogTitle) === false &&
+// 	            $(e.target).is(dialogContent) === false &&
+	            $(e.target).is(dialogAction) === false) {
+	            dialogBox.removeClass("dialog--active");
+	        }
+	    });
+
+	};
+
+	// Run function when the document has loaded
+	$(function() {
+	    dialog();
+	});
+	
+	</script>
+	
+	<button class="dialog__trigger button alt small">일정C</button>
+	
+	<div class="dialog">
+		<span class="dialog__close">&#x2715;</span>
+  		<h2 class="dialog__title">"일정C"는 골드멤버에 한해 사용가능합니다.</h2>
+  		<p class="dialog__content">test</p>
+  			
+  		<input type="button" class="dialog__action" onclick="location.href='./Pay.pln'" value="골드 멤버 되기 &#8594;">
+  		
+  		
+	</div>  
+
+<%} else {%>
+	<%=auth %>일때 나오는 버튼.
+
+	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
+	
+<%} %>
+
+<br>결제 테스트 구역 끝.
 	<!-- 결제 테스트 구역 끝 -->
 
 
