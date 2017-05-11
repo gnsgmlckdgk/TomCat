@@ -96,7 +96,7 @@
 					<td><%=send_fee%>원</td>
 				</tr>
 			</table>
-
+sfsdf
 			<h4>할인혜택</h4>
 			현재 적용 가능한 할인혜택이 없습니다. <br>
 			<br>
