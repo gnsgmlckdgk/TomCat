@@ -64,7 +64,6 @@ public class MemberLoginAction implements Action {
         
         if(check == 1){
         	out.println("<script>");
-        	out.println("alert('인증완료');");
         	out.println("location.href='./Main.me?loginCheck=1';");
         	out.println("</script>");
         	out.close();

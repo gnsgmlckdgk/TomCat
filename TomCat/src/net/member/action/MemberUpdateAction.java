@@ -47,7 +47,7 @@ public class MemberUpdateAction implements Action {
 		// DB수정 작업
 		MemberDAO mdao = new MemberDAO();
 		try {
-			mdao.updateMember(mb, request);
+			mdao.updateMember(mb, realPath);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

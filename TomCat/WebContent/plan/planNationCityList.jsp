@@ -16,7 +16,7 @@
 	int count = pdao.getCityCount(nation);
 
 	// 한페이지에 보여줄 글의 개수
-	int pageSize = 2;
+	int pageSize = 5;
 
 	// 현페이지가 몇페이지인지 가져오기(기본 1페이지)
 	String pageNum = request.getParameter("pageNum");
@@ -58,13 +58,13 @@
 			for (int i = 0; i < pcbList.size(); i++) {
 				pcb = pcbList.get(i);
 	%>
-	<tr>
+	<tr onclick="location.href='./PlanRegion.pl?region=<%=pcb.getName()%>';">
 		<td class="img_td"
 			style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName()%></p>
 			<p style="font-size: 0.7em;"><%=pcb.getEn_name()%></p>
-			<p style="font-size: 1.0em; color: #6B66FF;"><%=pcb.getInfo()%></p>
+			<p style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=pcb.getInfo()%></p>
 		</td>
 	</tr>
 	<%
@@ -72,7 +72,7 @@
 		} else {
 	%>
 	<tr>
-		<th colspan="2">정보가 없습니다...</th>
+		<td colspan="2"><p>찾으시는 정보가 없습니다.</p></td>
 	</tr>
 	<%
 		}
@@ -91,7 +91,7 @@
 		for (int i = startPage; i <= endPage; i++) {
 	%><a href="javascript:cityListChange('<%=i%>');"
 		<%if (currentPage == i) {%>
-		style="color: #000; background-color: #ccc;" <%}%>><%=i%></a>
+		style="background-color: #ccc;" <%}%>><%=i%></a>
 	<%
 		}
 		if (pageCount > endPage) {

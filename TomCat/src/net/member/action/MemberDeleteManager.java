@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
 
+// 관리자가 회원관리 페이지에서 다른 회원을 삭제하는 클래스
 public class MemberDeleteManager implements Action {
 
 	@Override
@@ -54,7 +55,10 @@ public class MemberDeleteManager implements Action {
 
     		}else {	// 비밀번호 맞음
     			
-    			mdao.deleteMember(id);	// 회원 삭제
+    			// DB작업전 프로필 사진 삭제 위한 설정
+                String realPath = request.getRealPath("/upload/images/profileImg/");
+    			
+    			mdao.deleteMember(id, realPath);	// 회원 삭제
     			
     			out.print("<script>");
     			out.print("alert('회원을 삭제하였습니다.');");

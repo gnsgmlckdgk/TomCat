@@ -1,5 +1,6 @@
 package net.member.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.PrivateKey;
@@ -12,12 +13,12 @@ import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
 
+// 자신의 아이디를 직접 탈퇴시키는 클래스
 public class MemberDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// 비밀번호 복호화
 		int check = deleteMember(request);
 		
 		System.out.println("회원탈퇴 DAO 반환 check: " + check);
@@ -77,9 +78,12 @@ public class MemberDeleteAction implements Action {
             // 세션값 가져오기
             String id = (String)session.getAttribute("id");
             
+            // DB작업전 프로필 사진 삭제 위한 설정
+            String realPath = request.getRealPath("/upload/images/profileImg/");
+            
             // DB작업
             MemberDAO mdao = new MemberDAO();
-            check = mdao.deleteMember(id, pass);
+            check = mdao.deleteMember(id, pass, realPath);
             
         } catch (Exception ex) {
             throw new ServletException(ex.getMessage(), ex);
