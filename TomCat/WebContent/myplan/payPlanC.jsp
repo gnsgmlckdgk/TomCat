@@ -50,7 +50,7 @@
 				<tr>
 					<th>주문하시는 분</th>
 					<td>
-						<table>
+						<table class="innerTable">
 							<tr>
 								<td>이름</td>
 								<td><input type="text" name="name"></td>
@@ -70,7 +70,7 @@
 				<tr>
 					<th>받으시는 분</th>
 					<td>
-						<table>
+						<table class="innerTable">
 							<tr>
 								<td>이름</td>
 								<td><input type="text" name="name"></td>
@@ -98,9 +98,18 @@
 			</table>
 
 			<h4>할인혜택</h4>
-			현재 적용 가능한 할인혜택이 없습니다.
-
+			현재 적용 가능한 할인혜택이 없습니다. <br>
+			<br>
+			<br>
 			<h4>결제수단</h4>
+			<div class="pay_way">
+				<input type="radio" name="pay_way" value="1" /> 신용카드<br> <input
+					type="radio" name="pay_way" value="2" /> 실시간 계좌이체<br> <input
+					type="radio" name="pay_way" value="3" /> 무통장<br> <input
+					type="radio" name="pay_way" value="4" /> 휴대폰 결제<br> <input
+					type="radio" name="pay_way" value="5" /> 신용, 믿음<br>
+			</div>
+			<div>신용카드 결제</div>
 
 
 		</div>
@@ -122,13 +131,13 @@
 					<td><%=send_fee%>원</td>
 				</tr>
 				<tr class="last_fee">
-					<th colspan="2" >총 결제금액</th>
+					<th colspan="2">총 결제금액</th>
 				</tr>
 				<tr class="last_fee">
 					<th colspan="2" class="right"><%=gold_price - discount_price + send_fee%>원</th>
 				</tr>
 			</table>
-			<br> <input type="submit" value="구매하기">
+			<br> <input type="submit" style="width: 100%" value="구매하기">
 		</div>
 
 
