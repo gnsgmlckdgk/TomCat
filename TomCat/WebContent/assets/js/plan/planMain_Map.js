@@ -7,6 +7,12 @@
       $('#map1').vectorMap({
         map: 'asia_mill',
         panOnDrag: true,
+        
+        onRegionClick : function(event, code){
+        	var map = $('#map1').vectorMap('get', 'mapObject');			
+			location.href="./PlanSearch.pl?check=1&search="+map.getRegionName(code);
+		},
+    
         series: {
           regions: [{
             scale: ['#C8EEFF', '#0071A4'],
@@ -77,6 +83,12 @@
       $('#map2').vectorMap({
         map: 'europe_mill',
         panOnDrag: true,
+        
+        onRegionClick : function(event, code){
+        	var map = $('#map2').vectorMap('get', 'mapObject');			
+			location.href="./PlanSearch.pl?check=1&search="+map.getRegionName(code);
+		},
+		
         series: {
           regions: [{
             scale: ['#C8EEFF', '#0071A4'],
@@ -144,6 +156,12 @@
 
       $('#map3').vectorMap({
         map: 'oceania_mill',
+        
+        onRegionClick : function(event, code){
+        	var map = $('#map3').vectorMap('get', 'mapObject');			
+			location.href="./PlanSearch.pl?check=1&search="+map.getRegionName(code);
+		},
+		
         panOnDrag: true,
         series: {
           regions: [{
@@ -170,7 +188,7 @@
       });
     })
 
-/* 북미  */
+/* 남미  */
     jQuery.noConflict();
     jQuery(function(){
       var $ = jQuery;
@@ -178,6 +196,12 @@
       $('#map4').vectorMap({
         map: 'south_america_mill',
         panOnDrag: true,
+        
+        onRegionClick : function(event, code){
+        	var map = $('#map4').vectorMap('get', 'mapObject');			
+			location.href="./PlanSearch.pl?check=1&search="+map.getRegionName(code);
+		},
+		
         series: {
           regions: [{
             scale: ['#C8EEFF', '#0071A4'],
@@ -202,7 +226,7 @@
       });
     })
 
-/* 중남미  */
+/* 북미  */
     jQuery.noConflict();
     jQuery(function(){
       var $ = jQuery;
@@ -210,6 +234,13 @@
       $('#map5').vectorMap({
         map: 'north_america_mill',
         panOnDrag: true,
+        
+        onRegionClick : function(event, code){
+        	var map = $('#map5').vectorMap('get', 'mapObject');			
+			location.href="./PlanSearch.pl?check=1&search="+map.getRegionName(code);
+		},
+		
+		
         series: {
           regions: [{
             scale: ['#C8EEFF', '#0071A4'],

@@ -34,7 +34,7 @@ public class BoardContentAction implements Action{
 		request.setAttribute("pageNum", pageNum);
 		
 //============================댓글 Action=====================
-		
+
 		ReplyDAO rdao = new ReplyDAO();
 		int count = rdao.replyCount(num);
 		int pageSize = 5;
@@ -54,9 +54,8 @@ public class BoardContentAction implements Action{
 			replylist=rdao.getReplyList(startrow, pageSize,num);
 		}
 		
-		int replycount=rdao.replyCount(num);
+		int replycount=rdao.replyCount(num);	
 
-		
 		request.setAttribute("rl", replylist);
 		request.setAttribute("count", count);
 		request.setAttribute("pageSize", pageSize);

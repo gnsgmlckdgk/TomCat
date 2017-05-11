@@ -22,7 +22,7 @@ public class ReplyDAO {
 	private Connection getConnection() throws Exception {
 		Connection con = null;
 		Context init = new InitialContext();
-		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mysqlDB");
+		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mySQL");
 		con = ds.getConnection();
 		return con;
 	}// getConnection
@@ -38,10 +38,9 @@ public class ReplyDAO {
 			rs = pstmt.executeQuery();						
 			
 			 if(rs.next()){re_num=rs.getInt(1)+1;}
-			 System.out.println(re_num);			 
 
 
-			sql = "insert into gram_reply(num,content,re_ref,re_lev,re_seq,nick,date,re_num) " + "values(?,?,?,?,?,?,now(),?)";
+			sql = "insert into gram_reply(num,content,re_ref,re_lev,re_seq,nick,re_num,date) " + "values(?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, rb.getNum()); // 일반글의 글번호
 			pstmt.setString(2, rb.getContent());
@@ -131,16 +130,17 @@ public class ReplyDAO {
 			pstmt.setInt(2, startRow - 1);
 			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				ReplyBean rb = new ReplyBean();
-				rb.setNum(rs.getInt(1));
-				rb.setContent(rs.getString(2));
-				rb.setRe_lev(rs.getInt(3));
-				rb.setRe_seq(rs.getInt(4));
-				rb.setNick(rs.getString(5));
-				rb.setDate(rs.getDate(6));
-				rb.setRe_num(rs.getInt(7));
-				rb.setRe_ref(rs.getInt(8));
+				rb.setNum(rs.getInt("num"));
+				rb.setContent(rs.getString("content"));
+				rb.setRe_lev(rs.getInt("re_lev"));
+				rb.setRe_seq(rs.getInt("re_seq"));
+				rb.setNick(rs.getString("nick"));
+				rb.setDate(rs.getDate("date"));
+				rb.setRe_num(rs.getInt("re_num"));
+				rb.setRe_ref(rs.getInt("re_ref"));
 				
 				replyList.add(rb);
 			}
