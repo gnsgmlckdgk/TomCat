@@ -338,6 +338,58 @@ public class PlanDAO {
 			
 		}
 		
+		//도시 추가하기
+				public void insertCity(PlanCityBean pcb){
+					PlanCityBean cb = null;
+					Connection con = null;
+					String sql = "";
+					ResultSet rs = null;
+					Statement stmt = null;
+					
+					try{
+						
+						con=getConnection();
+						sql =  "insert into city(country_code, name, info, city_code, en_name) values(?,?,?,?,?)";
+						pstmt= con.prepareStatement(sql);
+						
+						pstmt.setString(1, pcb.getCountry_code());
+						pstmt.setString(2, pcb.getName());
+						pstmt.setString(3, pcb.getInfo());
+						pstmt.setString(4, pcb.getCity_code());
+						pstmt.setString(5, pcb.getEn_name());
+						
+						pstmt.executeUpdate();
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+						
+					}finally {
+						// 예외상관없이 마무리 작업
+						// 객체생성 닫기
+						if (rs != null) {
+							try {
+								rs.close();
+							} catch (SQLException ex) {
+							} // Exception 이 가장 큰 범위
+						} // if
+						if (stmt != null) {
+							try {
+								stmt.close();
+							} catch (SQLException ex) {
+							} // Exception 이 가장 큰 범위
+						} // if
+						if (con != null) {
+							try {
+								con.close();
+							} catch (SQLException ex) {
+							} // Exception 이 가장 큰 범위
+						} // if
+						
+					}
+					
+				}
+				
+		
 		//국가 리스트 개수
 		public int getCountryCount(){
 			int count=0;

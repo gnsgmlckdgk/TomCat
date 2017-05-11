@@ -54,7 +54,7 @@ function func2(num,pageNum){
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 	%>
-				 	<section id="banner">
+	<section id="banner">
 	
 	<h1>글내용 보기</h1>
 	<table id="table">
