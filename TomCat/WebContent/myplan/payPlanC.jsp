@@ -10,6 +10,9 @@
 	<!-- 입력란 들어갈 곳. -->
 
 	<link rel="stylesheet" href="assets/css/myplan/payPlanC.css" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<script src="assets/js/jquery.min.js"></script>
+	
 
 	<%
 		String id = (String) session.getAttribute("id");
@@ -18,6 +21,7 @@
 		int discount_price = 0;
 		int send_fee = 3000;
 	%>
+	
 	<h2>결제</h2>
 	<form action="./PayAction.pln" method="post">
 
@@ -53,15 +57,17 @@
 						<table class="innerTable">
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="name"></td>
+								<td><input type="text" name="name" value="db에서받아오는값." readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><input type="text" name="email"></td>
+								<td><input type="text" name="email" value="<%=id%>"
+									readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td>휴대폰 번호</td>
-								<td><input type="text" name="email"></td>
+								<td><input type="text" name="phone_number" value="db에서받아오는값."
+									readonly="readonly"></td>
 							</tr>
 						</table>
 					</td>
@@ -82,14 +88,14 @@
 							<tr>
 								<td>받으실 주소</td>
 								<td><input type="text" name="address"
-									value="어엇 폼만 만드려 했는데 할게 늘어나네?"></td>
+									placeholder="배송을 받는 상품이 아닙니다."></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				<tr>
 					<th>배송메시지</th>
-					<td><input type="text" name="message"></td>
+					<td><input type="text" name="message" placeholder="배송비가 이상하다면 글을 남겨주세요."></td>
 				</tr>
 				<tr>
 					<th>총배송비</th>
@@ -101,21 +107,24 @@
 			현재 적용 가능한 할인혜택이 없습니다. <br> <br> <br>
 
 			<h4>결제수단</h4>
-			
-			<link rel="stylesheet" href="./assets/css/main.css"/>
-			
-			
+
 			<div class="pay_way">
 				<div class="pay_way_radio">
-					<input type="radio" name="pay_way" id="priority-normal" value="1" /> 신용카드<br> <input
-						type="radio" name="pay_way" id="priority-normal" value="2" /> 실시간 계좌이체<br> <input
-						type="radio" name="pay_way" id="priority-normal" value="3" /> 무통장<br> <input
-						type="radio" name="pay_way" id="priority-normal" value="4" /> 휴대폰 결제<br> <input
-						type="radio" name="pay_way" id="priority-normal" value="5" /> 믿음<br>
-						
+				
+					<button type="button" onclick="$('.card').toggle()">신용카드</button>
+					
+					
+					<input type="radio" name="pay_way" id="2" value="2" />실시간 계좌이체<br>
+					<input type="radio" name="pay_way" id="3" value="3" />무통장<br>
+					<input type="radio" name="pay_way" id="4" value="4" />휴대폰 결제<br>
+					<input type="radio" name="pay_way" id="5" value="5" />믿음<br>
 				</div>
 
 				<div class="pay_way_form">
+					좌측에서 결제 수단을 선택주세요.
+					<div class="card">
+						jquery test toggle
+					</div>
 				</div>
 			</div>
 
@@ -125,41 +134,27 @@
 
 	<div class="banner">
 		<h4>최종 결제 정보</h4>
-				상품금액<br>
-				<%=gold_price%>원<br><br>
-				할인금액<br>
-				<%=discount_price%>원<br><br>
-			배송비<br>
-				<%=send_fee%>원<br><br>
-				
-				총 결제금액<br>
-			<%=gold_price - discount_price + send_fee%>원<br><br>
-			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			
-			
-		<input type="submit" style="width: 100%" value="구매하기">
+
+		<div class="result">
+			상품금액<br>
+			<%=gold_price%>원<br> <br>할인금액<br>
+			<%=discount_price%>원<br> <br> 배송비<br>
+			<%=send_fee%>원<br> <br>
+			<span> 총 결제금액 </span><br> <span class="final_price"><%=gold_price - discount_price + send_fee%>원</span><br>
+
+		</div>
+
+		<div class="agree_check">
+			<input type="checkbox" name="agree">(필수)동의합니다.<br> 주문할
+			상품의 상품명, 가격, 배송정보에 동의 하십니까?(전자상거래법 제8조 2항)
+		</div>
+
+		<div class="popup_check">
+			<span>확인해주세요!</span><br> 설정에서 팝업차단을 해지했는지 확인해 주세요. 팝업창 차단이 설정되어
+			있으면 결제가 진행되지 않습니다.
+		</div>
+		<input type="button" style="width: 100%"
+			onclick="location.href='./MyPlan.pln?plan_nr=100'" value="구매하기">
 	</div>
 
 	<!-- 입력란 들어갈 곳. 끝. -->

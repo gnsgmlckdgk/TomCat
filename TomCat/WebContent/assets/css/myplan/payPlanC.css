@@ -1,23 +1,27 @@
 @CHARSET "UTF-8";
 
-h4{
+form h4{
+	border-left:10px solid #484848;
 	text-align: left;
 	margin-left: 3em;
 	font-size: 2em;
+	padding-left: 10px;
 }
 
 form{
 	background-color: white;
 	width: 78%;
-	margin: 0 5px;
 	text-align: center;
 	vertical-align: middle;
+	opacity:0.9;
 }
+
 form th{
 	text-align: center;
 }
-table th{
+table tr th{
 	vertical-align: middle;
+	text-align: center;
 }
 
 .innerTable td{
@@ -61,6 +65,47 @@ table th{
 	top:6em;
 	border: none;
 	border-collapse: none;
+	
+	height: 80%;
+	
+	opacity:0.9;
+}
+
+.banner h4{
+	margin-top:2em;
+	text-align: center;
+	font-size: 2em;
+	padding-bottom:2em;
+	border-bottom: 5px solid #484848;
+}
+
+.banner div{
+	margin: 20px;
+}
+.agree_check{
+	border: 1px solid #666;
+}
+
+.popup_check{
+	border: 1px solid #a40001;
+	margin: 0;
+}
+.popup_check span{
+	color: #a40001;
+}
+
+.result{
+	border: 3px solid #fff;
+}
+.result span{
+	color: orange;
+	text-align: left;
+}
+
+.result final_price{
+	color:orange;
+	text-align: right;
+	font-size: 1.5em;
 }
 
 .left{
@@ -76,3 +121,17 @@ table th{
 	font-size: 1.5em;
 	
 }
+
+
+
+/*jquery test*/
+
+    .card {
+    display:none;
+        border-radius : 5px;
+        border : 5px solid gray;
+        box-shadow : 0 0 5px silver;
+        padding : 20px;
+    }
+
+/*jquery test end*/
