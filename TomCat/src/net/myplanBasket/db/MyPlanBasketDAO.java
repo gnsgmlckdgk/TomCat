@@ -226,10 +226,46 @@ public class MyPlanBasketDAO {
 				}
 		}
 		
-		return auth;
+		return auth; //실제로는 gold값을 반환한다.
 	}
 	
-	
+	public void insertGoldMember(String id){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "update member set gold=1 where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			// 4 rs 실행저장
+			rs = pstmt.executeQuery();			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+		}
+	}
 	
 	// getBasketList(id)
 	public Vector getBasketList(String id) {

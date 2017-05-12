@@ -17,6 +17,9 @@
 	<%
 		String id = (String) session.getAttribute("id");
 		String nick = (String) session.getAttribute("nick");
+		
+		request.setAttribute("idid", id);
+		
 		int gold_price = 97000;
 		int discount_price = 0;
 		int send_fee = 3000;
@@ -179,7 +182,7 @@
 			있으면 결제가 진행되지 않습니다.
 		</div>
 		<input type="button" style="width: 100%"
-			onclick="location.href='./MyPlan.pln?plan_nr=100'" value="구매하기">
+			onclick="location.href='./PayAction.pln'" value="구매하기">
 	</div>
 
 	<!-- 입력란 들어갈 곳. 끝. -->
