@@ -12,112 +12,106 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/map.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$(document).ready(function(){
-	$('#pln_hide1').click(function(){
-		$('#tb1').toggle('fast',function(){
-		});
-	});
+$(".btn").click(function(){
+	var effect = 'slide';
+	var options ='left';
+	var duration = 500;
+	$('#pln_list').toggle(effect, options, duration);
+});//일정수정 버튼 클릭시 오른쪽으로 슬라이드 
+
+$(function(){
+	$('.datepicker').click(function(){
+  		$( '.datepicker').datepicker();
+	}); //날짜 선택하기
 });
 </script>
 </head>
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <body>
 	<%
-		String auth = (String)request.getAttribute("auth");
-		String id = (String)request.getAttribute("id");
-
+		String auth = (String) request.getAttribute("auth");
+		String id = (String) request.getAttribute("id");
 
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 	%>
-<%-- 	<h1>
+	<%-- 	<h1>
 		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1> --%>
 
 
-		<div class="container">
-		<div class="myplan-list">
-			<h3><a href="./MyPlan.pln?plan_nr=100">전체 일정 보기</a> |
-			<a href="./MyPlanModify.pln?plan_nr=<%=plan_nr %>">일정수정</a></h3>
-			<h5><a href="#">출발일</a>&nbsp;&nbsp;<img src="myplan/pn_cal_btn.png"></h5>
-			
-
-					<ul class="actions small">
-					<li><a href="./MyPlan.pln?plan_nr=1" class="button special small" id="pln_hide1">일정A</a></li>
-					<li><a href="./MyPlan.pln?plan_nr=2" class="button small" id="pln_hide2">일정B</a></li>
-					<li><a href="./MyPlan.pln?plan_nr=3" class="button alt small" id="pln_hide3">일정C</a></li>
-					</ul>
-				<table border="1" id="tb1">
-					<tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>	   				
-		  	 	</table>
-		  	 
-				<div>
-		    	<table border="1" id="tb2">
-			 		<tr><td>plan_nr</td><td>item_nr</td><td>name</td><td>추가</td></tr>
-				  	<%
-				 	  for(int i=0;i<basketList.size();i++){
-						MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
-						TravelBean tb=(TravelBean)goodsList.get(i);
-							if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
-							%>
-							
-							<tr>
-							<td><%=mpbb.getPlan_nr() %></td>
-							<td><%=mpbb.getItem_nr() %></td>
-							<td><%=tb.getName()%></td>
-							<td><a href="./MyPlan.pln?plan_nr=<%=plan_nr%>" ><img src="myplan/spot_to_inspot_a.png"></a></td>
-							</tr>	   
+	<div class="container" >
+		<div class="myplan-list" >
+			<h3>
+				<button onclick = "location.href ='./MyPlan.pln?plan_nr=100'">전체 찜 목록보기</button>
+				<button class="btn" >일정수정</button>
+			</h3>
+			<div>
+				<table border="1" >
+					<tr>
+						<td>plan_nr</td>
+						<td>item_nr</td>
+						<td>name</td>
+						<td>추가</td>
+					</tr>
 					<%
-			 		 }
-			  	 	%>
-		  	 	</table>
-				</div>
-			
+						for (int i = 0; i < basketList.size(); i++) {
+							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
+							TravelBean tb = (TravelBean) goodsList.get(i);
+							if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
+								continue;
+					%>
 
-
-		    <%-- 	<table border="1"> <tr><td>plan_nr</td><td>item_nr</td><td>name</td></tr>
-		    	
-			  	<%
-			 	  for(int i=0;i<basketList.size();i++){
-					MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
-					TravelBean tb=(TravelBean)goodsList.get(i);
-						if(plan_nr != mpbb.getPlan_nr() & plan_nr!=100) continue;
-						%>
-						
-						<tr>
-						<td><%=mpbb.getPlan_nr() %></td>
-						<td><%=mpbb.getItem_nr() %></td>
+					<tr>
+						<td><%=mpbb.getPlan_nr()%></td>
+						<td><%=mpbb.getItem_nr()%></td>
 						<td><%=tb.getName()%></td>
-
-					</tr>	   
-						
-									
-				<%
-				
-		 		 }
-		  	 	%></table>  --%>
-		  	 	
-		  	 	<%if(basketList.size()==0){
-		  	 	 %>아직 일정을 추가하지 않으셨군요! <br>
-		  	 	 여행지를 검색해서 찜해보세요. <br><br>
-		  	 	 
-		  	 	 여행지가 추가되면서,<br>
-		  	 	 일정별로 방문순서를 계획할 수 있어요<br><br>
-		  	 	 
-		  	 	 또한 여행경로도 확인 가능하다는 사실!<br>
-		  	 	 그 놀라운 서비스를 확인하러 Go~ Go~<br>
-		  	 	 <%
-				
-		 		 }
-		  	 	%>
-		  	 </div>	
-		  	 <div id="map"></div>
+						<td><a href="./MyPlan.pln?plan_nr=<%=plan_nr%>"><img
+								src="myplan/spot_to_inspot_a.png"></a></td>
+					</tr>
+					<%
+						}
+					%>
+				</table>
 			</div>
-	
-			
+
+			<%
+				if (basketList.size() == 0) {
+			%>아직 일정을 추가하지 않으셨군요! <br> 여행지를 검색해서 찜해보세요. <br> <br>
+			여행지가 추가되면서,<br> 일정별로 방문순서를 계획할 수 있어요<br> <br> 또한 여행경로도
+			확인 가능하다는 사실!<br> 그 놀라운 서비스를 확인하러 Go~ Go~<br>
+			<%
+				}
+			%>
+		</div>
+		<div id="right_full_box" class="f1" style="position:absolute; left: 1px; top: 0px;">
+		<div id="map" class="f1" style="height: 1045px;position: relative;width: 1584px;overflow: hidden;"></div>
+			<!--  오른쪽으로 뗄 예정
+		<div id="pln_list"  style="display: block;">
+		<div class="datepicker">
+			출발일<img src="myplan/pn_cal_btn.png">
+		</div>
+		</div>
+		 <ul class="actions small">
+			<li><a href="./MyPlan.pln?plan_nr=1"
+				class="button special small" >일정A</a></li>
+			<li><a href="./MyPlan.pln?plan_nr=2" 
+				class="button small" >일정B</a></li>
+			<li><a href="./MyPlan.pln?plan_nr=3" 
+				class="button alt small" >일정C</a></li>
+		</ul> -->
+		</div>
+	</div>
+
+
 
 	<script>
       var map;
@@ -142,36 +136,38 @@ $(document).ready(function(){
        var highlightedIcon = makeMarkerIcon('FFFF24');
      
 
-              <%
-		String MarkerColor;
-	 	String TitlePlan;
-	 	if(basketList.size()!=0){
-	  	
-	 	for(int i=0;i<basketList.size();i++){
-	 	 	MyPlanBasketBean mpbb=(MyPlanBasketBean)basketList.get(i);
-	 	 	TravelBean tb=(TravelBean)goodsList.get(i);
-		 	 	if(plan_nr!= mpbb.getPlan_nr()&plan_nr!=100  ) continue;
-	 		
- 	 		
-	 	 	switch (mpbb.getPlan_nr()) {
-	 	 	case 1 : MarkerColor="6799FF"; //light blue
-	 	 			 TitlePlan="A"; 
-	 	 			 break;	
-	 	 	case 2 : MarkerColor="F361DC"; //pink
-	 	 			 TitlePlan="B"; 
-	 	 			 break;	
-	 	 	case 3 : MarkerColor="8041D9"; //purple
-	 	 			 TitlePlan="C"; 
-	 	 			 break;	
-	 	 	case 4 : MarkerColor="47C83E"; //green
-	 	 			 TitlePlan="D"; 
-	 	 			 break;	
-			default: MarkerColor="F15F5F"; //red
-					 TitlePlan="E"; 
-					 break;	
-	 	 	}
-	 	 	
-	 	   %>
+              <%String MarkerColor;
+			String TitlePlan;
+			if (basketList.size() != 0) {
+
+				for (int i = 0; i < basketList.size(); i++) {
+					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
+					TravelBean tb = (TravelBean) goodsList.get(i);
+					if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
+						continue;
+
+					switch (mpbb.getPlan_nr()) {
+						case 1 :
+							MarkerColor = "6799FF"; //light blue
+							TitlePlan = "A";
+							break;
+						case 2 :
+							MarkerColor = "F361DC"; //pink
+							TitlePlan = "B";
+							break;
+						case 3 :
+							MarkerColor = "8041D9"; //purple
+							TitlePlan = "C";
+							break;
+						case 4 :
+							MarkerColor = "47C83E"; //green
+							TitlePlan = "D";
+							break;
+						default :
+							MarkerColor = "F15F5F"; //red
+							TitlePlan = "E";
+							break;
+					}%>
 
 	        var defaultIcon = makeMarkerIcon('<%=MarkerColor%>');
 	    
@@ -180,37 +176,29 @@ $(document).ready(function(){
 	    	var lng = <%=tb.getLongitude()%>;
 	    	var position = new google.maps.LatLng(lat,lng); 
 
-	    	var title = '일정<%=TitlePlan%>-'+'<%=i+1%>'+'번째 방문지: '+'<%=tb.getName()%>';
-         // Create a marker per location, and put into markers array.
-          var marker = new google.maps.Marker({
-        	position: position,
-            title: title,
-            animation: google.maps.Animation.DROP,
-            icon: defaultIcon,
-            id: <%=i%>
-          });
-         
-          // Push the marker to our array of markers.
-          markers.push(marker);
-          // Create an onclick event to open the large infowindow at each marker.
-          marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
-          });
-      	<%
-	 	 
-	 	}//for문
-	 
-	 	%> 
-	 	
-       showListings();
-     	<%
-    	
-   		}//if 문
-	 	%> 
-	
-        }//function initMap() 
-         
-	// This function will loop through the markers array and display them all.
+	    	var title = '일정<%=TitlePlan%>-'+'<%=i + 1%>'+'번째 방문지: '+'<%=tb.getName()%>';
+			// Create a marker per location, and put into markers array.
+			var marker = new google.maps.Marker({
+				position : position,
+				title : title,
+				animation : google.maps.Animation.DROP,
+				icon : defaultIcon,
+				id :
+	<%=i%>
+		});
+
+			// Push the marker to our array of markers.
+			markers.push(marker);
+			// Create an onclick event to open the large infowindow at each marker.
+			marker.addListener('click', function() {
+				populateInfoWindow(this, largeInfowindow);
+			});
+	<%} //for문%>
+		showListings();
+	<%} //if 문%>
+		}//function initMap() 
+
+		// This function will loop through the markers array and display them all.
 
 		function showListings() {
 			var bounds = new google.maps.LatLngBounds();
@@ -280,85 +268,86 @@ $(document).ready(function(){
 			return markerImage;
 		}
 	</script>
-
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHAu8kwLgLcIk1oWIKpJhyOQQTK6RBLNI&v=3&callback=initMap">
-		
 	</script>
 
 	<!-- 결제 테스트 구역 -->
-결제 테스트 구역.<br>
-<%if(auth.equals("무료회원")){%>
-	<%=auth %>일때 나오는 버튼.
-	
+	결제 테스트 구역.
+	<br>
+	<%
+		if (auth.equals("무료회원")) {
+	%>
+	<%=auth%>일때 나오는 버튼.
+
 	<script type="text/javascript">
-	
-	function dialog() {
+		function dialog() {
 
-	    var dialogBox = $('.dialog'),
-	        dialogTrigger = $('.dialog__trigger'),
-	        dialogClose = $('.dialog__close'),
-	        dialogTitle = $('.dialog__title'),
-	        dialogContent = $('.dialog__content'),
-	        dialogAction = $('.dialog__action');
+			var dialogBox = $('.dialog'), dialogTrigger = $('.dialog__trigger'), dialogClose = $('.dialog__close'), dialogTitle = $('.dialog__title'), dialogContent = $('.dialog__content'), dialogAction = $('.dialog__action');
 
-	    // Open the dialog
-	    dialogTrigger.on('click', function(e) {
-	        dialogBox.toggleClass('dialog--active');
-	        e.stopPropagation()
-	    });
+			// Open the dialog
+			dialogTrigger.on('click', function(e) {
+				dialogBox.toggleClass('dialog--active');
+				e.stopPropagation()
+			});
 
-	    // Close the dialog - click close button
-	    dialogClose.on('click', function() {
-	        dialogBox.removeClass('dialog--active');
-	    });
+			// Close the dialog - click close button
+			dialogClose.on('click', function() {
+				dialogBox.removeClass('dialog--active');
+			});
 
-	    // Close the dialog - press escape key // key#27
-	    $(document).keyup(function(e) {
-	        if (e.keyCode === 27) {
-	            dialogBox.removeClass('dialog--active');
-	        }
-	    });
+			// Close the dialog - press escape key // key#27
+			$(document).keyup(function(e) {
+				if (e.keyCode === 27) {
+					dialogBox.removeClass('dialog--active');
+				}
+			});
 
-	    // Close dialog - click outside
-	    $(document).on("click", function(e) {
-	        if ($(e.target).is(dialogBox) === false &&
-	            $(e.target).is(dialogTitle) === false &&
-// 	            $(e.target).is(dialogContent) === false &&
-	            $(e.target).is(dialogAction) === false) {
-	            dialogBox.removeClass("dialog--active");
-	        }
-	    });
+			// Close dialog - click outside
+			$(document).on(
+					"click",
+					function(e) {
+						if ($(e.target).is(dialogBox) === false
+								&& $(e.target).is(dialogTitle) === false &&
+								// 	            $(e.target).is(dialogContent) === false &&
+								$(e.target).is(dialogAction) === false) {
+							dialogBox.removeClass("dialog--active");
+						}
+					});
 
-	};
+		};
 
-	// Run function when the document has loaded
-	$(function() {
-	    dialog();
-	});
-	
+		// Run function when the document has loaded
+		$(function() {
+			dialog();
+		});
 	</script>
-	
+
 	<button class="dialog__trigger button alt small">일정C</button>
-	
+
 	<div class="dialog">
 		<span class="dialog__close">&#x2715;</span>
-  		<h2 class="dialog__title">"일정C"는 골드멤버에 한해 사용가능합니다.</h2>
-  		<p class="dialog__content">test</p>
-  			
-  		<input type="button" class="dialog__action" onclick="location.href='./Pay.pln'" value="골드 멤버 되기 &#8594;">
-  		
-  		
-	</div>  
+		<h2 class="dialog__title">"일정C"는 골드멤버에 한해 사용가능합니다.</h2>
+		<p class="dialog__content">test</p>
 
-<%} else {%>
-	<%=auth %>일때 나오는 버튼.
+		<input type="button" class="dialog__action"
+			onclick="location.href='./Pay.pln'" value="골드 멤버 되기 &#8594;">
+
+
+	</div>
+
+	<%
+		} else {
+	%>
+	<%=auth%>일때 나오는 버튼.
 
 	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
-	
-<%} %>
 
-<br>결제 테스트 구역 끝.
+	<%
+		}
+	%>
+
+	<br>결제 테스트 구역 끝.
 	<!-- 결제 테스트 구역 끝 -->
 
 
