@@ -96,54 +96,71 @@
 					<td><%=send_fee%>원</td>
 				</tr>
 			</table>
-sfsdf
+
 			<h4>할인혜택</h4>
-			현재 적용 가능한 할인혜택이 없습니다. <br>
-			<br>
-			<br>
+			현재 적용 가능한 할인혜택이 없습니다. <br> <br> <br>
+
 			<h4>결제수단</h4>
+			
+			<link rel="stylesheet" href="./assets/css/main.css"/>
+			
+			
 			<div class="pay_way">
-				<input type="radio" name="pay_way" value="1" /> 신용카드<br> <input
-					type="radio" name="pay_way" value="2" /> 실시간 계좌이체<br> <input
-					type="radio" name="pay_way" value="3" /> 무통장<br> <input
-					type="radio" name="pay_way" value="4" /> 휴대폰 결제<br> <input
-					type="radio" name="pay_way" value="5" /> 신용, 믿음<br>
+				<div class="pay_way_radio">
+					<input type="radio" name="pay_way" id="priority-normal" value="1" /> 신용카드<br> <input
+						type="radio" name="pay_way" id="priority-normal" value="2" /> 실시간 계좌이체<br> <input
+						type="radio" name="pay_way" id="priority-normal" value="3" /> 무통장<br> <input
+						type="radio" name="pay_way" id="priority-normal" value="4" /> 휴대폰 결제<br> <input
+						type="radio" name="pay_way" id="priority-normal" value="5" /> 믿음<br>
+						
+				</div>
+
+				<div class="pay_way_form">
+				</div>
 			</div>
-			<div>신용카드 결제</div>
-
 
 		</div>
-
-
-		<div class="banner">
-			<h4>최종 결제 정보</h4>
-			<table>
-				<tr>
-					<th>상품금액</th>
-					<td><%=gold_price%>원</td>
-				</tr>
-				<tr>
-					<th>할인금액</th>
-					<td><%=discount_price%>원</td>
-				</tr>
-				<tr>
-					<th>배송비</th>
-					<td><%=send_fee%>원</td>
-				</tr>
-				<tr class="last_fee">
-					<th colspan="2">총 결제금액</th>
-				</tr>
-				<tr class="last_fee">
-					<th colspan="2" class="right"><%=gold_price - discount_price + send_fee%>원</th>
-				</tr>
-			</table>
-			<br> <input type="submit" style="width: 100%" value="구매하기">
-		</div>
-
 
 	</form>
 
-
+	<div class="banner">
+		<h4>최종 결제 정보</h4>
+				상품금액<br>
+				<%=gold_price%>원<br><br>
+				할인금액<br>
+				<%=discount_price%>원<br><br>
+			배송비<br>
+				<%=send_fee%>원<br><br>
+				
+				총 결제금액<br>
+			<%=gold_price - discount_price + send_fee%>원<br><br>
+			
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			
+			
+		<input type="submit" style="width: 100%" value="구매하기">
+	</div>
 
 	<!-- 입력란 들어갈 곳. 끝. -->
 

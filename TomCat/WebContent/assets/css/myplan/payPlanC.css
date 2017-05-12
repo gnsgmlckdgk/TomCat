@@ -8,8 +8,8 @@ h4{
 
 form{
 	background-color: white;
-	width: 80%;
-	margin: auto;
+	width: 78%;
+	margin: 0 5px;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -26,18 +26,39 @@ table th{
 }
 
 .pay_way{
-	width:300em;
-	float: left;
+	position: relative;
 }
+
+.pay_way_radio{
+	border:1px solid red;
+	width: 30%;
+	height: 10em;
+	float: left;
+	
+	
+	
+	
+}
+.pay_way_form{
+	
+	border:1px solid blue;
+	
+	width: 70%;
+	height: 10em;
+	margin-left: 30%;
+	
+}
+
 
 .banner{
 	width:20%;
 
 	background-color: white;
-	opacity:0.8;
+	margin:0 5px;
+	
 	position:fixed;
 	right:5px;
-	top:100px;
+	top:6em;
 	border: none;
 	border-collapse: none;
 }

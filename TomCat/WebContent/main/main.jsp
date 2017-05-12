@@ -24,7 +24,7 @@ String nick = (String)session.getAttribute("nick");%>
 	<ul class="actions"> <!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
 		
-		<li><a href="./PlanNation.pl?nation='한국'" class="button special big">한국 국가페이지</a></li>
+		
 
 		<li><a href="./MyPlan.pln?plan_nr=100" class="button special big">나의일정관리</a></li>
 		
