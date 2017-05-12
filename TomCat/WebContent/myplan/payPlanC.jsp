@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="assets/css/myplan/payPlanC.css" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<script src="assets/js/jquery.min.js"></script>
-	
+
 
 	<%
 		String id = (String) session.getAttribute("id");
@@ -21,7 +21,7 @@
 		int discount_price = 0;
 		int send_fee = 3000;
 	%>
-	
+
 	<h2>결제</h2>
 	<form action="./PayAction.pln" method="post">
 
@@ -57,7 +57,8 @@
 						<table class="innerTable">
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="name" value="db에서받아오는값." readonly="readonly"></td>
+								<td><input type="text" name="name" value="db에서받아오는값."
+									readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td>이메일</td>
@@ -66,8 +67,8 @@
 							</tr>
 							<tr>
 								<td>휴대폰 번호</td>
-								<td><input type="text" name="phone_number" value="db에서받아오는값."
-									readonly="readonly"></td>
+								<td><input type="text" name="phone_number"
+									value="db에서받아오는값." readonly="readonly"></td>
 							</tr>
 						</table>
 					</td>
@@ -95,7 +96,8 @@
 				</tr>
 				<tr>
 					<th>배송메시지</th>
-					<td><input type="text" name="message" placeholder="배송비가 이상하다면 글을 남겨주세요."></td>
+					<td><input type="text" name="message"
+						placeholder="배송비가 이상하다면 글을 남겨주세요."></td>
 				</tr>
 				<tr>
 					<th>총배송비</th>
@@ -110,21 +112,44 @@
 
 			<div class="pay_way">
 				<div class="pay_way_radio">
-				
-					<button type="button" onclick="$('.card').toggle()">신용카드</button>
-					
-					
+
+					<button type="button" onclick="$('.card').toggle()">신용카드</button><br>
+
 					<input type="radio" name="pay_way" id="2" value="2" />실시간 계좌이체<br>
 					<input type="radio" name="pay_way" id="3" value="3" />무통장<br>
 					<input type="radio" name="pay_way" id="4" value="4" />휴대폰 결제<br>
-					<input type="radio" name="pay_way" id="5" value="5" />믿음<br>
+					
+					<button type="button" onclick="$('.believe').toggle()">믿음</button>
 				</div>
 
 				<div class="pay_way_form">
-					좌측에서 결제 수단을 선택주세요.
+					
 					<div class="card">
-						jquery test toggle
+						<span>신용카드 결제</span><br>
+						<table>
+							<tr>
+								<th>카드선택</th>
+								<td><select>
+										<option>BC카드</option>
+										<option>KB카드</option>
+								</select></td>
+							</tr>
+							<tr>
+								<th>할부선택</th>
+								<td><select>
+										<option>일시불</option>
+										<option>3개월</option>
+								</select></td>
+							</tr>
+						</table>
 					</div>
+					
+					<div class="believe">
+					
+						곧 송금할 것이라 믿습니다.<br>
+					
+					</div>
+					
 				</div>
 			</div>
 
@@ -139,8 +164,8 @@
 			상품금액<br>
 			<%=gold_price%>원<br> <br>할인금액<br>
 			<%=discount_price%>원<br> <br> 배송비<br>
-			<%=send_fee%>원<br> <br>
-			<span> 총 결제금액 </span><br> <span class="final_price"><%=gold_price - discount_price + send_fee%>원</span><br>
+			<%=send_fee%>원<br> <br> <span> 총 결제금액 </span><br> <span
+				class="final_price"><%=gold_price - discount_price + send_fee%>원</span><br>
 
 		</div>
 
