@@ -13,26 +13,18 @@
 	String id = (String) session.getAttribute("id");
 %>
 <!-- One 지역명 및 설명-->
-<section id="banner">
-	<div class="container 75%">
+<section id="banner" class="nation_one">
+	<div class="container 75% nation_info_content">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-				<h2><%=nation%></h2>
 				
+				<div class="nation_info">
+				<h2><%=nation%></h2><br>
 				 <%
-				 List<String> wikiList = (List)request.getAttribute("wiki");
-				 if(wikiList.size()>0) {
-					 for(int i=0; i<wikiList.size(); i++) {
-						 String wiki = wikiList.get(i);
-						 %>
-						 <p>
-						 <%=wiki %>
-						 </p>
-						 <%
-					 }
-				 }
+				 StringBuffer info = (StringBuffer)request.getAttribute("nation_info");
 				 %>
-				
+				 <%=info.toString() %>
+				</div>
 				
 			</div>
 			<div class="6u$ 12u$(medium)">
