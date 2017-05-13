@@ -24,7 +24,7 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=2"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=3"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
