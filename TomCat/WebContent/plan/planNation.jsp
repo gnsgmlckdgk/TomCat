@@ -17,19 +17,22 @@
 	<div class="container 75%">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-				<h2><%=nation%>
-					
-				</h2>
-				<p>
-					Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
-				</p>
-				<br>
-				<p>
-					http://blog.acronym.co.kr/337 <br>
-					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-				</p>
-				<br>
-				<p>이 부분까지 위키피디아에서 파싱???</p>
+				<h2><%=nation%></h2>
+				
+				 <%
+				 List<String> wikiList = (List)request.getAttribute("wiki");
+				 if(wikiList.size()>0) {
+					 for(int i=0; i<wikiList.size(); i++) {
+						 String wiki = wikiList.get(i);
+						 %>
+						 <p>
+						 <%=wiki %>
+						 </p>
+						 <%
+					 }
+				 }
+				 %>
+				
 				
 			</div>
 			<div class="6u$ 12u$(medium)">

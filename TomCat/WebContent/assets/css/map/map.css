@@ -1,14 +1,15 @@
 @CHARSET "UTF-8";
 
+
 .container {
-	height: 100%;
-	position: relative;
+	height: 1045px;
+	width:100%;
 }
 
 #map {
 	bottom: 0px;
 	height: 100%;
-	left: 375px;
+	left: 365px;
 	position: absolute;
 	right: 0px;
 	border: 1px solid #999999;
@@ -33,4 +34,19 @@
 
 .text {
 	font-size: 12px;
+}
+.f1{
+	 float: left;
+}
+
+#pln_list{
+	width: 300px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding-bottom: 20px;
+    z-index: 999;
+    background: #fff;
+    border-radius: 5px;
+    display: none;
 }

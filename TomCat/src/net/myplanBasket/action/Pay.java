@@ -16,9 +16,11 @@ public class Pay implements Action{
 				
 		//content
 		
-		
-		
-		
+		String id = (String)request.getAttribute("idid");
+		System.out.println(id);
+
+		MyPlanBasketDAO mpdao = new MyPlanBasketDAO();
+		mpdao.insertGoldMember(id);
 		
 		//end content		
 		
