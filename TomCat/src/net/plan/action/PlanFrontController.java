@@ -24,8 +24,13 @@ public class PlanFrontController extends HttpServlet {
 
 		if (command.equals("/PlanRegion.pl")) {	// 지역 페이지 이동
 			action = new PlanRegionAction();
+			//action = new WikiScraping();
+			
 			try {
 				forward = action.execute(request, response);
+				forward.setPath("./plan/planRegion.jsp");
+				forward.setRedirect(false);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

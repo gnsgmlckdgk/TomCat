@@ -60,9 +60,9 @@ public class PlanRegionAction implements Action {
 		request.setAttribute("currentPage", currentPage);
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("./plan/planRegion.jsp");
-		forward.setRedirect(false);
-
+		
+		
+		
 		return forward;
 	}
 }
