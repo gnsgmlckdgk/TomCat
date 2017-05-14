@@ -14,12 +14,11 @@
 	<script src="assets/js/jquery.min.js"></script>
 
 
+
 	<%
 		String id = (String) session.getAttribute("id");
 		String nick = (String) session.getAttribute("nick");
-		
-		request.setAttribute("idid", id);
-		
+
 		int gold_price = 97000;
 		int discount_price = 0;
 		int send_fee = 3000;
@@ -27,6 +26,7 @@
 
 	<h2>결제</h2>
 	<form action="./PayAction.pln" method="post">
+		<!-- 왼쪽 배송 장소 및 수단 선택 공간. -->
 
 		<div>
 			<h4>결제하실 정보</h4>
@@ -114,20 +114,26 @@
 			<h4>결제수단</h4>
 
 			<div class="pay_way">
-				<div class="pay_way_radio">
+				<div class="pay_way_radio 4u 12u$(xsmall)">
+					<!-- radio 버튼으로 구현하고 하는 결제수단 선택 -->
 
-					<button type="button" onclick="$('.card').toggle()">신용카드</button><br>
-
-					<input type="radio" name="pay_way" id="2" value="2" />실시간 계좌이체<br>
-					<input type="radio" name="pay_way" id="3" value="3" />무통장<br>
-					<input type="radio" name="pay_way" id="4" value="4" />휴대폰 결제<br>
 					
-					<button type="button" onclick="$('.believe').toggle()">믿음</button>
+					<input id="rdb1" type="radio" name="toggler" value="1" onclick="$('.card').toggle()"/><label	for="rdb1">신용카드</label><br>
+					<input id="rdb2" type="radio" name="toggler" value="2" onclick="$('.card').toggle()"/><label	for="rdb2">무통장</label><br>
+					<input id="rdb3" type="radio" name="toggler" value="3" onclick="$('.card').toggle()"/><label	for="rdb3">휴대폰 결제</label><br>
+					<input id="rdb4" type="radio" name="toggler" value="4" onclick="$('.believe').toggle()"/><label	for="rdb4">믿음</label>
+
+					
 				</div>
+				
+				
+				
+				<!-- radio 버튼으로 구현하고 하는 결제수단 선택 끝-->
 
 				<div class="pay_way_form">
-					
-					<div class="card">
+					<!-- 결제수단에서 선택하면 나올 공간 -->
+
+					<div id="blk-1" style="display: none">
 						<span>신용카드 결제</span><br>
 						<table>
 							<tr>
@@ -146,35 +152,74 @@
 							</tr>
 						</table>
 					</div>
-					
-					<div class="believe">
-					
+
+					<div id="blk-4" style="display: none">
+
 						곧 송금할 것이라 믿습니다.<br>
-					
+
 					</div>
-					
+
 				</div>
+				<!-- 결제수단에서 선택하면 나올 공간 끝 -->
 			</div>
 
 		</div>
 
+		<script type="text/javascript">
+			$("input:radio").click(function() {
+				var div ="#blk-1";
+				$("div").hide;
+				div ="#blk-2";
+				$("div").hide;
+				div ="#blk-3";
+				$("div").hide;
+				div ="#blk-4";
+				$("div").hide;
+				
+				div = "#blk-" + $(this).val();
+				$(div).show();
+			});
+		</script>
+
+
+
+
 	</form>
+	<!-- 왼쪽 배송 장소 및 수단 선택 공간 끝.-->
 
 	<div class="banner">
+		<!-- fix 된 오른쪽 사이드 출력 -->
 		<h4>최종 결제 정보</h4>
 
 		<div class="result">
-			상품금액<br>
-			<%=gold_price%>원<br> <br>할인금액<br>
-			<%=discount_price%>원<br> <br> 배송비<br>
-			<%=send_fee%>원<br> <br> <span> 총 결제금액 </span><br> <span
-				class="final_price"><%=gold_price - discount_price + send_fee%>원</span><br>
+		
+			<table>
+				<tr>
+					<th>상품금액</th>
+					<td><%=gold_price%>원</td>
+				</tr>
+				<tr>
+					<th>할인금액</th>
+					<td><%=discount_price%>원</td>
+				</tr>
+				<tr>
+					<th>배송비</th>
+					<td><%=send_fee%>원</td>
+				</tr>
+				<tr>
+					<th><span> 총 결제금액 </span></th>
+					<td><span
+				class="final_price"><%=gold_price - discount_price + send_fee%>원</span></td>
+				</tr>
+			
+			</table>
+		
 
 		</div>
 
 		<div class="agree_check">
-			<input type="checkbox" name="agree">(필수)동의합니다.<br> 주문할
-			상품의 상품명, 가격, 배송정보에 동의 하십니까?(전자상거래법 제8조 2항)
+			<input type="checkbox" name="agree" id="agree"><label for="agree">(필수)동의합니다.<br> 주문할
+			상품의 상품명, 가격, 배송정보에 동의 하십니까?(전자상거래법 제8조 2항)</label>
 		</div>
 
 		<div class="popup_check">
@@ -182,8 +227,9 @@
 			있으면 결제가 진행되지 않습니다.
 		</div>
 		<input type="button" style="width: 100%"
-			onclick="location.href='./PayAction.pln'" value="구매하기">
+			onclick="location.href='./PayAction.pln?id=<%=id%>'" value="구매하기">
 	</div>
+	<!-- fix 된 오른쪽 사이드 출력 끝-->
 
 	<!-- 입력란 들어갈 곳. 끝. -->
 

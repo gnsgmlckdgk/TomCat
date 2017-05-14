@@ -21,6 +21,7 @@ form {
 	text-align: center;
 	vertical-align: middle;
 	opacity: 0.9;
+	padding-top: 50px;
 }
 
 form th {
@@ -68,10 +69,10 @@ table tr th {
 }
 
 .banner h4 {
-	margin-top: 2em;
+	margin-top: 1.5em;
 	text-align: center;
 	font-size: 2em;
-	padding-bottom: 2em;
+	padding-bottom: 1.5em;
 	border-bottom: 5px solid #484848;
 }
 
@@ -81,7 +82,10 @@ table tr th {
 
 .agree_check {
 	border: 1px solid #666;
+	padding: 1em;
 }
+
+
 
 .popup_check {
 	border: 1px solid #a40001;
@@ -96,9 +100,16 @@ table tr th {
 	border: 3px solid #fff;
 }
 
+.result table{
+	background-color: white;
+	
+}
+
 .result span {
 	color: orange;
 	text-align: left;
+	font-size:1.5em;
+	font-weight: bold;
 }
 
 .result final_price {
@@ -141,3 +152,5 @@ table tr th {
 }
 
 /*jquery test end*/
+
+
