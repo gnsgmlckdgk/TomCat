@@ -25,6 +25,8 @@
 	padding: 10px 10px 30px 10px;
 	text-align: left;
 	width: 353px;
+	position:absolute;
+	z-index:1000;
 }
 
 #pano {
@@ -40,13 +42,13 @@
 }
 
 #pln_list{
-	width: 300px;
+	width: 333px;
     position: absolute;
-    left: 10px;
+    left: 368px;
     top: 10px;
     padding-bottom: 20px;
     z-index: 999;
     background: #fff;
     border-radius: 5px;
-    display: none;
+ 	display:none;
 }

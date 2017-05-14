@@ -11,7 +11,8 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/map.css" />
+<link rel="stylesheet" href="assets/css/map/map2.css" />
+<link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
@@ -20,13 +21,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-$(".btn").click(function(){
-	var effect = 'slide';
-	var options ='left';
-	var duration = 500;
-	$('#pln_list').toggle(effect, options, duration);
-});//일정수정 버튼 클릭시 오른쪽으로 슬라이드 
-
+$(function(){
+	$(".btn").click(function(){
+		var effect = 'slide';
+		var options ='left';
+		var duration = 500;
+		$('#pln_list').toggle(effect, options, duration);
+	}); 
+}); //일정수정 버튼 클릭시 오른쪽으로 슬라이드  
 $(function(){
 	$('.datepicker').click(function(){
   		$( '.datepicker').datepicker();
@@ -34,7 +36,6 @@ $(function(){
 });
 </script>
 </head>
-<link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <body>
 	<%
 		String auth = (String) request.getAttribute("auth");
@@ -50,11 +51,10 @@ $(function(){
 
 	<div class="container" >
 		<div class="myplan-list" >
-			<h3>
-				<button onclick = "location.href ='./MyPlan.pln?plan_nr=100'">전체 찜 목록보기</button>
+				<h3>
+				<button type="button" onclick = "location.href ='./MyPlan.pln?plan_nr=100'">전체 찜 목록보기</button>
 				<button class="btn" >일정수정</button>
-			</h3>
-			<div>
+				</h3>
 				<table border="1" >
 					<tr>
 						<td>plan_nr</td>
@@ -69,7 +69,6 @@ $(function(){
 							if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
 								continue;
 					%>
-
 					<tr>
 						<td><%=mpbb.getPlan_nr()%></td>
 						<td><%=mpbb.getItem_nr()%></td>
@@ -81,8 +80,6 @@ $(function(){
 						}
 					%>
 				</table>
-			</div>
-
 			<%
 				if (basketList.size() == 0) {
 			%>아직 일정을 추가하지 않으셨군요! <br> 여행지를 검색해서 찜해보세요. <br> <br>
@@ -92,24 +89,25 @@ $(function(){
 				}
 			%>
 		</div>
-		<div id="right_full_box" class="f1" style="position:absolute; left: 1px; top: 0px;">
-		<div id="map" class="f1" style="height: 1045px;position: relative;width: 1584px;overflow: hidden;"></div>
-			<!--  오른쪽으로 뗄 예정
-		<div id="pln_list"  style="display: block;">
-		<div class="datepicker">
+		<div id="right_full_box" class="f1" style="position:absolute; left: 1px; top: 0px;"><!-- right_full_box 시작 -->
+			<div id="map" class="f1" style="height: 1045px; position: relative; width: 1584px; overflow: hidden;"></div><!-- map -->
+				 <!--오른쪽으로 뗄 예정-->
+				
+		</div><!-- right_full_box 끝 -->
+		<div id="pln_list"  >
+			<div class="datepicker">
 			출발일<img src="myplan/pn_cal_btn.png">
+			</div>
+			<ul class="actions small">
+				<li><a href="./MyPlan.pln?plan_nr=1"
+					class="button special small" >일정A</a></li>
+				<li><a href="./MyPlan.pln?plan_nr=2" 
+					class="button small" >일정B</a></li>
+				<li><a href="./MyPlan.pln?plan_nr=3" 
+					class="button alt small" >일정C</a></li>
+			</ul> 
 		</div>
-		</div>
-		 <ul class="actions small">
-			<li><a href="./MyPlan.pln?plan_nr=1"
-				class="button special small" >일정A</a></li>
-			<li><a href="./MyPlan.pln?plan_nr=2" 
-				class="button small" >일정B</a></li>
-			<li><a href="./MyPlan.pln?plan_nr=3" 
-				class="button alt small" >일정C</a></li>
-		</ul> -->
-		</div>
-	</div>
+	</div><!-- container 끝 -->
 
 
 
