@@ -16,22 +16,8 @@
 	<div class="container 75%">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-				<h2><%=region%>
-
-				</h2>
-				<p>
-					Perspiciatis 펄스피치아티스 <br>doloremque recusandae dolor
-				</p>
-				<br>
-				<p>
-					http://blog.acronym.co.kr/337 <br>
-					https://ko.wikipedia.org/wiki/%EB%89%B4%EC%9A%95
-				</p>
-				<br>
-				<p>이 부분까지 위키피디아에서 파싱???</p>
-
-
-				</header>
+				<h2><%=region%></h2>
+				<p>위키백과 파싱 할 예정(국가페이지는 불러오는거 까지 했음)</p>
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
