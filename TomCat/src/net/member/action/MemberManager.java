@@ -27,6 +27,11 @@ public class MemberManager implements Action {
 		if(search_sel==null) {
 			search_sel = "id_search";
 		}
+		String sort = request.getParameter("sort");	// 정렬값, 기본값 0
+		int isort = 0;
+		if(sort!=null) {
+			isort = Integer.parseInt(sort);
+		}
 		
 		/* 회원 리스트 가져오기 */
 		// 현제 페이지 번호 구하기
@@ -59,7 +64,7 @@ public class MemberManager implements Action {
 		// 회원 리스트 가져오기
 		List<MemberBean> memberList = null;
 		if(count != 0) {
-			memberList = mdao.getMemberList(startRow, pageSize, search, search_sel);
+			memberList = mdao.getMemberList(startRow, pageSize, search, search_sel, isort);
 		}
 		
 		request.setAttribute("memberList", memberList);

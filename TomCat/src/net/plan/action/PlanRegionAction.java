@@ -100,6 +100,7 @@ class CityScraping {
 	}
 	
 	// 국내도시 정보 스크랩핑
+		// 국내도시는 다음백과에서 가져오는데 일일이 도시마다 다른 값을 가져와야함, 해외는 다음검색 해외지 미리보기에서 바로 가져올 수 있음
 	public StringBuffer getDomesticCity() {
 		// 국내도시 목록
 		final String BUSAN = "b10b0860b";
@@ -145,7 +146,7 @@ class CityScraping {
 			Elements p3 = doc.select(".info_details .desc_summary");
 			Element e3 = p3.get(0);
 			String e3_txt = e3.text().replace("요약", "");	// 앞의 요약 이라는 단어를 지운다.
-			sb.append("<tr><td colspan='2'>"+e3_txt+"</td></tr>");
+			sb.append("<tr><td colspan='2' style='text-align: left;'>"+e3_txt+"</td></tr>");
 			sb.append("</table>");
 			
 		} catch (IOException e1) {

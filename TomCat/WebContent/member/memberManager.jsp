@@ -42,6 +42,13 @@
 				search_sel = "id_search";
 			}
 			
+			// 정렬방법
+			String sort = request.getParameter("sort");
+			int isort = 0;
+			if(sort!=null) {	// 정렬값이 있을대, 없으면 기본값 0(가입날짜 오름차순)
+				isort = Integer.parseInt(sort);
+			}
+			
 			// 파라미터값 가져오기
 			int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 전체 회원 수
 			
@@ -52,21 +59,40 @@
 		%>
 		<div class="content">
 			<div class="content_member_memberManager">
-				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> )</h1>
+				<h1>회원 관리(<%if(search.length()>0) {%> &lt;<%=search%>&gt;로 검색된<%} %> 회원수:<%=count %> )
+				<%if(isort==1){%> : 아이디 오름차순 정렬<%}else if(isort==2){%> : 아이디 내림차순 정렬<%}%>
+				<%if(isort==3){%> : 닉네임 오름차순 정렬<%}else if(isort==4){%> : 닉네임 내림차순 정렬<%}%>
+				<%if(isort==5){%> : 관리자 우선정렬<%}else if(isort==6){%> : 사용자 우선정렬<%}else if(isort==0){%> : 가입날짜 오름차순<%}%>
+				</h1>
 					
 					<table>
 						<tr>
-							<th>프로필 이미지</th><th>아이디</th><th>닉네임</th><th>회원탈퇴</th><th>권한설정</th>
+							<th><div style="width: 160px; margin: 0 auto;">프로필 이미지</div></th>
+							<th id="th_id" class="a" title="아이디<%if(isort==1){%>오름차순<%}else if(isort==2){%>내림차순<%}%>">
+											<div style="width: 80px; margin: 0 auto;">아이디<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortId_img"></div></th>
+							<th id="th_nick" class="a" title="닉네임<%if(isort==3){%>오름차순<%}else if(isort==4){%>내림차순<%}%>">
+											<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div></th>
+							<th id="th_auth" class="a" title="권한<%if(isort==5){%>:관리자우선<%}else if(isort==6){%>:사용자우선<%}%>">
+											<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div></th>
+							<th><div style="width: 99px; margin: 0 auto;">회원탈퇴</div></th>
 						</tr>
 						<%
 						if(count>0) {
 							for(int i=0; i<memberList.size(); i++) {
 								mb = memberList.get(i);
 								%>
-								<tr>
+								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
 									<td class="id_td"><span><%=mb.getId() %></span></td>
-									<td class="nick_td"><%=mb.getNick() %></td>
+									<td class="nick_td"><%=mb.getNick() %></td>	
+									<td class="auth_select_box">
+										<div class="select-wrapper">
+										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
+											<option value="admin" <%if(mb.getAuth()==0){%>selected style="font-weight: bold;"<%}%>>관리자</option>
+											<option value="user" <%if(mb.getAuth()==1){%>selected style="font-weight: bold;"<%}%>>사용자</option>
+										</select>
+										</div>
+									</td>
 									<td class="delete_td">
 										<%
 										if(id.equals(mb.getId())) {	// 현재 로그인한 관리자 아이디와 가져온 관리자 아이디와 같다면
@@ -80,14 +106,6 @@
 										}
 										%>
 									</td>	
-									<td class="auth_select_box">
-										<div class="select-wrapper">
-										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
-											<option value="admin" <%if(mb.getAuth()==0){%>selected style="font-weight: bold;"<%}%>>관리자</option>
-											<option value="user" <%if(mb.getAuth()==1){%>selected style="font-weight: bold;"<%}%>>사용자</option>
-										</select>
-										</div>
-									</td>
 								</tr>
 								<%
 							}
@@ -120,15 +138,15 @@
 					<div class="page">
 						<%
 						if(currentPage > pageBlock) {
-							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>&search=<%=search%>">[이전]</a><%	
+							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>&search=<%=search%>&sort=<%=isort%>">[이전]</a><%	
 						}
 						for(int i=startPage; i<=endPage; i++) {
 							%><%if(currentPage==i){%>
 							<a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>" style="background-color: #f0f0f0;"><%=i %></a>
-							<%}else {%><a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>"><%=i %></a><%}%><%
+							<%}else {%><a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>&sort=<%=isort%>"><%=i %></a><%}%><%
 						}
 						if(pageCount > endPage) {
-							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>&search=<%=search%>">[다음]</a><%
+							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>&search=<%=search%>&sort=<%=isort%>">[다음]</a><%
 						}
 						%>
 					</div>
@@ -151,7 +169,7 @@
 							dataType: 'text',
 							async: false,
 							success: function(data){
-								console.log(data);
+								console.log("권한변경");
 							},
 							error: function(error){
 								alert(error);
@@ -159,9 +177,46 @@
 						});
 					}
 					
-					/* 프로필 이미지가 실제 경로에 없으면 */
-					function imgError() {
-						alert("aa");
+					/* 정렬 */
+					$('#th_id').click(function(){
+						var sort = <%=isort%>;	// 현재 정렬모드
+						if(sort==1) {	// 오름차순
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=2';
+						}else {	// 내림차순
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=1';
+						}
+					});
+					
+					$('#th_nick').click(function(){
+						var sort = <%=isort%>;	// 현재 정렬모드
+						if(sort==3) {	// 오름차순
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=4';
+						}else {	// 내림차순
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=3';
+						}
+					});
+					
+					$('#th_auth').click(function(){
+						var sort = <%=isort%>;	// 현재 정렬모드
+						if(sort==5) {	// 오름차순
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=6';
+						}else {	// 내림차순
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=5';
+						}
+					});
+					/* 정렬 이미지 */
+					if(<%=isort%>==1) {
+						$('.sortId_img').attr('src', './images/member/sort_top.png');
+					}else if(<%=isort%>==2) {
+						$('.sortId_img').attr('src', './images/member/sort_bottom.png');
+					}else if(<%=isort%>==3) {
+						$('.sortNick_img').attr('src', './images/member/sort_top.png');
+					}else if(<%=isort%>==4) {
+						$('.sortNick_img').attr('src', './images/member/sort_bottom.png');
+					}else if(<%=isort%>==5) {
+						$('.sortAuth_img').attr('src', './images/member/sort_top.png');
+					}else if(<%=isort%>==6) {
+						$('.sortAuth_img').attr('src', './images/member/sort_bottom.png');
 					}
 					
 					</script>

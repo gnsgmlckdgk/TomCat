@@ -64,6 +64,17 @@
 	}
 %>
 
+<!-- 검색폼 -->
+<div class="search_div">
+	<form action="javascript:cityListChange('<%=pageNum %>');" method="post">
+		<img src="./images/member/search_l2.png" class="search_img">
+		<input type="text" name="search" id="search" value="<%=search %>" placeholder="search...">
+		<input type="submit" value="검색" class="button alt">
+	</form>
+</div>
+					
+<div class="clear"></div>
+
 <table>
 	<%
 		PlanCityBean pcb = null;
@@ -90,18 +101,7 @@
 	<%
 		}
 	%>
-</table>   
-
-<!-- 검색폼 -->
-<div class="search_div">
-	<form action="javascript:cityListChange('<%=pageNum %>');" method="post">
-		<img src="./images/member/search_l2.png" class="search_img">
-		<input type="text" name="search" id="search" value="<%=search %>" placeholder="search...">
-		<input type="submit" value="검색" class="button alt">
-	</form>
-</div>
-					
-<div class="clear"></div>
+</table>
 
 <%
 	// 페이징

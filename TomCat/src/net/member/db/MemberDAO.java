@@ -675,7 +675,7 @@ public class MemberDAO {
 		}
 	
 	// 회원 리스트 가져오기
-	public List<MemberBean> getMemberList(int startRow, int pageSize, String search, String search_sel) {
+	public List<MemberBean> getMemberList(int startRow, int pageSize, String search, String search_sel, int sort) {
 		
 		List<MemberBean> memberList = new ArrayList<MemberBean>();
 		MemberBean mb = null;
@@ -685,11 +685,33 @@ public class MemberDAO {
 			con = getConnection();
 			
 			if("id_search".equals(search_sel)) {	// 아이디로 검색
-				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
-						+ "where id like ? limit ?, ?";
+				if(sort==1) {	// id오름차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by id limit ?, ?";
+				}else if(sort==2) {	// id내림차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by id desc limit ?, ?";
+				}else if(sort==3) {	// nick 오름차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by nick limit ?, ?";
+				}else if(sort==4) {	// nick 내림차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by nick desc limit ?, ?";
+				}else if(sort==5) {	// auth 오름차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by auth limit ?, ?";
+				}else if(sort==6) {	// auth 내림차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by auth desc limit ?, ?";
+				}else {
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where id like ? order by reg_date limit ?, ?";
+				}
+				
+
 			}else {	// 닉네임으로 검색
 				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
-						+ "where nick like ? limit ?, ?";
+					+ "where nick like ? order by reg_date limit ?, ?";
 			}
 			
 			ps = con.prepareStatement(sql);
