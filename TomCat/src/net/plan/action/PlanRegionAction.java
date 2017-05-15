@@ -106,6 +106,7 @@ class CityScraping {
 		final String ANDONG = "b14a3029b";
 		final String JEJU = "b19j1942b";
 		final String SEOUL = "b11s3796b";
+		final String DAEGU = "b04d2569b";
 		
 		String city = "";
 		
@@ -118,6 +119,8 @@ class CityScraping {
 			 			 break;
 			case "seoul" : city = SEOUL;
 			 			 break;
+			case "daegu" : city = DAEGU;
+						 break;
 		}
 		
 		// html 가져오기
