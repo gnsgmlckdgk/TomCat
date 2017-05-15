@@ -17,7 +17,13 @@
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 				<h2><%=region%></h2>
-				<p>위키백과 파싱 할 예정(국가페이지는 불러오는거 까지 했음)</p>
+
+		<!-- 지역 정보 -->
+		<%
+			StringBuffer region_info = (StringBuffer)request.getAttribute("region_info");
+		%>
+		<%=region_info.toString() %>
+
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->

@@ -2,6 +2,27 @@
 
 /* 국가 페이지 */
 
+/* 첫번재 섹션 : 국가 정보 */
+section#banner {
+	padding: 50px 0;
+}
+ section.nation_one {
+	position: relative;
+}
+section.nation_one div.nation_info table th {
+	color: #fff;
+	font-size: 1em;
+	min-width: 82px;
+}
+section.nation_one div.nation_info table td {
+	color: #fff;
+	font-size: 0.9em;
+}
+section.nation_one div.nation_info_content {
+	width: 60%;
+	min-width: 600px;
+}
+
 /* 두번째 섹션 : 국가 리스트 */
 section#nation_two {
 	padding: 20px;
@@ -23,6 +44,8 @@ section#nation_two .city_list_div tr {
 }
 section#nation_two .city_list_div tr:hover {
 	cursor: pointer;
+	box-sizing: border-box;
+	box-shadow: 3px 3px 3px #aca;
 }
 section#nation_two .city_list_div td {
 	padding: 0;
@@ -42,6 +65,9 @@ section#nation_two .city_list_div .txt_td {
 	background-color: #fff;
 	
 	padding: 20px;
+}
+section#nation_two .city_list_div .txt_td:hover {
+	background-color: #f0f0f0;
 }
 section#nation_two .city_list_div p {
 	padding: 0;

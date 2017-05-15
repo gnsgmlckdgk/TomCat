@@ -7,7 +7,7 @@
 
 <div class="clear"></div>
 <%
-	List countryList =(List)request.getAttribute("countL");
+	List countryList =(List)request.getAttribute("countList");
 
 %>
 
@@ -35,11 +35,10 @@
 		정보
 		<input type="text" name="info">
 		
-		<input type="submit"  value="추가">
-		
+		<input type="submit"  value="추가">	
 	</form>
 </div>
-
+<%-- 
 <div  style="width: 50em; margin: auto;">
 	<form action="./CityAdd.pl" name="coun_fr" method="post">
 		국가코드
@@ -71,7 +70,7 @@
 		
 	</form>
 </div>
-
+ --%>
 </section>
 
 <div class="clear"></div>

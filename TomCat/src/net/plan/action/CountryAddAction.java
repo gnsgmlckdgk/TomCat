@@ -32,11 +32,10 @@ public class CountryAddAction implements Action{
 		PrintWriter out = response.getWriter();		
 		out.println("<script>");
 		out.println("alert('국가가 추가되었습니다.')");
-		out.println("location.href='./countryAdd.pl'");
+		out.println("location.href='./CountryList.pl'");
 		out.println("</script>");
 		out.close(); 
-		
-		
+	
 		return null;
 	}
 

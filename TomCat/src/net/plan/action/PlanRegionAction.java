@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import net.plan.db.PlanCityBean;
 import net.plan.db.PlanDAO;
 import net.plan.db.PlanTravelBean;
 
@@ -25,11 +31,25 @@ public class PlanRegionAction implements Action {
 		//지역값 받아오기.
 		String region = request.getParameter("region");
 		
+		/* 지역의 각종 관광지, 맛집, 숙소 가져오는 작업 */
 		//지역값 받아와서 글 갯수에 조건 걸어서, 지역에 맞는 글만 가져오는 과정 필요.
 		//타입값 받아와서 글 타입에 조건 걸어서, 맛집, 관광지, 숙소 골라서 보기 가능하도록 할 필요.
 		
 		//객체 생성
 		PlanDAO pdao = new PlanDAO();
+		
+			/*** 지역설명(정보) 스크랩핑 ***/
+			// 지역값을 이용해 지역의 값을 빈에 담기
+			PlanCityBean pcb = pdao.getCity(region);
+			
+			CityScraping cs = new CityScraping(pcb);
+			StringBuffer region_info;
+			if("kr".equals(pcb.getCountry_code())) {	// 국내
+				region_info = cs.getDomesticCity();
+			}else {	// 해외 또는 없는 값
+				region_info = cs.getForeignCity();
+			}
+			request.setAttribute("region_info", region_info);
 		
 		//DB에 등록된 글의 개수.
 		int count = pdao.getTravelCount(region);
@@ -60,9 +80,109 @@ public class PlanRegionAction implements Action {
 		request.setAttribute("currentPage", currentPage);
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("./plan/planRegion.jsp");
-		forward.setRedirect(false);
-
+		
 		return forward;
 	}
+
 }
+
+// 도시 정보 스크랩핑
+class CityScraping {
+	
+	PlanCityBean pcb;	// 지역(도시)
+	StringBuffer sb;	// 여기에 출력할 html 형식의 text를 담음
+	
+	// 생성자
+	CityScraping(PlanCityBean pcb) {
+		this.pcb = pcb;
+		this.sb = new StringBuffer();
+	}
+	
+	// 국내도시 정보 스크랩핑
+	public StringBuffer getDomesticCity() {
+		// 국내도시 목록
+		final String BUSAN = "b10b0860b";
+		final String ANDONG = "b14a3029b";
+		final String JEJU = "b19j1942b";
+		final String SEOUL = "b11s3796b";
+		
+		String city = "";
+		
+		switch(pcb.getEn_name()) {
+			case "busan" : city = BUSAN;
+						 break;
+			case "andong" : city = ANDONG;
+			 			 break;
+			case "jeju" : city = JEJU;
+			 			 break;
+			case "seoul" : city = SEOUL;
+			 			 break;
+		}
+		
+		// html 가져오기
+		Document doc;
+		try {
+			// 다음 검색하면 다음백과 미리보기에서 가져오는데 해외도시는 미리보기가 뜨는데 국내도시는 안떠서 국내는 다음백과에서 따로 가져와야함, 검색값이 암호화됫는지 이상하게 나와서
+			// 그 값을 따로 저장해두고 따로 가져와야함.
+			doc = Jsoup.connect("http://100.daum.net/encyclopedia/view/"+city).get();
+							
+			// 특정 값 가져오기
+			Elements p = doc.select(".info_details tbody th");
+			Elements p2 = doc.select(".info_details tbody td");
+			
+			sb.append("<table>");
+			for(int i=0; i<p.size()-1; i++) {	// 소개 부분은 빼기 위해
+				Element e = p.get(i);
+				sb.append("<tr><th>"+e.text()+"</th>");
+				Element e2 = p2.get(i);
+				sb.append("<td>"+e2.text()+"</td></tr>");
+			}
+					
+			Elements p3 = doc.select(".info_details .desc_summary");
+			Element e3 = p3.get(0);
+			String e3_txt = e3.text().replace("요약", "");	// 앞의 요약 이라는 단어를 지운다.
+			sb.append("<tr><td colspan='2'>"+e3_txt+"</td></tr>");
+			sb.append("</table>");
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("웹에 가져올 정보가 없음.");
+			return sb;
+		}
+		
+		return sb;
+	}
+		
+	// 해외도시 정보 스크랩핑
+	public StringBuffer getForeignCity() {
+		
+		Document doc;
+		try {
+			String city = pcb.getName();
+			
+			// 다음 검색하면 다음백과 미리보기에서 가져오는데 해외도시는 미리보기가 뜨는데 국내도시는 안떠서 국내는 다음백과에서 따로 가져와야함, 검색값이 암호화됫는지 이상하게 나와서
+			// 그 값을 따로 저장해두고 따로 가져와야함.
+			doc = Jsoup.connect("http://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&q="+city).get();
+			
+			// 특정 값 가져오기
+			Elements p = doc.select("#cityNColl .wrap_cont .dl_comm dt");
+			Elements p2 = doc.select("#cityNColl .wrap_cont .dl_comm dd");
+			
+			sb.append("<table>");
+			for(int i=0; i<p.size()-1; i++) {	// 소개 부분은 빼기 위해
+				Element e = p.get(i);
+				sb.append("<tr><th>"+e.text()+"</th>");
+				Element e2 = p2.get(i);
+				sb.append("<td>"+e2.text()+"</td></tr>");
+			}
+			sb.append("</table>");
+
+		} catch (IOException e1) {
+			System.out.println("웹에 가져올 정보가 없음.");
+			return sb;
+		}		
+		
+		return sb;
+	}
+}
+

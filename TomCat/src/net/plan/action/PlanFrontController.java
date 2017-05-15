@@ -24,8 +24,13 @@ public class PlanFrontController extends HttpServlet {
 
 		if (command.equals("/PlanRegion.pl")) {	// 지역 페이지 이동
 			action = new PlanRegionAction();
+			//action = new WikiScraping();
+			
 			try {
 				forward = action.execute(request, response);
+				forward.setPath("./plan/planRegion.jsp");
+				forward.setRedirect(false);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -40,12 +45,10 @@ public class PlanFrontController extends HttpServlet {
 
 		} else if (command.equals("/PlanNation.pl")){	// 국가 페이지 이동
 			
-			action = new WikiScraping();
+			action = new PlanNationAction();
 			
 			try {
 				forward = action.execute(request, response);
-				forward.setPath("./plan/planNation.jsp");
-				forward.setRedirect(false);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -78,8 +81,8 @@ public class PlanFrontController extends HttpServlet {
 		
 		}
 		
-		else if(command.equals("/countryAdd.pl")){
-			action = new CountryListAction();
+		else if(command.equals("/CountryList.pl")){ //DB에있는 국가리스트 보여주는 페이지 이동
+			action = new DBCountryListAction();
 			try{
 				forward = action.execute(request, response);
 			}catch(Exception e){
@@ -87,6 +90,11 @@ public class PlanFrontController extends HttpServlet {
 			}
 		}
 		
+		else if(command.equals("/countryAdd.pl")){ //DB에 국가 추가하는 폼 페이지 이동
+			forward = new ActionForward();
+			forward.setPath("./plan/countryAdd.jsp");
+			forward.setRedirect(false);
+		}	
 		else if(command.equals("/CounAdd.pl")){
 			action = new CountryAddAction();
 			try{
@@ -96,8 +104,16 @@ public class PlanFrontController extends HttpServlet {
 			}
 		}
 		
+		else if(command.equals("/CountryUpdate.pl")){//DB에 국가 수정하는 폼 페이지 이동
+			action = new CountryUpdate();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		
-		else if(command.equals("/CityAdd.pl")){
+		else if(command.equals("/CityAdd.pl")){ //DB에 도시 추가하는 폼 페이지 이동
 			action = new CityAddAction();
 			try{
 				forward = action.execute(request, response);
@@ -105,6 +121,8 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		
 		
 		
 		

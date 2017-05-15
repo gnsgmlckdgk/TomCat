@@ -272,152 +272,116 @@ public class PlanDAO {
 			return list;
 		}
 	
-	/* 지역페이지? */
-	public int getTravelCount(String region){
-		
-		ResultSet rs = null;
-		int count = 0;
-		try{			
-			//1,2디비연결 메서드호출
-			con = getConnection();
-			//num 게시판 글번호 구하기
-			//sql 함수 최대값 구하기 max()
-			
-			sql = "select count(travel_id) from travel where address like ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + region + "%" );
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){count = rs.getInt(1);}
-			
-			//3. sql insert  디비날짜 now()
-		}catch (Exception e){
-			e.printStackTrace();
-		}finally{
-			if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
-			if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
-			if (con != null) {try {con.close();} catch (SQLException ex) {	}}
-		}
-		return count;
-	}// getBoardCount() end
 	
-	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region){
-		ResultSet rs = null;
-		List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
-		try{
-			
-			//1,2디비연결 메서드호출
-			con = getConnection();
-			//num 게시판 글번호 구하기
-			//sql 함수 최대값 구하기 max()
-			sql = "select * from travel where address like ? order by travel_id desc limit ?, ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + region + "%");
-			pstmt.setInt(2, startRow-1);
-			pstmt.setInt(3, pageSize);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				PlanTravelBean ptb = new PlanTravelBean();
-				ptb.setTravel_id(rs.getInt(1));
-				ptb.setType(rs.getString(2));
-				ptb.setConuntry_code(rs.getString(3));
-				ptb.setCity_code(rs.getString(4));
-				ptb.setName(rs.getString(5));
-				ptb.setLatitude(rs.getFloat(6));
-				ptb.setLongitude(rs.getFloat(7));
-				ptb.setInfo(rs.getString(8));
-				ptb.setAddress(rs.getString(9));				
-				ptb.setFile(rs.getString(10));
-				planTravelList.add(ptb);
-			}
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}finally{
-			if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
-			if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
-			if (con != null) {try {con.close();} catch (SQLException ex) {	}}
-		}
-		return planTravelList;
-	} //getBoardList() end
 	
-	//국가리스트 뽑아오기
+	/* 메인페이지 국가리스트 뽑아오기(메인페이지) */
 		public List<PlanCountryBean> getCountryList(){
 			List<PlanCountryBean> countryList = new ArrayList();
-			
 			PlanCountryBean cb = null;
-			Connection con = null;
-			String sql = "";
-			ResultSet rs = null;
 			Statement stmt = null;
 			
 			try {
-				//1,2디비연결 메서드 호출
 				con=getConnection();
 				
-				
-				//3 sql member모든 데이터 가져오기
 				sql="select * from country order by name asc";
-				//4 rs 실행저장
+
 				stmt = con.createStatement();
 				rs = stmt.executeQuery(sql);
-				
-				
-				//5 rs while 첫행 데이터 있으면
+	
 				while(rs.next()){
-					//자바빈 객체생성 MemberBean mb
 					cb = new PlanCountryBean();
-					//mb 멤버변수  <= rs에 id열에 해당하는 데이터 저장
+
 					cb.setCountry_code(rs.getString("country_code"));
 					cb.setName(rs.getString("name"));
 					cb.setInfo(rs.getString("info"));
 					cb.setContinent(rs.getString("continent"));
 					cb.setEn_name(rs.getString("en_name"));
 					
-					// mb주소값을 memberList 한칸에 저장
 					countryList.add(cb);
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 				
-			}finally {
-				// 예외상관없이 마무리 작업
-				// 객체생성 닫기
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException ex) {
-					} // Exception 이 가장 큰 범위
-				} // if
-				if (stmt != null) {
-					try {
-						stmt.close();
-					} catch (SQLException ex) {
-					} // Exception 이 가장 큰 범위
-				} // if
-				if (con != null) {
-					try {
-						con.close();
-					} catch (SQLException ex) {
-					} // Exception 이 가장 큰 범위
-				} // if
-				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
 			}
 			return countryList;
 			
 		}
 		
-	//국가 추가하기
-		public void insertCountry(PlanCountryBean pcb){
-			PlanCountryBean cb = null;
+	/*DB 국가 개수(운영자 페이지)*/
+			public int getCountryCount(){
+				int count = 0;
+				
+				try {
+					con = getConnection();
+						sql = "select count(*) as count from country";
+						pstmt = con.prepareStatement(sql);
+						
+						rs = pstmt.executeQuery();
+						
+						if(rs.next()) {
+							count = rs.getInt("count");
+						}
+				}catch(Exception e) {
+					e.printStackTrace();
+					
+				}finally{
+					if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+					if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+					if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+				}	
+				return count;
+			}
+		
+		/*DB 국가리스트 뽑아오기 (운영자 페이지) */
+				public List<PlanCountryBean> getCountryList(int startRow, int pageSize){
+					List<PlanCountryBean> countryList = new ArrayList();
+					PlanCountryBean cb = null;
+					String sql = "";
+					
+					try {
+						con=getConnection();
+
+						sql="select * from country order by name asc limit ?,?";
+				
+						pstmt=con.prepareStatement(sql);
+						pstmt.setInt(1, startRow-1);//시작행-1
+						pstmt.setInt(2, pageSize);//몇개글
+						
+						rs = pstmt.executeQuery();
+
+						while(rs.next()){
+							cb = new PlanCountryBean();
+							
+							cb.setCountry_code(rs.getString("country_code"));
+							cb.setName(rs.getString("name"));
+							cb.setInfo(rs.getString("info"));
+							cb.setContinent(rs.getString("continent"));
+							cb.setEn_name(rs.getString("en_name"));
+							
+							countryList.add(cb);
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+						
+					}finally{
+						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+						if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+					}
+					return countryList;
+					
+				}	
+		
+	/*국가 추가하기*/
+			public void insertCountry(PlanCountryBean pcb){
 			Connection con = null;
-			String sql = "";
-			ResultSet rs = null;
-			Statement stmt = null;
-			
+		
 			try{
 				
 				con=getConnection();
@@ -435,31 +399,119 @@ public class PlanDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 				
-			}finally {
-				// 예외상관없이 마무리 작업
-				// 객체생성 닫기
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException ex) {
-					} // Exception 이 가장 큰 범위
-				} // if
-				if (stmt != null) {
-					try {
-						stmt.close();
-					} catch (SQLException ex) {
-					} // Exception 이 가장 큰 범위
-				} // if
-				if (con != null) {
-					try {
-						con.close();
-					} catch (SQLException ex) {
-					} // Exception 이 가장 큰 범위
-				} // if
-				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			
 			}
 			
 		}
+			
+		/*국가 DB수정(운영자 페이지)*/
+		public PlanCountryBean getCountry(String country_code){
+			PlanCountryBean pcb = null;
+			Connection con = null;
+			
+			try{	
+				con=getConnection();
+				sql =  "select * from country where country_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, country_code);
+				
+				rs= pstmt.executeQuery();
+				
+				if(rs.next()){
+					pcb = new PlanCountryBean();
+					pcb.setContinent(rs.getString("continent"));
+					pcb.setCountry_code(rs.getString("country_code"));
+					pcb.setEn_name(rs.getString("en_name"));
+					pcb.setInfo(rs.getString("info"));
+					pcb.setName(rs.getString("name"));
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {}}
+			}
+			return pcb;
+		}
+		
+		
+		/* 지역페이지 */
+		public int getTravelCount(String region){
+			
+			ResultSet rs = null;
+			int count = 0;
+			try{			
+				//1,2디비연결 메서드호출
+				con = getConnection();
+				//num 게시판 글번호 구하기
+				//sql 함수 최대값 구하기 max()
+				
+				sql = "select count(travel_id) from travel where address like ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + region + "%" );
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){count = rs.getInt(1);}
+				
+				//3. sql insert  디비날짜 now()
+			}catch (Exception e){
+				e.printStackTrace();
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			return count;
+		}// getBoardCount() end
+		
+		public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region){
+			ResultSet rs = null;
+			List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
+			try{
+				
+				//1,2디비연결 메서드호출
+				con = getConnection();
+				//num 게시판 글번호 구하기
+				//sql 함수 최대값 구하기 max()
+				sql = "select * from travel where address like ? order by travel_id desc limit ?, ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + region + "%");
+				pstmt.setInt(2, startRow-1);
+				pstmt.setInt(3, pageSize);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					PlanTravelBean ptb = new PlanTravelBean();
+					ptb.setTravel_id(rs.getInt(1));
+					ptb.setType(rs.getString(2));
+					ptb.setConuntry_code(rs.getString(3));
+					ptb.setCity_code(rs.getString(4));
+					ptb.setName(rs.getString(5));
+					ptb.setLatitude(rs.getFloat(6));
+					ptb.setLongitude(rs.getFloat(7));
+					ptb.setInfo(rs.getString(8));
+					ptb.setAddress(rs.getString(9));				
+					ptb.setFile(rs.getString(10));
+					planTravelList.add(ptb);
+				}
+
+			}catch (Exception e){
+				e.printStackTrace();
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			return planTravelList;
+		} //getBoardList() end
 		
 		//도시 추가하기
 				public void insertCity(PlanCityBean pcb){
@@ -512,13 +564,43 @@ public class PlanDAO {
 					
 				}
 				
-		
-		//국가 리스트 개수
-		public int getCountryCount(){
-			int count=0;
-			return count;
+		// 도시 정보 가져오기
+		public PlanCityBean getCity(String region) {
+			
+			PlanCityBean pcb = new PlanCityBean();;
+			
+			try {
+				con = getConnection();
+				
+				sql = "select city_code, name, info, country_code, en_name from city where name = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, region);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					pcb.setCity_code(rs.getString("city_code"));
+					pcb.setCountry_code(rs.getString("country_code"));
+					pcb.setEn_name(rs.getString("en_name"));
+					pcb.setInfo(rs.getString("info"));
+					pcb.setName(rs.getString("name"));
+				}else {
+					pcb.setCity_code("");
+					pcb.setCountry_code("");
+					pcb.setEn_name("");
+					pcb.setInfo("");
+					pcb.setName("");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			
+			return pcb;
 		}
 		
-		
-	
 }
