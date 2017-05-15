@@ -11,7 +11,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/map2.css" />
+<link rel="stylesheet" href="assets/css/map/map3.css" />
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -29,6 +29,11 @@ $(function(){
 		$('#pln_list').toggle(effect, options, duration);
 	}); 
 }); //일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+/* $(function(){
+	$(출발일).click(function(){
+		$(출발일).();
+	});
+}); */ 
 $(function(){
 	$('.datepicker').click(function(){
   		$( '.datepicker').datepicker();
@@ -53,14 +58,13 @@ $(function(){
 		<div class="myplan-list" >
 				<h3>
 				<button type="button" onclick = "location.href ='./MyPlan.pln?plan_nr=100'">전체 찜 목록보기</button>
-				<button class="btn" >일정수정</button>
+				<button class="btn" >일정만들기</button>
 				</h3>
 				<table border="1" >
 					<tr>
 						<td>plan_nr</td>
 						<td>item_nr</td>
 						<td>name</td>
-						<td>추가</td>
 					</tr>
 					<%
 						for (int i = 0; i < basketList.size(); i++) {
@@ -73,8 +77,6 @@ $(function(){
 						<td><%=mpbb.getPlan_nr()%></td>
 						<td><%=mpbb.getItem_nr()%></td>
 						<td><%=tb.getName()%></td>
-						<td><a href="./MyPlan.pln?plan_nr=<%=plan_nr%>"><img
-								src="myplan/spot_to_inspot_a.png"></a></td>
 					</tr>
 					<%
 						}
@@ -89,15 +91,11 @@ $(function(){
 				}
 			%>
 		</div>
-		<div id="right_full_box" class="f1" style="position:absolute; left: 1px; top: 0px;"><!-- right_full_box 시작 -->
-			<div id="map" class="f1" style="height: 1045px; position: relative; width: 1584px; overflow: hidden;"></div><!-- map -->
-				 <!--오른쪽으로 뗄 예정-->
-				
-		</div><!-- right_full_box 끝 -->
-		<div id="pln_list"  >
-			<div class="datepicker">
-			출발일<img src="myplan/pn_cal_btn.png">
-			</div>
+		<div id="map" class="f1" ></div><!-- map -->		
+		<div id="pln_list"  ><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
+			<input type="text" class="datepicker" value="출발일" 
+					style="background-image:url('myplan/pn_cal_btn.png');  
+							background-repeat: no-repeat; background-position:300px 17px;"><br>		
 			<ul class="actions small">
 				<li><a href="./MyPlan.pln?plan_nr=1"
 					class="button special small" >일정A</a></li>
@@ -105,8 +103,9 @@ $(function(){
 					class="button small" >일정B</a></li>
 				<li><a href="./MyPlan.pln?plan_nr=3" 
 					class="button alt small" >일정C</a></li>
-			</ul> 
-		</div>
+			</ul>
+			<button class="btn_pln" onclick = "location.href ='./MyPlanModify.pln?plan_nr=1'">상세일정만들기</button> 
+		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 	</div><!-- container 끝 -->
 
 

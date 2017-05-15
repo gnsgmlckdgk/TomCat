@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+.container {
+	height: 1045px;
+	width: 100%;
+}
+
+.myplan-list {
+	background: #fff;
+	border: 1px solid #999;
+	border-radius: 3px;
+	height: 100%;
+	line-height: 35px;
+	padding: 10px 10px 30px 10px;
+	text-align: left;
+	width: 353px;
+	position: absolute;
+	z-index: 1000;
+}
+.myplan-list h3{
+	font-size: 1.35em;
+    line-height: 2.5em;
+    padding: 0.7em;
+}
+#map {
+	bottom: 0px;
+	/* height: 100%; */height: 1045px;
+	left: 365px;
+	/* position: absolute; */	position: relative;
+	right: 0px;
+	border: 1px solid #999999;
+	border-radius: 10px;
+	width: 1584px;
+	overflow: hidden;	
+}
+
+
+.f1 {
+	float: left;
+}
+
+
+#pln_list {
+	width: 380px;
+	position: absolute;
+	left: 378px;
+	top: 10px;
+	padding: 20px;
+	z-index: 999;
+	background: #fff;
+	border-radius: 5px;
+	display: none;
+}
+
+.btn_pln {
+	width:339px;
+}
+#pano {
+	width: 220px;
+	height: 220px;
+}
+
+.text {
+	font-size: 12px;
+}
+
