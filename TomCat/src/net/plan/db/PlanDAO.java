@@ -272,76 +272,7 @@ public class PlanDAO {
 			return list;
 		}
 	
-	/* 지역페이지? */
-	public int getTravelCount(String region){
-		
-		ResultSet rs = null;
-		int count = 0;
-		try{			
-			//1,2디비연결 메서드호출
-			con = getConnection();
-			//num 게시판 글번호 구하기
-			//sql 함수 최대값 구하기 max()
-			
-			sql = "select count(travel_id) from travel where address like ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + region + "%" );
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){count = rs.getInt(1);}
-			
-			//3. sql insert  디비날짜 now()
-		}catch (Exception e){
-			e.printStackTrace();
-		}finally{
-			if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
-			if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
-			if (con != null) {try {con.close();} catch (SQLException ex) {	}}
-		}
-		return count;
-	}// getBoardCount() end
 	
-	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region){
-		ResultSet rs = null;
-		List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
-		try{
-			
-			//1,2디비연결 메서드호출
-			con = getConnection();
-			//num 게시판 글번호 구하기
-			//sql 함수 최대값 구하기 max()
-			sql = "select * from travel where address like ? order by travel_id desc limit ?, ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + region + "%");
-			pstmt.setInt(2, startRow-1);
-			pstmt.setInt(3, pageSize);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				PlanTravelBean ptb = new PlanTravelBean();
-				ptb.setTravel_id(rs.getInt(1));
-				ptb.setType(rs.getString(2));
-				ptb.setConuntry_code(rs.getString(3));
-				ptb.setCity_code(rs.getString(4));
-				ptb.setName(rs.getString(5));
-				ptb.setLatitude(rs.getFloat(6));
-				ptb.setLongitude(rs.getFloat(7));
-				ptb.setInfo(rs.getString(8));
-				ptb.setAddress(rs.getString(9));				
-				ptb.setFile(rs.getString(10));
-				planTravelList.add(ptb);
-			}
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}finally{
-			if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
-			if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
-			if (con != null) {try {con.close();} catch (SQLException ex) {	}}
-		}
-		return planTravelList;
-	} //getBoardList() end
 	
 	/* 메인페이지 국가리스트 뽑아오기(메인페이지) */
 		public List<PlanCountryBean> getCountryList(){
@@ -548,6 +479,7 @@ public class PlanDAO {
 			
 		}
 		
+
 	/*DB 국가 삭제 (운영자 페이지)*/
 		public int deleteCountry(String country_code){
 			int check=0;
@@ -570,6 +502,78 @@ public class PlanDAO {
 			}
 			return check;
 		}
+
+		/* 지역페이지 */
+		public int getTravelCount(String region){
+			
+			ResultSet rs = null;
+			int count = 0;
+			try{			
+				//1,2디비연결 메서드호출
+				con = getConnection();
+				//num 게시판 글번호 구하기
+				//sql 함수 최대값 구하기 max()
+				
+				sql = "select count(travel_id) from travel where address like ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + region + "%" );
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){count = rs.getInt(1);}
+				
+				//3. sql insert  디비날짜 now()
+			}catch (Exception e){
+				e.printStackTrace();
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			return count;
+		}// getBoardCount() end
+		
+		public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region){
+			ResultSet rs = null;
+			List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
+			try{
+				
+				//1,2디비연결 메서드호출
+				con = getConnection();
+				//num 게시판 글번호 구하기
+				//sql 함수 최대값 구하기 max()
+				sql = "select * from travel where address like ? order by travel_id desc limit ?, ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + region + "%");
+				pstmt.setInt(2, startRow-1);
+				pstmt.setInt(3, pageSize);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					PlanTravelBean ptb = new PlanTravelBean();
+					ptb.setTravel_id(rs.getInt(1));
+					ptb.setType(rs.getString(2));
+					ptb.setConuntry_code(rs.getString(3));
+					ptb.setCity_code(rs.getString(4));
+					ptb.setName(rs.getString(5));
+					ptb.setLatitude(rs.getFloat(6));
+					ptb.setLongitude(rs.getFloat(7));
+					ptb.setInfo(rs.getString(8));
+					ptb.setAddress(rs.getString(9));				
+					ptb.setFile(rs.getString(10));
+					planTravelList.add(ptb);
+				}
+
+			}catch (Exception e){
+				e.printStackTrace();
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			return planTravelList;
+		} //getBoardList() end
+
 		
 	/*DB 도시 개수(운영자 페이지)*/
 		public int getCityCount(){
@@ -670,8 +674,9 @@ public class PlanDAO {
 					
 				}
 				
+
 		/*수정할 도시 가져오기(운영자 페이지)*/
-				public PlanCityBean getCity(String city_code){
+				public PlanCityBean getCityContent(String city_code){
 					PlanCityBean pcb = null;
 					Connection con = null;
 					
@@ -764,8 +769,44 @@ public class PlanDAO {
 					return check;
 				}
 				
+
+		// 도시 정보 가져오기
+		public PlanCityBean getCity(String region) {
+			
+			PlanCityBean pcb = new PlanCityBean();;
+			
+			try {
+				con = getConnection();
+				
+				sql = "select city_code, name, info, country_code, en_name from city where name = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, region);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					pcb.setCity_code(rs.getString("city_code"));
+					pcb.setCountry_code(rs.getString("country_code"));
+					pcb.setEn_name(rs.getString("en_name"));
+					pcb.setInfo(rs.getString("info"));
+					pcb.setName(rs.getString("name"));
+				}else {
+					pcb.setCity_code("");
+					pcb.setCountry_code("");
+					pcb.setEn_name("");
+					pcb.setInfo("");
+					pcb.setName("");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			
+			return pcb;
+		}
 		
-		
-		
-	
 }

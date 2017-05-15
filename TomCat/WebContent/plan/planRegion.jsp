@@ -12,17 +12,19 @@
 	String id = (String) session.getAttribute("id");
 %>
 <!-- One 지역명 및 설명-->
-<section id="banner">
-	<div class="container 75%">
+<section id="banner"  class="resion_one">
+	<div class="container 75% resion_info_content" >
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-				<h2><%=region%></h2>
 				
-
-<!-- 위키피디아 파싱 들어가는 부분. -->
-<!-- 왜 동작안하는거냐 frontController에서 두개의 클래스를 사용하면 안되는가. -->
-
-				 
+				<div class="resion_info">
+				<h2><%=region%></h2>
+				<!-- 지역 정보 -->
+				<%
+					StringBuffer region_info = (StringBuffer)request.getAttribute("region_info");
+				%>
+				<%=region_info.toString() %>
+				</div>
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->

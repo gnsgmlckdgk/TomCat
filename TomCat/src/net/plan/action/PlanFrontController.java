@@ -45,7 +45,7 @@ public class PlanFrontController extends HttpServlet {
 
 		} else if (command.equals("/PlanNation.pl")){	// 국가 페이지 이동
 			
-			action = new Scraping();
+			action = new PlanNationAction();
 			
 			try {
 				forward = action.execute(request, response);

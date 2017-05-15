@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 // 다음에서 국가를 검색했을때 나오는 국가 정보를 가져옴
-public class Scraping implements Action{
+public class PlanNationAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

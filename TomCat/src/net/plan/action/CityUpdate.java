@@ -19,7 +19,7 @@ System.out.println("CityUpdate execute()");
 		String pageNum = request.getParameter("pageNum");
 		
 		PlanDAO pdao = new PlanDAO();
-		PlanCityBean pcb = pdao.getCity(city_code);
+		PlanCityBean pcb = pdao.getCityContent(city_code);
 		List<PlanCountryBean> countryList =  pdao.getCountryList();
 		
 		

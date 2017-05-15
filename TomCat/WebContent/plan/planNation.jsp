@@ -21,9 +21,9 @@
 				<div class="nation_info">
 				<h2><%=nation%></h2><br>
 				 <%
-				 StringBuffer info = (StringBuffer)request.getAttribute("nation_info");
+				 StringBuffer nation_info = (StringBuffer)request.getAttribute("nation_info");
 				 %>
-				 <%=info.toString() %>
+				 <%=nation_info.toString() %>
 				</div>
 				
 			</div>
