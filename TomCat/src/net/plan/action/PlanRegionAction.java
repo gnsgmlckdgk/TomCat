@@ -31,26 +31,27 @@ public class PlanRegionAction implements Action {
 		//지역값 받아오기.
 		String region = request.getParameter("region");
 		
-		/* 지역의 각종 관광지, 맛집, 숙소 가져오는 작업 */
-		//지역값 받아와서 글 갯수에 조건 걸어서, 지역에 맞는 글만 가져오는 과정 필요.
-		//타입값 받아와서 글 타입에 조건 걸어서, 맛집, 관광지, 숙소 골라서 보기 가능하도록 할 필요.
-		
 		//객체 생성
 		PlanDAO pdao = new PlanDAO();
 		
-			/*** 지역설명(정보) 스크랩핑 ***/
+			/*** 지역설명(정보) 스크랩핑 시작 ***/
 			// 지역값을 이용해 지역의 값을 빈에 담기
 			PlanCityBean pcb = pdao.getCity(region);
 			
 			CityScraping cs = new CityScraping(pcb);
 			StringBuffer region_info;
-			if("kr".equals(pcb.getCountry_code())) {	// 국내
+			if("kr".equals(pcb.getCountry_code())) {// 국내
 				region_info = cs.getDomesticCity();
 			}else {	// 해외 또는 없는 값
 				region_info = cs.getForeignCity();
 			}
 			request.setAttribute("region_info", region_info);
+			/*** 지역설명(정보) 스크랩핑 끝 ***/
 		
+		/* 지역의 각종 관광지, 맛집, 숙소 가져오는 작업 */
+		//지역값 받아와서 글 갯수에 조건 걸어서, 지역에 맞는 글만 가져오는 과정 필요.
+		//타입값 받아와서 글 타입에 조건 걸어서, 맛집, 관광지, 숙소 골라서 보기 가능하도록 할 필요.
+			
 		//DB에 등록된 글의 개수.
 		int count = pdao.getTravelCount(region);
 		
