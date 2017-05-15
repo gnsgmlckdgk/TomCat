@@ -24,6 +24,7 @@ public class MemberManager implements Action {
 		// 파라미터 값 가져오기
 		String search = request.getParameter("search");
 		String search_sel = request.getParameter("search_sel");	// 검색 종류(id_search, nick_search)
+		System.out.println("search_sel: " + search_sel);
 		if(search_sel==null) {
 			search_sel = "id_search";
 		}

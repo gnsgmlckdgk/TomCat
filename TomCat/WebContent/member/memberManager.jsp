@@ -67,14 +67,21 @@
 					
 					<table>
 						<tr>
-							<th><div style="width: 160px; margin: 0 auto;">프로필 이미지</div></th>
+							<th>
+								<div style="width: 160px; margin: 0 auto;">프로필 이미지</div>
+							</th>
 							<th id="th_id" class="a" title="아이디<%if(isort==1){%>오름차순<%}else if(isort==2){%>내림차순<%}%>">
-											<div style="width: 80px; margin: 0 auto;">아이디<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortId_img"></div></th>
+								<div style="width: 80px; margin: 0 auto;">아이디<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortId_img"></div>
+							</th>
 							<th id="th_nick" class="a" title="닉네임<%if(isort==3){%>오름차순<%}else if(isort==4){%>내림차순<%}%>">
-											<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div></th>
+								<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div>
+							</th>
 							<th id="th_auth" class="a" title="권한<%if(isort==5){%>:관리자우선<%}else if(isort==6){%>:사용자우선<%}%>">
-											<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div></th>
-							<th><div style="width: 99px; margin: 0 auto;">회원탈퇴</div></th>
+								<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div>
+							</th>
+							<th>
+								<div style="width: 99px; margin: 0 auto;">회원탈퇴</div>
+							</th>
 						</tr>
 						<%
 						if(count>0) {
@@ -138,15 +145,15 @@
 					<div class="page">
 						<%
 						if(currentPage > pageBlock) {
-							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>&search=<%=search%>&sort=<%=isort%>">[이전]</a><%	
+							%><a href="./MemberManager.me?pageNum=<%=startPage-pageBlock %>&search=<%=search%>&sort=<%=isort%>&search_sel=<%=search_sel%>">[이전]</a><%	
 						}
 						for(int i=startPage; i<=endPage; i++) {
 							%><%if(currentPage==i){%>
-							<a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>" style="background-color: #f0f0f0;"><%=i %></a>
-							<%}else {%><a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>&sort=<%=isort%>"><%=i %></a><%}%><%
+							<a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>&sort=<%=isort%>&search_sel=<%=search_sel%>" style="background-color: #f0f0f0;"><%=i %></a>
+							<%}else {%><a href="./MemberManager.me?pageNum=<%=i %>&search=<%=search%>&sort=<%=isort%>&search_sel=<%=search_sel%>"><%=i %></a><%}%><%
 						}
 						if(pageCount > endPage) {
-							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>&search=<%=search%>&sort=<%=isort%>">[다음]</a><%
+							%><a href="./MemberManager.me?pageNum=<%=startPage+pageBlock %>&search=<%=search%>&sort=<%=isort%>&search_sel=<%=search_sel%>">[다음]</a><%
 						}
 						%>
 					</div>
@@ -181,27 +188,27 @@
 					$('#th_id').click(function(){
 						var sort = <%=isort%>;	// 현재 정렬모드
 						if(sort==1) {	// 오름차순
-							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=2';
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=2&search_sel=<%=search_sel%>';
 						}else {	// 내림차순
-							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=1';
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=1&search_sel=<%=search_sel%>';
 						}
 					});
 					
 					$('#th_nick').click(function(){
 						var sort = <%=isort%>;	// 현재 정렬모드
 						if(sort==3) {	// 오름차순
-							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=4';
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=4&search_sel=<%=search_sel%>';
 						}else {	// 내림차순
-							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=3';
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=3&search_sel=<%=search_sel%>';
 						}
 					});
 					
 					$('#th_auth').click(function(){
 						var sort = <%=isort%>;	// 현재 정렬모드
 						if(sort==5) {	// 오름차순
-							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=6';
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=6&search_sel=<%=search_sel%>';
 						}else {	// 내림차순
-							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=5';
+							location.href='./MemberManager.me?pageNum=<%=pageNum%>&search=<%=search%>&sort=5&search_sel=<%=search_sel%>';
 						}
 					});
 					/* 정렬 이미지 */

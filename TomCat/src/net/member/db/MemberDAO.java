@@ -710,8 +710,28 @@ public class MemberDAO {
 				
 
 			}else {	// 닉네임으로 검색
-				sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
-					+ "where nick like ? order by reg_date limit ?, ?";
+				if(sort==1) {	// id오름차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by id limit ?, ?";
+				}else if(sort==2) {	// id내림차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by id desc limit ?, ?";
+				}else if(sort==3) {	// nick 오름차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by nick limit ?, ?";
+				}else if(sort==4) {	// nick 내림차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by nick desc limit ?, ?";
+				}else if(sort==5) {	// auth 오름차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by auth limit ?, ?";
+				}else if(sort==6) {	// auth 내림차순
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by auth desc limit ?, ?";
+				}else {
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+							+ "where nick like ? order by reg_date limit ?, ?";
+				}
 			}
 			
 			ps = con.prepareStatement(sql);
