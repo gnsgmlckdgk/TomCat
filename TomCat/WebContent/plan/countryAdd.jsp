@@ -6,11 +6,6 @@
 <jsp:include page="../inc/header.jsp" />
 
 <div class="clear"></div>
-<%
-	List countryList =(List)request.getAttribute("countList");
-
-%>
-
 <section>
 <div  style="width: 50em; margin: auto;">
 	<form action="./CounAdd.pl" name="coun_fr" method="post">
@@ -33,44 +28,12 @@
 		<input type="text" name="en_name">
 		
 		정보
-		<input type="text" name="info">
+		<textarea rows="20" cols="20" name="info"></textarea>
 		
 		<input type="submit"  value="추가">	
 	</form>
 </div>
-<%-- 
-<div  style="width: 50em; margin: auto;">
-	<form action="./CityAdd.pl" name="coun_fr" method="post">
-		국가코드
-		<select name="country_code">
-			<%
-				for(int i=0;i<countryList.size();i++){
-					PlanCountryBean pcb = (PlanCountryBean)countryList.get(i);
-					%>
-					<option value="<%=pcb.getCountry_code() %>"><%=pcb.getName() %></option>
-					<%
-				}
-			%>
-		
-		</select>
-		
-		도시 코드
-		<input type="text" name="city_code">
-		
-		도시 이름
-		<input type="text" name="name">
-		
-		도시 영어이름
-		<input type="text" name="en_name">
-		
-		정보
-		<input type="text" name="info">
-		
-		<input type="submit"  value="추가">
-		
-	</form>
-</div>
- --%>
+
 </section>
 
 <div class="clear"></div>

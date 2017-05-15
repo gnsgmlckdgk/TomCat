@@ -34,6 +34,7 @@ String nick = (String)session.getAttribute("nick");%>
 		</form></li>
 		<li><a href="./PlanSpotWrite.pl" class="button special big">추천장소입력</a></li>
 		<li><a href="./CountryList.pl" class="button special big">국가 DB</a></li>
+		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
 	</ul><!-- 테스트용 버튼들 끝. -->
 	</section>
 

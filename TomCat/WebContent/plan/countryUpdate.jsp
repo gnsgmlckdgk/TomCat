@@ -12,7 +12,7 @@
 
 <section>
 <div  style="width: 50em; margin: auto;">
-	<form action="./CounAdd.pl" name="coun_fr" method="post">
+	<form action="./CountryUpdateAction.pl" name="coun_fr" method="post">
 		대륙
 		<select name="continent">
 			<option value=<%=pcb.getContinent() %>><%=pcb.getContinent() %></option>
@@ -33,9 +33,9 @@
 		<input type="text" name="en_name" value="<%=pcb.getEn_name() %>">
 		
 		정보
-		<input type="text" name="info" value="<%=pcb.getInfo() %>">
+		<textarea rows="20" cols="20" name="info"><%=pcb.getInfo() %></textarea>
 		
-		<input type="submit"  value="추가" >	
+		<input type="submit"  value="수정" >	
 	</form>
 </div>
 </section>

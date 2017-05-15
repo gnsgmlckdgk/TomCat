@@ -447,7 +447,7 @@ public class PlanDAO {
 					
 				}	
 		
-	/*국가 추가하기*/
+	/*국가 추가하기(운영자페이지)*/
 			public void insertCountry(PlanCountryBean pcb){
 			Connection con = null;
 		
@@ -477,7 +477,7 @@ public class PlanDAO {
 			
 		}
 			
-		/*국가 DB수정(운영자 페이지)*/
+	/*수정할 국가 가져오기(운영자 페이지)*/
 		public PlanCountryBean getCountry(String country_code){
 			PlanCountryBean pcb = null;
 			Connection con = null;
@@ -510,9 +510,134 @@ public class PlanDAO {
 			return pcb;
 		}
 		
+	/*국가 DB수정(운영자 페이지)*/
+		public int updateCountry(PlanCountryBean pcb){
+			int check = 0;
+			
+			try{	
+				con=getConnection();
+				sql =  "select * from country where country_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, pcb.getCountry_code());
+				
+				rs= pstmt.executeQuery();
+				
+				if(rs.next()){
+					check=1;
+					sql =  "update country set country_code=?, name=?, info=?, continent=?, en_name=? where country_code=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, pcb.getCountry_code());
+					pstmt.setString(2, pcb.getName());
+					pstmt.setString(3, pcb.getInfo());
+					pstmt.setString(4, pcb.getContinent());
+					pstmt.setString(5, pcb.getEn_name());
+					pstmt.setString(6, pcb.getCountry_code());
+					
+					pstmt.executeUpdate();
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {}}
+			}
+			return check;
+			
+		}
 		
+	/*DB 국가 삭제 (운영자 페이지)*/
+		public int deleteCountry(String country_code){
+			int check=0;
+			try{
+				con=getConnection();
+				
+				sql="delete from country where country_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, country_code);
+				
+				pstmt.executeUpdate();
+				check=1;
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {}}
+			}
+			return check;
+		}
 		
-		//도시 추가하기
+	/*DB 도시 개수(운영자 페이지)*/
+		public int getCityCount(){
+			int count = 0;
+			
+			try {
+				con = getConnection();
+					sql = "select count(*) as count from city";
+					pstmt = con.prepareStatement(sql);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						count = rs.getInt("count");
+					}
+			}catch(Exception e) {
+				e.printStackTrace();
+				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}	
+			return count;
+		}
+		
+	/*DB 도시리스트 뽑아오기 (운영자 페이지) */
+		public List<PlanCityBean> getCityList(int startRow, int pageSize){
+			List<PlanCityBean> cityList = new ArrayList();
+			PlanCityBean cb = null;
+			String sql = "";
+			
+			try {
+				con=getConnection();
+
+				sql="select * from city order by name asc limit ?,?";
+		
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, startRow-1);//시작행-1
+				pstmt.setInt(2, pageSize);//몇개글
+				
+				rs = pstmt.executeQuery();
+
+				while(rs.next()){
+					cb = new PlanCityBean();
+					
+					cb.setCountry_code(rs.getString("country_code"));
+					cb.setName(rs.getString("name"));
+					cb.setInfo(rs.getString("info"));
+					cb.setCity_code(rs.getString("city_code"));
+					cb.setEn_name(rs.getString("en_name"));
+					
+					cityList.add(cb);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+			}finally{
+				if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+				if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+				if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+			}
+			return cityList;
+			
+		}	
+		
+	//도시 추가하기
 				public void insertCity(PlanCityBean pcb){
 					PlanCityBean cb = null;
 					Connection con = null;
@@ -537,30 +662,106 @@ public class PlanDAO {
 					} catch (Exception e) {
 						e.printStackTrace();
 						
-					}finally {
-						// 예외상관없이 마무리 작업
-						// 객체생성 닫기
-						if (rs != null) {
-							try {
-								rs.close();
-							} catch (SQLException ex) {
-							} // Exception 이 가장 큰 범위
-						} // if
-						if (stmt != null) {
-							try {
-								stmt.close();
-							} catch (SQLException ex) {
-							} // Exception 이 가장 큰 범위
-						} // if
-						if (con != null) {
-							try {
-								con.close();
-							} catch (SQLException ex) {
-							} // Exception 이 가장 큰 범위
-						} // if
-						
+					}finally{
+						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+						if (con != null) {try {con.close();} catch (SQLException ex) {	}}
 					}
 					
+				}
+				
+		/*수정할 도시 가져오기(운영자 페이지)*/
+				public PlanCityBean getCity(String city_code){
+					PlanCityBean pcb = null;
+					Connection con = null;
+					
+					try{	
+						con=getConnection();
+						sql =  "select * from city where city_code=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, city_code);
+						
+						rs= pstmt.executeQuery();
+						
+						if(rs.next()){
+							pcb = new PlanCityBean();
+							pcb.setCity_code(rs.getString("city_code"));
+							pcb.setCountry_code(rs.getString("country_code"));
+							pcb.setEn_name(rs.getString("en_name"));
+							pcb.setInfo(rs.getString("info"));
+							pcb.setName(rs.getString("name"));
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+						
+					}finally{
+						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+						if (con != null) {try {con.close();} catch (SQLException ex) {}}
+					}
+					return pcb;
+				}
+				
+			/*국가 DB수정(운영자 페이지)*/
+				public int updateCity(PlanCityBean pcb){
+					int check = 0;
+					
+					try{	
+						con=getConnection();
+						sql =  "select * from city where city_code=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, pcb.getCity_code());
+						
+						rs= pstmt.executeQuery();
+						
+						if(rs.next()){
+							check=1;
+							sql = "update city set country_code=?, name=?, info=?, city_code=?, en_name=? where city_code=?";
+							pstmt = con.prepareStatement(sql);
+							pstmt.setString(1, pcb.getCountry_code());
+							pstmt.setString(2, pcb.getName());
+							pstmt.setString(3, pcb.getInfo());
+							pstmt.setString(4, pcb.getCity_code());
+							pstmt.setString(5, pcb.getEn_name());
+							pstmt.setString(6, pcb.getCity_code());
+							
+							pstmt.executeUpdate();
+						}
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+						
+					}finally{
+						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+						if (con != null) {try {con.close();} catch (SQLException ex) {}}
+					}
+					return check;
+					
+				}
+				
+			/*DB 도시 삭제 (운영자 페이지)*/
+				public int deleteCity(String city_code){
+					int check=0;
+					try{
+						con=getConnection();
+						
+						sql="delete from city where city_code=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, city_code);
+						
+						pstmt.executeUpdate();
+						check=1;
+					}catch (Exception e) {
+						e.printStackTrace();
+						
+					}finally{
+						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+						if (con != null) {try {con.close();} catch (SQLException ex) {}}
+					}
+					return check;
 				}
 				
 		
