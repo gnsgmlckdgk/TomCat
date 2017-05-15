@@ -12,18 +12,19 @@
 	String id = (String) session.getAttribute("id");
 %>
 <!-- One 지역명 및 설명-->
-<section id="banner">
-	<div class="container 75%">
+<section id="banner"  class="resion_one">
+	<div class="container 75% resion_info_content" >
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
+				
+				<div class="resion_info">
 				<h2><%=region%></h2>
-
-		<!-- 지역 정보 -->
-		<%
-			StringBuffer region_info = (StringBuffer)request.getAttribute("region_info");
-		%>
-		<%=region_info.toString() %>
-
+				<!-- 지역 정보 -->
+				<%
+					StringBuffer region_info = (StringBuffer)request.getAttribute("region_info");
+				%>
+				<%=region_info.toString() %>
+				</div>
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
