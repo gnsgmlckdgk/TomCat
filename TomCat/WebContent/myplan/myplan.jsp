@@ -43,8 +43,8 @@ $(function(){
 </head>
 <body>
 	<%
-		String gold = (String) request.getAttribute("auth");
-		String id = (String) request.getAttribute("id");
+		String gold = (String) request.getAttribute("gold");
+		String id = (String) session.getAttribute("id");
 
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
@@ -328,7 +328,7 @@ $(function(){
 		<p class="dialog__content">test</p>
 
 		<input type="button" class="dialog__action"
-			onclick="location.href='./PayAction.pln'" value="골드 멤버 되기">
+			onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="골드 멤버 되기">
 			<!-- payAction > payPlanC.jsp > payAction > myplan.jsp으로 이동합니다. -->
 
 

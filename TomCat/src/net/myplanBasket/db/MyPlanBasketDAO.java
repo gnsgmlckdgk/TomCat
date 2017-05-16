@@ -11,6 +11,8 @@ import java.util.Vector;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import net.member.db.MemberBean;
 import net.travel.admin.db.TravelBean;
 
 public class MyPlanBasketDAO {
@@ -182,18 +184,18 @@ public class MyPlanBasketDAO {
 		return check;
 	}
 
-	public String getMemberGold(String id){
-		String gold="무료회원";
-		
+	public String getMemberGold(String id) {
+		String gold = "무료회원";
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
 		int check = 0;
 		try {
-			
+
 			con = getConnection();
-			
+
 			sql = "select gold from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -201,11 +203,11 @@ public class MyPlanBasketDAO {
 			rs = pstmt.executeQuery();
 
 			check = rs.getInt(1);
-			
-			if(check==1){
+
+			if (check == 1) {
 				gold = "유료회원";
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -225,34 +227,32 @@ public class MyPlanBasketDAO {
 				} catch (SQLException ex) {
 				}
 		}
-		
-		return gold; //실제로는 gold값을 반환한다.
+
+		return gold; // 실제로는 gold값을 반환한다.
 	}
-	
-	public String getTel(String id){
-		String gold="무료회원";
-		
+
+	public MemberBean getTelName(String id) {
+		MemberBean mb = new MemberBean();
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int check = 0;
 		try {
-			
+
 			con = getConnection();
-			
-			sql = "select gold from member where id=?";
+
+			sql = "select AES_DECRYPT(UNHEX(tel), 'tel') as tel, name from member where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			// 4 rs 실행저장
 			rs = pstmt.executeQuery();
-
-			check = rs.getInt(1);
 			
-			if(check==1){
-				gold = "유료회원";
+			if (rs.next()) {
+				mb.setTel(rs.getString("tel"));
+				mb.setName(rs.getString("name"));
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -272,27 +272,27 @@ public class MyPlanBasketDAO {
 				} catch (SQLException ex) {
 				}
 		}
-		
-		return gold; //실제로는 gold값을 반환한다.
+
+		return mb;
 	}
-	
-	public void insertGoldMember(String id){
-		
+
+	public void insertGoldMember(String id) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		
+
 		try {
-			
+
 			con = getConnection();
-			
+
 			sql = "update member set gold=1 where id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,id);
+			pstmt.setString(1, id);
 			// 4 rs 실행저장
 			pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -313,7 +313,7 @@ public class MyPlanBasketDAO {
 				}
 		}
 	}
-	
+
 	// getBasketList(id)
 	public Vector getBasketList(String id) {
 		Connection con = null;
@@ -359,8 +359,6 @@ public class MyPlanBasketDAO {
 				mpbb.setPlan_done_nr(rs.getInt("plan_done_nr"));
 				basketList.add(mpbb);
 
-				System.out.println("mpbb.getPlan_nr : " + mpbb.getPlan_nr());
-
 				sql = "select * from travel where travel_id=?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1, mpbb.getTravel_id());
@@ -383,8 +381,8 @@ public class MyPlanBasketDAO {
 			// vector 두번째 칸 goodsList 저장
 			vector.add(basketList);
 			vector.add(goodsList);
-			System.out.println("basketList.size"+basketList.size());
-			System.out.println("goodsList.size"+goodsList.size());
+			System.out.println("basketList.size" + basketList.size());
+			System.out.println("goodsList.size" + goodsList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -432,7 +430,7 @@ public class MyPlanBasketDAO {
 			pstmt.setString(9, myplanbean.getDate());
 			pstmt.setString(10, myplanbean.getMemo());
 			pstmt.setInt(11, myplanbean.getPlan_done_nr());
-		
+
 			// 4실행
 			pstmt.executeUpdate();
 		} catch (Exception e) {

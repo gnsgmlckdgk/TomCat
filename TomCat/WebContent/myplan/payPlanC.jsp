@@ -18,6 +18,9 @@
 	<%
 		String id = (String) session.getAttribute("id");
 		String nick = (String) session.getAttribute("nick");
+		String tel = (String)request.getAttribute("tel");
+		String name = (String)request.getAttribute("name");
+		
 
 		int gold_price = 97000;
 		int discount_price = 0;
@@ -60,7 +63,7 @@
 						<table class="innerTable">
 							<tr>
 								<td>이름</td>
-								<td><input type="text" name="name" value="db에서받아오는값."
+								<td><input type="text" name="name" value="<%=name %>"
 									readonly="readonly"></td>
 							</tr>
 							<tr>
@@ -71,7 +74,7 @@
 							<tr>
 								<td>휴대폰 번호</td>
 								<td><input type="text" name="phone_number"
-									value="db에서받아오는값." readonly="readonly"></td>
+									value="<%=tel %>" readonly="readonly"></td>
 							</tr>
 						</table>
 					</td>

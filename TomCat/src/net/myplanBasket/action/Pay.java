@@ -3,7 +3,8 @@ package net.myplanBasket.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.myplanBasket.db.MyPlanBasketBean;
+import net.member.db.MemberBean;
+
 import net.myplanBasket.db.MyPlanBasketDAO;
 
 public class Pay implements Action {
@@ -16,25 +17,36 @@ public class Pay implements Action {
 		// content
 		String id = (String) request.getParameter("id");
 		int approval = Integer.parseInt(request.getParameter("approval"));
-
+		
+		
 		MyPlanBasketDAO mpdao = new MyPlanBasketDAO();
-
+		
+		
 		ActionForward forward = new ActionForward();
 		if (approval == 1) {
 
 			mpdao.insertGoldMember(id);
-			
+
 			forward.setRedirect(true);
 			forward.setPath("./MyPlan.pln?plan_nr=100");
+			return forward;
+
 		} else {
 			
-			mpdao.getTel(id);
+			MemberBean mb = (MemberBean)mpdao.getTelName(id);
 			
-			forward.setRedirect(false);
+			System.out.println(id);
+			System.out.println(mb.getName());
+			
+			request.setAttribute("name", mb.getName());
+			request.setAttribute("tel", mb.getTel());
+						
 			forward.setPath("./Pay.pln");
+			forward.setRedirect(false);
+			return forward;
 		}
 		// end content
 
-		return forward;
+		
 	}
 }
