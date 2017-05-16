@@ -62,23 +62,6 @@ public class PlanFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/PlanSpotWrite.pl")){
-			forward = new ActionForward();
-			forward.setPath("./plan/planSpotWrite.jsp");
-			forward.setRedirect(false);
-
-		} 
-		
-		
-		
-		else if(command.equals("/PlanSpotWriteAction.pl")){
-			action = new PlanSpotWriteAction();
-			try{
-				forward = action.execute(request, response);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		
 		}
 		
 		else if(command.equals("/CountryList.pl")){ //DB에있는 국가리스트 보여주는 페이지 이동

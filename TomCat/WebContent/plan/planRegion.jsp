@@ -37,6 +37,8 @@
 		</div>
 	</div>
 </section>
+
+
 <!-- Two -->
 <%
 	List planTravelList = (List) request.getAttribute("planTravelList");
