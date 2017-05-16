@@ -70,7 +70,7 @@ div.memberManagerNav li a:hover {
 /* 메인 전체 */
 section.memberManager {
 	
-	background-image: url("../../../images/member/back/back1.png");
+	background-image: url("../../../images/member/back/memberManager.png");
 	background-repeat: repeat;
 	background-size: cover;
 	background-attachment: fixed;
