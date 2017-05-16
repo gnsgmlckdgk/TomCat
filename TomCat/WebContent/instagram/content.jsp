@@ -54,7 +54,7 @@ function func2(){
 	%>
 	<section id="wrapper">
 	
-	<h1><%=nick %>님의 멋진 인생샷♡</h1>
+	<h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1>
 	<table class="table1">
 		<tr>
 			<td colspan="2"><%=bb.getSubject()%></td>
@@ -73,22 +73,33 @@ function func2(){
 		<tr>
 			<td colspan="4"><%=bb.getContent()%></td>
 		</tr>
-	</table>
-	<%if(bb.getNick().equals(nick)){%>
-	
-	<input type="button" value="글수정"
-		onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
-
+		<tr>
+		<td>
+		<%if(bb.getNick().equals(nick)){%>	
+	<input type="button" style="margin-left:50px;"
+	 value="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+		</td>
+		<td colspan="2">
 				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
 					<input type="hidden" value="<%=num%>" name="num"> 															
 					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
 					<input type="submit" value="글삭제">
 				</form>
+				</td>
 
 		<%} %>
-
-	<input type="button" value="글목록 "
+<td colspan="4">
+	<input id="listbutton" type="button" value="글목록 "
 		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">
+		
+	</td>	
+		
+		
+		</tr>
+		
+		
+	</table>
+	
 
 
 	<!--리플 -->	

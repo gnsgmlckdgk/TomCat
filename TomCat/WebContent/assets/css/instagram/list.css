@@ -41,6 +41,29 @@ background-color: #996699;
 
 .bottomline{
 
-	border-bottom: 1px solid #A9A9A9;
+	border-bottom: 1px solid #A9A9A9;	
+}
+
+
+.banner{
+	width:10em;
+	background-color: white;
+	opacity:0.8;
+	position:fixed;	
+	right:5px;
+	top:100px;
+	border: none;
+	border-collapse: none;
+}
+.banner img{
+/* 	border:2px solid black; */
+	
+}
+
+#listpage{
+	text-align:center;
+	font-size: 1.5em;
+		
+	
 	
 }

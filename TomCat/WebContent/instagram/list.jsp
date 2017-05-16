@@ -122,43 +122,58 @@ if(likecount%2==0){
 			}//아이디가 not null이면
 			%>
 			
+			<tr>
+			<td colspan="4" id="listpage">
+			
+			<%
+			
+			//페이지 출력
+			if(count!=0){
+				//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
+							//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
+				int pageCount=count/pageSize+(count%pageSize==0?0:1);
+				//한 화면에 보여줄 페이지 번호 개수
+				int pageBlock=10;
+				//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
+				int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
+				//끝페이지 번호 구하기
+				int endPage=startPage+pageBlock-1;
+				if(endPage>pageCount){
+					endPage=pageCount;}
+				//이전
+				if(startPage>pageBlock){
+					%><a href="./BoardList.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+			<%
+				}
+				//1...10
+				for(int i=startPage;i<=endPage;i++){
+					%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]
+			</a>
+			<%
+				}
+				//다음
+				if(endPage< pageCount){
+					%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock %>">[다음]</a>
+			<%}		
+			}		
+			%>			
+			</td>
+			</tr>
 	</table>
 	</div>
 	<%
-	//페이지 출력
-	if(count!=0){
-		//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
-					//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
-		int pageCount=count/pageSize+(count%pageSize==0?0:1);
-		//한 화면에 보여줄 페이지 번호 개수
-		int pageBlock=10;
-		//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
-		int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
-		//끝페이지 번호 구하기
-		int endPage=startPage+pageBlock-1;
-		if(endPage>pageCount){
-			endPage=pageCount;}
-		//이전
-		if(startPage>pageBlock){
-			%><a href="./BoardList.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a>
-	<%
-		}
-		//1...10
-		for(int i=startPage;i<=endPage;i++){
-			%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]
-	</a>
-	<%
-		}
-		//다음
-		if(endPage< pageCount){
-			%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock %>">[다음]</a>
-	<%
-			}		
-	}
+	
 	}
 	%>
-</section>
+	
+	<table class="banner">
+	<tr><td>BEST샷</td></tr>
+	<tr><td><img src="./instagram/italy.png" onerror="this.src='./instagram/italy.png'"></td></tr>	
+	</table>
+	
 
+</section>
+	
 </body>
 		
 <!-- Footer -->
