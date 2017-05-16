@@ -1,6 +1,8 @@
 package net.member.db;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -155,16 +157,18 @@ public class MemberDAO {
 		// 비밀번호 단방향 암호화(SHA-256)
 		// 전화번호 양방향 암호화(AES)
 		
-		// MySQL버전이 낮아져 PASSWORD() 함수로 암호화 하는 방식으로 변경
-		
 		try {
 			con = getConnection();
 			
+			// 자바에서 비밀번호 SHA256 암호화(DB에도 함수가 있지만 작업할때 낮은 버전의 mySql을 쓰게 되서 자바에서 암호화 후 DB에 입력)
+			String pass = mb.getPass();
+			String shaPass = encSHA256(pass);	// 암호화 된 비밀번호(SHA-256)
+			
 			sql = "insert into member(id, pass, name, nick, gender, tel, reg_date, profile, auth) "
-					+ "values(?,PASSWORD(?), ?, ?, ?, HEX(AES_ENCRYPT(?, 'tel')), ?, ?, ?)";
+					+ "values(?, ?, ?, ?, ?, HEX(AES_ENCRYPT(?, 'tel')), ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mb.getId());
-			ps.setString(2, mb.getPass());
+			ps.setString(2, shaPass);
 			ps.setString(3, mb.getName());
 			ps.setString(4, mb.getNick());
 			ps.setString(5, mb.getGender());
@@ -192,41 +196,31 @@ public class MemberDAO {
 	// 로그인 인증
 	public int memberLogin(String id, String pass) {
 		
-		// 0 아이디 또는 비밀번호 틀림, 1 비밀번호 맞음
+		// -1 아이디 없음, 0 비밀번호 틀림, 1 비밀번호 맞음
 		int check = 0;
 		
 		try {
 			
+			String shaPass = encSHA256(pass);	// SHA256로 암호화 된 비밀번호
+			
 			con = getConnection();
 			
-			// DB의 pass가 단방향 암호화 SHA-256으로 되어있기때문에 매개변수 pass를 SHA-256암호화 후 비교한다.
-			// MySQL 버전이 낮아져 PASSWORD() 함수를 사용한 암호화 방식으로 변경
-			sql = "select id from member where pass=PASSWORD(?)";
+			sql = "select pass from member where id = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, pass);
+			ps.setString(1, id);
 			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
-				if(rs.getString("id").equals(id)) {
-					check = 1;
-					return check;
-				}else {
-					check = 0;
-				}
-			}
-			
-			// SHA256 방식
-			/*if(rs.next()) {
-				String passSHA = txtSHA256(pass);	// SHA256 암호화
-				if(rs.getString("pass").equals(passSHA)) {
+			if(rs.next()) {	// 아이디 존재
+				if(rs.getString("pass").equals(shaPass)) {	// 비밀번호 일치
 					check = 1;
 				}else {	// 비밀번호 틀림
 					check = 0;
 				}
+				
 			}else {	// 아이디 없음
 				check = -1;
-			}*/	
+			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -241,32 +235,6 @@ public class MemberDAO {
 		}
 		return check;
 	}
-	
-	// DB 서버 호스팅하면서 MySQL 버전이 낮아져 불가피하게 SHA256에서 PASSWORD() 함수를 쓰는 방식으로 변경
-	// PASSWORD() 함수로 암호화 하는 것은 MySQL 사용자 자체의 계정 및 비밀번호를 관리하기 위한 함수여서 일반 서비스용 계정 및 암호를 관리하는 용도로는 적합하지 않다. ㅠㅠ
-	
-/*	// SHA256 암호화(비밀번호 확인 시 필요)
-	public String txtSHA256(String str){
-	
-		String SHA = ""; 
-	
-		try{
-			MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
-			sh.update(str.getBytes());
-			byte byteData[] = sh.digest();
-			StringBuffer sb = new StringBuffer(); 
-			for(int i = 0 ; i < byteData.length ; i++){
-				sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
-			}
-			SHA = sb.toString();
-
-		}catch(NoSuchAlgorithmException e){
-			System.out.println("SHA256암호화 오류");
-			e.printStackTrace(); 
-			SHA = null; 
-		}
-			return SHA;
-	}*/
 	
 	// 회원정보 가져오기
 	public MemberBean getMember(String id) {
@@ -363,13 +331,14 @@ public class MemberDAO {
 		// 임시비밀번호를 메일로 보내고 DB에서도 비밀번호를 한다.
 		try {
 			
+			String shaPass = encSHA256(pass);	// SHA256 암호화
+			
 			con = getConnection();
 			
 			// 임시비밀번호 SHA256 암호화
-			// MySQL 버전이 낮아져 PASSWORD() 방식으로 변경
-			sql = "update member set pass = PASSWORD(?) where id = ? ";
+			sql = "update member set pass = ? where id = ? ";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, pass);
+			ps.setString(1, shaPass);
 			ps.setString(2, id);
 			
 			ps.executeUpdate();
@@ -393,30 +362,39 @@ public class MemberDAO {
 	// 비밀번호 변경
 	public int updatePass(String id, String cur_pass, String new_pass) {
 			
-		int check = 0;	// 0: 비밀번호 일치하지 않음, 1: 비밀번호 일치
+		int check = 0;	// -1: 아이디 없음 0: 비밀번호 일치하지 않음, 1: 비밀번호 일치
 		
 		try {
 				
+			String shaCurPass = encSHA256(cur_pass);	// 현재 비밀번호 암호화
+			String shaNewPass = encSHA256(new_pass);	// 새로운 비밀번호 암호화
+			
 			con = getConnection();
 				
-			// 비밀번호 맞는지 확인
-			// MySQL 버전이 낮아져 PASSWORD() 방식으로 변경
-			sql = "select id from member where pass=PASSWORD(?)";
+			sql = "select pass from member where id = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, cur_pass);
+			ps.setString(1, id);
+			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {	// 이 비밀번호를 쓰는 아이디는 있음
-				if(rs.getString("id").equals(id)) {	// 로그인한 아이디가 쓰는 비밀번호와 일치
-					sql = "update member set pass = PASSWORD(?) where id = ?";
+			if(rs.next()) {	// 아이디 있음
+				if(rs.getString("pass").equals(shaCurPass)) {	// 현재 비밀번호 일치
+					
+					check = 1;
+					
+					sql = "update member set pass=? where id=?";
 					ps = con.prepareStatement(sql);
-					ps.setString(1, new_pass);
+					ps.setString(1, shaNewPass);
 					ps.setString(2, id);
 					
 					ps.executeUpdate();
-						
-					check = 1;	
+					
+				}else {	// 현재 비밀번호 틀림
+					check = 0;
 				}
+				
+			}else {	// 아이디 없음
+				check = -1;
 			}
 				
 			}catch(Exception e) {
@@ -503,20 +481,22 @@ public class MemberDAO {
 	// 회원 탈퇴
 	public int deleteMember(String id, String pass, String realPath) {
 		
-		int check = 0;	// 0: 비밀번호 틀림, 1: 탈퇴 완료
+		int check = 0;	// -1: 아이디 없음 0: 비밀번호 틀림, 1: 탈퇴 완료
 		
 		try {
 			
+			String shaPass = encSHA256(pass);	// SHA256 암호화
+			
 			con = getConnection();
 			
-			sql = "select id from member where pass=PASSWORD(?)";
+			sql = "select pass from member where id = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, pass);
+			ps.setString(1, id);
 			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
-				if(rs.getString("id").equals(id)) {	// 비밀번호의 아이디들 중 로그인한 아이디와 같은 아이디가 있는지 확인
+			if(rs.next()) {	// 아이디 있음
+				if(rs.getString(pass).equals(shaPass)) {	// 비밀번호 일치
 					check = 1;
 					
 					// 기존의 프로필 이미지는 삭제(물리적 위치에 있는 이미지 파일)
@@ -533,21 +513,22 @@ public class MemberDAO {
 							f.delete();
 							System.out.println("프로필 이미지 삭제 성공");
 						}
-					}
-					
+						
 					sql="delete from member where id=?";
 					ps = con.prepareStatement(sql);
 					ps.setString(1, id);
-					
+						
 					ps.executeUpdate();
-					
-					return check;
-					
-				}else {
+
+				}else {	// 비밀번호 불일치
 					check = 0;
 				}
+				
+			}else {	// 아이디 없음
+				check = -1;
 			}
-			
+		}		
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -590,7 +571,6 @@ public class MemberDAO {
 				ps = con.prepareStatement(sql);
 				ps.setString(1, id);
 				
-				// 일단 삭제안되게 막아둠
 				ps.executeUpdate();
 				
 			}catch(Exception e) {
@@ -802,6 +782,26 @@ public class MemberDAO {
 		}
 	}
 
+	// SHA256 암호화(단방향)
+	public String encSHA256(String str){
+		String SHA = ""; 
+		try{
+			MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
+			sh.update(str.getBytes()); 
+			byte byteData[] = sh.digest();
+			StringBuffer sb = new StringBuffer(); 
+			for(int i = 0 ; i < byteData.length ; i++){
+				sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+		}
+			SHA = sb.toString();
+
+		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace(); 
+			SHA = null; 
+		}
+			return SHA;
+	}
+	
 } // class
 
 
