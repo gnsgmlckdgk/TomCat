@@ -1,7 +1,7 @@
 /* 회원정보 관리에 관한 스타일 */
 
 .clear {
-	float: clear;
+	clear: both;
 }
 
 /* 회원정보로 들어가기전 팝업 메뉴 시작 */
@@ -313,16 +313,7 @@ div.content_member_memberManager img {
 	height: 50px;
 	margin: 0 0 -19px 0;
 }
-div.content_member_memberManager .page {
-	text-align: center;
-}
-div.content_member_memberManager .page a{
-	border: 1px solid #ccc;
-	padding: 4px 7px;
 
-	font-size: 1.2em;
-	font-weight: bold;
-}
 div.content_member_memberManager .page a:hover {
 	background-color: #f0f0f0;
 	color: orange;
@@ -397,6 +388,17 @@ div.content_member_memberManager div.search_div input[type="submit"] {
 	text-align: center;
 	
 	margin-left: 10px;
+}
+
+div.content_member_memberManager .page {
+	text-align: center;
+}
+div.content_member_memberManager .page a{
+	border: 1px solid #ccc;
+	padding: 4px 7px;
+
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 /* 회원정보 관리 페이지  끝 */
