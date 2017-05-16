@@ -6,8 +6,18 @@
 }
 
 /* join.jsp */
+section.joinSection {
+	/* 테스트 중 */
+	background-image: url("../../../images/member/back/join.png");
+	background-repeat: repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
 div.join_div {
+
 	border: 3px solid #ccc;
+	border-radius: 20px;
 	width: 70%;
 	margin: 0 auto;
 	padding: 0;
