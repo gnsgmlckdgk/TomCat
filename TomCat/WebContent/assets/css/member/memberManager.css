@@ -70,7 +70,7 @@ div.memberManagerNav li a:hover {
 /* 메인 전체 */
 section.memberManager {
 	
-	background-image: url("../../../images/member/back/memberManager.png");
+	background-image: url("../../../images/member/back/memberManager.jpg");
 	background-repeat: repeat;
 	background-size: cover;
 	background-attachment: fixed;
@@ -288,25 +288,40 @@ div.content_member_memberManager h1 {
 	margin: 0;
 }
 div.content_member_memberManager table {
-	min-width: 600px;
+	display: block;
 }
+
 div.content_member_memberManager th {
 	padding: 0px;
 	
 	text-align: center;
 	font-size: 1.1em;
 }
+div.content_member_memberManager th.th_img {
+	width: 5%;
+}
+div.content_member_memberManager th.th_id {
+	width: 45%;
+}
+div.content_member_memberManager th.th_nick {
+	width: 40%;
+}
+div.content_member_memberManager th.th_auth {
+	width: 5%;
+}
+div.content_member_memberManager th.th_delete {
+	width: 5%;
+}
+
 div.content_member_memberManager th.a:hover {
 	cursor: pointer;
 }
+
 div.content_member_memberManager td {
-	padding: 0px;
+	padding: 0;
 	text-align: center;
 	font-size: 1.1em;
 	font-weight: bold;
-}
-div.content_member_memberManager td.id_td span {
-	display: block;
 }
 div.content_member_memberManager img {
 	width: 50px;
@@ -318,30 +333,33 @@ div.content_member_memberManager .page a:hover {
 	background-color: #f0f0f0;
 	color: orange;
 }
-div.content_member_memberManager .auth_select_box {
-	width: 200px;
-}
-div.content_member_memberManager .auth_select_box select:hover {
-	background-color: #D4F4FA;
-	cursor: pointer;
-}
-div.content_member_memberManager .auth_select_box div {
+
+
+div.content_member_memberManager td.auth_select_box div {
 	width: 135px;
 	margin: 0 0 0 30px;
 	padding: 5px 0 5px 20px;
 }
-div.content_member_memberManager .auth_select_box label {
+div.content_member_memberManager td.auth_select_box label {
 	margin: 1px 20px 0 0;
 	float: left;
 }
-div.content_member_memberManager select {
-	margin: 0;
-	width: 110px;
-	height: 40px;
+div.content_member_memberManager td.auth_select_box select {
+	margin-left: -30px;
+	
+	width: 140px;	/* default 110 */
+	height: 38px;
+	
+}
+div.content_member_memberManager td.auth_select_box select:hover {
+	background-color: #D4F4FA;
+	cursor: pointer;
 }
 div.content_member_memberManager option {
 	height: 20px;
 }
+
+
 
 div.content_member_memberManager div.search_div {
 	position: relative;

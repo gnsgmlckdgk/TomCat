@@ -4,7 +4,7 @@
 
 /* 첫번재 섹션 : 지역(도시) 정보 */
 section#banner {
-	padding: 50px 0;
+	/* 맨 윗부분 */
 }
 section.resion_one {
 	position: relative;

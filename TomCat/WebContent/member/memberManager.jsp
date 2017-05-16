@@ -67,19 +67,19 @@
 					
 					<table>
 						<tr>
-							<th>
+							<th class="th_img">
 								<div style="width: 160px; margin: 0 auto;">프로필 이미지</div>
 							</th>
-							<th id="th_id" class="a" title="아이디<%if(isort==1){%>오름차순<%}else if(isort==2){%>내림차순<%}%>">
+							<th id="th_id" class="a th_id" title="아이디<%if(isort==1){%>오름차순<%}else if(isort==2){%>내림차순<%}%>">
 								<div style="width: 80px; margin: 0 auto;">아이디<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortId_img"></div>
 							</th>
-							<th id="th_nick" class="a" title="닉네임<%if(isort==3){%>오름차순<%}else if(isort==4){%>내림차순<%}%>">
+							<th id="th_nick" class="a th_nick" title="닉네임<%if(isort==3){%>오름차순<%}else if(isort==4){%>내림차순<%}%>">
 								<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div>
 							</th>
-							<th id="th_auth" class="a" title="권한<%if(isort==5){%>:관리자우선<%}else if(isort==6){%>:사용자우선<%}%>">
+							<th id="th_auth" class="a th_auth" title="권한<%if(isort==5){%>:관리자우선<%}else if(isort==6){%>:사용자우선<%}%>">
 								<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div>
 							</th>
-							<th>
+							<th class="th_delete">
 								<div style="width: 99px; margin: 0 auto;">회원탈퇴</div>
 							</th>
 						</tr>
@@ -90,7 +90,7 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td"><span><%=mb.getId() %></span></td>
+									<td class="id_td"><%=mb.getId() %></td>
 									<td class="nick_td"><%=mb.getNick() %></td>	
 									<td class="auth_select_box">
 										<div class="select-wrapper">
@@ -122,7 +122,7 @@
 					</table>
 					
 					<div class="search_div">
-						<form action="./MemberManager.me?pageNum=1" method="post">
+						<form action="./MemberManager.me?pageNum=1&sort=<%=isort%>" method="post">
 							<select name="search_sel" id="category">
 								<option value="id_search" <%if("id_search".equals(search_sel)){%>selected<%} %>>아이디 검색</option>
 								<option value="nick_search" <%if("nick_search".equals(search_sel)){%>selected<%} %>>닉네임 검색</option>
