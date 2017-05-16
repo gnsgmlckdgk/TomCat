@@ -328,7 +328,8 @@ $(function(){
 		<p class="dialog__content">test</p>
 
 		<input type="button" class="dialog__action"
-			onclick="location.href='./Pay.pln'" value="골드 멤버 되기 &#8594;">
+			onclick="location.href='./PayAction.pln'" value="골드 멤버 되기">
+			<!-- payAction > payPlanC.jsp > payAction > myplan.jsp으로 이동합니다. -->
 
 
 	</div>

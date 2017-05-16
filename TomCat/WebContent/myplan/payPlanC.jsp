@@ -227,7 +227,7 @@
 			있으면 결제가 진행되지 않습니다.
 		</div>
 		<input type="button" style="width: 100%"
-			onclick="location.href='./PayAction.pln?id=<%=id%>'" value="구매하기">
+			onclick="location.href='./PayAction.pln?id=<%=id%>&approval=1'" value="구매하기">
 	</div>
 	<!-- fix 된 오른쪽 사이드 출력 끝-->
 

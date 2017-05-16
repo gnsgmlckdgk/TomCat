@@ -183,7 +183,7 @@ public class MyPlanBasketDAO {
 	}
 
 	public String getMemberGold(String id){
-		String auth="무료회원";
+		String gold="무료회원";
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -203,7 +203,7 @@ public class MyPlanBasketDAO {
 			check = rs.getInt(1);
 			
 			if(check==1){
-				auth = "유료회원";
+				gold = "유료회원";
 			}
 			
 		} catch (Exception e) {
@@ -226,7 +226,54 @@ public class MyPlanBasketDAO {
 				}
 		}
 		
-		return auth; //실제로는 gold값을 반환한다.
+		return gold; //실제로는 gold값을 반환한다.
+	}
+	
+	public String getTel(String id){
+		String gold="무료회원";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		int check = 0;
+		try {
+			
+			con = getConnection();
+			
+			sql = "select gold from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			// 4 rs 실행저장
+			rs = pstmt.executeQuery();
+
+			check = rs.getInt(1);
+			
+			if(check==1){
+				gold = "유료회원";
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+		}
+		
+		return gold; //실제로는 gold값을 반환한다.
 	}
 	
 	public void insertGoldMember(String id){

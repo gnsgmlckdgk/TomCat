@@ -56,7 +56,7 @@ public class MyPlanFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}else if(command.equals("/PayAction.pln")){
-			//  AdminGoodsModifyForm
+			
 			action=new Pay();
 			try {
 				forward=action.execute(request, response);
