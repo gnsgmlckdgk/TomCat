@@ -69,11 +69,10 @@ div.memberManagerNav li a:hover {
 
 /* 메인 전체 */
 section.memberManager {
-	margin-top: -25px;
 	
-	background-image: url("../../../images/member/back/back03.jpg");
-	background-repeat: repeat-y;
-	background-size: 100%;
+	background-image: url("../../../images/member/back/back1.png");
+	background-repeat: repeat;
+	background-size: cover;
 	background-attachment: fixed;
 }
 
@@ -93,7 +92,7 @@ div#submenu {
 	
 	background-color: #fff;
 	
-	opacity: 0.92;
+	opacity: 0.9;
 }
 
 div#submenu ul {
