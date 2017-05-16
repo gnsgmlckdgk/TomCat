@@ -26,6 +26,7 @@
   <option value="">국가 선택</option>
   <option value="">------------</option>
   <option value="kr">한국(kr)</option>
+  <option value="usa">미국(usa)</option>
   <option value="jp">일본(jp)</option>
   <option value="ph">필리핀(ph)</option>
 </select>
@@ -38,6 +39,8 @@
   <option value="seoul" class="kr">서울(seoul)</option>
   <option value="busan" class="kr">부산(busan)</option>
   <option value="jeju" class="kr">제주(jeju)</option>
+
+  <option value="newyork" class="usa">뉴욕(newyork)</option>
 
   <option value="tokyo" class="jp">도쿄</option>
   <option value="osaca" class="jp">오사카</option>

@@ -21,7 +21,6 @@
 		String tel = (String)request.getAttribute("tel");
 		String name = (String)request.getAttribute("name");
 		
-
 		int gold_price = 97000;
 		int discount_price = 0;
 		int send_fee = 3000;
