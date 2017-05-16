@@ -19,7 +19,7 @@ public class MyPlanModifyForm implements Action {
 		String id = (String) session.getAttribute("id");
 		// 세션값 없으면 ./MemberLogin.me
 		ActionForward forward = new ActionForward();
-		if (id.equals("kshing44@gmail.com")) {
+		if (id != null) {
 		/*	forward.setRedirect(true);
 			forward.setPath("./MemberLoginAction.me");
 			return forward;

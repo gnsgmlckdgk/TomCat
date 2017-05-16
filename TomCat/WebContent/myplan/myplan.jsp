@@ -20,25 +20,58 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- datepicker 한국어로 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
-$(function(){
+ $(function(){
 	$(".btn").click(function(){
 		var effect = 'slide';
 		var options ='left';
 		var duration = 500;
 		$('#pln_list').toggle(effect, options, duration);
 	}); 
-}); //일정수정 버튼 클릭시 오른쪽으로 슬라이드  
-/* $(function(){
-	$(출발일).click(function(){
-		$(출발일).();
+});  
+//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+ $(function(){
+	 //datepicker 한국어로 사용하기 위한 언어설정
+   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+    // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
+    // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
+
+	//시작일
+	$('#fromDate').datepicker({
+		showOn: "focus",
+/* 		buttonImage: "myplan/pn_cal_btn.png",
+		buttonText:"날짜선택", buttonImageOnly:true,*/
+		dateFormat:"yy-mm-dd",
+		changeMonth:true,
+		onClose: function(selectedDate){
+            // 시작일(fromDate) datepicker가 닫힐때
+            // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+            $("#toDate").datepicker( "option", "minDate", selectedDate );
+		}
 	});
-}); */ 
-$(function(){
-	$('.datepicker').click(function(){
-  		$( '.datepicker').datepicker();
-	}); //날짜 선택하기
-});
+    
+    //종료일
+    $('#toDate').datepicker({
+   	  showOn: "focus", 
+/*          buttonImage: "myplan/pn_cal_btn.png", 
+         buttonText: "날짜선택",   buttonImageOnly : true, */
+         dateFormat: "yy-mm-dd",
+         changeMonth: true,
+         onClose: function( selectedDate ) {
+             // 종료일(toDate) datepicker가 닫힐때
+             // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+             $("#fromDate").datepicker( "option", "maxDate", selectedDate );
+         } 
+   	});
+	/* $( '.datepicker').datepicker({
+		altField: ".selecter"
+	}); */
+});  
+//날짜 선택하기 
 </script>
 </head>
 <body>
@@ -92,19 +125,24 @@ $(function(){
 			%>
 		</div>
 		<div id="map" class="f1" ></div><!-- map -->		
-		<div id="pln_list"  ><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
-			<input type="text" class="datepicker" value="출발일" 
-					style="background-image:url('myplan/pn_cal_btn.png');  
-							background-repeat: no-repeat; background-position:300px 17px;"><br>		
-			<ul class="actions small">
-				<li><a href="./MyPlan.pln?plan_nr=1"
-					class="button special small" >일정A</a></li>
-				<li><a href="./MyPlan.pln?plan_nr=2" 
-					class="button small" >일정B</a></li>
-				<li><a href="./MyPlan.pln?plan_nr=3" 
-					class="button alt small" >일정C</a></li>
-			</ul>
-			<button class="btn_pln" onclick = "location.href ='./MyPlanModify.pln?plan_nr=1'">상세일정만들기</button> 
+		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
+			<form id="pln_form" action="./MyPlanModify.pln?plan_nr=<%=plan_nr%>" method="post" name="fr">
+				<input type="text" name="fromDate" id="fromDate" value="시작일"
+					style="	background-image: url('myplan/pn_cal_btn.png');
+							background-repeat: no-repeat;
+							background-position: 110px 13px;"> 
+				<input type="text" name="toDate" id="toDate" value="종료일"
+					style="	background-image: url('myplan/pn_cal_btn.png');
+							background-repeat: no-repeat;
+							background-position: 110px 13px;">
+				<select name="plnpick">
+					<option value="choice">여행 타이틀을 선택하세요</option>
+					<option value="일정A">일정A</option>
+					<option value="일정B">일정B</option>
+					<option value="일정C">일정C</option>
+				</select>
+				<input type="submit" value="상세일정만들기" class="pln_sub">
+			</form>  		
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 	</div><!-- container 끝 -->
 
