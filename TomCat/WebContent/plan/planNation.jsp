@@ -40,8 +40,6 @@
 
 
 
-
-
 <!-- Two 국가의 지역 리스트 -->
 <section id="nation_two" class="wrapper style2 special">
 
