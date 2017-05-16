@@ -52,9 +52,9 @@ $(window).load(function() {
 	$.ajax({
 		type: 'post',
 		url: './plan/planRegionList.jsp',
-		data : {nation:'<%=region%>', pageNum:'1'},
+		data : {region:'<%=region%>', pageNum:'1'},
 		success: function(data) {
-			$('.city_list_div').append(data);
+			$('.region_list_div').append(data);
 		},
 		error: function(xhr, status, error) {
 	        alert(error);
@@ -63,31 +63,51 @@ $(window).load(function() {
 });
 
 // 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
-function cityListChange(pageNum) {
+function regionListChange(pageNum) {
 	
 		var search = $('#search').val();
 	
 		$.ajax({
 			type: 'post',
 			url: './plan/planRegionList.jsp',
-			data : {nation:'<%=region%>', pageNum: pageNum, search: search},
+			data : {region:'<%=region%>', pageNum: pageNum, search: search},
 			success: function(data) {
-				$('.city_list_div').empty();
-				$('.city_list_div').append(data);
+				$('.region_list_div').empty();
+				$('.region_list_div').append(data);
 			},
 			error: function(xhr, status, error) {
 				alert(error);
 		    }   
 		});
 }
+
+//찜 버튼 누르면 내 일정에 담김. 
+function zzim_add(travel_id) {
+	
+	$.ajax({
+		type : 'POST',
+		url : './MyPlanBasketAdd.pln',
+		data : {
+			'travel_id' : travel_id
+		},
+		dataType : 'text',
+		async : false,
+		success : function(data) {
+			console.log(data)
+			
+		}
+	});
+	alert("나의 일정에 등록되었습니다.");
+//		$.toast('<h4>나의 일정에 추가되었습니다.</h4>', { type: 'success', duration: 3000 } );
+}
 </script>
 
 	<div class="container">
-		<h2><%=region%> 주요 도시</h2>
+		<h2><%=region%> 주요 지역</h2>
 		<hr>
-		<div class="city_list_div">	<!-- 도시 리스트 -->
+		<div class="region_list_div">	<!-- 도시 리스트 -->
 			<!-- 도시리스트 테이블 오는 자리 -->
-		</div>	<!-- city_list_div -->
+		</div>	<!-- region_list_div -->
 	</div>	<!-- container -->
 </section>
 

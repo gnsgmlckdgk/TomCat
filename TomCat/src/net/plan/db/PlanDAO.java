@@ -676,7 +676,7 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 			
-			sql = "select * from travel where (address like ? or type like ? or name like ?)";
+			sql = "select * from travel where address like ? && (type like ? or name like ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + region + "%");
 			pstmt.setString(2, "%" + search + "%");
@@ -685,7 +685,7 @@ public class PlanDAO {
 
 			if (rs.next()) { // DB에 지역이 있으면
 				
-				sql = "select count(*) as count from travel where (address like ? or type like ? or name like ?)";
+				sql = "select count(*) as count from travel where address like ? && ( type like ? or name like ?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + region + "%");
 				pstmt.setString(2, "%" + search + "%");
@@ -796,7 +796,7 @@ public class PlanDAO {
 			con = getConnection();
 			// num 게시판 글번호 구하기
 			// sql 함수 최대값 구하기 max()
-			sql = "select * from travel where (address like ? or type like ? or name like ?) order by travel_id desc limit ?, ?";
+			sql = "select * from travel where address like ? or type like ? or name like ? order by travel_id desc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + region + "%");
 			pstmt.setString(2, "%" + search + "%");
@@ -812,7 +812,7 @@ public class PlanDAO {
 				con = getConnection();
 				// num 게시판 글번호 구하기
 				// sql 함수 최대값 구하기 max()
-				sql = "select * from travel where (address like ? or type like ? or name like ?) order by travel_id desc limit ?, ?";
+				sql = "select * from travel where address like ? or type like ? or name like ? order by travel_id desc limit ?, ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%" + search + "%");
 				pstmt.setString(2, "%" + search + "%");

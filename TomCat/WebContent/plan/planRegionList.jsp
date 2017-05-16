@@ -18,8 +18,10 @@
 	/* 게시글 가져오기 */
 	//DB에 등록된 글의 개수.
 	int count = 0;
+			
 	if("".equals(search)) {	// 검색값이 없으면
 		count = pdao.getTravelCount(region);
+			
 	}else {	// 검색값이 있으면
 		count = pdao.getTravelCount(region, search); 
 	}
@@ -82,17 +84,18 @@
 			for (int i = 0; i < ptbList.size(); i++) {
 				ptb = ptbList.get(i);
 	%>
-	<tr onclick="location.href='./PlanRegion.pl?region=<%=ptb.getName()%>';">
-		<td class="img_td"
-			style="background-image: url('./images/plan/nation/<%=ptb.getCity_code()%>.jpg'); background-size: cover;"></td>
+	<tr>
+		<td class="img_td" alt="<%=ptb.getName() %>" style="background-image: url('./images/plan/nation/<%=ptb.getCity_code()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
-			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%></p>
+			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%> <input type="button" name="zzim"
+								onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜"
+								class="button special icon fa-download" /> </p>
 			<p style="font-size: 0.7em;"><%=ptb.getCity_code()%></p>
 			<p style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
 		</td>
 	</tr>
 	<%
-		}
+			}
 		} else {
 	%>
 	<tr>
