@@ -21,8 +21,6 @@ public class MemberDeleteAction implements Action {
 		
 		int check = deleteMember(request);
 		
-		System.out.println("회원탈퇴 DAO 반환 check: " + check);
-		
 		// 이동
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -34,16 +32,27 @@ public class MemberDeleteAction implements Action {
 			out.print("</script>");
 			out.close();
 			
-		}else {
-			ActionForward forward = new ActionForward();
-			forward.setPath("./Main.me");
-			forward.setRedirect(true);
+		}else if(check == -1) {
 			
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			out.print("<script>");
+			out.print("alert('세션값이 없습니다.');");
+			out.print("location.href='./Main.me';");
+			out.print("</script>");
+			out.close();
+			
+		}else {
 			// 세션에 있는 값 삭제
 			HttpSession session = request.getSession();
 			session.invalidate();
 			
-			return forward;
+			out.print("<script>");
+			out.print("alert('회원탈퇴가 완료되었습니다.');");
+			out.print("location.href='./Main.me';");
+			out.print("</script>");
+			out.close();	
 		}
 		
 		return null;

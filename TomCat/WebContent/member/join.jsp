@@ -30,7 +30,7 @@
 
 		<!-- 추가한 스타일 -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css?ver=3"/>
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=10"/>
 
 		<!-- 추가한 스크립트 -->
 			<!-- plan -->
@@ -60,7 +60,7 @@
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
 		<!-- Main -->
-			<section id="main" class="wrapper">
+			<section id="main" class="wrapper joinSection">
 				<div class="container">
 				
 					<!-- 회원가입 -->

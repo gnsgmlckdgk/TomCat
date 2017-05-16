@@ -36,7 +36,7 @@ public class MyPlanBasketListAction implements Action{
 		
 		
 		Vector vector=basketdao.getBasketList(id);
-		String auth = basketdao.getMemberAuth(id);
+		String gold = basketdao.getMemberGold(id);
 		
 		
 		//List basketList = vector 첫번째데이터
@@ -48,7 +48,7 @@ public class MyPlanBasketListAction implements Action{
 		// 저장 basketList goodsList
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("goodsList", goodsList);
-		request.setAttribute("auth", auth);
+		request.setAttribute("gold", gold);
 		
 		//이동   ./goods_order/goods_basket.jsp
 		
