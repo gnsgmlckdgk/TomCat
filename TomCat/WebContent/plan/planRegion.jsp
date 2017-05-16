@@ -10,6 +10,7 @@
 <%
 	String region = request.getParameter("region");
 	String id = (String) session.getAttribute("id");
+	String city_code = (String) request.getAttribute("city_code");
 %>
 <!-- One 지역명 및 설명-->
 <section id="banner"  class="resion_one">
@@ -52,7 +53,7 @@ $(window).load(function() {
 	$.ajax({
 		type: 'post',
 		url: './plan/planRegionList.jsp',
-		data : {region:'<%=region%>', pageNum:'1'},
+		data : {region:'<%=region%>', pageNum:'1', city_code:'<%=city_code%>'},
 		success: function(data) {
 			$('.region_list_div').append(data);
 		},
@@ -70,7 +71,7 @@ function regionListChange(pageNum) {
 		$.ajax({
 			type: 'post',
 			url: './plan/planRegionList.jsp',
-			data : {region:'<%=region%>', pageNum: pageNum, search: search},
+			data : {region:'<%=region%>', pageNum: pageNum, search: search, city_code:'<%=city_code%>'},
 			success: function(data) {
 				$('.region_list_div').empty();
 				$('.region_list_div').append(data);

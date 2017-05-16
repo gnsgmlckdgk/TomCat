@@ -8,6 +8,8 @@
 	//파라미터 값 가져오기.
 	String region = request.getParameter("region"); // 리스트의 링크 값
 	String search = request.getParameter("search");	// 검색값
+	String city_code = request.getParameter("city_code"); // city_code 값
+	
 	if(search==null) {
 		search="";
 	}
@@ -20,10 +22,10 @@
 	int count = 0;
 			
 	if("".equals(search)) {	// 검색값이 없으면
-		count = pdao.getTravelCount(region);
+		count = pdao.getTravelCount(region, city_code);
 			
 	}else {	// 검색값이 있으면
-		count = pdao.getTravelCount(region, search); 
+		count = pdao.getTravelCount(region, city_code, search);
 	}
 
 	// 한페이지에 보여줄 글의 개수
@@ -45,9 +47,9 @@
 	List<PlanTravelBean> ptbList = null;
 	if (count > 0) {
 		if("".equals(search)) {	// 검색값 없으면
-			ptbList = pdao.getTravelList(startRow, pageSize, region);
+			ptbList = pdao.getTravelList(startRow, pageSize, region, city_code);
 		}else {	// 검색값 있으면
-			ptbList = pdao.getTravelList(startRow, pageSize, region, search);
+			ptbList = pdao.getTravelList(startRow, pageSize, region, search, city_code);
 		}	
 	}
 
