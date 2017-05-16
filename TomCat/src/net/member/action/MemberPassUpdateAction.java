@@ -27,6 +27,16 @@ public class MemberPassUpdateAction implements Action {
 			out.print("location.href='./MemberPassUpdate.me';");
 			out.print("</script>");
 			out.close();
+		}else if(check == -1){	// 아이디 없음
+			
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			out.print("<script>");
+			out.print("alert('세션값이 없어졌습니다.');");
+			out.print("location.href='./Main.me';");
+			out.print("</script>");
+			out.close();
 		}else {
 			out.print("<script>");
 			out.print("alert('비밀번호 변경 완료');");

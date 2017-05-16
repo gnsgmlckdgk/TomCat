@@ -68,13 +68,18 @@ public class MemberLoginAction implements Action {
         	out.println("</script>");
         	out.close();
         	
+        }else if(check == 0){
+        	out.println("<script>");
+        	out.println("alert('비밀번호가 일치하지 않습니다.');");
+        	out.println("location.href='./Main.me?loginCheck="+check+"';");
+        	out.println("</script>");
+        	out.close();	
         }else {
         	out.println("<script>");
-        	out.println("alert('아이디 또는 비밀번호가 일치하지 않습니다.');");
+        	out.println("alert('아이디 존재하지 않습니다.');");
         	out.println("location.href='./Main.me?loginCheck="+check+"';");
         	out.println("</script>");
         	out.close();
-        	
         }
         
         // 이동정보 없음(script로 이동함)
