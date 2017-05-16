@@ -16,9 +16,7 @@ public class Pay implements Action{
 		request.setCharacterEncoding("utf-8");
 				
 		//content
-		
 		String id = (String)request.getParameter("id");
-		System.out.println(id);
 
 		MyPlanBasketDAO mpdao = new MyPlanBasketDAO();
 		mpdao.insertGoldMember(id);

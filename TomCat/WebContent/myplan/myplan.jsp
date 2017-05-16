@@ -43,7 +43,7 @@ $(function(){
 </head>
 <body>
 	<%
-		String auth = (String) request.getAttribute("auth");
+		String gold = (String) request.getAttribute("auth");
 		String id = (String) request.getAttribute("id");
 
 		List basketList = (List) request.getAttribute("basketList");
@@ -273,9 +273,9 @@ $(function(){
 	결제 테스트 구역.
 	<br>
 	<%
-		if (auth.equals("무료회원")) {
+		if (gold.equals("무료회원")) {
 	%>
-	<%=auth%>일때 나오는 버튼.
+	<%=gold%>일때 나오는 버튼.
 
 	<script type="text/javascript">
 		function dialog() {
@@ -336,7 +336,7 @@ $(function(){
 	<%
 		} else {
 	%>
-	<%=auth%>일때 나오는 버튼.
+	<%=gold%>일때 나오는 버튼.
 
 	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
 

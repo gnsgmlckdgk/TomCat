@@ -182,7 +182,7 @@ public class MyPlanBasketDAO {
 		return check;
 	}
 
-	public String getMemberAuth(String id){
+	public String getMemberGold(String id){
 		String auth="무료회원";
 		
 		Connection con = null;
@@ -242,9 +242,9 @@ public class MyPlanBasketDAO {
 			
 			sql = "update member set gold=1 where id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1,id);
 			// 4 rs 실행저장
-			rs = pstmt.executeQuery();			
+			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -312,7 +312,7 @@ public class MyPlanBasketDAO {
 				mpbb.setPlan_done_nr(rs.getInt("plan_done_nr"));
 				basketList.add(mpbb);
 
-				System.out.println("test : " + mpbb.getPlan_nr());
+				System.out.println("mpbb.getPlan_nr : " + mpbb.getPlan_nr());
 
 				sql = "select * from travel where travel_id=?";
 				pstmt2 = con.prepareStatement(sql);
@@ -336,8 +336,8 @@ public class MyPlanBasketDAO {
 			// vector 두번째 칸 goodsList 저장
 			vector.add(basketList);
 			vector.add(goodsList);
-			System.out.println(basketList.size());
-			System.out.println(goodsList.size());
+			System.out.println("basketList.size"+basketList.size());
+			System.out.println("goodsList.size"+goodsList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
