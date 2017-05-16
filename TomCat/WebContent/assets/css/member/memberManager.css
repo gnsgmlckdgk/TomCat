@@ -69,11 +69,11 @@ div.memberManagerNav li a:hover {
 
 /* 메인 전체 */
 section.memberManager {
-	
-	background-image: url("../../../images/member/back/memberManager.jpg");
+	/* 배경화면 */
+	/* background-image: url("../../../images/member/back/memberManager.jpg");
 	background-repeat: repeat;
 	background-size: cover;
-	background-attachment: fixed;
+	background-attachment: fixed; */
 }
 
 div.container {

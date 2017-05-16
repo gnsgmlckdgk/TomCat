@@ -232,9 +232,13 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/AdminDBManager.me")) {	// 관리자 DB 작성 관리 페이지(통합 관리)
+			
+			forward = new ActionForward();
+			forward.setPath("./member/adminDBManager.jsp");
+			forward.setRedirect(false);
+			
 		}
-		
-		
 		
 		// 이동
 		if(forward!=null) {
