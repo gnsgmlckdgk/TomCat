@@ -21,8 +21,9 @@ public class MemberDeleteManager implements Action {
 		
 		// 파라미터 값 가져오기
 		String id = request.getParameter("id");				// 삭제할 아이디
-		String pageNum = request.getParameter("pageNum");	// 페이지 번호
 		String securedPass = request.getParameter("pass");	// 암호화 된 비밀번호
+		
+		String pageNum = request.getParameter("pageNum");	// 페이지 번호
 		
 		// 세션값 가져오기
 		HttpSession session = request.getSession();
@@ -45,7 +46,7 @@ public class MemberDeleteManager implements Action {
     		
     		response.setContentType("text/html; charset=UTF-8");
     		PrintWriter out = response.getWriter();
-    		if(check==0 || check == -1) {	// 비밀번호 틀림
+    		if(check==0) {	// 비밀번호 틀림
     			
     			out.print("<script>");
     			out.print("alert('비밀번호가 일치하지 않습니다.');");
@@ -53,6 +54,16 @@ public class MemberDeleteManager implements Action {
     			out.print("</script>");
     			out.close();
 
+    		}else if(check == -1) {	// 아이디 없음
+    		
+    			session.invalidate();
+    			
+    			out.print("<script>");
+    			out.print("alert('세션값이 없습니다.');");
+    			out.print("location.href='./Main.me';");
+    			out.print("</script>");
+    			out.close();
+    			
     		}else {	// 비밀번호 맞음
     			
     			// DB작업전 프로필 사진 삭제 위한 설정
