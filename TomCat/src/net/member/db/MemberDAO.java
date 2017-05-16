@@ -495,8 +495,8 @@ public class MemberDAO {
 			
 			rs = ps.executeQuery();
 			
-			if(rs.next()) {	// 아이디 있음
-				if(rs.getString(pass).equals(shaPass)) {	// 비밀번호 일치
+			if(rs.next()) { 	// 아이디 있음
+				if(rs.getString("pass").equals(shaPass)) { 	// 비밀번호 일치
 					check = 1;
 					
 					// 기존의 프로필 이미지는 삭제(물리적 위치에 있는 이미지 파일)
@@ -504,7 +504,7 @@ public class MemberDAO {
 					ps = con.prepareStatement(sql);
 					ps.setString(1, id);
 					rs = ps.executeQuery();
-					if(rs.next()) {
+					if(rs.next()){ 	// 아이디 존재
 						// 기본 프로필 사진일때는 삭제하지 않음
 						if("basic/man.png".equals(rs.getString("profile")) || "basic/woman.png".equals(rs.getString("profile")) ) {
 							System.out.println("기본 프로필이라 삭제 안함");
@@ -513,24 +513,25 @@ public class MemberDAO {
 							f.delete();
 							System.out.println("프로필 이미지 삭제 성공");
 						}
-						
+					}
+
 					sql="delete from member where id=?";
 					ps = con.prepareStatement(sql);
 					ps.setString(1, id);
 						
 					ps.executeUpdate();
-
-				}else {	// 비밀번호 불일치
+					
+				}else {	// 비밀번호 틀림
 					check = 0;
 				}
 				
 			}else {	// 아이디 없음
 				check = -1;
 			}
-		}		
-		
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
 		}finally {
 			try{
 				if(rs!=null) rs.close();
@@ -540,7 +541,6 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		
 		return check;
 	}
 	

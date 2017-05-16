@@ -76,8 +76,8 @@
 </head>
 <body>
 	<%
-		String auth = (String) request.getAttribute("auth");
-		String id = (String) request.getAttribute("id");
+		String gold = (String) request.getAttribute("gold");
+		String id = (String) session.getAttribute("id");
 
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
@@ -311,9 +311,9 @@
 	결제 테스트 구역.
 	<br>
 	<%
-		if (auth.equals("무료회원")) {
+		if (gold.equals("무료회원")) {
 	%>
-	<%=auth%>일때 나오는 버튼.
+	<%=gold%>일때 나오는 버튼.
 
 	<script type="text/javascript">
 		function dialog() {
@@ -366,7 +366,8 @@
 		<p class="dialog__content">test</p>
 
 		<input type="button" class="dialog__action"
-			onclick="location.href='./Pay.pln'" value="골드 멤버 되기 &#8594;">
+			onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="골드 멤버 되기">
+			<!-- payAction > payPlanC.jsp > payAction > myplan.jsp으로 이동합니다. -->
 
 
 	</div>
@@ -374,7 +375,7 @@
 	<%
 		} else {
 	%>
-	<%=auth%>일때 나오는 버튼.
+	<%=gold%>일때 나오는 버튼.
 
 	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
 
