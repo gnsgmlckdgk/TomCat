@@ -809,4 +809,70 @@ public class PlanDAO {
 			return pcb;
 		}
 		
+		/*추천장소 상세히 보여주기*/
+			public PlanTravelBean getTravel(String travel){
+				PlanTravelBean ptb = new PlanTravelBean();
+				
+				try{
+					con= getConnection();
+					
+					sql = "select * from travel where name=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, travel);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()){
+						ptb.setTravel_id(rs.getInt("travel_id"));
+						ptb.setType(rs.getString("type"));
+						ptb.setConuntry_code(rs.getString("country_code"));
+						ptb.setCity_code(rs.getString("city_code"));
+						ptb.setName(rs.getString("name"));
+						ptb.setLatitude(rs.getFloat("latitude"));
+						ptb.setLongitude(rs.getFloat("longitude"));
+						ptb.setInfo(rs.getString("info"));
+						ptb.setAddress(rs.getString("address"));
+						ptb.setFile(rs.getString("file"));
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally{
+					if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+					if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+					if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+				}
+				
+				return ptb;
+			}
+			
+			/*추천장소 이미지*/
+				public List getSpotImages(int travel_id){
+					List spotimagelist = new ArrayList();
+					
+					try{
+						con = getConnection();
+						
+						sql = "select * from images where travel_id=?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1, travel_id);
+						
+						rs = pstmt.executeQuery();
+						
+						if(rs.next()){
+							/*이미지 리스트 만들기*/
+						}
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally{
+						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
+						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
+						if (con != null) {try {con.close();} catch (SQLException ex) {	}}
+					}
+					return spotimagelist;
+				}
+			
+			
+			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+		
 }
