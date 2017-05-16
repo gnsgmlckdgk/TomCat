@@ -131,16 +131,19 @@ div#submenu li a:hover {
 
 div#submenu li hr {
 	margin: 20px 7px 20px 7px;
-	background-color: #ccc;
+	background-color: #ddd;
 }
 
 /* 컨텐츠 부분 공통 */
 div.content {
+	border: 2px solid #ddd;
+	
 	background-color: #fff;
 	padding: 0;
 
 	width: 80%;
 	min-width: 600px;
+	min-height: 600px;
 	
 	position: relative;
 	left: 230px;
@@ -156,7 +159,7 @@ section.memberManager input:FOCUS {	/* 회원관리 페이지의 모든 input:fo
 
 /* 회원정보 */
 div.content_member_info {
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 }
 div.content_member_info h1 {	/* 제목 */
 	border-bottom: 0;
@@ -217,7 +220,7 @@ div.content_member_info .info_form .form_btn input[type="submit"] {
 
 /* 비밀번호 변경 */
 div.content_member_passUpdate {
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 }
 div.content_member_passUpdate h1 {	/* 제목 */
 	border-bottom: 0;
@@ -245,7 +248,7 @@ div.content_member_passUpdate .pass_form .form_btn input[type="submit"] {
 
 /* 회원 탈퇴 */
 div.content_member_memberDelete {
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 }
 
 div.content_member_memberDelete h1 {
@@ -273,7 +276,7 @@ div.content_member_memberDelete .pass_form input[type="submit"] {
 
 /* 회원관리 페이지(관리자 전용, memberManager.jsp) */
 div.content_member_memberManager {
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 	margin: 0;
 	padding: 0 0 30px 0;
 	min-width: 720px;
@@ -418,6 +421,13 @@ div.content_member_memberManager .page a{
 	font-size: 1.2em;
 	font-weight: bold;
 }
+
+
+/* 관리자 DB 관리 페이지 */
+div.DBManager {
+	padding: 30px;
+}
+
 
 /* 회원정보 관리 페이지  끝 */
 
