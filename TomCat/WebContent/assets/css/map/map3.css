@@ -72,6 +72,18 @@
 #pln_list .pln_sub {
 	width: 280px;
 }
+#pln_list .pln_sub_free {
+	width: 140px;
+	float: left;
+	padding: 0;
+}
+#pln_list .pln_sub_btn_free {
+	width: 140px;
+	float: left;
+	padding: 0;
+	margin-left: 5px;
+	background-color: #f99;
+}
 
 #pano {
 	width: 220px;

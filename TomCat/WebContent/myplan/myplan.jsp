@@ -147,11 +147,12 @@
 					<%}%>
 				</select>
 				
-				<input type="submit" value="상세일정만들기" class="pln_sub">
-				
 					<%if(gold.equals("무료회원")){ %>
-						<input type="button" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
-					<%}%>
+						<input type="submit" value="상세일정만들기" class="pln_sub_free">
+						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
+					<%} else {%>
+						<input type="submit" value="상세일정만들기" class="pln_sub">	
+					<%} %>
 				
 			</form>  		
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
