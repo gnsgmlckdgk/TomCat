@@ -31,9 +31,9 @@
 		<div class="content DBManager">
 			<h2>DB 통합 관리</h2><hr>
 			
-				<a href = "javascript:countryInput()">국가 DB 입력</a><br>
+				<a href = "javascript:countryInput()">국가 DB 관리</a><br>
 				
-				<a href = "javascript:cityInput()">도시(지역) DB 입력</a><br>
+				<a href = "javascript:cityInput()">도시(지역) DB 관리</a><br>
 				
 				<a href = "javascript:travelInput()">여행지 DB 입력</a><br>
 					
@@ -48,7 +48,7 @@
 			}
 			
 			function cityInput() {
-				window.open("./CityList.pl", "window", "width=1200, height=800, top=100, left=300");
+				window.open("./CityList.pl", "window", "width=1400, height=800, top=100, left=200");
 			}
 			
 			function travelInput() {

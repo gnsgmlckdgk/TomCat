@@ -3,9 +3,44 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 헤더 -->
-<jsp:include page="../inc/header.jsp" />
 
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Before you go</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- Scripts -->
+		<script src="./assets/js/jquery.min.js"></script>
+		<script src="./assets/js/skel.min.js"></script>
+		<script src="./assets/js/util.js"></script>
+		<script src="./assets/js/main.js"></script>
+
+		<!-- 스타일 불러오기 -->
+		<link rel="stylesheet" href="./assets/css/main.css?ver=3"/>
+		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
+		
+		<!-- 추가한 css -->
+			<!-- plan -->
+			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=23"/>	<!-- 국가페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=23"/>	<!-- 지역(도시)페이지 -->
+	
+	<style type="text/css">
+		
+		section.cityUpdate {
+			position: relative;
+			top: -70px;
+			padding: 10px;
+		}
+	
+	</style>
+
+	</head>
+
+<body>
 <div class="clear"></div>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -16,7 +51,7 @@
 	String pageNum = (String)request.getAttribute("pageNum");
 %>
 
-<section>
+<section class="cityUpdate">
 
 <div  style="width: 50em; margin: auto;">
 	<form action="./CityUpdateAction.pl" name="city_fr" method="post">
@@ -53,5 +88,6 @@
 </section>
 
 <div class="clear"></div>
-<!-- footer -->
-<jsp:include page="../inc/footer.jsp" />
+
+</body>
+</html>

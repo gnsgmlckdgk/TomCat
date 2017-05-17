@@ -30,6 +30,8 @@ function popupToggle() {
 			});
 			$('#loginPopContainer').css('display', 'block');
 			
+			var loc = location.href;	// 현제 페이지 주소
+			$('#loc').val(loc);
 			
 		}else if($('#loginPopContainer').css('display')=="block") {	// 팝업 숨김
 			
