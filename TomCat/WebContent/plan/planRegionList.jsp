@@ -9,6 +9,7 @@
 	String region = request.getParameter("region"); // 리스트의 링크 값
 	String search = request.getParameter("search");	// 검색값
 	String city_code = request.getParameter("city_code"); // city_code 값
+	String id = (String)session.getAttribute("id");
 	
 	if(search==null) {
 		search="";
@@ -69,6 +70,14 @@
 %>
 
 <!-- 검색폼 -->
+
+<div class="checkbox">
+	<input type="checkbox" name="r" id="r" checked="checked"><label for="r">Restaurant</label>
+	<input type="checkbox" name="p" id="p" checked="checked"><label for="p">Place</label>
+	<input type="checkbox" name="h" id="h" checked="checked"><label for="h">Hotel</label>
+</div>
+
+
 <div class="search_div">
 	<form action="javascript:regionListChange('<%=pageNum %>');" method="post">
 		<img src="./images/member/search_l2.png" class="search_img">
@@ -89,9 +98,14 @@
 	<tr>
 		<td class="img_td" alt="<%=ptb.getName() %>" style="background-image: url('./images/plan/nation/<%=ptb.getCity_code()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
-			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%> <input type="button" name="zzim"
-								onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜"
-								class="button special icon fa-download" /> </p>
+			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%>
+			
+			<%if(id != null){%>
+				<input type="button" name="zzim" onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜" class="button special icon fa-download" />
+			<%} else if (id==null){%>
+				<input type="button" name="zzim_noId" onclick="zzim_noId()" value="찜" class="button special icon fa-download" />
+			<%} %>
+			</p>
 			<p style="font-size: 0.7em;"><%=ptb.getCity_code()%></p>
 			<p style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
 		</td>

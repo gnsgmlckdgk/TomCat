@@ -22,3 +22,12 @@ section.resion_one div.resion_info_content {
 	width: 60%;
 	min-width: 600px;
 }
+
+.checkbox{
+	float: left;
+	width: 50%;
+}
+.search_div{
+	float: left;
+	width: 50%;
+}

@@ -101,6 +101,10 @@ function zzim_add(travel_id) {
 	alert("나의 일정에 등록되었습니다.");
 //		$.toast('<h4>나의 일정에 추가되었습니다.</h4>', { type: 'success', duration: 3000 } );
 }
+function zzim_noId() {
+	alert("need LOGIN");
+	popupToggle()
+}
 </script>
 
 	<div class="container">
@@ -122,7 +126,7 @@ function zzim_add(travel_id) {
 			<h2><%=region%>
 				사진
 			</h2>
-			<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
+			
 		</header>
 
 		<div class="feature-grid">
