@@ -127,21 +127,32 @@
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
 			<form id="pln_form" action="./MyPlanModify.pln?plan_nr=<%=plan_nr%>" method="post" name="fr">
+				
 				<input type="text" name="fromDate" id="fromDate" value="시작일"
 					style="	background-image: url('myplan/pn_cal_btn.png');
 							background-repeat: no-repeat;
 							background-position: 110px 13px;"> 
+				
 				<input type="text" name="toDate" id="toDate" value="종료일"
 					style="	background-image: url('myplan/pn_cal_btn.png');
 							background-repeat: no-repeat;
 							background-position: 110px 13px;">
+				
 				<select name="plnpick">
 					<option value="choice">여행 타이틀을 선택하세요</option>
 					<option value="일정A">일정A</option>
 					<option value="일정B">일정B</option>
-					<option value="일정C">일정C</option>
+					<%if(gold.equals("유료회원")){ %>
+						<option value="일정C">일정C</option>
+					<%}%>
 				</select>
+				
 				<input type="submit" value="상세일정만들기" class="pln_sub">
+				
+					<%if(gold.equals("무료회원")){ %>
+						<input type="button" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
+					<%}%>
+				
 			</form>  		
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 	</div><!-- container 끝 -->
@@ -306,86 +317,6 @@
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHAu8kwLgLcIk1oWIKpJhyOQQTK6RBLNI&v=3&callback=initMap">
 	</script>
-
-	<!-- 결제 테스트 구역 -->
-	결제 테스트 구역.
-	<br>
-	<%
-		if (gold.equals("무료회원")) {
-	%>
-	<%=gold%>일때 나오는 버튼.
-
-	<script type="text/javascript">
-		function dialog() {
-
-			var dialogBox = $('.dialog'), dialogTrigger = $('.dialog__trigger'), dialogClose = $('.dialog__close'), dialogTitle = $('.dialog__title'), dialogContent = $('.dialog__content'), dialogAction = $('.dialog__action');
-
-			// Open the dialog
-			dialogTrigger.on('click', function(e) {
-				dialogBox.toggleClass('dialog--active');
-				e.stopPropagation()
-			});
-
-			// Close the dialog - click close button
-			dialogClose.on('click', function() {
-				dialogBox.removeClass('dialog--active');
-			});
-
-			// Close the dialog - press escape key // key#27
-			$(document).keyup(function(e) {
-				if (e.keyCode === 27) {
-					dialogBox.removeClass('dialog--active');
-				}
-			});
-
-			// Close dialog - click outside
-			$(document).on(
-					"click",
-					function(e) {
-						if ($(e.target).is(dialogBox) === false
-								&& $(e.target).is(dialogTitle) === false &&
-								// 	            $(e.target).is(dialogContent) === false &&
-								$(e.target).is(dialogAction) === false) {
-							dialogBox.removeClass("dialog--active");
-						}
-					});
-
-		};
-
-		// Run function when the document has loaded
-		$(function() {
-			dialog();
-		});
-	</script>
-
-	<button class="dialog__trigger button alt small">일정C</button>
-
-	<div class="dialog">
-		<span class="dialog__close">&#x2715;</span>
-		<h2 class="dialog__title">"일정C"는 골드멤버에 한해 사용가능합니다.</h2>
-		<p class="dialog__content">test</p>
-
-		<input type="button" class="dialog__action"
-			onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="골드 멤버 되기">
-			<!-- payAction > payPlanC.jsp > payAction > myplan.jsp으로 이동합니다. -->
-
-
-	</div>
-
-	<%
-		} else {
-	%>
-	<%=gold%>일때 나오는 버튼.
-
-	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
-
-	<%
-		}
-	%>
-
-	<br>결제 테스트 구역 끝.
-	<!-- 결제 테스트 구역 끝 -->
-
 
 </body>
 
