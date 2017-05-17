@@ -90,8 +90,8 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td"><%=mb.getId() %></td>
-									<td class="nick_td"><%=mb.getNick() %></td>	
+									<td class="id_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getId() %></td>
+									<td class="nick_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getNick() %></td>	
 									<td class="auth_select_box">
 										<div class="select-wrapper">
 										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">

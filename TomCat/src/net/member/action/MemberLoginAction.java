@@ -13,10 +13,9 @@ import javax.servlet.http.HttpSession;
 import net.member.db.MemberBean;
 import net.member.db.MemberDAO;
 
-public class MemberLoginAction implements Action {
+public class MemberLoginAction {
 
-	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public int execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int check = -1;
 		
@@ -24,10 +23,8 @@ public class MemberLoginAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		// 파라미터 값 가져오기
-		String securedId = request.getParameter("id_login");
-		String securedPass = request.getParameter("pass_login");
-		
-		String loc = request.getParameter("loc");	// 로그인 팝업을 띄운 페이지 위치
+		String securedId = request.getParameter("securedId");
+		String securedPass = request.getParameter("securedPass");
 		
 		// RSA암호화 한 값 복호화
         HttpSession session = request.getSession();
@@ -55,37 +52,11 @@ public class MemberLoginAction implements Action {
             }
             
         } catch (Exception ex) {
-        	// 가끔 오류가 나던데 그때 메인으로 다시 이동...
         	System.out.println("복호화 과정 오류");
-        	response.sendRedirect("./Main.me");
             throw new ServletException(ex.getMessage(), ex);
         }
         
-        // 인증 확인 후 이동
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        if(check == 0){ 	
-        	out.println("<script>");
-        	out.println("alert('비밀번호가 일치하지 않습니다.');");
-        	out.println("location.href='./Main.me?loginCheck="+check+"';");
-        	out.println("</script>");
-        	out.close();	
-        }else if(check == -1){
-        	out.println("<script>");
-        	out.println("alert('아이디 존재하지 않습니다.');");
-        	out.println("location.href='./Main.me?loginCheck="+check+"';");
-        	out.println("</script>");
-        	out.close();
-        }else {
-        	ActionForward forward = new ActionForward();
-        	forward.setPath("./Main.me?loginCheck=1");
-        	forward.setRedirect(false);
-        	return forward;
-        }
-        
-        // 이동정보 없음(script로 이동함)
-        return null;
+        return check;
     }
 	
 	private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {

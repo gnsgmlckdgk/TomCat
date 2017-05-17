@@ -30,7 +30,7 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=12"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=15"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
@@ -39,7 +39,7 @@
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=40"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=10"></script>	<!-- 로그인 스크립트 -->
 			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
@@ -88,32 +88,12 @@
 
 
 <!-- 로그인 팝업 창 -->
-<%
-	// 아이디, 비밀번호 입력 후 틀렸을때 다시 팝업창 띄우기 위해 변수 생성
-	/* String loginCheckStr = request.getParameter("loginCheck"); */
-	String loginCheckStr = request.getParameter("loginCheck");
-	System.out.println("loginCheck: " + loginCheckStr);
-	
-	int loginCheck;
-	if(loginCheckStr!=null) {
-		loginCheck = Integer.parseInt(loginCheckStr);
-	}else {
-		loginCheck = 1;
-	}
-	if(loginCheck==0 || loginCheck==-1) {
-		%>
-			<script type="text/javascript">
-				popupToggle();
-			</script>
-		<%
-	}
-%>
 
 <!-- 로그인 팝업창 뜰때 배경 -->
 <div id="loginPopContainer" onclick="popupToggle()"></div>
 <!-- 로그인 팝업창 -->
 <div id="loginPop">
-	<form action="./MemberLoginAction.me" post="post" name="login_form" id="login_form" onsubmit="return validateEncryptedLoginForm()">
+	<form action="javascript:validateEncryptedLoginForm()" post="post" name="login_form" id="login_form">
 		
 		<input type="email" name="id_login" id="id_login"  placeholder="이메일을 입력하세요." >
 		<input type="password" name="pass_login" id="pass_login" placeholder="비밀번호를 입력하세요."><br>
@@ -127,8 +107,6 @@
 		
 		<br>
 		아직 아이디가 없으십니까? <a href="./MemberJoin.me" onclick="popupToggle()">회원가입</a>
-		
-		<input type="hidden" name="loc" id="loc" value="">	<!-- 현재 페이지 주소 -->
 		
 	</form>	
 </div>

@@ -31,7 +31,13 @@
 				<div class="info_form">
 					
 					<form action="./MemberUpdate.me" method="post" enctype="multipart/form-data" onsubmit="return updateCheck();">
-						<table>	
+						<table>
+							<%if(mb.getGold()>0) { %>
+							<tr>
+								<th>회원등급</th>
+								<td><%if(mb.getGold()==1){ %><span style="color: #FFE400; text-shadow: 2px 2px 3px #000;">골드 회원</span><%} %></td>
+							</tr>
+							<% } %>
 							<tr><th>아이디</th>
 								<td><input type="text" value="<%=mb.getId() %>" name="id" id="id" readonly></td></tr>
 							<tr><th>이름</th>

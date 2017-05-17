@@ -136,7 +136,8 @@ div#submenu li hr {
 
 /* 컨텐츠 부분 공통 */
 div.content {
-	border: 2px solid #ddd;
+	border: 1px solid #ccc;
+	border-radius: 10px;
 	
 	background-color: #fff;
 	padding: 0;
@@ -151,11 +152,14 @@ div.content {
 	opacity: 0.9;
 }
 
+div.content h1 {
+	text-shadow: 2px 2px 2px #ffb3b3;
+}
+
 section.memberManager input:FOCUS {	/* 회원관리 페이지의 모든 input:focus */
 	font-weight: bold;
 	color: blue;
 }
-
 
 /* 회원정보 */
 div.content_member_info {
@@ -167,7 +171,6 @@ div.content_member_info h1 {	/* 제목 */
 	margin: 0;
 	
 	font-size: 1.4em;
-	background-color: #D4F4FA;
 }
 div.content_member_info .info_form th {
 	width: 150px;
@@ -228,7 +231,6 @@ div.content_member_passUpdate h1 {	/* 제목 */
 	margin: 0;
 	
 	font-size: 1.4em;
-	background-color: #D4F4FA;
 }
 div.content_member_passUpdate .pass_form th {
 	width: 150px;
@@ -253,8 +255,8 @@ div.content_member_memberDelete {
 
 div.content_member_memberDelete h1 {
 	font-size: 1.4em;
-	background-color: #D4F4FA;
 	padding: 12px;
+	border-bottom: 1px solid #ccc;
 }
 
 div.content_member_memberDelete .pass_form {
@@ -286,7 +288,6 @@ div.content_member_memberManager a {
 }
 div.content_member_memberManager h1 {
 	font-size: 1.4em;
-	background-color: #D4F4FA;
 	padding: 12px;
 	margin: 0;
 }

@@ -164,8 +164,8 @@ public class MemberDAO {
 			String pass = mb.getPass();
 			String shaPass = encSHA256(pass);	// 암호화 된 비밀번호(SHA-256)
 			
-			sql = "insert into member(id, pass, name, nick, gender, tel, reg_date, profile, auth) "
-					+ "values(?, ?, ?, ?, ?, HEX(AES_ENCRYPT(?, 'tel')), ?, ?, ?)";
+			sql = "insert into member(id, pass, name, nick, gender, tel, reg_date, profile, auth, gold) "
+					+ "values(?, ?, ?, ?, ?, HEX(AES_ENCRYPT(?, 'tel')), ?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mb.getId());
 			ps.setString(2, shaPass);
@@ -176,6 +176,7 @@ public class MemberDAO {
 			ps.setTimestamp(7, mb.getReg_date());
 			ps.setString(8, mb.getProfile());
 			ps.setInt(9, mb.getAuth());		// 처음 가입땐 1(일반사용자)
+			ps.setInt(10, 0);
 			
 			ps.executeUpdate();
 			
@@ -245,7 +246,7 @@ public class MemberDAO {
 			
 			con = getConnection();
 			
-			sql = "select id, pass, name, nick, gender, AES_DECRYPT(UNHEX(tel), 'tel') as tel, reg_date, profile, auth"
+			sql = "select id, pass, name, nick, gender, AES_DECRYPT(UNHEX(tel), 'tel') as tel, reg_date, profile, auth, gold"
 					+ " from member where id = ?";
 			ps = con.prepareStatement(sql);
 			
@@ -264,6 +265,7 @@ public class MemberDAO {
 				mb.setReg_date(rs.getTimestamp("reg_date"));
 				mb.setProfile(rs.getString("profile"));
 				mb.setAuth(rs.getInt("auth"));
+				mb.setGold(rs.getInt("gold"));
 				
 			}else {	// 아이디가 없으면
 				return mb;
@@ -666,50 +668,50 @@ public class MemberDAO {
 			
 			if("id_search".equals(search_sel)) {	// 아이디로 검색
 				if(sort==1) {	// id오름차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by id limit ?, ?";
 				}else if(sort==2) {	// id내림차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by id desc limit ?, ?";
 				}else if(sort==3) {	// nick 오름차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by nick limit ?, ?";
 				}else if(sort==4) {	// nick 내림차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by nick desc limit ?, ?";
 				}else if(sort==5) {	// auth 오름차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by auth limit ?, ?";
 				}else if(sort==6) {	// auth 내림차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by auth desc limit ?, ?";
 				}else {
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where id like ? order by reg_date limit ?, ?";
 				}
 				
 
 			}else {	// 닉네임으로 검색
 				if(sort==1) {	// id오름차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by id limit ?, ?";
 				}else if(sort==2) {	// id내림차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by id desc limit ?, ?";
 				}else if(sort==3) {	// nick 오름차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by nick limit ?, ?";
 				}else if(sort==4) {	// nick 내림차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by nick desc limit ?, ?";
 				}else if(sort==5) {	// auth 오름차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by auth limit ?, ?";
 				}else if(sort==6) {	// auth 내림차순
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by auth desc limit ?, ?";
 				}else {
-					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth from member "
+					sql = "select id, pass, name, nick, gender, tel, reg_date, profile, auth, gold from member "
 							+ "where nick like ? order by reg_date limit ?, ?";
 				}
 			}
@@ -733,6 +735,7 @@ public class MemberDAO {
 				mb.setReg_date(rs.getTimestamp("reg_date"));
 				mb.setProfile(rs.getString("profile"));
 				mb.setAuth(rs.getInt("auth"));
+				mb.setGold(rs.getInt("gold"));
 				
 				memberList.add(mb);
 			}
