@@ -1,53 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%String id = (String)session.getAttribute("id");
-String nick = (String)session.getAttribute("nick");%>
-	<!-- Header -->
-	<jsp:include page="../inc/header.jsp" />
+<%
+	String id = (String) session.getAttribute("id");
+	String nick = (String) session.getAttribute("nick");
+%>
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
 
-	<!-- Banner -->
-	<section id="banner">
+<!-- Banner -->
+<section id="banner">
 	<h2>TomCat</h2>
 	<p>
-		임시 메인화면 입니다. <br /> 현재 session의 id는 <%=id %>, nick은 <%=nick %>입니다.
+		임시 메인화면 입니다. <br /> 현재 session의 id는
+		<%=id%>, nick은
+		<%=nick%>입니다.
 	</p>
 	<ul class="actions">
 		<li><a href="#" class="button special big">함께해요</a></li>
-		<li><a href="./PlanMain.pl" class="button special big">여행 일정 플래너</a></li>
+		<li><a href="./PlanMain.pl" class="button special big">여행 일정
+				플래너</a></li>
 		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
 		<li><a href="#" class="button special big">Q & A</a></li>
 	</ul>
-	
-	<br>
-	아래는 연습용 버튼입니다.
-	<ul class="actions"> <!-- 테스트용 버튼들. -->
+
+	<br> 아래는 연습용 버튼입니다.
+	<ul class="actions">
+		<!-- 테스트용 버튼들. -->
 		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
-		
-		
 
+
+		<%
+			if (id != null) {
+		%>
 		<li><a href="./MyPlan.pln?plan_nr=100" class="button special big">나의일정관리</a></li>
-		
-		<li><form action="./PlanRegion.pl" method="get">
-			<input type="text" name="region" style="background-color: white" placeholder="암거나 검색">
-			<input type="submit" value="검색" class="button special">
-		</form></li>
-		
-		<li><a href="./PlanSpotWrite.pl" class="button special big">추천장소입력</a></li>
-		<li><a href="./CountryList.pl" class="button special big">국가 DB</a></li>
-		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
-		<li><a href="./PlanSpot.pl?travel=자갈치" class="button special big">추천장소 상세보기</a></li>
-	</ul><!-- 테스트용 버튼들 끝. -->
-	</section>
+		<%
+			} else if (id == null) {
+		%>
+		<li><a onclick="alert('need LOGIN')" class="button special big">나의일정관리</a></li>
 
-	<!-- One -->
-	<section id="one" class="wrapper style1">
+		<%
+			}
+		%>
+
+		<li><form action="./PlanRegion.pl" method="get">
+				<input type="text" name="region" style="background-color: white"
+					placeholder="암거나 검색"> <input type="submit" value="검색"
+					class="button special">
+			</form></li>
+
+		<li><a href="./PlanSpotWrite.pl" class="button special big">추천장소입력</a></li>
+		<li><a href="./CountryList.pl" class="button special big">국가
+				DB</a></li>
+		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
+		<li><a href="./PlanSpot.pl?travel=자갈치" class="button special big">추천장소
+				상세보기</a></li>
+	</ul>
+	<!-- 테스트용 버튼들 끝. -->
+</section>
+
+<!-- One -->
+<section id="one" class="wrapper style1">
 	<div class="container 75%">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 				<header class="major">
-				<h2>Maecenas luctus lectus</h2>
-				<p>Perspiciatis doloremque recusandae dolor</p>
+					<h2>Maecenas luctus lectus</h2>
+					<p>Perspiciatis doloremque recusandae dolor</p>
 				</header>
 			</div>
 			<div class="6u$ 12u$(medium)">
@@ -60,14 +79,14 @@ String nick = (String)session.getAttribute("nick");%>
 			</div>
 		</div>
 	</div>
-	</section>
+</section>
 
-	<!-- Two -->
-	<section id="two" class="wrapper style2 special">
+<!-- Two -->
+<section id="two" class="wrapper style2 special">
 	<div class="container">
 		<header class="major">
-		<h2>Fusce ultrices fringilla</h2>
-		<p>Maecenas vitae tellus feugiat eleifend</p>
+			<h2>Fusce ultrices fringilla</h2>
+			<p>Maecenas vitae tellus feugiat eleifend</p>
 		</header>
 		<div class="row 150%">
 			<div class="6u 12u$(xsmall)">
@@ -88,14 +107,14 @@ String nick = (String)session.getAttribute("nick");%>
 			<li><a href="#" class="button big">Sed vulputate</a></li>
 		</ul>
 	</div>
-	</section>
+</section>
 
-	<!-- Three -->
-	<section id="three" class="wrapper style1">
+<!-- Three -->
+<section id="three" class="wrapper style1">
 	<div class="container">
 		<header class="major special">
-		<h2>Mauris vulputate dolor</h2>
-		<p>Feugiat sed lorem ipsum magna</p>
+			<h2>Mauris vulputate dolor</h2>
+			<p>Feugiat sed lorem ipsum magna</p>
 		</header>
 		<div class="feature-grid">
 			<div class="feature">
@@ -104,8 +123,8 @@ String nick = (String)session.getAttribute("nick");%>
 				</div>
 				<div class="content">
 					<header>
-					<h4>Lorem ipsum</h4>
-					<p>Lorem ipsum dolor sit</p>
+						<h4>Lorem ipsum</h4>
+						<p>Lorem ipsum dolor sit</p>
 					</header>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 						Labore esse tenetur accusantium porro omnis, unde mollitia totam
@@ -118,8 +137,8 @@ String nick = (String)session.getAttribute("nick");%>
 				</div>
 				<div class="content">
 					<header>
-					<h4>Recusandae nemo</h4>
-					<p>Ratione maiores a, commodi</p>
+						<h4>Recusandae nemo</h4>
+						<p>Ratione maiores a, commodi</p>
 					</header>
 					<p>Animi mollitia optio culpa expedita. Dolorem alias minima
 						culpa repellat. Dolores, fuga maiores ut obcaecati blanditiis, at
@@ -132,8 +151,8 @@ String nick = (String)session.getAttribute("nick");%>
 				</div>
 				<div class="content">
 					<header>
-					<h4>Laudantium fugit</h4>
-					<p>Possimus ex reprehenderit eaque</p>
+						<h4>Laudantium fugit</h4>
+						<p>Possimus ex reprehenderit eaque</p>
 					</header>
 					<p>Maiores iusto inventore fugit architecto est iste expedita
 						commodi sed, quasi feugiat nam neque mollitia vitae omnis, ea
@@ -146,8 +165,8 @@ String nick = (String)session.getAttribute("nick");%>
 				</div>
 				<div class="content">
 					<header>
-					<h4>Porro aliquam</h4>
-					<p>Quaerat, excepturi eveniet laboriosam</p>
+						<h4>Porro aliquam</h4>
+						<p>Quaerat, excepturi eveniet laboriosam</p>
 					</header>
 					<p>Vitae earum unde, autem labore voluptas ex, iste dolorum
 						inventore natus consequatur iure similique obcaecati aut corporis
@@ -156,20 +175,20 @@ String nick = (String)session.getAttribute("nick");%>
 			</div>
 		</div>
 	</div>
-	</section>
+</section>
 
-	<!-- Four -->
-	<section id="four" class="wrapper style3 special">
+<!-- Four -->
+<section id="four" class="wrapper style3 special">
 	<div class="container">
 		<header class="major">
-		<h2>Aenean elementum ligula</h2>
-		<p>Feugiat sed lorem ipsum magna</p>
+			<h2>Aenean elementum ligula</h2>
+			<p>Feugiat sed lorem ipsum magna</p>
 		</header>
 		<ul class="actions">
 			<li><a href="#" class="button special big">Get in touch</a></li>
 		</ul>
 	</div>
-	</section>
+</section>
 
-	<!-- Footer -->
-	<jsp:include page="../inc/footer.jsp" />
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />

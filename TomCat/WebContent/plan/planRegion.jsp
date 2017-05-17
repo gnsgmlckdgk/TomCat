@@ -125,7 +125,7 @@ function zzim_noId() {
 	<div class="container">
 		<header class="major special">
 			<h2><%=region%>
-				사진
+				여행 후기
 			</h2>
 			
 		</header>

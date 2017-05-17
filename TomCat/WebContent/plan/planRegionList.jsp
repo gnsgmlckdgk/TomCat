@@ -96,7 +96,7 @@
 				ptb = ptbList.get(i);
 	%>
 	<tr>
-		<td class="img_td" alt="<%=ptb.getName() %>" style="background-image: url('./images/plan/nation/<%=ptb.getCity_code()%>.jpg'); background-size: cover;"></td>
+		<td class="img_td" alt="<%=ptb.getName() %>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%>
 			

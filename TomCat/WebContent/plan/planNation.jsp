@@ -98,7 +98,7 @@ function cityListChange(pageNum) {
 	<div class="container">
 		<header class="major special">
 			<h2><%=nation %>
-				사진
+				여행 후기
 			</h2>
 			<!-- <p>Feugiat sed lorem ipsum magna</p> -->
 		</header>

@@ -674,7 +674,6 @@ public class PlanDAO {
 			search = "r";
 		}
 
-		System.out.println(search);
 		
 		try {
 			con = getConnection();
