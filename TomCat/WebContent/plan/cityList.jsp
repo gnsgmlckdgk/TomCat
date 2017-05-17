@@ -3,12 +3,68 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 헤더 -->
-<jsp:include page="../inc/header.jsp" />
 
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Before you go</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- Scripts -->
+		<script src="./assets/js/jquery.min.js"></script>
+		<script src="./assets/js/skel.min.js"></script>
+		<script src="./assets/js/util.js"></script>
+		<script src="./assets/js/main.js"></script>
+
+		<!-- 스타일 불러오기 -->
+		<link rel="stylesheet" href="./assets/css/main.css?ver=3"/>
+		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
+		
+		<!-- 추가한 css -->
+			<!-- plan -->
+			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=23"/>	<!-- 국가페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=23"/>	<!-- 지역(도시)페이지 -->
+			
+		<style type="text/css">
+		
+			section.cityList {
+				position: relative;
+				top: -70px;
+				padding: 10px;
+			}
+			
+			section.cityList .list_div tr {
+				display: block;
+			}
+			
+			section.cityList .list_div th:nth-of-type(1), section.cityList .list_div td:nth-of-type(1) {
+				width: 130px;
+			}
+			section.cityList .list_div th:nth-of-type(2), section.cityList .list_div td:nth-of-type(2) {
+				width: 120px;
+			}
+			section.cityList .list_div th:nth-of-type(3), section.cityList .list_div td:nth-of-type(3) {
+				width: 100px;
+			}
+			section.cityList .list_div th:nth-of-type(4), section.cityList .list_div td:nth-of-type(4) {
+				width: 150px;
+			}
+			section.cityList .list_div th:nth-of-type(5), section.cityList .list_div td:nth-of-type(5) {
+				width: 540px;
+			}
+			section.cityList .list_div th:nth-of-type(6), section.cityList .list_div td:nth-of-type(6) {
+				width: 220px;
+			}
+		</style>
+			
+	</head>
+
+<body>
 <div class="clear"></div>
 
-<section>
+<section class="cityList">
 <%
 	List cityList = (List)request.getAttribute("cityList"); 
 	String pageNum=(String)request.getAttribute("pageNum");
@@ -18,18 +74,18 @@
 	int startPage=((Integer)request.getAttribute("startPage")).intValue();
 	int endPage=((Integer)request.getAttribute("endPage")).intValue();
 %>
-<div>
+<div class = "list_div">
 <h3>DB 도시 개수 :<%=count %> </h3>
 
 	<!-- 국가 리스트 출력 -->
 	<table border="1">
 		<tr>
-			<td>도시 코드</td>
-			<td>도시 이름</td>
-			<td>국가 코드</td>
-			<td>도시 영어이름</td>
-			<td>정보</td>
-			<td>수정 / 삭제</td>
+			<th>도시 코드</th>
+			<th>도시 이름</th>
+			<th>국가 코드</th>
+			<th>영어 이름</th>
+			<th>정보</th>
+			<th>수정 / 삭제</th>
 		</tr>
 		
 		<%
@@ -76,5 +132,6 @@
 </section>
 
 <div class="clear"></div>
-<!-- footer -->
-<jsp:include page="../inc/footer.jsp" />
+
+	</body>
+</html>
