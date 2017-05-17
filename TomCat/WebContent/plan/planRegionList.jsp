@@ -70,7 +70,7 @@
 %>
 
 <!-- 검색폼 -->
-<div class="checkbox">
+<div class="checkbox" onchange="checkbox_change()">
 	<input type="checkbox" name="r" id="r" checked="checked"><label for="r">Restaurant</label>
 	<input type="checkbox" name="p" id="p" checked="checked"><label for="p">Place</label>
 	<input type="checkbox" name="h" id="h" checked="checked"><label for="h">Hotel</label>
@@ -80,7 +80,7 @@
 <div class="search_div">
 	<form action="javascript:regionListChange('<%=pageNum %>');" method="post">
 		<img src="./images/member/search_l2.png" class="search_img">
-		<input type="text" name="search" id="search" value="<%=search %>" placeholder="search...">
+		<input type="text" name="search" id="search" value="<%=search %>" placeholder="이름으로 찾기">
 		<input type="submit" value="검색" class="button alt">
 	</form>
 </div>

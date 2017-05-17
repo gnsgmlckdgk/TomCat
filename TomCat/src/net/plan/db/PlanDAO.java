@@ -662,7 +662,7 @@ public class PlanDAO {
 		}
 		return count;
 	}// getTravelCount() end
-	
+
 	public int getTravelCount(String region, String city_code, String search) {
 		int count = 0;
 
@@ -674,36 +674,20 @@ public class PlanDAO {
 			search = "r";
 		}
 
-		
 		try {
 			con = getConnection();
-			
-			sql = "select * from travel where city_code like ? and (name like ? or type like ?)";
+
+			sql = "select count(*) as count from travel where city_code like ? and (name like ? or type like ?)";
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, city_code);
 			pstmt.setString(2, "%" + search + "%");
 			pstmt.setString(3, "%" + search + "%");
-			
+
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) { // DB에 지역이 있으면
-				
-				sql = "select count(*) as count from travel where city_code like ? and (name like ? or type like ?)";
-				pstmt = con.prepareStatement(sql);
-
-				pstmt.setString(1, city_code);
-				pstmt.setString(2, "%" + search + "%");
-				pstmt.setString(3, "%" + search + "%");
-
-				rs = pstmt.executeQuery();
-
-				if (rs.next()) {
-					count = rs.getInt("count");
-				}
-
-			} else { // 검색된 국가가 없으면
-				return count;
+			if (rs.next()) {
+				count = rs.getInt("count");
 			}
 
 		} catch (Exception e) {
@@ -724,7 +708,6 @@ public class PlanDAO {
 
 		return count;
 	}
-	
 
 	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region, String city_code) {
 		ResultSet rs = null;
@@ -784,7 +767,8 @@ public class PlanDAO {
 		return planTravelList;
 	} // getBoardList() end
 
-	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region, String search, String city_code) {
+	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region, String search,
+			String city_code) {
 		ResultSet rs = null;
 		List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
 
@@ -797,7 +781,7 @@ public class PlanDAO {
 		}
 
 		try {
-			
+
 			// 1,2디비연결 메서드호출
 			con = getConnection();
 			// num 게시판 글번호 구하기
@@ -826,7 +810,7 @@ public class PlanDAO {
 				pstmt.setString(1, city_code);
 				pstmt.setString(2, "%" + search + "%");
 				pstmt.setString(3, "%" + search + "%");
-				
+
 				pstmt.setInt(4, startRow - 1);
 				pstmt.setInt(5, pageSize);
 
@@ -1092,7 +1076,6 @@ public class PlanDAO {
 				pstmt.executeUpdate();
 			}
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -1119,76 +1102,99 @@ public class PlanDAO {
 		return check;
 
 	}
-		
-		
-		/*추천장소 상세히 보여주기*/
-			public PlanTravelBean getTravel(String travel){
-				PlanTravelBean ptb = new PlanTravelBean();
-				
-				try{
-					con= getConnection();
-					
-					sql = "select * from travel where name=?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, travel);
-					
-					rs = pstmt.executeQuery();
-					
-					if(rs.next()){
-						ptb.setTravel_id(rs.getInt("travel_id"));
-						ptb.setType(rs.getString("type"));
-						ptb.setConuntry_code(rs.getString("country_code"));
-						ptb.setCity_code(rs.getString("city_code"));
-						ptb.setName(rs.getString("name"));
-						ptb.setLatitude(rs.getFloat("latitude"));
-						ptb.setLongitude(rs.getFloat("longitude"));
-						ptb.setInfo(rs.getString("info"));
-						ptb.setAddress(rs.getString("address"));
-						ptb.setFile(rs.getString("file"));
-					}
-				}catch(Exception e) {
-					e.printStackTrace();
-				}finally{
-					if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
-					if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
-					if (con != null) {try {con.close();} catch (SQLException ex) {	}}
-				}
-				
-				return ptb;
-			}
-			
-			/*추천장소 이미지*/
-				public List getSpotImages(int travel_id){
-					List spotimagelist = new ArrayList();
-					
-					try{
-						con = getConnection();
-						
-						sql = "select * from images where travel_id=?";
-						pstmt = con.prepareStatement(sql);
-						pstmt.setInt(1, travel_id);
-						
-						rs = pstmt.executeQuery();
-						
-						if(rs.next()){
-							/*이미지 리스트 만들기*/
-						}
-						
-					}catch(Exception e) {
-						e.printStackTrace();
-					}finally{
-						if (rs != null) {try {rs.close();} catch (SQLException ex) {}	}
-						if (pstmt != null) {try {pstmt.close();} catch (SQLException ex) {}}
-						if (con != null) {try {con.close();} catch (SQLException ex) {	}}
-					}
-					return spotimagelist;
-				}
-			
-			
-			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-		
 
-		
+	/* 추천장소 상세히 보여주기 */
+	public PlanTravelBean getTravel(String travel) {
+		PlanTravelBean ptb = new PlanTravelBean();
+
+		try {
+			con = getConnection();
+
+			sql = "select * from travel where name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, travel);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				ptb.setTravel_id(rs.getInt("travel_id"));
+				ptb.setType(rs.getString("type"));
+				ptb.setConuntry_code(rs.getString("country_code"));
+				ptb.setCity_code(rs.getString("city_code"));
+				ptb.setName(rs.getString("name"));
+				ptb.setLatitude(rs.getFloat("latitude"));
+				ptb.setLongitude(rs.getFloat("longitude"));
+				ptb.setInfo(rs.getString("info"));
+				ptb.setAddress(rs.getString("address"));
+				ptb.setFile(rs.getString("file"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+
+		return ptb;
+	}
+
+	/* 추천장소 이미지 */
+	public List getSpotImages(int travel_id) {
+		List spotimagelist = new ArrayList();
+
+		try {
+			con = getConnection();
+
+			sql = "select * from images where travel_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, travel_id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				/* 이미지 리스트 만들기 */
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return spotimagelist;
+	}
 
 	/* DB 도시 삭제 (운영자 페이지) */
 	public int deleteCity(String city_code) {
@@ -1282,6 +1288,5 @@ public class PlanDAO {
 
 		return pcb;
 	}
-
 
 }

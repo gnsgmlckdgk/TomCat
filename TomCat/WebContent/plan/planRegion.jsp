@@ -63,6 +63,22 @@ $(window).load(function() {
 	});
 });
 
+function checkbox_change(){
+		
+	if(r.checked && p.checked && h.checked) {checkbox="rph"}
+	else if(!r.checked && !p.checked && !h.checked) {checkbox="rph"}
+	
+	else if(r.checked && p.checked && !h.checked) {checkbox="rp"}
+	else if(r.checked && !p.checked && h.checked) {checkbox="rh"}
+	else if(!r.checked && p.checked && h.checked) {checkbox="ph"}
+	
+	else if(r.checked && !p.checked && !h.checked) {checkbox="r"}
+	else if(!r.checked && p.checked && !h.checked) {checkbox="p"}
+	else if(!r.checked && !p.checked && h.checked) {checkbox="h"}
+	
+	alert(checkbox);
+}
+
 // 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
 function regionListChange(pageNum) {
 	
