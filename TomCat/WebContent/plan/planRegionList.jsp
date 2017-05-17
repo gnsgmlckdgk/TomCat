@@ -70,7 +70,6 @@
 %>
 
 <!-- 검색폼 -->
-
 <div class="checkbox">
 	<input type="checkbox" name="r" id="r" checked="checked"><label for="r">Restaurant</label>
 	<input type="checkbox" name="p" id="p" checked="checked"><label for="p">Place</label>
@@ -87,6 +86,7 @@
 </div>
 					
 <div class="clear"></div>
+<!-- 검색폼 끝. -->
 
 <table>
 	<%

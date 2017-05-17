@@ -674,25 +674,26 @@ public class PlanDAO {
 			search = "r";
 		}
 
+		System.out.println(search);
+		
 		try {
 			con = getConnection();
 			
-			sql = "select * from travel where address like ? or city_code like ? type like ? or name like ?";
+			sql = "select * from travel where city_code like ? and name like ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + region + "%");
-			pstmt.setString(2, city_code);
-			pstmt.setString(3, "%" + search + "%");
-			pstmt.setString(4, "%" + search + "%");
+			
+			pstmt.setString(1, city_code);
+			pstmt.setString(2, "%" + search + "%");
+			
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) { // DB에 지역이 있으면
 				
-				sql = "select count(*) as count from travel where address like ? or city_code like ? type like ? or name like ?";
+				sql = "select count(*) as count from travel where city_code like ? and name like ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, "%" + region + "%");
-				pstmt.setString(2, city_code);
-				pstmt.setString(3, "%" + search + "%");
-				pstmt.setString(4, "%" + search + "%");
+
+				pstmt.setString(1, city_code);
+				pstmt.setString(2, "%" + search + "%");
 
 				rs = pstmt.executeQuery();
 
@@ -795,19 +796,19 @@ public class PlanDAO {
 		}
 
 		try {
-
+			
 			// 1,2디비연결 메서드호출
 			con = getConnection();
 			// num 게시판 글번호 구하기
 			// sql 함수 최대값 구하기 max()
-			sql = "select * from travel where address like ? city_code like ? or type like ? or name like ? order by travel_id desc limit ?, ?";
+			sql = "select * from travel where city_code like ? and name like ? order by travel_id desc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + region + "%");
-			pstmt.setString(2, city_code);
-			pstmt.setString(3, "%" + search + "%");
-			pstmt.setString(4, "%" + search + "%");
-			pstmt.setInt(5, startRow - 1);
-			pstmt.setInt(6, pageSize);
+
+			pstmt.setString(1, city_code);
+			pstmt.setString(2, "%" + search + "%");
+
+			pstmt.setInt(3, startRow - 1);
+			pstmt.setInt(4, pageSize);
 
 			rs = pstmt.executeQuery();
 
@@ -817,14 +818,14 @@ public class PlanDAO {
 				con = getConnection();
 				// num 게시판 글번호 구하기
 				// sql 함수 최대값 구하기 max()
-				sql = "select * from travel where address like ? or city_code like ? or type like ? or name like ? order by travel_id desc limit ?, ?";
+				sql = "select * from travel where city_code like ? and name like ? order by travel_id desc limit ?, ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, "%" + search + "%");
-				pstmt.setString(2, city_code);
-				pstmt.setString(3, "%" + search + "%");
-				pstmt.setString(4, "%" + search + "%");
-				pstmt.setInt(5, startRow - 1);
-				pstmt.setInt(6, pageSize);
+
+				pstmt.setString(1, city_code);
+				pstmt.setString(2, "%" + search + "%");
+
+				pstmt.setInt(3, startRow - 1);
+				pstmt.setInt(4, pageSize);
 
 				rs = pstmt.executeQuery();
 
