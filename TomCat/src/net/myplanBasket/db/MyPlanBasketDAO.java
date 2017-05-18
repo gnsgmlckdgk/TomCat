@@ -185,15 +185,17 @@ public class MyPlanBasketDAO {
 	}
 
 	public String getMemberGold(String id) {
+		
 		String gold = "무료회원";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "";
-		int check = 0;
+		int check=0;
+		
 		try {
-
+			
 			con = getConnection();
 
 			sql = "select gold from member where id=?";
@@ -201,11 +203,13 @@ public class MyPlanBasketDAO {
 			pstmt.setString(1, id);
 			// 4 rs 실행저장
 			rs = pstmt.executeQuery();
-
-			check = rs.getInt(1);
-
+			
+			if(rs.next())check = rs.getInt("gold");
+			System.out.println("check : " + check);
+			
 			if (check == 1) {
 				gold = "유료회원";
+				
 			}
 
 		} catch (Exception e) {
