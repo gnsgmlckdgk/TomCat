@@ -2849,6 +2849,9 @@ body.is-touch #banner {
 	border-left: 5px solid #aaa;
 	padding-left: 10px;
 }
+#footer .footer_body .footer_body_2 img{
+	height: 3em;
+}
 
 #footer .footer_body .footer_body_3{
 	width: 15em;
