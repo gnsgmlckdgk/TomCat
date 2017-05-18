@@ -3,15 +3,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- 헤더 -->
-<jsp:include page="../inc/header.jsp" />
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Before you go</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- Scripts -->
+		<script src="./assets/js/jquery.min.js"></script>
+		<script src="./assets/js/skel.min.js"></script>
+		<script src="./assets/js/util.js"></script>
+		<script src="./assets/js/main.js"></script>
 
+		<!-- 스타일 불러오기 -->
+		<link rel="stylesheet" href="./assets/css/main.css?ver=3"/>
+		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
+		
+		<!-- 추가한 css -->		
+		<style type="text/css">
+		
+			section {
+				text-align: center;
+			}
+		
+			div.country_update {
+				width: 80%;
+				margin: -60px auto 30px auto;
+				
+				text-align: center;
+			}
+			
+			div.country_update .btn_div {
+				margin-top: 20px;
+			}
+			
+
+		</style>
+			
+	</head>
+
+<body>
 <div class="clear"></div>
 <%
 	PlanCountryBean pcb = (PlanCountryBean)request.getAttribute("pcb");
 %>
 
 <section>
-<div  style="width: 50em; margin: auto;">
+<div class="country_update">
 	<form action="./CountryUpdateAction.pl" name="coun_fr" method="post">
 		대륙
 		<select name="continent">
@@ -33,13 +72,22 @@
 		<input type="text" name="en_name" value="<%=pcb.getEn_name() %>">
 		
 		정보
-		<textarea rows="20" cols="20" name="info"><%=pcb.getInfo() %></textarea>
+		<textarea rows="10" cols="20" name="info"><%=pcb.getInfo() %></textarea>
 		
-		<input type="submit"  value="수정" >	
+		<div class="btn_div">
+		<input type="submit"  value="수정" >
+		<input type="reset"  value="다시쓰기" >
+		</div>
+		
 	</form>
 </div>
+
+<!-- 뒤로가기 버튼 -->
+<input type="button" class="button special" value="뒤로가기" onclick="history.back()">
+
 </section>
 
 <div class="clear"></div>
 <!-- footer -->
-<jsp:include page="../inc/footer.jsp" />
+</body>
+</html>

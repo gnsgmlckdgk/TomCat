@@ -375,6 +375,47 @@ public class PlanDAO {
 		}
 		return count;
 	}
+	
+	/* DB 국가 개수(운영자 페이지 : 검색값 포함) */
+	public int getCountryCount(String search) {
+		int count = 0;
+		
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from country where name like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
 
 	/* DB 국가리스트 뽑아오기 (운영자 페이지) */
 	public List<PlanCountryBean> getCountryList(int startRow, int pageSize) {
@@ -390,6 +431,73 @@ public class PlanDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow - 1);// 시작행-1
 			pstmt.setInt(2, pageSize);// 몇개글
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				cb = new PlanCountryBean();
+
+				cb.setCountry_code(rs.getString("country_code"));
+				cb.setName(rs.getString("name"));
+				cb.setInfo(rs.getString("info"));
+				cb.setContinent(rs.getString("continent"));
+				cb.setEn_name(rs.getString("en_name"));
+
+				countryList.add(cb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return countryList;
+
+	}
+	
+	/* DB 국가리스트 뽑아오기 (운영자 페이지 : 검색값) */
+	public List<PlanCountryBean> getCountryList(int startRow, int pageSize, String search, int sort) {
+		List<PlanCountryBean> countryList = new ArrayList();
+		PlanCountryBean cb = null;
+		String sql = "";
+		
+		try {
+			con = getConnection();
+			
+			// sort-> 0:정렬x 기본값, 1:국가코드 오름차순 ,2:국가코드 내림차순, 3:국가이름 오름차순, 4:국가이름 내림차순, 5:대륙별 오름차순, 6:대륙별 내림차순
+			// 7:영문이름 오름차순, 8:영문이름 내림차순
+			if(sort == 1) sql = "select * from country where name like ? order by country_code asc limit ?,?";
+			else if(sort == 2) sql = "select * from country where name like ? order by country_code desc limit ?,?";
+			else if(sort == 3) sql = "select * from country where name like ? order by name asc limit ?,?";
+			else if(sort == 4) sql = "select * from country where name like ? order by name desc limit ?,?";
+			else if(sort == 5) sql = "select * from country where name like ? order by continent asc limit ?,?";
+			else if(sort == 6) sql = "select * from country where name like ? order by continent desc limit ?,?";
+			else if(sort == 7) sql = "select * from country where name like ? order by en_name asc limit ?,?";
+			else if(sort == 8) sql = "select * from country where name like ? order by en_name desc limit ?,?";
+			else sql = "select * from country where name like ? limit ?,?";	// 정렬 값 없을때
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");	// 검색값
+			pstmt.setInt(2, startRow - 1);// 시작행-1
+			pstmt.setInt(3, pageSize);// 몇개글
 
 			rs = pstmt.executeQuery();
 

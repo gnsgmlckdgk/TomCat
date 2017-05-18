@@ -44,11 +44,11 @@
 		<script type="text/javascript">
 			
 			function countryInput() {
-				window.open("./CountryList.pl", "window", "width=1200, height=800, top=100, left=300");
+				window.open("./CountryList.pl", "window", "width=1200, height=1000, top=0, left=300");
 			}
 			
 			function cityInput() {
-				window.open("./CityList.pl", "window", "width=1400, height=800, top=100, left=200");
+				window.open("./CityList.pl", "window", "width=1300, height=800, top=100, left=200");
 			}
 			
 			function travelInput() {
