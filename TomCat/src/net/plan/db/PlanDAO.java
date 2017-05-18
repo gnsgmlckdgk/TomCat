@@ -676,8 +676,14 @@ public class PlanDAO {
 
 		try {
 			con = getConnection();
+			if (search.equals("rph")) {
+				sql = "select count(*) as count from travel where city_code like ?";
 
-			if (search.equals("ph") || search.equals("pr") || search.equals("hr")) {
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, city_code);
+
+			} else if (search.equals("rp") || search.equals("rh") || search.equals("ph")) {
 				sql = "select count(*) as count from travel where city_code like ? and (type like ? or type like ?)";
 
 				pstmt = con.prepareStatement(sql);
@@ -795,8 +801,16 @@ public class PlanDAO {
 
 			// 1,2디비연결 메서드호출
 			con = getConnection();
+			if (search.equals("rph")) {
+				sql = "select * from travel where city_code like ? order by travel_id desc limit ?, ?";
 
-			if (search.equals("ph") || search.equals("pr") || search.equals("hr")) {
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, city_code);
+				pstmt.setInt(2, startRow - 1);
+				pstmt.setInt(3, pageSize);
+
+			} else if (search.equals("rp") || search.equals("rh") || search.equals("ph")) {
 				sql = "select * from travel where city_code like ? and (type like ? or type like ?) order by travel_id desc limit ?, ?";
 
 				pstmt = con.prepareStatement(sql);

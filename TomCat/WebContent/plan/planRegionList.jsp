@@ -7,25 +7,25 @@
 <%
 	//파라미터 값 가져오기.
 	String region = request.getParameter("region"); // 리스트의 링크 값
-	String search = request.getParameter("search");	// 검색값
+	String search = request.getParameter("search"); // 검색값
 	String city_code = request.getParameter("city_code"); // city_code 값
-	String id = (String)session.getAttribute("id");
-	
-	if(search==null) {
-		search="";
+	String id = (String) session.getAttribute("id");
+
+	if (search == null) {
+		search = "";
 	}
-	
+
 	//객체 생성
 	PlanDAO pdao = new PlanDAO();
 
 	/* 게시글 가져오기 */
 	//DB에 등록된 글의 개수.
 	int count = 0;
-			
-	if("".equals(search)) {	// 검색값이 없으면
+
+	if ("".equals(search)) { // 검색값이 없으면
 		count = pdao.getTravelCount(region, city_code);
-			
-	}else {	// 검색값이 있으면
+
+	} else { // 검색값이 있으면
 		count = pdao.getTravelCount(region, city_code, search);
 	}
 
@@ -47,11 +47,11 @@
 	// 도시 리스트 가져오기
 	List<PlanTravelBean> ptbList = null;
 	if (count > 0) {
-		if("".equals(search)) {	// 검색값 없으면
+		if ("".equals(search)) { // 검색값 없으면
 			ptbList = pdao.getTravelList(startRow, pageSize, region, city_code);
-		}else {	// 검색값 있으면
+		} else { // 검색값 있으면
 			ptbList = pdao.getTravelList(startRow, pageSize, region, search, city_code);
-		}	
+		}
 	}
 
 	/* 페이징 */
@@ -67,18 +67,43 @@
 	if (endPage > pageCount) {
 		endPage = pageCount;
 	}
+	
+	//조건부 검색된 값이면 c_b가 true로.
+	boolean c_b = false;
+	if (search.equals("rph") || search.equals("rp") || search.equals("rh") || search.equals("ph")
+			|| search.equals("r") || search.equals("p") || search.equals("h")) {
+		c_b = true;
+	}
+	//조건부 검색된 값이면 c_b가 true로. 끝.
 %>
 
 <!-- 검색폼 -->
 
 <div class="search_div">
-	<form action="javascript:regionListChange('<%=pageNum %>');" method="post">
+	<form action="javascript:regionListChange('<%=pageNum%>');"
+		method="post">
 		<img src="./images/member/search_l2.png" class="search_img">
-		<input type="text" name="search" id="search" value="<%=search %>" placeholder="이름으로 찾기">
+
+		<!-- 조건부 검색 조건값을 보여주지 않음. -->
+		<%
+			if (c_b) {
+		%>
+		<input type="text" name="search" id="search" value=""
+			placeholder="이름으로 찾기">
+		<%
+			} else {
+		%>
+		<input type="text" name="search" id="search" value="<%=search%>"
+			placeholder="이름으로 찾기">
+		<%
+			}
+		%>
+		<!-- 조건부 검색 조건값을 보여주지 않음. 끝.-->
+
 		<input type="submit" value="검색" class="button alt">
 	</form>
 </div>
-					
+
 <div class="clear"></div>
 <!-- 검색폼 끝. -->
 
@@ -90,22 +115,33 @@
 				ptb = ptbList.get(i);
 	%>
 	<tr>
-		<td class="img_td" alt="<%=ptb.getName() %>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover;"></td>
+		<td class="img_td" alt="<%=ptb.getName()%>"
+			style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%>
-			
-			<%if(id != null){%>
-				<input type="button" name="zzim" onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜" class="button special icon fa-download" />
-			<%} else if (id==null){%>
-				<input type="button" name="zzim_noId" onclick="zzim_noId()" value="찜" class="button special icon fa-download" />
-			<%} %>
+
+				<%
+					if (id != null) {
+				%>
+				<input type="button" name="zzim"
+					onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜"
+					class="button special icon fa-download" />
+				<%
+					} else if (id == null) {
+				%>
+				<input type="button" name="zzim_noId" onclick="zzim_noId()"
+					value="찜" class="button special icon fa-download" />
+				<%
+					}
+				%>
 			</p>
 			<p style="font-size: 0.7em;"><%=ptb.getCity_code()%></p>
-			<p style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
+			<p
+				style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
 		</td>
 	</tr>
 	<%
-			}
+		}
 		} else {
 	%>
 	<tr>
@@ -122,17 +158,18 @@
 <div class="page">
 	<%
 		if (currentPage > pageBlock) {
-	%><a href="javascript:regionListChange('<%=startPage - pageBlock%>', '<%=search%>');">[이전]</a>
+	%><a
+		href="javascript:regionListChange('<%=startPage - pageBlock%>', '<%=search%>');">[이전]</a>
 	<%
 		}
 		for (int i = startPage; i <= endPage; i++) {
 	%><a href="javascript:regionListChange('<%=i%>', '<%=search%>');"
-		<%if (currentPage == i) {%>
-		style="background-color: #ccc;" <%}%>><%=i%></a>
+		<%if (currentPage == i) {%> style="background-color: #ccc;" <%}%>><%=i%></a>
 	<%
 		}
 		if (pageCount > endPage) {
-	%><a href="javascript:regionListChange('<%=startPage + pageBlock%>', '<%=search%>');">[다음]</a>
+	%><a
+		href="javascript:regionListChange('<%=startPage + pageBlock%>', '<%=search%>');">[다음]</a>
 	<%
 		}
 	%>
