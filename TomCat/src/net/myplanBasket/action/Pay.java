@@ -35,9 +35,6 @@ public class Pay implements Action {
 			
 			MemberBean mb = (MemberBean)mpdao.getTelName(id);
 			
-			System.out.println(id);
-			System.out.println(mb.getName());
-			
 			request.setAttribute("name", mb.getName());
 			request.setAttribute("tel", mb.getTel());
 						

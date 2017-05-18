@@ -32,9 +32,6 @@ public class MyPlanBasketListAction implements Action{
 		//  => Vector vector=new Vector();
 		
 		
-		
-		
-		
 		Vector vector=basketdao.getBasketList(id);
 		String gold = basketdao.getMemberGold(id);
 		
