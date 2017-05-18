@@ -677,12 +677,23 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 
-			sql = "select count(*) as count from travel where city_code like ? and (name like ? or type like ?)";
-			pstmt = con.prepareStatement(sql);
+			if (search.equals("ph") || search.equals("pr") || search.equals("hr")) {
+				sql = "select count(*) as count from travel where city_code like ? and (type like ? or type like ?)";
 
-			pstmt.setString(1, city_code);
-			pstmt.setString(2, "%" + search + "%");
-			pstmt.setString(3, "%" + search + "%");
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, city_code);
+				pstmt.setString(2, search.substring(0, 1));
+				pstmt.setString(3, search.substring(1, 2));
+			} else {
+				sql = "select count(*) as count from travel where city_code like ? and (name like ? or type like ?)";
+
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, city_code);
+				pstmt.setString(2, "%" + search + "%");
+				pstmt.setString(3, "%" + search + "%");
+			}
 
 			rs = pstmt.executeQuery();
 
@@ -784,26 +795,19 @@ public class PlanDAO {
 
 			// 1,2디비연결 메서드호출
 			con = getConnection();
-			// num 게시판 글번호 구하기
-			// sql 함수 최대값 구하기 max()
-			sql = "select * from travel where city_code like ? and (name like ? or type like ?) order by travel_id desc limit ?, ?";
-			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, city_code);
-			pstmt.setString(2, "%" + search + "%");
-			pstmt.setString(3, "%" + search + "%");
+			if (search.equals("ph") || search.equals("pr") || search.equals("hr")) {
+				sql = "select * from travel where city_code like ? and (type like ? or type like ?) order by travel_id desc limit ?, ?";
 
-			pstmt.setInt(4, startRow - 1);
-			pstmt.setInt(5, pageSize);
+				pstmt = con.prepareStatement(sql);
 
-			rs = pstmt.executeQuery();
+				pstmt.setString(1, city_code);
+				pstmt.setString(2, search.substring(0, 1));
+				pstmt.setString(3, search.substring(1, 2));
 
-			if (rs.next()) {
-
-				// 1,2디비연결 메서드호출
-				con = getConnection();
-				// num 게시판 글번호 구하기
-				// sql 함수 최대값 구하기 max()
+				pstmt.setInt(4, startRow - 1);
+				pstmt.setInt(5, pageSize);
+			} else {
 				sql = "select * from travel where city_code like ? and (name like ? or type like ?) order by travel_id desc limit ?, ?";
 				pstmt = con.prepareStatement(sql);
 
@@ -813,24 +817,23 @@ public class PlanDAO {
 
 				pstmt.setInt(4, startRow - 1);
 				pstmt.setInt(5, pageSize);
+			}
 
-				rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
-				while (rs.next()) {
-					PlanTravelBean ptb = new PlanTravelBean();
-					ptb.setTravel_id(rs.getInt(1));
-					ptb.setType(rs.getString(2));
-					ptb.setConuntry_code(rs.getString(3));
-					ptb.setCity_code(rs.getString(4));
-					ptb.setName(rs.getString(5));
-					ptb.setLatitude(rs.getFloat(6));
-					ptb.setLongitude(rs.getFloat(7));
-					ptb.setInfo(rs.getString(8));
-					ptb.setAddress(rs.getString(9));
-					ptb.setFile(rs.getString(10));
-					planTravelList.add(ptb);
-				}
-
+			while (rs.next()) {
+				PlanTravelBean ptb = new PlanTravelBean();
+				ptb.setTravel_id(rs.getInt(1));
+				ptb.setType(rs.getString(2));
+				ptb.setConuntry_code(rs.getString(3));
+				ptb.setCity_code(rs.getString(4));
+				ptb.setName(rs.getString(5));
+				ptb.setLatitude(rs.getFloat(6));
+				ptb.setLongitude(rs.getFloat(7));
+				ptb.setInfo(rs.getString(8));
+				ptb.setAddress(rs.getString(9));
+				ptb.setFile(rs.getString(10));
+				planTravelList.add(ptb);
 			}
 
 		} catch (Exception e) {

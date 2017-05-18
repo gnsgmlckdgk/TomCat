@@ -79,13 +79,11 @@ function checkbox_change(){
 	else if(!r.checked && p.checked && !h.checked) {$checkbox="p"}
 	else if(!r.checked && !p.checked && h.checked) {$checkbox="h"}
 	
-	var a = $checkbox;
-	alert(a);
 	
 	$.ajax({
 		type: 'post',
 		url: './plan/planRegionList.jsp',
-		data : {region:'<%=region%>', pageNum: '1', search: a, city_code:'<%=city_code%>'},
+		data : {region:'<%=region%>', pageNum: '1', search: $checkbox, city_code:'<%=city_code%>'},
 		success: function(data) {
 			$('.region_list_div').empty();
 			$('.region_list_div').append(data);
