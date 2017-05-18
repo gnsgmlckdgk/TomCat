@@ -92,7 +92,6 @@ public class LikeDAO {
 
 	}
 
-
 	public int getLikecount(int num,String nick) {
 		System.out.println("DAO에서의 넘,닉"+num+nick);
 		
