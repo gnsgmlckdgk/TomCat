@@ -64,10 +64,20 @@ table tr th {
 	top: 6em;
 	border: none;
 	border-collapse: none;
-	height: 80%;
+	height: 90%;
 	opacity: 0.9;
 }
 
+.banner .pay_button{
+	width: 20%;
+	position:fixed;
+	right:10px;
+	bottom:5px;
+	background-color: orange;
+}
+.banner .pay_button:hover{
+	background-color: #f55;
+}
 .banner h4 {
 	margin-top: 1.5em;
 	text-align: center;
@@ -132,25 +142,23 @@ table tr th {
 	font-size: 1.5em;
 }
 
-/*jquery test*/
-.card {
-	display: none;
-	background-color: white;
-}
-.card table{
-	margin: 0;
+/* 결제수단 */
+.pay_way_div{
 	padding: 0;
-	height: 50px;
-}
-.card table select{
-	width:50%;
-	float: right;
+	margin: 0;
 }
 
-.believe{
-	display: none;
+.pay_way_div .pay_way_title{
+	color: orange;
+	font-size: 1.2em;
+	text-align: left;
+	border-left: 10px solid orange;
 }
 
-/*jquery test end*/
-
+.pay_way_div table{
+	margin-top:20px;
+	width: 95%;
+	padding: 0;
+}
+/* 결제수단 끝*/
 
