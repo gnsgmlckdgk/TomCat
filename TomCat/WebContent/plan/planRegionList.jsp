@@ -115,11 +115,10 @@
 				ptb = ptbList.get(i);
 	%>
 	<tr>
-		<td class="img_td" alt="<%=ptb.getName()%>"
-			style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover;"></td>
+		<td class="img_td" alt="<%=ptb.getName()%>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%>
-
+			<span style="font-size: 0.7em;"><%=ptb.getCity_code()%></span>
 				<%
 					if (id != null) {
 				%>
@@ -135,7 +134,7 @@
 					}
 				%>
 			</p>
-			<p style="font-size: 0.7em;"><%=ptb.getCity_code()%></p>
+			
 			<p
 				style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
 		</td>
