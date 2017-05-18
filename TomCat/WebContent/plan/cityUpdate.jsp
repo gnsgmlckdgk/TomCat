@@ -23,18 +23,14 @@
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
-			<!-- plan -->
-			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=23"/>	<!-- 국가페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=23"/>	<!-- 지역(도시)페이지 -->
-	
 	<style type="text/css">
 		
-		section.cityUpdate {
-			position: relative;
-			top: -70px;
-			padding: 10px;
-		}
+		div.city_update {
+				width: 90%;
+				margin: -60px auto 30px auto;
+				
+				text-align: center;
+			}
 	
 	</style>
 
@@ -53,7 +49,7 @@
 
 <section class="cityUpdate">
 
-<div  style="width: 50em; margin: auto;">
+<div class="city_update">
 	<form action="./CityUpdateAction.pl" name="city_fr" method="post">
 		국가코드
 		<select name="country_code">

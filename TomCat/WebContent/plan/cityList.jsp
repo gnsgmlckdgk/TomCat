@@ -28,7 +28,6 @@
 			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=23"/>	<!-- 지역(도시)페이지 -->
 			
 		<style type="text/css">
-		
 			section.cityList {
 				position: relative;
 				top: -70px;
@@ -131,7 +130,5 @@
 </div>
 </section>
 
-<div class="clear"></div>
-
-	</body>
+</body>
 </html>
