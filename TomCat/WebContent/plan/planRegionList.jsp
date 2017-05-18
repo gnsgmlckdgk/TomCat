@@ -70,12 +70,6 @@
 %>
 
 <!-- 검색폼 -->
-<div class="checkbox" onchange="checkbox_change()">
-	<input type="checkbox" name="r" id="r" checked="checked"><label for="r">Restaurant</label>
-	<input type="checkbox" name="p" id="p" checked="checked"><label for="p">Place</label>
-	<input type="checkbox" name="h" id="h" checked="checked"><label for="h">Hotel</label>
-</div>
-
 
 <div class="search_div">
 	<form action="javascript:regionListChange('<%=pageNum %>');" method="post">
