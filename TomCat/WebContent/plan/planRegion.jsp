@@ -79,16 +79,17 @@ function checkbox_change(){
 	else if(!r.checked && p.checked && !h.checked) {$checkbox="p"}
 	else if(!r.checked && !p.checked && h.checked) {$checkbox="h"}
 	
-	alert($checkbox);//ajax에 checkbox 변수값을 어떻게 넘기나?
+	var a = $checkbox;
+	alert(a);
 	
-	$checkbox = "어린이";		
 	$.ajax({
 		type: 'post',
 		url: './plan/planRegionList.jsp',
-		data : {region:'<%=region%>', pageNum: '1', search: '어린이', city_code:'<%=city_code%>'},
+		data : {region:'<%=region%>', pageNum: '1', search: a, city_code:'<%=city_code%>'},
 		success: function(data) {
 			$('.region_list_div').empty();
 			$('.region_list_div').append(data);
+			
 		},
 		error: function(xhr, status, error) {
 			alert(error);
