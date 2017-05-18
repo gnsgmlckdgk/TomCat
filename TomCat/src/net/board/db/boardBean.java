@@ -8,11 +8,19 @@ public class boardBean {
 	private String nick;
 	private String subject;
 	private String content;
-	private String image1;
+	private String image1;	
 	private Date date;
+	private int love;
+	
 	
 	
 
+	public int getLove() {
+		return love;
+	}
+	public void setLove(int love) {
+		this.love = love;
+	}
 	public Date getDate() {
 		return date;
 	}

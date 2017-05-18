@@ -35,6 +35,8 @@ function func1(re_num){
 function func2(){
 	alert("정말 삭제하시겠습니까?");		
 }
+
+
 </script>
 
 <!-- Header -->
@@ -68,7 +70,7 @@ function func2(){
 			<td colspan="4">
 			
 			<img src="./upload/<%=bb.getImage1()%>"
-				width=400 height=400 onerror="this.src='./instagram/noimage.png'"></td>
+				width=400 height=400 onerror="this.src='./images/instagram/noimage.png'"></td>
 		</tr>
 		<tr>
 			<td colspan="4"><%=bb.getContent()%></td>
@@ -135,8 +137,8 @@ function func2(){
 		if(rb.getRe_lev()>0){
 			wid=40*rb.getRe_lev();
 			%>
-			<img src="./instagram/level.gif" width="<%=wid%>" height="15">
-			<img src="./instagram/re.gif">
+			<img src="./images/instagram/level.gif" width="<%=wid%>" height="15">
+			<img src="./images/instagram/re.gif">
 			
 	<%	} %>
 		<%=rb.getNick() %>		

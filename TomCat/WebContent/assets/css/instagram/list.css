@@ -1,69 +1,71 @@
 @CHARSET "UTF-8";
 
-.wrapper{
-		padding: 16em 0 13em 0;
-		background-attachment: fixed;
-		background-image: url("../instagram/england.png");
-		background-position: center top;
-		background-size: cover;
-		line-height: 1.75;
-		text-align: center;
-	}
+.wrapper {
+	padding: 16em 0 13em 0;
+	background-attachment: fixed;
+	background-image: url("../images/instagram/bridge.png");	
+	background-position: center top;
+	background-size: cover;
+	line-height: 1.75;
+	text-align: center;
+}
 
-
-#border{	
-	width:40%;
-	margin:auto;
+#border {
+	width: 40%;
+	margin: auto;
 	background-color: white;
 	opacity: 0.85;
 	border-radius: 20px;
 }
 
-#like{
-background-color: #ff6699;
-	}
-
-#dislike
-{	
-background-color: #996699;
-
-}
-
-.button{
-	width:48em;	
+#like {
 	background-color: #ff6699;
-		opacity: 0.85;
-	border-radius: 20px;	
-}
-.button:hover{
-	letter-spacing:5px;	
 }
 
-.bottomline{
-
-	border-bottom: 1px solid #A9A9A9;	
+#dislike {
+	background-color: #996699;
 }
 
+.button {
+	width: 48em;
+	background-color: #ff6699;
+	opacity: 0.85;
+	border-radius: 20px;
+}
 
-.banner{
-	width:10em;
+.button:hover {
+	letter-spacing: 5px;
+}
+
+.bottomline {
+	border-bottom: 1px solid #A9A9A9;
+}
+
+.banner {
+	width: 10em;
 	background-color: white;
-	opacity:0.8;
-	position:fixed;	
-	right:5px;
-	top:100px;
+	opacity: 0.8;
+	position: fixed;
+	right: 30px;
+	top: 300px;
 	border: none;
 	border-collapse: none;
-}
-.banner img{
-/* 	border:2px solid black; */
-	
+	border: none;
 }
 
-#listpage{
-	text-align:center;
+img#up{
+		position: fixed;
+		left: 30px;
+	top: 300px;
+}
+
+img#down{
+	position: fixed;
+	left: 30px;
+	top: 370px;
+}
+
+#listpage {
+	text-align: center;
 	font-size: 1.5em;
-		
-	
-	
 }

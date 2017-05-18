@@ -4,6 +4,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.like.db.LikeBean;
+
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -38,7 +40,7 @@ public class BoardDAO {
 			 pstmt=con.prepareStatement(sql);			 
 			 rs=pstmt.executeQuery();			 
 			 if(rs.next()){num=rs.getInt(1)+1;}
-	         sql = "insert into gram(num,nick,subject,content,image1,date) values(?,?,?,?,?,now())";
+	         sql = "insert into gram(num,nick,subject,content,image1,love,date) values(?,?,?,?,?,?,now())";
 	         
 			pstmt = con.prepareStatement(sql);
 
@@ -47,6 +49,8 @@ public class BoardDAO {
 			pstmt.setString(3, bb.getSubject());
 			pstmt.setString(4, bb.getContent());
 			pstmt.setString(5, bb.getImage1());
+			pstmt.setInt(6, bb.getLove());
+
 			//date는 위에서 now()로 생성됨
 
 		
@@ -140,6 +144,7 @@ public class BoardDAO {
 				bb.setContent(rs.getString("content"));
 				bb.setImage1(rs.getString("image1"));
 				bb.setDate(rs.getDate("date"));
+				bb.setLove(rs.getInt("love"));
 
 					
 				//boardList 한칸 저장
@@ -180,6 +185,7 @@ public class BoardDAO {
 			bb.setSubject(rs.getString("subject"));
 			bb.setContent(rs.getString("content"));
 			bb.setImage1(rs.getString("image1"));
+			bb.setLove(rs.getInt("love"));
 			bb.setDate(rs.getDate("date"));
 		}
 	
@@ -206,14 +212,15 @@ public class BoardDAO {
 			
 			
 			
-					sql = "update gram set nick=?, subject=?, content=?, image1=? where num=?";
+					sql = "update gram set nick=?, subject=?, content=?, image1=? love=? where num=?";
 					pstmt=con.prepareStatement(sql);
 					
 					pstmt.setString(1, bb.getNick());
 					pstmt.setString(2, bb.getSubject());
 					pstmt.setString(3, bb.getContent());
 					pstmt.setString(4,bb.getImage1());
-					pstmt.setInt(5,bb.getNum());			
+					pstmt.setInt(5, bb.getLove());
+					pstmt.setInt(6,bb.getNum());			
 										
 					pstmt.executeUpdate();
 			
@@ -245,7 +252,6 @@ public class BoardDAO {
 					pstmt = con.prepareStatement(sql);
 					pstmt.setInt(1, num);
 					pstmt.executeUpdate();
-					System.out.println("정보삭제됨");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,6 +266,141 @@ public class BoardDAO {
 		
 		
 	}
+	
+	
+//gram 테이블에  해당글의 좋아요수를 증가시켜주는 메소드
+	public void GramAddLike(boardBean bb) {
+		int love = bb.getLove();
+		
+
+		try {
+			con = getConnection();
+			sql = "select max(love) from gram where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,bb.getNum()); 
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {love = rs.getInt(1) + 1;}		
+			
+			sql = "update gram set love=? ";	
+
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setInt(1, love);
+			
+						
+								
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+		} // finally
+
+	}
+	
+
+	public void GramDisLike(boardBean bb) {
+int love = bb.getLove();
+		
+
+		try {
+			con = getConnection();
+			sql = "select max(love) from gram where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,bb.getNum()); 
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {love = rs.getInt(1)- 1;}		
+			
+			sql = "update gram set love=? ";	
+
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setInt(1, love);
+			
+						
+								
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+		} // finally
+
+	}
+	
+	
+	
+	public String Bestshot(boardBean bb) {
+		String img=null;
+		
+	
+				try {
+					con = getConnection();
+					sql = "select num from gram where love=(select max(love) from gram)";
+					pstmt = con.prepareStatement(sql);					
+					rs = pstmt.executeQuery();
+					
+					if (rs.next()) {
+							img=rs.getString(bb.getImage1());
+							
+							System.out.println("dao에서의 이미지다다다ㅏ다다:"+bb.getImage1());		
+					}		
+					
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if (rs != null)
+						try {
+							rs.close();
+						} catch (SQLException ex) {
+						}
+					if (pstmt != null)
+						try {
+							pstmt.close();
+						} catch (SQLException ex) {
+						}
+					if (con != null)
+						try {
+							con.close();
+						} catch (SQLException ex) {
+						}
+				} // finally
+				return img;
+
+			}
+			
+	
 	
 	
 	
