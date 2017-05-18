@@ -90,7 +90,7 @@
 	<div class="container" >
 		<div class="myplan-list" >
 				<h3>
-				<button type="button" onclick = "location.href ='./MyPlan.pln?plan_nr=100'">전체 찜 목록보기</button>
+				<button type="button" >대중교통경로</button><!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
 				<button class="btn" >일정만들기</button>
 				</h3>
 				<table border="1" >
@@ -126,22 +126,19 @@
 		</div>
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
-			<form id="pln_form" action="./MyPlanModify.pln?plan_nr=<%=plan_nr%>" method="post" name="fr">
-				
+			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr">
 				<input type="text" name="fromDate" id="fromDate" value="시작일"
 					style="	background-image: url('myplan/pn_cal_btn.png');
 							background-repeat: no-repeat;
 							background-position: 110px 13px;"> 
-				
 				<input type="text" name="toDate" id="toDate" value="종료일"
 					style="	background-image: url('myplan/pn_cal_btn.png');
 							background-repeat: no-repeat;
 							background-position: 110px 13px;">
-				
-				<select name="plnpick">
+				<select name="plan_nr">
 					<option value="choice">여행 타이틀을 선택하세요</option>
-					<option value="일정A">일정A</option>
-					<option value="일정B">일정B</option>
+					<option value="1" >일정A</option>
+					<option value="2">일정B</option>
 					<%if(gold.equals("유료회원")){ %>
 						<option value="일정C">일정C</option>
 					<%}%>
