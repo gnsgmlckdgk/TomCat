@@ -44,7 +44,8 @@
 		<script type="text/javascript">
 			
 			function countryInput() {
-				window.open("./CountryList.pl", "window", "width=1200, height=1000, top=0, left=300");
+				var availHeight = screen.availHeight-67;
+				window.open("./CountryList.pl", "window", "width=1200, height="+availHeight+", top=0, left=400");
 			}
 			
 			function cityInput() {
