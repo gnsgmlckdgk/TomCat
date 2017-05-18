@@ -2826,6 +2826,33 @@ body.is-touch #banner {
 /*added footer design*/
 .clear{
 	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+#footer .footer_body{
+	margin: auto;
+	width: 70em;
+	max-width: 70em;
+}
+#footer .footer_body .footer_body_1{
+	width: 15em;
+	float: left;
+	
+}
+#footer .footer_body .footer_body_2{
+	width: 39em;
+	float: left;
+	text-align: left;
+}
+#footer .footer_body .footer_body_2 .title{
+	border-left: 5px solid #aaa;
+	padding-left: 10px;
+}
+
+#footer .footer_body .footer_body_3{
+	width: 15em;
+	float: left;
 }
 
 /*added footer design end*/
