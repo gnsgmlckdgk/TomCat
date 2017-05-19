@@ -117,8 +117,7 @@
 	<tr>
 		<td class="img_td" alt="<%=ptb.getName()%>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
-			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%>
-			<span style="font-size: 0.7em;"><%=ptb.getCity_code()%></span>
+			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%> 
 				<%
 					if (id != null) {
 				%>
