@@ -77,7 +77,7 @@ if(id!=null){
 			<tr>
 			<td colspan="4">
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
+			<img id="contentimg" src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
 			</a>
 			</td></tr>
 		<%if(id!=null){	//아이디가 not null일때만 좋아요/좋아요취소버튼 출력%>			
@@ -183,10 +183,12 @@ if(likecount%2==0){
 	String img=bdao.Bestshot();
 	System.out.println("이미지명이다"+img);	
 	%>
-	
+
+<img id="crown" src="./images/instagram/crown.png">	
 	<table class="banner">
 	<tr><td>BEST샷</td></tr>
 	<tr><td>	
+
 <img src="./upload/<%=img%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
 	</td></tr>	
 	</table>

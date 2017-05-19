@@ -32,13 +32,7 @@ public class ReplyFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();}
-		} else if (command.equals("/ReplyUpdate.re")) {
-			action= new ReplyUpdate();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();}
+				e.printStackTrace();}	
 			
 		} else if (command.equals("/RreplyUpdateAction.re")) {
 			action= new RreplyUpdateAction();
