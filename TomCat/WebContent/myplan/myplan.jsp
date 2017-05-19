@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -39,7 +40,12 @@ $(function(){
   		$( '.datepicker').datepicker();
 	}); //날짜 선택하기
 });
+
+
 </script>
+
+		
+
 </head>
 <body>
 	<%
@@ -49,6 +55,16 @@ $(function(){
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
+		
+		String dep_lat =  (String) request.getParameter("dlat");
+		String dep_lng =  (String) request.getParameter("dlng");
+		String arr_lat =  (String) request.getParameter("alat");
+		String arr_lng =  (String) request.getParameter("alng");
+		
+		
+		
+/* 		int init_nr=0; */
+ 		int plan_item_nr=0; 
 	%>
 	<%-- 	<h1>
 		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1> --%>
@@ -62,14 +78,34 @@ $(function(){
 				</h3>
 				<table border="1" >
 					<tr>
-						<td>plan_nr</td>
-						<td>item_nr</td>
-						<td>name</td>
+						<td>plan</td>
+						<td>item</td>
+						<td width="400px">name</td>
+						<%
+						if(plan_nr!=100){
+							%>	
+						<td width="100px">경로</td>
+						<%
+						}
+						%>
 					</tr>
 					<%
-						for (int i = 0; i < basketList.size(); i++) {
+ 					for (int i = 0; i < basketList.size(); i++) {
+						MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
+						if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
+							continue;
+						plan_item_nr=plan_item_nr+1;
+						
+					} 
+					
+					
+					int button_nr=0;
+					float[][] route=new float[plan_item_nr][2]; 
+					
+					for (int i = 0; i < basketList.size(); i++) {
 							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
 							TravelBean tb = (TravelBean) goodsList.get(i);
+					
 							if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
 								continue;
 					%>
@@ -77,14 +113,43 @@ $(function(){
 						<td><%=mpbb.getPlan_nr()%></td>
 						<td><%=mpbb.getItem_nr()%></td>
 						<td><%=tb.getName()%></td>
+						<%
+						if(plan_nr!=100){
+							%>
+						
+						<td>
+								<%
+								
+								
+							
+									route[button_nr][0] = tb.getLatitude();
+									route[button_nr][1] = tb.getLongitude();  
+									if(button_nr!=0){
+									%>	
+									
+										<a href='./MyPlan.pln?plan_nr=<%=plan_nr%>&dlat=<%=route[button_nr-1][0]%>&dlng=<%=route[button_nr-1][1]%>&alat=<%=route[button_nr][0]%>&alng=<%=route[button_nr][1]%>'>
+				  						<img src="./images/myplans/bus_trans.png" width="30px" height="30px" style="vertical-align:bottom"> </a> 
+		  						<%
+		  							}
+									button_nr=button_nr+1;			
+		  						%>
+						</td>
+						<%
+						}
+						%>
 					</tr>
-					<%
+	  				
+							
+						<%
 						}
 					%>
 				</table>
+
+			
 			<%
 				if (basketList.size() == 0) {
-			%>아직 일정을 추가하지 않으셨군요! <br> 여행지를 검색해서 찜해보세요. <br> <br>
+					%>				
+			아직 일정을 추가하지 않으셨군요! <br> 여행지를 검색해서 찜해보세요. <br> <br>
 			여행지가 추가되면서,<br> 일정별로 방문순서를 계획할 수 있어요<br> <br> 또한 여행경로도
 			확인 가능하다는 사실!<br> 그 놀라운 서비스를 확인하러 Go~ Go~<br>
 			<%
@@ -106,6 +171,9 @@ $(function(){
 			</ul>
 			<button class="btn_pln" onclick = "location.href ='./MyPlanModify.pln?plan_nr=1'">상세일정만들기</button> 
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
+
+   <div id="right-panel">    </div>
+
 	</div><!-- container 끝 -->
 
 
@@ -131,8 +199,8 @@ $(function(){
 
        var largeInfowindow = new google.maps.InfoWindow();
        var highlightedIcon = makeMarkerIcon('FFFF24');
-     
-
+					       
+      					       
               <%String MarkerColor;
 			String TitlePlan;
 			if (basketList.size() != 0) {
@@ -191,8 +259,53 @@ $(function(){
 				populateInfoWindow(this, largeInfowindow);
 			});
 	<%} //for문%>
-		showListings();
-	<%} //if 문%>
+			showListings();
+			
+			 <%
+		      if(plan_nr!=100 & dep_lat!=null & dep_lng!=null & arr_lat!=null & arr_lng!=null){
+
+			 	String route_dep = dep_lat + ", " + dep_lng;
+			 	String route_arr= arr_lat + ", " + arr_lng;
+			 	%>
+			 	
+			 	
+			 var directionsService = new google.maps.DirectionsService; //필수
+		       var directionsDisplay = new google.maps.DirectionsRenderer({
+							           draggable: true,
+							           map: map,
+							           panel: document.getElementById('right-panel')
+							         });
+							        
+		     
+			 
+			 
+				 
+		       directionsDisplay.addListener('directions_changed', function() {
+		           computeTotalDistance(directionsDisplay.getDirections());
+		         });
+		       						displayRoute('<%=route_dep%>', '<%=route_arr%>', directionsService, directionsDisplay);
+
+							       function displayRoute(origin, destination, service, display) {
+							           service.route({
+							             origin: origin,
+							             destination: destination,
+							            // waypoints: [{location: '35.158408, 129.062038'}],
+							             travelMode: 'TRANSIT',
+							             avoidTolls: true
+							           }, function(response, status) {
+							             if (status === 'OK') {
+							               display.setDirections(response);
+							             } else {
+							               alert('Could not display directions due to: ' + status);
+							             }
+							           });
+							         }
+			
+			
+			
+			
+	<%} 
+			}//if 문%>
 		}//function initMap() 
 
 		// This function will loop through the markers array and display them all.
