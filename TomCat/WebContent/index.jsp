@@ -9,20 +9,6 @@
 <body>
 	<script type="text/javascript">
 	location.href="./Main.me";
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	</script>
 </body>
 </html>

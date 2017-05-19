@@ -69,7 +69,7 @@
 	
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
-			<li><a href="#">함께해요</a></li>
+			<li><a href="./BoardList1.bb">함께해요</a></li>
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="#">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
