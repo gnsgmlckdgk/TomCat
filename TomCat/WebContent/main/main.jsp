@@ -323,5 +323,6 @@
 	</div>
 </section>
 
+
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

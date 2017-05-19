@@ -93,7 +93,6 @@ public class LikeDAO {
 
 	}
 
-
 	public int getLikecount(int num,String nick) {
 		
 		Connection con = null;
