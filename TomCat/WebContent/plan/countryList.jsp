@@ -270,15 +270,15 @@
 	<%	
 	if(count != 0){
 	if(startPage>pageBlock){
-	%><a href="./CountryList.pl?pageNum=<%=startPage - pageBlock%>&search=<%=search%>">[이전]</a>	
+	%><a href="./CountryList.pl?pageNum=<%=startPage - pageBlock%>&search=<%=search%>&sort=<%=isort%>">[이전]</a>	
 	<%}//if
 	
 	for (int i = startPage; i <= endPage; i++) {
-	%><a href="./CountryList.pl?pageNum=<%=i%>&search=<%=search%>" <%if(currentPage==i){ %>style="background-color: #ccc;"<%}%>><span style="color: #000;"><%=i%></span></a>
+	%><a href="./CountryList.pl?pageNum=<%=i%>&search=<%=search%>&sort=<%=isort %>" <%if(currentPage==i){ %>style="background-color: #ccc;"<%}%>><span style="color: #000;"><%=i%></span></a>
 	<%}//for
 	
 	if (endPage < pageCount) {
-	%><a href="./CountryList.pl?pageNum=<%=startPage + pageBlock%>&search=<%=search%>">[다음]</a>
+	%><a href="./CountryList.pl?pageNum=<%=startPage + pageBlock%>&search=<%=search%>&sort=<%=isort%>">[다음]</a>
 	<%
 		}//if
 	}//if

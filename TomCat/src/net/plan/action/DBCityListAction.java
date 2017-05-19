@@ -20,8 +20,27 @@ public class DBCityListAction implements Action{
 		
 		PlanDAO pdao = new PlanDAO();
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		String search = request.getParameter("search");
+		if(search==null) {
+			search = "";
+		}
+		
+		String sort = request.getParameter("sort");
+		if(sort==null) {
+			sort = "0";
+		}
+		int isort = Integer.parseInt(sort);
+				
 		//전체글의 개수 구하기
-		int count = pdao.getCityCount();
+		int count = 0;
+		if(search.equals("")) {
+			count = pdao.getCityCount();
+		}else {
+			count = pdao.getCitySearchCount(search);
+			System.out.println(search+": count: " + count);
+		}
 		
 		//한페이지에 보여줄 글의 개수 설정
 		int pageSize =10;
@@ -40,8 +59,8 @@ public class DBCityListAction implements Action{
 		int endRow = currentPage * pageSize;
 		
 		List<PlanCityBean> cityList = null;
-		if(count != 0){
-			cityList = pdao.getCityList(startRow, pageSize);
+		if(count >= 0){
+			cityList = pdao.getCitySearchList(startRow, pageSize, search);
 		}
 		
 		int pageCount = count / pageSize + (count % pageSize == 0? 0:1);

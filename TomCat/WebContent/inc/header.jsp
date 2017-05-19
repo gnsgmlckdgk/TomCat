@@ -50,14 +50,14 @@
 <body>
 
 <%
-	// 세션값 가져오기
-	String id = (String)session.getAttribute("id");			// 아이디
-	if(id==null) {
-		id="";
+	String id = "";
+	if(session.getAttribute("id")!=null) {
+		id = (String) session.getAttribute("id");
 	}
-	String nick = (String)session.getAttribute("nick");		// 닉네임
-	if(nick==null) {
-		nick = "";
+
+	String nick = "";
+	if(session.getAttribute("nick")!=null) {
+		nick = (String) session.getAttribute("nick");
 	}
 %>
 
