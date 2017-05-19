@@ -180,16 +180,15 @@ if(likecount%2==0){
 <!-- 	리스트 배너에 있는 좋아요 갯수가 가장 많은 베스트 -->
 	<%
 	boardBean bb=new boardBean();
-	String img=bdao.Bestshot(bb);
-	System.out.println("이미지명이다"+img);
-	
-	
-	
+	String img=bdao.Bestshot();
+	System.out.println("이미지명이다"+img);	
 	%>
 	
 	<table class="banner">
 	<tr><td>BEST샷</td></tr>
-	<tr><td><img src="./images/instagram/italy.png" width=300 height=300 onerror="this.src='./images/instagram/italy.png'"></td></tr>	
+	<tr><td>	
+<img src="./upload/<%=img%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
+	</td></tr>	
 	</table>
 	
 <!-- 	화면 상단/ 하단 이동 아이콘 -->

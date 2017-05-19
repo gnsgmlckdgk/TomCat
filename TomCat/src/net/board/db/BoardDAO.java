@@ -270,24 +270,21 @@ public class BoardDAO {
 	
 //gram 테이블에  해당글의 좋아요수를 증가시켜주는 메소드
 	public void GramAddLike(boardBean bb) {
-		int love = bb.getLove();
-		
-
+		int love = 0;
 		try {
 			con = getConnection();
-			sql = "select max(love) from gram where num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,bb.getNum()); 
-			
+			sql = "select max(love)as max from gram where num=?";
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setInt(1,bb.getNum());
 			rs = pstmt.executeQuery();
-			if (rs.next()) {love = rs.getInt(1) + 1;}		
 			
-			sql = "update gram set love=? ";	
-
+			if (rs.next()) {love = rs.getInt("max") + 1;}		
+			
+			sql = "update gram set love=? where num=?";	
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1, love);
-			
-						
+			pstmt.setInt(2, bb.getNum());
+
 								
 			pstmt.executeUpdate();
 
@@ -327,10 +324,12 @@ int love = bb.getLove();
 			rs = pstmt.executeQuery();
 			if (rs.next()) {love = rs.getInt(1)- 1;}		
 			
-			sql = "update gram set love=? ";	
+			sql = "update gram set love=? where num=?";	
 
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1, love);
+			pstmt.setInt(2, bb.getNum());
+
 			
 						
 								
@@ -360,22 +359,17 @@ int love = bb.getLove();
 	
 	
 	
-	public String Bestshot(boardBean bb) {
-		String img=null;
-		
-	
-				try {
+	public String Bestshot() {		
+		String image1=null;
+				try {	
 					con = getConnection();
-					sql = "select num from gram where love=(select max(love) from gram)";
+					sql = "select num,image1 from gram where love=(select max(love) from gram)";
 					pstmt = con.prepareStatement(sql);					
-					rs = pstmt.executeQuery();
+					rs = pstmt.executeQuery();			
 					
 					if (rs.next()) {
-							img=rs.getString(bb.getImage1());
-							
-							System.out.println("dao에서의 이미지다다다ㅏ다다:"+bb.getImage1());		
-					}		
-					
+					image1=rs.getString("image1");
+					}					
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -396,15 +390,7 @@ int love = bb.getLove();
 						} catch (SQLException ex) {
 						}
 				} // finally
-				return img;
-
+				return image1;
 			}
-			
-	
-	
-	
-	
-	
-	
 	
 }//클래스 end
