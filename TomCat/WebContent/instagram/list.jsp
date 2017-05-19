@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
 <section class="wrapper">
 
-	
+	<div id="top"></div>
 	<%
 	String id = (String)session.getAttribute("id");			// 아이디
 	String nick = (String)session.getAttribute("nick");	// 닉네임
@@ -77,7 +77,7 @@ if(id!=null){
 			<tr>
 			<td colspan="4">
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./instagram/noimage.png'">
+			<img id="contentimg" src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
 			</a>
 			</td></tr>
 		<%if(id!=null){	//아이디가 not null일때만 좋아요/좋아요취소버튼 출력%>			
@@ -94,7 +94,12 @@ if(likecount%2==0){
 				<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>	
 			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
+			<input type="hidden" name="subject" value="<%=bb.getSubject()%>">
+			<input type="hidden" name="content" value="<%=bb.getContent()%>">
+			<input type="hidden" name="image1" value="<%=bb.getImage1()%>">
+			<input type="hidden" name="love" value="<%=bb.getLove()%>">
 			<input type="hidden" name="nick" value="<%=nick%>">
+			
 			<input type="hidden" name="pageNum"value="<%=pageNum%>">				
 				
 			</form>
@@ -107,10 +112,16 @@ if(likecount%2==0){
 		
 			<form action="./DislikeaddAction.lk" method="post" name="fr">		
 			<input type="submit" id="dislike" value="좋아요취소 ">
-			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>					
+			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>
+			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
+			<input type="hidden" name="subject" value="<%=bb.getSubject()%>">
+			<input type="hidden" name="content" value="<%=bb.getContent()%>">
+			<input type="hidden" name="image1" value="<%=bb.getImage1()%>">
+			<input type="hidden" name="love" value="<%=bb.getLove()%>">
 			<input type="hidden" name="nick" value="<%=nick%>">
-			<input type="hidden" name="pageNum"value="<%=pageNum%>">			
+			
+			<input type="hidden" name="pageNum"value="<%=pageNum%>">		
 			
 			</form>	
 			<%} %>
@@ -166,11 +177,29 @@ if(likecount%2==0){
 	}
 	%>
 	
+<!-- 	리스트 배너에 있는 좋아요 갯수가 가장 많은 베스트 -->
+	<%
+	boardBean bb=new boardBean();
+	String img=bdao.Bestshot();
+	System.out.println("이미지명이다"+img);	
+	%>
+
+<img id="crown" src="./images/instagram/crown.png">	
 	<table class="banner">
 	<tr><td>BEST샷</td></tr>
-	<tr><td><img src="./instagram/italy.png" onerror="this.src='./instagram/italy.png'"></td></tr>	
+	<tr><td>	
+
+<img src="./upload/<%=img%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
+	</td></tr>	
 	</table>
 	
+<!-- 	화면 상단/ 하단 이동 아이콘 -->
+	<a href="#top"><img id="up" src="./images/instagram/up.png"></a>
+	<a href="#bottom"><img id="down" class="down" src="./images/instagram/down.png"></a>
+	
+	
+	
+	<div id="bottom"></div>
 
 </section>
 	

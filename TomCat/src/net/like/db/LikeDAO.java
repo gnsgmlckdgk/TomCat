@@ -74,9 +74,10 @@ public class LikeDAO {
 		try {
 			 con = getConnection();	 
 
-				sql = "delete from love where num=?";
+				sql = "delete from love where num=? and nick=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,lb.getNum());
+				pstmt.setString(2, lb.getNick());
 				pstmt.executeUpdate();
 				System.out.println("정보삭제됨");
 		} catch (Exception e) {
@@ -93,7 +94,6 @@ public class LikeDAO {
 	}
 
 	public int getLikecount(int num,String nick) {
-		System.out.println("DAO에서의 넘,닉"+num+nick);
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;

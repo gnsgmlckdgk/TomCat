@@ -2,8 +2,15 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String id = (String) session.getAttribute("id");
-	String nick = (String) session.getAttribute("nick");
+	String id = "";
+	if(session.getAttribute("id")!=null) {
+		id = (String) session.getAttribute("id");
+	}
+
+	String nick = "";
+	if(session.getAttribute("nick")!=null) {
+		nick = (String) session.getAttribute("nick");
+	}
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
@@ -17,7 +24,7 @@
 		<%=nick%>입니다.
 	</p>
 	<ul class="actions">
-		<li><a href="#" class="button special big">함께해요</a></li>
+		<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
 		<li><a href="./PlanMain.pl" class="button special big">여행 일정
 				플래너</a></li>
 		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
@@ -31,11 +38,11 @@
 
 
 		<%
-			if (id != null) {
+			if (!id.equals("")) {
 		%>
 		<li><a href="./MyPlan.pln?plan_nr=100" class="button special big">나의일정관리</a></li>
 		<%
-			} else if (id == null) {
+			} else if (id.equals("")) {
 		%>
 		<li><a onclick="alert('need LOGIN')" class="button special big">나의일정관리</a></li>
 

@@ -92,6 +92,36 @@
 		<url-pattern>*.lk</url-pattern>
 	</servlet-mapping>
 
+<!-- 함께해요 -->
+	<servlet>
+		<servlet-name>BoardFrontController1</servlet-name>
+		<servlet-class>net.Board1.action.BoardFrontController1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BoardFrontController1</servlet-name>
+		<url-pattern>*.bb</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 함께해요 댓글~-->
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>ReplyFrontController</servlet-name> -->
+<!-- 		<servlet-class>net.Board_reply.action.ReplyFrontController</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>ReplyFrontController</servlet-name> -->
+<!-- 		<url-pattern>*.rr</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+
+	<!-- 함께해요 좋아용-->
+
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>LikeFrontController</servlet-name> -->
+<!-- 		<servlet-class>net.like.action.LikeFrontController</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>LikeFrontController</servlet-name> -->
+<!-- 		<url-pattern>*.lk</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
 
 

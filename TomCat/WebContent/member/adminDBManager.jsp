@@ -18,6 +18,12 @@
 
 </head>
 <body>
+<%
+	String id = (String)session.getAttribute("id");
+	if(id==null) {
+		response.sendRedirect("./Main.me");
+	}
+%>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 	
@@ -44,11 +50,15 @@
 		<script type="text/javascript">
 			
 			function countryInput() {
-				window.open("./CountryList.pl", "window", "width=1200, height=800, top=100, left=300");
+				var left = (screen.width - 1200)/2;
+				var availHeight = screen.availHeight-67;
+				window.open("./CountryList.pl", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 			
 			function cityInput() {
-				window.open("./CityList.pl", "window", "width=1400, height=800, top=100, left=200");
+				var left = (screen.width - 1200)/2;
+				var availHeight = screen.availHeight-67;
+				window.open("./CityList.pl", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 			
 			function travelInput() {

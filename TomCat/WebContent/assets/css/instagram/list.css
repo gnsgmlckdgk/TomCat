@@ -1,69 +1,118 @@
 @CHARSET "UTF-8";
 
-.wrapper{
-		padding: 16em 0 13em 0;
+.wrapper {
 		background-attachment: fixed;
-		background-image: url("../instagram/england.png");
+		background-image: url("../instagram/bridge.png");		
 		background-position: center top;
 		background-size: cover;
 		line-height: 1.75;
 		text-align: center;
-	}
+}
 
-
-#border{	
-	width:40%;
-	margin:auto;
+#border {
+	text-align:center;
+	width: 30em;
+	margin: auto;
 	background-color: white;
+/* 	opacity: 0.85; */
+	border-radius: 20px;
+}
+#contentimg{
+	margin:auto;
+	
+}
+#like {
+	background-color: #ff6699;
+}
+
+#dislike {
+	background-color: #996699;
+}
+
+.button {
+	width: 48em;
+	background-color: #ff6699;
 	opacity: 0.85;
 	border-radius: 20px;
 }
 
-#like{
-background-color: #ff6699;
-	}
-
-#dislike
-{	
-background-color: #996699;
-
+.button:hover {
+	letter-spacing: 5px;
 }
 
-.button{
-	width:48em;	
-	background-color: #ff6699;
-		opacity: 0.85;
-	border-radius: 20px;	
-}
-.button:hover{
-	letter-spacing:5px;	
+.bottomline {
+	border-bottom: 1px solid #A9A9A9;
 }
 
-.bottomline{
-
-	border-bottom: 1px solid #A9A9A9;	
-}
-
-
-.banner{
-	width:10em;
+.banner {
+	width: 10em;
 	background-color: white;
-	opacity:0.8;
-	position:fixed;	
-	right:5px;
-	top:100px;
+	opacity: 0.8;
+	position: fixed;
+	left: 30px;
+	top: 330px;
 	border: none;
 	border-collapse: none;
-}
-.banner img{
-/* 	border:2px solid black; */
-	
+	border: none;
 }
 
-#listpage{
-	text-align:center;
+img#up {
+	position: fixed;
+	right: 30px;
+	top: 330px;
+}
+
+img#down {
+	position: fixed;
+	right: 30px;
+	top: 450px;
+}
+
+
+#listpage {
+	text-align: center;
 	font-size: 1.5em;
-		
-	
-	
+}
+
+
+
+
+
+
+img#crown{
+position: fixed;
+left: 30px;
+top: 230px;	
+animation-name:movingcrown; /*애니메이션의 이름 지정*/
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
+}
+
+@keyframes movingcrown{
+0%{
+	left: 30px;
+	top: 230px;
+}
+25%{
+	left: 50px;
+	top: 180px;
+}
+
+50%{
+	left: 90px;
+	top: 230px;
+}
+75%{
+opacity:0.5;
+	left: 120px;
+	top: 180px;
+}
+
+100%{
+opacity:0.8;
+	left: 80px;
+	top: 230px;
+}
 }

@@ -20,8 +20,27 @@ public class DBCountryListAction implements Action {
 
 		PlanDAO pdao = new PlanDAO();
 
+		// 검색 값 가져오기
+		String search = request.getParameter("search");
+		if(search==null) {
+			search = "";
+		}
+		// 정렬 값 가져오기
+		// sort-> 0:정렬x 기본값, 1:국가코드 오름차순 ,2:국가코드 내림차순, 3:국가이름 오름차순, 4:국가이름 내림차순, 5:대륙별 오름차순, 6:대륙별 내림차순
+		// 7:영문이름 오름차순, 8:영문이름 내림차순
+		String sort = request.getParameter("sort");
+		if(sort==null) {
+			sort = "0";
+		}
+		int isort = Integer.parseInt(sort);
+
 		// 전체글의 개수 구하기
-		int count = pdao.getCountryCount();
+		int count = 0;
+		if(search.equals("")) {	// 검색값이 없을때
+			count = pdao.getCountryCount();
+		}else {	// 검색 값이 있을때
+			count = pdao.getCountryCount(search);
+		}
 
 		// 한페이지에 보여줄 글의 개수 설정
 		int pageSize = 10;
@@ -38,12 +57,12 @@ public class DBCountryListAction implements Action {
 
 		// 끝행 구하기
 		int endRow = currentPage * pageSize;
-
+		
 		List<PlanCountryBean> countryList = null;
-		if (count != 0) {
-			countryList = pdao.getCountryList(startRow, pageSize);
+		if (count >= 0) {
+				countryList = pdao.getCountryList(startRow, pageSize, search, isort);
 		}
-
+		
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 
 		int pageBlock = 10;
@@ -67,6 +86,7 @@ public class DBCountryListAction implements Action {
 		forward = new ActionForward();
 		forward.setPath("./plan/countryList.jsp");
 		forward.setRedirect(false);
+		
 		return forward;
 	}
 
