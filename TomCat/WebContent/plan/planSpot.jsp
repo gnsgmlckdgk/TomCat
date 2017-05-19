@@ -8,12 +8,32 @@
 <!-- 헤더 -->
 <jsp:include page="../inc/header.jsp" />
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('input').click(function(){
+			$('input').css('background-color','#323037');
+			$(this).css('background-color','#f32853');
+			
+			var month=$(this).val();
+			
+			$('.month_img').append(function(){
+				var con='<h1>'+month+'</h1>';
+				return con;
+			});
+			
+		});
+	});
+
+</script>
+
+
+
 
 <%
 	PlanTravelBean ptb = (PlanTravelBean)request.getAttribute("ptb");
 
 %>
-
+<div class="clear"></div>
 <!-- 본문 -->
 <section class = "planSpot">
 <h2><%=ptb.getName() %><span><%=ptb.getAddress() %></span></h2>
@@ -36,25 +56,37 @@
 <!-- 월별 옷차림(검색) -->
 
 <h3>월별 옷차림</h3>
-<input type="button" value="1월" class="special">
-<input type="button" value="2월">
-<input type="button" value="3월">
-<input type="button" value="4월">
-<input type="button" value="5월">
-<input type="button" value="6월">
-<input type="button" value="7월">
-<input type="button" value="8월">
-<input type="button" value="9월">
-<input type="button" value="10월">
-<input type="button" value="11월">
-<input type="button" value="12월">
-
+<div>
+<input type="button" value="1월" class="month">
+<input type="button" value="2월" class="month">
+<input type="button" value="3월" class="month">
+<input type="button" value="4월" class="month">
+<input type="button" value="5월" class="month">
+<input type="button" value="6월" class="month">
+<input type="button" value="7월" class="month">
+<input type="button" value="8월" class="month">
+<input type="button" value="9월" class="month">
+<input type="button" value="10월" class="month">
+<input type="button" value="11월" class="month">
+<input type="button" value="12월" class="month">
+</div>
+<div class="clear"></div>
+<div class="month_img">
+</div>
+<div class="clear"></div>
 
 <!-- 선물리스트(1위 2위 3위)(db에서 받아오기) -->
 
 <h3>선물리스트</h3>
+<table class="gift">
+<tr>
+<td>1위</td>
+<td>2위</td>
+<td>3위</td>
+</tr>
+</table>
 
-<!-- 장소에 대한 후기 작성 -->
+<!-- 장소에 대한 후기 작성(시간나면) -->
 
 
 
@@ -62,7 +94,7 @@
 
 
 </section>
+<div class="clear"></div>
 
-
-<!-- footer -->
-<jsp:include page="../inc/footer.jsp" />
+<%-- <!-- footer -->
+<jsp:include page="../inc/footer.jsp" /> --%>

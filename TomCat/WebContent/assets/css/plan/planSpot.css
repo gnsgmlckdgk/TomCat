@@ -45,3 +45,16 @@ div.tr_info{
 	width:40em;
 	height: 20em;
 }
+
+div.month_img {
+	width: 80em;
+	height: 20em;
+	margin-top:1.5em;
+	margin-bottom:1.5em;
+	border: 1px solid green; 
+}
+
+table.gift{
+	width: 80em;
+	height: 20em;
+}
