@@ -8,6 +8,12 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
+<!-- script -->
+<script type="text/javascript">
+
+</script>
+<!-- script end -->
+
 <!-- Banner -->
 <section id="banner">
 	<h2>TomCat</h2>
@@ -37,7 +43,7 @@
 		<%
 			} else if (id == null) {
 		%>
-		<li><a onclick="alert('need LOGIN')" class="button special big">나의일정관리</a></li>
+		<li><a onclick="popupToggle()" class="button special big">나의일정관리</a></li>
 
 		<%
 			}
