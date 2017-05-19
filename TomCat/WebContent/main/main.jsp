@@ -2,8 +2,15 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String id = (String) session.getAttribute("id");
-	String nick = (String) session.getAttribute("nick");
+	String id = "";
+	if(session.getAttribute("id")!=null) {
+		id = (String) session.getAttribute("id");
+	}
+
+	String nick = "";
+	if(session.getAttribute("nick")!=null) {
+		nick = (String) session.getAttribute("nick");
+	}
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
@@ -31,11 +38,11 @@
 
 
 		<%
-			if (id != null) {
+			if (!id.equals("")) {
 		%>
 		<li><a href="./MyPlan.pln?plan_nr=100" class="button special big">나의일정관리</a></li>
 		<%
-			} else if (id == null) {
+			} else if (id.equals("")) {
 		%>
 		<li><a onclick="alert('need LOGIN')" class="button special big">나의일정관리</a></li>
 

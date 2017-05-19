@@ -148,6 +148,87 @@ public class PlanDAO {
 		return count;
 	}
 
+	/* DB 도시 개수(운영자 페이지) */
+	public int getCityCount() {
+		int count = 0;
+
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from city";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
+	
+	/* DB 도시 개수(운영자 페이지) : 검색값 있을때 */
+	public int getCitySearchCount(String search) {
+		int count = 0;
+
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from city where name like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
+	
 	// 국가페이지의 도시리스트 가져오기
 	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
 
@@ -283,6 +364,64 @@ public class PlanDAO {
 		return list;
 	}
 
+	/* DB 도시리스트 뽑아오기 (운영자 페이지) : 검색값 */
+	public List<PlanCityBean> getCitySearchList(int startRow, int pageSize, String search) {
+		List<PlanCityBean> cityList = new ArrayList();
+		PlanCityBean cb = null;
+		String sql = "";
+
+		try {
+			con = getConnection();
+
+			sql = "select * from city where name like ? order by name asc limit ?,?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, startRow - 1);// 시작행-1
+			pstmt.setInt(3, pageSize);// 몇개글
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				cb = new PlanCityBean();
+
+				cb.setCountry_code(rs.getString("country_code"));
+				cb.setName(rs.getString("name"));
+				cb.setInfo(rs.getString("info"));
+				cb.setCity_code(rs.getString("city_code"));
+				cb.setEn_name(rs.getString("en_name"));
+
+				cityList.add(cb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return cityList;
+
+	}
+
+	
 	/* 메인페이지 국가리스트 뽑아오기(메인페이지) */
 	public List<PlanCountryBean> getCountryList() {
 		List<PlanCountryBean> countryList = new ArrayList();
@@ -982,102 +1121,6 @@ public class PlanDAO {
 		}
 		return planTravelList;
 	} // getBoardList() end
-
-	/* DB 도시 개수(운영자 페이지) */
-	public int getCityCount() {
-		int count = 0;
-
-		try {
-			con = getConnection();
-			sql = "select count(*) as count from city";
-			pstmt = con.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				count = rs.getInt("count");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ex) {
-				}
-			}
-		}
-		return count;
-	}
-
-	/* DB 도시리스트 뽑아오기 (운영자 페이지) */
-	public List<PlanCityBean> getCityList(int startRow, int pageSize) {
-		List<PlanCityBean> cityList = new ArrayList();
-		PlanCityBean cb = null;
-		String sql = "";
-
-		try {
-			con = getConnection();
-
-			sql = "select * from city order by name asc limit ?,?";
-
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow - 1);// 시작행-1
-			pstmt.setInt(2, pageSize);// 몇개글
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				cb = new PlanCityBean();
-
-				cb.setCountry_code(rs.getString("country_code"));
-				cb.setName(rs.getString("name"));
-				cb.setInfo(rs.getString("info"));
-				cb.setCity_code(rs.getString("city_code"));
-				cb.setEn_name(rs.getString("en_name"));
-
-				cityList.add(cb);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ex) {
-				}
-			}
-		}
-		return cityList;
-
-	}
 
 	// 도시 추가하기
 	public void insertCity(PlanCityBean pcb) {
