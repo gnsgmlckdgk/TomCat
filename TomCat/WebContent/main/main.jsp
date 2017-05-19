@@ -89,6 +89,12 @@
 
 <!-- Carousel -->
 
+<script src="assets/js/main/jquery.min.js"></script>
+<script src="assets/js/main/jquery.dropotron.min.js"></script>
+<script src="assets/js/main/jquery.scrolly.min.js"></script>
+<script src="assets/js/main/jquery.onvisible.min.js"></script>
+<script src="assets/js/main/skel.min.js"></script>
+<script src="assets/js/main/util.js"></script>
 <script src="assets/js/main/main.js"></script>
 
 <section class="carousel">
