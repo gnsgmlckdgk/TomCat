@@ -7,6 +7,7 @@
     RSAKeySetting rsa_key = new RSAKeySetting();
     rsa_key.keySetting(request);
     %>
-    
+<div id="publicKey_div">
 <input type="hidden" id="login_publicKeyModulus" value="<%=request.getAttribute("publicKeyModulus")%>" />
 <input type="hidden" id="login_publicKeyExponent" value="<%=request.getAttribute("publicKeyExponent")%>" />
+</div>

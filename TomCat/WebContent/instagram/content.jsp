@@ -14,27 +14,40 @@
 #replytextarea{
 display:none;
 }
+
+#replymodify{
+display:none;
+}
 </style>
 
 <script type="text/javascript">
-function func1(re_num){	
+function func1(re_num){		
+	$(document).ready(function() {	
+		var x=document.getElementById('replytextarea');		
+		x.style.display='display';		
+		$('.replyreply'+re_num).toggle('slow',function(){				
+			});	
+	});	
+	}	
+function func2(){alert("정말 삭제하시겠습니까?");}
+
+
+function func3(i){
 	
 	$(document).ready(function() {	
 
-		var x=document.getElementById('replytextarea');
+		var x=document.getElementById('originalreply'+i);
 		
-		x.style.display='display';		
-			$('.replyreply'+re_num).toggle('slow',function(){
+		x.style.display='none';		
+			$('.replymodifyclass'+i).toggle('slow',function(){
 				
 			});	
 
 	});
 	
-	}
-	
-function func2(){
-	alert("정말 삭제하시겠습니까?");		
 }
+
+
 </script>
 
 <!-- Header -->
@@ -52,9 +65,9 @@ function func2(){
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 	%>
-	<section id="wrapper">
+	<section class="wrapper">
 	
-	<h1><%=nick %>님의 멋진 인생샷♡</h1>
+	<h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1>
 	<table class="table1">
 		<tr>
 			<td colspan="2"><%=bb.getSubject()%></td>
@@ -68,27 +81,38 @@ function func2(){
 			<td colspan="4">
 			
 			<img src="./upload/<%=bb.getImage1()%>"
-				width=400 height=400 onerror="this.src='./instagram/noimage.png'"></td>
+				width=400 height=400 onerror="this.src='./images/instagram/noimage.png'"></td>
 		</tr>
 		<tr>
 			<td colspan="4"><%=bb.getContent()%></td>
 		</tr>
-	</table>
-	<%if(bb.getNick().equals(nick)){%>
-	
-	<input type="button" value="글수정"
-		onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
-
+		<tr>
+		<td>
+		<%if(bb.getNick().equals(nick)){%>	
+	<input type="button" style="margin-left:50px;"
+	 value="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+		</td>
+		<td colspan="2">
 				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
 					<input type="hidden" value="<%=num%>" name="num"> 															
 					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
 					<input type="submit" value="글삭제">
 				</form>
+				</td>
 
 		<%} %>
-
-	<input type="button" value="글목록 "
+<td colspan="4">
+	<input id="listbutton" type="button" value="글목록 "
 		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">
+		
+	</td>	
+		
+		
+		</tr>
+		
+		
+	</table>
+	
 
 
 	<!--리플 -->	
@@ -117,15 +141,34 @@ function func2(){
 		<%for(int i=0;i<replylist.size();i++){
 			rb = (ReplyBean)replylist.get(i);
 			%>
-		<tr>
+<!-- 			댓글수정시 뜨는창 -->
+			<tr id="replymodify" class="replymodifyclass<%=i%>">
+			<td colspan="2"><%=rb.getNick() %></td>
+			<td colspan="2">	
+					
+			<form action="RreplyUpdateAction.re" method="post" name="fr">
+					<input type="hidden" value="<%=nick %>" name="nick"> 
+					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
+					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">									
+					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
+					<input type="text" value="<%=rb.getContent() %>" name="content">			
+					<input type="submit" id="txt" value="수정">			
+			</form>	
+					
+			</td>			
+			<td><%=rb.getDate()%></td>
+			</tr>
+			
+			
+		<tr id="originalreply<%=i%>">
 		<td colspan="2">
 		<%
 		int wid=0;
 		if(rb.getRe_lev()>0){
 			wid=40*rb.getRe_lev();
 			%>
-			<img src="./instagram/level.gif" width="<%=wid%>" height="15">
-			<img src="./instagram/re.gif">
+			<img src="./images/instagram/level.gif" width="<%=wid%>" height="15">
+			<img src="./images/instagram/re.gif">
 			
 	<%	} %>
 		<%=rb.getNick() %>		
@@ -134,14 +177,14 @@ function func2(){
 	<td colspan="2"><%=rb.getContent() %>
 	
 <%if(rb.getNick().equals(nick)){%>
-<input type="text" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
+<input type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
 <%int re_num=rb.getRe_num(); %>	
-<input type="text" id="txt" value="수정" onclick="location.href='./ReplyUpdate.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
+<input type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
 <%}
 
 
 if(id!=null){%>
-<input type="text" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
+<input type="button" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
 <%} %>
 
 		</td>
@@ -161,7 +204,7 @@ if(id!=null){%>
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					<textarea rows="2" cols="100" name="content"></textarea>
-					<input type="submit" id="submit" value="입력"><%=rb.getRe_ref() %>
+					<input type="submit" id="submit" value="입력">
 				</form>		
 				
 		

@@ -30,6 +30,7 @@ public class PlanRegionAction implements Action {
 
 		//지역값 받아오기.
 		String region = request.getParameter("region");
+		String city_code = request.getParameter("city_code");
 		
 		//객체 생성
 		PlanDAO pdao = new PlanDAO();
@@ -53,7 +54,7 @@ public class PlanRegionAction implements Action {
 		//타입값 받아와서 글 타입에 조건 걸어서, 맛집, 관광지, 숙소 골라서 보기 가능하도록 할 필요.
 			
 		//DB에 등록된 글의 개수.
-		int count = pdao.getTravelCount(region);
+		int count = pdao.getTravelCount(region, city_code);
 		
 		// 한페이지에 보여줄 글의 개수
 		int pageSize = 4;
@@ -72,13 +73,14 @@ public class PlanRegionAction implements Action {
 
 		List<PlanTravelBean> planTravelList = null;
 		if (count != 0)
-			planTravelList = pdao.getTravelList(startRow, pageSize, region);
+			planTravelList = pdao.getTravelList(startRow, pageSize, region, city_code);
 		
 		request.setAttribute("planTravelList", planTravelList);
 		request.setAttribute("count", count);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("city_code", pcb.getCity_code());
 
 		ActionForward forward = new ActionForward();
 		

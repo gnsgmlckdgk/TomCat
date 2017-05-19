@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+.q{
+/* 	border: 1px solid black; */
+	border-radius: 30px;
+	padding-bottom: 100px;
+	margin-bottom: 1000px;
+}
+
+.w{
+	margin-left: 390px;
+	padding-right: 300px;
+	margin-left: 150px;
+}
+
+#e{
+	border: 1px solid #8c8c8c;
+	width: 900px;
+	height: 780px;
+	margin-right: 60px;
+    border-radius: 40px;
+	margin: 70px auto;	
+	background-color:#ccc;
+	background-color: rgba(204,204,204,0.2);
+	
+}
+
+body{
+	background-image: url("back.jpg") ;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	
+	}
+	
+.btn_up_layer{
+	position:fixed;
+	right:15px;
+	bottom:20px;
+	display:none;
+	background-color: white;
+	margin-bottom: 30px;
+	padding:5px 10px;z-index:1;
+	}
+	
+	.btn_up_layer:hover{
+	background-color: white;
+	}
+
+#sub{
+	border: 1px solid black;
+	margin: 50px;
+	width: 50px;
+	margin-left: 400px;
+	margin-top: 100px;
+}
+
+#con{
+	border: 1px solid black;
+	margin-left: 400px;
+	margin: 50px;	
+	width: 50px;
+	margin-left: 400px;
+}
+
+#nick{
+	border: 1px solid black;
+	margin: 50px;
+	width: 50px;	
+}
+
+#file{
+	border: 1px solid black;
+	width: 50px;
+	border-radius: 300px;
+}
+	
+@-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }	
+	
+.fadein{
+		opacity:0;  /* make things invisible upon start */
+	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+
+	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+
+	-webkit-animation-duration:1s;
+	-moz-animation-duration:1s;
+	animation-duration:1s;
+	
+}
+	
+	
+	
+	
+	
+	

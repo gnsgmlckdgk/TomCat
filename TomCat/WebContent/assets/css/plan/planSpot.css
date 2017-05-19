@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+section.planSpot{
+	margin:auto;
+	width: 80em;
+	height: 40em;
+}
+
+section.planSpot h2{
+	font-size: 2.6em;
+	margin-top: 0.5em;
+	margin-bottom: 0em;
+	font-weight: bold;
+}
+
+section.planSpot h2 span{
+	font-weight: bold;
+	color:#777;
+	font-size: 0.4em;
+	margin-top: 0em;
+	padding-left: 1em;
+	
+}
+
+section.planSpot h1{
+	font-size: 1.1em;
+	line-height: 1.5em;
+}
+
+table.planSpot_tb{
+	width: 80em; 
+	height: 20em;
+	
+}

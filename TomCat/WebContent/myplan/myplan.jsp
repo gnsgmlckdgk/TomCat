@@ -21,26 +21,59 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- datepicker 한국어로 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
-$(function(){
+ $(function(){
 	$(".btn").click(function(){
 		var effect = 'slide';
 		var options ='left';
 		var duration = 500;
 		$('#pln_list').toggle(effect, options, duration);
 	}); 
-}); //일정수정 버튼 클릭시 오른쪽으로 슬라이드  
-/* $(function(){
-	$(출발일).click(function(){
-		$(출발일).();
-	});
-}); */ 
-$(function(){
-	$('.datepicker').click(function(){
-  		$( '.datepicker').datepicker();
-	}); //날짜 선택하기
-});
+});  
+//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+ $(function(){
+	 //datepicker 한국어로 사용하기 위한 언어설정
+   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+    // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
+    // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
 
+	//시작일
+	$('#fromDate').datepicker({
+		showOn: "focus",
+/* 		buttonImage: "myplan/pn_cal_btn.png",
+		buttonText:"날짜선택", buttonImageOnly:true,*/
+		dateFormat:"yy-mm-dd",
+		changeMonth:true,
+		onClose: function(selectedDate){
+            // 시작일(fromDate) datepicker가 닫힐때
+            // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+            $("#toDate").datepicker( "option", "minDate", selectedDate );
+		}
+	});
+
+    
+    //종료일
+    $('#toDate').datepicker({
+   	  showOn: "focus", 
+/*          buttonImage: "myplan/pn_cal_btn.png", 
+         buttonText: "날짜선택",   buttonImageOnly : true, */
+         dateFormat: "yy-mm-dd",
+         changeMonth: true,
+         onClose: function( selectedDate ) {
+             // 종료일(toDate) datepicker가 닫힐때
+             // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+             $("#fromDate").datepicker( "option", "maxDate", selectedDate );
+         } 
+   	});
+	/* $( '.datepicker').datepicker({
+		altField: ".selecter"
+	}); */
+});  
+//날짜 선택하기 
 
 </script>
 
@@ -73,7 +106,7 @@ $(function(){
 	<div class="container" >
 		<div class="myplan-list" >
 				<h3>
-				<button type="button" onclick = "location.href ='./MyPlan.pln?plan_nr=100'">전체 찜 목록보기</button>
+				<button type="button" >대중교통경로</button><!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
 				<button class="btn" >일정만들기</button>
 				</h3>
 				<table border="1" >
@@ -157,19 +190,33 @@ $(function(){
 			%>
 		</div>
 		<div id="map" class="f1" ></div><!-- map -->		
-		<div id="pln_list"  ><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
-			<input type="text" class="datepicker" value="출발일" 
-					style="background-image:url('myplan/pn_cal_btn.png');  
-							background-repeat: no-repeat; background-position:300px 17px;"><br>		
-			<ul class="actions small">
-				<li><a href="./MyPlan.pln?plan_nr=1"
-					class="button special small" >일정A</a></li>
-				<li><a href="./MyPlan.pln?plan_nr=2" 
-					class="button small" >일정B</a></li>
-				<li><a href="./MyPlan.pln?plan_nr=3" 
-					class="button alt small" >일정C</a></li>
-			</ul>
-			<button class="btn_pln" onclick = "location.href ='./MyPlanModify.pln?plan_nr=1'">상세일정만들기</button> 
+		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
+			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr">
+				<input type="text" name="fromDate" id="fromDate" value="시작일"
+					style="	background-image: url('myplan/pn_cal_btn.png');
+							background-repeat: no-repeat;
+							background-position: 110px 13px;"> 
+				<input type="text" name="toDate" id="toDate" value="종료일"
+					style="	background-image: url('myplan/pn_cal_btn.png');
+							background-repeat: no-repeat;
+							background-position: 110px 13px;">
+				<select name="plan_nr">
+					<option value="choice">여행 타이틀을 선택하세요</option>
+					<option value="1" >일정A</option>
+					<option value="2">일정B</option>
+					<%if(gold.equals("유료회원")){ %>
+						<option value="일정C">일정C</option>
+					<%}%>
+				</select>
+				
+					<%if(gold.equals("무료회원")){ %>
+						<input type="submit" value="상세일정만들기" class="pln_sub_free">
+						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
+					<%} else {%>
+						<input type="submit" value="상세일정만들기" class="pln_sub">	
+					<%} %>
+				
+			</form>  		
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
    <div id="right-panel">    </div>
@@ -381,86 +428,6 @@ $(function(){
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHAu8kwLgLcIk1oWIKpJhyOQQTK6RBLNI&v=3&callback=initMap">
 	</script>
-
-	<!-- 결제 테스트 구역 -->
-	결제 테스트 구역.
-	<br>
-	<%
-		if (gold.equals("무료회원")) {
-	%>
-	<%=gold%>일때 나오는 버튼.
-
-	<script type="text/javascript">
-		function dialog() {
-
-			var dialogBox = $('.dialog'), dialogTrigger = $('.dialog__trigger'), dialogClose = $('.dialog__close'), dialogTitle = $('.dialog__title'), dialogContent = $('.dialog__content'), dialogAction = $('.dialog__action');
-
-			// Open the dialog
-			dialogTrigger.on('click', function(e) {
-				dialogBox.toggleClass('dialog--active');
-				e.stopPropagation()
-			});
-
-			// Close the dialog - click close button
-			dialogClose.on('click', function() {
-				dialogBox.removeClass('dialog--active');
-			});
-
-			// Close the dialog - press escape key // key#27
-			$(document).keyup(function(e) {
-				if (e.keyCode === 27) {
-					dialogBox.removeClass('dialog--active');
-				}
-			});
-
-			// Close dialog - click outside
-			$(document).on(
-					"click",
-					function(e) {
-						if ($(e.target).is(dialogBox) === false
-								&& $(e.target).is(dialogTitle) === false &&
-								// 	            $(e.target).is(dialogContent) === false &&
-								$(e.target).is(dialogAction) === false) {
-							dialogBox.removeClass("dialog--active");
-						}
-					});
-
-		};
-
-		// Run function when the document has loaded
-		$(function() {
-			dialog();
-		});
-	</script>
-
-	<button class="dialog__trigger button alt small">일정C</button>
-
-	<div class="dialog">
-		<span class="dialog__close">&#x2715;</span>
-		<h2 class="dialog__title">"일정C"는 골드멤버에 한해 사용가능합니다.</h2>
-		<p class="dialog__content">test</p>
-
-		<input type="button" class="dialog__action"
-			onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="골드 멤버 되기">
-			<!-- payAction > payPlanC.jsp > payAction > myplan.jsp으로 이동합니다. -->
-
-
-	</div>
-
-	<%
-		} else {
-	%>
-	<%=gold%>일때 나오는 버튼.
-
-	<a href="./MyPlan.pln?plan_nr=3" class="button alt small">일정C</a>
-
-	<%
-		}
-	%>
-
-	<br>결제 테스트 구역 끝.
-	<!-- 결제 테스트 구역 끝 -->
-
 
 </body>
 

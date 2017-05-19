@@ -96,7 +96,7 @@
 		} else {
 	%>
 	<tr>
-		<td colspan="2"><p>찾으시는 정보가 없습니다.</p></td>
+		<td colspan="2" style="display: block; text-align: center;">찾으시는 정보가 없습니다.</td>
 	</tr>
 	<%
 		}

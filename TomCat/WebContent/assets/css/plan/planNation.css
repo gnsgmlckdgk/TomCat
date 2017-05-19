@@ -44,8 +44,7 @@ section#nation_two .city_list_div tr {
 }
 section#nation_two .city_list_div tr:hover {
 	cursor: pointer;
-	box-sizing: border-box;
-	box-shadow: 3px 3px 3px #aca;
+	box-shadow: 3px 2px 4px #ccc;
 }
 section#nation_two .city_list_div td {
 	padding: 0;

@@ -30,6 +30,7 @@ function popupToggle() {
 			});
 			$('#loginPopContainer').css('display', 'block');
 			
+			$('#id_login').focus();
 			
 		}else if($('#loginPopContainer').css('display')=="block") {	// 팝업 숨김
 			
@@ -47,31 +48,66 @@ function popupToggle() {
 
 /* 로그인 인증 */
 function validateEncryptedLoginForm() {
-
+	
 	var id = document.login_form.id_login.value;
 	var pass = document.login_form.pass_login.value;
 	
 	if(id=="" || pass==""){
 		alert("아이디/비밀번호를 입력해주세요.");
 		return false;
+	}else {
+		
+		// 공개키 가져오기
+	    var login_publicKeyModulus = document.getElementById("login_publicKeyModulus").value;
+	    var login_publicKeyExponent = document.getElementById("login_publicKeyExponent").value;
+	    
+	    var rsa = new RSAKey();
+	    rsa.setPublic(login_publicKeyModulus, login_publicKeyExponent);
+	    
+	    // 사용자ID와 비밀번호를 RSA로 암호화한다.(이름은 암호화 제외)
+	    var securedId = rsa.encrypt(id);
+	    var securedPass = rsa.encrypt(pass);
+	    
+	    // 암호화된 값을 다시 폼에 넣는다.
+	    document.login_form.id_login.value = securedId;
+	    document.login_form.pass_login.value = securedPass;
+	    
+	    // 동기 방식으로 로그인 처리
+	    $.ajax({
+	    	type: "POST",
+	    	url: "./member/loginCheck/loginCheck.jsp",
+	    	data: {securedId : securedId, securedPass : securedPass},
+	    	async: false,
+	    	success: function(data) {
+	    		if(data==-1) {
+	    			alert("아이디가 없습니다.");
+	    			
+	    			$('#login_publicKeyModulus').remove();
+	    			$('#login_publicKeyExponent').remove();
+	    			
+	    			$('#loginPop').css('display', 'none');
+	    			$('#loginPopContainer').css('display', 'none');
+	    			
+	    			popupToggle();
+	    			
+	    		}else if(data==0){
+	    			alert("비밀번호가 맞지 않습니다.");
+	    			
+	    			$('#login_publicKeyModulus').remove();
+	    			$('#login_publicKeyExponent').remove();
+	    			
+	    			$('#loginPop').css('display', 'none');
+	    			$('#loginPopContainer').css('display', 'none');
+	    			
+	    			popupToggle();
+	    			
+	    		}else {	// 로그인 인증 성공
+	    			location.reload(true);	// 페이지 새로고침(세션값 초기화가 필요해서)
+	    		}
+	    	}
+	    });
 	}
 	
-	// 공개키 가져오기
-    var login_publicKeyModulus = document.getElementById("login_publicKeyModulus").value;
-    var login_publicKeyExponent = document.getElementById("login_publicKeyExponent").value;
-    
-    var rsa = new RSAKey();
-    rsa.setPublic(login_publicKeyModulus, login_publicKeyExponent);
-    
-    // 사용자ID와 비밀번호를 RSA로 암호화한다.(이름은 암호화 제외)
-    var securedId = rsa.encrypt(id);
-    var securedPass = rsa.encrypt(pass);
-    
-    // 암호화된 값을 다시 폼에 넣는다.
-    document.login_form.id_login.value = securedId;
-    document.login_form.pass_login.value = securedPass;
-    
-    return true;
 }
 
 /* 아이디 찾기 팝업 브라우져 */

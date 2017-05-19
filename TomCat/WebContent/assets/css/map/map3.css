@@ -17,29 +17,31 @@
 	position: absolute;
 	z-index: 1000;
 }
-.myplan-list h3{
+
+.myplan-list h3 {
 	font-size: 1.35em;
-    line-height: 2.5em;
-    padding: 0.7em;
+	line-height: 2.5em;
+	padding: 0.7em;
 }
+
 #map {
 	bottom: 0px;
-	/* height: 100%; */height: 1045px;
+	/* height: 100%; */
+	height: 1045px;
 	left: 365px;
+
 	/* position: absolute; */	position: relative;
  	  right: 365px;  
+
 	border: 1px solid #999999;
 	border-radius: 10px;
+
 /* 	  float: left; */
 	width: 1150px;  /*width: 1584px; */
 	overflow: hidden;	
+
 }
-/*  #map {
-  height: 100%;
-  float: left;
-  width: 63%;
-  height: 100%;
-}  */
+
 #right-panel {
   float: right;
   width: 365px;
@@ -47,26 +49,54 @@
   	border: 1px solid #999999;
 }
 
+
 .f1 {
 	float: left;
 }
 
-
 #pln_list {
-	width: 380px;
+	width: 335px;
+	height: 218px;
 	position: absolute;
 	left: 378px;
 	top: 10px;
-	padding: 20px;
 	z-index: 999;
 	background: #fff;
 	border-radius: 5px;
 	display: none;
 }
 
-.btn_pln {
-	width:339px;
+#pln_list #pln_form {
+	padding: 23px;	
 }
+
+#pln_list #fromDate, #toDate {
+	width: 140px;
+	margin-bottom:10px;
+	display: inline-block;
+}
+
+#pln_list select {
+	width: 285px;
+	margin-bottom:10px;
+}
+
+#pln_list .pln_sub {
+	width: 280px;
+}
+#pln_list .pln_sub_free {
+	width: 140px;
+	float: left;
+	padding: 0;
+}
+#pln_list .pln_sub_btn_free {
+	width: 140px;
+	float: left;
+	padding: 0;
+	margin-left: 5px;
+	background-color: #f99;
+}
+
 #pano {
 	width: 220px;
 	height: 220px;
@@ -74,6 +104,7 @@
 
 .text {
 	font-size: 12px;
+
 }
 
  #right-panel {
@@ -98,4 +129,5 @@
 .panel {
   height: 100%;
   overflow: auto;
+
 }

@@ -12,6 +12,7 @@ public class MemberBean {
 	private Timestamp reg_date;
 	private String profile;
 	private int auth;	// 0: 관리자, 1: 일반사용자, 2: 제휴업체(?)
+	private int gold;	// 유료회원: 1, 무료회원: 0
 	
 	public String getId() {
 		return id;
@@ -67,4 +68,11 @@ public class MemberBean {
 	public int getAuth() {
 		return auth;
 	}
+	public int getGold() {
+		return gold;
+	}
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+	
 }

@@ -30,7 +30,7 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=11"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=15"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
@@ -39,7 +39,7 @@
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=20"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=10"></script>	<!-- 로그인 스크립트 -->
 			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
@@ -50,14 +50,14 @@
 <body>
 
 <%
-	// 세션값 가져오기
-	String id = (String)session.getAttribute("id");			// 아이디
-	if(id==null) {
-		id="";
+	String id = "";
+	if(session.getAttribute("id")!=null) {
+		id = (String) session.getAttribute("id");
 	}
-	String nick = (String)session.getAttribute("nick");		// 닉네임
-	if(nick==null) {
-		nick = "";
+
+	String nick = "";
+	if(session.getAttribute("nick")!=null) {
+		nick = (String) session.getAttribute("nick");
 	}
 %>
 
@@ -69,7 +69,7 @@
 	
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
-			<li><a href="#">함께해요</a></li>
+			<li><a href="./BoardList1.bb">함께해요</a></li>
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="#">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
@@ -88,29 +88,12 @@
 
 
 <!-- 로그인 팝업 창 -->
-<%
-	// 아이디, 비밀번호 입력 후 틀렸을때 다시 팝업창 띄우기 위해 변수 생성
-	String loginCheckStr = request.getParameter("loginCheck");
-	int loginCheck;
-	if(loginCheckStr!=null) {
-		loginCheck = Integer.parseInt(loginCheckStr);
-	}else {
-		loginCheck = 1;
-	}
-	if(loginCheck==0 || loginCheck==-1) {
-		%>
-			<script type="text/javascript">
-				popupToggle();
-			</script>
-		<%
-	}
-%>
 
 <!-- 로그인 팝업창 뜰때 배경 -->
 <div id="loginPopContainer" onclick="popupToggle()"></div>
 <!-- 로그인 팝업창 -->
 <div id="loginPop">
-	<form action="./MemberLoginAction.me" post="post" name="login_form" id="login_form" onsubmit="return validateEncryptedLoginForm()">
+	<form action="javascript:validateEncryptedLoginForm()" post="post" name="login_form" id="login_form">
 		
 		<input type="email" name="id_login" id="id_login"  placeholder="이메일을 입력하세요." >
 		<input type="password" name="pass_login" id="pass_login" placeholder="비밀번호를 입력하세요."><br>

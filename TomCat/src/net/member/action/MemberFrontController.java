@@ -55,14 +55,9 @@ public class MemberFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MemberLoginAction.me")) {		// 로그인 처리
-			action = new MemberLoginAction();
 			
-			try {
-				forward = action.execute(request, response);
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			/* 로그인 방식 변경해서 필요가 없어짐...ㅠㅠ */
+			/* 그래도 나중에 필요할까봐 일단 남겨둠 */
 			
 		}else if(command.equals("/MemberIdFinder.me")) {	// 아이디 찾기 입력 페이지(팝업 브라우저)
 			
@@ -232,9 +227,13 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/AdminDBManager.me")) {	// 관리자 DB 작성 관리 페이지(통합 관리)
+			
+			forward = new ActionForward();
+			forward.setPath("./member/adminDBManager.jsp");
+			forward.setRedirect(false);
+			
 		}
-		
-		
 		
 		// 이동
 		if(forward!=null) {

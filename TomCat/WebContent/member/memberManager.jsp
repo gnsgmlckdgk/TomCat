@@ -71,13 +71,13 @@
 								<div style="width: 160px; margin: 0 auto;">프로필 이미지</div>
 							</th>
 							<th id="th_id" class="a th_id" title="아이디<%if(isort==1){%>오름차순<%}else if(isort==2){%>내림차순<%}%>">
-								<div style="width: 80px; margin: 0 auto;">아이디<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortId_img"></div>
+								<div style="width: 80px; margin: 0 auto;">아이디<img src="./images/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortId_img"></div>
 							</th>
 							<th id="th_nick" class="a th_nick" title="닉네임<%if(isort==3){%>오름차순<%}else if(isort==4){%>내림차순<%}%>">
-								<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div>
+								<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div>
 							</th>
 							<th id="th_auth" class="a th_auth" title="권한<%if(isort==5){%>:관리자우선<%}else if(isort==6){%>:사용자우선<%}%>">
-								<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/member/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div>
+								<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div>
 							</th>
 							<th class="th_delete">
 								<div style="width: 99px; margin: 0 auto;">회원탈퇴</div>
@@ -90,8 +90,8 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td"><%=mb.getId() %></td>
-									<td class="nick_td"><%=mb.getNick() %></td>	
+									<td class="id_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getId() %></td>
+									<td class="nick_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getNick() %></td>	
 									<td class="auth_select_box">
 										<div class="select-wrapper">
 										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
@@ -213,17 +213,17 @@
 					});
 					/* 정렬 이미지 */
 					if(<%=isort%>==1) {
-						$('.sortId_img').attr('src', './images/member/sort_top.png');
+						$('.sortId_img').attr('src', './images/sort_top.png');
 					}else if(<%=isort%>==2) {
-						$('.sortId_img').attr('src', './images/member/sort_bottom.png');
+						$('.sortId_img').attr('src', './images/sort_bottom.png');
 					}else if(<%=isort%>==3) {
-						$('.sortNick_img').attr('src', './images/member/sort_top.png');
+						$('.sortNick_img').attr('src', './images/sort_top.png');
 					}else if(<%=isort%>==4) {
-						$('.sortNick_img').attr('src', './images/member/sort_bottom.png');
+						$('.sortNick_img').attr('src', './images/sort_bottom.png');
 					}else if(<%=isort%>==5) {
-						$('.sortAuth_img').attr('src', './images/member/sort_top.png');
+						$('.sortAuth_img').attr('src', './images/sort_top.png');
 					}else if(<%=isort%>==6) {
-						$('.sortAuth_img').attr('src', './images/member/sort_bottom.png');
+						$('.sortAuth_img').attr('src', './images/sort_bottom.png');
 					}
 					
 					</script>

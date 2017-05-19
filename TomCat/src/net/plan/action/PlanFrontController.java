@@ -168,6 +168,15 @@ public class PlanFrontController extends HttpServlet {
 			}
 		}
 		
+		else if(command.equals("/PlanSpot.pl")){//추천장소를 상세히 보여주는 페이지
+			action = new PlanSpot();
+			try{
+				forward = action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
 		
 		
 		
