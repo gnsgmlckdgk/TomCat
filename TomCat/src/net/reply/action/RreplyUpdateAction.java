@@ -33,7 +33,7 @@ public class RreplyUpdateAction implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('수정성공')");
+//		out.println("alert('수정성공')");
 		out.println("location.href='./BoardContent.bo?num="+num+"&pageNum=" + pageNum + "';");
 		out.println("</script>");
 		out.close();
