@@ -365,7 +365,7 @@ public class PlanDAO {
 	}
 
 	/* DB 도시리스트 뽑아오기 (운영자 페이지) : 검색값 */
-	public List<PlanCityBean> getCitySearchList(int startRow, int pageSize, String search) {
+	public List<PlanCityBean> getCitySearchList(int startRow, int pageSize, String search, int sort) {
 		List<PlanCityBean> cityList = new ArrayList();
 		PlanCityBean cb = null;
 		String sql = "";
@@ -373,7 +373,15 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from city where name like ? order by name asc limit ?,?";
+			if(sort == 1) sql = "select * from city where name like ? order by city_code asc limit ?,?";
+			else if(sort == 2) sql = "select * from city where name like ? order by city_code desc limit ?,?";
+			else if(sort == 3) sql = "select * from city where name like ? order by name asc limit ?,?";
+			else if(sort == 4) sql = "select * from city where name like ? order by name desc limit ?,?";
+			else if(sort == 5) sql = "select * from city where name like ? order by country_code asc limit ?,?";
+			else if(sort == 6) sql = "select * from city where name like ? order by country_code desc limit ?,?";
+			else if(sort == 7) sql = "select * from city where name like ? order by en_name asc limit ?,?";
+			else if(sort == 8) sql = "select * from city where name like ? order by en_name desc limit ?,?";
+			else sql = "select * from city where name like ? limit ?,?";	// 정렬 값 없을때
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");

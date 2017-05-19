@@ -24,7 +24,7 @@ public class MemberManager implements Action {
 		// 파라미터 값 가져오기
 		String search = request.getParameter("search");
 		String search_sel = request.getParameter("search_sel");	// 검색 종류(id_search, nick_search)
-		System.out.println("search_sel: " + search_sel);
+		
 		if(search_sel==null) {
 			search_sel = "id_search";
 		}
@@ -57,7 +57,7 @@ public class MemberManager implements Action {
 		int currentPage = Integer.parseInt(pageNum);
 		
 		// 한 페이지에 출력할 게시글의 갯수 설정
-		int pageSize = 5;
+		int pageSize = 10;
 		
 		// 시작 행 구하기
 		int startRow = (currentPage - 1) * pageSize + 1;

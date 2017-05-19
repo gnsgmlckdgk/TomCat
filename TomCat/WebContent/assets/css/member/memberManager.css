@@ -67,6 +67,16 @@ div.memberManagerNav li a:hover {
 
 /* 회원정보 관리 페이지  시작 */
 
+/* 프로필 사진 확대 미리보기, 회원관리 페이지 */
+.profileImg_enl {
+	position: fixed;
+	z-index: 10;
+	
+	display: none;
+
+	right: 0;
+}
+
 /* 메인 전체 */
 section.memberManager {
 	/* 배경화면 */
@@ -297,24 +307,37 @@ div.content_member_memberManager table {
 
 div.content_member_memberManager th {
 	padding: 0px;
-	
 	text-align: center;
-	font-size: 1.1em;
 }
 div.content_member_memberManager th.th_img {
-	width: 5%;
+	width: 10px;
+/* 	
+계산한거
+10	2
+260	20
+300	33
+120	13
+100	11
+100	11
+
+890 
+*/
+	
 }
 div.content_member_memberManager th.th_id {
-	width: 45%;
+	width: 260px;
 }
 div.content_member_memberManager th.th_nick {
-	width: 40%;
+	width: 300px;
+}
+div.content_member_memberManager th.th_name {
+	width: 120px;
 }
 div.content_member_memberManager th.th_auth {
-	width: 5%;
+	width: 100px;
 }
 div.content_member_memberManager th.th_delete {
-	width: 5%;
+	width: 100px;
 }
 
 div.content_member_memberManager th.a:hover {
@@ -324,8 +347,6 @@ div.content_member_memberManager th.a:hover {
 div.content_member_memberManager td {
 	padding: 0;
 	text-align: center;
-	font-size: 1.1em;
-	font-weight: bold;
 }
 div.content_member_memberManager img {
 	width: 50px;
@@ -422,7 +443,6 @@ div.content_member_memberManager .page a{
 	font-size: 1.2em;
 	font-weight: bold;
 }
-
 
 /* 관리자 DB 관리 페이지 */
 div.DBManager {

@@ -62,7 +62,9 @@
 			}
 			
 			function travelInput() {
-				window.open("./TravelAdmin.td", "window", "width=1200, height=800, top=100, left=300");
+				var left = (screen.width - 1200)/2;
+				var availHeight = screen.availHeight-67;
+				window.open("./TravelAdmin.td", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 	
 		</script>

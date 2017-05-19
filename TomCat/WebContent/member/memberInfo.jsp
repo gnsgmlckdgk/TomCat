@@ -5,6 +5,32 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 프로필 사진 확대해서 미리보기 -->
+<div class="profileImg_enl"><img src="">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#profileImg').mouseenter(function(){
+				var browserWidth = window.innerWidth;
+				var browserHeight = window.innerHeight;
+				var imgWid = browserWidth * 0.3;
+				var imgHeight = browserHeight * 0.5;
+				
+				var profileImgPath = $('#profileImg').attr('src');
+				
+				$('.profileImg_enl').css('display', 'block');
+				$('.profileImg_enl img').css({
+					'width' : imgWid,
+					'height' : imgHeight
+				});
+				$('.profileImg_enl img').attr('src', profileImgPath);
+			});
+			$('#profileImg').mouseleave(function(){
+				$('.profileImg_enl').css('display', 'none');
+			})
+		});
+	</script>
+</div>
+
 <!-- Main -->
 <section id="main" class="wrapper memberManager">
 	<div class="container">
@@ -61,7 +87,7 @@
 										<img src="./upload/images/profileImg/<%=mb.getProfile()%>" width="100px" height="120px" id="profileImg">
 										
 										<img src="./images/member/오른쪽 화살표.png" id="right_arrow" >
-										<div id="previewImg"></div>
+										<div id="previewImg"></div>	<!-- 새 이미지 파일 선택하면 display 됨 -->
 										
 								</td></tr>	
 						</table>
@@ -73,6 +99,10 @@
 					
 					<script type="text/javascript">
 					/* memberInfo.jsp */
+					
+					$('#previewImg').click(function(){
+						
+					});
 
 					// fakepath로 이미지 경로가 뜨기 때문에 실제 경로를 알아내기 위한 코드들(이미지파일 제약조건 포함)
 					var loadImageFile = (function() {
@@ -117,6 +147,7 @@
 						}
 					})();
 
+					
 					// 리셋 버튼 누르면 프로필사진 미리보기가 사라짐
 					$('#reset').click(function() {
 						$('#right_arrow, #previewImg').css('display', 'none');
