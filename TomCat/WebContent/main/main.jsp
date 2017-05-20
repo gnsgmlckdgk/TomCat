@@ -61,6 +61,7 @@
 		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
 		<li><a href="./PlanSpot.pl?travel=자갈치" class="button special big">추천장소
 				상세보기</a></li>
+		<li><a href="./chat_test/broadcast.jsp" class="button special big">채팅 테스트</a></li>
 	</ul>
 	<!-- 테스트용 버튼들 끝. -->
 </section>
