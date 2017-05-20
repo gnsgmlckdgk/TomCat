@@ -15,8 +15,8 @@
 			$('.img_td').mouseenter(function(){
 				var browserWidth = window.innerWidth;
 				var browserHeight = window.innerHeight;
-				var imgWid = browserWidth * 0.3;
-				var imgHeight = browserHeight * 0.5;
+				var imgWid = browserWidth * 0.25;
+				var imgHeight = browserHeight * 0.45;
 				
 				var profileImgPath = $(this).children('img').attr('src');
 				

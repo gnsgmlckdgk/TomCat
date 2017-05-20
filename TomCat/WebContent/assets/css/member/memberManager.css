@@ -67,14 +67,20 @@ div.memberManagerNav li a:hover {
 
 /* 회원정보 관리 페이지  시작 */
 
-/* 프로필 사진 확대 미리보기, 회원관리 페이지 */
-.profileImg_enl {
+/* 프로필 사진 확대 미리보기, 회원정보 페이지, 회원관리 페이지 */
+.profileImg_enl {	/* 기존 이미지 */
 	position: fixed;
 	z-index: 10;
-	
 	display: none;
+	right: 0;
+}
+#profileImg_enl {	/* 새로운 이미지 */
+	position: fixed;
+	z-index: 10;
+	visibility: hidden;
 
 	right: 0;
+	progid: DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
 }
 
 /* 메인 전체 */
@@ -171,23 +177,32 @@ section.memberManager input:FOCUS {	/* 회원관리 페이지의 모든 input:fo
 	color: blue;
 }
 
-/* 회원정보 */
+/* 회원정보 memberInfo.jsp */
 div.content_member_info {
 	/* border: 1px solid #ccc; */
 }
 div.content_member_info h1 {	/* 제목 */
-	border-bottom: 0;
+	border-bottom: 1px solid #ccc;
 	padding: 12px;
-	margin: 0;
+	margin-bottom: 10px;
 	
 	font-size: 1.4em;
 }
+div.content_member_info .info_form tr {
+	border: none;
+	background-color: #fff;
+}
 div.content_member_info .info_form th {
-	width: 150px;
+	width: 15%;
+	border: none;
+}
+div.content_member_info .info_form td {
+	border: none;
 }
 div.content_member_info .info_form input[type="text"] {
 	border: 1px solid #ccc;
 	background-color: rgba(255, 255, 255, 0.1);
+	width: 90%;
 }
 div.content_member_info .info_form p {	/* 프로필사진 추천 사이즈 팁 */
 	margin-bottom: 0;
@@ -200,25 +215,23 @@ div.content_member_info .info_form img {	/* 프로필 사진 */
 }
 
 div.content_member_info .info_form img#right_arrow {	/* 미리보기 이미지 가르키는 화살표 div */
-	width: 60px;
-	height: 60px;
+	width: 70px;
+	height: 70px;
+	
+	margin-left : 30px;
+	margin-top : 20px; 
+	
 	border: none;
-	
-	position: relative;
-	left: 40px;
-	
 	display: none;
 }
 
 div.content_member_info .info_form div#previewImg {	/* 이미지 바뀔때 미리보기 div */
 	width: 100px;
 	height: 120px;
-	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
-	
 	position: absolute;
-	left: 400px;
-	
+	margin-left: 35px;
 	display: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
 }
 
 div.content_member_info .info_form .form_btn {
@@ -231,16 +244,23 @@ div.content_member_info .info_form .form_btn input[type="submit"] {
 
 
 
-/* 비밀번호 변경 */
+/* 비밀번호 변경 memberPassUpdate.jsp */
 div.content_member_passUpdate {
 	/* border: 1px solid #ccc; */
 }
 div.content_member_passUpdate h1 {	/* 제목 */
-	border-bottom: 0;
+	border-bottom: 1px solid #ccc;
 	padding: 12px;
-	margin: 0;
+	margin-bottom: 10px;
 	
 	font-size: 1.4em;
+}
+div.content_member_passUpdate .pass_form tr {
+	border: none;
+	background-color: #fff;
+}
+div.content_member_passUpdate .pass_form td {
+	border: none;
 }
 div.content_member_passUpdate .pass_form th {
 	width: 150px;
