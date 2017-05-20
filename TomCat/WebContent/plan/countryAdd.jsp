@@ -64,7 +64,7 @@
 		
 		국가 영어이름
 		<input type="text" name="en_name">
-		
+
 		정보
 		<textarea rows="10" cols="20" name="info"></textarea>
 		

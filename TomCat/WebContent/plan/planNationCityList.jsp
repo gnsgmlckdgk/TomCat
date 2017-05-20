@@ -84,7 +84,7 @@
 	%>
 	<tr onclick="location.href='./PlanRegion.pl?region=<%=pcb.getName()%>';">
 		<td class="img_td"
-			style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
+			style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName()%></p>
 			<p style="font-size: 0.7em;"><%=pcb.getEn_name()%></p>

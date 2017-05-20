@@ -229,6 +229,70 @@ public class PlanDAO {
 		return count;
 	}
 	
+	// 국가페이지의 도시리스트 전체  가져오기
+		public List<PlanCityBean> getCityList(String str) {
+
+			String country_code = "";
+			List<PlanCityBean> list = new ArrayList<PlanCityBean>();
+
+			String nation = str;
+			if ("한국".equals(nation)) {
+				nation = "대한민국";
+			}
+
+			try {
+				con = getConnection();
+
+				// country_code 값 가져오기
+				sql = "select country_code from country where name=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, nation);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) { // 검색된 국가가 있으면
+					country_code = rs.getString("country_code");
+
+					sql = "select city_code, name, en_name, info, country_code from city where country_code = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, country_code);
+
+					rs = pstmt.executeQuery();
+
+					PlanCityBean pcb = null;
+					while (rs.next()) {
+						pcb = new PlanCityBean();
+
+						pcb.setCity_code(rs.getString("city_code"));
+						pcb.setName(rs.getString("name"));
+						pcb.setEn_name(rs.getString("en_name"));
+						pcb.setInfo(rs.getString("info"));
+						pcb.setCountry_code(rs.getString("country_code"));
+
+						list.add(pcb);
+					}
+
+				} else {
+					return null;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			return list;
+		}
+	
 	// 국가페이지의 도시리스트 가져오기
 	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
 

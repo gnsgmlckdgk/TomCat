@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import net.plan.db.PlanCountryBean;
 import net.plan.db.PlanDAO;
 

@@ -1,11 +1,19 @@
 package net.plan.action;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
+import net.plan.db.PlanCityBean;
+import net.plan.db.PlanDAO;
 
 // 다음에서 국가를 검색했을때 나오는 국가 정보를 가져옴
 public class PlanNationAction implements Action{
@@ -48,8 +56,13 @@ public class PlanNationAction implements Action{
 		}
 		nation_info.append("</table>");
 		
+		// 도시 리시트 가져오기
+		List<PlanCityBean> cityList = null;
+		cityList = getCityList(nation);
+		
 		// request에 담기
 		request.setAttribute("nation_info", nation_info);
+		request.setAttribute("cityList", cityList);
 		
 		// 이동정보
 		ActionForward forward = new ActionForward();
@@ -57,5 +70,16 @@ public class PlanNationAction implements Action{
 		forward.setRedirect(false);
 		
 		return forward;
+	}
+	
+	// 도시 리스트 전체 가져오기
+	public List<PlanCityBean> getCityList(String nation) {
+		
+		PlanDAO pdao = new PlanDAO();
+		
+		List<PlanCityBean> cityList = null;
+		cityList = pdao.getCityList(nation);
+		
+		return cityList;
 	}
 }
