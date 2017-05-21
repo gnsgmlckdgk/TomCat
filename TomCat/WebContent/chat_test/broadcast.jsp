@@ -1,6 +1,3 @@
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
-
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,10 +14,6 @@
 	}
 %>
 
-
-
-<section id="banner">
-	<fieldset>
 		함께해요 게시판에 붙일예정.<br>
 		http://nowonbun.tistory.com/285<br>
 		http://m.mkexdev.net/337<br>
@@ -29,11 +22,9 @@
 		<textarea id="messageWindow" rows="10" cols="50" readonly="true"></textarea><br />
 		
 		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
-		<input id="inputMessage" type="text" onkeydown="if(event.keyCode==13)send();"/>
-		<input type="submit" value="send" onclick="send()"/>
+		<input id="inputMessage" type="text" onkeydown="if(event.keyCode==13){send();}"/>
+		<input type="submit" value="send" onclick="send();"/>
 		
-	</fieldset>
-</section>
 
 
 
@@ -76,10 +67,18 @@
 		//	현재 채팅창에 출력될 값
 		textarea.value += "<%=nick%> : " + inputMessage.value + "\n";
 		
-		//	서버에 보내줄때 날아가는 값.
+		//	서버에 보낼때 날아가는 값.
 		webSocket.send("<%=nick%> : " + inputMessage.value);
 
-		inputMessage.value = "";
+		//	?
+		//inputMessage.value = "";
+		
+		//	inputMessage의 value값을 지운다.
+		inputMessage.value='';
+
+		//	textarea의 스크롤을 맨 밑으로 내린다.
+		messageWindow.scrollTop = messageWindow.scrollHeight;
+		
 	}
 	
 </script>
