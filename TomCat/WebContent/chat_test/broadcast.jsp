@@ -11,6 +11,8 @@
 	String nick = "";
 	if (session.getAttribute("nick") != null) {
 		nick = (String) session.getAttribute("nick");
+	} else {
+		nick = "NULL";
 	}
 %>
 
