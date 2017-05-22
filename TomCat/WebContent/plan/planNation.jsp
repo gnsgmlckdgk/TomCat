@@ -8,26 +8,6 @@
    	<!-- Link Swiper's CSS 슬라이드 -->
     <link rel="stylesheet" href="./assets/dist/css/swiper.min.css">
     
-    <style type="text/css">
-    	/* 국가페이지 도시 이미지 슬라이드 planNation */
-    	div.slideContainer {
-    		z-index: 9;
-    		
-    		width: 70%;
-    		height: 50%;
-    		
-    		margin: 60px auto -4em auto;
-    		padding-left: 5%;
-    		padding-right: 5%;
-    		
-    		background-color: rgba(255, 255, 255, 0);
-    	}
-    	div.slideContainer div img {
-    		width: 100%;
-    		height: 100%;
-    	}
-    </style>
-    
 </head>	
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
@@ -41,25 +21,6 @@
 	<div class="container 75% nation_info_content">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
-				
-				<div class="nation_info">
-				<h2><%=nation%></h2><br>
-				 <%
-				 StringBuffer nation_info = (StringBuffer)request.getAttribute("nation_info");
-				 %>
-				 <%=nation_info.toString() %>
-				</div>
-				
-			</div>
-			<div class="6u$ 12u$(medium)">
-				<!-- 수현씨 지도 부분 -->
-				<iframe width="600" height="450" frameborder="0" style="border: 0"
-					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=nation%>"
-					allowfullscreen> </iframe>
-			</div>
-			<!-- 수현씨 지도 부분 끝 -->
-		</div>
-		
 <!-- 국가의 도시들의 이미지 슬라이드 -->
 <!-- Swiper -->
     <%
@@ -68,6 +29,7 @@
     cityList = (List)request.getAttribute("cityList");
     %>
     <div class="swiper-container slideContainer">
+        <h2><%=nation%></h2>
         <div class="swiper-wrapper">
     <%
     PlanCityBean pcb = null;
@@ -96,8 +58,29 @@
         spaceBetween: 30,
     });
     </script>
-    		
-	</div>
+    
+	</div>	<!-- close 6u 12u$(medium) -->
+	
+	<div class="map">
+		<!-- 수현씨 지도 부분 -->
+		<iframe width="100%" height="100%" frameborder="0" style="border: 0"
+			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=nation%>"
+			allowfullscreen> </iframe>
+	</div> <!-- 수현씨 지도 부분 끝 -->
+	
+	<div class="clear"></div>
+	
+	</div>	<!-- close row 200% -->
+			
+			<div class="nation_info">
+				 <%
+				 // PlanNationAction에서 가져옴
+				 StringBuffer nation_info = (StringBuffer)request.getAttribute("nation_info");
+				 %>
+				 <%=nation_info.toString() %>
+			</div>
+			
+		</div>
 </section>
 
 <!-- Two 국가의 지역 리스트 -->

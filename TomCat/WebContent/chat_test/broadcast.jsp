@@ -32,7 +32,7 @@
 
 <script type="text/javascript">
 	var textarea = document.getElementById("messageWindow");
-	var webSocket = new WebSocket('ws://localhost:8080/TomCat/broadcasting');
+	var webSocket = new WebSocket('ws://192.168.2.17:8080/TomCat/broadcasting');
 	//var webSocket = new WebSocket('ws://localhost:8080/프로젝트명/broadcasting');
 	var inputMessage = document.getElementById('inputMessage');
 
