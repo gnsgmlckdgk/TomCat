@@ -78,6 +78,10 @@
     		<div class="swiper-slide"><img src="./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg"></div>
     		<%
     	}
+    }else {
+    	%>
+    		<div class="swiper-slide" style="color: #fff;">이미지 정보가 없습니다.</div>
+    	<%
     }
     %>
      </div>
