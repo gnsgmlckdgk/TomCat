@@ -81,6 +81,8 @@ div.memberManagerNav li a:hover {
 	visibility: hidden;
 
 	right: 0;
+	bottom: 0;
+	
 	progid: DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
 }
 
@@ -160,7 +162,7 @@ div.content {
 	padding: 0;
 
 	width: 80%;
-	min-width: 600px;
+	min-width: 900px;
 	min-height: 600px;
 	
 	position: relative;
@@ -331,34 +333,28 @@ div.content_member_memberManager th {
 	text-align: center;
 }
 div.content_member_memberManager th.th_img {
-	width: 10px;
-/* 	
-계산한거
-10	2
-260	20
-300	33
-120	13
-100	11
-100	11
-
-890 
-*/
-	
+	/* width: 10px; */
+	width: 2%;	
 }
 div.content_member_memberManager th.th_id {
-	width: 260px;
+	/* width: 260px; */
+	width: 20%;
 }
 div.content_member_memberManager th.th_nick {
-	width: 300px;
+	/* width: 300px; */
+	width: 33%;
 }
 div.content_member_memberManager th.th_name {
-	width: 120px;
+	/* width: 120px; */
+	width: 13%;
 }
 div.content_member_memberManager th.th_auth {
-	width: 100px;
+	/* width: 100px; */
+	width: 11%;
 }
 div.content_member_memberManager th.th_delete {
-	width: 100px;
+	/* width: 100px; */
+	width: 11%;
 }
 
 div.content_member_memberManager th.a:hover {

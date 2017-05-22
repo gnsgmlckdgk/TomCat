@@ -18,9 +18,8 @@
 %>
 <!-- One 지역명 및 설명-->
 <section id="banner" class="nation_one">
-	<div class="container 75% nation_info_content">
-		<div class="row 200%">
-			<div class="6u 12u$(medium)">
+	<h2><%=nation%></h2>
+	<div class="nation_info_content">
 <!-- 국가의 도시들의 이미지 슬라이드 -->
 <!-- Swiper -->
     <%
@@ -29,7 +28,6 @@
     cityList = (List)request.getAttribute("cityList");
     %>
     <div class="swiper-container slideContainer">
-        <h2><%=nation%></h2>
         <div class="swiper-wrapper">
     <%
     PlanCityBean pcb = null;
@@ -62,8 +60,6 @@
         spaceBetween: 30,
     });
     </script>
-    
-	</div>	<!-- close 6u 12u$(medium) -->
 	
 	<div class="map">
 		<!-- 수현씨 지도 부분 -->
@@ -73,8 +69,6 @@
 	</div> <!-- 수현씨 지도 부분 끝 -->
 	
 	<div class="clear"></div>
-	
-	</div>	<!-- close row 200% -->
 			
 			<div class="nation_info">
 				 <%
