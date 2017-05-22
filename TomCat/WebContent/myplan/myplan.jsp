@@ -44,8 +44,6 @@
 	//시작일
 	$('#fromDate').datepicker({
 		showOn: "focus",
-/* 		buttonImage: "myplan/pn_cal_btn.png",
-		buttonText:"날짜선택", buttonImageOnly:true,*/
 		dateFormat:"yy-mm-dd",
 		changeMonth:true,
 		onClose: function(selectedDate){
@@ -58,9 +56,7 @@
     
     //종료일
     $('#toDate').datepicker({
-   	  showOn: "focus", 
-/*          buttonImage: "myplan/pn_cal_btn.png", 
-         buttonText: "날짜선택",   buttonImageOnly : true, */
+   	 	 showOn: "focus", 
          dateFormat: "yy-mm-dd",
          changeMonth: true,
          onClose: function( selectedDate ) {
@@ -74,6 +70,11 @@
 	}); */
 });  
 //날짜 선택하기 
+	
+	
+
+
+
 
 </script>
 
