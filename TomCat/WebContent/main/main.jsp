@@ -61,6 +61,8 @@
 		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
 		<li><a href="./PlanSpot.pl?travel=자갈치" class="button special big">추천장소
 				상세보기</a></li>
+		<li><a href="./chat_test/broadcast.jsp"
+			class="button special big">채팅 테스트</a></li>
 	</ul>
 	<!-- 테스트용 버튼들 끝. -->
 </section>
@@ -100,117 +102,31 @@
 <section class="carousel">
 	<div class="reel">
 
-		<article>
-			<a href="#" class="image featured"><img src="images/pic01.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Pulvinar sagittis congue</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
+		<%
+			int i = 1;
+			while (i <= 11) {
+				if (i != 6) {
+					int ii = i % 6;
+		%>
 
 		<article>
-			<a href="#" class="image featured"><img src="images/pic02.jpg"
-				alt="" /></a>
+			<a href="#" class="image featured"><img
+				src="images/pic0<%=ii%>.jpg" alt="" /></a>
 			<header>
 				<h3>
-					<a href="#">Fermentum sagittis proin</a>
+					<a href="#"><%=ii %></a>
 				</h3>
 			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+			<p><%=ii %></p>
 		</article>
 
-		<article>
-			<a href="#" class="image featured"><img src="images/pic03.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Sed quis rhoncus placerat</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
 
-		<article>
-			<a href="#" class="image featured"><img src="images/pic04.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Ultrices urna sit lobortis</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
-
-		<article>
-			<a href="#" class="image featured"><img src="images/pic05.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Varius magnis sollicitudin</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
-
-		<article>
-			<a href="#" class="image featured"><img src="images/pic01.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Pulvinar sagittis congue</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
-
-		<article>
-			<a href="#" class="image featured"><img src="images/pic02.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Fermentum sagittis proin</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
-
-		<article>
-			<a href="#" class="image featured"><img src="images/pic03.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Sed quis rhoncus placerat</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
-
-		<article>
-			<a href="#" class="image featured"><img src="images/pic04.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Ultrices urna sit lobortis</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
-
-		<article>
-			<a href="#" class="image featured"><img src="images/pic05.jpg"
-				alt="" /></a>
-			<header>
-				<h3>
-					<a href="#">Varius magnis sollicitudin</a>
-				</h3>
-			</header>
-			<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-		</article>
+		<%
+			}
+				i = i + 1;
+			}
+		%>
 	</div>
-	
 </section>
 <!-- Carousel end-->
 

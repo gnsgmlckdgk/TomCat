@@ -73,6 +73,7 @@ div.memberManagerNav li a:hover {
 	z-index: 10;
 	display: none;
 	right: 0;
+	bottom: 0;
 }
 #profileImg_enl {	/* 새로운 이미지 */
 	position: fixed;

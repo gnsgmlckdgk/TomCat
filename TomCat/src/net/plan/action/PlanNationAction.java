@@ -46,13 +46,15 @@ public class PlanNationAction implements Action{
 			
 			// dd에 요약정보라는 숨겨져 있는 문자열이 있는데 이걸 다른 문자열로 바꿈
 			if(p2.get(i).text().contains("요약정보")) {	
-				String txt = p2.get(i).text().replaceAll("요약정보", "<br>");
+				String txt = p2.get(i).text().replaceAll("요약정보", ", ");
 				nation_info.append("<th>"+p.get(i).text()+ "</th>"+"<td>"+txt+"</td>");
 				continue;
 			}
 			
 			nation_info.append("<th>"+p.get(i).text()+ "</th>"+"<td>"+p2.get(i).text()+"</td>");
 			nation_info.append("</tr>");
+			
+			System.out.println("test: " + i);
 		}
 		nation_info.append("</table>");
 		

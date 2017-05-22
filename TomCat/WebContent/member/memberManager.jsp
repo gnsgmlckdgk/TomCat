@@ -16,7 +16,7 @@
 				var browserWidth = window.innerWidth;
 				var browserHeight = window.innerHeight;
 				var imgWid = browserWidth * 0.25;
-				var imgHeight = browserHeight * 0.45;
+				var imgHeight = browserHeight * 0.35;
 				
 				var profileImgPath = $(this).children('img').attr('src');
 				
