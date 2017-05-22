@@ -5,11 +5,13 @@
 	String id = (String)session.getAttribute("id");
 	if(id==null) {
 		response.sendRedirect("./Main.me");
+		return;
 	}
 
 	String auth_str = (String)session.getAttribute("auth");
 	if(auth_str==null) {
 		response.sendRedirect("./Main.me");
+		return;
 	}
 	int auth = Integer.parseInt(auth_str);
 %>

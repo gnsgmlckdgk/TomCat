@@ -89,10 +89,10 @@ div.memberManagerNav li a:hover {
 /* 메인 전체 */
 section.memberManager {
 	/* 배경화면 */
-	/* background-image: url("../../../images/member/back/memberManager.jpg");
+	background-image: url("../../../images/member/back/join.png");
 	background-repeat: repeat;
 	background-size: cover;
-	background-attachment: fixed; */
+	background-attachment: fixed;
 }
 
 div.container {
@@ -102,7 +102,7 @@ div.container {
 
 /* 서브메뉴 */
 div#submenu {
-	border: 1px solid #ccc;
+	border: 3px solid #ccc;
 	
 	width: 200px;
 	min-height: 480px;
@@ -155,7 +155,7 @@ div#submenu li hr {
 
 /* 컨텐츠 부분 공통 */
 div.content {
-	border: 1px solid #ccc;
+	border: 3px solid #ccc;
 	border-radius: 10px;
 	
 	background-color: #fff;
@@ -364,6 +364,9 @@ div.content_member_memberManager th.a:hover {
 div.content_member_memberManager td {
 	padding: 0;
 	text-align: center;
+}
+div.content_member_memberManager td.id_td {
+	cursor: pointer;
 }
 div.content_member_memberManager img {
 	width: 50px;

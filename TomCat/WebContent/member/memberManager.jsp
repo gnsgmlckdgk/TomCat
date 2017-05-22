@@ -46,6 +46,7 @@
 			String id = (String)session.getAttribute("id");	// 관리자 아이디
 			if(id==null) {
 				response.sendRedirect("./Main.me");
+				return;
 			}
 		
 			// 한글처리
@@ -120,8 +121,8 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getId() %></td>
-									<td class="nick_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getNick() %></td>	
+									<td class="id_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>';"><%=mb.getId() %></td>
+									<td class="nick_td"><%=mb.getNick() %></td>	
 									<td class="name_td"><%=mb.getName() %></td>
 									<td class="auth_select_box">
 										<div class="select-wrapper">

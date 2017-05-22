@@ -50,6 +50,7 @@
 				String id = (String)session.getAttribute("id");
 				if(id==null) {
 					response.sendRedirect("./Main.me");
+					return;
 				}
 				
 				// 회원정보 가져오기

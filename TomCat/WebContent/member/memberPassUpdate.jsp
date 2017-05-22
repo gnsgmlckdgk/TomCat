@@ -12,6 +12,15 @@
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
 		
+		<%
+			// 세션값 확인
+			String id = (String)session.getAttribute("id");
+			if(id==null) {
+				response.sendRedirect("./Main.me");
+				return;
+			}
+		%>
+		
 		<!-- 컨텐츠 -->
 		<div class="content">
 			<div class="content_member_passUpdate">

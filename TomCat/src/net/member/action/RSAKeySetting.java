@@ -35,7 +35,6 @@ public class RSAKeySetting {
 		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
 
 		request.setAttribute("publicKeyModulus", publicKeyModulus);
-		request.setAttribute("publicKeyExponent", publicKeyExponent);
-		
+		request.setAttribute("publicKeyExponent", publicKeyExponent);	
 	}
 }

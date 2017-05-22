@@ -12,10 +12,13 @@ public class MemberInfoAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		// 세션값 가져오기
+
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("id");
+		if(id==null) {
+			response.sendRedirect("./Main.me");
+			return null;
+		}
 		
 		// DB작업 객체
 		MemberDAO mdao = new MemberDAO();
