@@ -88,7 +88,7 @@
 			
 			//	현재 채팅창에 출력될 값
 			textarea.value += "<%=nick%> : " + inputMessage.value + "\n";
-		
+			
 			//	서버에 보낼때 날아가는 값.
 			webSocket.send("<%=nick%> : " + inputMessage.value);
 			
