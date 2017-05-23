@@ -27,6 +27,7 @@
 		</div>
 		<div class="footer_body_2">
 			<h4>이 페이지는 팀 Tomcat의 첫 프로젝트입니다.</h4>
+			이 페이지는 Chrome에 최적화 되어있습니다.<br>
 			<span class="title">개발환경</span> <br><br> OS/DB/Tools/ETC<br>
 			<img src="./images/footer/windows.png"> <img
 				src="./images/footer/mysql.png"> <img

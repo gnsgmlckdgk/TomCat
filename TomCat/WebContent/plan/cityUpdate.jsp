@@ -25,11 +25,19 @@
 		<!-- 추가한 css -->
 	<style type="text/css">
 		
-		div.city_update {
-				width: 90%;
+		section {
+				text-align: center;
+			}
+		
+			div.city_update {
+				width: 80%;
 				margin: -60px auto 30px auto;
 				
 				text-align: center;
+			}
+			
+			div.city_update .btn_div {
+				margin-top: 20px;
 			}
 	
 	</style>
@@ -47,7 +55,7 @@
 	String pageNum = (String)request.getAttribute("pageNum");
 %>
 
-<section class="cityUpdate">
+<section>
 
 <div class="city_update">
 	<form action="./CityUpdateAction.pl" name="city_fr" method="post">
@@ -74,12 +82,18 @@
 		<input type="text" name="en_name" value="<%=pcb.getEn_name()%>">
 		
 		정보
-		<textarea rows="20" cols="20" name="info"><%=pcb.getInfo()%></textarea>
+		<textarea rows="10" cols="20" name="info"><%=pcb.getInfo()%></textarea>
 	
-		<input type="submit"  value="수정">
+		<div class="btn_div">
+		<input type="submit"  value="수정" >
+		<input type="reset"  value="다시쓰기" >
+		</div>
 		
 	</form>
 </div>
+
+<!-- 뒤로가기 버튼 -->
+<input type="button" class="button special" value="뒤로가기" onclick="history.back()">
 
 </section>
 

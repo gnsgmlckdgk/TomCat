@@ -229,6 +229,70 @@ public class PlanDAO {
 		return count;
 	}
 	
+	// 국가페이지의 도시리스트 전체  가져오기
+		public List<PlanCityBean> getCityList(String str) {
+
+			String country_code = "";
+			List<PlanCityBean> list = new ArrayList<PlanCityBean>();
+
+			String nation = str;
+			if ("한국".equals(nation)) {
+				nation = "대한민국";
+			}
+
+			try {
+				con = getConnection();
+
+				// country_code 값 가져오기
+				sql = "select country_code from country where name=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, nation);
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) { // 검색된 국가가 있으면
+					country_code = rs.getString("country_code");
+
+					sql = "select city_code, name, en_name, info, country_code from city where country_code = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, country_code);
+
+					rs = pstmt.executeQuery();
+
+					PlanCityBean pcb = null;
+					while (rs.next()) {
+						pcb = new PlanCityBean();
+
+						pcb.setCity_code(rs.getString("city_code"));
+						pcb.setName(rs.getString("name"));
+						pcb.setEn_name(rs.getString("en_name"));
+						pcb.setInfo(rs.getString("info"));
+						pcb.setCountry_code(rs.getString("country_code"));
+
+						list.add(pcb);
+					}
+
+				} else {
+					return null;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			return list;
+		}
+	
 	// 국가페이지의 도시리스트 가져오기
 	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
 
@@ -365,7 +429,7 @@ public class PlanDAO {
 	}
 
 	/* DB 도시리스트 뽑아오기 (운영자 페이지) : 검색값 */
-	public List<PlanCityBean> getCitySearchList(int startRow, int pageSize, String search) {
+	public List<PlanCityBean> getCitySearchList(int startRow, int pageSize, String search, int sort) {
 		List<PlanCityBean> cityList = new ArrayList();
 		PlanCityBean cb = null;
 		String sql = "";
@@ -373,7 +437,15 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 
-			sql = "select * from city where name like ? order by name asc limit ?,?";
+			if(sort == 1) sql = "select * from city where name like ? order by city_code asc limit ?,?";
+			else if(sort == 2) sql = "select * from city where name like ? order by city_code desc limit ?,?";
+			else if(sort == 3) sql = "select * from city where name like ? order by name asc limit ?,?";
+			else if(sort == 4) sql = "select * from city where name like ? order by name desc limit ?,?";
+			else if(sort == 5) sql = "select * from city where name like ? order by country_code asc limit ?,?";
+			else if(sort == 6) sql = "select * from city where name like ? order by country_code desc limit ?,?";
+			else if(sort == 7) sql = "select * from city where name like ? order by en_name asc limit ?,?";
+			else if(sort == 8) sql = "select * from city where name like ? order by en_name desc limit ?,?";
+			else sql = "select * from city where name like ? limit ?,?";	// 정렬 값 없을때
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");

@@ -5,6 +5,35 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 기존 프로필 이미지 확대해서 보기 -->
+<div class="profileImg_enl"><img src="">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#profileImg').mouseenter(function(){
+				var browserWidth = window.innerWidth;
+				var browserHeight = window.innerHeight;
+				var imgWid = browserWidth * 0.25;
+				var imgHeight = browserHeight * 0.35;
+				
+				var profileImgPath = $('#profileImg').attr('src');
+				
+				$('.profileImg_enl').css('display', 'block');
+				$('.profileImg_enl img').css({
+					'width' : imgWid,
+					'height' : imgHeight
+				});
+				$('.profileImg_enl img').attr('src', profileImgPath);
+			});
+			$('#profileImg').mouseleave(function(){
+				$('.profileImg_enl img').attr('src', '');
+				$('.profileImg_enl').css('display', 'none');
+			})
+		});
+	</script>
+</div>
+<!-- 새로운 프로필 이미지 확대해서 볼 div -->
+<div id="profileImg_enl"></div>
+
 <!-- Main -->
 <section id="main" class="wrapper memberManager">
 	<div class="container">
@@ -21,6 +50,7 @@
 				String id = (String)session.getAttribute("id");
 				if(id==null) {
 					response.sendRedirect("./Main.me");
+					return;
 				}
 				
 				// 회원정보 가져오기
@@ -43,7 +73,7 @@
 							<tr><th>이름</th>
 								<td><input type="text" value="<%=mb.getName() %>" name="name" id="name" maxlength="30"></td></tr>
 							<tr><th>닉네임</th>
-								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="16" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"></td></tr>
+								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="9" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"></td></tr>
 							<tr><th>성별</th>
 								<td>
 									<input type="radio" id="priority-normal man" name="gender" value="남" <%if(mb.getGender().equals("남")){ %>checked<%} %>>
@@ -55,13 +85,13 @@
 								<td><input type="text" value="<%=mb.getTel() %>" name="tel" id="tel" maxlength="20" placeholder=" ' - '문자 생략, 예)01000000000"></td></tr>
 							<tr><th>프로필사진</th>
 								<td>
-									<input type="file" value="<%=mb.getProfile() %>" name="profile" id="profile" onchange="loadImageFile()">
+									<input type="file" value="<%=mb.getProfile() %>" name="profile" id="profile" onchange="loadImageFile();loadImageFile2();">
 									<p>추천 사이즈: 100 x 120</p>
 									
 										<img src="./upload/images/profileImg/<%=mb.getProfile()%>" width="100px" height="120px" id="profileImg">
 										
-										<img src="./images/member/오른쪽 화살표.png" id="right_arrow" >
-										<div id="previewImg"></div>
+										<img src="./images/member/right-arrow.png" id="right_arrow" >
+										<div id="previewImg"></div>	<!-- 새 이미지 파일 선택하면 display 됨 -->
 										
 								</td></tr>	
 						</table>
@@ -73,17 +103,15 @@
 					
 					<script type="text/javascript">
 					/* memberInfo.jsp */
-
 					// fakepath로 이미지 경로가 뜨기 때문에 실제 경로를 알아내기 위한 코드들(이미지파일 제약조건 포함)
 					var loadImageFile = (function() {
-
 						if (window.FileReader) {
 							var oPreviewImg = null, oFReader = new window.FileReader(), rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
 							oFReader.onload = function(oFREvent) {
 								if (!oPreviewImg) {
-									var newPreview = document.getElementById("previewImg"); // 보여줄
-																							// 화면
+									var newPreview = document.getElementById("previewImg"); // 보여줄 화면
+																							
 									oPreviewImg = new Image();
 									oPreviewImg.style.width = (newPreview.offsetWidth).toString()
 											+ "px";
@@ -115,8 +143,63 @@
 										.getElementById("profile").value;
 							}
 						}
+						
 					})();
+					
+					// 새 프로필 미리보기 확대해서 보기
+					var loadImageFile2 = (function() {
+						var browserWidth = window.innerWidth;
+						var browserHeight = window.innerHeight;
+						var imgWid = browserWidth * 0.25;
+						var imgHeight = browserHeight * 0.45;
+						
+						$('#profileImg_enl').css({
+							'width' : imgWid,
+							'height' : imgHeight
+						});
+							
+						if (window.FileReader) {
+							
+							var oPreviewImg = null, oFReader = new window.FileReader(), rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
+							oFReader.onload = function(oFREvent) {
+								if (!oPreviewImg) {
+									var newPreview = document.getElementById("profileImg_enl"); // 보여줄 화면
+																							
+									oPreviewImg = new Image();
+									oPreviewImg.style.width = (newPreview.offsetWidth).toString()
+											+ "px";
+									oPreviewImg.style.height = (newPreview.offsetHeight).toString()
+											+ "px";
+									newPreview.appendChild(oPreviewImg);
+								}
+								oPreviewImg.src = oFREvent.target.result;
+							};
+
+							return function() {
+								var aFiles = document.getElementById("profile").files; // 파일 입력 폼
+								if (aFiles.length === 0) {
+									return;
+								}
+								if (!rFilter.test(aFiles[0].type)) {
+									alert("이미지 파일만 선택해주세요!");
+									$('#profile').val('');
+									return;
+								}
+								oFReader.readAsDataURL(aFiles[0]);
+							}
+
+						}
+						if (navigator.appName === "Microsoft Internet Explorer") {
+							return function() {
+								document.getElementById("profileImg_enl").filters
+										.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document
+										.getElementById("profile").value;
+							}
+						}
+						
+					})();
+					
 					// 리셋 버튼 누르면 프로필사진 미리보기가 사라짐
 					$('#reset').click(function() {
 						$('#right_arrow, #previewImg').css('display', 'none');
@@ -125,6 +208,23 @@
 					// 프로필 사진 바뀌면 미리보기 보여짐
 					$('#profile').change(function() {
 						$('#right_arrow, #previewImg').css('display', 'inline');
+					});
+					// 새 프로필 사진에 마우스 올리면 확대 이미지 보여짐
+					$('#previewImg').mouseenter(function() {
+						var browserWidth = window.innerWidth;
+						var browserHeight = window.innerHeight;
+						var imgWid = browserWidth * 0.25;
+						var imgHeight = browserHeight * 0.35;
+						
+						$('#profileImg_enl').css({
+							'width' : imgWid,
+							'height' : imgHeight
+						});
+						
+						$('#profileImg_enl').css('visibility', 'visible');
+					});
+					$('#previewImg').mouseleave(function(){
+						$('#profileImg_enl').css('visibility', 'hidden');
 					});
 
 					// 바뀐정보는 글자 색을 바꿈
@@ -190,7 +290,7 @@
 							type : 'POST',
 							data : {
 								'id' : id,
-								'nick' : nick	
+								'nick' : nick
 							},
 							dataType : 'text',
 							url : './member/updateCheck/nickOverlapCheck.jsp',

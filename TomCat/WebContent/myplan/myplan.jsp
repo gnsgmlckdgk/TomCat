@@ -44,8 +44,6 @@
 	//시작일
 	$('#fromDate').datepicker({
 		showOn: "focus",
-/* 		buttonImage: "myplan/pn_cal_btn.png",
-		buttonText:"날짜선택", buttonImageOnly:true,*/
 		dateFormat:"yy-mm-dd",
 		changeMonth:true,
 		onClose: function(selectedDate){
@@ -58,9 +56,7 @@
     
     //종료일
     $('#toDate').datepicker({
-   	  showOn: "focus", 
-/*          buttonImage: "myplan/pn_cal_btn.png", 
-         buttonText: "날짜선택",   buttonImageOnly : true, */
+   	 	 showOn: "focus", 
          dateFormat: "yy-mm-dd",
          changeMonth: true,
          onClose: function( selectedDate ) {
@@ -74,6 +70,11 @@
 	}); */
 });  
 //날짜 선택하기 
+	
+	
+
+
+
 
 </script>
 
@@ -106,7 +107,12 @@
 	<div class="container" >
 		<div class="myplan-list" >
 				<h3>
-				<button type="button" >대중교통경로</button><!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
+				<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
+								
 				<button class="btn" >일정만들기</button>
 				</h3>
 				<table border="1" >

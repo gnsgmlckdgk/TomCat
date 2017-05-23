@@ -22,13 +22,14 @@
 	String id = (String)session.getAttribute("id");
 	if(id==null) {
 		response.sendRedirect("./Main.me");
+		return;
 	}
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 	
 <!-- Main -->
-<section id="main" class="wrapper">
+<section id="main" class="wrapper memberManager">
 	<div class="container">
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
@@ -62,7 +63,9 @@
 			}
 			
 			function travelInput() {
-				window.open("./TravelAdmin.td", "window", "width=1200, height=800, top=100, left=300");
+				var left = (screen.width - 1200)/2;
+				var availHeight = screen.availHeight-67;
+				window.open("./TravelAdmin.td", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 	
 		</script>

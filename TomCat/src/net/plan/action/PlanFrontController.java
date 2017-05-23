@@ -175,9 +175,8 @@ public class PlanFrontController extends HttpServlet {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			
 		}
-		
-		
 		
 		
 		

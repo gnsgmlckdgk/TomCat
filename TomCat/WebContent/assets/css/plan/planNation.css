@@ -6,22 +6,72 @@
 section#banner {
 	/* 맨 윗부분 */
 }
- section.nation_one {
-	position: relative;
+section.nation_one {
+	/* position: relative; */
+}
+section.nation_one .nation_info_content {
+	margin: 0 auto;
+	padding: 0;
+}
+section.nation_one div.nation_info {
+	background-color: #fff;
+	
+	width: 100%;
+	margin: 50px auto;
+}
+section.nation_one h2 {
+	display: block;
+}
+section.nation_one div.nation_info table {
+	
+}
+section.nation_one div.nation_info table tr {
+	border: none;
+	background-color: #fff;
+	
+	display: block;
+	margin-bottom: 10px;
 }
 section.nation_one div.nation_info table th {
-	color: #fff;
+	color: #000;
 	font-size: 1em;
 	min-width: 82px;
+	border-right: 3px solid #ccc;
+
+	width: 10em;
 }
 section.nation_one div.nation_info table td {
-	color: #fff;
+	color: #000;
 	font-size: 0.9em;
 }
 section.nation_one div.nation_info_content {
-	width: 60%;
+	width: 1250px;
 	min-width: 600px;
+	padding: 0;
 }
+		/* 국가페이지 도시 이미지 슬라이드 planNation */
+    	div.slideContainer {
+    		z-index: 9;
+    		width: 600px;
+    		height: 400px;
+    		background-color: rgba(255, 255, 255, 0);
+    		float: left;
+    	}
+    	div.slideContainer div img {
+    		width: 100%;
+    		height: 100%;
+    	}
+
+		/* 지도  */
+		section.nation_one div.map {
+			padding: 0;
+			width: 600px;
+			height: 400px;
+			z-index: 9;
+			
+			float: left;
+			margin-left: 50px;
+		}
 
 /* 두번째 섹션 : 국가 리스트 */
 section#nation_two {
@@ -29,7 +79,6 @@ section#nation_two {
 }
 section#nation_two .container {
 	margin: 20px auto;
-	
 	min-width: 900px;
 }
 section#nation_two .city_list_div {
@@ -78,7 +127,6 @@ section#nation_two div.search_div {	/* 검색 */
 	position: relative;
 	
 	width: 420px;
-	
 }
 section#nation_two div.search_div img {
 	position: absolute;
