@@ -121,7 +121,7 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>';"><%=mb.getId() %></td>
+									<td class="id_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>&pageNum=<%=pageNum%>&search=<%=search%>&sort=<%=isort%>';"><%=mb.getId() %></td>
 									<td class="nick_td"><%=mb.getNick() %></td>	
 									<td class="name_td"><%=mb.getName() %></td>
 									<td class="auth_select_box">
