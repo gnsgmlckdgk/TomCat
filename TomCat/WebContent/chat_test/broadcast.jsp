@@ -60,7 +60,10 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 
 	//	OnClose는 웹 소켓이 끊겼을 때 동작하는 함수.
 	function onClose(event){
-		textarea.value += <%=nick%> + " DisConnected \n";
+var div=document.createElement('div');
+		
+		//접속했을 때 접속자들에게 알릴 내용.
+		webSocket.send("<%=nick%> is DisConnected\n");
 	}
 
 	//	OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면 호출되는 함수.
@@ -68,14 +71,15 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 		
 		//messageWindow2에 붙이기
 		var div=document.createElement('div');
-		div.style["width"]="10em";
+		
+		div.style["width"]="auto";
 		div.style["word-wrap"]="break-word";
-		div.style["display"]="block";
+		div.style["display"]="inline-block";
 		div.style["background-color"]="#fcfcfc";
 		div.style["border-radius"]="3px";
 		div.style["padding"]="3px";
 		div.style["margin-left"]="3px";
-		div.innerHTML = "connected";
+
 		
 		div.innerHTML = event.data;
 		document.getElementById('messageWindow2').appendChild(div);
@@ -96,13 +100,15 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 		//접속했을 때, 내 영역에 보이는 글.
 		
 		var div=document.createElement('div');
-		div.style["width"]="10em";
+		
+		div.style["width"]="auto";
 		div.style["word-wrap"]="break-word";
-		div.style["display"]="block";
+		div.style["display"]="inline-block";
 		div.style["background-color"]="#fcfcfc";
 		div.style["border-radius"]="3px";
 		div.style["padding"]="3px";
 		div.style["margin-left"]="3px";
+		
 		div.innerHTML = "connected";
 		document.getElementById('messageWindow2').appendChild(div);
 		
@@ -122,20 +128,22 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 	// send 함수를 통해서 웹소켓으로 메시지를 보낸다.
 	function send() {
 			
+		
+		
 		//	서버에 보낼때 날아가는 값.
 		webSocket.send("<%=nick%> : " + inputMessage.value);
 		
 		// 채팅화면 div에 붙일 내용
 		var div=document.createElement('div');
-		div.style["width"]="10em";
+		div.style["width"]="auto";
 		div.style["word-wrap"]="break-word";
 		div.style["float"]="right";
-		div.style["display"]="block";
+		div.style["display"]="inline-block";
 		div.style["background-color"]="#ffea00";
 		div.style["padding"]="3px";
 		div.style["border-radius"]="3px";
 		div.style["margin-right"]="3px";
-		div.innerHTML = "<%=nick%>	: " + inputMessage.value;
+		div.innerHTML = inputMessage.value;
 		document.getElementById('messageWindow2').appendChild(div);
 
 		//clear div 추가
@@ -151,6 +159,7 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 
 		//	textarea의 스크롤을 맨 밑으로 내린다.
 		messageWindow2.scrollTop = messageWindow2.scrollHeight;
+		
 	}
 </script>
 
