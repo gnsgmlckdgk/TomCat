@@ -167,6 +167,7 @@ public class BoardDAO {
 		return boardList;
 	}//getBoardList(startRow,pageSize)
 	
+	
 	public BoardBean getBoard(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;

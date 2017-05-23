@@ -16,16 +16,35 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/myplanModify.css" />
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="assets/css/map/modifyNewFile.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <script>
+$(function(){
+	$("#left_box1").click(function(){
+		var effect = 'slide';
+		var options ='left';
+		var duration = 500;
+		$('#left_box2').toggle(effect, options, duration);
+	}); 
+});
 
+$(function(){
+	$("#left_box2").click(function(){
+		var effect = 'slide';
+		var options ='left';
+		var duration = 500;
+		$('#right_box').toggle(effect, options, duration);
+	}); 
+});
 </script>
 <body>
 	<%
@@ -35,58 +54,12 @@
 
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 		
+
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
+		List datelist = (List)request.getAttribute("datelist");
 		System.out.println(fromDate);
-         
-/* 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
-		  Calendar cal = Calendar.getInstance();
-
-		  try {
-		   cal.setTime(sdf.parse(fromDate));
-		  } catch (Exception e) {
-		  }
-
-		  int count = getDiffDayCount(fromDate, toDate);
-
-		  // 시작일부터
-		  cal.add(Calendar.DATE, -1);
-
-		  // 데이터 저장
-		  ArrayList<String> list = new ArrayList<String>();
-
-		  for (int i = 0; i <= count; i++) {
-		   cal.add(Calendar.DATE, 1);
-
-		   list.add(sdf.format(cal.getTime()));
-		  }
-
-		  String[] result = new String[list.size()];
-
-		  list.toArray(result);
- 		 */
-     
-		/* 
-		DateFormat df = new SimpleDateFormat("yyyyMMdd");
-		
-		Date d1 = df.parse(fromDate);
-		Date d2 = df.parse(toDate);
-		
-		Calendar c1 = Calendar.getInstance();
-		Calendar c2 = Calendar.getInstance();
-		
-		c1.setTime(d1);
-		c1.setTime(d2);
-
-		while(c1.compareTo(c2) !=1){
-			
-			System.out.printf("%tF\n", c1.getTime());
-			
-			c1.add(Calendar.DATE, 1);
-		} 
-		*/
+    
 		%>
 
 		<!-- <form action="./MyPlanModifyAction.pln" method="post" ></form> -->
@@ -97,28 +70,36 @@
 				<ul id="left_box1_detail">
 					<!-- myplanModify.css -->
 					<li>[<%if (plan_nr == 1) {%>일정A<%}%><%if (plan_nr == 2) {%>일정B<%}%>]</li>
-					<li><%=fromDate%>~<%=toDate%></li>
-					<li>일정전체보기</li>
+					<li>전체일정보기</li>
 					<li><%=fromDate%></li>
-			
+					<%for(int i=0;i<datelist.size();i++){
+						%>
+					<li>
+						<%=datelist.get(i) %>
+					</li>		
+						<%
+						}
+						%>
+					<li><%=toDate%></li>
 				</ul>
-			
-				
 			</div>
 			<div id="left_box2">
 				<!-- box2 찜 바구니-->
 				<ul id="left_box2_detail">
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-				</ul>
-			</div>
+					<%
+						for (int i = 0; i < goodsList.size(); i++) {
+							TravelBean tb = (TravelBean) goodsList.get(i);
+					%>
+					<li><%=tb.getName()%></li>
+					<%
+						}
+					%>
+				</ul>	
+			</div>	
 			<div id="right_box">
 				<!-- box3 도시 찜 버튼 -->
 				<ul id="right_box_detail">
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
+					
 				</ul>
 			</div>
 		</div>
