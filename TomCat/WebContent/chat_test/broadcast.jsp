@@ -68,8 +68,16 @@ var div=document.createElement('div');
 
 	//	OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면 호출되는 함수.
 	function onMessage(event) {
+
+		//클라이언트에서 날아온 메시지를 |\| 단위로 분리한다
+		var message = event.data.split("|\|");
 		
 		//messageWindow2에 붙이기
+		var who = document.createElement('div');
+		
+		who.style["padding"]="3px";
+		who.style["margin-left"]="3px";
+		
 		var div=document.createElement('div');
 		
 		div.style["width"]="auto";
@@ -79,14 +87,15 @@ var div=document.createElement('div');
 		div.style["border-radius"]="3px";
 		div.style["padding"]="3px";
 		div.style["margin-left"]="3px";
-
 		
-		div.innerHTML = event.data;
+		who.innerHTML = message[0];
+		document.getElementById('messageWindow2').appendChild(who);
+		div.innerHTML = message[1];
 		document.getElementById('messageWindow2').appendChild(div);
 		
 		//clear div 추가		
 		var clear=document.createElement('div');
-		div.style["clear"]="both";
+		clear.style["clear"]="both";
 		document.getElementById('messageWindow2').appendChild(clear);
 		
 		//textarea 스크롤 아래로.
@@ -101,19 +110,13 @@ var div=document.createElement('div');
 		
 		var div=document.createElement('div');
 		
-		div.style["width"]="auto";
-		div.style["word-wrap"]="break-word";
-		div.style["display"]="inline-block";
-		div.style["background-color"]="#fcfcfc";
-		div.style["border-radius"]="3px";
-		div.style["padding"]="3px";
-		div.style["margin-left"]="3px";
+		div.style["text-align"]="center";
 		
 		div.innerHTML = "connected";
 		document.getElementById('messageWindow2').appendChild(div);
 		
 		var clear=document.createElement('div');
-		div.style["clear"]="both";
+		clear.style["clear"]="both";
 		document.getElementById('messageWindow2').appendChild(clear);
 		
 		//접속했을 때 접속자들에게 알릴 내용.
@@ -127,38 +130,43 @@ var div=document.createElement('div');
 	
 	// send 함수를 통해서 웹소켓으로 메시지를 보낸다.
 	function send() {
+
+		//inputMessage가 있을때만 전송가능
+		if(inputMessage.value!=""){
 			
-		
-		
-		//	서버에 보낼때 날아가는 값.
-		webSocket.send("<%=nick%> : " + inputMessage.value);
-		
-		// 채팅화면 div에 붙일 내용
-		var div=document.createElement('div');
-		div.style["width"]="auto";
-		div.style["word-wrap"]="break-word";
-		div.style["float"]="right";
-		div.style["display"]="inline-block";
-		div.style["background-color"]="#ffea00";
-		div.style["padding"]="3px";
-		div.style["border-radius"]="3px";
-		div.style["margin-right"]="3px";
-		div.innerHTML = inputMessage.value;
-		document.getElementById('messageWindow2').appendChild(div);
+			//	서버에 보낼때 날아가는 값.
+			webSocket.send("<%=nick%>|\|" + inputMessage.value);
+			
+			// 채팅화면 div에 붙일 내용
+			var div=document.createElement('div');
+			
+			div.style["width"]="auto";
+			div.style["word-wrap"]="break-word";
+			div.style["float"]="right";
+			div.style["display"]="inline-block";
+			div.style["background-color"]="#ffea00";
+			div.style["padding"]="3px";
+			div.style["border-radius"]="3px";
+			div.style["margin-right"]="3px";
+			
+			//div에 innerHTML로 문자 넣기
+			div.innerHTML = inputMessage.value;
+			document.getElementById('messageWindow2').appendChild(div);
 
-		//clear div 추가
-		var clear = document.createElement('div');
-		div.style["clear"] = "both";
-		document.getElementById('messageWindow2').appendChild(clear);
+			//clear div 추가
+			var clear = document.createElement('div');
+			clear.style["clear"] = "both";
+			document.getElementById('messageWindow2').appendChild(clear);
+			
+			//	?
+			//inputMessage.value = "";
 
-		//	?
-		//inputMessage.value = "";
+			//	inputMessage의 value값을 지운다.
+			inputMessage.value = '';
 
-		//	inputMessage의 value값을 지운다.
-		inputMessage.value = '';
-
-		//	textarea의 스크롤을 맨 밑으로 내린다.
-		messageWindow2.scrollTop = messageWindow2.scrollHeight;
+			//	textarea의 스크롤을 맨 밑으로 내린다.
+			messageWindow2.scrollTop = messageWindow2.scrollHeight;
+		}//inputMessage가 있을때만 전송가능 끝.
 		
 	}
 </script>
