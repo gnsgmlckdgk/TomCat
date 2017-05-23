@@ -16,31 +16,31 @@
 	}
 %>
 
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
+
 함께해요 게시판에 붙일예정.
-<br>
-http://nowonbun.tistory.com/285
-<br>
-http://m.mkexdev.net/337
-<br>
-http://cocomo.tistory.com/271
-<br>
-귓속말 기능 : http://j3rmy.tistory.com/3
-<br>
+
 <hr>
 채팅방 입장 비밀번호. 귓속말(혹은 쪽지)
 <br>
-textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
+(완)textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 <br>
 채팅방 이미지 전송.
+<br>
+이모티콘 유료기능 구현하기.
 <br>
 
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 <input id="inputMessage" type="text"
-	onkeydown="if(event.keyCode==13){send();}" />
-<input type="submit" value="send" onclick="send();" />
-<img src='../images/chat/emoticon_test.png' onclick="emoticon()" style="width:2em">
-<div id="messageWindow2" style="padding:10px 0;height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
+	onkeydown="if(event.keyCode==13){send();}"/>
+	
+<input type="submit" value="send" onclick="send();"/>
+
+<img src='./images/chat/emoticon_test.png' onclick="emoticon()" style="width:2em">
+
+<div id="messageWindow2" style="padding:10px 0;height: 30em; overflow: auto; background-color: #a0c0d7;"></div>
 
 
 <script type="text/javascript">
@@ -90,7 +90,7 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 
 				re_send = message[0];
 			}
-		
+			
 			//div는 받은 메시지 출력할 공간.
 			var div=document.createElement('div');
 		
@@ -98,7 +98,12 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 			div.style["width"]="auto";
 			div.style["word-wrap"]="break-word";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="#fcfcfc";
+			
+			//3번째 구분자가 img를 말할 경우, background 제거
+			if(message[2] == null){
+				div.style["background-color"]="#fcfcfc";
+			}
+			
 			div.style["border-radius"]="3px";
 			div.style["padding"]="3px";
 			div.style["margin-left"]="3px";
@@ -190,9 +195,8 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 		
 		var div = document.createElement('div');
 		
-		
 		div.style["float"]="right";
-		div.innerHTML = "<img src='../images/chat/emoticon_test.png'>";
+		div.innerHTML = "<img src='./images/chat/emoticon_test.png'>";
 		document.getElementById('messageWindow2').appendChild(div);
 		
 		//clear div 추가
@@ -200,9 +204,11 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 		clear.style["clear"] = "both";
 		document.getElementById('messageWindow2').appendChild(clear);
 		
-		webSocket.send("<%=nick%>|\|" + "<img src='../images/chat/emoticon_test.png'>");
+		//2번째 구분자 뒤에 img 단어를 넣는다.
+		webSocket.send("<%=nick%>|\|" + "<img src='./images/chat/emoticon_test.png'>"+"|\|img");
 		
 	}
 </script>
 
-
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />
