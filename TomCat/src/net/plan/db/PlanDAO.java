@@ -1456,5 +1456,139 @@ public class PlanDAO {
 
 		return pcb;
 	}
+	
+	/*각 대륙에 맞는 도시 개수*/
+	public int getCityCount_con(String continent) {
+		int count = 0;
+		String country_code="";
+		try {
+			con = getConnection();
+
+			// country_code 값 가져오기
+			sql = "select country_code from country where continent=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, continent);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) { // DB에 국가가 있으면
+				country_code = rs.getString("country_code");
+
+				sql = "select count(*) as count from city where country_code=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, country_code);
+		
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					count = count+rs.getInt("count");
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	/* 각대륙에 맞는 도시리스트 뽑아오기 */
+	public List<PlanCityBean> getCityList_con(String continent) {
+		List<PlanCityBean> cityList = new ArrayList();
+		PlanCityBean cb = null;
+		String sql = "";
+		String country_code="";
+		ResultSet rs2=null;
+
+		try {
+			con = getConnection();
+			if(continent.equals("All")){//도시 전체
+				sql="select * from city";
+				pstmt=con.prepareStatement(sql);
+				rs=pstmt.executeQuery();
+				
+				while(rs.next()){
+					cb=new PlanCityBean();
+					
+					cb.setCountry_code(rs.getString("country_code"));
+					cb.setName(rs.getString("name"));
+					cb.setInfo(rs.getString("info"));
+					cb.setCity_code(rs.getString("city_code"));
+					cb.setEn_name(rs.getString("en_name"));
+					
+					cityList.add(cb);
+				}
+			}else{//대륙에 맞는 도시 리스트
+				sql="select country_code from country where continent=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, continent);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) { // DB에 국가가 있으면
+					country_code = rs.getString("country_code");
+					
+					sql = "select * from city where country_code=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, country_code);
+			
+					rs2 = pstmt.executeQuery();
+
+					while(rs2.next()) {
+						cb=new PlanCityBean();
+						cb.setCountry_code(rs2.getString("country_code"));
+						cb.setName(rs2.getString("name"));
+						cb.setInfo(rs2.getString("info"));
+						cb.setCity_code(rs2.getString("city_code"));
+						cb.setEn_name(rs2.getString("en_name"));
+						
+						cityList.add(cb);
+					}
+				}
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (rs2 != null) {
+				try {
+					rs2.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return cityList;
+
+	}
+	
 
 }
