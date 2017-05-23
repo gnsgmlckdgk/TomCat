@@ -163,7 +163,7 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 			div.style["padding"]="3px";
 			div.style["border-radius"]="3px";
 			div.style["margin-right"]="3px";
-			
+
 			//div에 innerHTML로 문자 넣기
 			div.innerHTML = inputMessage.value;
 			document.getElementById('messageWindow2').appendChild(div);
