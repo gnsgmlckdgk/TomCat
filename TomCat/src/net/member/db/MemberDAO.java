@@ -784,6 +784,66 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	// 닉네임 변경
+	public void updateNick(String id, String nick) {
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "update member set nick=? where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nick);
+			ps.setString(2, id);
+			
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// 닉네임 반환
+	public String getNick(String id) {
+		
+		String nick = "";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql="select nick from member where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				nick = rs.getString("nick");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return nick;
+	}
+	
 
 	// SHA256 암호화(단방향)
 	public String encSHA256(String str){

@@ -244,7 +244,6 @@ public class MemberFrontController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 		
 		

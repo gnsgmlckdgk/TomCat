@@ -5,45 +5,49 @@
 
 <html>
 <head>
-	<style type="text/css">
-		/* 나중에 외부파일로 옮길 예정 */
-		div.adminMemberInfo {	/* 서브메뉴 + 주내용 */
-			
-		}
-		div.adminMemberInfo h1 {	/* 제목 */
-			border-bottom: 1px solid #ccc;
-			padding: 12px;
-			margin-bottom: 10px;
-			font-size: 1.4em;
-		}
-		div.adminMemberInfo div.inner_content {	/* 제목뺀 내용들 */
-			max-width: 700px;
-			margin: 0 auto;
-		}
-		div.adminMemberInfo img {	/* 프로필 이미지 */
-			display: block;
-			margin: 0 auto 30px auto;
-		}
-		div.adminMemberInfo tr {
-			display: block;
-			width: 100%;
-		}
-		div.adminMemberInfo th {
-			width: 100px;
-		}
-		div.adminMemberInfo td {
-			width: 300px;
-		}
-		div.adminMemberInfo td input[type="text"] {	/* 닉네임 폼 */
-			border: none;
-			background-color: #fff;
-		}
-		div.adminMemberInfo input[type="button"] {
-			display: block;
-			margin: 20px auto;
+
+	<script type="text/javascript">
+	
+	// 닉네임 수정
+	function nickUpdate(memberId, adminId) {
+		
+		var nick = $('.nick').val();
+		
+		var regNick = /^[a-z|가-힣][a-z|0-9|가-힣]{1,8}/i; // 영문, 한글 시작 영문,숫자,한글 조합 가능
+		
+		if(!regNick.test(nick)) {
+			alert("닉네임을 형식에 맞게 입력해주세요.");
+			return;
 		}
 		
-	</style>
+		// 닉네임 중복확인
+		$.ajax({
+			type: 'POST',
+			url: './member/updateCheck/nickOverlapCheck.jsp',
+			data: {
+				'id' : memberId,
+				'nick' : nick,
+				'adminId': adminId,
+				'admin' : '1'
+			},
+			dataType: 'text',
+			async: false,
+			success: function(data) {
+				if(data==1) {	// 중복없음
+					alert(memberId+" 사용자의 닉네임이 변경되었습니다.");
+					location.reload();	// 페이지 새로고침
+				}else {			// 사용할 수 없는 닉네임
+					alert("이미 사용중인 닉네임 입니다.");
+				}
+			},
+			error: function(status, err) {
+				alert(status + " : " + err);	
+			}
+		});
+		
+	}
+	
+	</script>
 </head>
 
 <!-- 회원정보 보기(관리자) -->
@@ -59,6 +63,17 @@
 	}
 	
 	// 파라미터 값 가져오기
+	String pageNum = request.getParameter("pageNum");
+	String search = request.getParameter("search");
+	if(search==null) {
+		search="";
+	}
+	String sort = request.getParameter("sort");	
+	if(sort==null) {
+		sort="0";
+	}
+	int isort = Integer.parseInt(sort);
+	
 	MemberBean mb = (MemberBean)request.getAttribute("memberInfo");
 	if(mb==null) {
 		response.sendRedirect("./Main.me");
@@ -102,7 +117,11 @@
 					</tr>
 					<tr>
 						<th>닉네임</th>
-						<td><input type="text" name="nick" value="<%=mb.getNick()%>"></td>
+						<td>
+							<input type="text" name="nick" class="nick" value="<%=mb.getNick()%>" maxlength="9">
+							<input type="button" class="update_btn" value="수정" class="button alt" 
+							onclick="nickUpdate('<%=mb.getId()%>', '<%=id%>');">
+						</td>
 					</tr>
 					<tr>
 						<th>이름</th>
@@ -124,7 +143,9 @@
 				
 				</div><!-- inner_content -->
 				
-				<input type="button" value="뒤로가기" onclick="history.back();" class="button special">
+				<input type="button" value="뒤로가기" 
+				onclick="location.href='./MemberManager.me?pageNum=<%=pageNum %>&search=<%=search %>&sort=<%=isort %>';" 
+				class="button special">
 				
 			</div><!-- content -->
 		</div>	<!-- adminMemberInfo -->
