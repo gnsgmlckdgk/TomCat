@@ -145,7 +145,7 @@ public class BoardDAO {
 			while(rs.next()){
 				BoardBean bb=new BoardBean();
 				bb.setNum(rs.getInt("num"));
-			
+				bb.setNick_name(rs.getString("nick_name"));
 				bb.setSubject(rs.getString("subject"));
 				bb.setContent(rs.getString("content"));
 				bb.setDate(rs.getTimestamp("date"));
@@ -187,7 +187,7 @@ public class BoardDAO {
 			if(rs.next()){
 				bb=new BoardBean();
 				bb.setNum(rs.getInt("num"));
-			
+				bb.setNick_name(rs.getString("nick_name"));
 				bb.setSubject(rs.getString("subject"));
 				bb.setContent(rs.getString("content"));
 				bb.setDate(rs.getTimestamp("date"));

@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="assets/css/list.css" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body class="fadein">
@@ -57,6 +57,7 @@ $(document).scroll(function() {
 // request.setAttribute("pageBlock", pageBlock);
 // request.setAttribute("startPage", startPage);
 // request.setAttribute("endPage", endPage);
+String id = (String)session.getAttribute("id");	
 List boardList=(List)request.getAttribute("boardList");
 String pageNum=(String)request.getAttribute("pageNum");    
 int count=((Integer)request.getAttribute("count")).intValue();
@@ -64,10 +65,14 @@ int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
-%>
-<div class="w">
-<h3><a href="./BoardWrite1.bb">글쓰기</a></h3>
 
+if(id!=null){
+%>
+
+<h3><a href="./BoardWrite1.bb">글쓰기</a></h3>
+<%} %>
+
+<div class="w">
  <%
     //  boardList 
 
@@ -78,20 +83,23 @@ int endPage=((Integer)request.getAttribute("endPage")).intValue();
     		%>
     		
 <div id="e">
-
+<!-- 프로필 -->
 <div id="file">
-<%=mb.getProfile()%>
+<img src="./upload/images/profileimg/<%=mb.getProfile()%>" >
 </div>
 
+<!-- 닉네임,날짜 -->
 <div id="nick">
 <%=bb.getNick_name()%>
 <%=bb.getDate() %>
  </div>
  
+<!--  제목 -->
  <div id="sub">
 <%=bb.getSubject() %>
 </div>
 
+<!-- 내용 -->
 <div id="con">
 <%=bb.getContent() %>
 </div>
