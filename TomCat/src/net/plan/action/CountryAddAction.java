@@ -1,5 +1,6 @@
 package net.plan.action;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,16 @@ public class CountryAddAction implements Action{
 		PlanDAO pdao = new PlanDAO();
 		
 		pdao.insertCountry(pcb);
+		
+		// 이미지 담는 폴더 생성
+		String realPath = request.getSession().getServletContext().getRealPath("/images/plan/nation/"+pcb.getCountry_code());
+		System.out.println("realPath: " + realPath);
+		File dir = new File(realPath);
+		if(!dir.exists()) {	// 존재하지 않으면
+			System.out.println("새 디렉토리 생성");
+			dir.mkdirs();
+			// 가상경로에 생성됨 이클립스 아파치톰캣 서버에서는
+		}
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();		

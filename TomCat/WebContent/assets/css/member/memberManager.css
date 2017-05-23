@@ -93,6 +93,7 @@ div.container {
 /* 서브메뉴 */
 div#submenu {
 	border: 3px solid #ccc;
+	border-radius: 10px;
 	width: 200px;
 	min-height: 480px;
 	position: absolute;
@@ -333,7 +334,7 @@ div.content_member_memberManager th.th_img {
 
 div.content_member_memberManager th.th_id {
 	/* width: 260px; */
-	width: 20%;
+	width: 33%;
 }
 
 div.content_member_memberManager th.th_nick {
@@ -343,7 +344,6 @@ div.content_member_memberManager th.th_nick {
 
 div.content_member_memberManager th.th_name {
 	/* width: 120px; */
-	width: 13%;
 }
 
 div.content_member_memberManager th.th_auth {

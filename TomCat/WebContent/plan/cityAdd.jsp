@@ -37,6 +37,15 @@
 				margin-top: 20px;
 			}
 			
+			div.cityAdd input[type="file"] {
+				display: block;
+				margin: 0 auto 10px auto;
+				font-size: 1.1em;
+			}
+			div.cityAdd .cityt {
+				font-weight: bold;
+			}
+			
 		</style>
 			
 	</head>
@@ -55,7 +64,7 @@
 
 <div class="cityAdd">
 	<form action="./CityAdd.pl" name="city_fr" method="post">
-		국가코드
+		<span class="cityt">국가코드</span>
 		<select name="country_code">
 			<%
 				for(int i=0;i<countryList.size();i++){
@@ -69,14 +78,16 @@
 	
 		<!-- 도시 코드  ==> 도시영어이름과 동일 -->
 		
-		
-		도시 이름
+		<span class="cityt">도시 이름</span>
 		<input type="text" name="name">
 		
-		도시 영어이름
+		<span class="cityt">도시 영어이름</span>
 		<input type="text" name="en_name">
 		
-		정보
+		<span class="cityt">도시 이미지</span>
+		<input type="file" name="file">
+		
+		<span class="cityt">정보</span>
 		<textarea rows="10" cols="20" name="info"></textarea>
 	
 		<div class="btn_div">
