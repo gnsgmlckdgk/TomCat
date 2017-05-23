@@ -46,6 +46,7 @@
 			String id = (String)session.getAttribute("id");	// 관리자 아이디
 			if(id==null) {
 				response.sendRedirect("./Main.me");
+				return;
 			}
 		
 			// 한글처리
@@ -105,7 +106,6 @@
 							<th id="th_nick" class="a th_nick" title="닉네임<%if(isort==3){%>오름차순<%}else if(isort==4){%>내림차순<%}%>">
 								<div style="width: 80px; margin: 0 auto;">닉네임<img src="./images/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortNick_img"></div>
 							</th>
-							<th class="th_name">이름</th>
 							<th id="th_auth" class="a th_auth" title="권한<%if(isort==5){%>:관리자우선<%}else if(isort==6){%>:사용자우선<%}%>">
 								<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div>
 							</th>
@@ -120,9 +120,11 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getId() %></td>
-									<td class="nick_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getNick() %></td>	
-									<td class="name_td"><%=mb.getName() %></td>
+									<td class="id_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>&pageNum=<%=pageNum%>&search=<%=search%>&sort=<%=isort%>';">
+									<span <%if(mb.getGold()==1){%>style="color: gold; text-shadow: 1px 1px 1px black;"<%} %>><%=mb.getId() %></span></td>
+									<td class="nick_td">
+									<span <%if(mb.getGold()==1){%>style="color: gold; text-shadow: 1px 1px 1px black;"<%} %>><%=mb.getNick() %></span>
+									</td>	
 									<td class="auth_select_box">
 										<div class="select-wrapper">
 										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">

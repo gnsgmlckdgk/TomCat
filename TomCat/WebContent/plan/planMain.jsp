@@ -89,6 +89,39 @@
 	window.onload=CountryList();
 </script> -->
 
+<!-- 추천 도시 -->
+<script type="text/javascript">
+	$(window).load(function(){
+		$.ajax({
+			type:'post',
+			url:'./plan/planMainCityList.jsp',
+			data:{continent:'All'},
+			success:function(data){
+				$('div.bestTripimg').append(data);
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
+		});
+	});
+	
+	function cityListchange(continent) {
+		$.ajax({
+			type:'post',
+			url:'./plan/planMainCityList.jsp',
+			data:{continent : continent},
+			success:function(data){
+				$('div.bestTripimg').empty();
+				$('div.bestTripimg').append(data);
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
+		});
+	
+	}
+</script>
+
 <%
 	/* 대륙 리스트 */
 	String[] cont = { "아시아", "유럽", "남태평양", "중남미", "북미" };
@@ -121,12 +154,12 @@
 			<h2>인기여행지</h2>
 			<div class="bestTripMenu">
 				<ul class="bestTrip_cont">
-					<li><a href="#">추천</a></li>
-					<li><a href="#">아시아</a></li>
-					<li><a href="#">유럽</a></li>
-					<li><a href="#">남태평양</a></li>
-					<li><a href="#">중남미</a></li>
-					<li><a href="#">북미</a></li>
+					<li><a href="javascript:cityListchange('All');">추천</a></li>
+					<li><a href="javascript:cityListchange('asia');">아시아</a></li>
+					<li><a href="javascript:cityListchange('europe');">유럽</a></li>
+					<li><a href="javascript:cityListchange('oceania');">남태평양</a></li>
+					<li><a href="javascript:cityListchange('south');">중남미</a></li>
+					<li><a href="javascript:cityListchange('north');">북미</a></li>
 				</ul>
 			</div>
 
@@ -134,28 +167,7 @@
 
 			<!-- 인기여행지 이미지리스트(대륙별 도시추천) -->
 			<div class="bestTripimg">
-				<table border="1">
-					<tr>
-						<td><img alt="" src="./images/pic01.jpg" width="350em"
-							height="300em"></td>
-						<td><img alt="" src="./images/pic02.jpg" width="350em"
-							height="300em"></td>
-						<td><img alt="" src="./images/pic03.jpg" width="350em"
-							height="300em"></td>
-						<td><img alt="" src="./images/pic04.jpg" width="350em"
-							height="300em"></td>
-					</tr>
-					<tr>
-						<td><img alt="" src="./images/pic04.jpg" width="350em"
-							height="300em"></td>
-						<td><img alt="" src="./images/pic03.jpg" width="350em"
-							height="300em"></td>
-						<td><img alt="" src="./images/pic05.jpg" width="350em"
-							height="300em"></td>
-						<td><img alt="" src="./images/pic06.jpg" width="350em"
-							height="300em"></td>
-					</tr>
-				</table>
+				
 			</div>
 		</div>
 

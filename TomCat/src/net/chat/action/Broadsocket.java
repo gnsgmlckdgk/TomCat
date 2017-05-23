@@ -1,4 +1,4 @@
-package net.chat_test;
+package net.chat.action;
 
 import java.io.IOException;
 import java.util.Collections;

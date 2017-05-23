@@ -50,6 +50,7 @@
 				String id = (String)session.getAttribute("id");
 				if(id==null) {
 					response.sendRedirect("./Main.me");
+					return;
 				}
 				
 				// 회원정보 가져오기
@@ -72,7 +73,7 @@
 							<tr><th>이름</th>
 								<td><input type="text" value="<%=mb.getName() %>" name="name" id="name" maxlength="30"></td></tr>
 							<tr><th>닉네임</th>
-								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="16" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"></td></tr>
+								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="9" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"></td></tr>
 							<tr><th>성별</th>
 								<td>
 									<input type="radio" id="priority-normal man" name="gender" value="남" <%if(mb.getGender().equals("남")){ %>checked<%} %>>
@@ -289,7 +290,7 @@
 							type : 'POST',
 							data : {
 								'id' : id,
-								'nick' : nick	
+								'nick' : nick
 							},
 							dataType : 'text',
 							url : './member/updateCheck/nickOverlapCheck.jsp',

@@ -1,9 +1,14 @@
 package net.plan.action;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 import net.plan.db.PlanCityBean;
 import net.plan.db.PlanCountryBean;
@@ -18,7 +23,7 @@ public class CityAddAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		
 		PlanCityBean pcb = new PlanCityBean();
-		
+
 		pcb.setCountry_code(request.getParameter("country_code"));
 		pcb.setName(request.getParameter("name"));
 		pcb.setEn_name(request.getParameter("en_name"));
@@ -36,10 +41,9 @@ public class CityAddAction implements Action{
 		out.println("location.href='./CityList.pl'");
 		out.println("</script>");
 		out.close(); 
-		
-		
+				
 		return null;
 	}
-	}
+}
 
 

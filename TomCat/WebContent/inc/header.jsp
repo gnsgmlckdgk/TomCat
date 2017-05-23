@@ -24,13 +24,13 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=3"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=7"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=5"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=9"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
@@ -50,15 +50,8 @@
 <body>
 
 <%
-	String id = "";
-	if(session.getAttribute("id")!=null) {
-		id = (String) session.getAttribute("id");
-	}
-
-	String nick = "";
-	if(session.getAttribute("nick")!=null) {
-		nick = (String) session.getAttribute("nick");
-	}
+	String id = (String)session.getAttribute("id");
+	String nick = (String) session.getAttribute("nick");
 %>
 
 <!-- Header -->
@@ -74,7 +67,7 @@
 			<li><a href="#">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
-			if("".equals(id)){ %>
+			if(id==null){ %>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
 					<li><a href="#">마이페이지</a></li>
@@ -113,7 +106,7 @@
 
 <!-- 회원관리/로그아웃 선택 팝업 메뉴 -->
 <%
-	if(!"".equals(nick)) {	// 로그인 되어 있을때만
+	if(nick!=null) {	// 로그인 되어 있을때만
 			MemberDAO mdao = new MemberDAO();
 			MemberBean mb = mdao.getMember(id);
 			String profile = mb.getProfile();

@@ -21,11 +21,15 @@ public class PlanSpot implements Action{
 		String travel = request.getParameter("travel");
 	
 		PlanDAO pdao = new PlanDAO();
+		
 		/*해당 장소 가져오기*/
 		PlanTravelBean ptb = pdao.getTravel(travel);
 		
 		/*해당장소에 맞는 이미지 가져오기  
 		List spotimagelist = pdao.getSpotImages(ptb.getTravel_id());*/
+		
+		/*해당 장소 선물 리스트*/
+		
 
 		request.setAttribute("ptb", ptb);
 		
