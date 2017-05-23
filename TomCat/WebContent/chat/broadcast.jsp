@@ -39,6 +39,7 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 <input id="inputMessage" type="text"
 	onkeydown="if(event.keyCode==13){send();}" />
 <input type="submit" value="send" onclick="send();" />
+<img src='../images/chat/emoticon_test.png' onclick="emoticon()" style="width:2em">
 <div id="messageWindow2" style="padding:10px 0;height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
 
 
@@ -75,8 +76,6 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 		//클라이언트에서 날아온 메시지를 |\| 단위로 분리한다
 		var message = event.data.split("|\|");
 		
-
-		
 			//금방 보낸 이를 re_send에 저장하고,
 			//금방 보낸 이가 다시 보낼경우 보낸이 출력 없도록 함.
 			if(message[0] != re_send){
@@ -95,6 +94,7 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 			//div는 받은 메시지 출력할 공간.
 			var div=document.createElement('div');
 		
+			div.style["max-width"]="15em";
 			div.style["width"]="auto";
 			div.style["word-wrap"]="break-word";
 			div.style["display"]="inline-block";
@@ -105,8 +105,6 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 
 			div.innerHTML = message[1];
 			document.getElementById('messageWindow2').appendChild(div);
-		
-
 		
 		//clear div 추가. 줄바꿈용.		
 		var clear=document.createElement('div');
@@ -122,7 +120,6 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 	function onOpen(event) {
 		
 		//접속했을 때, 내 영역에 보이는 글.
-		
 		var div=document.createElement('div');
 		
 		div.style["text-align"]="center";
@@ -155,6 +152,7 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 			// 채팅화면 div에 붙일 내용
 			var div=document.createElement('div');
 			
+			div.style["max-width"]="15em";
 			div.style["width"]="auto";
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
@@ -182,8 +180,27 @@ textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 			//	textarea의 스크롤을 맨 밑으로 내린다.
 			messageWindow2.scrollTop = messageWindow2.scrollHeight;
 			
+			//	금방 보낸 사람을 임시 저장한다.
 			re_send = "<%=nick%>";
 		}//inputMessage가 있을때만 전송가능 끝.
+		
+	}
+	
+	function emoticon(){
+		
+		var div = document.createElement('div');
+		
+		
+		div.style["float"]="right";
+		div.innerHTML = "<img src='../images/chat/emoticon_test.png'>";
+		document.getElementById('messageWindow2').appendChild(div);
+		
+		//clear div 추가
+		var clear = document.createElement('div');
+		clear.style["clear"] = "both";
+		document.getElementById('messageWindow2').appendChild(clear);
+		
+		webSocket.send("<%=nick%>|\|" + "<img src='../images/chat/emoticon_test.png'>");
 		
 	}
 </script>
