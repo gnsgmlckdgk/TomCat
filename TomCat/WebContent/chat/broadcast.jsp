@@ -231,9 +231,6 @@
 			//	서버에 보낼때 날아가는 값.
 			webSocket.send("<%=nick%>|\|" + inputMessage.value);
 			
-			message = inputMessage.value;
-			
-			
 			// 채팅화면 div에 붙일 내용
 			var div=document.createElement('div');
 			
@@ -247,8 +244,31 @@
 			div.style["border-radius"]="3px";
 			div.style["margin-right"]="3px";
 
-			//div에 innerHTML로 문자 넣기
-			div.innerHTML = inputMessage.value;
+			//input message를 secret_msg에 넣어서 귓속말인지 판별하도록 한다.
+			var secret_msg = (inputMessage.value).split(" ");
+			//secret_msg 의 가장 앞에 /가 있다면, 귓속말.
+			if(secret_msg[0].substring(1,0) == "/"){
+				
+				div.style["color"]="blue";
+				
+				//귓속말을 누구에게 보냈는지 확인가능하도록 한다.
+				div.innerHTML = secret_msg[0].substring(1) + "님에게 "
+				
+				//secret_chat의 /nick부분을 제하고 출력.
+				for(var i=1; i < secret_msg.length; i++){
+					div.innerHTML += secret_msg[i] + " ";
+				}//secret_chat의 /nick부분을 제하고 출력 끝.
+				
+				//귓속말을 보낼 경우에 inputMessage 대상에 연속성을 부여한다.
+				inputMessage.value = secret_msg[0]+" ";
+			} else { 
+				//div에 innerHTML로 문자 넣기
+				div.innerHTML = inputMessage.value;
+				
+				//	inputMessage의 value값을 지운다.
+				inputMessage.value = '';
+			}
+			
 			document.getElementById('messageWindow2').appendChild(div);
 
 			//clear div 추가
@@ -256,12 +276,6 @@
 			clear.style["clear"] = "both";
 			document.getElementById('messageWindow2').appendChild(clear);
 			
-			//	?
-			//inputMessage.value = "";
-
-			//	inputMessage의 value값을 지운다.
-			inputMessage.value = '';
-
 			//	textarea의 스크롤을 맨 밑으로 내린다.
 			messageWindow2.scrollTop = messageWindow2.scrollHeight;
 			
