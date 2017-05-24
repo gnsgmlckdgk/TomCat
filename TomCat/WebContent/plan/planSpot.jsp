@@ -14,8 +14,10 @@
 			$('input').css('background-color','#323037');
 			$(this).css('background-color','#f32853');
 			
-			var month=$(this).val();
 			
+			
+			var month=$(this).val();
+			$('.month_img').empty();
 			$('.month_img').append(function(){
 				var con='<h1>'+month+'</h1>';
 				return con;
@@ -40,6 +42,8 @@ $(document).ready(function() {
 
 <%
 	PlanTravelBean ptb = (PlanTravelBean)request.getAttribute("ptb");
+	
+	//도시이름 가져오기
 
 %>
 <div class="clear"></div>
@@ -52,22 +56,22 @@ $(document).ready(function() {
 
 <!-- 장소 이미지(이미지 슬라이드) -->
 
-	<!-- 다음검색 api -->
+	<!-- <!-- 다음검색 api 
 	<script src="./assets/js/plan/planSpotSearch.js"></script>
 	
-	<!-- 검색어 설정(검색어 바꾸기 => "도시이름+여행+장소" ) -->
+	검색어 설정(검색어 바꾸기 => "도시이름+여행+장소" )
 	<div id="daumForm">
     	<input id="daumSearch" type="hidden" value="부산 여행 자갈치" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
 	</div>
 
-	<!-- 이미지 출력 -->
+	이미지 출력
 	<div id="daumView">
         <div id="daumImage"></div>
 	</div>
 
 	<div id="daumScript">
  		<div id="daumImageScript"><img src="pic02.jpg" width="200" height="200"/></div>
-	</div>
+	</div> -->
 
 <!-- 추가정보(검색설명) -->
 <div class="tr_info" style="">추가 정보들</div>
@@ -110,6 +114,8 @@ $(document).ready(function() {
 </table>
 
 <!-- 장소에 대한 후기 작성(시간나면) -->
+<div class="blog_Spot">블로그 정보</div>
+<div class="Spot_epilogue">여행 후기</div>
 
 
 
