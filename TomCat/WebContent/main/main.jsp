@@ -1,3 +1,5 @@
+<%@page import="net.board.db.boardBean"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -59,7 +61,7 @@
 		<li><a href="./CountryList.pl" class="button special big">국가
 				DB</a></li>
 		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
-		<li><a href="./PlanSpot.pl?travel=자갈치" class="button special big">추천장소
+		<li><a href="./PlanSpot.pl?travel=태종대" class="button special big">추천장소
 				상세보기</a></li>
 		<li><a href="./Chat.ct"
 			class="button special big">채팅 테스트</a></li>
@@ -103,27 +105,30 @@
 	<div class="reel">
 
 		<%
-			int i = 1;
-			while (i <= 11) {
-				if (i != 6) {
-					int ii = i % 6;
+		List boardList=(List)request.getAttribute("bl");
+
+		for(int i=0;i<boardList.size();i++){
+			
+			//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
+		boardBean bb=(boardBean)boardList.get(i);
 		%>
 
 		<article>
-			<a href="#" class="image featured"><img
-				src="images/pic0<%=ii%>.jpg" alt="" /></a>
+			<a href="#" class="image featured">
+			
+			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
+			</a>
 			<header>
 				<h3>
-					<a href="#"><%=ii %></a>
+					<a href="#"><%=bb.getSubject()%></a>
 				</h3>
 			</header>
-			<p><%=ii %></p>
+			<p><%=bb.getNick()%></p>
 		</article>
 
 
 		<%
-			}
-				i = i + 1;
+		
 			}
 		%>
 	</div>

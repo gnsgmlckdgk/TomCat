@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
    
 public class MemberFrontController extends HttpServlet {
       
@@ -25,10 +26,13 @@ public class MemberFrontController extends HttpServlet {
 		RSAKeySetting rsa_key;
 		
 		if(command.equals("/Main.me")) {	// 메인 페이지
-			
-			forward = new ActionForward();
-			forward.setPath("./main/main.jsp");
-			forward.setRedirect(false);
+			action = new MainListAction();			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		
 		}else if(command.equals("/MemberJoin.me")) {	// 회원가입 입력 페이지
 			

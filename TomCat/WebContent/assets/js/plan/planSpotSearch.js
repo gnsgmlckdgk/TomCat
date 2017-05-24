@@ -2,7 +2,7 @@
 var daumSearch = {
         /** 초기화. **/
         init : function(){
-            this.apikey = "DAUM_SEARCH_DEMO_APIKEY";
+            this.apikey = "5aad815bb793e165b8de68b1d3e26d3467e96367";
             this.q = document.getElementById('daumSearch');
             
             //검색 객체들 초기화.
@@ -33,7 +33,7 @@ var daumSearch = {
         pongSearch : function(search, z){
             var ul = document.createElement('div');
             ul.className="div_1";
-          /*  ul.style["border"]="5px solid blue";*/
+/*           ul.style["border"]="5px solid blue";*/
             for(var i=0; i<z.channel.item.length; i++){
                 //title 정보를 얻음.
                 var title = document.createElement('h6');
@@ -90,7 +90,11 @@ var daumSearch = {
         /** li setting **/
         getSearch : function(title,content){
             var li = document.createElement('div');
-         li.className='planSpot_tb';
+            /*li.style["border"]="5px solid blue";*/
+            li.style.height = '18em';
+            li.style.width = '18em';
+            
+            li.className='planSpot_tb';
   
            /* content.appendChild(document.createElement('br'));*/
            li.appendChild(content);
@@ -106,8 +110,8 @@ var daumSearch = {
            a.target = '_blank';
            a.href = z.image;
            
-           img.style.height = '20em';
-           img.style.width = '30em';
+          /* img.style.height = '20em';
+           img.style.width = '30em';*/
            
            img.src = z.thumbnail;
            

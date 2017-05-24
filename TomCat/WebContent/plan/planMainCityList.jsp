@@ -102,7 +102,7 @@
 			%>
 
 			<td
-				style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); 
+				style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg'); 
 					   background-size: cover; 
 					   width:22em;
 					   height:20em;"
@@ -137,10 +137,11 @@
 				%>
 
 				<td
-					style="background-image: url('./images/plan/nation/<%=pcb.getEn_name()%>.jpg'); 
-						   background-size: cover; 
-						   width:22em;
-						   height:20em;">
+				style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg'); 
+					   background-size: cover; 
+					   width:22em;
+					   height:20em;"
+					   >
 					<span><a href="./PlanSearch.pl?check=2&search='<%=pcb.getName()%>'"><%=pcb.getName()%></a></span>
 				</td>
 				<%
