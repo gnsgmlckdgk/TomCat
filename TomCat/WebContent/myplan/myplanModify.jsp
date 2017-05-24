@@ -45,6 +45,14 @@ $(function(){
 		$('#right_box').toggle(effect, options, duration);
 	}); 
 });
+
+
+$( function() {
+    $( "#left_box2_detail" ).sortable();
+    $( "#left_box2_detail" ).disableSelection();
+  } );
+  
+  
 </script>
 <body>
 	<%
@@ -90,10 +98,10 @@ $(function(){
 						for (int i = 0; i < goodsList.size(); i++) {
 							TravelBean tb = (TravelBean) goodsList.get(i);
 					%>
-					<li><%=tb.getName()%></li>
-					<%
-						}
-					%>
+						<li><%=tb.getName()%></li>
+						<%
+							}
+						%>
 				</ul>	
 			</div>	
 			<div id="right_box">
@@ -103,6 +111,9 @@ $(function(){
 				</ul>
 			</div>
 		</div>
+		<script type="text/javascript">
+			Sortable.create("left_box2_detail")
+		</script>
 </body>
 
 <%-- 	
