@@ -22,7 +22,9 @@
 함께해요 게시판에 붙일예정.
 
 <hr>
-채팅방 입장 비밀번호. 귓속말(혹은 쪽지)
+채팅방 입장 비밀번호. 
+<br>
+(완)귓속말(혹은 쪽지)
 <br>
 (완)textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 <br>
@@ -74,11 +76,73 @@
 	function onMessage(event) {
 
 		//클라이언트에서 날아온 메시지를 |\| 단위로 분리한다
+		// id|\| 내용 |\|img
 		var message = event.data.split("|\|");
 		
+		//message의 내용(message[1]을 말한다.)을 확인해서,
+		//처음이 / 이면, 귓속말로 분류한다.
+		var secret_chat = message[1].split(" ");
+		if(secret_chat[0].substring(1,0) == "/"){
+			
+			//귓속말 조건 시작
+			if(secret_chat[0] == "/<%=nick%>"){
+				//귓속말을 받는 이가 본인일 경우
+				
+				//금방 보낸 이를 re_send에 저장하고,
+				//금방 보낸 이가 연속해서 메시지를 보낼경우 보낸 이 출력 없도록 함.
+				if(message[0] != re_send & message[2] != "입장"){
+					//messageWindow2에 붙이기
+					var who = document.createElement('div');
+
+					who.style["padding"]="3px";
+					who.style["margin-left"]="3px";
+
+					who.innerHTML = message[0];
+					document.getElementById('messageWindow2').appendChild(who);
+
+					//	금방 보낸 사람을 임시 저장한다.
+					re_send = message[0];
+				}
+				
+				//div는 받은 메시지 출력할 공간.
+				var div=document.createElement('div');
+				
+				div.style["max-width"]="15em";
+				div.style["width"]="auto";
+				div.style["word-wrap"]="break-word";
+				div.style["display"]="inline-block";
+				div.style["color"]="blue";
+
+				//3번째 구분자가 존재 할 경우, background 제거
+				if(message[2] == null){
+					div.style["background-color"]="#fcfcfc";
+				}
+
+				div.style["border-radius"]="3px";
+				div.style["padding"]="3px";
+				div.style["margin-left"]="3px";
+				
+				//secret_chat의 /nick부분을 제하고 출력.
+				for(var i=1; i < secret_chat.length; i++){
+					div.innerHTML += secret_chat[i] + " ";
+				}//secret_chat의 /nick부분을 제하고 출력 끝.
+				document.getElementById('messageWindow2').appendChild(div);
+
+				//clear div 추가. 줄바꿈용.		
+				var clear=document.createElement('div');
+				clear.style["clear"]="both";
+				document.getElementById('messageWindow2').appendChild(clear);
+				
+			} else {
+				//귓속말을 받는 이가 아닐 경우 출력없음.
+			}//귓속말 조건 끝.
+			
+			// 받은 문자의 처음이 /가 아닐 경우 일반 메시지로 처리.
+		} else {
+		
 			//금방 보낸 이를 re_send에 저장하고,
-			//금방 보낸 이가 다시 보낼경우 보낸이 출력 없도록 함.
-			if(message[0] != re_send){
+			//금방 보낸 이가 연속해서 메시지를 보낼경우 보낸 이 출력 없도록 함.
+			if(message[0] != re_send & message[2] != "입장"){
 				//messageWindow2에 붙이기
 				var who = document.createElement('div');
 
@@ -88,33 +152,46 @@
 				who.innerHTML = message[0];
 				document.getElementById('messageWindow2').appendChild(who);
 
+				//	금방 보낸 사람을 임시 저장한다.
 				re_send = message[0];
 			}
 			
 			//div는 받은 메시지 출력할 공간.
 			var div=document.createElement('div');
-		
-			div.style["max-width"]="15em";
-			div.style["width"]="auto";
-			div.style["word-wrap"]="break-word";
-			div.style["display"]="inline-block";
 			
-			//3번째 구분자가 img를 말할 경우, background 제거
-			if(message[2] == null){
-				div.style["background-color"]="#fcfcfc";
-			}
-			
-			div.style["border-radius"]="3px";
-			div.style["padding"]="3px";
-			div.style["margin-left"]="3px";
+			//세번째 구분자에 입장이 있을경우 입장했다 문구 출력
+			if(message[2] == "입장"){
+				message[1] = message[0] + "님이 입장하셨습니다.";
+				div.style["text-align"]="center";
+				
+			//세번째 구분자가 없을 경우 메시지 출력.
+			} else {
 
+				div.style["max-width"]="15em";
+				div.style["width"]="auto";
+				div.style["word-wrap"]="break-word";
+				div.style["display"]="inline-block";
+
+				//3번째 구분자가 존재 할 경우, background 제거
+				if(message[2] == null){
+					div.style["background-color"]="#fcfcfc";
+				}
+
+				div.style["border-radius"]="3px";
+				div.style["padding"]="3px";
+				div.style["margin-left"]="3px";
+
+			}//세번째 옵션 구분 끝.
+			
 			div.innerHTML = message[1];
 			document.getElementById('messageWindow2').appendChild(div);
+
+			//clear div 추가. 줄바꿈용.		
+			var clear=document.createElement('div');
+			clear.style["clear"]="both";
+			document.getElementById('messageWindow2').appendChild(clear);
 		
-		//clear div 추가. 줄바꿈용.		
-		var clear=document.createElement('div');
-		clear.style["clear"]="both";
-		document.getElementById('messageWindow2').appendChild(clear);
+		}
 		
 		//div 스크롤 아래로.
 		messageWindow2.scrollTop = messageWindow2.scrollHeight;
@@ -137,7 +214,7 @@
 		document.getElementById('messageWindow2').appendChild(clear);
 		
 		//접속했을 때 접속자들에게 알릴 내용.
-		webSocket.send("<%=nick%>|\|안녕하세요^^");
+		webSocket.send("<%=nick%>|\| |\|입장");
 	}
 
 	//	OnError는 웹 소켓이 에러가 나면 발생을 하는 함수.
