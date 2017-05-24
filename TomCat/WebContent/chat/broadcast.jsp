@@ -24,7 +24,7 @@
 <hr>
 채팅방 입장 비밀번호. 
 <br>
-(완)귓속말(혹은 쪽지)
+(완)귓속말 : /닉네임 내용
 <br>
 (완)textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
 <br>
@@ -231,6 +231,9 @@
 			//	서버에 보낼때 날아가는 값.
 			webSocket.send("<%=nick%>|\|" + inputMessage.value);
 			
+			message = inputMessage.value;
+			
+			
 			// 채팅화면 div에 붙일 내용
 			var div=document.createElement('div');
 			
@@ -263,7 +266,10 @@
 			messageWindow2.scrollTop = messageWindow2.scrollHeight;
 			
 			//	금방 보낸 사람을 임시 저장한다.
+			//	re_send의 값을 바꾸어 주어야, 자연스럽게 nick 출력.
+			//	(주석처리하고 2인끼리 대화하면 알 수 있다.)
 			re_send = "<%=nick%>";
+			
 		}//inputMessage가 있을때만 전송가능 끝.
 		
 	}
