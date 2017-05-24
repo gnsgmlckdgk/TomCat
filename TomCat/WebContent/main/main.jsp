@@ -120,10 +120,10 @@
 			</a>
 			<header>
 				<h3>
-					<a href="#"><%=i%></a>
+					<a href="#"><%=bb.getSubject()%></a>
 				</h3>
 			</header>
-			<p><%=i%></p>
+			<p><%=bb.getNick()%></p>
 		</article>
 
 
