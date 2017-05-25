@@ -56,8 +56,6 @@ public class PlanNationAction implements Action{
 			
 			nation_info.append("<th>"+p.get(i).text()+ "</th>"+"<td>"+p2.get(i).text()+"</td>");
 			nation_info.append("</tr>");
-			
-			System.out.println("test: " + i);
 		}
 		nation_info.append("</table>");
 		
