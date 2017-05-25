@@ -34,15 +34,16 @@
 
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
+
+<div id="messageWindow2" style="max-width:25em; padding:10px 0;height: 30em; overflow: auto; background-color: #a0c0d7;"></div>
+
 <input id="inputMessage" type="text"
-	onkeydown="if(event.keyCode==13){send();}"/>
-	
+	onkeydown="if(event.keyCode==13){send();}" style="width:20em;"/>
 <input type="submit" value="send" onclick="send();"/>
 
-<img src='./images/chat/emoticon_test.png' onclick="emoticon()" style="width:2em">
-
-<div id="messageWindow2" style="padding:10px 0;height: 30em; overflow: auto; background-color: #a0c0d7;"></div>
-
+<%for(int i=1; i<=2; i++){ %>
+	<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc(<%=i %>)" style="width:2em">
+<%} %>
 
 <script type="text/javascript">
 	
@@ -287,12 +288,12 @@
 		
 	}
 	
-	function emoticon(){
-		
+	//이모티콘 함수
+	function emtc(i){
 		var div = document.createElement('div');
 		
 		div.style["float"]="right";
-		div.innerHTML = "<img src='./images/chat/emoticon_test.png'>";
+		div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:3em;'>";
 		document.getElementById('messageWindow2').appendChild(div);
 		
 		//clear div 추가
@@ -301,9 +302,9 @@
 		document.getElementById('messageWindow2').appendChild(clear);
 		
 		//2번째 구분자 뒤에 img 단어를 넣는다.
-		webSocket.send("<%=nick%>|\|" + "<img src='./images/chat/emoticon_test.png'>"+"|\|img");
-		
+		webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:3em;'>|\|img");
 	}
+	
 </script>
 
 <!-- Footer -->
