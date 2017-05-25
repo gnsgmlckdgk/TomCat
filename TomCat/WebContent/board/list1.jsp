@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="net.Board1.db.BoardBean"%>
 <%@page import="net.member.db.MemberBean"%>
 <%@page import="java.util.List"%>
@@ -9,16 +10,17 @@
 <jsp:include page="../inc/header.jsp" />
 <section class="wrapper" style="padding:0 ;">
 
-<html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 
 <link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 </head>
+
+
 <body class="fadein">
 
 	<!-- 버튼 : 위로 -->
@@ -54,9 +56,11 @@
 			}, 'slow');
 		});
 	</script>
-
-
-
+	
+	<a href="./BoardWrite1.bb">
+		<h3 class="write">글쓰기</h3>
+	</a>
+	
 	<div class="q">
 		<%
 			// request.setAttribute("boardList", boardList);
@@ -75,55 +79,25 @@
 			int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 			int endPage = ((Integer) request.getAttribute("endPage")).intValue();
 
-			if (id != null) {
+			//jsp 날짜 구하기
+			Calendar cal = Calendar.getInstance();
+			//jsp 날짜 구하기 끝.
 		%>
 
-
-		<h3>
-			<a href="./BoardWrite1.bb">글쓰기</a>
-		</h3>
-		<%
-			}
-		%>
 
 		<div class="w">
 			<%
 				//  boardList 
 
+				MemberBean mb = new MemberBean();
+
 				for (int i = 0; i < boardList.size(); i++) {
 					//자바빈(BoardBean) 변수 =배열한칸 접근   배열변수.get()
 					BoardBean bb = (BoardBean) boardList.get(i);
-					MemberBean mb = new MemberBean();
 			%>
 
-<<<<<<< HEAD
-			<div id="e">
-				<!-- 프로필 -->
-				<div id="file">
-					<img src="./upload/images/profileimg/<%=mb.getProfile()%>">
-				</div>
-=======
-<!-- 닉네임,날짜 -->
-<div id="nick">
-<%=bb.getNick_name()%>
- </div>
- 
-<!--  날짜 -->
- <div id="date">
- <%=bb.getDate() %>
- </div>
- 
-<!--  제목 -->
-<div id="sub">
-<%=bb.getSubject() %>
-</div>
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 
-				<!-- 닉네임,날짜 -->
-				<div id="nick">
-					<%=bb.getNick_name()%>
-					<%=bb.getDate()%>
-				</div>
+			<div id="e">
 
 				<!--  제목 -->
 				<div id="sub">
@@ -135,7 +109,73 @@
 					<%=bb.getContent()%>
 				</div>
 
+				<div id="2_inner_left" style="width: 30%;">
+					<!-- 프로필 -->
+					<div id="file">
+						<img src="./upload/images/profileImg/basic/man.png">
+						<%-- 					<img src="./upload/images/profileImg/<%=mb.getProfile()%>"> --%>
+					</div>
+
+					<!-- 닉네임,날짜 -->
+					<div id="nick">
+						<%=bb.getNick_name()%>
+					</div>
+
+					<!--  날짜 -->
+					<div id="date">
+						<%
+							if (cal.get(Calendar.YEAR) == bb.getDate().getYear() + 1900) {
+						%>
+						<%
+							if (cal.get(Calendar.MONTH) == bb.getDate().getMonth()) {
+						%>
+
+						<%
+							if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
+						%>
+						오늘<br>
+						<%=bb.getDate().getHours()%>시
+						<%
+							} else {
+						%>
+						<%=bb.getDate().getDate()%>일
+						<%=bb.getDate().getHours()%>시
+
+
+						<%
+							}
+						%>
+
+						<%
+							} else {
+						%>
+
+						<%=bb.getDate().getMonth()%>월
+						<%=bb.getDate().getDate()%>일
+						<%=bb.getDate().getHours()%>시
+
+						<%
+							}
+						%>
+						<%
+							} else {
+						%>
+						<%=bb.getDate().getYear()%>년 <br>
+						<%=bb.getDate().getMonth()%>월
+						<%=bb.getDate().getDate()%>일
+						<%=bb.getDate().getHours()%>시
+						<%
+							}
+						%>
+					</div>
+				</div>
+
+
+
 			</div>
+
+			<div style="clear: both;"></div>
+
 			<%
 				}
 			%>
@@ -143,71 +183,71 @@
 		</div>
 		<%
 			//페이지 출력
-			if (count != 0) {
+			// 			if (count != 0) {
 
-			}
+			// 			}
 
-			BoardBean bb = new BoardBean();
+			// 			BoardBean bb = new BoardBean();
 		%>
 		<script type="text/javascript">
-			function prettyDate(time) {
+			// 			function prettyDate(time) {
 
-				var date = new Date((time || "").replace(/-/g, "/").replace(
-						/[TZ]/g, " ").split(".")[0]),
+			// 				var date = new Date((time || "").replace(/-/g, "/").replace(
+			// 						/[TZ]/g, " ").split(".")[0]),
 
-				diff = (((new Date()).getTime() - date.getTime()) / 1000);
+			// 				diff = (((new Date()).getTime() - date.getTime()) / 1000);
 
-				diff = diff - 33000;
+			// 				diff = diff - 33000;
 
-				if (diff < 0)
-					diff = 0;
+			// 				if (diff < 0)
+			// 					diff = 0;
 
-				day_diff = Math.floor(diff / 86400);
+			// 				day_diff = Math.floor(diff / 86400);
 
-				if (isNaN(day_diff) || day_diff < 0)
+			// 				if (isNaN(day_diff) || day_diff < 0)
 
-					return;
+			// 					return;
 
-				return day_diff == 0
-						&& (
+			// 				return day_diff == 0
+			// 						&& (
 
-						diff < 60 && "방금전" ||
+			// 						diff < 60 && "방금전" ||
 
-						diff < 120 && "1분전" ||
+			// 						diff < 120 && "1분전" ||
 
-						diff < 3600 && Math.floor(diff / 60) + " 분전" ||
+			// 						diff < 3600 && Math.floor(diff / 60) + " 분전" ||
 
-						diff < 7200 && "1 시간전" ||
+			// 						diff < 7200 && "1 시간전" ||
 
-						diff < 86400 && Math.floor(diff / 3600) + " 시간전")
-						||
+			// 						diff < 86400 && Math.floor(diff / 3600) + " 시간전")
+			// 						||
 
-						day_diff == 1
-						&& "어제"
-						||
+			// 						day_diff == 1
+			// 						&& "어제"
+			// 						||
 
-						day_diff < 7
-						&& day_diff
-						+ " 일전"
-						||
+			// 						day_diff < 7
+			// 						&& day_diff
+			// 						+ " 일전"
+			// 						||
 
-						day_diff < 31
-						&& Math.floor(day_diff / 7)
-						+ " 주전"
-						||
+			// 						day_diff < 31
+			// 						&& Math.floor(day_diff / 7)
+			// 						+ " 주전"
+			// 						||
 
-						day_diff < 360
-						&& Math.floor(day_diff / 30)
-						+ " 개월 전"
-						||
+			// 						day_diff < 360
+			// 						&& Math.floor(day_diff / 30)
+			// 						+ " 개월 전"
+			// 						||
 
-						day_diff >= 360
-						&& (Math.floor(day_diff / 360) == 0 ? 1 : Math
-								.floor(day_diff / 360)) + " 년 전"
+			// 						day_diff >= 360
+			// 						&& (Math.floor(day_diff / 360) == 0 ? 1 : Math
+			// 								.floor(day_diff / 360)) + " 년 전"
 
-			}
+			// 			}
 		</script>
 	</div>
 </body>
-</html>
+
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />
