@@ -303,6 +303,9 @@
 		
 		//2번째 구분자 뒤에 img 단어를 넣는다.
 		webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:3em;'>|\|img");
+		
+		//div 스크롤 아래로.
+		messageWindow2.scrollTop = messageWindow2.scrollHeight;
 	}
 	
 </script>
