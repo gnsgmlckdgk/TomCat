@@ -1,10 +1,12 @@
 package net.plan.action;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.images.db.ImagesDAO;
 import net.plan.db.PlanCountryBean;
 import net.plan.db.PlanDAO;
 
@@ -24,10 +26,29 @@ public class CountryUpdateAction implements Action{
 		pcb.setEn_name(request.getParameter("en_name"));
 		pcb.setInfo(request.getParameter("info"));
 		
+				// 이미지 폴더 교체 작업
+				String beforeCountryCode = request.getParameter("before_country_code");
+				// 폴더 이름이 변경 되었으면(country_code가 변경되었으면)
+				if(!beforeCountryCode.equals(request.getParameter("country_code"))) {
+					ImagesDAO idao = new ImagesDAO();
+
+					String newCountry_code = request.getParameter("country_code");
+					String curFilePath = request.getSession().getServletContext().getRealPath("/images/plan/nation/"+beforeCountryCode);
+					String newFilePath = request.getSession().getServletContext().getRealPath("/images/plan/nation/"+newCountry_code);
+					
+					File curFile = new File(curFilePath);
+					File newFile = new File(newFilePath);
+					
+					// 폴더 이름 변경
+					if(curFile.exists()) {
+						curFile.renameTo(newFile);
+					}
+				}
+				
+		// 새 정보로 업데이트
 		PlanDAO pdao = new PlanDAO();
-		
-		int check=pdao.updateCountry(pcb);
-		
+		int check=pdao.updateCountry(pcb, beforeCountryCode);
+				
 		if(check==1){
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();		
@@ -40,6 +61,6 @@ public class CountryUpdateAction implements Action{
 		
 		return null;
 	}
-	}
+}
 
 

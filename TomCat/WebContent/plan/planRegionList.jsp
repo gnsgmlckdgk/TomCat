@@ -109,6 +109,8 @@
 
 <table>
 	<%
+	// 
+	
 		PlanTravelBean ptb = null;
 		if (count > 0) {
 			for (int i = 0; i < ptbList.size(); i++) {

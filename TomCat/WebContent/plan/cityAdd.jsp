@@ -63,7 +63,7 @@
 <section>
 
 <div class="cityAdd">
-	<form action="./CityAdd.pl" name="city_fr" method="post">
+	<form action="./CityAdd.pl" name="city_fr" method="post" enctype="multipart/form-data">
 		<span class="cityt">국가코드</span>
 		<select name="country_code">
 			<%

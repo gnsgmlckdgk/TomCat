@@ -1,3 +1,4 @@
+<%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,19 +24,23 @@
 <!-- 국가의 도시들의 이미지 슬라이드 -->
 <!-- Swiper -->
     <%
-    // 도시 리스트
+/*     // 도시 리스트
     List<PlanCityBean> cityList = null;
-    cityList = (List)request.getAttribute("cityList");
+    cityList = (List)request.getAttribute("cityList");	// 도시 리스트, 필요없을지도... */
+    
+    // 도시 이미지 리스트
+    List<ImagesBean> cityImgList = null;
+    cityImgList = (List)request.getAttribute("cityImgList");
     %>
     <div class="swiper-container slideContainer">
         <div class="swiper-wrapper">
     <%
-    PlanCityBean pcb = null;
-    if(cityList.size()>0) {
-    	for(int i=0; i<cityList.size(); i++) {
-    		pcb = cityList.get(i);
+    ImagesBean ib = null;
+    if(cityImgList.size()>0) {
+    	for(int i=0; i<cityImgList.size(); i++) {
+    		ib = cityImgList.get(i);
     		%>
-    		<div class="swiper-slide"><img src="./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg"></div>
+    		<div class="swiper-slide"><img src="./images/plan/nation/<%=ib.getFile()%>"></div>
     		<%
     	}
     }else {

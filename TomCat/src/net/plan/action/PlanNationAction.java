@@ -12,7 +12,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
+import net.images.db.ImagesBean;
+import net.images.db.ImagesDAO;
 import net.plan.db.PlanCityBean;
+import net.plan.db.PlanCountryBean;
 import net.plan.db.PlanDAO;
 
 // 다음에서 국가를 검색했을때 나오는 국가 정보를 가져옴
@@ -58,13 +61,21 @@ public class PlanNationAction implements Action{
 		}
 		nation_info.append("</table>");
 		
-		// 도시 리시트 가져오기
+/*		// 도시 리스트 가져오기
 		List<PlanCityBean> cityList = null;
-		cityList = getCityList(nation);
+		cityList = getCityList(nation);*/
+		
+		// 도시 이미지 리스트 가져오기
+		List<ImagesBean> cityImgList = null;
+		ImagesDAO idao = new ImagesDAO();
+		PlanDAO pdao = new PlanDAO();
+		String countryCode = pdao.getCountyCode(nation);	// country_code 를 구하기 위해 국가 정보를 가져옴
+		cityImgList = idao.getCityImages(countryCode);
 		
 		// request에 담기
 		request.setAttribute("nation_info", nation_info);
-		request.setAttribute("cityList", cityList);
+		//request.setAttribute("cityList", cityList);
+		request.setAttribute("cityImgList", cityImgList);	// 도시 이미지들 담음
 		
 		// 이동정보
 		ActionForward forward = new ActionForward();
