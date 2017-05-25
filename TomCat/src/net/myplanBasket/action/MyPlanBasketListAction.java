@@ -31,10 +31,8 @@ public class MyPlanBasketListAction implements Action{
 		//Vector vector= 메서드호출  getBasketList(String id)
 		//  => Vector vector=new Vector();
 		
-		
 		Vector vector=basketdao.getBasketList(id);
 		String gold = basketdao.getMemberGold(id);
-		
 		
 		//List basketList = vector 첫번째데이터
 		List basketList=(List)vector.get(0);
