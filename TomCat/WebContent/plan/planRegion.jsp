@@ -12,6 +12,9 @@
 	String id = (String) session.getAttribute("id");
 	String city_code = (String) request.getAttribute("city_code");
 %>
+
+
+
 <!-- One 지역명 및 설명-->
 <section id="banner" class="resion_one">
 	<div class="container 75% resion_info_content">
@@ -30,82 +33,100 @@
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
 				<iframe width="600" height="450" frameborder="0" style="border: 0"
-					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>"
-					allowfullscreen> </iframe>
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>" allowfullscreen>
+				</iframe>
 			</div>
 			<!-- 수현씨 지도 부분 끝 -->
 
 		</div>
-	</div>
+	</div>	
 </section>
 
 
-
-
 <!-- Two -->
-<!-- Two 국가의 지역 리스트 -->
+<!-- 지역 리스트 -->
 <section id="nation_two" class="wrapper style2 special">
+
+	<!-- container -->
+	<div class="container">
+		<h2><%=region%> 주요 지역 </h2>
+		
+		<hr>
+
+		<!-- checkbox -->
+		<div class="checkbox" onchange="checkbox_change()">
+			<input type="checkbox" name="r" id="r" checked="checked"><label for="r">Restaurant</label>
+			<input type="checkbox" name="p" id="p" checked="checked"><label for="p">Place</label>
+			<input type="checkbox" name="h" id="h" checked="checked"><label for="h">Hotel</label>
+		</div>
+		<!--end checkbox -->
+
+		<!-- 도시리스트 테이블 오는 자리 -->
+		<div class="region_list_div"></div>
+		<!-- region_list_div -->
+	</div>
+	<!-- container end-->
+
 
 	<!-- Two 섹션 스크립트 -->
 	<script type="text/javascript">
-// 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
-$(window).load(function() {
-	$.ajax({
-		type: 'post',
-		url: './plan/planRegionList.jsp',
-		data : {region:'<%=region%>', pageNum:'1', city_code:'<%=city_code%>'},
-		success: function(data) {
-			$('.region_list_div').append(data);
-		},
-		error: function(xhr, status, error) {
-	        alert(error);
-	    }   
-	});
-});
-
-//checkbox 버튼을 통한 조건부 검색.
-function checkbox_change(){
-		
-	var $checkbox;
-	
-	if(r.checked && p.checked && h.checked) {$checkbox="rph"}
-	else if(!r.checked && !p.checked && !h.checked) {$checkbox="rph"}
-	
-	else if(r.checked && p.checked && !h.checked) {$checkbox="rp"}
-	else if(r.checked && !p.checked && h.checked) {$checkbox="rh"}
-	else if(!r.checked && p.checked && h.checked) {$checkbox="ph"}
-	
-	else if(r.checked && !p.checked && !h.checked) {$checkbox="r"}
-	else if(!r.checked && p.checked && !h.checked) {$checkbox="p"}
-	else if(!r.checked && !p.checked && h.checked) {$checkbox="h"}
-	
-	
-	$.ajax({
-		type: 'post',
-		url: './plan/planRegionList.jsp',
-		data : {region:'<%=region%>', pageNum: '1', search: $checkbox, city_code:'<%=city_code%>'},
-		success: function(data) {
-			$('.region_list_div').empty();
-			$('.region_list_div').append(data);
-			
-		},
-		error: function(xhr, status, error) {
-			alert(error);
-	    }
-	});
-	
-}
-
-// 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
-function regionListChange(pageNum) {
-	
-		var search = $('#search').val();
-	
-		$.ajax({
-			type: 'post',
-			url: './plan/planRegionList.jsp',
-			data : {region:'<%=region%>', pageNum: pageNum, search: search, city_code:'<%=city_code%>'
+		// 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
+		$(window).load(function() {
+			$.ajax({
+				type: 'post',
+				url: './plan/planRegionList.jsp',
+				data : {region:'<%=region%>', pageNum:'1', city_code:'<%=city_code%>'},
+				success: function(data) {
+					$('.region_list_div').append(data);
 				},
+				error: function(xhr, status, error) {
+        			alert(error);
+    			}   
+			});
+		});
+
+		//checkbox 버튼을 통한 조건부 검색.
+		function checkbox_change(){
+		
+			var $checkbox;
+
+			//checkbox에서 받아온 true / false를 문자 형태로 저장
+			if(r.checked && p.checked && h.checked) {$checkbox="rph"}
+			else if(!r.checked && !p.checked && !h.checked) {$checkbox="rph"}
+	
+			else if(r.checked && p.checked && !h.checked) {$checkbox="rp"}
+			else if(r.checked && !p.checked && h.checked) {$checkbox="rh"}
+			else if(!r.checked && p.checked && h.checked) {$checkbox="ph"}
+	
+			else if(r.checked && !p.checked && !h.checked) {$checkbox="r"}
+			else if(!r.checked && p.checked && !h.checked) {$checkbox="p"}
+			else if(!r.checked && !p.checked && h.checked) {$checkbox="h"}
+			//checkbox에서 받아온 true / false를 문자 형태로 저장. 끝
+	
+			$.ajax({
+				type: 'post',
+				url: './plan/planRegionList.jsp',
+				data : {region:'<%=region%>', pageNum: '1', search: $checkbox, city_code:'<%=city_code%>'},
+				success: function(data) {
+					$('.region_list_div').empty();
+					$('.region_list_div').append(data);
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+			    }
+			});
+	
+		}
+
+		// 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
+		function regionListChange(pageNum) {
+	
+			var search = $('#search').val();
+	
+			$.ajax({
+				type: 'post',
+				url: './plan/planRegionList.jsp',
+				data : {region:'<%=region%>', pageNum: pageNum, search: search, city_code:'<%=city_code%>'},
 				success : function(data) {
 					$('.region_list_div').empty();
 					$('.region_list_div').append(data);
@@ -116,7 +137,7 @@ function regionListChange(pageNum) {
 			});
 		}
 
-		//찜 버튼 누르면 내 일정에 담김. 
+		//찜 버튼 누르면 내 일정에 담김.
 		function zzim_add(travel_id) {
 
 			$.ajax({
@@ -132,9 +153,15 @@ function regionListChange(pageNum) {
 
 				}
 			});
-			alert("나의 일정에 등록되었습니다.");
-			//		$.toast('<h4>나의 일정에 추가되었습니다.</h4>', { type: 'success', duration: 3000 } );
-		}
+			
+			//찜 버튼이 동작한 후, 페이지 이동을 물어본다.
+			if (confirm("\n나의 일정에 추가되었습니다.\n\n나의 일정 페이지로 이동하시겠습니까?") == true){    //확인
+				location.href="./MyPlan.pln?plan_nr=100";
+			}else{   //취소
+			    return;
+			}//찜 버튼이 동작한 후, 페이지 이동을 물어본다. 끝
+			
+		}//찜 버튼 끝.
 
 		//비로그인 상태에서 찜버튼을 누르면 로그인 창 활성화.
 		function zzim_noId() {
@@ -142,29 +169,8 @@ function regionListChange(pageNum) {
 		}
 	</script>
 
-	<div class="container">
-		<h2><%=region%>
-			주요 지역
-		</h2>
-		<hr>
-
-<!-- checkbox -->
-		<div class="checkbox" onchange="checkbox_change()">
-			<input type="checkbox" name="r" id="r" checked="checked"><label for="r">Restaurant</label>
-			<input type="checkbox" name="p" id="p" checked="checked"><label for="p">Place</label>
-			<input type="checkbox" name="h" id="h" checked="checked"><label
-				for="h">Hotel</label>
-		</div>
-<!--end checkbox -->
-
-		<div class="region_list_div">
-			<!-- 도시 리스트 -->
-			<!-- 도시리스트 테이블 오는 자리 -->
-		</div>
-		<!-- region_list_div -->
-	</div>
-	<!-- container -->
 </section>
+<!-- 지역 리스트 끝-->
 
 
 
@@ -179,17 +185,12 @@ function regionListChange(pageNum) {
 
 		</header>
 
+		<!-- 이미지 서치 시작.-->
 		<div class="feature-grid">
-
-			<!-- 이미지 서치 시작.-->
-
 			<script src="./assets/js/plan/daumSearch3.js"></script>
 
 			<div id="daumForm">
-				<input id="daumSearch" type="hidden" value="<%=region%>+여행"
-					onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
-				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
-				<!-- 					type="submit" value="검색" /> -->
+				<input id="daumSearch" type="hidden" value="<%=region%>+여행" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
 			</div>
 
 			<div id="daumView">
@@ -201,9 +202,6 @@ function regionListChange(pageNum) {
 			</div>
 		</div>
 		<!-- 이미지 서치 끝. -->
-
-
-	</div>
 	</div>
 </section>
 

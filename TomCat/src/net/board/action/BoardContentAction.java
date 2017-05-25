@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.board.db.BoardDAO;
 import net.board.db.boardBean;
-import net.reply.db.ReplyBean;
 import net.reply.db.ReplyDAO;
 
 
@@ -38,11 +37,12 @@ public class BoardContentAction implements Action{
 		ReplyDAO rdao = new ReplyDAO();
 		int count = rdao.replyCount(num);
 		int pageSize = 5;
-		
-		if (pageNum == null) {//pageNum 이 없으면
-			pageNum = "1";//무조건 1페이지
+		String replypageNum=request.getParameter("replypageNum");
+		if (replypageNum == null) {//pageNum 이 없으면
+			replypageNum = "1";//무조건 1페이지
 		}
-		int currentPage = Integer.parseInt(pageNum);
+		
+		int currentPage = Integer.parseInt(replypageNum);
 		int startrow = (currentPage - 1) * pageSize + 1;
 		 // 시작 줄 	=	(3-1)			* 10 +1 =21 줄부터시작!
 		int endRow=currentPage*pageSize;
@@ -57,13 +57,13 @@ public class BoardContentAction implements Action{
 		int replycount=rdao.replyCount(num);	
 
 		request.setAttribute("rl", replylist);
-		request.setAttribute("count", count);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startrow", startrow);
 		request.setAttribute("endRow", endRow);		
 		request.setAttribute("replycount", replycount);
-		
+		request.setAttribute("replypageNum", replypageNum);
+
 		
 		forward.setPath("./instagram/content.jsp");
 		forward.setRedirect(false);
@@ -75,3 +75,4 @@ public class BoardContentAction implements Action{
 	
 
 }
+

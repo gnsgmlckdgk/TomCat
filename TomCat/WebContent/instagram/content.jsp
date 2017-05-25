@@ -119,17 +119,18 @@ function func3(i){
 	<%
 	
 		ReplyDAO rdao = new ReplyDAO();	
-		int recount=((Integer)request.getAttribute("replycount")).intValue();
+		int replycount=((Integer)request.getAttribute("replycount")).intValue();
 		
 		List replylist = (List) request.getAttribute("rl");
 	
-		int count = ((Integer) request.getAttribute("count")).intValue();
 		int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
 		int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
 		int startrow = ((Integer) request.getAttribute("startrow")).intValue();
 		int endRow = ((Integer) request.getAttribute("endRow")).intValue();
+		String replypageNum=(String)request.getAttribute("replypageNum");
+
 	
-		if(recount!=0){
+		if(replycount!=0){
 
 	%>
 	<table class="table2">
@@ -239,10 +240,10 @@ if(id!=null){%>
 <!-- 리플 페이징 -->
 		<% 		
 	//페이지 출력
-	if(count!=0){
+	if(replycount!=0){
 		//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
 					//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
-		int pageCount=count/pageSize+(count%pageSize==0?0:1);
+		int pageCount=replycount/pageSize+(replycount%pageSize==0?0:1);
 		//한 화면에 보여줄 페이지 번호 개수
 		int pageBlock=5;
 		//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
@@ -253,17 +254,17 @@ if(id!=null){%>
 			endPage=pageCount;}
 		//이전
 		if(startPage>pageBlock){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=startPage-pageBlock%>">[이전]</a>
+			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage-pageBlock%>">[이전]</a>
 	<%
 		}
 		//1...10
 		for(int i=startPage;i<=endPage;i++){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=i%>">[<%=i%>]</a>
+			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=i%>">[<%=i%>]</a>
 	<%
 		}
 		//다음
 		if(endPage< pageCount){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=startPage+pageBlock %>">[다음]</a>
+			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage+pageBlock %>">[다음]</a>
 			
 			
 			
@@ -272,7 +273,7 @@ if(id!=null){%>
 			}
 		
 		}
-		if(recount==0){
+		if(replycount==0){
 			%>
 					<form action="./ReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=bb.getSubject()%>" name="nick">							
@@ -298,3 +299,4 @@ if(id!=null){%>
 		
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
+

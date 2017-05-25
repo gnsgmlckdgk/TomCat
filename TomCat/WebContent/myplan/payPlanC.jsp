@@ -13,8 +13,6 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<script src="assets/js/jquery.min.js"></script>
 
-
-
 	<%
 		String id = (String) session.getAttribute("id");
 		String nick = (String) session.getAttribute("nick");
@@ -28,52 +26,53 @@
 
 	<!-- 결제 수단 선택 하면 동작할 함수 -->
 	<script type="text/javascript">
-				var i=0;
-				var agr=0;
-				
-				function payway_change() {
-										
-					if(rdb1.checked){
-						i=1;
-					} else if(rdb2.checked){
-						i=2;
-					} else if(rdb3.checked){
-						i=3;
-					} else if(rdb4.checked){
-						i=4;
-					}
-					
-					$.ajax({
-						type:'post',
-						url:'./myplan/payWayList.jsp',
-						data : {i:i},
-						success : function(data){
-							$('.pay_way_form').empty();
-							$('.pay_way_form').append(data);
-						}
-					});
-				}
+		var i=0;
+		var agr=0;
+		
+		function payway_change() {
 								
-				function agree_check(){
-								
-					if(agree.checked){
-						agr=1;
-					} else{
-						agr=0;
-					}
+			if(rdb1.checked){
+				i=1;
+			} else if(rdb2.checked){
+				i=2;
+			} else if(rdb3.checked){
+				i=3;
+			} else if(rdb4.checked){
+				i=4;
+			}
+			
+			$.ajax({
+				type:'post',
+				url:'./myplan/payWayList.jsp',
+				data : {i:i},
+				success : function(data){
+					$('.pay_way_form').empty();
+					$('.pay_way_form').append(data);
 				}
+			});
+		}
+						
+		function agree_check(){
+						
+			if(agree.checked){
+				agr=1;
+			} else{
+				agr=0;
+			}
+		}
+		
+		function pay(){
+			if(agr==1 && i==4){
 				
-				function pay(){
-					if(agr==1 && i==4){
-						location.href='./PayAction.pln?id=<%=id%>&approval=1';
-					} else if (agr != 1) {
-						alert("구매 동의버튼을 선택해주세요.");
-					} else if (agr == 1 && i == 0) {
-						alert("결제 방법을 선택해 주세요.")
-					} else if (agr == 1 && i != 4) {
-						alert("선택하신 결제 방법은 현재 사용하실 수 없습니다. 믿음을 선택해주세요.");
-					}
-				}
+				location.href='./PayAction.pln?id=<%=id%>&approval=1';
+			} else if (agr != 1) {
+				alert("구매 동의버튼을 선택해주세요.");
+			} else if (agr == 1 && i == 0) {
+				alert("결제 방법을 선택해 주세요.")
+			} else if (agr == 1 && i != 4) {
+				alert("선택하신 결제 방법은 현재 사용하실 수 없습니다. 믿음을 선택해주세요.");
+			}
+		}
 	</script>
 	<!-- 결제 수단 선택 하면 동작할 함수 끝-->
 
@@ -225,7 +224,8 @@
 		</div>
 
 		<div class="popup_check">
-			<span>확인해주세요!</span><br> 설정에서 팝업차단을 해지했는지 확인해 주세요. 팝업창 차단이 설정되어
+			<span>확인해주세요!</span><br>
+			설정에서 팝업차단을 해지했는지 확인해 주세요. 팝업창 차단이 설정되어
 			있으면 결제가 진행되지 않습니다.
 		</div>
 		<a class="pay_button button spacial" onclick="pay()">구매하기</a>
@@ -234,7 +234,6 @@
 	<!-- fix 된 오른쪽 사이드 출력 끝-->
 
 	<!-- 입력란 들어갈 곳. 끝. -->
-
 </section>
 
 <!-- Footer -->
