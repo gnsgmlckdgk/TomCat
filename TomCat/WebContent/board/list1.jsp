@@ -55,11 +55,35 @@
 		});
 	</script>
 
-	<a href="./BoardWrite1.bb">
-		<h3 class="write">글쓰기</h3>
 		
-	</a>
-	
+		<form method="post" action="./BoardWrite1.bb" class="write">
+			<input type="hidden" id="location" name="location" value="aaa">
+			<input type="submit" value="글쓰기">
+		</form>
+
+<script type="text/javascript">  
+  if (!!navigator.geolocation) 
+  {
+    navigator.geolocation.getCurrentPosition(successCallback,errorCallback);  
+  }
+  else
+  {
+    alert("이 브라우저는 Geolocation를 지원하지 않습니다");
+  }
+    
+  function successCallback(position)
+  {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    
+    document.getElementById("location").value = lat + ", "+lng;
+  }
+  
+  function errorCallback(error)
+  {
+    alert(error.message);
+  }    
+</script>
 	
 
 	<div class="q">
@@ -107,7 +131,8 @@
 
 				<!-- 내용 -->
 				<div id="con">
-					<%=bb.getContent()%>
+					<%=bb.getContent()%><br>
+					현재 위치 <%=bb.getLocation() %>
 				</div>
 
 				<div id="2_inner_left" style="width: 30%;">
@@ -168,8 +193,12 @@
 
 	</div>
 	
+
+	
+</body>
+
 	<div id="chat"></div>
-		
+
 		<script type="text/javascript">
 		// 채팅을 불러온다.
 		$(window).load(function() {
@@ -185,7 +214,10 @@
 			});
 		});
 		</script>
-	
-</body>
+		
+		
+
+
+		
 
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />
