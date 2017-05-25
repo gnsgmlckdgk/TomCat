@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: tomcat
+-- Host: 192.168.2.17    Database: tomcat
 -- ------------------------------------------------------
 -- Server version	5.7.17-log
 
@@ -218,7 +218,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
-INSERT INTO `images` VALUES (2,'fr','nice',0,NULL,'니스','니스의 사진','fr\\nice.jpg'),(3,'fr','paris',0,NULL,'파리','파리의 사진','fr\\paris.jpg'),(4,'kr','andong',0,NULL,'안동','안동','kr\\andong.jpg'),(5,'kr','busan',0,NULL,'부산','부산','kr\\busan.jpg'),(6,'ph','cebu',0,NULL,'세부','세부','ph\\cebu.jpg'),(7,'kr','daegu',0,NULL,'대구','대구','kr\\daegu.jpg'),(8,'kr','jeju',0,NULL,'제주','제주','kr\\jeju.jpg'),(9,'uk','london',0,NULL,'런던','런던','uk\\london.jpg'),(10,'usa','newyork',0,NULL,'뉴욕','뉴욕','usa\\newyork.jpg'),(11,'jp','osaca',0,NULL,'오사카','오사카','jp\\osaca.jpg'),(12,'kr','seoul',0,NULL,'서울','서울','kr\\seoul.jpg'),(13,'jp','tokyo',0,NULL,'도쿄','도쿄','jp\\tokyo.jpg'),(14,'jp','osaka',0,NULL,'오사카','오사카','jp\\osaka.jpg');
+INSERT INTO `images` VALUES (2,'fr','nice',0,NULL,'니스','니스의 사진','fr\\nice.jpg'),(3,'fr','paris',0,NULL,'파리','파리의 사진','fr\\paris.jpg'),(4,'kr','andong',0,NULL,'안동','안동','kr\\andong.jpg'),(5,'kr','busan',0,NULL,'부산','부산','kr\\busan.jpg'),(6,'ph','cebu',0,NULL,'세부','세부','ph\\cebu.jpg'),(7,'kr','daegu',0,NULL,'대구','대구','kr\\daegu.jpg'),(8,'kr','jeju',0,NULL,'제주','제주','kr\\jeju.jpg'),(9,'uk','london',0,NULL,'런던','런던','uk\\london.jpg'),(10,'usa','newyork',0,NULL,'뉴욕','뉴욕','usa\\newyork.jpg'),(12,'kr','seoul',0,NULL,'서울','서울','kr\\seoul.jpg'),(13,'jp','tokyo',0,NULL,'도쿄','도쿄','jp\\tokyo.jpg'),(14,'jp','osaka',0,NULL,'오사카','오사카','jp\\osaka.jpg');
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,4 +455,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25 16:45:23
+-- Dump completed on 2017-05-25 17:03:26
