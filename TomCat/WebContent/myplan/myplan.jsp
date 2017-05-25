@@ -69,16 +69,7 @@
 	}); */
 });  
 //날짜 선택하기 
-	
-	
-
-
-
-
 </script>
-
-		
-
 </head>
 <body>
 	<%
@@ -94,8 +85,6 @@
 		String arr_lat =  (String) request.getParameter("alat");
 		String arr_lng =  (String) request.getParameter("alng");
 		
-		
-		
 /* 		int init_nr=0; */
  		int plan_item_nr=0; 
 	%>
@@ -106,10 +95,10 @@
 	<div class="container" >
 		<div class="myplan-list" >
 				<h3>
-				<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a>
-				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a>
-				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a>
-				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=100'><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=1'><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=2'><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+				<a href='./MyPlan.pln?plan_nr=3'><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a>
 				<!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
 								
 				<button class="btn" >일정만들기</button>
@@ -154,33 +143,26 @@
 						<%
 						if(plan_nr!=100){
 							%>
-						
 						<td>
-								<%
-								
-								
-							
-									route[button_nr][0] = tb.getLatitude();
-									route[button_nr][1] = tb.getLongitude();  
-									if(button_nr!=0){
-									%>	
-									
-										<a href='./MyPlan.pln?plan_nr=<%=plan_nr%>&dlat=<%=route[button_nr-1][0]%>&dlng=<%=route[button_nr-1][1]%>&alat=<%=route[button_nr][0]%>&alng=<%=route[button_nr][1]%>'>
-				  						<img src="./images/myplans/bus_trans.png" width="30px" height="30px" style="vertical-align:bottom"> </a> 
-		  						<%
-		  							}
-									button_nr=button_nr+1;			
-		  						%>
+							<%
+							route[button_nr][0] = tb.getLatitude();
+							route[button_nr][1] = tb.getLongitude();  
+							if(button_nr!=0){
+							%>	
+							<a href='./MyPlan.pln?plan_nr=<%=plan_nr%>&dlat=<%=route[button_nr-1][0]%>&dlng=<%=route[button_nr-1][1]%>&alat=<%=route[button_nr][0]%>&alng=<%=route[button_nr][1]%>'>
+	  						<img src="./images/myplans/bus_trans.png" width="30px" height="30px" style="vertical-align:bottom"> </a> 
+  							<%
+  							}
+							button_nr=button_nr+1;			
+	  						%>
 						</td>
 						<%
 						}
 						%>
-					</tr>
-	  				
-							
+					</tr>	
 						<%
 						}
-					%>
+						%>
 				</table>
 
 			
@@ -244,7 +226,7 @@
        
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 35.096706, lng: 129.03049},
+            center: {lat: 35.159658, lng: 129.043302},
           	zoom: 13,
          	mapTypeControl: false
         });
@@ -253,7 +235,7 @@
        var highlightedIcon = makeMarkerIcon('FFFF24');
 					       
       					       
-              <%String MarkerColor;
+          <%String MarkerColor;
 			String TitlePlan;
 			if (basketList.size() != 0) {
 
