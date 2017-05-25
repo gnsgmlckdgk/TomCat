@@ -4,7 +4,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
@@ -12,12 +11,11 @@
 
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 
 <link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
 </head>
 
 
@@ -56,11 +54,14 @@
 			}, 'slow');
 		});
 	</script>
-	
+
 	<a href="./BoardWrite1.bb">
 		<h3 class="write">글쓰기</h3>
+		
 	</a>
 	
+	
+
 	<div class="q">
 		<%
 			// request.setAttribute("boardList", boardList);
@@ -125,45 +126,28 @@
 					<div id="date">
 						<%
 							if (cal.get(Calendar.YEAR) == bb.getDate().getYear() + 1900) {
+								if (cal.get(Calendar.MONTH) == bb.getDate().getMonth()) {
+									if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
 						%>
+										<%=cal.get(Calendar.HOUR) - bb.getDate().getHours()%>시
 						<%
-							if (cal.get(Calendar.MONTH) == bb.getDate().getMonth()) {
+									} else {
 						%>
+										<%=cal.get(Calendar.DATE) - bb.getDate().getDate()%>일전
+						<%
+									}
+								} else {
+						%>
+									<%=cal.get(Calendar.MONTH) - bb.getDate().getMonth()%>달전
+						<%
+								}
 
-						<%
-							if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
-						%>
-						오늘<br>
-						<%=bb.getDate().getHours()%>시
-						<%
 							} else {
 						%>
-						<%=bb.getDate().getDate()%>일
-						<%=bb.getDate().getHours()%>시
-
-
-						<%
-							}
-						%>
-
-						<%
-							} else {
-						%>
-
-						<%=bb.getDate().getMonth()%>월
-						<%=bb.getDate().getDate()%>일
-						<%=bb.getDate().getHours()%>시
-
-						<%
-							}
-						%>
-						<%
-							} else {
-						%>
-						<%=bb.getDate().getYear()%>년 <br>
-						<%=bb.getDate().getMonth()%>월
-						<%=bb.getDate().getDate()%>일
-						<%=bb.getDate().getHours()%>시
+								<%=bb.getDate().getYear()%>년 <br>
+								<%=bb.getDate().getMonth()%>월
+								<%=bb.getDate().getDate()%>일
+								<%=bb.getDate().getHours()%>시
 						<%
 							}
 						%>
@@ -171,83 +155,37 @@
 				</div>
 
 
-
 			</div>
 
-			<div style="clear: both;"></div>
 
 			<%
 				}
 			%>
 
 		</div>
-		<%
-			//페이지 출력
-			// 			if (count != 0) {
+		
+		
 
-			// 			}
-
-			// 			BoardBean bb = new BoardBean();
-		%>
-		<script type="text/javascript">
-			// 			function prettyDate(time) {
-
-			// 				var date = new Date((time || "").replace(/-/g, "/").replace(
-			// 						/[TZ]/g, " ").split(".")[0]),
-
-			// 				diff = (((new Date()).getTime() - date.getTime()) / 1000);
-
-			// 				diff = diff - 33000;
-
-			// 				if (diff < 0)
-			// 					diff = 0;
-
-			// 				day_diff = Math.floor(diff / 86400);
-
-			// 				if (isNaN(day_diff) || day_diff < 0)
-
-			// 					return;
-
-			// 				return day_diff == 0
-			// 						&& (
-
-			// 						diff < 60 && "방금전" ||
-
-			// 						diff < 120 && "1분전" ||
-
-			// 						diff < 3600 && Math.floor(diff / 60) + " 분전" ||
-
-			// 						diff < 7200 && "1 시간전" ||
-
-			// 						diff < 86400 && Math.floor(diff / 3600) + " 시간전")
-			// 						||
-
-			// 						day_diff == 1
-			// 						&& "어제"
-			// 						||
-
-			// 						day_diff < 7
-			// 						&& day_diff
-			// 						+ " 일전"
-			// 						||
-
-			// 						day_diff < 31
-			// 						&& Math.floor(day_diff / 7)
-			// 						+ " 주전"
-			// 						||
-
-			// 						day_diff < 360
-			// 						&& Math.floor(day_diff / 30)
-			// 						+ " 개월 전"
-			// 						||
-
-			// 						day_diff >= 360
-			// 						&& (Math.floor(day_diff / 360) == 0 ? 1 : Math
-			// 								.floor(day_diff / 360)) + " 년 전"
-
-			// 			}
-		</script>
 	</div>
+	
+	<div id="chat"></div>
+		
+		<script type="text/javascript">
+		// 채팅을 불러온다.
+		$(window).load(function() {
+			$.ajax({
+				type: 'post',
+				url: './chat/broadcast.jsp',
+				success: function(data) {
+					$('#chat').append(data);
+				},
+				error: function(xhr, status, error) {
+        			alert(error);
+    			}   
+			});
+		});
+		</script>
+	
 </body>
 
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />

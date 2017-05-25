@@ -16,8 +16,6 @@
 	}
 %>
 
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
 
 함께해요 게시판에 붙일예정.
 
@@ -310,5 +308,3 @@
 	
 </script>
 
-<!-- Footer -->
-<jsp:include page="../inc/footer.jsp" />

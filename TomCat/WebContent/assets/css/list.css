@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 .q {
 	/* 	border: 1px solid black; */
@@ -51,12 +52,16 @@ body {
 	border:1px solid red;
 	padding:1em;
 	border-radius : 4em;
+	
 	position:fixed;
-	margin-left: 2em;
+	margin-top: 3em;
+	margin-left: 1em;
 	
 }
 
 #sub {
+	text-align: center;
+	
 	/* 	margin: 50px; */
 /* 	width: 300px; */
 /* 	margin-left: 400px; */
@@ -67,9 +72,9 @@ body {
 /* 	position: relative; */
 /* 	top: -275px; */
 /* 	right: 140px; */
-/* 	font-weight: bold; */
-/* 	font-family: "나눔손글씨 펜"; */
-/* 	font-size: 1.5em; */
+
+	font-family: 'Hanna', serif;
+	font-size: 1.5em;
 /* 	vertical-align: middle; */
 }
 
@@ -93,6 +98,8 @@ body {
 
 #nick{
 	text-align: center;
+	font-size: 1.5em;
+	font-family: 'Hanna', serif;
 }
 #date{
 	text-align: center;
@@ -107,6 +114,18 @@ body {
 }
 /* 프로필 이미지 끝*/
 
+/*chat css*/
+#chat{
+	border: 5px solid red;
+	width: 25em;
+/* 	position:fixed; */
+	
+	
+	right:1em;
+/* 	margin-top: 1em; */
+/* 	z-index: 1; */
+}
+/*chat css 끝*/
 
 
 .gl {
