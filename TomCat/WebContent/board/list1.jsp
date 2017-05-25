@@ -1,4 +1,3 @@
-
 <%@page import="net.Board1.db.BoardBean"%>
 <%@page import="net.member.db.MemberBean"%>
 <%@page import="java.util.List"%>
@@ -8,15 +7,17 @@
 
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<section class="wrapper">
+<section class="wrapper" style="padding:0 ;">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 </head>
 <body class="fadein">
 
@@ -77,6 +78,7 @@
 			if (id != null) {
 		%>
 
+
 		<h3>
 			<a href="./BoardWrite1.bb">글쓰기</a>
 		</h3>
@@ -94,11 +96,28 @@
 					MemberBean mb = new MemberBean();
 			%>
 
+<<<<<<< HEAD
 			<div id="e">
 				<!-- 프로필 -->
 				<div id="file">
 					<img src="./upload/images/profileimg/<%=mb.getProfile()%>">
 				</div>
+=======
+<!-- 닉네임,날짜 -->
+<div id="nick">
+<%=bb.getNick_name()%>
+ </div>
+ 
+<!--  날짜 -->
+ <div id="date">
+ <%=bb.getDate() %>
+ </div>
+ 
+<!--  제목 -->
+<div id="sub">
+<%=bb.getSubject() %>
+</div>
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 
 				<!-- 닉네임,날짜 -->
 				<div id="nick">

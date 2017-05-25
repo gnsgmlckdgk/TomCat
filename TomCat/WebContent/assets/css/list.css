@@ -14,7 +14,7 @@
 }
 
 #e{
-	border: 1px solid #8c8c8c;
+	border: 2px solid #8c8c8c;
 	width: 900px;
 	height: 780px;
 	margin-right: 60px;
@@ -47,38 +47,64 @@ body{
 	}
 
 #sub{
-	border: 1px solid black;
-	margin: 50px;
-	width: 50px;
+	
+/* 	margin: 50px; */
+	width: 300px;
 	margin-left: 400px;
-	margin-top: 100px;
-}
+	background-image: url("god.png");
+	background-repeat: no-repeat;
+	padding-left: 120px;
+	height: 50px;
+	position: relative;
+	top :-305px;
+	right: 140px;
+	font-weight: bold;
+	font-family: "나눔손글씨 펜";
+	font-size: 1.5em;
+	
+	
+	}
 
 #con{
 	border: 1px solid black;
 	margin-left: 400px;
-	margin: 50px;	
 	width: 50px;
-	margin-left: 400px;
+	margin-bottom: 100px;
+	
 }
 
 #nick{
-	border: 1px solid black;
-	margin: 50px;
-	width: 50px;	
-	margin-top: 150px;
+/* 	border: 1px solid black; */
+	font-weight: bold;
+	font-family: "나눔손글씨 펜";
+	font-size: 1.4em;
+	width: 20%;
+	text-align: center;
+}
+
+#date{
+	font-weight: bold;
+	font-family: "나눔손글씨 펜";
+	font-size: 1.3em;
 }
 
 #file{
-	border: 1px solid black;
+	border: 3px solid black;
 	width: 100px;
 	height: 100px;
 	border-radius: 250px;
 	margin-top: 100px;
-	margin-left: 50px;
+	margin-left: 45px;
+	font-weight: bold;
+	font-family: "나눔손글씨 펜";
+	font-size: 1.5em;
+	margin-right: 10px;
 	
 }
 
+.gl{
+	position: fixed;
+}
 	
 	
 @-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
