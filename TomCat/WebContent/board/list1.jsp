@@ -1,4 +1,3 @@
-
 <%@page import="net.Board1.db.BoardBean"%>
 <%@page import="net.member.db.MemberBean"%>
 <%@page import="java.util.List"%>
@@ -8,13 +7,13 @@
 
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<section class="wrapper">
+<section class="wrapper" style="padding:0 ;">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=8" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body class="fadein">
@@ -69,7 +68,7 @@ int endPage=((Integer)request.getAttribute("endPage")).intValue();
 if(id!=null){
 %>
 
-<h3><a href="./BoardWrite1.bb">글쓰기</a></h3>
+<h3><a href="./BoardWrite1.bb" class="gl">글쓰기</a></h3>
 <%} %>
 
 <div class="w">
@@ -91,11 +90,15 @@ if(id!=null){
 <!-- 닉네임,날짜 -->
 <div id="nick">
 <%=bb.getNick_name()%>
-<%=bb.getDate() %>
+ </div>
+ 
+<!--  날짜 -->
+ <div id="date">
+ <%=bb.getDate() %>
  </div>
  
 <!--  제목 -->
- <div id="sub">
+<div id="sub">
 <%=bb.getSubject() %>
 </div>
 
