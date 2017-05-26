@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="net.board.db.boardBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,12 +14,29 @@
 	if (session.getAttribute("nick") != null) {
 		nick = (String) session.getAttribute("nick");
 	}
+
+	//오늘 날짜 구하기
+	Calendar cal = Calendar.getInstance();
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Banner -->
-<section id="banner">
+
+<%
+	int second_number = cal.get(Calendar.SECOND)%2;
+	if (second_number == 1) {
+%>
+		<section id="banner" class="banner_background<%=second_number%>">
+<%
+	} else {
+%>
+		<section id="banner" class="banner_background0">
+<%
+	}
+%>
+
+
 	<h2>TomCat</h2>
 	<p>
 		임시 메인화면 입니다. <br /> 현재 session의 id는
@@ -26,7 +44,20 @@
 		<%=nick%>입니다.
 	</p>
 	<ul class="actions">
+
+
+		<%
+			if (!id.equals("")) {
+		%>
 		<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
+		<%
+			} else if (id.equals("")) {
+		%>
+		<li><a onclick="popupToggle()" class="button special big">함께해요</a></li>
+		<%
+			}
+		%>
+
 		<li><a href="./PlanMain.pl" class="button special big">여행 일정
 				플래너</a></li>
 		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
@@ -63,8 +94,7 @@
 		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
 		<li><a href="./PlanSpot.pl?travel=태종대" class="button special big">추천장소
 				상세보기</a></li>
-		<li><a href="./Chat.ct"
-			class="button special big">채팅 테스트</a></li>
+		<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
 	</ul>
 	<!-- 테스트용 버튼들 끝. -->
 </section>
@@ -105,18 +135,18 @@
 	<div class="reel">
 
 		<%
-		List boardList=(List)request.getAttribute("bl");
+			List boardList = (List) request.getAttribute("bl");
 
-		for(int i=0;i<boardList.size();i++){
-			
-			//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
-		boardBean bb=(boardBean)boardList.get(i);
+			for (int i = 0; i < boardList.size(); i++) {
+
+				//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
+				boardBean bb = (boardBean) boardList.get(i);
 		%>
 
 		<article>
-			<a href="#" class="image featured">
-			
-			<img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
+			<a href="#" class="image featured"> <img
+				src="./upload/<%=bb.getImage1()%>" width=300 height=300
+				onerror="this.src='./images/instagram/noimage.png'">
 			</a>
 			<header>
 				<h3>
@@ -128,7 +158,6 @@
 
 
 		<%
-		
 			}
 		%>
 	</div>

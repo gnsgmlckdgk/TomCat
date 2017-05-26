@@ -62,7 +62,7 @@
 			<input type="submit" value="글쓰기">
 		</form>
 
-<!-- giolocation 위치값 받기 -->
+<!-- giolocation 위치값 받기. 모바일환경에서도 작동. -->
 <script type="text/javascript">  
   if (!!navigator.geolocation) 
   {
@@ -151,6 +151,7 @@
 					</div>
 
 					<!--  날짜 -->
+					<!-- 현재 날짜와 글이 작성된 날짜를 비교해서, 언제 쓴 글인지 알기 쉽도록 한다. -->
 					<div id="date">
 						<%
 							if (cal.get(Calendar.YEAR) == bb.getDate().getYear() + 1900) {
@@ -180,7 +181,7 @@
 							}
 						%>
 					</div>
-					
+					<!-- 날짜 끝. -->
 					
 					<!-- 수현씨 지도 부분 -->
 					<%if(bb.getLocation() != null && !bb.getLocation().equals("null")) {%>
