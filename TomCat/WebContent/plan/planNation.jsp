@@ -177,7 +177,7 @@ function cityListChange(pageNum) {
 <section class="nation_four">
 	
 	<div class="container comment">
-	<hr><h2><%=nation %> 리뷰</h2><hr>
+	<hr><h2><%=nation %> 커뮤니티</h2><hr>
 		<div class="table_div">
 			<table>
 				<!-- 리뷰 리스트 오는 자리 -->
@@ -200,10 +200,11 @@ function cityListChange(pageNum) {
 			
 			<form action="javascript:writeComplete()" method="post">
 			<select id="eval">
-				<optgroup label="아직안가봄">
+				<option value="-1" style="font-weight: 900; color: #6B66FF">평가하기</option>
+				<optgroup label="여행 전">
 					<option value="0">아직안가봤어요</option>
 				</optgroup>
-				<optgroup label="평가하기">
+				<optgroup label="여행 후">
 					<option value="1">좋았어요</option>
 					<option value="2">그저 그랬어요</option>
 					<option value="3">별로였어요</option>
@@ -258,6 +259,10 @@ function cityListChange(pageNum) {
 			var sel = $('#eval').val();
 			if(con.length == 0) {
 				alert("글을 입력해주세요.");
+				return;
+			}
+			if(sel == -1) {
+				alert("평가하기를 해주세요.");
 				return;
 			}
 			
