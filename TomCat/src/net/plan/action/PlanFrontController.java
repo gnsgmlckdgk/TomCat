@@ -174,8 +174,7 @@ public class PlanFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace();
-			}
-			
+			}	
 		}
 		
 		

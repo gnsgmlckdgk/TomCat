@@ -173,18 +173,129 @@ function cityListChange(pageNum) {
 	
 </section>
 
-<!-- Four -->
-<section id="four" class="wrapper style3 special">
-	<div class="container">
-		<header class="major">
-			<h2>Aenean elementum ligula</h2>
-			<p>Feugiat sed lorem ipsum magna</p>
-		</header>
-		<ul class="actions">
-			<li><a href="#" class="button special big">Get in touch</a></li>
-		</ul>
-	</div>
+<!-- Four 여행 후기, 리뷰 등 댓글 -->
+<section class="nation_four">
+	
+	<div class="container comment">
+	<hr><h2><%=nation %> 리뷰</h2><hr>
+		<div class="table_div">
+			<table>
+				<!-- 리뷰 리스트 오는 자리 -->
+			</table>
+			
+			<!-- 페이징 -->
+		<div class="page">
+			1 2 3 4
+		</div>
+			
+		</div>
+
+		
+		<!-- 리뷰 작성 -->
+		<%if(id!=null) {%>
+		<input type="button" value="리뷰쓰기" id="reviewWriteBtn" class="button alt writeBtn">
+		<%} %>
+		<!-- 숨겨진 공간 -->
+		<div class="reviewWriterDiv animated fadeInDown">
+			
+			<form action="javascript:writeComplete()" method="post">
+			<select id="eval">
+				<optgroup label="아직안가봄">
+					<option value="0">아직안가봤어요</option>
+				</optgroup>
+				<optgroup label="평가하기">
+					<option value="1">좋았어요</option>
+					<option value="2">그저 그랬어요</option>
+					<option value="3">별로였어요</option>
+				</optgroup>
+			</select>
+			<textarea rows="5" cols="3" maxlength="1000" name="content"></textarea>
+			<div class="formBtnDiv">
+				<input type="submit" value="작성완료" class="submitBtn">
+				<input type="reset" value="다시쓰기" class="resetBtn">
+			</div>
+			</form>
+		</div>
+		</div>
+
 </section>
+	<!-- Four 스크립트 -->
+	<script type="text/javascript">
+		
+		var toggleBtn = 0;
+		$(document).ready(function(data){
+			/* 리뷰 작성 버튼 */
+			$('#reviewWriteBtn').click(function(){
+				if(toggleBtn==0) {
+					$('.reviewWriterDiv').css('display', 'block');
+					toggleBtn = 1;
+				}else {
+					$('.reviewWriterDiv').css('display', 'none');
+					toggleBtn = 0;
+				}
+			});
+			
+			
+			/* 최초 리뷰 리스트 가져오기 */
+			$.ajax({
+				type: 'post',
+				url: './plan/planComment/planNationCommentList.jsp',
+				data : {nation:'<%=nation%>'},
+				success: function(data) {
+					$('div.comment table').empty();
+					$('div.comment table').append(data);
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+			    } 
+			});
+			
+		});
+		
+		/* 리뷰 작성완료 DB작업 */
+		function writeComplete() {
+			var con = $('textarea').val();
+			var sel = $('#eval').val();
+			if(con.length == 0) {
+				alert("글을 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type: 'post',
+				url: './plan/planComment/planNationCommentWrite.jsp',
+				data : {nation:'<%=nation%>', content : con, eval : sel},
+				success: function(data) {
+					$('textarea').val('');
+					$('.reviewWriterDiv').css('display', 'none');
+					toggleBtn = 0;
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+			    } 
+			});
+		}
+		
+		/* 페이지 버튼 누를때나 리뷰 추가했을때 */
+		
+		function nationCommentList(pageNum) {
+			$.ajax({
+				type: 'post',
+				url: './plan/planComment/planNationCommentList.jsp',
+				data : {nation:'<%=nation%>', pageNum : pageNum},
+				success: function(data) {
+					$('div.comment table').empty();
+					$('div.comment table').append(data);
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+			    } 
+			});
+		}
+		
+	</script>
+
+<div class="clear"></div>
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
