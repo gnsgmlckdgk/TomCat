@@ -22,12 +22,13 @@
 
 	<div id="top"></div>
 	<%
-	String id = (String)session.getAttribute("id");			// 아이디
-	String nick = (String)session.getAttribute("nick");	// 닉네임
-		
-
-	List boardList=(List)request.getAttribute("bl");
 	
+	
+	String id = (String)session.getAttribute("id");
+	String nick = (String)session.getAttribute("nick");		
+	
+	//BoardListAction에서 받아오는 값들
+	List boardList=(List)request.getAttribute("bl");
 	int count=((Integer)request.getAttribute("count")).intValue();
 	int pageSize=((Integer)request.getAttribute("pageSize")).intValue();
 	String pageNum=(String)request.getAttribute("pageNum");
@@ -35,40 +36,37 @@
 	int startrow=((Integer)request.getAttribute("startrow")).intValue();
 	int endRow=((Integer)request.getAttribute("endRow")).intValue();
 
-	BoardDAO bdao = new BoardDAO();	
-	ReplyDAO rdao=new ReplyDAO();
-	
+	BoardDAO bdao = new BoardDAO();//인생샷그램 글들의 DAO객체 생성
+	ReplyDAO rdao=new ReplyDAO();//댓글의 DAO생성 하는 이유는 게시판글 보여줄때 댓글 갯수가 몇개인지 제목옆에 표시해주기 위해!
 
-	
-if(id!=null){
-			 %>
-			 
+	//하기는 id가 있는 경우에만 글쓰기 버튼이 보이게 제어
+if(id!=null){%>			 
 		<a href="./BoardWrite.bo" class="button" >인생샷 공유해요</a>
-	<br><br>
+	<br>
 	<%} %>
 	
-		
-		
-
 	<div class="table-wrapper">
 			<table class="alt" id="border">
 		<%
-		
-		int boardcount=bdao.getBoardcount();
-		if(boardcount!=0){
-		
-			for(int i=0;i<boardList.size();i++){
-				
-				//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
+		//글의 갯수가 0이 아닐경우 하기실행(글 게시)	
+		if(count!=0){
+			//boardList(boardListAction에서 받아온 값)의 갯수만큼 for문 반복
+			for(int i=0;i<boardList.size();i++){				
+			//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
+			//boardList에서 List하나하나 순서대로 불러오는 작업
 			boardBean bb=(boardBean)boardList.get(i);
-				
+			//좋아요를 구현하기 위해 LikeBean LikeDAO객체 생성			
 			LikeBean lb=new LikeBean();
 			LikeDAO ldao=new LikeDAO();
+			//net.like.db.LikeDAO 의 좋아요 갯수 구하는 메소드 :likecountall
 			int likecountall=ldao.getLikecountall(bb.getNum());
+			//한사람당 한개만 좋아요갯수를 누르개 하기위해 하기의 getLikecount라는 메소드 생성
+			//한사람이 likecount넘버가 짝수일경우 좋아요만 누를수 있게,홀수일경우에는 좋아요 취소만 누를 수 있게 구현
 			int likecount=ldao.getLikecount(bb.getNum(), nick);
 				
 			%>
 		<tr>
+													<!-- 제목옆에 해당글에 댓글이 몇개 달렸는지 나타내줌 -->
 			<td colspan="4"><%=bb.getSubject() %>(댓글:<%=rdao.replyCount(bb.getNum()) %>)</td>
 			</tr>		
 			<tr><td>닉네임:</td><td><%=bb.getNick()%></td>
@@ -80,48 +78,42 @@ if(id!=null){
 			<img id="contentimg" src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
 			</a>
 			</td></tr>
-		<%if(id!=null){	//아이디가 not null일때만 좋아요/좋아요취소버튼 출력%>			
+		<%
+		
+		//아이디가 있을때만 좋아요나 좋아요취소버튼 출력
+		if(id!=null){%>			
 			<tr >
-			<td colspan="4" class="bottomline">
+			<td colspan="4">
 			
 <!-- 			====================좋아요================= -->
 <%
-
+//likecount(한사람이 좋아요를 누른 갯수)가 2로 나누었을때 0일떄, 즉 짝수일때는 좋아요를 누를 수 있게 구현
 if(likecount%2==0){
 %>
 			<form action="./LikeaddAction.lk" method="post" name="fr" >
 			<input type="submit" id="like" value="좋아요: )">	
-				<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>	
-			
+				<%
+				//likecountall은 해당글에 해당하는 총 좋아요갯수, 화면상에 표기됨
+				if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>				
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
-			<input type="hidden" name="subject" value="<%=bb.getSubject()%>">
-			<input type="hidden" name="content" value="<%=bb.getContent()%>">
-			<input type="hidden" name="image1" value="<%=bb.getImage1()%>">
 			<input type="hidden" name="love" value="<%=bb.getLove()%>">
-			<input type="hidden" name="nick" value="<%=nick%>">
-			
-			<input type="hidden" name="pageNum"value="<%=pageNum%>">				
+			<input type="hidden" name="nick" value="<%=nick%>">			
 				
 			</form>
 			<%} %>			
 						
 <!-- 			====================좋아요취소=============== -->
 
-		<%if(likecount%2!=0){			
-		%>
-		
-			<form action="./DislikeaddAction.lk" method="post" name="fr">		
+		<%
+		//likecount(한사람이 좋아요를 누른 갯수)가 2로 나누었을때 0이 아닐떄, 즉홀수일때는 좋아요취소를 누를 수 있게 구현
+		if(likecount%2!=0){	
+		%>		
+			<form action="./DislikeaddAction.lk" method="post" name="fr">
 			<input type="submit" id="dislike" value="좋아요취소 ">
-			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>
-			
+			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
-			<input type="hidden" name="subject" value="<%=bb.getSubject()%>">
-			<input type="hidden" name="content" value="<%=bb.getContent()%>">
-			<input type="hidden" name="image1" value="<%=bb.getImage1()%>">
 			<input type="hidden" name="love" value="<%=bb.getLove()%>">
-			<input type="hidden" name="nick" value="<%=nick%>">
-			
-			<input type="hidden" name="pageNum"value="<%=pageNum%>">		
+			<input type="hidden" name="nick" value="<%=nick%>">			
 			
 			</form>	
 			<%} %>

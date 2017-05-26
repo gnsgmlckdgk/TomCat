@@ -3,7 +3,7 @@ package net.board.action;
 
 public class ActionForward {
 	//이동정보 저장하는 파일 만들기
-	//패키지 net.member.action 파일 ActionForward
+	//패키지 net.board.action 파일 ActionForward
 	//path 멤버변수 이동할 페이지 주소
 	//isRedirect 멤버변수 이동할 방식
 	
@@ -14,13 +14,15 @@ public class ActionForward {
 	//Alt+Shift+r
 	private String path;	//이동할 페이지 주소
 	private boolean isRedirect;		//이동할 방식 true  sendRedirect
-	//								 false	forward이동
+									//		false	forward이동
+	
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
 	public boolean isRedirect() {
 		return isRedirect;
 	}

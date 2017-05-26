@@ -22,6 +22,7 @@ public class BoardDAO {
 	ResultSet rs=null;
 	int num=0;
 
+	//커넥션 풀(디비연결작업)
 	private Connection getConnection() throws Exception {
 		Connection con=null;
 		Context init=new InitialContext();
@@ -69,6 +70,7 @@ public class BoardDAO {
 
 	}//insertBoard 메소드
 
+	//게시한글이 몇개인지 세주는 메소드(BoardListAction에서 호출됨)
 	public int getBoardcount(){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -81,8 +83,7 @@ public class BoardDAO {
 			 //3  sql 함수 count(*) 이용
 			 sql="select count(*) from gram";
 			 
-			 pstmt=con.prepareStatement(sql);
-			 
+			 pstmt=con.prepareStatement(sql);			 
 			 //4 rs실행저장
 			 rs=pstmt.executeQuery();
 			 //5 데이터있으면 count저장
@@ -105,7 +106,8 @@ public class BoardDAO {
 	
 	
 	
-
+	//게시판에 글들을 게시할때 필요한 메소드
+	//(BoardListAction에서 호출됨, 게시판에 게시할변수가 많으므로 list형으로 return)
 	public List getBoardList(int startrow, int pageSize) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -117,17 +119,15 @@ public class BoardDAO {
 		try {
 			// 1,2 디비연결 메서드 호출
 			con = getConnection();
-			// 3 sql member모든 데이터 가져오기
-			//sql select*from board
-			//최근글 위로 re_ref 그룹별 내림차순 정렬 re_seq 오름차순
-			//re_ref desc, re_seq asc
-			//글 잘라 오기 limit(시작행-1, 개수)
+			// 3 sql gram의모든 데이터 가져오기(select*from gram)
+			//	 num에 의한 내림차순 정렬(order by num)
+			//	  글 잘라 오기 limit(시작행-1, 개수) startrow을 기준으로 pageSize만큼 자른다!
 			sql = "select *from gram order by num desc limit ?,?";
 		
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startrow-1);
 			pstmt.setInt(2, pageSize);
-			// 4 rs 실행저장
+			// 4 결과 rs에 저장
 			rs = pstmt.executeQuery();
 			
 			
@@ -162,7 +162,7 @@ public class BoardDAO {
 			if (con != null)
 				try {con.close();} catch (SQLException ex) {}
 
-		}//finally
+		}//finally		
 		return boardList;
 	}
 
@@ -273,13 +273,14 @@ public class BoardDAO {
 		int love = 0;
 		try {
 			con = getConnection();
+			//좋아요를 누르면: 해당 num의 글에서 최대값을 구하고 거기 +1이 되어 총 좋아요갯수에서 1이 증가함
 			sql = "select max(love)as max from gram where num=?";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1,bb.getNum());
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {love = rs.getInt("max") + 1;}		
-			
+			//증가한 1값을 DB에 update하는 sql구문
 			sql = "update gram set love=? where num=?";	
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1, love);
@@ -311,7 +312,8 @@ public class BoardDAO {
 	}
 	
 
-	public void GramDisLike(boardBean bb) {
+//좋아요 취소 구현, gram 테이블에서 총 좋아요갯수에서 -1를 구현
+public void GramDisLike(boardBean bb) {
 int love = bb.getLove();
 		
 

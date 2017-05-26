@@ -58,11 +58,15 @@
 
 img#up {
 	position: fixed;
+	opacity: 0.5;
+	
 	right: 30px;
 	top: 330px;
 }
 
 img#down {
+	opacity: 0.5;
+	
 	position: fixed;
 	right: 30px;
 	top: 450px;

@@ -230,6 +230,46 @@ if(id!=null){%>
 					<textarea rows="2" cols="80" name="content"></textarea>
 					<input type="submit" id="submit" value="입력">
 				</form>
+				
+				<%
+				
+				
+				//페이지 출력
+				if(replycount!=0){
+					//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
+								//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
+					int pageCount=replycount/pageSize+(replycount%pageSize==0?0:1);
+					//한 화면에 보여줄 페이지 번호 개수
+					int pageBlock=5;
+					//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
+					int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
+					//끝페이지 번호 구하기
+					int endPage=startPage+pageBlock-1;
+					if(endPage>pageCount){
+						endPage=pageCount;}
+					//이전
+					if(startPage>pageBlock){
+						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage-pageBlock%>">[이전]</a>
+				<%
+					}
+					//1...10
+					for(int i=startPage;i<=endPage;i++){
+						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=i%>">[<%=i%>]</a>
+				<%
+					}
+					//다음
+					if(endPage< pageCount){
+						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage+pageBlock %>">[다음]</a>
+						
+						
+						
+				<%
+							}		
+						}
+				
+				%>
+				
+				
 
 			</td>
 		</tr>
@@ -239,38 +279,7 @@ if(id!=null){%>
 
 <!-- 리플 페이징 -->
 		<% 		
-	//페이지 출력
-	if(replycount!=0){
-		//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
-					//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
-		int pageCount=replycount/pageSize+(replycount%pageSize==0?0:1);
-		//한 화면에 보여줄 페이지 번호 개수
-		int pageBlock=5;
-		//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
-		int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
-		//끝페이지 번호 구하기
-		int endPage=startPage+pageBlock-1;
-		if(endPage>pageCount){
-			endPage=pageCount;}
-		//이전
-		if(startPage>pageBlock){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage-pageBlock%>">[이전]</a>
-	<%
-		}
-		//1...10
-		for(int i=startPage;i<=endPage;i++){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=i%>">[<%=i%>]</a>
-	<%
-		}
-		//다음
-		if(endPage< pageCount){
-			%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage+pageBlock %>">[다음]</a>
-			
-			
-			
-	<%
-				}		
-			}
+
 		
 		}
 		if(replycount==0){
