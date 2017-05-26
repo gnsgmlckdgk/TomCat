@@ -101,16 +101,12 @@ body {
 
 /*chat css*/
 #chat{
-/* 	border: 5px solid red; */
 	width: 20%;
 	min-width:100px;
 	height: 75em;
 	position:fixed;
-	
-/* 	background-color:red; */
 	top:6em;
 	right:0;
-/* 	margin-top: 1em; */
 	z-index: 50;
 }
 
