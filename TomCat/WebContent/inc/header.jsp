@@ -68,9 +68,10 @@
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
 			if(id==null){ %>
+				<li><a onclick="popupToggle()">일정 관리</a></li>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
-					<li><a href="#">마이페이지</a></li>
+					<li><a href="./MyPlan.pln?plan_nr=100">일정 관리</a></li>
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>
 		</ul>

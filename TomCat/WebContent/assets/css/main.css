@@ -3192,7 +3192,7 @@ body.is-touch #banner {
 /*main 여행 설명 gif*/
 div.main_container {
     position: relative;
-    min-height: 500px;
+    min-height: 400px;
     margin-bottom:2em;
     margin: auto;
 }
@@ -3203,8 +3203,23 @@ div.main_container {
 	margin: auto;
 }
 .explain_gif img{
-	width: 90%;
+	width: 60%;
 }
+.explain_gif img:hover{
+	animation : 0.5s large linear;
+	width: 100%;
+}
+@keyframes large{
+	0%{
+		width:70%
+	}
+	100%{
+		width:100%;
+	}
+
+}
+
+
 .explain_gif h4{
 	background-color: white;
 	width: 90%;
