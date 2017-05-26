@@ -1,4 +1,3 @@
-<%@page import="java.util.Calendar"%>
 <%@page import="net.board.db.boardBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,89 +13,66 @@
 	if (session.getAttribute("nick") != null) {
 		nick = (String) session.getAttribute("nick");
 	}
-
-	//오늘 날짜 구하기
-	Calendar cal = Calendar.getInstance();
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Banner -->
+<section id="banner">
 
-<%
-	int second_number = cal.get(Calendar.SECOND)%2;
-	if (second_number == 1) {
-%>
-		<section id="banner" class="banner_background<%=second_number%>">
-<%
-	} else {
-%>
-		<section id="banner" class="banner_background0">
-<%
-	}
-%>
+	<div style="max-width: 1080px; margin: auto;">
 
+		<h2>TomCat</h2>
+		<p>
+			임시 메인화면 입니다. <br /> 현재 session의 id는
+			<%=id%>, nick은
+			<%=nick%>입니다.
+		</p>
+		<ul class="actions">
+			<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
+			<li><a href="./PlanMain.pl" class="button special big">여행 일정
+					플래너</a></li>
+			<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
+			<li><a href="#" class="button special big">Q & A</a></li>
+		</ul>
 
-	<h2>TomCat</h2>
-	<p>
-		임시 메인화면 입니다. <br /> 현재 session의 id는
-		<%=id%>, nick은
-		<%=nick%>입니다.
-	</p>
-	<ul class="actions">
-
-
-		<%
-			if (!id.equals("")) {
-		%>
-		<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
-		<%
-			} else if (id.equals("")) {
-		%>
-		<li><a onclick="popupToggle()" class="button special big">함께해요</a></li>
-		<%
-			}
-		%>
-
-		<li><a href="./PlanMain.pl" class="button special big">여행 일정
-				플래너</a></li>
-		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
-		<li><a href="#" class="button special big">Q & A</a></li>
-	</ul>
-
-	<br> 아래는 연습용 버튼입니다.
-	<ul class="actions">
-		<!-- 테스트용 버튼들. -->
-		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
+		<br> 아래는 연습용 버튼입니다.
+		<ul class="actions">
+			<!-- 테스트용 버튼들. -->
+			<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
 
 
-		<%
-			if (!id.equals("")) {
-		%>
-		<li><a href="./MyPlan.pln?plan_nr=100" class="button special big">나의일정관리</a></li>
-		<%
-			} else if (id.equals("")) {
-		%>
-		<li><a onclick="popupToggle()" class="button special big">나의일정관리</a></li>
+			<%
+				if (!id.equals("")) {
+			%>
+			<li><a href="./MyPlan.pln?plan_nr=100"
+				class="button special big">나의일정관리</a></li>
+			<%
+				} else if (id.equals("")) {
+			%>
+			<li><a onclick="popupToggle()" class="button special big">나의일정관리</a></li>
 
-		<%
-			}
-		%>
+			<%
+				}
+			%>
 
-		<li><form action="./PlanRegion.pl" method="get">
-				<input type="text" name="region" style="background-color: white"
-					placeholder="암거나 검색"> <input type="submit" value="검색"
-					class="button special">
-			</form></li>
+			<li><form action="./PlanRegion.pl" method="get">
+					<input type="text" name="region" style="background-color: white"
+						placeholder="암거나 검색"> <input type="submit" value="검색"
+						class="button special">
+				</form></li>
 
-		<li><a href="./CountryList.pl" class="button special big">국가
-				DB</a></li>
-		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
-		<li><a href="./PlanSpot.pl?travel=태종대" class="button special big">추천장소
-				상세보기</a></li>
-		<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
-	</ul>
-	<!-- 테스트용 버튼들 끝. -->
+			<li><a href="./CountryList.pl" class="button special big">국가
+					DB</a></li>
+			<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
+			<li><a href="./PlanSpot.pl?travel=태종대"
+				class="button special big">추천장소 상세보기</a></li>
+			<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
+		</ul>
+		<!-- 테스트용 버튼들 끝. -->
+
+	</div>
+
 </section>
 
 <!-- One -->
