@@ -70,7 +70,7 @@ public class BoardDAO {
 			}
 			System.out.println("num="+num);
 			//3 sql insert  디비날짜  now()
-			sql="insert into board(num,nick_name,subject,content,readcount,re_ref,date,file) values(?,?,?,?,?,?,now(),?)";
+			sql="insert into board(num,nick_name,subject,content,readcount,re_ref,date,file,location) values(?,?,?,?,?,?,now(),?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, bb.getNick_name());
@@ -79,6 +79,7 @@ public class BoardDAO {
 			pstmt.setInt(5, bb.getReadcount()); //re_lev 답변글 들여쓰기 일반글 들여쓰기 없음
 			pstmt.setInt(6, bb.getRe_ref()); //re_seq 답변글 순서   일반글 순서 맨위
 			pstmt.setString(7, bb.getFile()); 
+			pstmt.setString(8, bb.getLocation());
 			//4  실행
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -154,6 +155,8 @@ public class BoardDAO {
 				bb.setRe_ref(rs.getInt("re_ref"));
 			
 				bb.setReadcount(rs.getInt("readcount"));
+				bb.setLocation(rs.getString("location"));
+				
 				//boardList  한칸 저장
 				boardList.add(bb);
 			}

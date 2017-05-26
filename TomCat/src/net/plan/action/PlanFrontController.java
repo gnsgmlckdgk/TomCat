@@ -174,8 +174,7 @@ public class PlanFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			}catch(Exception e){
 				e.printStackTrace();
-			}
-			
+			}	
 		}
 		
 		else if(command.equals("/SouvenirList.pl")){//기념품 리스트 보기

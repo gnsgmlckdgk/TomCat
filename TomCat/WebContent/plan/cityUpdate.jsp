@@ -52,16 +52,22 @@
 	String city_code=(String)request.getParameter("city_code");
 	List countryList =(List)request.getAttribute("countryList");
 	PlanCityBean pcb = (PlanCityBean)request.getAttribute("pcb");
+	
 	String pageNum = (String)request.getAttribute("pageNum");
+	
+	String cityImgPath = (String)request.getAttribute("cityImgPath");
 %>
 
 <section>
 
 <div class="city_update">
-	<form action="./CityUpdateAction.pl" name="city_fr" method="post">
+	<form action="./CityUpdateAction.pl" name="city_fr" method="post" enctype="multipart/form-data">
 		국가코드
 		<select name="country_code">
-			<option value=<%=pcb.getCountry_code() %>><%=pcb.getCountry_code() %></option>
+			<optgroup label="현제 국가코드">
+				<option value=<%=pcb.getCountry_code() %>><%=pcb.getCountry_code() %></option>
+			</optgroup>
+			<optgroup label="수정가능한 국가코드">
 			<%
 				for(int i=0;i<countryList.size();i++){
 					PlanCountryBean pcob = (PlanCountryBean)countryList.get(i);
@@ -70,7 +76,11 @@
 					<%
 				}
 			%>
+			</optgroup>
 		</select>  
+		
+		<!-- 이전 국가코드 : 국가코드 변경시 필요 -->
+		<input type="hidden" name="beforeCountryCode" value="<%=pcb.getCountry_code() %>">
 		
 		<!-- 도시 코드  ==> 도시영어이름과 동일 -->
 		<input type="hidden" name="city_code" value="<%=city_code%>">
@@ -80,6 +90,10 @@
 		
 		도시 영어이름
 		<input type="text" name="en_name" value="<%=pcb.getEn_name()%>">
+		<input type="hidden" name="before_en_name" value="<%=pcb.getEn_name() %>">
+		
+		<br>이미지 변경
+		<input type="file" name="file"><br><br>
 		
 		정보
 		<textarea rows="10" cols="20" name="info"><%=pcb.getInfo()%></textarea>

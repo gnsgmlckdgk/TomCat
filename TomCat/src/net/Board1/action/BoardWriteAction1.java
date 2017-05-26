@@ -23,6 +23,11 @@ public class BoardWriteAction1 implements Action1{
 		bb.setSubject(request.getParameter("subject"));
 		bb.setFile(request.getParameter("file"));
 		bb.setIp(request.getRemoteAddr());
+		bb.setLocation(request.getParameter("location"));
+		
+		System.out.println("location test : "+request.getParameter("location"));
+		System.out.println("location test : "+bb.getLocation());
+		
 		// BoardDAO 객체생성
 			BoardDAO bdao = new BoardDAO();
 		// 메서드 호출 insertBoard(bb)

@@ -546,7 +546,7 @@ public class PlanDAO {
 		return countryList;
 
 	}
-
+	
 	/* DB 국가 개수(운영자 페이지) */
 	public int getCountryCount() {
 		int count = 0;
@@ -796,11 +796,45 @@ public class PlanDAO {
 
 	}
 
+	public String getCountyCode(String nation) {
+		PlanCountryBean pcb = null;
+		Connection con = null;
+		
+		String country_code = "";
+		
+		try {
+			con = getConnection();
+			sql = "select country_code from country where name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nation);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				country_code = rs.getString("country_code");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}finally {
+			try{
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return country_code;
+	}
+	
 	/* 수정할 국가 가져오기(운영자 페이지) */
 	public PlanCountryBean getCountry(String country_code) {
 		PlanCountryBean pcb = null;
 		Connection con = null;
-
+		
 		try {
 			con = getConnection();
 			sql = "select * from country where country_code=?";
@@ -843,16 +877,18 @@ public class PlanDAO {
 		}
 		return pcb;
 	}
-
+	
 	/* 국가 DB수정(운영자 페이지) */
-	public int updateCountry(PlanCountryBean pcb) {
+	public int updateCountry(PlanCountryBean pcb, String beforeCountryCode) {
 		int check = 0;
 
+		System.out.println("country_code: " + pcb.getCountry_code());
+		
 		try {
 			con = getConnection();
 			sql = "select * from country where country_code=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, pcb.getCountry_code());
+			pstmt.setString(1, beforeCountryCode);
 
 			rs = pstmt.executeQuery();
 
@@ -865,7 +901,7 @@ public class PlanDAO {
 				pstmt.setString(3, pcb.getInfo());
 				pstmt.setString(4, pcb.getContinent());
 				pstmt.setString(5, pcb.getEn_name());
-				pstmt.setString(6, pcb.getCountry_code());
+				pstmt.setString(6, beforeCountryCode);
 
 				pstmt.executeUpdate();
 			}
@@ -1291,14 +1327,14 @@ public class PlanDAO {
 	}
 
 	/* 국가 DB수정(운영자 페이지) */
-	public int updateCity(PlanCityBean pcb) {
+	public int updateCity(PlanCityBean pcb, String beforeCityCode) {
 		int check = 0;
 
 		try {
 			con = getConnection();
 			sql = "select * from city where city_code=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, pcb.getCity_code());
+			pstmt.setString(1, beforeCityCode);
 
 			rs = pstmt.executeQuery();
 
@@ -1311,7 +1347,7 @@ public class PlanDAO {
 				pstmt.setString(3, pcb.getInfo());
 				pstmt.setString(4, pcb.getCity_code());
 				pstmt.setString(5, pcb.getEn_name());
-				pstmt.setString(6, pcb.getCity_code());
+				pstmt.setString(6, beforeCityCode);
 
 				pstmt.executeUpdate();
 			}
@@ -1661,6 +1697,7 @@ public class PlanDAO {
 		return cityList;
 
 	}
+
 	
 	/*기념품 리스트 뽑아 오기*/
 	public List<PlanSouvenirBean> getSouvenirList(String city_code){

@@ -15,7 +15,8 @@
 
 <link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
+	
 </head>
 
 
@@ -55,11 +56,37 @@
 		});
 	</script>
 
-	<a href="./BoardWrite1.bb">
-		<h3 class="write">글쓰기</h3>
 		
-	</a>
-	
+		<form method="post" action="./BoardWrite1.bb" class="write">
+			<input type="hidden" id="location" name="location" value="aaa">
+			<input type="submit" value="글쓰기">
+		</form>
+
+<!-- giolocation 위치값 받기. 모바일환경에서도 작동. -->
+<script type="text/javascript">  
+  if (!!navigator.geolocation) 
+  {
+    navigator.geolocation.getCurrentPosition(successCallback,errorCallback);  
+  }
+  else
+  {
+    alert("이 브라우저는 Geolocation를 지원하지 않습니다");
+  }
+    
+  function successCallback(position)
+  {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    
+    document.getElementById("location").value = lat + ", "+lng;
+  }
+  
+  function errorCallback(error)
+  {
+    alert(error.message);
+  }
+</script>
+<!-- giolocation 위치값 받기 끝-->
 	
 
 	<div class="q">
@@ -98,7 +125,7 @@
 			%>
 
 
-			<div id="e">
+			<div class="e" id="<%=i%>">
 
 				<!--  제목 -->
 				<div id="sub">
@@ -107,7 +134,8 @@
 
 				<!-- 내용 -->
 				<div id="con">
-					<%=bb.getContent()%>
+					<%=bb.getContent()%><br>
+					현재 위치 <%=bb.getLocation() %>
 				</div>
 
 				<div id="2_inner_left" style="width: 30%;">
@@ -123,6 +151,7 @@
 					</div>
 
 					<!--  날짜 -->
+					<!-- 현재 날짜와 글이 작성된 날짜를 비교해서, 언제 쓴 글인지 알기 쉽도록 한다. -->
 					<div id="date">
 						<%
 							if (cal.get(Calendar.YEAR) == bb.getDate().getYear() + 1900) {
@@ -144,7 +173,7 @@
 
 							} else {
 						%>
-								<%=bb.getDate().getYear()%>년 <br>
+								<%=bb.getDate().getYear() + 1900%>년 <br>
 								<%=bb.getDate().getMonth()%>월
 								<%=bb.getDate().getDate()%>일
 								<%=bb.getDate().getHours()%>시
@@ -152,6 +181,19 @@
 							}
 						%>
 					</div>
+					<!-- 날짜 끝. -->
+					
+					<!-- 수현씨 지도 부분 -->
+					<%if(bb.getLocation() != null && !bb.getLocation().equals("null")) {%>
+					
+				<iframe width="100%" height="200px" frameborder="0" style="border: 0; margin:auto;"
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=bb.getLocation()%>" allowfullscreen>
+				</iframe>
+				<%} %>
+				<!-- 수현씨 지도 부분 끝 -->
+			
+			
+					
 				</div>
 
 
@@ -168,8 +210,12 @@
 
 	</div>
 	
+
+	
+</body>
+
 	<div id="chat"></div>
-		
+
 		<script type="text/javascript">
 		// 채팅을 불러온다.
 		$(window).load(function() {
@@ -184,8 +230,8 @@
     			}   
 			});
 		});
-		</script>
-	
-</body>
+ 		</script>
+		
+		
 
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />

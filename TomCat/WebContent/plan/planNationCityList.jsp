@@ -1,3 +1,5 @@
+<%@page import="net.images.db.ImagesBean"%>
+<%@page import="net.images.db.ImagesDAO"%>
 <%@page import="net.plan.db.PlanDAO"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="java.util.List"%>
@@ -48,7 +50,7 @@
 			pcbList = pdao.getCityList(nation, startRow, pageSize, search);
 		}	
 	}
-
+	
 	/* 페이징 */
 	// 필요한 전체 페이지 수
 	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -77,14 +79,18 @@
 
 <table>
 	<%
+		ImagesDAO idao = new ImagesDAO();	// 이미지 정보 들고오기
 		PlanCityBean pcb = null;
+		String cityPath = "";
 		if (count > 0) {
 			for (int i = 0; i < pcbList.size(); i++) {
 				pcb = pcbList.get(i);
+				cityPath = idao.getCityImgPath(pcb.getCity_code());
+				cityPath = cityPath.replace("\\", "/");	// css는 \아닌 /로 인식되서 바꿔줌
 	%>
 	<tr onclick="location.href='./PlanRegion.pl?region=<%=pcb.getName()%>';">
 		<td class="img_td"
-			style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg'); background-size: cover;"></td>
+			style="background-image: url('./images/plan/nation/<%=cityPath %>'); background-size: cover;"></td>
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName()%></p>
 			<p style="font-size: 0.7em;"><%=pcb.getEn_name()%></p>

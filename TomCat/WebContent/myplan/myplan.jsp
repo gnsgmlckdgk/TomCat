@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+<!-- 드래그 삽입 시작 -->		
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--   <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
+  <!-- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  <!-- 드래그 삽입 종료 -->		
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
@@ -69,14 +75,72 @@
 	}); */
 });  
 //날짜 선택하기 
-	
-	
-
-
-
-
 </script>
 
+
+<!-- 드래그 삽입 시작 -->		
+ 
+
+  <style type="text/css" >
+  	 body { font-size:12px; }
+  
+  #bestseller_books tr { cursor:pointer; }
+  #bestseller_books tr:hover { background:rgba(244,251,17,0.45); }
+  #bestseller_books th { height:30px; }
+  #bestseller_books td { height:30px; }
+  </style>
+  
+  
+  
+  <Script language="javascript" type="application/javascript">
+	
+	$(document).ready(function() {     //Helper function to keep table row from collapsing when being sorted     
+		var fixHelperModified = function(e, tr) {         
+			var $originals = tr.children();         
+			var $helper = tr.clone(); 
+			$helper.children().each(function(index) {
+				$(this).width($originals.eq(index).width()) 
+		});
+		return $helper;
+	};
+	
+	
+	//Make diagnosis table sortable
+	$("#bestseller_books tbody").sortable({
+		helper: fixHelperModified, stop: function(event,ui) {
+			renumber_table('#diagnosis_list')}
+   }).disableSelection(); 
+   
+	
+	//Delete button in table rows     
+   $('table').on('click','.btn-delete',function() {  
+      tableID = '#' + $(this).closest('table').attr('id'); 
+	  r = confirm('Delete this item?');
+	  if(r) { 
+	    $(this).closest('tr').remove();
+		renumber_table(tableID); 
+	  } 
+	});
+ }); 
+	
+	
+	
+ //Renumber table rows 
+ 	
+	function renumber_table(tableID) {     
+		$(tableID + " tr").each(function() {
+			count = $(this).parent().children().index($(this)) + 1;
+			$(this).find('.priority').html(count);
+	     });
+	 }
+  </script>
+		
+		
+<!-- 드래그 삽입 종료-->
+		
+		
+		
+		
 		
 
 </head>
@@ -85,106 +149,119 @@
 		String gold = (String) request.getAttribute("gold");
 		String id = (String) session.getAttribute("id");
 
-		List basketList = (List) request.getAttribute("basketList");
-		List goodsList = (List) request.getAttribute("goodsList");
-		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
+		List basketList = (List) request.getAttribute("basketList"); //여행지찜리스트 myplans List
+		List goodsList = (List) request.getAttribute("goodsList"); //상품 travel List
+		int plan_nr = Integer.parseInt(request.getParameter("plan_nr")); //일정 종류
 		
-		String dep_lat =  (String) request.getParameter("dlat");
-		String dep_lng =  (String) request.getParameter("dlng");
-		String arr_lat =  (String) request.getParameter("alat");
-		String arr_lng =  (String) request.getParameter("alng");
-		
-		
+
+		String dep_lat =  (String) request.getParameter("dlat"); //경로 표시를 위한 출발장소의 lat 값
+		String dep_lng =  (String) request.getParameter("dlng"); //경로 표시를 위한 출발장소의 lnt 값
+		String arr_lat =  (String) request.getParameter("alat"); //경로 표시를 위한 도착장소의 lat 값
+		String arr_lng =  (String) request.getParameter("alng"); //경로 표시를 위한 도착장소의 lnt 값
+
 		
 /* 		int init_nr=0; */
- 		int plan_item_nr=0; 
+ 		int plan_item_nr=0;  // 일정종류별 방문지 갯수 계산을 위함
 	%>
 	<%-- 	<h1>
-		여행장바구니<%=basketList.size()%><%=goodsList.size()%></h1> --%>
+		여행지찜리스트<%=basketList.size()%><%=goodsList.size()%></h1> --%>
 
 
 	<div class="container" >
 		<div class="myplan-list" >
 				<h3>
-				<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a>
-				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a>
-				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a>
-				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a>
+
+				<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!-- 여행지찜리스트 전체 목록 -->
+				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정1 -->
+				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정2 -->
+				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정3 -->
+
 				<!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
-								
 				<button class="btn" >일정만들기</button>
 				</h3>
-				<table border="1" >
+
+				<table border="1"  class="table" id="bestseller_books">  <!-- 여행지찜리스트 목록 및 일정별 목록 -->
+					<thead>
 					<tr>
-						<td>plan</td>
-						<td>item</td>
-						<td width="400px">name</td>
-						<%
+						<th>plan</th>
+						<th>item</th>
+						<th width="400px">name</th>
+						<% /* 전체목록 표시(plan_nr=100)할 때에는 경로 column 숨기기 */
 						if(plan_nr!=100){
 							%>	
-						<td width="100px">경로</td>
+						<th width="100px">경로</th>
 						<%
 						}
 						%>
 					</tr>
+					<thead>
 					<%
- 					for (int i = 0; i < basketList.size(); i++) {
+					/* 일정별 방문지 갯수 계산을 위한 for문 */ 
+ 					for (int i = 0; i < basketList.size(); i++) {  
 						MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-						if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
+						/* 일정종류(plan_nr) 가 여행지찜리스트의 일정종류와 다를 때에는 갯수 계산 안함. 
+						일정종류(plan_nr) 가 목록표시일 경우에도 갯수 계산 안함 */
+						if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)    
 							continue;
-						plan_item_nr=plan_item_nr+1;
-						
-					} 
+						plan_item_nr=plan_item_nr+1;    	 						
+					} /* 선택한 일정의 방문지 갯수 계산 완료 */
 					
 					
-					int button_nr=0;
-					float[][] route=new float[plan_item_nr][2]; 
+					int button_nr=0; //경로 표시 버튼의 각  id 값 생성을 위한 초기 값(for문)
+					float[][] route=new float[plan_item_nr][2];  // 두 지점간의 경로표시를 위해 for 문내에서(출발지의 lat, lng 도착지의 lat, lng 값)을 2차원 배열에 저장
 					
+					
+					/* 전체 방문지 찜목록, 일정별 방문지 목록 생성을 위한 for문 */
 					for (int i = 0; i < basketList.size(); i++) {
-							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-							TravelBean tb = (TravelBean) goodsList.get(i);
+							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i); /* 찜목록 DB Bean */ 
+							TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
 					
+							/* 여행지찜리스트에서 선택한 일정종류(plan_nr) 와 일정종류가 다를 땐, 목록테이블 만들지 않고 pass. 
+							일정종류(plan_nr) 가 목록표시(100)일 경우에도  목록테이블 만들지 않고 pass????????? */
 							if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
 								continue;
 					%>
+					 <tbody>
 					<tr>
-						<td><%=mpbb.getPlan_nr()%></td>
-						<td><%=mpbb.getItem_nr()%></td>
-						<td><%=tb.getName()%></td>
-						<%
-						if(plan_nr!=100){
-							%>
+						<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
+						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 -->
+						<td><%=tb.getName()%></td> <!-- 여행지명 -->
 						
+						<%
+						if(plan_nr!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
+							%>
 						<td>
-								<%
-								
-								
-							
-									route[button_nr][0] = tb.getLatitude();
-									route[button_nr][1] = tb.getLongitude();  
-									if(button_nr!=0){
+
+								<% /* 일정별 방문지 목록에서 각 여행지의 lat, lnt 값을  이차원 배열의 각 행에 저장 */
+									route[button_nr][0] = tb.getLatitude();  
+									route[button_nr][1] = tb.getLongitude();
+									if(button_nr!=0){  /* 첫번째 방문지(button_nr=0)에는 경로버튼 표시하지 않음 */
 									%>	
 									
+										<!-- 경로표시 버튼 눌렀을 때, plan_nr 과, 출발지 lat, lng, 도착지 lat, lng 값을 다음페이지(경로표시페이지)에 넘겨줌 -->
 										<a href='./MyPlan.pln?plan_nr=<%=plan_nr%>&dlat=<%=route[button_nr-1][0]%>&dlng=<%=route[button_nr-1][1]%>&alat=<%=route[button_nr][0]%>&alng=<%=route[button_nr][1]%>'>
+				  						<!-- 경로표시 버튼 이미지 -->
 				  						<img src="./images/myplans/bus_trans.png" width="30px" height="30px" style="vertical-align:bottom"> </a> 
 		  						<%
 		  							}
-									button_nr=button_nr+1;			
+									button_nr=button_nr+1; /* 경로표시 버튼 넘버링 */			
 		  						%>
+
 						</td>
 						<%
 						}
 						%>
-					</tr>
-	  				
-							
+					</tr>	
 						<%
 						}
+
 					%>
+					</tbody>
+
 				</table>
 
 			
-			<%
+			<% /* 찜한 방문지가 없을 때 안내멘트 표시 */
 				if (basketList.size() == 0) {
 					%>				
 			아직 일정을 추가하지 않으셨군요! <br> 여행지를 검색해서 찜해보세요. <br> <br>
@@ -224,7 +301,7 @@
 			</form>  		
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
-   <div id="right-panel">    </div>
+   	<div id="right-panel">    </div>
 
 	</div><!-- container 끝 -->
 
@@ -234,36 +311,46 @@
       var map;
 
       // Create a new blank array for all the listing markers.
-      var markers = [];
-      var tr_location =[];  
-      var tr_title =[];  
-      
+      var markers = [];     //찜목록 마커들 표시를 위한 배열
+      var TotalPath = []; // 전체 경로 표시를 위한 위치값 저장 배열 
+     
       
       function initMap() {
-        // Create a styles array to use with the map.
        
-        // Constructor creates a new map - only center and zoom are required.
+        // 초기 셋팅
         map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 35.096706, lng: 129.03049},
+
+            center: {lat: 35.096706, lng: 129.03049},  //초기 임의의 센터값 입력 
+
           	zoom: 13,
          	mapTypeControl: false
         });
 
-       var largeInfowindow = new google.maps.InfoWindow();
-       var highlightedIcon = makeMarkerIcon('FFFF24');
-					       
+        
+		var largeInfowindow = new google.maps.InfoWindow();
+		var highlightedIcon = makeMarkerIcon('FFFF24');
+		    
       					       
-              <%String MarkerColor;
-			String TitlePlan;
-			if (basketList.size() != 0) {
 
-				for (int i = 0; i < basketList.size(); i++) {
+             <%
+			String MarkerColor;
+
+			String TitlePlan;
+			String typeIcon;  // 여행지 type 별 아이콘 hotel, place, restaurant
+			
+			if (basketList.size() != 0) { //여행찜 목록이 존재할 때
+
+				for (int i = 0; i < basketList.size(); i++) {  //여행찜 목록 만큼 for 문 실행
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
 					TravelBean tb = (TravelBean) goodsList.get(i);
-					if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
+						//목록보기 일때에는 마커생성 안함. 찜목록중에 일정별로 해당 목록표시
+						if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100) 
 						continue;
 
-					switch (mpbb.getPlan_nr()) {
+						
+						
+					/* 일정별 마커 색깔 정의*/
+/* 					switch (mpbb.getPlan_nr()) {
 						case 1 :
 							MarkerColor = "6799FF"; //light blue
 							TitlePlan = "A";
@@ -284,9 +371,29 @@
 							MarkerColor = "F15F5F"; //red
 							TitlePlan = "E";
 							break;
-					}%>
+					} */   /* switch 문 종료 */
+					
+					/* 일정별 마커 모양 정의*/
+					switch (tb.getType()) {
+						case "r" :
+							typeIcon = "./images/myplans/restaurant.png";
+							 TitlePlan = "A"; 
+							break;
+						case "h" :
+							typeIcon = "./images/myplans/hotel.png";
+							TitlePlan = "B"; 
+							break;
+						case "p" :
+							typeIcon = "./images/myplans/place.png"; 
+							TitlePlan = "C"; 
+							break;
+						default :
+							typeIcon = "F15F5F"; //red
+							TitlePlan = "D"; 
+							break;
+					}   /* switch 문 종료 */%> 
 
-	        var defaultIcon = makeMarkerIcon('<%=MarkerColor%>');
+	      <%--   var defaultIcon = makeMarkerIcon('<%=MarkerColor%>'); --%>
 	    
 
          	var lat = <%=tb.getLatitude()%>;
@@ -299,82 +406,107 @@
 				position : position,
 				title : title,
 				animation : google.maps.Animation.DROP,
-				icon : defaultIcon,
-				id :
-	<%=i%>
-		});
+				icon : {
+            			url: '<%=typeIcon%>',   //full path of your image
+            			//scaledSize: new google.maps.Size(40,60)//this control the size of your icon
+        		},
+				id :<%=i%>
+				});
 
-			// Push the marker to our array of markers.
+			// 마커를 마커 배열에 Push
 			markers.push(marker);
-			// Create an onclick event to open the large infowindow at each marker.
+			
+			
+			//일정별 초기 화면에서만 전체 경로 표시해줌
+			<%
+			    if(plan_nr!=100 & dep_lat==null & dep_lng==null & arr_lat==null & arr_lng==null){
+			%>
+						TotalPath.push(position);
+			<%
+		    			}
+		     %>
+			
+			// onclick 이벤트 생성 (각 마커에서 large infowindow 를 열기 위함)
 			marker.addListener('click', function() {
 				populateInfoWindow(this, largeInfowindow);
 			});
-	<%} //for문%>
-			showListings();
-			
+	<%} //for문 종료 (여행찜 목록 만큼 for 문 실행하여, 표시할 마커들 정보 생성)  %>
+	
+			showListings();  //마커가 저장된 배열을 실제로 표출시키고 bound 로 묶어서 적당한 zoom 을 발생하기 위함
+			flightPath();
 			 <%
+			 //전체목록보기가 아니고, 출발지 도착지 lat lng 값 모두 null 이 아닐때 => 경로 표시
 		      if(plan_nr!=100 & dep_lat!=null & dep_lng!=null & arr_lat!=null & arr_lng!=null){
 
-			 	String route_dep = dep_lat + ", " + dep_lng;
-			 	String route_arr= arr_lat + ", " + arr_lng;
-			 	%>
-			 	
-			 	
-			 var directionsService = new google.maps.DirectionsService; //필수
-		       var directionsDisplay = new google.maps.DirectionsRenderer({
-							           draggable: true,
-							           map: map,
-							           panel: document.getElementById('right-panel')
-							         });
-							        
-		     
-			 
-			 
-				 
-		       directionsDisplay.addListener('directions_changed', function() {
-		           computeTotalDistance(directionsDisplay.getDirections());
-		         });
-		       						displayRoute('<%=route_dep%>', '<%=route_arr%>', directionsService, directionsDisplay);
-
-							       function displayRoute(origin, destination, service, display) {
-							           service.route({
-							             origin: origin,
-							             destination: destination,
-							            // waypoints: [{location: '35.158408, 129.062038'}],
-							             travelMode: 'TRANSIT',
-							             avoidTolls: true
-							           }, function(response, status) {
-							             if (status === 'OK') {
-							               display.setDirections(response);
-							             } else {
-							               alert('Could not display directions due to: ' + status);
-							             }
-							           });
-							         }
+						 	String route_dep = dep_lat + ", " + dep_lng;   // 출발지 lat lng 값 변수 하나로 저장
+						 	String route_arr= arr_lat + ", " + arr_lng;  //도착지 lat lng 값 변수 하나로 저장
+						 	%>
+						 	
+						 var directionsService = new google.maps.DirectionsService;  // 경로 표시 서비스
+					     var directionsDisplay = new google.maps.DirectionsRenderer({   //경로 표시
+										           draggable: true,
+										           map: map,
+										           panel: document.getElementById('right-panel')
+										         });
+								 
+					       directionsDisplay.addListener('directions_changed', function() {
+					           computeTotalDistance(directionsDisplay.getDirections());
+					         });
+				   			
+					       displayRoute('<%=route_dep%>', '<%=route_arr%>', directionsService, directionsDisplay);
+				
+					       function displayRoute(origin, destination, service, display) {
+					           service.route({
+					             origin: origin,
+					             destination: destination,
+					            // waypoints: [{location: '35.158408, 129.062038'}]/*  국가별로 경유지 지원여부 달라서 구현하지 않음 */
+					             travelMode: 'TRANSIT',  /* 대중교통표시 모두 */
+					             avoidTolls: true
+					           }, function(response, status) {
+					             if (status === 'OK') {
+					               display.setDirections(response);
+					             } else {
+					               alert('다음의 이유로 경로를 표시할 수 없습니다: ' + status);
+					             }
+					           });
+					         }
 			
-			
-			
-			
-	<%} 
-			}//if 문%>
-		}//function initMap() 
-
-		// This function will loop through the markers array and display them all.
-
+		<%} //경로표시 if문 
+		      
+		      
+			}//if 문 (여행찜 목록이 존재할 때) 닫기 %>  
+		}	//*******function initMap() 닫기*****
+		
+		
+		
+		
+		function flightPath (){
+			var flightPath = new google.maps.Polyline({
+		          path: TotalPath,
+		          geodesic: true,
+		          strokeColor: '#FF0000',
+		          strokeOpacity: 1.0,
+		          strokeWeight: 2
+		        });			
+			flightPath.setMap(map);
+		}
+		
+		// 마커 배열의 모든 아이템 표시하고 bound로 묶어서 zoom
 		function showListings() {
-			var bounds = new google.maps.LatLngBounds();
-			for (var i = 0; i < markers.length; i++) {
+			var bounds = new google.maps.LatLngBounds();  //LatLngBounds() 객체를 사용한 bounds 변수선언
+			for (var i = 0; i < markers.length; i++) {  // 마커배열에 모든 정보를 지도에 하나씩 출력
 				markers[i].setMap(map);
 				bounds.extend(markers[i].position);
 			}
-			map.fitBounds(bounds);
+			map.fitBounds(bounds);  
 		}
 
 		function populateInfoWindow(marker, infowindow) {
-			// Check to make sure the infowindow is not already opened on this marker.
+			
+			// info윈도우가 해당 마커에 이미 열려있는지 확인
 			if (infowindow.marker != marker) {
-				// Clear the infowindow content to give the streetview time to load.
+			
+				// street 뷰 출력을 위해 info window 를 Clear
 				infowindow.setContent('');
 				infowindow.marker = marker;
 				// Make sure the marker property is cleared if the infowindow is closed.
@@ -418,8 +550,10 @@
 			}
 		}
 
-		// This function takes in a COLOR, and then creates a new marker
-		// icon of that color. The icon will be 21 px wide by 34 high, have an origin
+		
+		//
+		// This function takes in a COLOR, and then creates a new marker icon of that color. 
+		// The icon will be 21 px wide by 34 high, have an origin
 		// of 0, 0 and be anchored at 10, 34).
 		function makeMarkerIcon(markerColor) {
 			var markerImage = new google.maps.MarkerImage(
