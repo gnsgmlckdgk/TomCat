@@ -32,7 +32,7 @@
 			</div>
 			<div class="6u$ 12u$(medium)">
 				<!-- 수현씨 지도 부분 -->
-				<iframe width="600" height="450" frameborder="0" style="border: 0"
+				<iframe width="100%" height="450" frameborder="0" style="border: 0; min-width: 280px;"
 					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>" allowfullscreen>
 				</iframe>
 			</div>
