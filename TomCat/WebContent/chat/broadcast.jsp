@@ -16,28 +16,25 @@
 	}
 %>
 
+<!-- 함께해요 게시판에 붙일예정. -->
 
-함께해요 게시판에 붙일예정.
+<!-- (완)귓속말 : /닉네임 내용 -->
 
-<hr>
+<!-- (완)textarea가 아닌 div 사용해서 카카오톡처럼 만들기. -->
 
-(완)귓속말 : /닉네임 내용
-<br>
-(완)textarea가 아닌 div 사용해서 카카오톡처럼 만들기.
-<br>
-현재 접속자 알기.
-<br>
-이모티콘 유료기능 구현하기. - action으로 갔다가, db에서 골드회원인지 검증하기.
-<br>
+<!-- 현재 접속자 알기. -->
+
+<!-- 이모티콘 유료기능 구현하기. - action으로 갔다가, db에서 골드회원인지 검증하기. -->
+
 
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
-<div id="messageWindow2" style="max-width:25em; padding:10px 0;height: 30em; overflow: auto; background-color: #a0c0d7;"></div>
+<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: #a0c0d7;"></div>
 
 <input id="inputMessage" type="text"
-	onkeydown="if(event.keyCode==13){send();}" style="width:20em;"/>
-<input type="submit" value="send" onclick="send();"/>
+	onkeydown="if(event.keyCode==13){send();}" style="width:20em;" placeholder="Enter로 전송"/>
+<!-- <input type="submit" value="send" onclick="send();"/> -->
 
 <%for(int i=1; i<=2; i++){ %>
 	<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc(<%=i %>)" style="width:2em">
