@@ -67,29 +67,48 @@
 
 <!-- Two -->
 <section id="two" class="wrapper style2 special">
-	<div class="container">
+	<div class="main_container" style="max-width: 1080px;">
 		<header class="major">
-			<h2>Fusce ultrices fringilla</h2>
-			<p>Maecenas vitae tellus feugiat eleifend</p>
+		<p>BEFORE YOU GO 에서</p>
+			<h2>성공적인 여행을 시작하세요</h2>
+			
 		</header>
-		<div class="row 150%">
-			<div class="6u 12u$(xsmall)">
-				<div class="image fit captioned">
-					<img src="./images/pic02.jpg" alt="" />
-					<h3>Lorem ipsum dolor sit amet.</h3>
-				</div>
+		<div class="main_explain">
+			<div class="explain_gif">
+				<img src="./images/main/gif01.gif" alt="" />
+				<h4>여행 일정 플래너에서 <br>가고 싶은 여행지를 선택하세요!</h4>
 			</div>
-			<div class="6u$ 12u$(xsmall)">
-				<div class="image fit captioned">
-					<img src="./images/pic03.jpg" alt="" />
-					<h3>Illum, maiores tempora cupid?</h3>
-				</div>
+			<div class="explain_gif">
+				<img src="./images/main/gif01.gif" alt="" />
+				<h4>나의 일정 관리에서 <br> 여행 날짜와 교통을 알수있습니다!</h4>
+			</div>
+			<div class="explain_gif">
+				<img src="./images/main/gif01.gif" alt="" />
+				<h4>함께해요와 인생샷그램에서 <br> 여행을 공유하세요!</h4>
 			</div>
 		</div>
-		<ul class="actions">
-			<li><a href="#" class="button special big">Nulla luctus</a></li>
-			<li><a href="#" class="button big">Sed vulputate</a></li>
-		</ul>
+		<div class="clear"></div>
+		
+<!-- 		<div class="row 150%"> -->
+<!-- 			<div class="6u 12u$(xsmall)"> -->
+<!-- 				<div class="image fit captioned"> -->
+<!-- 					<img src="./images/main/gif01.gif" alt="" /> -->
+<!-- 					<h3>여행 일정 플래너에서 여행지를 찾으세요</h3> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="6u$ 12u$(xsmall)"> -->
+<!-- 				<div class="image fit captioned"> -->
+<!-- 					<img src="./images/pic03.jpg" alt="" /> -->
+<!-- 					<h3>Illum, maiores tempora cupid?</h3> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="6u$ 12u$(xsmall)"> -->
+<!-- 				<div class="image fit captioned"> -->
+<!-- 					<img src="./images/pic03.jpg" alt="" /> -->
+<!-- 					<h3>Illum, maiores tempora cupid?</h3> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	</div>
 </section>
 

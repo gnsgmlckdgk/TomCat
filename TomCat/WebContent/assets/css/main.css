@@ -2188,7 +2188,7 @@ header h4+p, header h5+p, header h6+p {
 }
 
 header.major {
-	margin: 0 0 6em 0;
+	margin: 0 0 1em 0;
 }
 
 header.major h2 {
@@ -2208,7 +2208,7 @@ header.major p {
 
 @media screen and (max-width: 1280px) {
 	header.major {
-		margin-bottom: 4em;
+		margin-bottom: 1em;
 	}
 	header.major h2 {
 		font-size: 2.5em;
@@ -2312,7 +2312,7 @@ body.is-touch .wrapper.style3 {
 }
 
 .wrapper {
-	padding: 6em 0 4em 0;
+	padding: 3em 0 3em 0;
 }
 
 .wrapper>.inner {
@@ -2756,12 +2756,13 @@ body.is-touch #banner {
 #banner {
 	padding: 3em 0 3em 0;
 	background-attachment: fixed;
-	background-image: url("images/overlay.png"),
+	background-image: 
 		url("../../images/banner2.jpg"); /* 메인 화면 윗부분 사진 */
 	background-position: center top;
 	background-size: cover;
 	line-height: 1.75;
 	text-align: center;
+	text-shadow: 1px 3px 10px gray;
 }
 
 #banner:last-child {
@@ -3170,6 +3171,7 @@ body.is-touch #banner {
 	background-color: white;
 	height: 3.1em;
 }
+
 #banner .Main_Search .main_plan_search .search_text{
 	margin: auto;
 	height: 3.15em;
@@ -3187,3 +3189,26 @@ body.is-touch #banner {
 }
 /*Main_Search 끝*/
 
+/*main 여행 설명 gif*/
+div.main_container {
+    position: relative;
+    min-height: 500px;
+    margin-bottom:2em;
+    margin: auto;
+}
+
+.explain_gif{
+	width: calc(100%/3);
+	float: left;
+	margin: auto;
+}
+.explain_gif img{
+	width: 90%;
+}
+.explain_gif h4{
+	background-color: white;
+	width: 90%;
+	margin: 0.5em auto;
+}
+
+/*main 여행 설명 gif*/
