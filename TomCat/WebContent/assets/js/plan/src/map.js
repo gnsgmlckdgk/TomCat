@@ -51,7 +51,7 @@
 <pre>{
   initial: {
     fill: 'grey',
-    stroke: '#505050',
+    stroke: '#005c99',
     "fill-opacity": 1,
     "stroke-width": 1,
     "stroke-opacity": 1,
@@ -1096,7 +1096,7 @@ jvm.Map.prototype = {
 jvm.Map.maps = {};
 jvm.Map.defaultParams = {
   map: 'world_mill_en',
-  backgroundColor: '#505050',
+  backgroundColor: '#005c99',
   zoomButtons: true,
   zoomOnScroll: true,
   zoomOnScrollSpeed: 3,
@@ -1141,7 +1141,7 @@ jvm.Map.defaultParams = {
   markerStyle: {
     initial: {
       fill: 'grey',
-      stroke: '#505050',
+      stroke: '#005c99',
       "fill-opacity": 1,
       "stroke-width": 1,
       "stroke-opacity": 1,

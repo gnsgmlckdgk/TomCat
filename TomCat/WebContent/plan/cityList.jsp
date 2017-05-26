@@ -230,7 +230,8 @@ $(document).ready(function() {
 			<th onclick="sortCityList(5)">국가 코드<img src="./images/sort_right.png" class="sort_img sort3_img"></th>
 			<th onclick="sortCityList(7)">영문 이름<img src="./images/sort_right.png" class="sort_img sort4_img"></th>
 			<th>정보</th>
-			<th>수정 / 삭제</th>
+			<th>수정 /삭제</th>
+			<th>기념품 리스트</th>
 		</tr>
 		
 		<%
@@ -249,6 +250,7 @@ $(document).ready(function() {
 				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=pcb.getCity_code() %>'">
 				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=pcb.getCity_code()%>');">
 			</td>
+			<td><input type="button" name="souvenir" value="기념품 목록" onclick="location.href='./SouvenirList.pl?pageNum=<%=pageNum%>&city_code=<%=pcb.getCity_code() %>'"></td>
 			
 		</tr>
 		<%}//for %>

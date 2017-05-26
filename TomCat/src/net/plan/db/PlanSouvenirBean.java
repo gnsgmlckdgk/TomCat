@@ -5,7 +5,8 @@ public class PlanSouvenirBean {
 	String city_code;
 	String img;
 	String name;
-	String rangking;
+	int ranking;
+	String info;
 	
 	public int getNum() {
 		return num;
@@ -31,11 +32,17 @@ public class PlanSouvenirBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getRangking() {
-		return rangking;
+	public int getRanking() {
+		return ranking;
 	}
-	public void setRangking(String rangking) {
-		this.rangking = rangking;
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	
 }

@@ -1662,5 +1662,63 @@ public class PlanDAO {
 
 	}
 	
+	/*기념품 리스트 뽑아 오기*/
+	public List<PlanSouvenirBean> getSouvenirList(String city_code){
+		List<PlanSouvenirBean> souvenirList = new ArrayList<PlanSouvenirBean>();
+		PlanSouvenirBean psb = null;
+		
+		try {
+			con = getConnection();
+			
+			//도시에 맞는 기념품 리스트 가져오기
+			sql="select * from souvenir where city_code=? order by ranking asc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, city_code);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				psb=new PlanSouvenirBean();
+				
+				psb.setCity_code(city_code);
+				psb.setImg(rs.getString("sou_img"));
+				psb.setName(rs.getString("sou_name"));
+				psb.setNum(rs.getInt("num"));
+				psb.setRanking(rs.getInt("ranking"));
+				psb.setInfo(rs.getString("info"));
+				
+				souvenirList.add(psb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		
+		return souvenirList;
+	}
+	
+	/*기념품 리스트 추가하기*/
+	public void addSouvenir(){
+		
+	}
+	
 
 }

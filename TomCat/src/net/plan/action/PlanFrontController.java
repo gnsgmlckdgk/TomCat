@@ -178,6 +178,22 @@ public class PlanFrontController extends HttpServlet {
 			
 		}
 		
+		else if(command.equals("/SouvenirList.pl")){//기념품 리스트 보기
+			action=new SouvenirList();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		
+		else if(command.equals("/SouvenirAdd.pl")){ //기념품 추가하는 폼으로 이동
+			forward = new ActionForward();
+			forward.setPath("./plan/souvenirAdd.jsp");
+			forward.setRedirect(false);
+		}
+		
 		
 		
 

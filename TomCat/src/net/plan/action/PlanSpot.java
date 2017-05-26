@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.plan.db.PlanDAO;
+import net.plan.db.PlanSouvenirBean;
 import net.plan.db.PlanTravelBean;
 
 public class PlanSpot implements Action{
@@ -29,6 +30,8 @@ public class PlanSpot implements Action{
 		List spotimagelist = pdao.getSpotImages(ptb.getTravel_id());*/
 		
 		/*해당 장소 선물 리스트*/
+		List<PlanSouvenirBean> souvenirList = pdao.getSouvenirList(ptb.getCity_code());
+		
 		
 
 		request.setAttribute("ptb", ptb);
