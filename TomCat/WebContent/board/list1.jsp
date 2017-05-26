@@ -15,7 +15,8 @@
 
 <link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
+	
 </head>
 
 
@@ -61,6 +62,7 @@
 			<input type="submit" value="글쓰기">
 		</form>
 
+<!-- giolocation 위치값 받기 -->
 <script type="text/javascript">  
   if (!!navigator.geolocation) 
   {
@@ -82,8 +84,9 @@
   function errorCallback(error)
   {
     alert(error.message);
-  }    
+  }
 </script>
+<!-- giolocation 위치값 받기 끝-->
 	
 
 	<div class="q">
@@ -122,7 +125,7 @@
 			%>
 
 
-			<div id="e">
+			<div class="e" id="<%=i%>">
 
 				<!--  제목 -->
 				<div id="sub">
@@ -169,7 +172,7 @@
 
 							} else {
 						%>
-								<%=bb.getDate().getYear()%>년 <br>
+								<%=bb.getDate().getYear() + 1900%>년 <br>
 								<%=bb.getDate().getMonth()%>월
 								<%=bb.getDate().getDate()%>일
 								<%=bb.getDate().getHours()%>시
@@ -177,6 +180,19 @@
 							}
 						%>
 					</div>
+					
+					
+					<!-- 수현씨 지도 부분 -->
+					<%if(bb.getLocation() != null && !bb.getLocation().equals("null")) {%>
+					
+				<iframe width="100%" height="200px" frameborder="0" style="border: 0; margin:auto;"
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=bb.getLocation()%>" allowfullscreen>
+				</iframe>
+				<%} %>
+				<!-- 수현씨 지도 부분 끝 -->
+			
+			
+					
 				</div>
 
 
@@ -197,27 +213,24 @@
 	
 </body>
 
-	<div id="chat"></div>
+<!-- 	<div id="chat"></div> -->
 
-		<script type="text/javascript">
-		// 채팅을 불러온다.
-		$(window).load(function() {
-			$.ajax({
-				type: 'post',
-				url: './chat/broadcast.jsp',
-				success: function(data) {
-					$('#chat').append(data);
-				},
-				error: function(xhr, status, error) {
-        			alert(error);
-    			}   
-			});
-		});
-		</script>
+<!-- 		<script type="text/javascript"> -->
+<!-- 		// 채팅을 불러온다. -->
+<!-- 		$(window).load(function() { -->
+<!-- 			$.ajax({ -->
+<!-- 				type: 'post', -->
+<!-- 				url: './chat/broadcast.jsp', -->
+<!-- 				success: function(data) { -->
+<!-- 					$('#chat').append(data); -->
+<!-- 				}, -->
+<!-- 				error: function(xhr, status, error) { -->
+<!--         			alert(error); -->
+<!--     			}    -->
+<!-- 			}); -->
+<!-- 		}); -->
+<!-- 		</script> -->
 		
-		
-
-
 		
 
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />

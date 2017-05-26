@@ -155,6 +155,8 @@ public class BoardDAO {
 				bb.setRe_ref(rs.getInt("re_ref"));
 			
 				bb.setReadcount(rs.getInt("readcount"));
+				bb.setLocation(rs.getString("location"));
+				
 				//boardList  한칸 저장
 				boardList.add(bb);
 			}

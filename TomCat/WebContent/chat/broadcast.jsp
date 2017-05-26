@@ -48,7 +48,10 @@
 	//웹소켓 설정
 	var webSocket = new WebSocket('ws://192.168.2.17:8080/TomCat/broadcasting');
 	//var webSocket = new WebSocket('ws://localhost:8080/프로젝트명/broadcasting');
+	
+	//inputMessage를 선언.
 	var inputMessage = document.getElementById('inputMessage');
+	
 	//같은 이가 여러번 보낼때 이름 판별할 변수
 	var re_send = "";
 

@@ -4,7 +4,7 @@
 .q {
 	/* 	border: 1px solid black; */
 	border-radius: 30px;
-	padding-bottom: 100px;
+/* 	padding-bottom: 100px; */
 }
 
 .w {
@@ -13,7 +13,7 @@
 	
 }
 
-#e {
+.e {
 	border: 2px solid #8c8c8c;
 	border-radius: 40px;
 	padding :20px;
@@ -21,7 +21,7 @@
 	max-width:1000px;
 	background-color: #ccc;
 	background-color: rgba(204, 204, 204, 0.2);
-	height: 250px;
+	
 	margin: 10px;
 	
 }
@@ -48,14 +48,11 @@ body {
 }
 
 .write{
-	
-	border:1px solid red;
-	padding:1em;
-	border-radius : 4em;
-	
+
 	position:fixed;
 	margin-top: 3em;
 	margin-left: 1em;
+
 	
 }
 
@@ -81,7 +78,7 @@ body {
 #con {
 	
 	width: 70%;
-	min-height : 150px;
+	
 	float: right;
 	position: relative;
 	overflow-y:scroll;
