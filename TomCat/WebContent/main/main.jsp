@@ -19,59 +19,26 @@
 
 <!-- Banner -->
 <section id="banner">
-
-	<div style="max-width: 1080px; margin: auto;">
-
-		<h2>TomCat</h2>
-		<p>
-			임시 메인화면 입니다. <br /> 현재 session의 id는
-			<%=id%>, nick은
-			<%=nick%>입니다.
-		</p>
-		<ul class="actions">
-			<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
-			<li><a href="./PlanMain.pl" class="button special big">여행 일정
-					플래너</a></li>
-			<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
-			<li><a href="#" class="button special big">Q & A</a></li>
-		</ul>
-
-		<br> 아래는 연습용 버튼입니다.
-		<ul class="actions">
-			<!-- 테스트용 버튼들. -->
-			<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
-
-
-			<%
-				if (!id.equals("")) {
-			%>
-			<li><a href="./MyPlan.pln?plan_nr=100"
-				class="button special big">나의일정관리</a></li>
-			<%
-				} else if (id.equals("")) {
-			%>
-			<li><a onclick="popupToggle()" class="button special big">나의일정관리</a></li>
-
-			<%
-				}
-			%>
-
-			<li><form action="./PlanRegion.pl" method="get">
-					<input type="text" name="region" style="background-color: white"
-						placeholder="암거나 검색"> <input type="submit" value="검색"
-						class="button special">
-				</form></li>
-
-			<li><a href="./CountryList.pl" class="button special big">국가
-					DB</a></li>
-			<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
-			<li><a href="./PlanSpot.pl?travel=태종대"
-				class="button special big">추천장소 상세보기</a></li>
-			<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
-		</ul>
-		<!-- 테스트용 버튼들 끝. -->
-
-	</div>
+<div style="max-width: 1080px; margin: auto;">
+	<span class="small">나만의 여행 플래너</span><span class="head1"> <b>BEFORE</b> YOU GO...</span>
+	<!-- 검색폼 -->
+		<div class="Main_Search">
+			<form name="fr" action="./PlanSearch.pl" class="main_plan_search"
+				method="post" onsubmit="return checkSearch();">
+				<h2>어디로 여행을 가시나요?</h2>
+				<div class="clear"></div>
+				<div style="max-width: 950px; margin: auto;">
+					<select name="check" class="check_search">
+						<option value="0">선택해주십시오</option>
+						<option value="1">국가명</option>
+						<option value="2">도시명</option>
+					</select>
+					<input type="text" name="search" value="" class="search_text" placeholder="임시 버튼은 아래에 있습니당">
+					<input type="submit" value="검색" class="main_serch_button">
+				</div>
+			</form>
+		</div>
+</div>
 
 </section>
 
@@ -97,6 +64,35 @@
 <!-- 	</div> -->
 <!-- </section> -->
 
+
+<!-- Two -->
+<section id="two" class="wrapper style2 special">
+	<div class="container">
+		<header class="major">
+			<h2>Fusce ultrices fringilla</h2>
+			<p>Maecenas vitae tellus feugiat eleifend</p>
+		</header>
+		<div class="row 150%">
+			<div class="6u 12u$(xsmall)">
+				<div class="image fit captioned">
+					<img src="./images/pic02.jpg" alt="" />
+					<h3>Lorem ipsum dolor sit amet.</h3>
+				</div>
+			</div>
+			<div class="6u$ 12u$(xsmall)">
+				<div class="image fit captioned">
+					<img src="./images/pic03.jpg" alt="" />
+					<h3>Illum, maiores tempora cupid?</h3>
+				</div>
+			</div>
+		</div>
+		<ul class="actions">
+			<li><a href="#" class="button special big">Nulla luctus</a></li>
+			<li><a href="#" class="button big">Sed vulputate</a></li>
+		</ul>
+	</div>
+</section>
+
 <!-- Carousel -->
 
 <script src="assets/js/main/jquery.min.js"></script>
@@ -113,10 +109,11 @@
 		<%
 			List boardList = (List) request.getAttribute("bl");
 
-			for (int i = 0; i < boardList.size(); i++) {
+			if(boardList != null){
+				for (int i = 0; i < boardList.size(); i++) {
 
-				//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
-				boardBean bb = (boardBean) boardList.get(i);
+					//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
+					boardBean bb = (boardBean) boardList.get(i);
 		%>
 
 		<article>
@@ -134,39 +131,14 @@
 
 
 		<%
+				}
 			}
 		%>
 	</div>
 </section>
 <!-- Carousel end-->
 
-<!-- Two -->
-<!-- <section id="two" class="wrapper style2 special"> -->
-<!-- 	<div class="container"> -->
-<!-- 		<header class="major"> -->
-<!-- 			<h2>Fusce ultrices fringilla</h2> -->
-<!-- 			<p>Maecenas vitae tellus feugiat eleifend</p> -->
-<!-- 		</header> -->
-<!-- 		<div class="row 150%"> -->
-<!-- 			<div class="6u 12u$(xsmall)"> -->
-<!-- 				<div class="image fit captioned"> -->
-<!-- 					<img src="./images/pic02.jpg" alt="" /> -->
-<!-- 					<h3>Lorem ipsum dolor sit amet.</h3> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="6u$ 12u$(xsmall)"> -->
-<!-- 				<div class="image fit captioned"> -->
-<!-- 					<img src="./images/pic03.jpg" alt="" /> -->
-<!-- 					<h3>Illum, maiores tempora cupid?</h3> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 		<ul class="actions"> -->
-<!-- 			<li><a href="#" class="button special big">Nulla luctus</a></li> -->
-<!-- 			<li><a href="#" class="button big">Sed vulputate</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
-<!-- </section> -->
+
 
 <!-- Three -->
 <!-- <section id="three" class="wrapper style1"> -->
@@ -237,18 +209,74 @@
 <!-- </section> -->
 
 <!-- Four -->
-<section id="four" class="wrapper style3 special">
-	<div class="container">
-		<header class="major">
-			<h2>Aenean elementum ligula</h2>
-			<p>Feugiat sed lorem ipsum magna</p>
-		</header>
-		<ul class="actions">
-			<li><a href="#" class="button special big">Get in touch</a></li>
-		</ul>
-	</div>
-</section>
+<!-- <section id="four" class="wrapper style3 special"> -->
+<!-- 	<div class="container"> -->
+<!-- 		<header class="major"> -->
+<!-- 			<h2>Aenean elementum ligula</h2> -->
+<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
+<!-- 		</header> -->
+<!-- 		<ul class="actions"> -->
+<!-- 			<li><a href="#" class="button special big">Get in touch</a></li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
+<!-- </section> -->
 
+<!-- 테스트용 버튼들. -->
+<div style="max-width: 1080px; margin: auto;">
+
+		
+		
+		<p>
+			임시 메인화면 입니다. <br /> 현재 session의 id는
+			<%=id%>, nick은
+			<%=nick%>입니다.
+		</p>
+		<ul class="actions">
+			<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
+			<li><a href="./PlanMain.pl" class="button special big">여행 일정
+					플래너</a></li>
+			<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
+			<li><a href="#" class="button special big">Q & A</a></li>
+		</ul>
+
+		<br> 아래는 연습용 버튼입니다.
+		<ul class="actions">
+			
+			<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
+
+
+			<%
+				if (!id.equals("")) {
+			%>
+			<li><a href="./MyPlan.pln?plan_nr=100"
+				class="button special big">나의일정관리</a></li>
+			<%
+				} else if (id.equals("")) {
+			%>
+			<li><a onclick="popupToggle()" class="button special big">나의일정관리</a></li>
+
+			<%
+				}
+			%>
+
+			<li><form action="./PlanRegion.pl" method="get">
+					<input type="text" name="region" style="background-color: white"
+						placeholder="암거나 검색"> <input type="submit" value="검색"
+						class="button special">
+				</form></li>
+
+			<li><a href="./CountryList.pl" class="button special big">국가
+					DB</a></li>
+			<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
+			<li><a href="./PlanSpot.pl?travel=태종대"
+				class="button special big">추천장소 상세보기</a></li>
+			<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
+		</ul>
+		
+
+
+	</div>
+<!-- 테스트용 버튼들 끝. -->
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

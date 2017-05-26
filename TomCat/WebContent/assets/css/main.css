@@ -2785,7 +2785,7 @@ body.is-touch #banner {
 
 @media screen and (max-width: 1280px) {
 	#banner {
-		padding: 14em 0 11em 0;
+		padding: 3em 0 3em 0;
 	}
 	#banner h2 {
 		font-size: 2.5em;
@@ -2794,7 +2794,7 @@ body.is-touch #banner {
 
 @media screen and (max-width: 980px) {
 	#banner {
-		padding: 9em 0 7em 0;
+		padding: 3em 0 3em 0;
 	}
 }
 
@@ -3138,3 +3138,52 @@ body.is-touch #banner {
 /*added footer design end*/
 
 /*footer 끝*/
+
+
+/*Main_Search*/
+#banner .head1{
+	color: white;
+	font-size: 2.5em;
+}
+#banner b{
+	color: white;
+}
+#banner .small{
+	font-size: 1em;
+	color:white;
+}
+#banner h4{
+	color:white;
+	font-size: 1.5em;
+}
+#banner .Main_Search{
+	margin: auto;
+}
+#banner .Main_Search .main_plan_search{
+	font-size: 1em;
+	margin-top:0;
+	margin-bottom: 3em;
+}
+#banner .Main_Search .main_plan_search .check_search{
+	width:20%;
+	float:left;
+	background-color: white;
+	height: 3.1em;
+}
+#banner .Main_Search .main_plan_search .search_text{
+	margin: auto;
+	height: 3.15em;
+	float:left;
+	position:relative;
+	width:60%;
+	background-color: white;
+}
+#banner .Main_Search .main_plan_search .main_serch_button{
+	width:20%;
+	background-color: #f44066;
+}
+#banner .Main_Search .main_plan_search .main_serch_button:hover{
+	background-color: orange;
+}
+/*Main_Search 끝*/
+
