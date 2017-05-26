@@ -359,16 +359,58 @@ int love = bb.getLove();
 	
 	
 	
-	public String Bestshot() {		
-		String image1=null;
-				try {	
+//	public String Bestshot() {		
+//		String image1=null;
+//				try {	
+//					con = getConnection();
+//					sql = "select num,image1 from gram where love=(select max(love) from gram)";
+//					pstmt = con.prepareStatement(sql);					
+//					rs = pstmt.executeQuery();			
+//					
+//					if (rs.next()) {
+//					image1=rs.getString("image1");
+//					}					
+//
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				} finally {
+//					if (rs != null)
+//						try {
+//							rs.close();
+//						} catch (SQLException ex) {
+//						}
+//					if (pstmt != null)
+//						try {
+//							pstmt.close();
+//						} catch (SQLException ex) {
+//						}
+//					if (con != null)
+//						try {
+//							con.close();
+//						} catch (SQLException ex) {
+//						}
+//				} // finally
+//				return image1;
+//			}
+	
+	
+	public boardBean Bestshot() {		
+		boardBean bb=null;
+		try {	
 					con = getConnection();
 					sql = "select num,image1 from gram where love=(select max(love) from gram)";
 					pstmt = con.prepareStatement(sql);					
 					rs = pstmt.executeQuery();			
 					
 					if (rs.next()) {
-					image1=rs.getString("image1");
+						bb=new boardBean();
+						bb.setNum(rs.getInt("num"));
+						bb.setNick(rs.getString("nick"));
+						bb.setSubject(rs.getString("subject"));
+						bb.setContent(rs.getString("content"));
+						bb.setImage1(rs.getString("image1"));
+						bb.setLove(rs.getInt("love"));
+						bb.setDate(rs.getDate("date"));
 					}					
 
 				} catch (Exception e) {
@@ -390,7 +432,9 @@ int love = bb.getLove();
 						} catch (SQLException ex) {
 						}
 				} // finally
-				return image1;
+				return bb;
 			}
+	
+	
 	
 }//클래스 end

@@ -60,7 +60,7 @@ public class DBCityListAction implements Action{
 		
 		List<PlanCityBean> cityList = null;
 		if(count >= 0){
-			cityList = pdao.getCitySearchList(startRow, pageSize, search);
+			cityList = pdao.getCitySearchList(startRow, pageSize, search, isort);
 		}
 		
 		int pageCount = count / pageSize + (count % pageSize == 0? 0:1);

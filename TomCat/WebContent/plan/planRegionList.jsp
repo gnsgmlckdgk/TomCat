@@ -11,10 +11,6 @@
 	String city_code = request.getParameter("city_code"); // city_code 값
 	String id = (String) session.getAttribute("id");
 
-	if (search == null) {
-		search = "";
-	}
-
 	//객체 생성
 	PlanDAO pdao = new PlanDAO();
 
@@ -22,9 +18,9 @@
 	//DB에 등록된 글의 개수.
 	int count = 0;
 
-	if ("".equals(search)) { // 검색값이 없으면
+	if (search == null) { // 검색값이 없으면
+		search = "";//null값 방지를 위해서.
 		count = pdao.getTravelCount(region, city_code);
-
 	} else { // 검색값이 있으면
 		count = pdao.getTravelCount(region, city_code, search);
 	}
@@ -109,6 +105,8 @@
 
 <table>
 	<%
+	// 
+	
 		PlanTravelBean ptb = null;
 		if (count > 0) {
 			for (int i = 0; i < ptbList.size(); i++) {

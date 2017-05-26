@@ -11,7 +11,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/map3.css" />
+<link rel="stylesheet" href="assets/css/map/myplanNew.css" />
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <!-- 드래그 삽입 종료 -->		
 <head>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -50,8 +49,6 @@
 	//시작일
 	$('#fromDate').datepicker({
 		showOn: "focus",
-/* 		buttonImage: "myplan/pn_cal_btn.png",
-		buttonText:"날짜선택", buttonImageOnly:true,*/
 		dateFormat:"yy-mm-dd",
 		changeMonth:true,
 		onClose: function(selectedDate){
@@ -64,9 +61,7 @@
     
     //종료일
     $('#toDate').datepicker({
-   	  showOn: "focus", 
-/*          buttonImage: "myplan/pn_cal_btn.png", 
-         buttonText: "날짜선택",   buttonImageOnly : true, */
+   	 	 showOn: "focus", 
          dateFormat: "yy-mm-dd",
          changeMonth: true,
          onClose: function( selectedDate ) {
@@ -80,8 +75,8 @@
 	}); */
 });  
 //날짜 선택하기 
-
 </script>
+
 
 <!-- 드래그 삽입 시작 -->		
  
@@ -158,10 +153,12 @@
 		List goodsList = (List) request.getAttribute("goodsList"); //상품 travel List
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr")); //일정 종류
 		
+
 		String dep_lat =  (String) request.getParameter("dlat"); //경로 표시를 위한 출발장소의 lat 값
 		String dep_lng =  (String) request.getParameter("dlng"); //경로 표시를 위한 출발장소의 lnt 값
 		String arr_lat =  (String) request.getParameter("alat"); //경로 표시를 위한 도착장소의 lat 값
 		String arr_lng =  (String) request.getParameter("alng"); //경로 표시를 위한 도착장소의 lnt 값
+
 		
 /* 		int init_nr=0; */
  		int plan_item_nr=0;  // 일정종류별 방문지 갯수 계산을 위함
@@ -173,10 +170,12 @@
 	<div class="container" >
 		<div class="myplan-list" >
 				<h3>
+
 				<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!-- 여행지찜리스트 전체 목록 -->
 				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정1 -->
 				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정2 -->
 				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정3 -->
+
 				<!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
 				<button class="btn" >일정만들기</button>
 				</h3>
@@ -231,8 +230,8 @@
 						<%
 						if(plan_nr!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
 							%>
-						
 						<td>
+
 								<% /* 일정별 방문지 목록에서 각 여행지의 lat, lnt 값을  이차원 배열의 각 행에 저장 */
 									route[button_nr][0] = tb.getLatitude();  
 									route[button_nr][1] = tb.getLongitude();
@@ -247,17 +246,18 @@
 		  							}
 									button_nr=button_nr+1; /* 경로표시 버튼 넘버링 */			
 		  						%>
+
 						</td>
 						<%
 						}
 						%>
-					</tr>
-	  				
-							
+					</tr>	
 						<%
 						}
+
 					%>
 					</tbody>
+
 				</table>
 
 			
@@ -319,7 +319,9 @@
        
         // 초기 셋팅
         map = new google.maps.Map(document.getElementById('map'), {
+
             center: {lat: 35.096706, lng: 129.03049},  //초기 임의의 센터값 입력 
+
           	zoom: 13,
          	mapTypeControl: false
         });
@@ -329,8 +331,10 @@
 		var highlightedIcon = makeMarkerIcon('FFFF24');
 		    
       					       
+
              <%
 			String MarkerColor;
+
 			String TitlePlan;
 			String typeIcon;  // 여행지 type 별 아이콘 hotel, place, restaurant
 			

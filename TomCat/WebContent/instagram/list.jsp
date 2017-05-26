@@ -180,8 +180,14 @@ if(likecount%2==0){
 <!-- 	리스트 배너에 있는 좋아요 갯수가 가장 많은 베스트 -->
 	<%
 	boardBean bb=new boardBean();
-	String img=bdao.Bestshot();
-	System.out.println("이미지명이다"+img);	
+	bb=	bdao.Bestshot();
+	
+	LikeDAO ldao=new LikeDAO();
+	int likecountall=ldao.getLikecountall(bb.getNum());
+
+
+// 	String img=bdao.Bestshot();
+	System.out.println("새로운거작업중"+bb.getImage1()+bb.getNum());	
 	%>
 
 <img id="crown" src="./images/instagram/crown.png">	
@@ -189,8 +195,9 @@ if(likecount%2==0){
 	<tr><td>BEST샷</td></tr>
 	<tr><td>	
 
-<img src="./upload/<%=img%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
-	</td></tr>	
+<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'"></a>
+	</td></tr>
+	<tr><td>좋아요<%=likecountall %>개</td></tr>
 	</table>
 	
 <!-- 	화면 상단/ 하단 이동 아이콘 -->

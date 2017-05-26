@@ -24,17 +24,17 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=3"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=7"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=15"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=9"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=23"/>	<!-- 국가페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=3"/>	<!-- 국가페이지 -->
 			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=23"/>	<!-- 지역(도시)페이지 -->
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
@@ -50,15 +50,8 @@
 <body>
 
 <%
-	String id = "";
-	if(session.getAttribute("id")!=null) {
-		id = (String) session.getAttribute("id");
-	}
-
-	String nick = "";
-	if(session.getAttribute("nick")!=null) {
-		nick = (String) session.getAttribute("nick");
-	}
+	String id = (String)session.getAttribute("id");
+	String nick = (String) session.getAttribute("nick");
 %>
 
 <!-- Header -->
@@ -74,7 +67,7 @@
 			<li><a href="#">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
-			if("".equals(id)){ %>
+			if(id==null){ %>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
 					<li><a href="#">마이페이지</a></li>
@@ -113,7 +106,7 @@
 
 <!-- 회원관리/로그아웃 선택 팝업 메뉴 -->
 <%
-	if(!"".equals(nick)) {	// 로그인 되어 있을때만
+	if(nick!=null) {	// 로그인 되어 있을때만
 			MemberDAO mdao = new MemberDAO();
 			MemberBean mb = mdao.getMember(id);
 			String profile = mb.getProfile();

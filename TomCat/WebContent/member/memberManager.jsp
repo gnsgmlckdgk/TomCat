@@ -8,6 +8,32 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 프로필 사진 확대해서 미리보기 -->
+<div class="profileImg_enl"><img src="">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.img_td').mouseenter(function(){
+				var browserWidth = window.innerWidth;
+				var browserHeight = window.innerHeight;
+				var imgWid = browserWidth * 0.25;
+				var imgHeight = browserHeight * 0.35;
+				
+				var profileImgPath = $(this).children('img').attr('src');
+				
+				$('.profileImg_enl').css('display', 'block');
+				$('.profileImg_enl img').css({
+					'width' : imgWid,
+					'height' : imgHeight
+				});
+				$('.profileImg_enl img').attr('src', profileImgPath);
+			});
+			$('.img_td').mouseleave(function(){
+				$('.profileImg_enl').css('display', 'none');
+			})
+		});
+	</script>
+</div>
+
 <!-- Main -->
 <section id="main" class="wrapper memberManager">
 	<div class="container">
@@ -16,15 +42,16 @@
 		
 		<!-- 컨텐츠 -->
 		<%
-			// 한글처리
-			request.setCharacterEncoding("UTF-8");
-		
 			// 세션값 가져오기
 			String id = (String)session.getAttribute("id");	// 관리자 아이디
 			if(id==null) {
 				response.sendRedirect("./Main.me");
+				return;
 			}
-			
+		
+			// 한글처리
+			request.setCharacterEncoding("UTF-8");
+
 			// 현제 페이지 번호
 			String pageNum = request.getParameter("pageNum");
 			if(pageNum==null) {
@@ -50,7 +77,10 @@
 			}
 			
 			// 파라미터값 가져오기
-			int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 전체 회원 수
+			int count = 0;
+			if(request.getAttribute("count")!=null) {
+				 count = Integer.parseInt(String.valueOf(request.getAttribute("count")));	// 전체 회원 수
+			}
 			
 			// 회원리스트 가져오기
 			List<MemberBean> memberList = (List)request.getAttribute("memberList");
@@ -80,7 +110,7 @@
 								<div style="width: 99px; margin: 0 auto;">권한설정<img src="./images/sort_right.png" style="width: 12px; height: 12px; float: right; margin-top: 10px;" class="sortAuth_img"></div>
 							</th>
 							<th class="th_delete">
-								<div style="width: 99px; margin: 0 auto;">회원탈퇴</div>
+								회원탈퇴
 							</th>
 						</tr>
 						<%
@@ -90,8 +120,11 @@
 								%>
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td"><img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"></td>
-									<td class="id_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getId() %></td>
-									<td class="nick_td" <%if(mb.getGold()==1){%>style="color: yellow; text-shadow: 2px 2px 2px black;"<%}%>><%=mb.getNick() %></td>	
+									<td class="id_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>&pageNum=<%=pageNum%>&search=<%=search%>&sort=<%=isort%>';">
+									<span <%if(mb.getGold()==1){%>style="color: gold; text-shadow: 1px 1px 1px black;"<%} %>><%=mb.getId() %></span></td>
+									<td class="nick_td">
+									<span <%if(mb.getGold()==1){%>style="color: gold; text-shadow: 1px 1px 1px black;"<%} %>><%=mb.getNick() %></span>
+									</td>	
 									<td class="auth_select_box">
 										<div class="select-wrapper">
 										<select name="auth" id="category" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">
@@ -161,8 +194,13 @@
 					<script type="text/javascript">
 					/* 관리자가 회원을 탈퇴시킬때 비밀번호 한번더 확인 */
 					function deleteMemberPass(id) {
+						var screenWidth = screen.availWidth;
+						var screenHeight = screen.availHeight;
+						var left = screenWidth/2 - 600/2;
+						var top = screenHeight/2 - 350/2;
+						
 						window.open('./AdminPassCertification.me?id='+id+'&pageNum=<%=pageNum %>', '_blank', 
-						'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+						'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top='+top+', left='+left);
 					}
 					
 					/* 권한 설정이 변경되었을때 */

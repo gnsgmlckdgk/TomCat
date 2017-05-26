@@ -64,6 +64,7 @@
 		
 		국가 코드
 		<input type="text" name="country_code" value="<%=pcb.getCountry_code() %>">
+		<input type="hidden" name="before_country_code" value=<%=pcb.getCountry_code() %>>	<!-- 이전 국가코드(이미지 교체시 필요) -->
 		
 		국가 이름
 		<input type="text" name="name" value="<%=pcb.getName() %>">

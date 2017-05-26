@@ -102,6 +102,16 @@
 		<url-pattern>*.bb</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Chat -->
+	<servlet>
+		<servlet-name>ChatFrontController</servlet-name>
+		<servlet-class>net.chat.action.ChatFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChatFrontController</servlet-name>
+		<url-pattern>*.ct</url-pattern>
+	</servlet-mapping>
+	
 	<!-- 함께해요 댓글~-->
 <!-- 	<servlet> -->
 <!-- 		<servlet-name>ReplyFrontController</servlet-name> -->

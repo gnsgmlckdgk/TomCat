@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
    
 public class MemberFrontController extends HttpServlet {
       
@@ -24,10 +26,13 @@ public class MemberFrontController extends HttpServlet {
 		RSAKeySetting rsa_key;
 		
 		if(command.equals("/Main.me")) {	// 메인 페이지
-			
-			forward = new ActionForward();
-			forward.setPath("./main/main.jsp");
-			forward.setRedirect(false);
+			action = new MainListAction();			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		
 		}else if(command.equals("/MemberJoin.me")) {	// 회원가입 입력 페이지
 			
@@ -177,7 +182,7 @@ public class MemberFrontController extends HttpServlet {
 				System.out.println("MemberForntController MemberDeleteAction.me 예외 발생");
 				e.printStackTrace();
 			}
-			
+				
 		}else if(command.equals("/MemberManager.me")) {	// 회원관리 페이지(관리자 전용)
 			
 			action = new MemberManager();
@@ -189,7 +194,7 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/AdminPassCertification.me")) {	// 회원관리페이지에서 탈퇴 눌렀을때 비밀번호 인증하는 팝업
+		}else if(command.equals("/AdminPassCertification.me")) {	// 회원관리페이지에서 탈퇴 눌렀을때 비밀번호 인증하는 팝업			
 			// 관리자 비밀번호 인증 페이지 이동 전 공개키, 개인키 셋팅(RSA 암호화)
 			rsa_key = new RSAKeySetting();
 			
@@ -206,7 +211,7 @@ public class MemberFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MemberDeleteManager.me")) {	// 회원관리 페이지에서 관리자가 회원 삭제하는 처리
-			
+
 			action = new MemberDeleteManager();
 			
 			try {
@@ -233,7 +238,18 @@ public class MemberFrontController extends HttpServlet {
 			forward.setPath("./member/adminDBManager.jsp");
 			forward.setRedirect(false);
 			
+		}else if(command.equals("/AdminMemberInfo.me")) { // 관리자 회원 정보보기
+			
+			action = new AdminMemberInfoAction();
+			
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		
 		// 이동
 		if(forward!=null) {

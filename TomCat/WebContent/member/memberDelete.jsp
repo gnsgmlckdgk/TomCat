@@ -13,6 +13,7 @@
 		String id = (String)session.getAttribute("id");
 		if(id==null) {
 			response.sendRedirect("./Main.me");
+			return;
 		}
 	%>
 		<!-- 서브메뉴 -->

@@ -37,6 +37,10 @@
 				margin-top: 20px;
 			}
 			
+			div.countryAdd .countryt {
+				font-weight: bold;
+			}
+			
 		</style>
 			
 	</head>
@@ -47,7 +51,7 @@
 <section>
 <div class="countryAdd">
 	<form action="./CounAdd.pl" name="coun_fr" method="post">
-		대륙
+		<span class="countryt">대륙</span>
 		<select name="continent">
 			<option value="asia">아시아</option>
 			<option value="europe">유럽</option>
@@ -56,16 +60,16 @@
 			<option value="south">남미</option>
 		</select>
 		
-		국가 코드
+		<span class="countryt">국가 코드</span>
 		<input type="text" name="country_code">
 		
-		국가 이름
+		<span class="countryt">국가 이름</span>
 		<input type="text" name="name">
 		
-		국가 영어이름
+		<span class="countryt">국가 영어이름</span>
 		<input type="text" name="en_name">
 		
-		정보
+		<span class="countryt">정보</span>
 		<textarea rows="10" cols="20" name="info"></textarea>
 		
 		<div class="btn_div">

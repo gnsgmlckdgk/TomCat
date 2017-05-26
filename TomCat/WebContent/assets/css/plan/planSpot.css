@@ -34,6 +34,7 @@ section.planSpot h1{
 }
 
 div.planSpot_tb{
+	
 	float:left;
 	width: 40em; 
 	height: 20em;
@@ -58,3 +59,5 @@ table.gift{
 	width: 80em;
 	height: 20em;
 }
+
+

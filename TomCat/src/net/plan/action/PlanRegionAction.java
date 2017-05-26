@@ -153,7 +153,7 @@ class CityScraping {
 			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("웹에 가져올 정보가 없음.");
+			System.out.println("가져올 정보가 없음.");
 			return sb;
 		}
 		
@@ -185,7 +185,7 @@ class CityScraping {
 			sb.append("</table>");
 
 		} catch (IOException e1) {
-			System.out.println("웹에 가져올 정보가 없음.");
+			System.out.println("가져올 정보가 없음.");
 			return sb;
 		}		
 		

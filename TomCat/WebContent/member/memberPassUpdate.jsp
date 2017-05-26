@@ -12,6 +12,15 @@
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
 		
+		<%
+			// 세션값 확인
+			String id = (String)session.getAttribute("id");
+			if(id==null) {
+				response.sendRedirect("./Main.me");
+				return;
+			}
+		%>
+		
 		<!-- 컨텐츠 -->
 		<div class="content">
 			<div class="content_member_passUpdate">
@@ -26,7 +35,7 @@
 								<td><input type="password" name="cur_pass" id="cur_pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용"></td>
 							</tr>
 							<tr>
-								<th></th><td></td>	<!-- 구분 행 -->
+								<th colspan="2"><hr></th>	<!-- 구분 행 -->
 							</tr>
 							<tr>
 								<th>새로운 비밀번호</th>

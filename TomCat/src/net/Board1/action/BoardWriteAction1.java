@@ -17,12 +17,17 @@ public class BoardWriteAction1 implements Action1{
 		// BoardBean bb 객체생성
 		net.Board1.db.BoardBean bb = new net.Board1.db.BoardBean();
 		// 자바빈 멤버변수 <= 파라미터 저장
-		
+		bb.setNick_name(request.getParameter("nick_name"));
 		bb.setPass(request.getParameter("pass"));
 		bb.setContent(request.getParameter("content"));
 		bb.setSubject(request.getParameter("subject"));
 		bb.setFile(request.getParameter("file"));
 		bb.setIp(request.getRemoteAddr());
+		bb.setLocation(request.getParameter("location"));
+		
+		System.out.println("location test : "+request.getParameter("location"));
+		System.out.println("location test : "+bb.getLocation());
+		
 		// BoardDAO 객체생성
 			BoardDAO bdao = new BoardDAO();
 		// 메서드 호출 insertBoard(bb)

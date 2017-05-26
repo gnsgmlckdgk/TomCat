@@ -84,10 +84,15 @@ position: fixed;
 left: 30px;
 top: 230px;	
 animation-name:movingcrown; /*애니메이션의 이름 지정*/
-animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-duration:1s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
 animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
+}
+
+img#crown:HOVER{
+animation-play-state:paused;
+
 }
 
 @keyframes movingcrown{
@@ -96,23 +101,23 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 	top: 230px;
 }
 25%{
-	left: 50px;
+	left: 90px;
 	top: 180px;
 }
 
 50%{
-	left: 90px;
+	left: 150px;
 	top: 230px;
 }
 75%{
 opacity:0.5;
-	left: 120px;
+	left: 210px;
 	top: 180px;
 }
 
 100%{
 opacity:0.8;
-	left: 80px;
+	left: 300px;
 	top: 230px;
 }
 }
