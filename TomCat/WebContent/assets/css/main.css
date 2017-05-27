@@ -3203,11 +3203,13 @@ div.main_container {
 }
 .explain_gif img{
 	width: 60%;
+	border-radius:50%;
 }
 .explain_gif img:hover{
 	animation : 1s large;
 	width: 100%;
 	vertical-align: middle;
+	border-radius:0;
 	
 }
 @keyframes large{
