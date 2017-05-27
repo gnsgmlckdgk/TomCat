@@ -1,3 +1,5 @@
+
+<%@page import="java.util.Calendar"%>
 <%@page import="net.board.db.boardBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,12 +15,22 @@
 	if (session.getAttribute("nick") != null) {
 		nick = (String) session.getAttribute("nick");
 	}
+	
+	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
+	Calendar cal = Calendar.getInstance();
+	int second = cal.get(Calendar.SECOND)%2;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Banner -->
-<section id="banner">
+<%if(second==1) {%>
+<section id="banner" class="b_back<%=second%>">
+<%} else { %>
+<section id="banner" class="b_back">
+<%} %>
+
+
 	<div style="max-width: 1080px; margin: auto;">
 		<span class="small">나만의 여행 플래너</span><span class="head1"> <b>BEFORE</b>
 			YOU GO...
