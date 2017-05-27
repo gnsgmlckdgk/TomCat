@@ -264,7 +264,7 @@
 <!-- </section> -->
 
 <!-- 테스트용 버튼들. -->
-<div style="max-width: 1080px; margin: auto;">
+<div style="max-width: 1080px; margin: auto; border:5px solid red;">
 
 
 

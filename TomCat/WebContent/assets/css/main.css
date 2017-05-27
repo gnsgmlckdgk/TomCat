@@ -1700,7 +1700,7 @@ input[type="submit"].special:active, input[type="reset"].special:active,
 
 /* Form */
 form {
-	margin: 0 0 2em 0;
+/* 	margin: 0 0 2em 0; */
 }
 
 label {
@@ -3163,7 +3163,6 @@ body.is-touch #banner {
 #banner .Main_Search .main_plan_search{
 	font-size: 1em;
 	margin-top:0;
-	margin-bottom: 3em;
 }
 #banner .Main_Search .main_plan_search .check_search{
 	width:20%;
@@ -3206,8 +3205,10 @@ div.main_container {
 	width: 60%;
 }
 .explain_gif img:hover{
-	animation : 0.5s large linear;
+	animation : 1s large;
 	width: 100%;
+	vertical-align: middle;
+	
 }
 @keyframes large{
 	0%{
