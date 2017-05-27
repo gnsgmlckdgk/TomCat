@@ -2762,6 +2762,7 @@ body.is-touch #banner {
 	text-align: center;
 	text-shadow: 1px 3px 10px gray;
 }
+
 .b_back{
 	background-image: 
 		url("../../images/banner.jpg"); /* 메인 화면 윗부분 사진 */
@@ -2769,6 +2770,14 @@ body.is-touch #banner {
 .b_back1{
 	background-image: 
 		url("../../images/banner2.jpg"); /* 메인 화면 윗부분 사진 */
+}
+.b_back2{
+	background-image: 
+		url("../../images/banner3.jpg"); /* 메인 화면 윗부분 사진 */
+}
+.b_back3{
+	background-image: 
+		url("../../images/banner4.jpg"); /* 메인 화면 윗부분 사진 */
 }
 
 #banner:last-child {

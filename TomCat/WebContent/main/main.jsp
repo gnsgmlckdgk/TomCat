@@ -18,20 +18,24 @@
 	
 	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
 	Calendar cal = Calendar.getInstance();
-	int second = cal.get(Calendar.SECOND)%2;//배경 갯수에 따라서 나누는 값 바꾸기
+	int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Banner -->
-<%if(second==1) {%>
+<%if(second==3) {%>
+<section id="banner" class="b_back<%=second%>">
+<%} else if(second==2) {%>
+<section id="banner" class="b_back<%=second%>">
+<%} else if(second==1) {%>
 <section id="banner" class="b_back<%=second%>">
 <%} else { %>
 <section id="banner" class="b_back">
 <%} %>
 
 
-	<div style="max-width: 1080px; margin: auto;">
+	<div style="max-width: 1080px; margin: auto; padding: 1.5em 0;">
 		<span class="small">나만의 여행 플래너</span><span class="head1"> <b>BEFORE</b>
 			YOU GO...
 		</span>
