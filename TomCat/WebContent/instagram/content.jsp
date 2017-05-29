@@ -61,11 +61,13 @@ function func3(i){
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 	
 	
-	
+// 	하기는 BoardContentAction에서 받아오는 아이들
 		boardBean bb = (boardBean) request.getAttribute("bb");
 		ReplyBean rb=new ReplyBean();
-		int num = Integer.parseInt(request.getParameter("num"));
-		String pageNum = request.getParameter("pageNum");
+		int num=((Integer)request.getAttribute("num")).intValue();
+		String pageNum = request.getParameter("pageNum");//이거는 해당 글의 페이지넘버!(댓글 페이지넘은 따로있음)
+
+
 	%>
 	<section class="wrapper">
 	
@@ -81,7 +83,7 @@ function func3(i){
 		</tr>
 		<tr>
 			<td colspan="4">
-			
+<!-- 			onerror의 쓰임새는 이미지 에러가 뜰때는 noimage를 출력시켜라...  -->
 			<img src="./upload/<%=bb.getImage1()%>"
 				width=400 height=400 onerror="this.src='./images/instagram/noimage.png'"></td>
 		</tr>
@@ -90,7 +92,10 @@ function func3(i){
 		</tr>
 		<tr>
 		<td>
-		<%if(bb.getNick().equals(nick)){%>	
+		<%
+		//로그인한 닉네임(세션값 닉네임)이랑 글쓴닉네임(boardContentAction 에서 받아온닉네임)이 같으면 글 수정및 삭제가가능해용
+		//BoardContentAction에서 받아온 닉네임.equals(세션값 닉네임)		
+		if(bb.getNick().equals(nick)){%>	
 	<input type="button" style="margin-left:50px;"
 	 value="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 		</td>
@@ -105,34 +110,31 @@ function func3(i){
 		<%} %>
 <td colspan="4">
 	<input id="listbutton" type="button" value="글목록 "
-		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">
-		
-	</td>	
-		
-		
-		</tr>
-		
-		
+		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">		
+	</td>		
+		</tr>		
 	</table>
-	
 
-
-	<!--리플 -->	
+<!-- ==========================여기서부터는 댓글입니당 ~~~~========================= -->
 	<%
 	
-		ReplyDAO rdao = new ReplyDAO();	
-		int replycount=((Integer)request.getAttribute("replycount")).intValue();
-		
-		List replylist = (List) request.getAttribute("rl");
-	
-		int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
-		int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();
-		int startrow = ((Integer) request.getAttribute("startrow")).intValue();
-		int endRow = ((Integer) request.getAttribute("endRow")).intValue();
-		String replypageNum=(String)request.getAttribute("replypageNum");
 
 	
-		if(replycount!=0){
+		//밑에 아이들은 net.board.action.BoardContentActio에서 가져오는 아이들
+		//(위의 게시글이랑 댓글 부분의 action분리하지않고 같은페이지로 불러 왔어용)
+		//코드가 짧아서 같은페이지에서  불러오고 같은 jsp페이지에 출력도록 했는데 이러면 ajax가 잘 안됩니다... 
+		ReplyDAO rdao = new ReplyDAO();	
+		int replycount=((Integer)request.getAttribute("replycount")).intValue();		
+		List replylist = (List) request.getAttribute("rl");	
+		int pageSize = ((Integer) request.getAttribute("pageSize")).intValue();
+		int currentPage = ((Integer) request.getAttribute("currentPage")).intValue();		
+		int pageCount = ((Integer) request.getAttribute("pageCount")).intValue();
+		int startPage = ((Integer) request.getAttribute("startPage")).intValue();
+		int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+		//하기의 댓글 페이지넘버는 Attribute가 아닌 parameter 값으로 받아왔습니다~~ 주소창에 parameter표기를 위해!
+		String replypageNum = request.getParameter("replypageNum");
+		
+			if(replycount!=0){//댓글이 하나라도 있을때 실행
 
 	%>
 	<table class="table2">
@@ -144,7 +146,8 @@ function func3(i){
 		<%for(int i=0;i<replylist.size();i++){
 			rb = (ReplyBean)replylist.get(i);
 			%>
-<!-- 			댓글수정시 뜨는창 -->
+
+<!-- =================댓글 수정시 뜨는창 맨 위에 보면 처음에는 display:none으로 숨겨놨어요=============== -->
 			<tr id="replymodify" class="replymodifyclass<%=i%>">
 			<td colspan="2"><%=rb.getNick() %></td>
 			<td colspan="2">	
@@ -161,8 +164,8 @@ function func3(i){
 			</td>			
 			<td><%=rb.getDate()%></td>
 			</tr>
-			
-			
+<!-- 		======================================================================== -->
+<!-- 		밑에 originalreply라는 아이디를 준 이유는 댓글 수정을 눌렀을때 하기 tr은 숨기고 수정 tr이 나타나게 하기 위함 -->
 		<tr id="originalreply<%=i%>">
 		<td colspan="2">
 		<%
@@ -174,18 +177,19 @@ function func3(i){
 			<img src="./images/instagram/re.gif">
 			
 	<%	} %>
-		<%=rb.getNick() %>		
+		<%=rb.getNick() %>
 		</td>
 
 	<td colspan="2"><%=rb.getContent() %>
 	
-<%if(rb.getNick().equals(nick)){%>
+<%
+//로그인닉넴이랑 댓글 쓴사람이 동일할때만 삭제, 수정 보이게 제어
+if(rb.getNick().equals(nick)){%>
 <input type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
 <%int re_num=rb.getRe_num(); %>	
 <input type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
 <%}
-
-
+//로그인 되 있으면 대댓글 달수있게 제어, 대댓글 func1()누르면 맨 상단의 jQuery작동
 if(id!=null){%>
 <input type="button" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
 <%} %>
@@ -195,8 +199,8 @@ if(id!=null){%>
 		<td><%=rb.getDate() %></td>
 		</tr>	
 		
-<!-- 		대댓글창 -->
-		<tr id="replytextarea" class="replyreply<%=rb.getRe_num() %>"><td colspan="5">
+<!-- 		==========func1()이 동작하면 대댓글창, 초기화면에는 display:none으로 숨겨져 있습니다========== -->
+				<tr id="replytextarea" class="replyreply<%=rb.getRe_num() %>"><td colspan="5">
 				<form action="ReplyReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=nick %>" name="nick"> 
 					<input type="hidden" value="<%=rb.getNum()%>" name="num"> 
@@ -209,13 +213,12 @@ if(id!=null){%>
 					<textarea rows="2" cols="100" name="content"></textarea>
 					<input type="submit" id="submit" value="입력">
 				</form>		
-				
-		
-		</td></tr>
+		</td></tr>		
+<!-- 		============================================================================== -->
 		<%} %>
 		
 		
-<!-- 		댓글창 -->
+<!-- 		댓글입력창 -->
 
 		<tr id="replytextarea2">
 			<td colspan="6">
@@ -234,24 +237,14 @@ if(id!=null){%>
 				</form>
 				
 				<%
-				
-				
-				//페이지 출력
+				//댓글 페이지 출력
 				if(replycount!=0){
-					//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
-								//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
-					int pageCount=replycount/pageSize+(replycount%pageSize==0?0:1);
-					//한 화면에 보여줄 페이지 번호 개수
-					int pageBlock=5;
-					//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
-					int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
-					//끝페이지 번호 구하기
-					int endPage=startPage+pageBlock-1;
+	
 					if(endPage>pageCount){
 						endPage=pageCount;}
 					//이전
-					if(startPage>pageBlock){
-						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage-pageBlock%>">[이전]</a>
+					if(startPage>pageSize){
+						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage-pageSize%>">[이전]</a>
 				<%
 					}
 					//1...10
@@ -261,8 +254,7 @@ if(id!=null){%>
 					}
 					//다음
 					if(endPage< pageCount){
-						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage+pageBlock %>">[다음]</a>
-						
+						%><a href="./BoardContent.bo?num=<%=num %>&pageNum=<%=pageNum%>&replypageNum=<%=startPage+pageSize %>">[다음]</a>						
 						
 						
 				<%
@@ -281,10 +273,10 @@ if(id!=null){%>
 
 <!-- 리플 페이징 -->
 		<% 		
-
 		
 		}
 		if(replycount==0){
+// 			댓글 누르면 뜨는 대댓글창
 			%>
 					<form action="./ReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=bb.getSubject()%>" name="nick">							
@@ -302,7 +294,10 @@ if(id!=null){%>
 				</form>
 				<%}%>
 
-	<!--리플 -->
+<!-- ====================================리플끗~========================================= -->
+
+
+
 </section>
 
 </body>

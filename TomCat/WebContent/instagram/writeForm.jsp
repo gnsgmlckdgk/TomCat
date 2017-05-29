@@ -31,6 +31,7 @@ document.fr.submit();
 <section class="wrapper">
   
 	<%
+// 	인생샷그램 글쓰는곳
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 	%>
 	<div id="form">
