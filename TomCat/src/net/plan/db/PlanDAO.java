@@ -188,6 +188,45 @@ public class PlanDAO {
 		return count;
 	}
 	
+	public int getTravelCount() {
+		int count = 0;
+
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from travel";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
+	
 	/* DB 도시 개수(운영자 페이지) : 검색값 있을때 */
 	public int getCitySearchCount(String search) {
 		int count = 0;
@@ -195,6 +234,47 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 			sql = "select count(*) as count from city where name like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
+	
+	/* DB 도시 개수(운영자 페이지) : 검색값 있을때 */
+	public int getTravelSearchCount(String search) {
+		int count = 0;
+
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from travel where name like ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
 
@@ -547,29 +627,41 @@ public class PlanDAO {
 
 	}
 	
-	/* 메인페이지 국가리스트 뽑아오기(메인페이지) */
-	public List<PlanTravelBean> getTravelList() {
+	/* DB 도시리스트 뽑아오기 (운영자 페이지) : 검색값 */
+	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String search, int sort) {
 		List<PlanTravelBean> travelList = new ArrayList();
 		PlanTravelBean tb = null;
-		Statement stmt = null;
+		String sql = "";
 
 		try {
 			con = getConnection();
 
-			sql = "select * from travel order by city_code asc";
+			if(sort == 1) sql = "select * from travel where name like ? order by city_code asc limit ?,?";
+			else if(sort == 2) sql = "select * from travel where name like ? order by city_code desc limit ?,?";
+			else if(sort == 3) sql = "select * from travel where name like ? order by name asc limit ?,?";
+			else if(sort == 4) sql = "select * from travel where name like ? order by name desc limit ?,?";
+			else if(sort == 5) sql = "select * from travel where name like ? order by country_code asc limit ?,?";
+			else if(sort == 6) sql = "select * from travel where name like ? order by country_code desc limit ?,?";
+			else if(sort == 7) sql = "select * from travel where name like ? order by type asc limit ?,?";
+			else if(sort == 8) sql = "select * from travel where name like ? order by type desc limit ?,?";
+			else sql = "select * from travel where name like ? limit ?,?";	// 정렬 값 없을때
 
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, startRow - 1);// 시작행-1
+			pstmt.setInt(3, pageSize);// 몇개글
+
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				tb = new PlanTravelBean();
 
-				tb.setType(rs.getString("type"));
 				tb.setConuntry_code(rs.getString("country_code"));
-				tb.setCity_code(rs.getString("city_code"));
 				tb.setName(rs.getString("name"));
 				tb.setInfo(rs.getString("info"));
-				
+				tb.setCity_code(rs.getString("city_code"));
+				tb.setType(rs.getString("type"));
+
 				travelList.add(tb);
 			}
 

@@ -1,3 +1,5 @@
+<%@page import="net.plan.db.PlanTravelBean"%>
+<%@page import="net.travel.admin.db.TravelBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="net.plan.db.PlanCountryBean"%>
 <%@page import="java.util.List"%>
@@ -126,17 +128,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	List cityList = (List)request.getAttribute("cityList"); 
+	List travelList = (List)request.getAttribute("travelList"); 
 	String pageNum=(String)request.getAttribute("pageNum");
 	if(pageNum==null) {
 		pageNum="1";
 	}
 	int currentPage = Integer.parseInt(pageNum);
-	int count=((Integer)request.getAttribute("count")).intValue();
+	
 	int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 	int pageBlock=((Integer)request.getAttribute("pageBlock")).intValue();
 	int startPage=((Integer)request.getAttribute("startPage")).intValue();
 	int endPage=((Integer)request.getAttribute("endPage")).intValue();
+	int count=((Integer)request.getAttribute("count")).intValue();
 	
 	String search = request.getParameter("search");
 	if(search==null) {
@@ -235,22 +238,22 @@ $(document).ready(function() {
 		</tr>
 		
 		<%
-		for (int i=0; i<cityList.size();i++){
-			PlanCityBean pcb = (PlanCityBean)cityList.get(i);
+		for (int i=0; i<travelList.size();i++){
+			PlanTravelBean tb = (PlanTravelBean)travelList.get(i);
 		%>
 		<tr>
-			<td><%=pcb.getCity_code() %></td>
-			<td style="font-weight: bold;"><%=pcb.getName() %></td>
-			<td><%=pcb.getCountry_code() %></td>
-			<td><%=pcb.getEn_name() %></td>
+			<td><%=tb.getCity_code() %></td>
+			<td style="font-weight: bold;"><%=tb.getName() %></td>
+			<td><%=tb.getConuntry_code() %></td>
+			<td><%=tb.getType() %></td>
 			<td><span id="hideInfo<%=i%>" style="display: display"><a href="javascript:toggleInfo('<%=i%>', '1');">펼쳐보기</a></span>
-			<span id="showInfo<%=i%>" style="display: none"><a href="javascript:toggleInfo('<%=i%>', '0');">접기</a><br><%=pcb.getInfo() %></span></td>
+			<span id="showInfo<%=i%>" style="display: none"><a href="javascript:toggleInfo('<%=i%>', '0');">접기</a><br><%=tb.getInfo() %></span></td>
 			
 			<td>
-				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=pcb.getCity_code() %>'">
-				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=pcb.getCity_code()%>');">
+				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'">
+				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=tb.getCity_code()%>');">
 			</td>
-			<td><input type="button" name="souvenir" value="기념품 목록" onclick="location.href='./SouvenirList.pl?pageNum=<%=pageNum%>&city_code=<%=pcb.getCity_code() %>'"></td>
+			<td><input type="button" name="souvenir" value="기념품 목록" onclick="location.href='./SouvenirList.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'"></td>
 			
 		</tr>
 		<%}//for %>
