@@ -2,7 +2,7 @@ package net.plan.db;
 
 import java.sql.Timestamp;
 
-public class PlanResionCommentBean {
+public class PlanRegionCommentBean {
 	
 	private int num;
 	private String region;

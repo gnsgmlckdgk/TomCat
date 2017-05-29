@@ -89,8 +89,42 @@ public class PlanCommentDAO {
 		
 	}
 
-	// 특정 리뷰 리스트 가져오기
-	public List<PlanNationCommentBean> getListComment(String nation) {
+	// 리뷰 갯수 구하기(국가)
+	public int getCount(String nation) {
+		
+		int count = 0;
+		
+		try {
+			con = getConnection();
+			
+			sql = "select count(*) as count from nation_comment where nation = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nation);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return count;
+	}
+	
+	// 특정 리뷰 리스트 가져오기(국가)
+	public List<PlanNationCommentBean> getNationListComment(String nation, int startRow, int pageSize) {
 		
 		List<PlanNationCommentBean> list = new ArrayList<PlanNationCommentBean>();
 		
@@ -98,9 +132,11 @@ public class PlanCommentDAO {
 			
 			con = getConnection();
 			
-			sql = "select * from nation_comment where nation = ? order by nation_num desc";
+			sql = "select * from nation_comment where nation = ? order by nation_num desc limit ?, ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, nation);
+			ps.setInt(2, startRow-1);
+			ps.setInt(3, pageSize);
 			rs = ps.executeQuery();
 
 			while(rs.next()) {
@@ -129,6 +165,33 @@ public class PlanCommentDAO {
 		}
 		
 		return list;
+	}
+	
+	// 국가 리뷰 삭제하기
+	public void deleteNationReview(int num) {
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "delete from nation_comment where num = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 }
