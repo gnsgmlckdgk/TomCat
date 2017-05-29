@@ -49,26 +49,26 @@
 			}
 			/* 테이블 크기 */
 			div.cityList th:nth-of-type(1) {	/* 도시코드 */
-				width: 9%;
+				width: 10%;
 				cursor: pointer;
 			}
-			div.cityList th:nth-of-type(2) {	/* 도시이름 */
-				width: 9%;
+			div.cityList th:nth-of-type(2) {	/* 여행지 이름 */
+				width: 15%;
 				cursor: pointer;
 			}
 			div.cityList th:nth-of-type(3) {	/* 국가코드 */
-				width: 8%;
+				width: 10%;
 				cursor: pointer;
 			}
-			div.cityList th:nth-of-type(4) {	/* 영문이름 */
-				width: 9%;
+			div.cityList th:nth-of-type(4) {	/* 여행지 타입 */
+				width: 10%;
 				cursor: pointer;
 			}
 			div.cityList th:nth-of-type(5) {	/* 정보 */
-				width: 44%;
+				width: 35%;
 			} 
 			div.cityList th:nth-of-type(6) {	/* 수정 / 삭제 */
-				width: 21%;
+				width: 20%;
 			}
 
 			div.cityList .page a {
@@ -159,11 +159,12 @@
 function delConfirm(pageNum, city_code) {
 	var result = confirm("정말 삭제하시겠습니까?");
 	if(result==true) {
-		location.href="./CityDelete.pl?pageNum="+pageNum+"&city_code="+city_code;					
+// 		location.href="./CityDelete.pl?pageNum="+pageNum+"&city_code="+city_code;				
+		location.href="#";		
 	}
 }
 
-// 국가 정보 펼쳐보기 / 숨기기
+// 여행지 정보 펼쳐보기 / 숨기기
 function toggleInfo(i, t) {	// i는 td위치, t는 토글
 	if(t==1) {	// 펼치기
 		$('#hideInfo'+i).css('display', 'none');
@@ -175,7 +176,7 @@ function toggleInfo(i, t) {	// i는 td위치, t는 토글
 }
 
 // 정렬값 가지고 도시 리스트 가져오기
-function sortCityList(i) {
+function sortTravelList(i) {
 	
 	var sort = i;
 	
@@ -196,7 +197,7 @@ function sortCityList(i) {
 		else sort=7;	// 오름차순으로
 	}
 	
-	location.href="./CityList.pl?pageNum=<%=pageNum%>&search=<%=search%>&sort="+sort;
+	location.href="./TravelAdminList.td?pageNum=<%=pageNum%>&search=<%=search%>&sort="+sort;
 }
 
 // 정렬 값에 따라 th의 화살표 이미지 변경
@@ -223,18 +224,17 @@ $(document).ready(function() {
 </script>
 
 <div class="cityList">
-<h3 onclick="location.href='./CityList.pl';">DB 도시 개수 :<%=count %> </h3>
+<h3 onclick="location.href='./TravelAdminList.td'">DB 도시 개수 :<%=count %> </h3>
 
 	<!-- 국가 리스트 출력 -->
 	<table>
 		<tr>
-			<th onclick="sortCityList(1)">도시 코드<img src="./images/sort_right.png" class="sort_img sort1_img"></th>
-			<th onclick="sortCityList(3)">도시 이름<img src="./images/sort_right.png" class="sort_img sort2_img"></th>
-			<th onclick="sortCityList(5)">국가 코드<img src="./images/sort_right.png" class="sort_img sort3_img"></th>
-			<th onclick="sortCityList(7)">영문 이름<img src="./images/sort_right.png" class="sort_img sort4_img"></th>
+			<th onclick="sortTravelList(1)">도시 코드<img src="./images/sort_right.png" class="sort_img sort1_img"></th>
+			<th onclick="sortTravelList(3)">여행지 이름<img src="./images/sort_right.png" class="sort_img sort2_img"></th>
+			<th onclick="sortTravelList(5)">국가 코드<img src="./images/sort_right.png" class="sort_img sort3_img"></th>
+			<th onclick="sortTravelList(7)">여행지 타입<img src="./images/sort_right.png" class="sort_img sort4_img"></th>
 			<th>정보</th>
 			<th>수정 /삭제</th>
-			<th>기념품 리스트</th>
 		</tr>
 		
 		<%
@@ -250,10 +250,11 @@ $(document).ready(function() {
 			<span id="showInfo<%=i%>" style="display: none"><a href="javascript:toggleInfo('<%=i%>', '0');">접기</a><br><%=tb.getInfo() %></span></td>
 			
 			<td>
-				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'">
-				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=tb.getCity_code()%>');">
+				<input type = "button" name="update" value="수정" onclick="location.href='#'">
+<%-- 				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'"> --%>
+				<input type = "button" name="delete" value="삭제" onclick="">
+<%-- 				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=tb.getCity_code()%>');"> --%>
 			</td>
-			<td><input type="button" name="souvenir" value="기념품 목록" onclick="location.href='./SouvenirList.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'"></td>
 			
 		</tr>
 		<%}//for %>
@@ -261,9 +262,9 @@ $(document).ready(function() {
 	
 	<!-- 검색폼 -->
 	<div class="search_div">
-		<form action="./CityList.pl" method="post">
+		<form action="./TravelAdminList.td" method="post">
 			<img src="./images/member/search_l2.png" class="search_img">
-			<input type="text" name="search" id="search" value="<%=search %>" placeholder="도시이름으로 검색">
+			<input type="text" name="search" id="search" value="<%=search %>" placeholder="여행지 이름으로 검색">
 			
 			<input type="submit" value="검색" class="button alt">
 		</form>
@@ -272,22 +273,22 @@ $(document).ready(function() {
 	<div class="clear"></div>
 	
 	<!-- 국가 추가 버튼 -->
-	<input type="button" onclick="location.href='/TravelAdminWrite.td'" value="명소 추가하기" class="addCityBtn">
+	<input type="button" onclick="location.href='./TravelAdminWrite.td'" value="여행지 추가하기" class="addCityBtn">
 	
 	<!-- 페이지 출력 -->
 	<div class="page">
 	<%	
 	if(count != 0){
 	if(startPage>pageBlock){
-	%><a href="./CityList.pl?pageNum=<%=startPage - pageBlock%>&search=<%=search%>&sort=<%=isort %>">[이전]</a>	
+	%><a href="./TravelAdminList.td?pageNum=<%=startPage - pageBlock%>&search=<%=search%>&sort=<%=isort %>">[이전]</a>	
 	<%}//if
 	
 	for (int i = startPage; i <= endPage; i++) {
-	%><a href="./CityList.pl?pageNum=<%=i%>&search=<%=search%>&sort=<%=isort %>"<%if(currentPage==i){ %>style="background-color: #ccc;"<%}%>><span style="color: #000;"><%=i%></span></a>
+	%><a href="./TravelAdminList.td?pageNum=<%=i%>&search=<%=search%>&sort=<%=isort %>"<%if(currentPage==i){ %>style="background-color: #ccc;"<%}%>><span style="color: #000;"><%=i%></span></a>
 	<%}//for
 	
 	if (endPage < pageCount) {
-	%><a href="./CityList.pl?pageNum=<%=startPage + pageBlock%>&search=<%=search%>&sort=<%=isort %>">[다음]</a>
+	%><a href="./TravelAdminList.td?pageNum=<%=startPage + pageBlock%>&search=<%=search%>&sort=<%=isort %>">[다음]</a>
 	<%
 		}//if
 	}//if
