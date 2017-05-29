@@ -26,7 +26,7 @@ public class BoardFrontController extends HttpServlet {
 
 		ActionForward forward = null;
 		Action action = null;
-	
+
 		if (command.equals("/BoardWrite.bo")) {
 			forward = new ActionForward();
 			forward.setPath("./instagram/writeForm.jsp");
@@ -48,7 +48,7 @@ public class BoardFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/BoardContent.bo")) {
 			action = new BoardContentAction();
-			
+
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -84,34 +84,33 @@ public class BoardFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();}
+				e.printStackTrace();
 			}
-		
-
-		
-			
-			if(forward!=null){
-				if(forward.isRedirect()){
-					response.sendRedirect(forward.getPath());
-				}else{
-					RequestDispatcher dispatcher
-					=request.getRequestDispatcher(forward.getPath());
-					dispatcher.forward(request, response);
-				}
-			}
-
-		}
-		
-		@Override
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			System.out.println("doGet()메서드 호출");
-			doProcess(request, response);
 		}
 
-		@Override
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			System.out.println("doPost()메서드 호출");
-			doProcess(request, response);
+		if (forward != null) {
+			if (forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
 		}
 
 	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("doGet()메서드 호출");
+		doProcess(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("doPost()메서드 호출");
+		doProcess(request, response);
+	}
+
+}
