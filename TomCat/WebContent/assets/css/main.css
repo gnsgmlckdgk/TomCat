@@ -2321,7 +2321,7 @@ body.is-touch .wrapper.style3 {
 }
 
 .wrapper.style2 {
-	background-color: #f6f6f6;
+	background-color: rgba(255,255,255,0.8);
 }
 
 .wrapper.style3 {

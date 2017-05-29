@@ -53,19 +53,19 @@
 			function countryInput() {
 				var left = (screen.width - 1200)/2;
 				var availHeight = screen.availHeight-67;
-				window.open("./CountryList.pl", "window", "width=1200, height="+availHeight+", top=0, left="+left);
+				window.open("./CountryList.pl", "window", "width=1200, height="+availHeight*3/4+", top=0, left="+left);
 			}
 			
 			function cityInput() {
 				var left = (screen.width - 1200)/2;
 				var availHeight = screen.availHeight-67;
-				window.open("./CityList.pl", "window", "width=1200, height="+availHeight+", top=0, left="+left);
+				window.open("./CityList.pl", "window", "width=1200, height="+availHeight*3/4+", top=0, left="+left);
 			}
 			
 			function travelInput() {
 				var left = (screen.width - 1200)/2;
 				var availHeight = screen.availHeight-67;
-				window.open("./TravelAdmin.td", "window", "width=1200, height="+availHeight+", top=0, left="+left);
+				window.open("./TravelAdminList.td", "window", "width=1200, height="+availHeight*3/4+", top=0, left="+left);
 			}
 	
 		</script>

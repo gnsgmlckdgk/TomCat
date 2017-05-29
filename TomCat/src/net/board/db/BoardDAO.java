@@ -359,48 +359,13 @@ int love = bb.getLove();
 
 	}
 	
-	
-	
-//	public String Bestshot() {		
-//		String image1=null;
-//				try {	
-//					con = getConnection();
-//					sql = "select num,image1 from gram where love=(select max(love) from gram)";
-//					pstmt = con.prepareStatement(sql);					
-//					rs = pstmt.executeQuery();			
-//					
-//					if (rs.next()) {
-//					image1=rs.getString("image1");
-//					}					
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				} finally {
-//					if (rs != null)
-//						try {
-//							rs.close();
-//						} catch (SQLException ex) {
-//						}
-//					if (pstmt != null)
-//						try {
-//							pstmt.close();
-//						} catch (SQLException ex) {
-//						}
-//					if (con != null)
-//						try {
-//							con.close();
-//						} catch (SQLException ex) {
-//						}
-//				} // finally
-//				return image1;
-//			}
-	
-	
+	//인생샷그램 게시판 베너에 있는 best인생샷(좋아요가 가장 많은 게시글 게시)	
 	public boardBean Bestshot() {		
 		boardBean bb=null;
 		try {	
 					con = getConnection();
-					sql = "select num,image1 from gram where love=(select max(love) from gram)";
+					//gram 테이블에서 좋아요갯수가 가장많은 게시글 선정 select max(love)from gram				
+					sql = "select * from gram where love=(select max(love) from gram)";
 					pstmt = con.prepareStatement(sql);					
 					rs = pstmt.executeQuery();			
 					

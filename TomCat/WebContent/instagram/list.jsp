@@ -33,8 +33,11 @@
 	int pageSize=((Integer)request.getAttribute("pageSize")).intValue();
 	String pageNum=(String)request.getAttribute("pageNum");
 	int currentPage=((Integer)request.getAttribute("currentPage")).intValue();
-	int startrow=((Integer)request.getAttribute("startrow")).intValue();
-	int endRow=((Integer)request.getAttribute("endRow")).intValue();
+	int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
+	int startPage=((Integer)request.getAttribute("startPage")).intValue();
+	int endPage=((Integer)request.getAttribute("endPage")).intValue();
+
+	
 
 	BoardDAO bdao = new BoardDAO();//인생샷그램 글들의 DAO객체 생성
 	ReplyDAO rdao=new ReplyDAO();//댓글의 DAO생성 하는 이유는 게시판글 보여줄때 댓글 갯수가 몇개인지 제목옆에 표시해주기 위해!
@@ -129,23 +132,15 @@ if(likecount%2==0){
 			<td colspan="4" id="listpage">
 			
 			<%
+// 			=======================페이지출력===================
 			
-			//페이지 출력
-			if(count!=0){
-				//전체 페이지수 구하기 게시판 글 50개 한화면에 보여줄 글개수 10 =>5  전체페이지+0=>5
-							//게시판 글 56개 한화면에 보여줄 글개수 10 =>5 전체페이지+1(나머지)=>6 
-				int pageCount=count/pageSize+(count%pageSize==0?0:1);
-				//한 화면에 보여줄 페이지 번호 개수
-				int pageBlock=10;
-				//시작페이지 번호 구하기 1~10=>1  11~20=>11  21~30=>21
-				int startPage=((currentPage-1)/pageBlock)*pageBlock+1;
-				//끝페이지 번호 구하기
-				int endPage=startPage+pageBlock-1;
+			if(count!=0){//글이 한개라도 있을때 하기 출력
+
 				if(endPage>pageCount){
 					endPage=pageCount;}
 				//이전
-				if(startPage>pageBlock){
-					%><a href="./BoardList.bo?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+				if(startPage>pageSize){
+					%><a href="./BoardList.bo?pageNum=<%=startPage-pageSize%>">[이전]</a>
 			<%
 				}
 				//1...10
@@ -156,7 +151,7 @@ if(likecount%2==0){
 				}
 				//다음
 				if(endPage< pageCount){
-					%><a href="./BoardList.bo?pageNum=<%=startPage+pageBlock %>">[다음]</a>
+					%><a href="./BoardList.bo?pageNum=<%=startPage+pageSize %>">[다음]</a>
 			<%}		
 			}		
 			%>			
@@ -172,17 +167,16 @@ if(likecount%2==0){
 <!-- 	리스트 배너에 있는 좋아요 갯수가 가장 많은 베스트 -->
 	<%
 	boardBean bb=new boardBean();
-	bb=	bdao.Bestshot();
+	bb=	bdao.Bestshot();//좋아요가 가장 많은 게시글을 선정해주는 메소드
 	
+	//베스트 게시글의 좋아요가 몇개인지 게시하기 위해 하기 실행
 	LikeDAO ldao=new LikeDAO();
 	int likecountall=ldao.getLikecountall(bb.getNum());
-
-
-// 	String img=bdao.Bestshot();
-	System.out.println("새로운거작업중"+bb.getImage1()+bb.getNum());	
 	%>
 
+<!-- 인생샷그램 위에 움직이는 왕관모양 -->
 <img id="crown" src="./images/instagram/crown.png">	
+<!-- 	베스트 게시글 테이블 -->
 	<table class="banner">
 	<tr><td>BEST샷</td></tr>
 	<tr><td>	
