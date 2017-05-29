@@ -40,15 +40,55 @@ if(id!=null){%>
 <tr>
 <td><%=qb.getNum()%></td>
 <td><%=qb.getNick()%></td>
-<td><%=qb.getSubject()%></td>
+<td>
+<a href="./QandAContentAction.qna?num=<%=qb.getNum()%>&pageNum=<%=pageNum %>">
+<%=qb.getSubject()%></a>
+
+</td>
 <td><%=qb.getDate()%></td>
 </tr>
+<%} %>
+<tr><td colspan="4">
+
+			<%
+// 			=======================페이지출력===================
+			
+			if(count!=0){//글이 한개라도 있을때 하기 출력
+
+				if(endPage>pageCount){
+					endPage=pageCount;}
+				//이전
+				if(startPage>pageSize){
+					%><a href="./QandAList.qna?pageNum=<%=startPage-pageSize%>">[이전]</a>
+			<%
+				}
+				//1...10
+				for(int j=startPage;j<=endPage;j++){
+					%><a href="./QandAList.qna?pageNum=<%=j%>">[<%=j%>]
+			</a>
+			<%
+				}
+				//다음
+				if(endPage< pageCount){
+					%><a href="./QandAList.qna?pageNum=<%=startPage+pageSize %>">[다음]</a>
+			<%}		
+			}		
+			%>	
 
 
-<%}
+
+</td></tr>
+
+<%
 
 			} %>
-						</table>
+</table>
+
+
+
+
+
+
 	
 	
 

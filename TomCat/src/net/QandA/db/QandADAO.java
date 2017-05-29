@@ -190,42 +190,47 @@ public class QandADAO {
 		return QandAList;
 	}
 
-	// public boardBean getBoard(int num) {
-	// boardBean bb=null;
-	// try{
-	// con = getConnection();
-	// sql = "select *from gram where num=?";
-	// pstmt = con.prepareStatement(sql);
-	// pstmt.setInt(1,num);
-	//
-	// rs = pstmt.executeQuery();
-	//
-	// if (rs.next()) {
-	// bb=new boardBean();
-	//
-	// bb.setNum(rs.getInt("num"));
-	// bb.setNick(rs.getString("nick"));
-	// bb.setSubject(rs.getString("subject"));
-	// bb.setContent(rs.getString("content"));
-	// bb.setImage1(rs.getString("image1"));
-	// bb.setLove(rs.getInt("love"));
-	// bb.setDate(rs.getDate("date"));
-	// }
-	//
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// } finally {
-	// if (rs != null)
-	// try {rs.close();} catch (SQLException ex) { }
-	// if (pstmt != null)
-	// try {pstmt.close();} catch (SQLException ex) {}
-	// if (con != null)
-	// try {con.close();} catch (SQLException ex) {}
-	//
-	// }//finally
-	// return bb;
-	// }
+	//컨텐트 내용을 불러옴
+	 public QandABean getQandA(int num) {
+		 QandABean qb=null;
+	 try{
+	 con = getConnection();
+	 sql = "select *from qanda where num=?";
+	 pstmt = con.prepareStatement(sql);
+	 pstmt.setInt(1,num);
+	
+	 rs = pstmt.executeQuery();
+	
+	 if (rs.next()) {
+	 qb=new QandABean();
+	
+		qb.setNum(rs.getInt("num"));
+		qb.setNick(rs.getString("nick"));
+		qb.setSubject(rs.getString("subject"));
+		qb.setContent(rs.getString("content"));
+		qb.setImage1(rs.getString("image1"));
+		qb.setRe_lev(rs.getInt("re_lev"));
+		qb.setRe_seq(rs.getInt("re_seq"));
+		qb.setRe_ref(rs.getInt("re_ref"));
+		qb.setDate(rs.getDate("date"));
+ 
+
+	 }
+	
+	
+	 } catch (Exception e) {
+	 e.printStackTrace();
+	 } finally {
+	 if (rs != null)
+	 try {rs.close();} catch (SQLException ex) { }
+	 if (pstmt != null)
+	 try {pstmt.close();} catch (SQLException ex) {}
+	 if (con != null)
+	 try {con.close();} catch (SQLException ex) {}
+	
+	 }//finally
+	 return qb;
+	 }
 	//
 	// //게시글 수정하는 메소드
 	// public void updateBoard(boardBean bb){

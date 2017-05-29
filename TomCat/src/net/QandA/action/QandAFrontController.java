@@ -38,8 +38,15 @@ public class QandAFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
+				e.printStackTrace();}
+		} else if (command.equals("/QandAContentAction.qna")) {
+			action = new QandAContentAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 			
 			
 		} 
