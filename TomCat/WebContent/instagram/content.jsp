@@ -11,17 +11,22 @@
 <title>Insert title here</title>
 <script src="./js/jquery-3.2.0.js"></script>
 <style type="text/css">
+/*하기는 대댓글창(처음에는 숨겨놓고 func1함수실행되면 보이게한당 */
 #replytextarea{
 display:none;
 }
-
+/* 하기는 수정창(처음에는 숨겨놓고 func3()이 실행되면 보이게한당) */
 #replymodify{
 display:none;
 }
 </style>
 
 <script type="text/javascript">
-function func1(re_num){		
+// 하기에 대댓글창을 보면 아이디는 replytextarea로 주고 클래스는 replyreply로 아이디, 클래스 두개 다 부여함
+// 그 이유는 아이디는 기존에 display:none값을 display로 해제하기위함이고
+// replyreply클래스는 뒤에 변수를 넘겨서 클릭한 해당댓글에만 창이 뜨게 하기 위해서이다.
+// (처음 css에서 none속성을 주고싶은데 변수까지 제어가 안되어 두개준것임)
+function func1(re_num){
 	$(document).ready(function() {	
 		var x=document.getElementById('replytextarea');		
 		x.style.display='display';		
@@ -33,16 +38,13 @@ function func2(){alert("정말 삭제하시겠습니까?");}
 
 
 function func3(i){
-	
-	$(document).ready(function() {	
-
-		var x=document.getElementById('originalreply'+i);
-		
+	// 댓글 수정 버튼을 누를 때 뜨는 창도
+	//func1()과 같은 로직으로 id="replymodify" class="replymodifyclass" 이렇게 두개 부여	
+	$(document).ready(function() {
+		var x=document.getElementById('originalreply'+i);		
 		x.style.display='none';		
-			$('.replymodifyclass'+i).toggle('slow',function(){
-				
+			$('.replymodifyclass'+i).toggle('slow',function(){				
 			});	
-
 	});
 	
 }
