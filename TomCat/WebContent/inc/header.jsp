@@ -64,7 +64,7 @@
 		<ul>
 			<li><a href="./BoardList1.bb">함께해요</a></li>
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
-			<li><a href="#">여행일정Q&A</a></li>
+			<li><a href="./QandAList.qna">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
 			if(id==null){ %>

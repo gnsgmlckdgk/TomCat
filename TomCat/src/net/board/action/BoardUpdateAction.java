@@ -36,20 +36,15 @@ public class BoardUpdateAction implements Action{
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
 		String image1=multi.getFilesystemName("image1");
-		bb.setImage1(image1);
-			
+		//image1이 빈칸이 아니다 = 파일을 추가하였다=> 추가한 파일을 사용한다.
 		if(image1!=null){
-			bb.setImage1(multi.getFilesystemName("image1"));	
+			bb.setImage1(image1);	
 			}
-		
+		//image1이 빈칸이다 = 추가한 파일이 없다 => 기존의 image2파일을 그대로 사용한다.
 		else{
 			bb.setImage1(multi.getParameter("image2"));	
-		}
-		
-		System.out.println("nick의값:"+bb.getNick());
-		System.out.println("ct의값:"+bb.getContent());
-		System.out.println("이미지1의값:"+bb.getImage1());	
-		
+		}	
+	
 		
 		bdao.updateBoard(bb);
 

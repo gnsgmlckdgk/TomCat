@@ -27,6 +27,8 @@ public class ReplyDAO {
 		return con;
 	}// getConnection
 
+	
+//	댓글 입력되는 메소드
 	public void insertRepley(ReplyBean rb) {		
 		int re_num=0;
 
@@ -77,6 +79,7 @@ public class ReplyDAO {
 		}
 	}// insertRepley() end
 
+	//하기의 메소드는 특정글의 댓글이 몇개인지 세어주는 메소드 입니당
 	public int replyCount(int num) {
 		ResultSet rs = null;
 		int count = 0;
@@ -86,10 +89,13 @@ public class ReplyDAO {
 			sql = "select count(*) from gram_reply where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			//센 값을 rs에 담아줍니당
 			rs = pstmt.executeQuery();
+			
 			if (rs.next())
+				//rs에 담긴 센값을  return 값으로 넘겨주기위해 count에 넣습니다
 				count = rs.getInt(1);
-			// 3. sql insert 디비날짜 now()
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -115,15 +121,14 @@ public class ReplyDAO {
 		return count;
 	}// replyCount() end
 
+	//댓글을 list형으로 게시해주는 메소드입니당
 	public List<ReplyBean> getReplyList(int startRow, int pageSize, int num) {
 		ResultSet rs = null;
+		//<ReplyBean>를 생략해도 되지만 이렇게 붙이면 ReplyBean의 변수들만 받겠다는말이에용(자바의 제네릭 기능)
+		//제네릭은 동적으로 타입이 결정되지 않고 컴파일 시에 타입이 결정되므로 보다 안전한 프로그래밍 가능~!
 		List<ReplyBean> replyList = new ArrayList<ReplyBean>();
 		try {
-
-			// 1,2디비연결 메서드호출
-			con = getConnection();
-			// num 게시판 글번호 구하기
-			// sql 함수 최대값 구하기 max()
+			con = getConnection();// 1,2디비연결 메서드호출
 			sql = "select * from gram_reply where num=? order by re_ref desc, re_seq asc limit ?, ? ";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1, num);
@@ -170,48 +175,48 @@ public class ReplyDAO {
 		return replyList;
 	} // getReplyList() end
 
-	public ReplyBean getReply(int re_num) {		
-		ReplyBean rb = new ReplyBean();
-		try {
-			con = getConnection();
-			sql = "select * from gram_reply where re_num=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, re_num);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				rb.setNum(rs.getInt("num"));
-				rb.setContent(rs.getString("content"));
-				rb.setRe_lev(rs.getInt("re_lev"));
-				rb.setRe_seq(rs.getInt("re_seq"));
-				rb.setNick(rs.getString("nick"));
-				rb.setDate(rs.getDate("date"));
-				rb.setRe_num(rs.getInt("re_num"));				
-	
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ex) {
-				}
-			}
-		}
-		return rb;
-	}// getBoard() end
+//	public ReplyBean getReply(int re_num) {		
+//		ReplyBean rb = new ReplyBean();
+//		try {
+//			con = getConnection();
+//			sql = "select * from gram_reply where re_num=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, re_num);
+//			rs = pstmt.executeQuery();
+//			while (rs.next()) {
+//				rb.setNum(rs.getInt("num"));
+//				rb.setContent(rs.getString("content"));
+//				rb.setRe_lev(rs.getInt("re_lev"));
+//				rb.setRe_seq(rs.getInt("re_seq"));
+//				rb.setNick(rs.getString("nick"));
+//				rb.setDate(rs.getDate("date"));
+//				rb.setRe_num(rs.getInt("re_num"));				
+//	
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException ex) {
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException ex) {
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException ex) {
+//				}
+//			}
+//		}
+//		return rb;
+//	}// getBoard() end
 
 	public void deleteReply(int re_num) {
 		

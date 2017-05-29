@@ -134,6 +134,18 @@
 <!-- 	</servlet-mapping> -->
 
 
+	<!-- Q&A입니당~-->
+
+	<servlet>
+		<servlet-name>QandAFrontController</servlet-name>
+		<servlet-class>net.QandA.action.QandAFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QandAFrontController</servlet-name>
+		<url-pattern>*.qna</url-pattern>
+	</servlet-mapping>
+
+
 
 
 </web-app>
