@@ -3,8 +3,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
+
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 
@@ -86,6 +85,5 @@ marker 가 뜨면 마우스 우클릭하여 "이곳이 궁금한가요?" 클릭�
 </body>
 
 <div class="clear"></div>
-<!-- Footer -->
-<jsp:include page="../inc/footer.jsp" />
+
 </html>

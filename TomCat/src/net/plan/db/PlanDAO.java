@@ -547,6 +547,60 @@ public class PlanDAO {
 
 	}
 	
+	/* 메인페이지 국가리스트 뽑아오기(메인페이지) */
+	public List<PlanTravelBean> getTravelList() {
+		List<PlanTravelBean> travelList = new ArrayList();
+		PlanTravelBean tb = null;
+		Statement stmt = null;
+
+		try {
+			con = getConnection();
+
+			sql = "select * from travel order by city_code asc";
+
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				tb = new PlanTravelBean();
+
+				tb.setType(rs.getString("type"));
+				tb.setConuntry_code(rs.getString("country_code"));
+				tb.setCity_code(rs.getString("city_code"));
+				tb.setName(rs.getString("name"));
+				tb.setInfo(rs.getString("info"));
+				
+				travelList.add(tb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return travelList;
+
+	}
+	
+	
 	/* DB 국가 개수(운영자 페이지) */
 	public int getCountryCount() {
 		int count = 0;
