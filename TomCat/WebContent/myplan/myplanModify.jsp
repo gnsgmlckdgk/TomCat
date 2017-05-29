@@ -16,7 +16,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/modifyNewFile1.css" />
+<link rel="stylesheet" href="assets/css/map/modifyNewFile3.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
@@ -26,6 +26,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
 </head>
 <script>
 /* $(function(){
@@ -52,7 +53,6 @@ $( function() {
     $( "#left_box2_detail" ).disableSelection();
   } );
   
-  
 </script>
 <body>
 	<%
@@ -61,6 +61,9 @@ $( function() {
 		String id = (String) session.getAttribute("id");
 
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
+		
+		String region = request.getParameter("region");
+		String city_code = (String) request.getAttribute("city_code");
 		
 
 		String fromDate = (String) request.getParameter("fromDate");
@@ -97,48 +100,53 @@ $( function() {
 			</div>
 			<div id="left_box2">
 				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->
-				<ul id="left_box2_detail">
-					<%-- <%
+				<ul id="left_box2_head">
+					<li><%=fromDate %></li>
+					<li>
+						<button style="border: 1px solid red;">경로최적화</button><!-- 가능할지 의문?  -->
+						<button style="border: 1px solid red;">장소추가하기</button>
+					</li>
+				</ul>
+				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
+					<%
 						for (int i = 0; i < goodsList.size(); i++) {
 							TravelBean tb = (TravelBean) goodsList.get(i);
 					%>
 						<li><%=tb.getName()%></li>
 						<%
 							}
-						%> --%>
-					<!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
-					<li><%=fromDate %></li>
-					<li><button style="border: 1px solid red;">경로최적화</button><!-- 가능할지 의문?  --></li>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>	
-					<li>5</li>
-					<li>6</li>
-					<li>7</li>
-					<li>8</li>
+						%>
 				</ul>	
 			</div>	
-			<div id="right_box">
-				<!-- box3 도시 찜 버튼 -->
+			<!-- box3 도시 찜 버튼 -->
+			 <div id="right_box">
 				<ul id="right_box_detail">
-					<li><form action="#" method="get">
-						<input type="text" name="region" placeholder="장소검색" style="background:#fff;"> 
-						<input type="button" value="검색" class="button special"></form>
-					</li><!-- 성우씨 찜하기 기능 -->
+					
+					
+						<%
+						for (int i = 0; i < goodsList.size(); i++) {
+							TravelBean tb = (TravelBean) goodsList.get(i);
+					%>
+						<li><%=tb.getName()%></li>
+						<%
+							}
+						%>
+					
+			
+					
 				</ul>
 			</div>
-			<div id="map" class="f1" ></div><!-- map -->	
+			<div id="map" class="f1" ></div><!-- myplan.jsp 페이지에서 지도 code 가져옴,  수정예정   -->	
 		</div>
 		
 	
-		
-		
-		
-		
-		
-		<!--  myplan.jsp 페이지에서 지도 code 가져옴,  수정예정 -->
-		<script>
+	
+	
+	
+	
+	
+	
+	<script>
       var map;
 
       // Create a new blank array for all the listing markers.
