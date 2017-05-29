@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="net.plan.db.PlanTravelBean"%>
 
 <%@page import="java.util.List"%>
@@ -11,13 +12,28 @@
 	String region = request.getParameter("region");
 	String id = (String) session.getAttribute("id");
 	String city_code = (String) request.getAttribute("city_code");
+	
+	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
+	Calendar cal = Calendar.getInstance();
+	int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 
 
 
 <!-- One 지역명 및 설명-->
-<section id="banner" class="resion_one">
-	<div class="container 75% resion_info_content">
+<%if(second==3) {%>
+<section id="banner" class="resion_one b_back<%=second%>">
+<%} else if(second==2) {%>
+<section id="banner" class="resion_one b_back<%=second%>">
+<%} else if(second==1) {%>
+<section id="banner" class="resion_one b_back<%=second%>">
+<%} else { %>
+<section id="banner" class="resion_one b_back">
+<%} %>
+
+
+
+	<div class="container 75% resion_info_content" style="min-height: 0;">
 		<div class="row 200%">
 			<div class="6u 12u$(medium)">
 
@@ -45,13 +61,13 @@
 
 <!-- Two -->
 <!-- 지역 리스트 -->
-<section id="nation_two" class="wrapper style2 special">
+<section id="nation_two" class="wrapper style2 special" style="max-width: 1080px; margin: auto;">
 
 	<!-- container -->
 	<div class="container">
 		<h2><%=region%> 주요 지역 </h2>
 		
-		<hr>
+		<hr style="max-width: 1080px;">
 
 		<!-- checkbox -->
 		<div class="checkbox" onchange="checkbox_change()">
@@ -172,7 +188,7 @@
 </section>
 <!-- 지역 리스트 끝-->
 
-
+<div class="clear" style="clear: both;"></div>
 
 
 <!-- Three -->

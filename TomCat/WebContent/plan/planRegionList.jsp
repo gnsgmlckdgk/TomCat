@@ -113,8 +113,8 @@
 				ptb = ptbList.get(i);
 	%>
 	<tr>
-		<td class="img_td" alt="<%=ptb.getName()%>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover; width:300px;"></td>
-		<td class="txt_td" style="text-align: left; padding-left: 2em;">
+		<td class="img_td" alt="<%=ptb.getName()%>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover; min-width:2em;"></td>
+		<td class="txt_td" style="text-align: left; padding-left: 1em;">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%> 
 				<%
 					if (id != null) {
