@@ -24,11 +24,23 @@ section.resion_one div.resion_info_content {
 	max-width: 1080px;
 }
 
+.container h2{
+	max-width: 1080px;
+}
+
 .checkbox{
 	float: left;
-	width: 50%;
+	width: 45%;
 }
 .search_div{
 	float: left;
 	width: 50%;
+}
+
+.region_list_div{
+	max-width: 1080px;
+}
+
+#three .container{
+	max-width: 1080px;
 }

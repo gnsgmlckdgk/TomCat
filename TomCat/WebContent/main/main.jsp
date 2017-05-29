@@ -24,6 +24,7 @@
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Banner -->
+<!-- 현재 초 값을 받아와서, 배경이 새로고침 할때마다 바뀌도록. -->
 <%if(second==3) {%>
 <section id="banner" class="b_back<%=second%>">
 <%} else if(second==2) {%>
@@ -60,28 +61,6 @@
 
 </section>
 
-<!-- One -->
-<!-- <section id="one" class="wrapper style1"> -->
-<!-- 	<div class="container 75%"> -->
-<!-- 		<div class="row 200%"> -->
-<!-- 			<div class="6u 12u$(medium)"> -->
-<!-- 				<header class="major"> -->
-<!-- 					<h2>Maecenas luctus lectus</h2> -->
-<!-- 					<p>Perspiciatis doloremque recusandae dolor</p> -->
-<!-- 				</header> -->
-<!-- 			</div> -->
-<!-- 			<div class="6u$ 12u$(medium)"> -->
-<!-- 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non -->
-<!-- 					ea mollitia corporis id, distinctio sunt veritatis officiis dolore -->
-<!-- 					reprehenderit deleniti voluptatibus harum magna, doloremque alias -->
-<!-- 					quisquam minus, eaque. Feugiat quod, nesciunt! Iste quos ipsam, -->
-<!-- 					iusto sit esse.</p> -->
-
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </section> -->
-
 
 <!-- Two -->
 <section id="two" class="wrapper style2 special">
@@ -109,7 +88,6 @@
 			<%if(id.equals("")){ %>
 			<a onclick="popupToggle()">
 			<%} else {%>
-			
 			<a href="./MyPlan.pln?plan_nr=100">
 			<%} %>
 				<div class="explain_gif">

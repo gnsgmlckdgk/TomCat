@@ -52,6 +52,7 @@ public class BoardList1 implements Action1{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		
+		
 		// 이동  ./board/list.jsp
 		ActionForward1 forward=new ActionForward1();
 		forward.setPath("./board/list1.jsp");
