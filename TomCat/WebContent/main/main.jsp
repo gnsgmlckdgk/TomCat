@@ -104,14 +104,22 @@
 						여행 일정 플래너에서 <br>가고 싶은 여행지를 선택하세요!
 					</h4>
 				</div>
-			</a> <a href="./MyPlan.pln?plan_nr=100">
+			</a>
+			
+			<%if(id.equals("")){ %>
+			<a onclick="popupToggle()">
+			<%} else {%>
+			
+			<a href="./MyPlan.pln?plan_nr=100">
+			<%} %>
 				<div class="explain_gif">
 					<img src="./images/main/gif02.gif" alt="" />
 					<h4>
 						나의 일정 관리에서 <br> 여행 날짜와 교통을 알수있습니다!
 					</h4>
 				</div>
-			</a> <a href='./BoardList1.bb'>
+			</a>
+			<a href='./BoardList1.bb'>
 				<div class="explain_gif">
 					<img src="./images/main/gif03.gif" alt="" />
 					<h4>
