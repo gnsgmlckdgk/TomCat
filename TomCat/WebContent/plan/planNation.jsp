@@ -174,7 +174,7 @@ function cityListChange(pageNum) {
 </section>
 
 <!-- Four 여행 후기, 리뷰 등 댓글 -->
-<section class="nation_four">
+<section class="four">
 	
 	<div class="comment">
 	<h2><%=nation %> 커뮤니티</h2>
@@ -186,28 +186,46 @@ function cityListChange(pageNum) {
 		<div class="comment_right">
 		<!-- 리뷰 작성 -->
 		<%if(id!=null) {%>
-		<input type="button" value="리뷰쓰기" id="reviewWriteBtn" class="button alt writeBtn">
+		<input type="button" value="리뷰쓰기" id="writeBtn" class="button alt writeBtn">
 		<%} %>
 		<!-- 숨겨진 공간 -->
-		<div class="reviewWriterDiv animated fadeInDown">
+		<div class="reviewWriterDiv">
 			
 			<form action="javascript:writeComplete()" method="post">
 			<select id="eval">
 				<option value="-1" style="font-weight: 900; color: #6B66FF">평가하기</option>
-					<option value="1">좋았요!</option>
-					<option value="2">괜찮아요.</option>
-					<option value="3">별로에요!</option>
+					<option value="1" style="color: orange;">좋아요!</option>
+					<option value="2" style="color: blue;">괜찮아요.</option>
+					<option value="3" style="color: red;">별로에요!</option>
 			</select>
-			<textarea rows="5" cols="3" maxlength="1000" name="content"></textarea>
+			<textarea rows="5" cols="5" maxlength="1000" name="content"></textarea>
 			<div class="formBtnDiv">
 				<input type="submit" value="작성완료" class="submitBtn">
 				<input type="reset" value="다시쓰기" class="resetBtn">
 			</div>
+			
 			</form>
-		</div>	<!-- 리뷰 작성 div -->
+			
+		</div>	<!-- 리뷰 작성 div(숨겨진 공간) -->
+			
+			<%
+			if(id==null) {
+			%>
+			<div class="comment_member">	<!-- 로그인, 회원가입 DIV -->
+				<span>도움이 필요하신가요?<br>로그인하여 커뮤니티에 참여해 보세요!</span><br>
+				<div class="comment_member_btn">
+					<input type="button" value="로그인" onclick="popupToggle()">
+					<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me';">
+				</div>
+			</div>	<!-- .comment_member -->
+			<%
+			}
+			%>	
 		</div>	<!-- .comment_right -->
+		
 	<div class="clear"></div>
 	</div>	<!-- .comment -->
+	
 </section>
 	<!-- Four 스크립트 -->
 	<script type="text/javascript">
@@ -215,12 +233,17 @@ function cityListChange(pageNum) {
 		var toggleBtn = 0;
 		$(document).ready(function(data){
 			/* 리뷰 작성 버튼 */
-			$('#reviewWriteBtn').click(function(){
+			$('#writeBtn').click(function(){
 				if(toggleBtn==0) {
-					$('.reviewWriterDiv').css('display', 'block');
+					$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
+					$('.reviewWriterDiv').css('display', 'inline-block');
+					
 					toggleBtn = 1;
 				}else {
-					$('.reviewWriterDiv').css('display', 'none');
+					$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
+					setTimeout(function(){
+						$('.reviewWriterDiv').hide();
+					}, 700)
 					toggleBtn = 0;
 				}
 			});
@@ -239,7 +262,6 @@ function cityListChange(pageNum) {
 					alert(error);
 			    } 
 			});
-			
 		});
 		
 		/* 리뷰 작성완료 DB작업 */
@@ -289,11 +311,6 @@ function cityListChange(pageNum) {
 			});
 		}
 		
-		/* 리뷰 수정하기 */
-		function nationCommentUpdate(num) {
-			alert("테스트: " + num);
-		}
-		
 		/* 리뷰 삭제하기 */
 		function nationCommentDelete(num, pageNum) {
 			
@@ -304,14 +321,15 @@ function cityListChange(pageNum) {
 					type: 'post',
 					url: './plan/planComment/planNationCommentDelete.jsp',
 					data : {num : num},
+					async: false,
 					success: function(data) {
 						alert("삭제 되었습니다.");
-						nationCommentList(pageNum);
 					},
 					error: function(xhr, status, error) {
 						alert(error);
 				    }
 				});
+				nationCommentList(pageNum);
 			}
 		}
 		

@@ -1,3 +1,4 @@
+<%@page import="net.plan.db.PlanRegionCommentBean"%>
 <%@page import="net.member.db.MemberBean"%>
 <%@page import="net.member.db.MemberDAO"%>
 <%@page import="net.plan.db.PlanNationCommentBean"%>
@@ -14,7 +15,7 @@
 	String id = (String)session.getAttribute("id");
 
 	// 파라미터 값 가져오기
-	String nation = request.getParameter("nation");
+	String region = request.getParameter("region");
 	
 	// 페이지 번호 구하기
 	String pageNum = request.getParameter("pageNum");
@@ -31,41 +32,42 @@
 	
 	// 리스트 가져오기
     PlanCommentDAO pcdao = new PlanCommentDAO();
-	List<PlanNationCommentBean> list = pcdao.getNationListComment(nation, startRow, pageSize);
+	List<PlanRegionCommentBean> list = pcdao.getRegionListComment(region, startRow, pageSize);
 %>
 
 <%if(list.size()==0) {
-	%>
+	System.out.println("test");
+	%>	
 		<table><tr><td>아직 리뷰가 없습니다.</td></tr></table>
 	<%
 }else {
 	%>
 	<table>
 	<%
-	PlanNationCommentBean pncb = null;
+	PlanRegionCommentBean prcb = null;
 	for(int i=0; i<list.size(); i++) {
-		pncb = list.get(i);
+		prcb = list.get(i);
 		%>
 		<tr>
 			<td>
 			<%
 			// 닉네임을 이용해 프로필 사진 찾기
 			MemberDAO mdao = new MemberDAO();
-			MemberBean mb = mdao.getMemberNick(pncb.getNick());
+			MemberBean mb = mdao.getMemberNick(prcb.getNick());
 			MemberBean sessionIdMb = mdao.getMember(id);
 			%>
 			<img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'"><!-- 프로필 이미지 -->
-			<span class="c_nick"><%=pncb.getNick() %></span><span class="c_date"><%=pncb.getDate() %></span>
-			<span class="c_eval"><%if(pncb.getEval()==1) {%>좋아요!<%}%>
-								<%if(pncb.getEval()==2) {%>괜찮아요.<%}%>
-								<%if(pncb.getEval()==3) {%>별로에요!<%}%></span>
-			<span class="c_content"><%=pncb.getContent() %></span>
+			<span class="c_nick"><%=prcb.getNick() %></span><span class="c_date"><%=prcb.getDate() %></span>
+			<span class="c_eval"><%if(prcb.getEval()==1) {%>좋아요!<%}%>
+								<%if(prcb.getEval()==2) {%>괜찮아요.<%}%>
+								<%if(prcb.getEval()==3) {%>별로에요!<%}%></span>
+			<span class="c_content"><%=prcb.getContent() %></span>
 			</td>
 			<td>
 				<%
 				if(id!=null && mb.getId().equals(id) || id!=null && sessionIdMb.getAuth()==0) {
 					%>
-					<a href="javascript:nationCommentDelete('<%=pncb.getNum()%>', '<%=pageNum%>');">삭제</a>
+					<a href="javascript:regionCommentDelete('<%=prcb.getNum()%>', '<%=pageNum%>');">삭제</a>
 					<%
 				}
 				%>
@@ -77,7 +79,7 @@
 	</table>
 	<%
 	// 전체 글의 갯수 구하기
-	int count = pcdao.getCount(nation);
+	int count = pcdao.getRegionCount(region);
 	
 	// 필요한 페이지 갯수
 	int pageCount = count/pageSize + (count%pageSize==0 ? 0:1);
@@ -98,17 +100,17 @@
 		<%
 		if(currentPage > pageBlock) {
 			%>
-			<a href="javascript:nationCommentList('<%=startPage-pageBlock%>');">
+			<a href="javascript:regionCommentList('<%=startPage-pageBlock%>');">
 				<img src="./images/etc/backward_icon.png">
 			</a>
 			<%
 		}
 		for(int i=startPage; i<=endPage; i++) {
-			%><a href="javascript:nationCommentList('<%=i%>');"
+			%><a href="javascript:regionCommentList('<%=i%>');"
 			<%if(currentPage==i){%>style="border: 1px solid #FF00DD;"<%}%>><%=i %></a><%
 		}
 		if(endPage < pageCount) {
-			%><a href="javascript:nationCommentList('<%=startPage+pageBlock%>');">
+			%><a href="javascript:regionCommentList('<%=startPage+pageBlock%>');">
 				<img src="./images/etc/next_icon.png">
 			</a><%
 		}
