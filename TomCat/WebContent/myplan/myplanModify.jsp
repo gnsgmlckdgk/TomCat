@@ -28,7 +28,7 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
 </head>
-<script>
+<script >
 /* $(function(){
 	$("#left_box1").click(function(){
 		var effect = 'slide';
@@ -109,6 +109,8 @@ $( function() {
 				</ul>
 				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
 					<li>장소를 추가해 보세요~</li>
+					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
+					
 				</ul>	
 			</div>	
 			<!-- box3 도시 찜 버튼 -->
@@ -118,7 +120,7 @@ $( function() {
 						for (int i = 0; i < goodsList.size(); i++) {
 							TravelBean tb = (TravelBean) goodsList.get(i);
 						%>
-						<li><%=tb.getName()%><img src="myplan/spot_to_inspot_a.png" ></li>
+						<li><%=tb.getName()%><img src="myplan/spot_to_inspot_a.png"  onclick="javascript:isBasket()"></li>
 						<%
 							}
 						%>
@@ -127,7 +129,17 @@ $( function() {
 			<div id="map" class="f1" ></div><!-- myplan.jsp 페이지에서 지도 code 가져옴,  수정예정   -->	
 		</div>
 		
-	
+	<script type="text/javascript">
+	function isBasket(){
+		var is=confirm("장바구니에 저장하시겠습니까?");
+		if(is==true){
+		document.gfr.action="./BasketAdd.ba";
+		document.gfr.submit();
+		}else{
+			return;
+		}
+	}
+</script>
 	
 	
 	
