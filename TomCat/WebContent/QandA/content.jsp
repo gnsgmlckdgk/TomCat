@@ -14,7 +14,6 @@
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/QandA/content.css"/>	
 <%
-
 String id = (String)session.getAttribute("id");			// 아이디
 String nick = (String)session.getAttribute("nick");	// 닉네임
 QandABean qb = (QandABean) request.getAttribute("qb");
@@ -31,6 +30,7 @@ content=qb.getContent().replace("\r\n","<br>");
 }
 
 %>
+
 <h1>Q&A</h1>
 
 <table>
@@ -51,7 +51,9 @@ content=qb.getContent().replace("\r\n","<br>");
 <input type="button" value="답글" 
 onclick="location.href='./QandAReplyWrite.qna?pageNum=<%=pageNum%>&num=<%=num%>&re_ref=<%=qb.getRe_ref()%>&re_lev=<%=qb.getRe_lev()%>&re_seq=<%=qb.getRe_seq()%>'">
 
-<%} %>
+<%
+System.out.println("ref의 값"+qb.getRe_ref());
+		} %>
 
 </td></tr>
 </table>

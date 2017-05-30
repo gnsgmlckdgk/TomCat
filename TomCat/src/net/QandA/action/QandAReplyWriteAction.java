@@ -42,10 +42,6 @@ public class QandAReplyWriteAction implements Action{
 		qb.setRe_seq(Integer.parseInt(multi.getParameter("re_seq")));
 
 
-
-		
-	
-		
 		
 		qdao.insertQandAReply(qb);
 

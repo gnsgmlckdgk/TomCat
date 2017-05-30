@@ -1,1 +1,11 @@
 @CHARSET "UTF-8";
+
+.wrapper {
+		background-attachment: fixed;
+		background-color:pink;
+/* 		background-image: url("../instagram/bridge.png");		 */
+		background-position: center top;
+		background-size: cover;
+		line-height: 1.75;
+		text-align: center;
+}

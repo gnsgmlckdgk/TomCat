@@ -51,7 +51,7 @@ public class QandADAO {
 			pstmt.setString(3, qb.getSubject());
 			pstmt.setString(4, qb.getContent());
 			pstmt.setString(5, qb.getImage1());
-			pstmt.setInt(6, num);//re_ref 답변글 그룹==일반글의 글번호
+			pstmt.setInt(6,num);//re_ref 답변글 그룹==일반글의 글번호
 			pstmt.setInt(7, 0);//re_lev 답변글 들여쓰기,0:맨위, 일반글 들여쓰기 없음
 			pstmt.setInt(8, 0);//re_seq 답변글 순서 일반글순서 맨위
 			pstmt.setInt(9, 0);//처음조회수는0
@@ -217,7 +217,7 @@ public class QandADAO {
 		qb.setRe_lev(rs.getInt("re_lev"));
 		qb.setRe_seq(rs.getInt("re_seq"));
 		qb.setRe_ref(rs.getInt("re_ref"));
-		qb.setRe_ref(rs.getInt("readcount"));
+		qb.setReadcount(rs.getInt("readcount"));
 		qb.setDate(rs.getDate("date")); 
 
 	 }
@@ -478,7 +478,7 @@ public class QandADAO {
 					num = rs.getInt(1) + 1;
 				}
 				 
-				 sql="update qanda set re_seq=re_seq+1 where re_ref=? and re_seq>?";			
+					 sql="update qanda set re_seq=re_seq+1 where re_ref=? and re_seq>?";			
 				 pstmt = con.prepareStatement(sql);
 				 pstmt.setInt(1,qb.getRe_ref());
 				 pstmt.setInt(2,qb.getRe_seq());
