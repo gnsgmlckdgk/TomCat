@@ -4,7 +4,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.board.db.boardBean;
 import net.like.db.LikeBean;
+import net.reply.db.ReplyBean;
 
 import java.sql.Connection;
 
@@ -40,7 +42,7 @@ public class QandADAO {
 			if (rs.next()) {
 				num = rs.getInt(1) + 1;
 			}
-			sql = "insert into qanda(num,nick,subject,content,image1,date) values(?,?,?,?,?,now())";
+			sql = "insert into qanda(num,nick,subject,content,image1,re_ref,re_lev,re_seq,readcount,date) values(?,?,?,?,?,?,?,?,?,now())";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -49,6 +51,11 @@ public class QandADAO {
 			pstmt.setString(3, qb.getSubject());
 			pstmt.setString(4, qb.getContent());
 			pstmt.setString(5, qb.getImage1());
+			pstmt.setInt(6,num);//re_ref 답변글 그룹==일반글의 글번호
+			pstmt.setInt(7, 0);//re_lev 답변글 들여쓰기,0:맨위, 일반글 들여쓰기 없음
+			pstmt.setInt(8, 0);//re_seq 답변글 순서 일반글순서 맨위
+			pstmt.setInt(9, 0);//처음조회수는0
+
 
 			// date는 위에서 now()로 생성됨
 
@@ -158,13 +165,11 @@ public class QandADAO {
 				qb.setRe_lev(rs.getInt("re_lev"));
 				qb.setRe_seq(rs.getInt("re_seq"));
 				qb.setRe_ref(rs.getInt("re_ref"));
+				qb.setReadcount(rs.getInt("readcount"));
 				qb.setDate(rs.getDate("date"));
 
 				// boardList 한칸 저장
-				QandAList.add(qb);				
-
-				
-				
+				QandAList.add(qb);			
 			}
 
 		} catch (Exception e) {
@@ -212,8 +217,8 @@ public class QandADAO {
 		qb.setRe_lev(rs.getInt("re_lev"));
 		qb.setRe_seq(rs.getInt("re_seq"));
 		qb.setRe_ref(rs.getInt("re_ref"));
-		qb.setDate(rs.getDate("date"));
- 
+		qb.setReadcount(rs.getInt("readcount"));
+		qb.setDate(rs.getDate("date")); 
 
 	 }
 	
@@ -231,70 +236,70 @@ public class QandADAO {
 	 }//finally
 	 return qb;
 	 }
-	//
-	// //게시글 수정하는 메소드
-	// public void updateBoard(boardBean bb){
-	// //System.out.println(bb.getSubject());
-	//
-	// try{
-	// con = getConnection();
-	//
-	//
-	//
-	// sql = "update gram set nick=?, subject=?, content=?, image1=? where
-	// num=?";
-	// pstmt=con.prepareStatement(sql);
-	//
-	// pstmt.setString(1, bb.getNick());
-	// pstmt.setString(2, bb.getSubject());
-	// pstmt.setString(3, bb.getContent());
-	// pstmt.setString(4,bb.getImage1());
-	// pstmt.setInt(5,bb.getNum());
-	//
-	// pstmt.executeUpdate();
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// } finally {
-	// if (rs != null)
-	// try {rs.close();} catch (SQLException ex) { }
-	// if (pstmt != null)
-	// try {pstmt.close();} catch (SQLException ex) {}
-	// if (con != null)
-	// try {con.close();} catch (SQLException ex) {}
-	// }//finally
-	// }
-	//
-	//
-	//// 게시글 삭제하는 메소드
-	// public void deleteboard(int num){
-	//
-	//
-	// Connection con = null;
-	// PreparedStatement pstmt = null;
-	// String sql = "";
-	// ResultSet rs = null;
-	// try {
-	// con = getConnection();
-	//
-	// sql = "delete from gram where num=?";
-	// pstmt = con.prepareStatement(sql);
-	// pstmt.setInt(1, num);
-	// pstmt.executeUpdate();
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// } finally {
-	// if (rs != null)
-	// try {rs.close();} catch (SQLException ex) { }
-	// if (pstmt != null)
-	// try {pstmt.close();} catch (SQLException ex) {}
-	// if (con != null)
-	// try {con.close();} catch (SQLException ex) {}
-	// }//finally
-	//
-	//
-	// }
+	 
+	
+	 
+	 
+	
+	 //게시글 수정하는 메소드
+	 public void updateQandA(QandABean qb){
+	
+	 try{
+	 con = getConnection();	
+	 sql = "update qanda set nick=?, subject=?, content=?, image1=? where num=?";
+	 pstmt=con.prepareStatement(sql);
+	
+	 pstmt.setString(1, qb.getNick());
+	 pstmt.setString(2, qb.getSubject());
+	 pstmt.setString(3, qb.getContent());
+	 pstmt.setString(4, qb.getImage1());
+	 pstmt.setInt(5,qb.getNum());
+	
+	 pstmt.executeUpdate();
+	
+	 } catch (Exception e) {
+	 e.printStackTrace();
+	 } finally {
+	 if (rs != null)
+	 try {rs.close();} catch (SQLException ex) { }
+	 if (pstmt != null)
+	 try {pstmt.close();} catch (SQLException ex) {}
+	 if (con != null)
+	 try {con.close();} catch (SQLException ex) {}
+	 }//finally
+	 }
+
+	 
+	 
+	// 게시글 삭제하는 메소드
+	 public void deleteqna(int num){
+	
+	
+	 Connection con = null;
+	 PreparedStatement pstmt = null;
+	 String sql = "";
+	 ResultSet rs = null;
+	 try {
+	 con = getConnection();
+	
+	 sql = "delete from qanda where num=?";
+	 pstmt = con.prepareStatement(sql);
+	 pstmt.setInt(1, num);
+	 pstmt.executeUpdate();
+	
+	 } catch (Exception e) {
+	 e.printStackTrace();
+	 } finally {
+	 if (rs != null)
+	 try {rs.close();} catch (SQLException ex) { }
+	 if (pstmt != null)
+	 try {pstmt.close();} catch (SQLException ex) {}
+	 if (con != null)
+	 try {con.close();} catch (SQLException ex) {}
+	 }	
+	 }
+	 
+	 
 	//
 	//
 	//// gram 테이블에 해당글의 좋아요수를 증가시켜주는 메소드
@@ -431,4 +436,102 @@ public class QandADAO {
 	// return bb;
 	// }
 
+	 //content.jsp를 클릭했을때 바로 실행되는 메소드! 조회수 1을 증가시킨다!
+		public void updateReadCount(int num){
+			try{
+				//1,2디비연결 메서드 호출
+				con = getConnection();			
+				//3 sql 객체 생성 조건 num값에 해당하는 게시판글 전체 가져오기
+				sql = "update qanda set readcount=readcount+1 where num=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,num);
+
+				//4 rs=실행저장			
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null)
+					try {rs.close();} catch (SQLException ex) {	}
+				if (pstmt != null)
+					try {pstmt.close();} catch (SQLException ex) {}
+				if (con != null)
+					try {con.close();} catch (SQLException ex) {}
+
+			}//finally	
+			
+		}
+		
+	 
+	 
+
+		public void insertQandAReply(QandABean qb) {	
+			System.out.println("insertQandAReply까지오나요?");
+				int num=0;
+			try {			
+				con = getConnection();
+				sql = "select max(num) from qanda";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					num = rs.getInt(1) + 1;
+				}
+				 
+					 sql="update qanda set re_seq=re_seq+1 where re_ref=? and re_seq>?";			
+				 pstmt = con.prepareStatement(sql);
+				 pstmt.setInt(1,qb.getRe_ref());
+				 pstmt.setInt(2,qb.getRe_seq());
+				 
+				 pstmt.executeUpdate();
+		
+
+					sql = "insert into qanda(num,nick,subject,content,image1,readcount,re_ref,re_lev,re_seq,date) values(?,?,?,?,?,?,?,?,?,now())";
+
+					pstmt = con.prepareStatement(sql);
+
+					pstmt.setInt(1, num);
+					pstmt.setString(2, qb.getNick());
+					pstmt.setString(3, qb.getSubject());
+					pstmt.setString(4, qb.getContent());
+					pstmt.setString(5, qb.getImage1());
+					pstmt.setInt(6,0);//readcount , 처음조회수는0
+//					===================================================
+					pstmt.setInt(7, qb.getRe_ref());//re_ref 기존글 그룹번호 같게함
+					pstmt.setInt(8, qb.getRe_lev()+1);//re_lev 답변글 들여쓰기,0:맨위, 일반글 들여쓰기 없음// 기존글+1
+					pstmt.setInt(9, qb.getRe_seq()+1);//re_seq 답변글 순서 일반글순서 맨위// 기존글 +1
+		//	
+				 
+
+				pstmt.executeUpdate();
+				 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException ex) {
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException ex) {
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException ex) {
+					}
+				}
+			
+			}
+		}// insertRepley() end
+		
+	 
+	 
+	 
+	 
 }// 클래스 end

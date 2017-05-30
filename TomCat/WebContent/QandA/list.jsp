@@ -25,12 +25,14 @@ int endPage=((Integer)request.getAttribute("endPage")).intValue();
 QandADAO qdao=new QandADAO();
 
 if(id!=null){%>
+
+
 		<a href="./QandAWrite.qna">Q&A글쓰기</a>
 	<br>
 <%}%>
 
-<table>
-<tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td></tr>
+<table class="table1">
+<tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td><td>조회수</td></tr>
 <%
 		if(count!=0){
 			for(int i=0;i<QandAList.size();i++){
@@ -38,7 +40,20 @@ if(id!=null){%>
 %>
 
 <tr>
-<td><%=qb.getNum()%></td>
+<td>
+		<%
+		int wid=0;
+		if(qb.getRe_lev()>0){
+			wid=40*qb.getRe_lev();
+			%>
+			<img src="./images/QandA/level.gif" width="<%=wid%>" height="15">
+			<img src="./images/QandA/re.gif">
+			
+	<%	} %>
+
+
+
+<%=qb.getNum()%></td>
 <td><%=qb.getNick()%></td>
 <td>
 <a href="./QandAContentAction.qna?num=<%=qb.getNum()%>&pageNum=<%=pageNum %>">
@@ -46,9 +61,10 @@ if(id!=null){%>
 
 </td>
 <td><%=qb.getDate()%></td>
+<td><%=qb.getReadcount() %></td>
 </tr>
 <%} %>
-<tr><td colspan="4">
+<tr><td colspan="5">
 
 			<%
 // 			=======================페이지출력===================
@@ -77,20 +93,22 @@ if(id!=null){%>
 
 
 
-</td></tr>
+</td>
+
+</tr>
 
 <%
 
 			} %>
 </table>
 
+<table id="banner">
+<tr><td><a href="./QandAWrite.qna">Q&A글쓰기</a></td></tr>
+<tr><td><a href="#">자주묻는 질문</a></td></tr>
+<tr><td><a href="./QandAList.qna">목록으로</a></td></tr>
 
+</table>
 
-
-
-
-	
-	
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

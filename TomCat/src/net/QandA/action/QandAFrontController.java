@@ -26,7 +26,9 @@ public class QandAFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./QandA/writeForm.jsp");
 			forward.setRedirect(false);// forward방식으로 이동
-		} else if (command.equals("/QandAList.qna")) {
+		} 
+		
+		else if (command.equals("/QandAList.qna")) {
 			action = new QandAListAction();
 			try {
 				forward = action.execute(request, response);
@@ -46,12 +48,40 @@ public class QandAFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-		} 
-		
+		} else if (command.equals("/QandAUpdate.qna")) {
+			action = new QandAUpdate();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/QandAUpdateAction.qna")) {
+			action = new QandAUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/QandADeleteAction.qna")) {
+			action = new QandADeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/QandAReplyWrite.qna")) {
+				forward = new ActionForward();
+				forward.setPath("./QandA/rewriteForm.jsp");
+				forward.setRedirect(false);// forward방식으로 이동
 
+	} else if (command.equals("/QandAReplyWriteAction.qna")) {
+		action = new QandAReplyWriteAction();
+		try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 		
 			
 		
