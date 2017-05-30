@@ -16,7 +16,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/modifyNewFile4.css" />
+<link rel="stylesheet" href="assets/css/map/modifyNewFile5.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
@@ -108,33 +108,21 @@ $( function() {
 					</li>
 				</ul>
 				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
-					<%
-						for (int i = 0; i < goodsList.size(); i++) {
-							TravelBean tb = (TravelBean) goodsList.get(i);
-					%>
-						<li><%=tb.getName()%></li>
-						<%
-							}
-						%>
+					<li>장소를 추가해 보세요~</li>
 				</ul>	
 			</div>	
 			<!-- box3 도시 찜 버튼 -->
 			 <div id="right_box">
 				<ul id="right_box_detail">
-					
-					
 						<%
 						for (int i = 0; i < goodsList.size(); i++) {
 							TravelBean tb = (TravelBean) goodsList.get(i);
-					%>
-						<li><%=tb.getName()%></li>
+						%>
+						<li><%=tb.getName()%><img src="myplan/spot_to_inspot_a.png" ></li>
 						<%
 							}
 						%>
-					
-			
-					
-				</ul>
+				</ul>	
 			</div>
 			<div id="map" class="f1" ></div><!-- myplan.jsp 페이지에서 지도 code 가져옴,  수정예정   -->	
 		</div>

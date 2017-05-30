@@ -126,6 +126,16 @@
 	list-style: none;
 }
 
+#right_box_detail li {
+	width: 100%;
+	height: 70px;
+	background: #203341;
+	color: #fff;
+	text-align: center;
+	border-bottom: solid 1px #374854;
+	cursor: pointer;
+}
+
 #map {
 	bottom: 0px;
 	/* height: 100%; */
