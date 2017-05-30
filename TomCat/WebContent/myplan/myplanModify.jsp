@@ -16,7 +16,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/modifyNewFile3.css" />
+<link rel="stylesheet" href="assets/css/map/modifyNewFile4.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
