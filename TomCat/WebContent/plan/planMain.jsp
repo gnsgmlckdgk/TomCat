@@ -181,8 +181,8 @@
 				for (int j = 0; j < 5; j++) {
 			%>
 
-			<h3><%=cont[j] + "  "%><a
-					onclick="popupToggle_<%=asia[j]%>()">>>지도로보기</a>
+			<h3><%=cont[j] + " "%> <a
+					onclick="popupToggle_<%=asia[j]%>()"> >>지도로보기</a>
 			</h3>
 			<div>
 				<%

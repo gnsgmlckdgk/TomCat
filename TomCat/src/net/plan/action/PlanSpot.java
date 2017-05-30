@@ -35,6 +35,7 @@ public class PlanSpot implements Action{
 		
 
 		request.setAttribute("ptb", ptb);
+		request.setAttribute("souvenirList", souvenirList);
 		
 		forward = new ActionForward();
 		forward.setRedirect(false);

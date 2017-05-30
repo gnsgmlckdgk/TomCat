@@ -165,7 +165,7 @@
 			else{
 				%>
 			
-				<div style="width: 85em ; height: 20em; border: 1px dotted #999;">
+				<div style="width: 1080px ; height: 15em; border: 2px dotted #999;">
 					<span>현재 등록된 여행지가 없습니다.ㅠ ㅅ ㅠ</span>
 				</div>
 			<%	

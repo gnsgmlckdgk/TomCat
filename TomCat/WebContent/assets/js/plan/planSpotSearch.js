@@ -60,16 +60,16 @@ var daumSearch = {
     };
 
     
-
-    /** 이미지 검색. **/
+/*
+    *//** 이미지 검색. **//*
     var daumImage = {
-        /** 초기화. **/
+        *//** 초기화. **//*
         init : function(r){
             daumImage.api = 'http://apis.daum.net/search/image';
             daumImage.pgno = 1;
             daumImage.result = r;
         },
-        /** callback 함수 호출. **/
+        *//** callback 함수 호출. **//*
         pingSearch : function(pgno){
             daumImage.pgno = pgno;
             
@@ -79,7 +79,7 @@ var daumSearch = {
             daumSearch.pingSearch(ds,daumImage.api, 
                 daumImage.pgno, callback, daumImage.result);  
         },
-        /** 결과를 뿌려줌. **/
+        *//** 결과를 뿌려줌. **//*
         pongSearch : function(z){
             var dv = document.getElementById('daumImage');
             dv.innerHTML ="";
@@ -87,22 +87,22 @@ var daumSearch = {
             dv.appendChild(daumSearch.pongPgno(daumImage.pgno, 
                 z.channel.totalCount/daumImage.result,daumImage.pingSearch));
         },
-        /** li setting **/
+        *//** li setting **//*
         getSearch : function(title,content){
             var li = document.createElement('div');
-            /*li.style["border"]="5px solid blue";*/
+            li.style["border"]="5px solid blue";
             li.style.height = '18em';
             li.style.width = '18em';
             
             li.className='planSpot_tb';
   
-           /* content.appendChild(document.createElement('br'));*/
+            content.appendChild(document.createElement('br'));
            li.appendChild(content);
             li.appendChild(title);
             
             return li;
         },
-        /** 설명 return **/
+        *//** 설명 return **//*
        getContent : function(z){
            var a = document.createElement('a');
            var img = document.createElement('img');
@@ -110,8 +110,8 @@ var daumSearch = {
            a.target = '_blank';
            a.href = z.image;
            
-          /* img.style.height = '20em';
-           img.style.width = '30em';*/
+           img.style.height = '20em';
+           img.style.width = '30em';
            
            img.src = z.thumbnail;
            
@@ -119,7 +119,54 @@ var daumSearch = {
            
            return a;
        }
-    };
+    };*/
+
+/** 블로그 검색. **/
+var daumBlog = {
+    /** 초기화. **/
+    init : function(r){
+        daumBlog.api = 'http://apis.daum.net/search/blog';
+        daumBlog.pgno = 1;
+        daumBlog.result = r;
+    },
+    /** callback 함수 호출. **/
+    pingSearch : function(pgno){
+        daumBlog.pgno = pgno;
+        
+        var ds = document.getElementById('daumBlogScript');
+        var callback = 'daumBlog.pongSearch';
+        
+        daumSearch.pingSearch(ds,daumBlog.api, daumBlog.pgno, 
+            callback, daumBlog.result);  
+    },
+    /** 결과를 뿌려줌. **/
+    pongSearch : function(z){
+        var dv = document.getElementById('daumBlog');
+        dv.innerHTML ="";
+        dv.appendChild(daumSearch.pongSearch(this, z));
+        dv.appendChild(daumSearch.pongPgno(daumBlog.pgno, 
+            z.channel.totalCount/daumBlog.result,daumBlog.pingSearch));
+    },
+    /** li setting **/
+    getSearch : function(title,content){
+        var li = document.createElement('div');
+       
+        li.appendChild(title);
+        li.appendChild(content);
+        
+        return li;
+    },
+    /** 설명 return **/
+   getContent : function(z){
+       var a = document.createElement('a');
+       
+       a.target = '_blank';
+       a.href = z.link;
+       a.innerHTML = daumSearch.escapeHtml(z.description);
+       
+       return a;
+   }
+};
     
     window.onload = function () {
         daumSearch.init();

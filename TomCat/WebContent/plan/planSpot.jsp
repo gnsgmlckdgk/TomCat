@@ -1,3 +1,4 @@
+<%@page import="net.plan.db.PlanSouvenirBean"%>
 <%@page import="net.plan.db.PlanTravelBean"%>
 <%@page import="net.plan.db.PlanCountryBean"%>
 <%@page import="java.util.List"%>
@@ -24,6 +25,13 @@
 			});	
 		});
 	});
+	
+	/* 처음 화면 */
+	$(window).load(function(){
+		$.ajax({
+			
+		})
+	})
 
 </script>
 
@@ -44,6 +52,9 @@ $(document).ready(function() {
 	PlanTravelBean ptb = (PlanTravelBean)request.getAttribute("ptb");
 	
 	//도시이름 가져오기
+	
+	//선물리스트 가져오기
+	List souvenirList = (List)request.getAttribute("souvenirList");
 
 %>
 <div class="clear"></div>
@@ -104,19 +115,52 @@ $(document).ready(function() {
 
 <!-- 선물리스트(1위 2위 3위)(db에서 받아오기) -->
 
-<h3>선물리스트</h3>
-<table class="gift">
-<tr>
-<td>1위</td>
-<td>2위</td>
-<td>3위</td>
-</tr>
-</table>
+<h3>선물 리스트</h3>
+
+
+<%
+	for(int i=0; i<souvenirList.size();i++){
+		PlanSouvenirBean psb = (PlanSouvenirBean)souvenirList.get(i);
+	%>
+	<div style="">
+	<table class="souvenir" style="float: left; width: 300px; margin-right: 50px; border: none;">
+		
+			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getName() %></td></tr>
+			<tr style="background: none; border: none"><td style="text-align: center;"><img alt="" src="./upload/<%=psb.getImg()%>" width="200" height="200"></td></tr>
+			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getInfo() %></td></tr>
+		
+	</table>
+	</div>
+	<%
+	}
+%>
+
+
 
 <!-- 장소에 대한 후기 작성(시간나면) -->
-<div class="blog_Spot">블로그 정보</div>
-<div class="Spot_epilogue">여행 후기</div>
+<div class="clear"></div>
 
+<div class="blog_epil">
+<div class="blog_Spot"><span class="text">블로그 정보</span></div>
+<script src="./assets/js/plan/planSpotSearch.js"></script>
+<div id="daumForm">
+    	<input id="daumSearch" type="hidden" value="부산 여행 태종대" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
+	</div>
+	
+	<div id="daumView">
+        <div class="daumBlog"></div>
+	</div>
+	
+	<div id="daumScript">
+ 		<div id="daumImageScript"><img src="pic02.jpg" width="200" height="200"/></div>
+	</div>
+
+
+
+
+
+<div class="Spot_epilogue"><span class="text">여행 후기</span></div>
+</div>
 
 
 
