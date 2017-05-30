@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="java.util.List"%>
@@ -16,9 +17,26 @@
 <%
 	String nation = request.getParameter("nation");	// 국가명
 	String id = (String) session.getAttribute("id");
+	
+	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
+		Calendar cal = Calendar.getInstance();
+		int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 <!-- One 지역명 및 설명-->
 <section id="banner" class="nation_one">
+
+<!-- 현재 초 값을 받아와서, 배경이 새로고침 할때마다 바뀌도록. -->
+<%if(second==3) {%>
+<section id="banner" class="nation_one b_back<%=second%>">
+<%} else if(second==2) {%>
+<section id="banner" class="nation_one b_back<%=second%>">
+<%} else if(second==1) {%>
+<section id="banner" class="nation_one b_back<%=second%>">
+<%} else { %>
+<section id="banner" class="nation_one b_back">
+<%} %>
+
+
 	<h2><%=nation%></h2>
 	<div class="nation_info_content">
 <!-- 국가의 도시들의 이미지 슬라이드 -->

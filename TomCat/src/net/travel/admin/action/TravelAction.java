@@ -72,13 +72,11 @@ public class TravelAction implements Action{
 			//travel 테이블에 들어간 후, travel_id값을 받아서, images 테이블에 넣는다. 끝.
 				
 		String fileName = multi.getFilesystemName("file");
-		File curFile = new File(realPath+"\\"+multi.getParameter("country_code")+"\\"+multi.getParameter("city_code")+"\\"+fileName);
+		File curFile = new File(realPath+"\\"+fileName);
 		String curFileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());	// 확장자 가져오기
 		File newFile = new File(realPath+"\\"+multi.getParameter("country_code")+"\\"+multi.getParameter("city_code")+"\\"+ptb.getTravel_id()+curFileType);
 		if(curFile.exists()){curFile.renameTo(newFile);};
 		// 넣은 도시 이미지 다른 폴더에 넣기 끝.
-		
-		System.out.println(realPath);
 		
 		// 이미지 관리 테이블에 넣기
 		ImagesDAO idao = new ImagesDAO();
