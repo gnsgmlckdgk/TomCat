@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <!-- 드래그 삽입 시작 -->		
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
 <!--   <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
   <!-- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css"> -->
@@ -81,7 +81,7 @@
 <!-- 드래그 삽입 시작 -->		
  
 
-  <style type="text/css" >
+<!--   <style type="text/css" >
   	 body { font-size:12px; }
   
   #bestseller_books tr { cursor:pointer; }
@@ -135,7 +135,7 @@
 	 }
   </script>
 		
-		
+	 -->	
 <!-- 드래그 삽입 종료-->
 		
 		
@@ -159,13 +159,9 @@
 		String arr_lat =  (String) request.getParameter("alat"); //경로 표시를 위한 도착장소의 lat 값
 		String arr_lng =  (String) request.getParameter("alng"); //경로 표시를 위한 도착장소의 lnt 값
 
-		
-/* 		int init_nr=0; */
  		int plan_item_nr=0;  // 일정종류별 방문지 갯수 계산을 위함
+ 		int j=0;  //일정목록 넘버링을 위함
 	%>
-	<%-- 	<h1>
-		여행지찜리스트<%=basketList.size()%><%=goodsList.size()%></h1> --%>
-
 
 	<div class="container" >
 		<div class="myplan-list" >
@@ -183,9 +179,16 @@
 				<table border="1"  class="table" id="bestseller_books">  <!-- 여행지찜리스트 목록 및 일정별 목록 -->
 					<thead>
 					<tr>
-						<th>plan</th>
-						<th>item</th>
-						<th width="400px">name</th>
+						<!-- <th>plan</th>
+						<th>item</th> -->
+						<th width="100px" align="center">
+							<% // 전체 목록표시와 세부 일정일때 테이블 제목 각기 다르게 표시
+							if(plan_nr==100)%>찜갯수 <%
+							else %> 순서</th>
+						<th width="400px" align="center">
+							<%// 전체 목록표시와 세부 일정일때 테이블 제목 각기 다르게 표시
+							if(plan_nr==100)%>찜목록 <%
+							else %> 방문지</th>
 						<% /* 전체목록 표시(plan_nr=100)할 때에는 경로 column 숨기기 */
 						if(plan_nr!=100){
 							%>	
@@ -223,9 +226,10 @@
 					%>
 					 <tbody>
 					<tr>
-						<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
-						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 -->
-						<td><%=tb.getName()%></td> <!-- 여행지명 -->
+<%-- 						<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
+						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 --> --%>
+						<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
+						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
 						
 						<%
 						if(plan_nr!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
@@ -301,8 +305,10 @@
 			</form>  		
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
-   	<div id="right-panel">    </div>
-
+	<%if(plan_nr!=100) { %>
+   	<div id="right-panel">    </div> <!-- 방문지간 대중교통 이동 정보 표시 패널 -->
+<%
+}%>
 	</div><!-- container 끝 -->
 
 
@@ -480,25 +486,25 @@
 		
 		
 		
-		function flightPath (){
+		function flightPath (){  //좌표 배열을 활용한 비행경로 함수 사용 
 			var flightPath = new google.maps.Polyline({
-		          path: TotalPath,
-		          geodesic: true,
-		          strokeColor: '#FF0000',
-		          strokeOpacity: 1.0,
-		          strokeWeight: 2
+		          path: TotalPath,  // 일정별 전체 이동경로
+		          geodesic: true, 	//측지선?....음....
+		          strokeColor: '#8041D9',   //경로 선 색상 초기값 '#FF0000'  
+		          strokeOpacity: 0.7,   //불투명도
+		          strokeWeight: 4    //선두께
 		        });			
-			flightPath.setMap(map);
+			flightPath.setMap(map);  //맵에 함수 결과 표시
 		}
 		
 		// 마커 배열의 모든 아이템 표시하고 bound로 묶어서 zoom
 		function showListings() {
 			var bounds = new google.maps.LatLngBounds();  //LatLngBounds() 객체를 사용한 bounds 변수선언
 			for (var i = 0; i < markers.length; i++) {  // 마커배열에 모든 정보를 지도에 하나씩 출력
-				markers[i].setMap(map);
-				bounds.extend(markers[i].position);
+				markers[i].setMap(map);			//맵에 배열i당 결과 표시
+				bounds.extend(markers[i].position);  //bound로 확장
 			}
-			map.fitBounds(bounds);  
+			map.fitBounds(bounds);  //bound로 묶음 zoom
 		}
 
 		function populateInfoWindow(marker, infowindow) {
