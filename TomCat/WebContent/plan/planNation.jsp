@@ -23,7 +23,6 @@
 		int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 <!-- One 지역명 및 설명-->
-<section id="banner" class="nation_one">
 
 <!-- 현재 초 값을 받아와서, 배경이 새로고침 할때마다 바뀌도록. -->
 <%if(second==3) {%>
