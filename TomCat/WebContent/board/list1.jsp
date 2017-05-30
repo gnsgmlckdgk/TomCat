@@ -229,7 +229,7 @@
 <%if(id!=null){ %>
 
 	<div id="chat"></div>
-
+ 
 		<script type="text/javascript">
 		// 채팅을 불러온다.
 		$(window).load(function() {
