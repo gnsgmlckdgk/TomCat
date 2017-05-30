@@ -19,8 +19,6 @@ public class BoardUpdate implements Action{
 		ActionForward forward=new ActionForward();
 		request.setCharacterEncoding("utf-8");
 
-		request.setCharacterEncoding("utf-8");
-
 		
 		BoardDAO bdao=new BoardDAO();
 		
