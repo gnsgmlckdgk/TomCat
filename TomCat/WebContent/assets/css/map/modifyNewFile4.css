@@ -67,6 +67,24 @@
 	left: 365px;	
 }
 
+#left_box2_head {
+	width: 351px;
+	height: 100%;
+	background: #203341;
+	overflow-y: auto;
+	list-style: none;
+}
+
+#left_box2_head  li {
+	width: 100%;
+	height: 70px;
+	background: #203341;
+	color: #fff;
+	text-align: center;
+	border-bottom: solid 1px #374854;
+	cursor: pointer;
+}
+
 #left_box2_detail {
 	border: 1px solid red;
 	width: 351px;
