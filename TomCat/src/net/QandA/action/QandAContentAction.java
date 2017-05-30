@@ -26,6 +26,8 @@ public class QandAContentAction implements Action {
 		request.setAttribute("qb", qb);
 		request.setAttribute("num", num);
 		request.setAttribute("pageNum", pageNum);
+		
+	System.out.println("re_Ref의값"+qb.getRe_ref());
 
 		forward.setPath("./QandA/content.jsp");
 		forward.setRedirect(false);

@@ -25,11 +25,13 @@ int endPage=((Integer)request.getAttribute("endPage")).intValue();
 QandADAO qdao=new QandADAO();
 
 if(id!=null){%>
+
+
 		<a href="./QandAWrite.qna">Q&A글쓰기</a>
 	<br>
 <%}%>
 
-<table>
+<table class="table1">
 <tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td><td>조회수</td></tr>
 <%
 		if(count!=0){
@@ -100,6 +102,12 @@ if(id!=null){%>
 			} %>
 </table>
 
+<table id="banner">
+<tr><td><a href="./QandAWrite.qna">Q&A글쓰기</a></td></tr>
+<tr><td><a href="#">자주묻는 질문</a></td></tr>
+<tr><td><a href="./QandAList.qna">목록으로</a></td></tr>
+
+</table>
 
 
 <!-- Footer -->

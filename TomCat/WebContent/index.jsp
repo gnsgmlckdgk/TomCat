@@ -9,6 +9,6 @@
 <body>
 	<script type="text/javascript">
 	location.href="./Main.me";	
-	</script>=
+	</script>
 </body>
 </html>
