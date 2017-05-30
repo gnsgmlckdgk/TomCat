@@ -12,11 +12,18 @@ public class QandABean {
 	private int re_lev;
 	private int re_seq;
 	private int re_ref;
+	private int readcount;
 	private Date date;
 
 	
 	
 	
+	public int getReadcount() {
+		return readcount;
+	}
+	public void setReadcount(int readcount) {
+		this.readcount = readcount;
+	}
 	public String getImage1() {
 		return image1;
 	}
