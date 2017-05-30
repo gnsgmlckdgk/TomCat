@@ -46,7 +46,7 @@
 				
 		<%List cityList = (List) request.getAttribute("cityList");
 			for (int i = 0; i < cityList.size(); i++) {
-				
+
 				PlanCityBean cb = (PlanCityBean) cityList.get(i);%>
 				
 			if (country == "<%=cb.getCountry_code()%>") {
@@ -56,10 +56,9 @@
 					
 					option.text = "<%=cb.getName()%>";
 					option.value = "<%=cb.getCity_code()%>";
-					
+
 					document.getElementById('city_code').appendChild(option);
 				}
-			
 		<%}%>
 			}
 		</script>
