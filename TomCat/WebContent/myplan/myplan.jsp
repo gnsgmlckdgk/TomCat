@@ -173,7 +173,8 @@
 				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정3 -->
 
 				<!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
-				<button class="btn" >일정만들기</button>
+				<img class="btn"  src="./images/myplans/modify.png" width="35px" height="35px" style="vertical-align:bottom"> <!-- 일정만들기버튼 -->
+				<!-- <button class="btn" >일정만들기</button> -->
 				</h3>
 
 				<table border="1"  class="table" id="bestseller_books">  <!-- 여행지찜리스트 목록 및 일정별 목록 -->
@@ -466,7 +467,7 @@
 					             origin: origin,
 					             destination: destination,
 					            // waypoints: [{location: '35.158408, 129.062038'}]/*  국가별로 경유지 지원여부 달라서 구현하지 않음 */
-					             travelMode: 'TRANSIT',  /* 대중교통표시 모두 */
+					             travelMode: 'TRANSIT',  /* 대중교통표시 mode */
 					             avoidTolls: true
 					           }, function(response, status) {
 					             if (status === 'OK') {
@@ -507,6 +508,7 @@
 			map.fitBounds(bounds);  //bound로 묶음 zoom
 		}
 
+		//populateInfoWindow 함수
 		function populateInfoWindow(marker, infowindow) {
 			
 			// info윈도우가 해당 마커에 이미 열려있는지 확인
@@ -515,15 +517,15 @@
 				// street 뷰 출력을 위해 info window 를 Clear
 				infowindow.setContent('');
 				infowindow.marker = marker;
-				// Make sure the marker property is cleared if the infowindow is closed.
+				// 만약 info창이 닫혀져 있다면, 마커 특성이 clear 되었는지 확인.
 				infowindow.addListener('closeclick', function() {
 					infowindow.marker = null;
 				});
 				var streetViewService = new google.maps.StreetViewService();
 				var radius = 50;
-				// In case the status is OK, which means the pano was found, compute the
-				// position of the streetview image, then calculate the heading, then get a
-				// panorama from that and set the options
+				// 상태가 OK 라면, 파노라마 뷰가 발견되었음을 의미. In case the status is OK, which means the pano was found, compute the
+				// streetview 이미지의 위치를 산정하고, 방향을 계산하고, 그것으로 부터 파노라마를 얻은후 옵션값을 셋팅한다.
+				
 				function getStreetView(data, status) {
 					if (status == google.maps.StreetViewStatus.OK) {
 						var nearStreetViewLocation = data.location.latLng;
@@ -547,20 +549,17 @@
 								+ '<div>No Street View Found</div>');
 					}
 				}
-				// Use streetview service to get the closest streetview image within
-				// 50 meters of the markers position
+				// 마커 위치에서 50 m 이내의 가장 가까운 streetview 이미지를 갖기 위해 streetview 서비스를 사용
 				streetViewService.getPanoramaByLocation(marker.position,
 						radius, getStreetView);
-				// Open the infowindow on the correct marker.
+				// 마커에 infowindow 를 open 한다
 				infowindow.open(map, marker);
 			}
 		}
 
 		
-		//
-		// This function takes in a COLOR, and then creates a new marker icon of that color. 
-		// The icon will be 21 px wide by 34 high, have an origin
-		// of 0, 0 and be anchored at 10, 34).
+		// 이 함수는 마커색상을 취하고 그 색상의 새로운 마커를 생성한다.  
+		// 아이콘은 21px 폭, 34 높이가 될것임
 		function makeMarkerIcon(markerColor) {
 			var markerImage = new google.maps.MarkerImage(
 					'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'
