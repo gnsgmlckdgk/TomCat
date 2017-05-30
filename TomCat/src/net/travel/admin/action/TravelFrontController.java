@@ -32,12 +32,14 @@ public class TravelFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/TravelAdminWriteAction.td")){
+			action=new TravelAdminWriteAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
-		else if(command.equals("/TravelAdminWrite.td")){
-			forward=new ActionForward();
-			forward.setPath("/TravelAdmin/TravelAdmin.jsp");
-			forward.setRedirect(false);
-			
 		}else if(command.equals("/TravelAdminAction.td")){ 
 			// GoodsAddAction
 			action=new TravelAction();

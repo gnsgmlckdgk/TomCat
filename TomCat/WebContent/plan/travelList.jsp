@@ -273,7 +273,7 @@ $(document).ready(function() {
 	<div class="clear"></div>
 	
 	<!-- 국가 추가 버튼 -->
-	<input type="button" onclick="location.href='./TravelAdminWrite.td'" value="여행지 추가하기" class="addCityBtn">
+	<input type="button" onclick="location.href='./TravelAdminWriteAction.td'" value="여행지 추가하기" class="addCityBtn">
 	
 	<!-- 페이지 출력 -->
 	<div class="page">
