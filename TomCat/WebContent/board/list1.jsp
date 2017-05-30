@@ -13,7 +13,7 @@
 <head>
 
 
-<link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=12" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
 	
@@ -56,11 +56,7 @@
 		});
 	</script>
 
-		
-		<form method="post" action="./BoardWrite1.bb" class="write">
-			<input type="hidden" id="location" name="location" value="aaa">
-			<input type="submit" value="글쓰기">
-		</form>
+
 
 <!-- giolocation 위치값 받기. 모바일환경에서도 작동. -->
 <script type="text/javascript">  
@@ -110,9 +106,16 @@
 			//jsp 날짜 구하기
 			Calendar cal = Calendar.getInstance();
 			//jsp 날짜 구하기 끝.
+			
+			if(id!=null){
 		%>
-
-
+		
+		<form method="post" action="./BoardWrite1.bb" class="write">
+			<input type="hidden" id="location" name="location" value="aaa">
+			<input type="submit" value="글쓰기">
+		</form>
+		<%} %>
+		
 		<div class="w">
 			<%
 				//  boardList 
@@ -122,6 +125,11 @@
 				for (int i = 0; i < boardList.size(); i++) {
 					//자바빈(BoardBean) 변수 =배열한칸 접근   배열변수.get()
 					BoardBean bb = (BoardBean) boardList.get(i);
+					
+					String content=bb.getContent();
+					if(content!=null){
+					content=bb.getContent().replace("\r\n", "<br>");
+					}
 			%>
 
 
@@ -134,8 +142,8 @@
 
 				<!-- 내용 -->
 				<div id="con">
-					<%=bb.getContent()%><br>
-					현재 위치 <%=bb.getLocation() %>
+					<%=content%><br>
+<%-- 					현재 위치 <%=bb.getLocation() %> --%>
 				</div>
 
 				<div id="2_inner_left" style="width: 30%;">
@@ -157,6 +165,7 @@
 							if (cal.get(Calendar.YEAR) == bb.getDate().getYear() + 1900) {
 								if (cal.get(Calendar.MONTH) == bb.getDate().getMonth()) {
 									if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
+											
 						%>
 										<%=cal.get(Calendar.HOUR) - bb.getDate().getHours()%>시
 						<%
@@ -169,14 +178,14 @@
 						%>
 									<%=cal.get(Calendar.MONTH) - bb.getDate().getMonth()%>달전
 						<%
-								}
-
+								}				
 							} else {
 						%>
 								<%=bb.getDate().getYear() + 1900%>년 <br>
 								<%=bb.getDate().getMonth()%>월
 								<%=bb.getDate().getDate()%>일
 								<%=bb.getDate().getHours()%>시
+																
 						<%
 							}
 						%>
@@ -202,6 +211,9 @@
 
 			<%
 				}
+				
+					
+				
 			%>
 
 		</div>
@@ -213,6 +225,8 @@
 
 	
 </body>
+
+<%if(id!=null){ %>
 
 	<div id="chat"></div>
 
@@ -231,7 +245,7 @@
 			});
 		});
  		</script>
-		
+		<%} %>
 		
 
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />
