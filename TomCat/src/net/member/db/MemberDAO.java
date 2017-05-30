@@ -256,7 +256,7 @@ public class MemberDAO {
 			
 			if(rs.next()) {	// 아이디가 있으면
 				
-				mb.setId(id);
+				mb.setId(rs.getString("id"));
 				mb.setPass(rs.getString("pass"));
 				mb.setName(rs.getString("name"));
 				mb.setNick(rs.getString("nick"));

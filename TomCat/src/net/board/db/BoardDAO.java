@@ -115,7 +115,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 
 		// 배열(컬렉션)객체 생성- 여러개의 기억공간 사용+기억공간 추가해서 사용
-		List boardList = new ArrayList();
+		List<boardBean> boardList = new ArrayList<boardBean>();
 		try {
 			// 1,2 디비연결 메서드 호출
 			con = getConnection();
@@ -204,6 +204,7 @@ public class BoardDAO {
 	return bb;
 }
 	
+	//게시글 수정하는 메소드
 	public void updateBoard(boardBean bb){
 		//System.out.println(bb.getSubject());
 	
@@ -212,15 +213,14 @@ public class BoardDAO {
 			
 			
 			
-					sql = "update gram set nick=?, subject=?, content=?, image1=? love=? where num=?";
+					sql = "update gram set nick=?, subject=?, content=?, image1=? where num=?";
 					pstmt=con.prepareStatement(sql);
 					
 					pstmt.setString(1, bb.getNick());
 					pstmt.setString(2, bb.getSubject());
 					pstmt.setString(3, bb.getContent());
 					pstmt.setString(4,bb.getImage1());
-					pstmt.setInt(5, bb.getLove());
-					pstmt.setInt(6,bb.getNum());			
+					pstmt.setInt(5,bb.getNum());			
 										
 					pstmt.executeUpdate();
 			
@@ -237,7 +237,7 @@ public class BoardDAO {
 	}
 	
 	
-
+//게시글 삭제하는 메소드
 	public void deleteboard(int num){
 		
 		
@@ -359,48 +359,13 @@ int love = bb.getLove();
 
 	}
 	
-	
-	
-//	public String Bestshot() {		
-//		String image1=null;
-//				try {	
-//					con = getConnection();
-//					sql = "select num,image1 from gram where love=(select max(love) from gram)";
-//					pstmt = con.prepareStatement(sql);					
-//					rs = pstmt.executeQuery();			
-//					
-//					if (rs.next()) {
-//					image1=rs.getString("image1");
-//					}					
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				} finally {
-//					if (rs != null)
-//						try {
-//							rs.close();
-//						} catch (SQLException ex) {
-//						}
-//					if (pstmt != null)
-//						try {
-//							pstmt.close();
-//						} catch (SQLException ex) {
-//						}
-//					if (con != null)
-//						try {
-//							con.close();
-//						} catch (SQLException ex) {
-//						}
-//				} // finally
-//				return image1;
-//			}
-	
-	
+	//인생샷그램 게시판 베너에 있는 best인생샷(좋아요가 가장 많은 게시글 게시)	
 	public boardBean Bestshot() {		
 		boardBean bb=null;
 		try {	
 					con = getConnection();
-					sql = "select num,image1 from gram where love=(select max(love) from gram)";
+					//gram 테이블에서 좋아요갯수가 가장많은 게시글 선정 select max(love)from gram				
+					sql = "select * from gram where love=(select max(love) from gram)";
 					pstmt = con.prepareStatement(sql);					
 					rs = pstmt.executeQuery();			
 					

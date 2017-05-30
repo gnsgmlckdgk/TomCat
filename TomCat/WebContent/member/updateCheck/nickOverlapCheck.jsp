@@ -11,7 +11,10 @@
     int check = mdao.nickOverlapCheck2(id, nick);
     
  	// 관리자가 다른 사용자의 닉네임 변경을 하기위해 중복검사를 했을때, 1인 경우
-    String admin = request.getParameter("admin");	
+    String admin = request.getParameter("admin");
+ 	if(admin==null) {
+ 		admin = "1";
+ 	}
     if(check==1 && admin.equals("1")) {
     	mdao.updateNick(id, nick);
     

@@ -23,11 +23,23 @@ public class TravelFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 		
-		if(command.equals("/TravelAdmin.td")){
-			forward=new ActionForward();
-			forward.setPath("/TravelAdmin/TravelAdmin.jsp");
-			forward.setRedirect(false);
-			
+		if(command.equals("/TravelAdminList.td")){ 
+			// GoodsAddAction
+			action=new TravelListAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/TravelAdminWriteAction.td")){
+			action=new TravelAdminWriteAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 		}else if(command.equals("/TravelAdminAction.td")){ 
 			// GoodsAddAction
 			action=new TravelAction();

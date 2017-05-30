@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+body {
+	background-image: url("../instagram/bridge.png");
+	margin: auto;
+	background-size: cover;
+	text-align: center;
+}
+
+.table1 {
+	background-position: center top;
+	background-attachment: fixed;
+	margin: auto;
+	line-height: 1.75;
+	text-align: center;
+	width: 60em;
+	background-color: white;
+	border-radius: 20px;
+}
+
+#banner {
+	border: 1px solid black;
+	text-align: left;
+	width: 10em;
+	background-color: white;
+	position: absolute;
+	left: 100px;
+	top: 100px;
+	border: none;
+	border-collapse: none;
+	border: none;
+	border: none;
+}

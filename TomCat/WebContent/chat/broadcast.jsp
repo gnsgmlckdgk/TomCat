@@ -30,7 +30,7 @@
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
-<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: #a0c0d7;"></div>
+<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: #f3f6fd;"></div>
 
 <input id="inputMessage" type="text"
 	onkeydown="if(event.keyCode==13){send();}" style="width:20em;" placeholder="Enter로 전송"/>
@@ -113,7 +113,7 @@
 
 				//3번째 구분자가 존재 할 경우, background 제거
 				if(message[2] == null){
-					div.style["background-color"]="#fcfcfc";
+					div.style["background-color"]="rgba(95,132,242,0.3)";
 				}
 
 				div.style["border-radius"]="3px";
@@ -172,7 +172,7 @@
 
 				//3번째 구분자가 존재 할 경우, background 제거
 				if(message[2] == null){
-					div.style["background-color"]="#fcfcfc";
+					div.style["background-color"]="rgba(95,132,242,0.3)";
 				}
 
 				div.style["border-radius"]="3px";
@@ -237,7 +237,7 @@
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="#ffea00";
+			div.style["background-color"]="rgba(255, 0, 0, 0.15)";
 			div.style["padding"]="3px";
 			div.style["border-radius"]="3px";
 			div.style["margin-right"]="3px";

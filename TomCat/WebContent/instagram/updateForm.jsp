@@ -34,7 +34,9 @@ boardBean bb=bdao.getBoard(num);
 		
 		<img src="./upload/<%=bb.getImage1()%>" width=200 height=200><br>
 		
-		파일첨부:<input type="file" name="image1"><input type="hidden" name="image2" value="<%=bb.getImage1()%>">
+<!-- 		파일 첨부할때 type2개 만들어 놓기(하나는  hidden) -->
+		파일첨부:<input type="file" name="image1">
+		<input type="hidden" name="image2" value="<%=bb.getImage1()%>">
 		
 		
 		<br>

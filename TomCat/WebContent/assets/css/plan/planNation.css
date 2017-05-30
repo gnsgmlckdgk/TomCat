@@ -2,6 +2,10 @@
 
 /* 국가 페이지 */
 
+body {
+	background-color: #fff;
+}
+
 /* 첫번재 섹션 : 국가 정보 */
 section#banner {
 	/* 맨 윗부분 */
@@ -162,115 +166,157 @@ section#nation_two .city_list_div .page a:hover {
 }
 
 
-/* 국가 리뷰 커뮤니티 */
-section.nation_four div.comment {
-	min-width: 70em;
-	max-width: 80em;
-	border: 1px solid red;
-	max-height: 100em;
+/* 국가, 도시 리뷰 커뮤니티 */
+section.four {	/* 리뷰 커뮤니티 전체 */
+	font-size: 12px;
+	background-color: #f7f7f7;
+	margin-bottom: -35px;
+	padding: 30px 0;
 }
-section.nation_four div.comment .table_div {
-	width: 70em;
-	margin-top: -20px;
+div.comment {	/* 내용물 전체를 감싸는 div */
+	width: 1080px;
+	min-height: 700px;
+	margin: 0 auto;
 }
-section.nation_four div.comment table {
-	display: block;
-	color: #000;
-	font-size: 0.8em;
-}
-section.nation_four div.comment table td {
-	display: block;
-	position: relative;
-	border-top: 1px solid #ccc;
-
-	min-height: 12em;
-	
-	float: left;
-}
-section.nation_four div.comment table td:nth-of-type(1) {
-	width: 75em;
-}
-section.nation_four div.comment table td:nth-of-type(2) {
-	width: 5em;
+div.comment h2 {
+	padding: 10px;
+	font-size: 25px;
 	text-align: center;
 }
-section.nation_four div.comment td img {	/* 프로필 이미지 */
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	
-	width: 50px;
-	height: 50px;
-	display: inline-block;
-	border-radius: 30px;
-}
-section.nation_four div.comment td .c_nick {
-	position: absolute;
-	top: 20px;
-	left: 90px;
-	
-	font-weight: 700;
-	color: #808080;
-}
-section.nation_four div.comment td .c_date {
-	position: absolute;
-	top: 20px;
-	left: 190px;
-	
-	font-weight: 300;
-	color: #b7b7ff;
-}
-section.nation_four div.comment td .c_eval {
-	position: absolute;
-	top: 75px;
-	left: 90px;
-	
-	font-weight: 900;
-	color: #ff8000;
-}
-section.nation_four div.comment td .c_content {
-	position: absolute;
-	top: 120px;
-	left: 90px;
-	
-	font-weight: 800;
-	color: #4040ff;
-}
-section.nation_four div.comment textarea {
-	display: block;
+
+/* 왼쪽 내용물(리스트) */
+div.comment .review_list {	
 	width: 700px;
+	float: left;
 }
-section.nation_four div.comment .reviewWriterDiv {
+div.comment .review_list tr {
+	height: 150px;
+}
+div.comment .review_list td {
+	background-color: #f7f7f7;
+	position: relative;
+	padding-top: 20px;
+}
+div.comment .review_list td:nth-of-type(1) {
+	width: 92%;
+}
+div.comment .review_list td:nth-of-type(2) {
+	width: 8%;
+}
+div.comment .review_list td img {
+	width: 40px;
+	height: 40px;
+	border-radius: 25px;
+}
+div.comment .review_list td .c_nick {	/* 닉네임 */
+	position: absolute;
+	left: 60px;
+	top: 15px;
+	font-size: 14px;
+	font-weight: 900;
+}
+div.comment .review_list td .c_date {	/* 글쓴 날짜 */
+	position: absolute;
+	left: 60px;
+	top: 33px;
+	color: #777;
+	font-weight: 600;
+}
+div.comment .review_list td .c_eval {	/* 평가 */
+	position: absolute;
+	left: 60px;
+	top: 70px;
+	color: #FF7012;
+	font-size: 13px;
+}
+div.comment .review_list td .c_content {	/* 본문 */
+	position: absolute;
+	left: 60px;
+	top: 100px;
+	font-size: 13px;
+}
+
+div.comment .review_list .page { /* 페이징 div */
+	text-align: center;
+}
+div.comment .review_list .page a {
+	padding: 1px 7px;
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	text-decoration: none;
+}
+div.comment .review_list .page img {
+	width: 13px;
+	height: 13px;
+}
+
+/* 오른쪽 내용물(리뷰작성 등) */
+div.comment .comment_right {	
+	width: 340px;
+	float: left;
+	margin-left: 10px;
+}
+div.comment .comment_right #writeBtn {	/* 리뷰쓰기 버튼 */
+	font-size: 14px;
+	font-family: "나눔 고딕", "맑은 고딕", sans-serif;
+}
+div.comment .comment_right .reviewWriterDiv {
 	display: none;
 }
-section.nation_four div.comment .writeBtn {	/* 리뷰쓰기 버튼 */
+div.comment .comment_right select {	/* 평가하기 */
+	font-size: 14px;
+	margin: 6px 0;
+}
+div.comment .comment_right textarea {	/* 본문 */
+	display: block;
+	width: 340px;
+	height: 400px;
+	font-size: 14px;
+}
+div.comment .comment_right .formBtnDiv {	
+	text-align: center;
+}
+div.comment .comment_right .submitBtn, .comment_right .resetBtn {
+	font-size: 14px;
+	margin: 10px;
+}
+div.comment .comment_right .comment_member {	/* 로그인, 회원가입 버튼 DIV */
+	border: 1px solid #ccc;
+	text-align: center;
+	background-image: url('../../../images/etc/question.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+	
+	padding: 30px;
+	font-size: 16px;
+	text-shadow: 2px 2px 2px #ccc;
+	font-weight: 900;
+	color: #000;
+}
+div.comment .comment_right .comment_member .comment_member_btn {
+	text-align: center;
+	margin-top: 30px;
+}
+div.comment .comment_right .comment_member input[type=button] {
 	font-size: 12px;
 }
-section.nation_four div.comment select {	/* 평가하기 */
-	width: 102px;
-	border: 2px solid #ddd;
-	font-size: 14px;
-	background-color: #fff;
-	color: #6B66FF;
-	
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-section.nation_four div.comment option {
-	color: #000;
-}
-section.nation_four div.comment optgroup {
-	color: #000;
-}
-section.nation_four div.comment .formBtnDiv {
-	position: absolute;
-	left: 475px;
-	bottom: -10px;
-}
-section.nation_four div.comment .submitBtn {	/* 제출버튼 */
-	font-size: 13px;
-}
-section.nation_four div.comment .resetBtn {	/* 리셋 버튼 */
-	font-size: 13px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

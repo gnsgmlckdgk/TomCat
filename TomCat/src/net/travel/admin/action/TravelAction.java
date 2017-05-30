@@ -72,7 +72,7 @@ public class TravelAction implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./TravelAdmin.td");
+		forward.setPath("./TravelAdminList.td");
 
 		return forward;
 	}

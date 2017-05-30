@@ -187,16 +187,14 @@ public class PlanDAO {
 		}
 		return count;
 	}
-	
-	/* DB 도시 개수(운영자 페이지) : 검색값 있을때 */
-	public int getCitySearchCount(String search) {
+
+	public int getTravelCount() {
 		int count = 0;
 
 		try {
 			con = getConnection();
-			sql = "select count(*) as count from city where name like ?";
+			sql = "select count(*) as count from travel";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
 
 			rs = pstmt.executeQuery();
 
@@ -228,71 +226,200 @@ public class PlanDAO {
 		}
 		return count;
 	}
-	
-	// 국가페이지의 도시리스트 전체  가져오기
-		public List<PlanCityBean> getCityList(String str) {
 
-			String country_code = "";
-			List<PlanCityBean> list = new ArrayList<PlanCityBean>();
+	/* DB 도시 개수(운영자 페이지) : 검색값 있을때 */
+	public int getCitySearchCount(String search) {
+		int count = 0;
 
-			String nation = str;
-			if ("한국".equals(nation)) {
-				nation = "대한민국";
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from city where name like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
+
+	/* DB 도시 개수(운영자 페이지) : 검색값 있을때 */
+	public int getTravelSearchCount(String search) {
+		int count = 0;
+
+		try {
+			con = getConnection();
+			sql = "select count(*) as count from travel where name like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return count;
+	}
+
+	// 도시리스트 전체 가져오기
+	public List<PlanCityBean> getCityList() {
+
+		List<PlanCityBean> cityList = new ArrayList<PlanCityBean>();
+		PlanCityBean pcb = null;
+		Statement pstmt = null;
+		
+		try {
+			con = getConnection();
+
+			// country_code 값 가져오기
+			sql = "select * from city";
+			pstmt = con.createStatement();
+			rs = pstmt.executeQuery(sql);
+
+			
+			
+			while (rs.next()) {
+				pcb = new PlanCityBean();
+
+				pcb.setCity_code(rs.getString("city_code"));
+				pcb.setName(rs.getString("name"));
+				pcb.setEn_name(rs.getString("en_name"));
+				pcb.setInfo(rs.getString("info"));
+				pcb.setCountry_code(rs.getString("country_code"));
+
+				cityList.add(pcb);
 			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				con = getConnection();
-
-				// country_code 값 가져오기
-				sql = "select country_code from country where name=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, nation);
-				rs = pstmt.executeQuery();
-
-				if (rs.next()) { // 검색된 국가가 있으면
-					country_code = rs.getString("country_code");
-
-					sql = "select city_code, name, en_name, info, country_code from city where country_code = ?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, country_code);
-
-					rs = pstmt.executeQuery();
-
-					PlanCityBean pcb = null;
-					while (rs.next()) {
-						pcb = new PlanCityBean();
-
-						pcb.setCity_code(rs.getString("city_code"));
-						pcb.setName(rs.getString("name"));
-						pcb.setEn_name(rs.getString("en_name"));
-						pcb.setInfo(rs.getString("info"));
-						pcb.setCountry_code(rs.getString("country_code"));
-
-						list.add(pcb);
-					}
-
-				} else {
-					return null;
-				}
-
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if (rs != null)
-						rs.close();
-					if (pstmt != null)
-						pstmt.close();
-					if (con != null)
-						con.close();
-				} catch (Exception e) {
-					e.printStackTrace();
+			}
+		}
+
+		return cityList;
+	}
+
+	// 국가페이지의 도시리스트 전체 가져오기
+	public List<PlanCityBean> getCityList(String str) {
+
+		String country_code = "";
+		List<PlanCityBean> list = new ArrayList<PlanCityBean>();
+
+		String nation = str;
+		if ("한국".equals(nation)) {
+			nation = "대한민국";
+		}
+
+		try {
+			con = getConnection();
+
+			// country_code 값 가져오기
+			sql = "select country_code from country where name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nation);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) { // 검색된 국가가 있으면
+				country_code = rs.getString("country_code");
+
+				sql = "select city_code, name, en_name, info, country_code from city where country_code = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, country_code);
+
+				rs = pstmt.executeQuery();
+
+				PlanCityBean pcb = null;
+				while (rs.next()) {
+					pcb = new PlanCityBean();
+
+					pcb.setCity_code(rs.getString("city_code"));
+					pcb.setName(rs.getString("name"));
+					pcb.setEn_name(rs.getString("en_name"));
+					pcb.setInfo(rs.getString("info"));
+					pcb.setCountry_code(rs.getString("country_code"));
+
+					list.add(pcb);
 				}
+
+			} else {
+				return null;
 			}
 
-			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-	
+
+		return list;
+	}
+
 	// 국가페이지의 도시리스트 가져오기
 	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
 
@@ -437,18 +564,28 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 
-			if(sort == 1) sql = "select * from city where name like ? order by city_code asc limit ?,?";
-			else if(sort == 2) sql = "select * from city where name like ? order by city_code desc limit ?,?";
-			else if(sort == 3) sql = "select * from city where name like ? order by name asc limit ?,?";
-			else if(sort == 4) sql = "select * from city where name like ? order by name desc limit ?,?";
-			else if(sort == 5) sql = "select * from city where name like ? order by country_code asc limit ?,?";
-			else if(sort == 6) sql = "select * from city where name like ? order by country_code desc limit ?,?";
-			else if(sort == 7) sql = "select * from city where name like ? order by en_name asc limit ?,?";
-			else if(sort == 8) sql = "select * from city where name like ? order by en_name desc limit ?,?";
-			else sql = "select * from city where name like ? limit ?,?";	// 정렬 값 없을때
+			if (sort == 1)
+				sql = "select * from city where name like ? order by city_code asc limit ?,?";
+			else if (sort == 2)
+				sql = "select * from city where name like ? order by city_code desc limit ?,?";
+			else if (sort == 3)
+				sql = "select * from city where name like ? order by name asc limit ?,?";
+			else if (sort == 4)
+				sql = "select * from city where name like ? order by name desc limit ?,?";
+			else if (sort == 5)
+				sql = "select * from city where name like ? order by country_code asc limit ?,?";
+			else if (sort == 6)
+				sql = "select * from city where name like ? order by country_code desc limit ?,?";
+			else if (sort == 7)
+				sql = "select * from city where name like ? order by en_name asc limit ?,?";
+			else if (sort == 8)
+				sql = "select * from city where name like ? order by en_name desc limit ?,?";
+			else
+				sql = "select * from city where name like ? limit ?,?"; // 정렬 값
+																		// 없을때
 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(1, "%" + search + "%");
 			pstmt.setInt(2, startRow - 1);// 시작행-1
 			pstmt.setInt(3, pageSize);// 몇개글
 
@@ -493,7 +630,6 @@ public class PlanDAO {
 
 	}
 
-	
 	/* 메인페이지 국가리스트 뽑아오기(메인페이지) */
 	public List<PlanCountryBean> getCountryList() {
 		List<PlanCountryBean> countryList = new ArrayList();
@@ -546,7 +682,83 @@ public class PlanDAO {
 		return countryList;
 
 	}
-	
+
+	/* DB 도시리스트 뽑아오기 (운영자 페이지) : 검색값 */
+	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String search, int sort) {
+		List<PlanTravelBean> travelList = new ArrayList();
+		PlanTravelBean tb = null;
+		String sql = "";
+
+		try {
+			con = getConnection();
+
+			if (sort == 1)
+				sql = "select * from travel where name like ? order by city_code asc limit ?,?";
+			else if (sort == 2)
+				sql = "select * from travel where name like ? order by city_code desc limit ?,?";
+			else if (sort == 3)
+				sql = "select * from travel where name like ? order by name asc limit ?,?";
+			else if (sort == 4)
+				sql = "select * from travel where name like ? order by name desc limit ?,?";
+			else if (sort == 5)
+				sql = "select * from travel where name like ? order by country_code asc limit ?,?";
+			else if (sort == 6)
+				sql = "select * from travel where name like ? order by country_code desc limit ?,?";
+			else if (sort == 7)
+				sql = "select * from travel where name like ? order by type asc limit ?,?";
+			else if (sort == 8)
+				sql = "select * from travel where name like ? order by type desc limit ?,?";
+			else
+				sql = "select * from travel where name like ? limit ?,?"; // 정렬
+																			// 값
+																			// 없을때
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setInt(2, startRow - 1);// 시작행-1
+			pstmt.setInt(3, pageSize);// 몇개글
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				tb = new PlanTravelBean();
+
+				tb.setConuntry_code(rs.getString("country_code"));
+				tb.setName(rs.getString("name"));
+				tb.setInfo(rs.getString("info"));
+				tb.setCity_code(rs.getString("city_code"));
+				tb.setType(rs.getString("type"));
+
+				travelList.add(tb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return travelList;
+
+	}
+
 	/* DB 국가 개수(운영자 페이지) */
 	public int getCountryCount() {
 		int count = 0;
@@ -586,17 +798,17 @@ public class PlanDAO {
 		}
 		return count;
 	}
-	
+
 	/* DB 국가 개수(운영자 페이지 : 검색값 포함) */
 	public int getCountryCount(String search) {
 		int count = 0;
-		
+
 		try {
 			con = getConnection();
 			sql = "select count(*) as count from country where name like ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");
-			
+			pstmt.setString(1, "%" + search + "%");
+
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -683,30 +895,42 @@ public class PlanDAO {
 		return countryList;
 
 	}
-	
+
 	/* DB 국가리스트 뽑아오기 (운영자 페이지 : 검색값) */
 	public List<PlanCountryBean> getCountryList(int startRow, int pageSize, String search, int sort) {
 		List<PlanCountryBean> countryList = new ArrayList();
 		PlanCountryBean cb = null;
 		String sql = "";
-		
+
 		try {
 			con = getConnection();
-			
-			// sort-> 0:정렬x 기본값, 1:국가코드 오름차순 ,2:국가코드 내림차순, 3:국가이름 오름차순, 4:국가이름 내림차순, 5:대륙별 오름차순, 6:대륙별 내림차순
+
+			// sort-> 0:정렬x 기본값, 1:국가코드 오름차순 ,2:국가코드 내림차순, 3:국가이름 오름차순, 4:국가이름
+			// 내림차순, 5:대륙별 오름차순, 6:대륙별 내림차순
 			// 7:영문이름 오름차순, 8:영문이름 내림차순
-			if(sort == 1) sql = "select * from country where name like ? order by country_code asc limit ?,?";
-			else if(sort == 2) sql = "select * from country where name like ? order by country_code desc limit ?,?";
-			else if(sort == 3) sql = "select * from country where name like ? order by name asc limit ?,?";
-			else if(sort == 4) sql = "select * from country where name like ? order by name desc limit ?,?";
-			else if(sort == 5) sql = "select * from country where name like ? order by continent asc limit ?,?";
-			else if(sort == 6) sql = "select * from country where name like ? order by continent desc limit ?,?";
-			else if(sort == 7) sql = "select * from country where name like ? order by en_name asc limit ?,?";
-			else if(sort == 8) sql = "select * from country where name like ? order by en_name desc limit ?,?";
-			else sql = "select * from country where name like ? limit ?,?";	// 정렬 값 없을때
+			if (sort == 1)
+				sql = "select * from country where name like ? order by country_code asc limit ?,?";
+			else if (sort == 2)
+				sql = "select * from country where name like ? order by country_code desc limit ?,?";
+			else if (sort == 3)
+				sql = "select * from country where name like ? order by name asc limit ?,?";
+			else if (sort == 4)
+				sql = "select * from country where name like ? order by name desc limit ?,?";
+			else if (sort == 5)
+				sql = "select * from country where name like ? order by continent asc limit ?,?";
+			else if (sort == 6)
+				sql = "select * from country where name like ? order by continent desc limit ?,?";
+			else if (sort == 7)
+				sql = "select * from country where name like ? order by en_name asc limit ?,?";
+			else if (sort == 8)
+				sql = "select * from country where name like ? order by en_name desc limit ?,?";
+			else
+				sql = "select * from country where name like ? limit ?,?"; // 정렬
+																			// 값
+																			// 없을때
 
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%"+search+"%");	// 검색값
+			pstmt.setString(1, "%" + search + "%"); // 검색값
 			pstmt.setInt(2, startRow - 1);// 시작행-1
 			pstmt.setInt(3, pageSize);// 몇개글
 
@@ -799,9 +1023,9 @@ public class PlanDAO {
 	public String getCountyCode(String nation) {
 		PlanCountryBean pcb = null;
 		Connection con = null;
-		
+
 		String country_code = "";
-		
+
 		try {
 			con = getConnection();
 			sql = "select country_code from country where name=?";
@@ -817,24 +1041,27 @@ public class PlanDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-		}finally {
-			try{
-				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(con!=null) con.close();
-				
-			}catch(Exception e) {
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return country_code;
 	}
-	
+
 	/* 수정할 국가 가져오기(운영자 페이지) */
 	public PlanCountryBean getCountry(String country_code) {
 		PlanCountryBean pcb = null;
 		Connection con = null;
-		
+
 		try {
 			con = getConnection();
 			sql = "select * from country where country_code=?";
@@ -877,13 +1104,13 @@ public class PlanDAO {
 		}
 		return pcb;
 	}
-	
+
 	/* 국가 DB수정(운영자 페이지) */
 	public int updateCountry(PlanCountryBean pcb, String beforeCountryCode) {
 		int check = 0;
 
 		System.out.println("country_code: " + pcb.getCountry_code());
-		
+
 		try {
 			con = getConnection();
 			sql = "select * from country where country_code=?";
@@ -1564,11 +1791,11 @@ public class PlanDAO {
 
 		return pcb;
 	}
-	
-	/*각 대륙에 맞는 도시 개수*/
+
+	/* 각 대륙에 맞는 도시 개수 */
 	public int getCityCount_con(String continent) {
 		int count = 0;
-		String country_code="";
+		String country_code = "";
 		try {
 			con = getConnection();
 
@@ -1578,17 +1805,17 @@ public class PlanDAO {
 			pstmt.setString(1, continent);
 			rs = pstmt.executeQuery();
 
-			while(rs.next()) { // DB에 국가가 있으면
+			while (rs.next()) { // DB에 국가가 있으면
 				country_code = rs.getString("country_code");
 
 				sql = "select count(*) as count from city where country_code=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, country_code);
-		
+
 				rs = pstmt.executeQuery();
 
 				if (rs.next()) {
-					count = count+rs.getInt("count");
+					count = count + rs.getInt("count");
 				}
 			}
 
@@ -1609,60 +1836,61 @@ public class PlanDAO {
 		}
 		return count;
 	}
+
 	/* 각대륙에 맞는 도시리스트 뽑아오기 */
 	public List<PlanCityBean> getCityList_con(String continent) {
 		List<PlanCityBean> cityList = new ArrayList();
 		PlanCityBean cb = null;
 		String sql = "";
-		String country_code="";
-		ResultSet rs2=null;
+		String country_code = "";
+		ResultSet rs2 = null;
 
 		try {
 			con = getConnection();
-			if(continent.equals("All")){//도시 전체
-				sql="select * from city";
-				pstmt=con.prepareStatement(sql);
-				rs=pstmt.executeQuery();
-				
-				while(rs.next()){
-					cb=new PlanCityBean();
-					
+			if (continent.equals("All")) {// 도시 전체
+				sql = "select * from city";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					cb = new PlanCityBean();
+
 					cb.setCountry_code(rs.getString("country_code"));
 					cb.setName(rs.getString("name"));
 					cb.setInfo(rs.getString("info"));
 					cb.setCity_code(rs.getString("city_code"));
 					cb.setEn_name(rs.getString("en_name"));
-					
+
 					cityList.add(cb);
 				}
-			}else{//대륙에 맞는 도시 리스트
-				sql="select country_code from country where continent=?";
-				
+			} else {// 대륙에 맞는 도시 리스트
+				sql = "select country_code from country where continent=?";
+
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, continent);
 				rs = pstmt.executeQuery();
-				
-				while(rs.next()) { // DB에 국가가 있으면
+
+				while (rs.next()) { // DB에 국가가 있으면
 					country_code = rs.getString("country_code");
-					
+
 					sql = "select * from city where country_code=?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, country_code);
-			
+
 					rs2 = pstmt.executeQuery();
 
-					while(rs2.next()) {
-						cb=new PlanCityBean();
+					while (rs2.next()) {
+						cb = new PlanCityBean();
 						cb.setCountry_code(rs2.getString("country_code"));
 						cb.setName(rs2.getString("name"));
 						cb.setInfo(rs2.getString("info"));
 						cb.setCity_code(rs2.getString("city_code"));
 						cb.setEn_name(rs2.getString("en_name"));
-						
+
 						cityList.add(cb);
 					}
 				}
-				
+
 			}
 
 		} catch (Exception e) {
@@ -1698,37 +1926,36 @@ public class PlanDAO {
 
 	}
 
-	
-	/*기념품 리스트 뽑아 오기*/
-	public List<PlanSouvenirBean> getSouvenirList(String city_code){
+	/* 기념품 리스트 뽑아 오기 */
+	public List<PlanSouvenirBean> getSouvenirList(String city_code) {
 		List<PlanSouvenirBean> souvenirList = new ArrayList<PlanSouvenirBean>();
 		PlanSouvenirBean psb = null;
-		
+
 		try {
 			con = getConnection();
-			
-			//도시에 맞는 기념품 리스트 가져오기
-			sql="select * from souvenir where city_code=? order by ranking asc";
+
+			// 도시에 맞는 기념품 리스트 가져오기
+			sql = "select * from souvenir where city_code=? order by ranking asc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, city_code);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				psb=new PlanSouvenirBean();
-				
+
+			while (rs.next()) {
+				psb = new PlanSouvenirBean();
+
 				psb.setCity_code(city_code);
 				psb.setImg(rs.getString("sou_img"));
 				psb.setName(rs.getString("sou_name"));
 				psb.setNum(rs.getInt("num"));
 				psb.setRanking(rs.getInt("ranking"));
 				psb.setInfo(rs.getString("info"));
-				
+
 				souvenirList.add(psb);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -1748,10 +1975,10 @@ public class PlanDAO {
 				}
 			}
 		}
-		
+
 		return souvenirList;
 	}
-	
+
 	/*기념품 리스트 추가하기*/
 	public void addSouvenir(PlanSouvenirBean psb){
 		int num=0;
@@ -1803,6 +2030,12 @@ public class PlanDAO {
 		}
 
 	}
+	/* 기념품 리스트 추가하기 */
+	public void addSouvenir() {
+
+
+	}
+
 	
 	/*기념품 정보보기*/
 	public PlanSouvenirBean getSouvenir(int num){
@@ -1904,5 +2137,7 @@ public class PlanDAO {
 	}
 	
 	
+
+
 
 }

@@ -174,51 +174,58 @@ function cityListChange(pageNum) {
 </section>
 
 <!-- Four 여행 후기, 리뷰 등 댓글 -->
-<section class="nation_four">
+<section class="four">
 	
-	<div class="container comment">
-	<hr><h2><%=nation %> 커뮤니티</h2><hr>
-		<div class="table_div">
-			<table>
-				<!-- 리뷰 리스트 오는 자리 -->
-			</table>
-			
-			<!-- 페이징 -->
-		<div class="page">
-			1 2 3 4
+	<div class="comment">
+	<h2><%=nation %> 커뮤니티</h2>
+		<div class="review_list">
+			<!-- 리뷰 리스트 오는 자리 -->
+			<!-- 페이지 번호 오는 자리 -->
 		</div>
-			
-		</div>
-
 		
+		<div class="comment_right">
 		<!-- 리뷰 작성 -->
 		<%if(id!=null) {%>
-		<input type="button" value="리뷰쓰기" id="reviewWriteBtn" class="button alt writeBtn">
+		<input type="button" value="리뷰쓰기" id="writeBtn" class="button alt writeBtn">
 		<%} %>
 		<!-- 숨겨진 공간 -->
-		<div class="reviewWriterDiv animated fadeInDown">
+		<div class="reviewWriterDiv">
 			
 			<form action="javascript:writeComplete()" method="post">
 			<select id="eval">
 				<option value="-1" style="font-weight: 900; color: #6B66FF">평가하기</option>
-				<optgroup label="여행 전">
-					<option value="0">아직안가봤어요</option>
-				</optgroup>
-				<optgroup label="여행 후">
-					<option value="1">좋았어요</option>
-					<option value="2">그저 그랬어요</option>
-					<option value="3">별로였어요</option>
-				</optgroup>
+					<option value="1" style="color: orange;">좋아요!</option>
+					<option value="2" style="color: blue;">괜찮아요.</option>
+					<option value="3" style="color: red;">별로에요!</option>
 			</select>
-			<textarea rows="5" cols="3" maxlength="1000" name="content"></textarea>
+			<textarea rows="5" cols="5" maxlength="1000" name="content"></textarea>
 			<div class="formBtnDiv">
 				<input type="submit" value="작성완료" class="submitBtn">
 				<input type="reset" value="다시쓰기" class="resetBtn">
 			</div>
+			
 			</form>
-		</div>
-		</div>
-
+			
+		</div>	<!-- 리뷰 작성 div(숨겨진 공간) -->
+			
+			<%
+			if(id==null) {
+			%>
+			<div class="comment_member">	<!-- 로그인, 회원가입 DIV -->
+				<span>도움이 필요하신가요?<br>로그인하여 커뮤니티에 참여해 보세요!</span><br>
+				<div class="comment_member_btn">
+					<input type="button" value="로그인" onclick="popupToggle()">
+					<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me';">
+				</div>
+			</div>	<!-- .comment_member -->
+			<%
+			}
+			%>	
+		</div>	<!-- .comment_right -->
+		
+	<div class="clear"></div>
+	</div>	<!-- .comment -->
+	
 </section>
 	<!-- Four 스크립트 -->
 	<script type="text/javascript">
@@ -226,12 +233,17 @@ function cityListChange(pageNum) {
 		var toggleBtn = 0;
 		$(document).ready(function(data){
 			/* 리뷰 작성 버튼 */
-			$('#reviewWriteBtn').click(function(){
+			$('#writeBtn').click(function(){
 				if(toggleBtn==0) {
-					$('.reviewWriterDiv').css('display', 'block');
+					$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
+					$('.reviewWriterDiv').css('display', 'inline-block');
+					
 					toggleBtn = 1;
 				}else {
-					$('.reviewWriterDiv').css('display', 'none');
+					$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
+					setTimeout(function(){
+						$('.reviewWriterDiv').hide();
+					}, 700)
 					toggleBtn = 0;
 				}
 			});
@@ -243,14 +255,13 @@ function cityListChange(pageNum) {
 				url: './plan/planComment/planNationCommentList.jsp',
 				data : {nation:'<%=nation%>'},
 				success: function(data) {
-					$('div.comment table').empty();
-					$('div.comment table').append(data);
+					$('div.comment .review_list').empty();
+					$('div.comment .review_list').append(data);
 				},
 				error: function(xhr, status, error) {
 					alert(error);
 			    } 
 			});
-			
 		});
 		
 		/* 리뷰 작성완료 DB작업 */
@@ -270,6 +281,7 @@ function cityListChange(pageNum) {
 				type: 'post',
 				url: './plan/planComment/planNationCommentWrite.jsp',
 				data : {nation:'<%=nation%>', content : con, eval : sel},
+				async: false,
 				success: function(data) {
 					$('textarea').val('');
 					$('.reviewWriterDiv').css('display', 'none');
@@ -279,23 +291,46 @@ function cityListChange(pageNum) {
 					alert(error);
 			    } 
 			});
+			
+			nationCommentList(1);
 		}
 		
-		/* 페이지 버튼 누를때나 리뷰 추가했을때 */
-		
+		/* 페이징 변경이나 다른 작업 후 다시 리뷰 리스트를 로딩할때 */
 		function nationCommentList(pageNum) {
 			$.ajax({
 				type: 'post',
 				url: './plan/planComment/planNationCommentList.jsp',
 				data : {nation:'<%=nation%>', pageNum : pageNum},
 				success: function(data) {
-					$('div.comment table').empty();
-					$('div.comment table').append(data);
+					$('div.comment .review_list').empty();
+					$('div.comment .review_list').append(data);
 				},
 				error: function(xhr, status, error) {
 					alert(error);
-			    } 
+			    }
 			});
+		}
+		
+		/* 리뷰 삭제하기 */
+		function nationCommentDelete(num, pageNum) {
+			
+			var con = confirm("리뷰를 삭제하시겠습니까?");
+			
+			if(con == true) {
+				$.ajax({
+					type: 'post',
+					url: './plan/planComment/planNationCommentDelete.jsp',
+					data : {num : num},
+					async: false,
+					success: function(data) {
+						alert("삭제 되었습니다.");
+					},
+					error: function(xhr, status, error) {
+						alert(error);
+				    }
+				});
+				nationCommentList(pageNum);
+			}
 		}
 		
 	</script>
