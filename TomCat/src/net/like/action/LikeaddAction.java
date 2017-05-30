@@ -26,6 +26,8 @@ public class LikeaddAction implements Action {
 		String nick=request.getParameter("nick");		
 		lb.setNick(nick);
 		lb.setNum(Integer.parseInt(request.getParameter("num")));
+		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+
 		
 		ldao.addLike(lb);//net.like.db.LikeDAO의 addLike에 lb에 담긴값들을 넘겨줌
 		
@@ -40,7 +42,7 @@ public class LikeaddAction implements Action {
 		
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardList.bo");
+		forward.setPath("./BoardList.bo?pageNum="+pageNum);
 		forward.setRedirect(true);
 		return forward;	
 		
