@@ -30,7 +30,7 @@
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
-<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: #E4E7EF;"></div>
+<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(255,215,247,0.89)"></div>
 
 <input id="inputMessage" type="text"
 	onkeydown="if(event.keyCode==13){send();}" style="width:20em;" placeholder="Enter로 전송"/>
