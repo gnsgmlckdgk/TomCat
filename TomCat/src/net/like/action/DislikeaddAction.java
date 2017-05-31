@@ -23,6 +23,8 @@ public class DislikeaddAction implements Action {
 		
 		lb.setNick(request.getParameter("nick"));
 		lb.setNum(Integer.parseInt(request.getParameter("num")));
+		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+
 		
 		ldao.adddislike(lb);//net.like.db.LikeDAO
 		
@@ -38,7 +40,7 @@ public class DislikeaddAction implements Action {
 		
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardList.bo");
+		forward.setPath("./BoardList.bo?pageNum="+pageNum);
 		forward.setRedirect(true);
 		return forward;	
 		

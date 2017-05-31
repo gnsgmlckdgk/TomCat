@@ -8,17 +8,15 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <section class="wrapper" style="padding:0 ;">
-
+<!-- Header ph -->
 
 <head>
 
-
-<link href="assets/css/list.css?ver=12" rel="stylesheet" type="text/css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<link href="assets/css/list.css?ver=798" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
-	
 </head>
-
 
 <body class="fadein">
 
@@ -26,7 +24,6 @@
 	<button type="button" class="btn_up_layer">
 		<img src="./board/pl.png">
 	</button>
-
 
 	<script type="text/javascript">
 		/* 위로
@@ -107,6 +104,8 @@
 			Calendar cal = Calendar.getInstance();
 			//jsp 날짜 구하기 끝.
 			
+			
+			
 			if(id!=null){
 		%>
 		
@@ -130,6 +129,7 @@
 					if(content!=null){
 					content=bb.getContent().replace("\r\n", "<br>");
 					}
+					
 			%>
 
 
@@ -167,7 +167,7 @@
 									if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
 											
 						%>
-										<%=cal.get(Calendar.HOUR) - bb.getDate().getHours()%>시
+										<%=cal.get(Calendar.HOUR) - bb.getDate().getHours()%>시간전
 						<%
 									} else {
 						%>
@@ -192,6 +192,7 @@
 					</div>
 					<!-- 날짜 끝. -->
 					
+					<div class="if">
 					<!-- 수현씨 지도 부분 -->
 					<%if(bb.getLocation() != null && !bb.getLocation().equals("null")) {%>
 					
@@ -200,15 +201,31 @@
 				</iframe>
 				<%} %>
 				<!-- 수현씨 지도 부분 끝 -->
-			
+			</div>
 			
 					
 				</div>
 
 
 			</div>
-
-
+			
+	<script type="text/javascript"> 
+		//댓글 기능(->슬라이드)
+// 		 $(function(){
+// 			$(".btn").click(function(){
+// 				var effect = 'slide';
+// 				var options ='left';
+// 				var duration = 500;
+// 			$('#pln_list').toggle(effect, options, duration);
+// 			}); 
+// 		});  
+// 		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+//  		 $(function(){
+// 			 //datepicker 한국어로 사용하기 위한 언어설정
+// 		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+// 		 });
+		</script>
+ 
 			<%
 				}
 				
@@ -221,11 +238,33 @@
 		
 
 	</div>
-	
+		
+<script type="text/javascript">
+$(document).ready(function (event){
+	$(window).scroll(function (){
 
-	
+		var scrollHeight = $(window).scrollTop() + $(window).height();
+		var documentHeight = $(document).height();
+
+		// 스크롤이 맨 아래로 갔는지 아닌지 확인
+		if(scrollHeight == documentHeight)
+		{
+			for(var i=0; i<10; i++)
+			{
+				$('<h1>scroll2_'+i+'_</h1>').appendTo('body');
+			}
+		}
+	});
+});
+
+$(document).ready(function(){
+	for(var i=0; i<20; i++){
+		$('<h1>scroll_'+i+'_</h1>').appendTo('body');
+	}
+});
+</script>
+
 </body>
-
 <%if(id!=null){ %>
 
 	<div id="chat"></div>
@@ -244,8 +283,7 @@
     			}   
 			});
 		});
+
  		</script>
 		<%} %>
 		
-
-<!-- Footer --> <jsp:include page="../inc/footer.jsp" />

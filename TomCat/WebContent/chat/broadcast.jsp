@@ -30,15 +30,17 @@
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
-<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: #f3f6fd;"></div>
+<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(255,215,247,0.89)"></div>
+
+<div style="background-color: white; max-width: 20em;">
+<%for(int i=1; i<=9; i++){ %><!-- i값의 범위를 이모티콘의 개수로 한다. -->
+	<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc(<%=i %>)" style="width:2em; vertical-align: middle;">
+<%} %>
+</div>
 
 <input id="inputMessage" type="text"
-	onkeydown="if(event.keyCode==13){send();}" style="width:20em;" placeholder="Enter로 전송"/>
+	onkeydown="if(event.keyCode==13){send();}" style="width:20em; background-color: white;" placeholder="Enter로 전송"/>
 <!-- <input type="submit" value="send" onclick="send();"/> -->
-
-<%for(int i=1; i<=2; i++){ %>
-	<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc(<%=i %>)" style="width:2em">
-<%} %>
 
 <script type="text/javascript">
 	
@@ -68,6 +70,7 @@
 		
 		//접속했을 때 접속자들에게 알릴 내용.
 		webSocket.send("<%=nick%> is DisConnected\n");
+		alert("test");
 	}
 
 	//	OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면 호출되는 함수.
@@ -291,7 +294,7 @@
 		var div = document.createElement('div');
 		
 		div.style["float"]="right";
-		div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:3em;'>";
+		div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em;'>";
 		document.getElementById('messageWindow2').appendChild(div);
 		
 		//clear div 추가
@@ -300,7 +303,7 @@
 		document.getElementById('messageWindow2').appendChild(clear);
 		
 		//2번째 구분자 뒤에 img 단어를 넣는다.
-		webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:3em;'>|\|img");
+		webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em;'>|\|img");
 		
 		//div 스크롤 아래로.
 		messageWindow2.scrollTop = messageWindow2.scrollHeight;

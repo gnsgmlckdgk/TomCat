@@ -195,6 +195,41 @@ public class ImagesDAO {
 		return path;
 	}
 	
+	// 여행지 이미지 경로 구하기
+		public String getTravelImgPath(int travel_id) {
+			
+			String path = "";
+			
+			try {
+				
+				con = getConnection();
+				
+				sql = "select file from images where travel_id = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, travel_id);
+				
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					path = rs.getString("file");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}	
+			}
+			
+			return path;
+		}
+	
 	// 국가 삭제시 이미지도 같이 삭제
 	public void deleteCountryImages(String country_code) {
 		

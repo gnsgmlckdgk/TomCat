@@ -16,7 +16,7 @@ public class BoardList1 implements Action1{
 		// int count=   getBoardCount() 메서드호출 
 		int count=bdao.getBoardCount();
 		//한페이지에 보여줄 글의 개수 설정
-		int pageSize=50;
+		int pageSize=10;
 		//현페이지가  몇페이지 인지 가져오기 없으면 1페이지 설정
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null){
