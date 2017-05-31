@@ -27,7 +27,7 @@
 	}
 
 	// 한페이지에 보여줄 글의 개수
-	int pageSize = 5;
+	int pageSize = 6;
 
 	// 현페이지가 몇페이지인지 가져오기(기본 1페이지)
 	String pageNum = request.getParameter("pageNum");
@@ -55,7 +55,7 @@
 	// 필요한 전체 페이지 수
 	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 	// 한페이지에 출력할 페이지 수
-	int pageBlock = 5;
+	int pageBlock = 3;
 	// 시작 페이지
 	int startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
 	;
@@ -92,9 +92,9 @@
 		<td class="img_td"
 			style="background-image: url('./images/plan/nation/<%=cityPath %>'); background-size: cover;"></td>
 		<td class="txt_td">
-			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName()%></p>
-			<p style="font-size: 0.7em;"><%=pcb.getEn_name()%></p>
-			<p style="font-size: 1.0em; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=pcb.getInfo()%></p>
+			<span class="city_name"><%=pcb.getName()%></span><br>
+			<span class="city_enName"><%=pcb.getEn_name()%></span><br>
+			<span class="city_info"><%=pcb.getInfo()%></span>
 		</td>
 	</tr>
 	<%
@@ -102,30 +102,30 @@
 		} else {
 	%>
 	<tr>
-		<td colspan="2" style="display: block; text-align: center;">찾으시는 정보가 없습니다.</td>
+		<td colspan="2" style="display: block; text-align: center; width: 1080px;">찾으시는 정보가 없습니다.</td>
 	</tr>
 	<%
 		}
 	%>
 </table>
 
-<%
-	// 페이징
-%>
+<!-- 페이징 -->
 <div class="page">
 	<%
 		if (currentPage > pageBlock) {
-	%><a href="javascript:cityListChange('<%=startPage - pageBlock%>', '<%=search%>');">[이전]</a>
+	%><a href="javascript:cityListChange('<%=startPage - pageBlock%>', '<%=search%>');">
+	<img src="./images/etc/backward_icon.png"></a>
 	<%
 		}
 		for (int i = startPage; i <= endPage; i++) {
 	%><a href="javascript:cityListChange('<%=i%>', '<%=search%>');"
 		<%if (currentPage == i) {%>
-		style="background-color: #ccc;" <%}%>><%=i%></a>
+		style="color: #0054FF; font-weight: 900;" <%}%>><%=i%></a>
 	<%
 		}
 		if (pageCount > endPage) {
-	%><a href="javascript:cityListChange('<%=startPage + pageBlock%>', '<%=search%>');">[다음]</a>
+	%><a href="javascript:cityListChange('<%=startPage + pageBlock%>', '<%=search%>');">
+	<img src="./images/etc/next_icon.png"></a>
 	<%
 		}
 	%>

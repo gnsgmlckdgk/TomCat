@@ -77,96 +77,104 @@ section.nation_one div.nation_info_content {
 			margin-left: 50px;
 		}
 
+
+
+
+
 /* 두번째 섹션 : 국가 리스트 */
-section#nation_two {
-	padding: 20px;
-}
-section#nation_two .container {
-	margin: 20px auto;
-	min-width: 900px;
-}
-section#nation_two .city_list_div {
-	margin: 0;
-}
-section#nation_two .city_list_div table {
-	min-height: 400px;
-}
-section#nation_two .city_list_div tr {
-	display: block;
-	margin-bottom: 20px;
-}
-section#nation_two .city_list_div tr:hover {
-	cursor: pointer;
-	box-shadow: 3px 2px 4px #ccc;
-}
-section#nation_two .city_list_div td {
-	padding: 0;
-	margin: 0;
-}
-section#nation_two .city_list_div .img_td {
-	width: 300px;
-	min-width: 300px;
-	height: 180px;
+section.two {	/* 두번째 섹션 전체 */
+	font-size: 12px;
+	border-bottom: 1px solid #ccc;
 	background-color: #fff;
-	
-	padding: 0;
 }
-section#nation_two .city_list_div .txt_td {
-	width: 1100px;
-	text-align: left;
-	background-color: #fff;
-	
-	padding: 20px;
+div.cityList {	/* 내용물 전체 */
+	width: 1080px;
+	min-height: 600px;
+	margin: 30px auto;
 }
-section#nation_two .city_list_div .txt_td:hover {
-	background-color: #f0f0f0;
-}
-section#nation_two .city_list_div p {
-	padding: 0;
-	margin: 0;
+div.cityList h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
 }
 
-section#nation_two div.search_div {	/* 검색 */
+div.cityList .search_div {	/* 검색 DIV */
+	width: 360px;
 	float: right;
 	position: relative;
-	
-	width: 420px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
-section#nation_two div.search_div img {
-	position: absolute;
-	width: 25px;
-	height: 25px;
-	
-	left: 5px;
-	top: 5px;
-}
-section#nation_two div.search_div input[type="text"] {
+div.cityList .search_div #search {
+	width: 290px;
+	font-size: 12px;
+	padding-left: 34px;
 	float: left;
-	display: block;
-	width: 300px;
-	height: 35px;
-	padding-left: 40px;
 }
-section#nation_two div.search_div input[type="submit"] {
-	width: 100px;
-	height: 35px;
-	font-size: 0.8em;
+div.cityList .search_div .search_img {	/* 검색 이미지 */
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	left: 2px;
+	top: 2px;
+}
+div.cityList .search_div input[type=submit] {
+	font-size: 10px;
+	float: right;
 }
 
-section#nation_two .city_list_div .page a {
-	font-size: 1.4em;
-	font-weight: bold;
+div.cityList div.cityListTable {	/* 도시 리스트 테이블 전체 */
+	margin-top: 30px;
+}
+div.cityList div.cityListTable tr {
+	display: inline-block;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+}
+div.cityList div.cityListTable tr:hover {
+	cursor: pointer;
+	border: 1px solid #0054FF;
+}
+div.cityList div.cityListTable td.img_td {	/* 도시 이미지 */
+	background-color: #fff;
+	width: 260px;
+	height: 160px;
+	max-width: 260px;
+	max-height: 160px;
+}
+div.cityList div.cityListTable td.txt_td {	/* 도시 소개 */
+	background-color: #fff;
+	width: 820px;
+	padding: 10px 30px 10px 20px;
+}
+div.cityList div.cityListTable td .city_name {
+	font-size: 16px;
+	font-weight: 900;
+}
+div.cityList div.cityListTable td .city_enName {
+	color: orange;
+	font-weight: 600;
+}
+div.cityList div.cityListTable td .city_info {
+	text-indent: 5px;
+}
+div.cityList div.cityListTable .page {	/* 페이징 */
+	font-size: 16px;
+	text-align: center;
+}
+div.cityList div.cityListTable .page a {
+	padding: 1px 7px;
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 600;
 	text-decoration: none;
-	border: 1px solid #ccc;
-	padding: 3px 6px;
 }
-section#nation_two .city_list_div .page a:hover {
-	background-color: #f0f0f0;
-	color: #FF8224;
+div.cityList div.cityListTable .page img {
+	width: 13px;
+	height: 13px;
 }
 
-
-/* 국가, 도시 리뷰 커뮤니티 */
+/* 국가, 도시 리뷰 커뮤니티(국가페이지, 도시페이지 공통) */
 section.four {	/* 리뷰 커뮤니티 전체 */
 	font-size: 12px;
 	background-color: #f7f7f7;
@@ -204,6 +212,8 @@ div.comment .review_list td:nth-of-type(2) {
 	width: 8%;
 }
 div.comment .review_list td img {
+	position: absolute;
+	top: 20px;
 	width: 40px;
 	height: 40px;
 	border-radius: 25px;
