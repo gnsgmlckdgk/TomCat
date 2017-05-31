@@ -102,10 +102,11 @@
 			%>
 
 			<td
-				style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg'); 
-					   background-size: cover; 
-					   width:10em;
-					   height:15em;"
+				style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg') ; 
+					   background-size:cover;
+					   width:15em;
+					   height:15em;
+					   "
 					   >
 					   
 				<span><a href="./PlanSearch.pl?check=2&search=<%=pcb.getName()%>"><%=pcb.getName()%></a></span>

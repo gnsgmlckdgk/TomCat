@@ -60,41 +60,35 @@ $(document).ready(function() {
 <div class="clear"></div>
 <!-- 본문 -->
 <section class = "planSpot">
-<h2><%=ptb.getName() %><span><%=ptb.getAddress() %></span></h2>
+<h2>
+	<%=ptb.getName() %><span><%=ptb.getAddress() %></span>
+<!-- 찜하기 -->
+	<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기">
+</h2>
 
 
 <!-- 찜하기 버튼 추가 -->
 
-<!-- 장소 이미지(이미지 슬라이드) -->
-
-	<!-- <!-- 다음검색 api 
-	<script src="./assets/js/plan/planSpotSearch.js"></script>
+<!-- 장소 이미지(임시 이미지) -->
+<div class="img_info">
+	<div class="travel_img">
+ 		<img src="./images/pic02.jpg" width="500em" height="350" /></div>
 	
-	검색어 설정(검색어 바꾸기 => "도시이름+여행+장소" )
-	<div id="daumForm">
-    	<input id="daumSearch" type="hidden" value="부산 여행 자갈치" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
-	</div>
-
-	이미지 출력
-	<div id="daumView">
-        <div id="daumImage"></div>
-	</div>
-
-	<div id="daumScript">
- 		<div id="daumImageScript"><img src="pic02.jpg" width="200" height="200"/></div>
-	</div> -->
 
 <!-- 추가정보(검색설명) -->
-<div class="tr_info" style="">추가 정보들</div>
+<div class="tr_info" style="">지도</div>
+
+</div>
+
 <div class="clear"></div>
 
 <!-- 장소 설명(db에서 받아온 설명) -->
-<h1><%=ptb.getInfo() %></h1>
+<h1>&nbsp▶&nbsp<%=ptb.getInfo() %></h1>
 
 <!-- 월별 옷차림(검색) -->
 
-<h3>월별 옷차림</h3>
-<div>
+<h3>월별 옷차림 &nbsp<span>계절에 맞는 이 지역 코디를 검색해 보세요</span></h3>
+<div class="All_mon">
 <input type="button" value="1월" class="month">
 <input type="button" value="2월" class="month">
 <input type="button" value="3월" class="month">
@@ -116,13 +110,14 @@ $(document).ready(function() {
 <!-- 선물리스트(1위 2위 3위)(db에서 받아오기) -->
 
 <h3>선물 리스트</h3>
-
+<!-- <img alt="이전" src="./images/Spot/arrow2.png"> -->
 
 <%
 	for(int i=0; i<souvenirList.size();i++){
 		PlanSouvenirBean psb = (PlanSouvenirBean)souvenirList.get(i);
 	%>
 	<div style="">
+	
 	<table class="souvenir" style="float: left; width: 300px; margin-right: 50px; border: none;">
 		
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getName() %></td></tr>
@@ -130,11 +125,13 @@ $(document).ready(function() {
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getInfo() %></td></tr>
 		
 	</table>
+	
 	</div>
 	<%
 	}
 %>
-
+<!-- <img alt="이후" src="./images/Spot/arrow.png">
+ -->
 
 
 <!-- 장소에 대한 후기 작성(시간나면) -->
@@ -142,24 +139,17 @@ $(document).ready(function() {
 
 <div class="blog_epil">
 <div class="blog_Spot"><span class="text">블로그 정보</span></div>
+<div class="Spot_epilogue"><span class="text">여행 후기</span></div>
+<div class="clear"></div>
 <script src="./assets/js/plan/planSpotSearch.js"></script>
 <div id="daumForm">
     	<input id="daumSearch" type="hidden" value="부산 여행 태종대" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
 	</div>
 	
-	<div id="daumView">
-        <div class="daumBlog"></div>
-	</div>
+        <div id="daumBlog" style="border: 1px solid red;"></div>
+
 	
-	<div id="daumScript">
- 		<div id="daumImageScript"><img src="pic02.jpg" width="200" height="200"/></div>
-	</div>
-
-
-
-
-
-<div class="Spot_epilogue"><span class="text">여행 후기</span></div>
+	<div id="daumBlogScript" style="border: 1px solid red;"></div>
 </div>
 
 

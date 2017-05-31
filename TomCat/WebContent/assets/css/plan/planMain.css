@@ -84,6 +84,7 @@ div.bestTripimg table {
 div.bestTripimg table tr{	
 	background-color:#fff;
 	height: 15em;
+	overflow: hidden;
 }
 
 div.bestTripimg table td{
@@ -91,15 +92,21 @@ div.bestTripimg table td{
 	text-align: center;
 	padding-top:6em;
 	border: 10px solid white;
+	overflow: hidden;
 }
+ div.bestTripimg table td:HOVER{
+ 	
+	
+} 
 
 div.bestTripimg td span,div.bestTripimg td span a{
 	font-size:1.3em;
-	color:#999;
+	color:white;
 	font-weight:bold;
 	text-shadow: 2px 2px 2px black;
 	margin-top:10em;
 	text-decoration: none;
+	
 }
 
 div.bestTripimg td span a:hover{
@@ -124,6 +131,9 @@ div.bestTripimg div span{
 div.countryList{
 	width:1080px;
 	margin: 2em auto;
+}
+div.countryList div{
+	margin-bottom: 0.5em;
 }
 
 div.countryList div div{

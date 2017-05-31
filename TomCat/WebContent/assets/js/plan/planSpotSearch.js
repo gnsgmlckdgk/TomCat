@@ -1,13 +1,13 @@
-  
-var daumSearch = {
+ var daumSearch = {
         /** 초기화. **/
         init : function(){
             this.apikey = "5aad815bb793e165b8de68b1d3e26d3467e96367";
             this.q = document.getElementById('daumSearch');
             
             //검색 객체들 초기화.
-            daumImage.init(5);
-
+       
+            daumBlog.init(5);
+            
         },
         /** 검색 **/
         search : function(){
@@ -15,7 +15,9 @@ var daumSearch = {
                 + '&output=json&q=' + encodeURI(this.q.value);
             
             //검색어에 맞게 각각 첫페이지를 띄움.
-            daumImage.pingSearch(1);
+       
+            daumBlog.pingSearch(1);
+            
         },
         /** callback 함수 호출. **/
         pingSearch : function(ds, api, pgno, callback, result){
@@ -31,17 +33,19 @@ var daumSearch = {
         },
         /** 결과를 뿌려줌. **/
         pongSearch : function(search, z){
-            var ul = document.createElement('div');
-            ul.className="div_1";
-/*           ul.style["border"]="5px solid blue";*/
+            var ul = document.createElement('ul');
+            
             for(var i=0; i<z.channel.item.length; i++){
                 //title 정보를 얻음.
-                var title = document.createElement('h6');
+                var title = document.createElement('h4');
                 var a = document.createElement('a');
                 a.href = z.channel.item[i].link;
                 a.target = '_blank';
                 a.innerHTML = this.escapeHtml(z.channel.item[i].title) 
                     + '<br'+'>';
+
+                title.appendChild(a);
+                
                 //세부 내용을 얻음.
                 var content = search.getContent(z.channel.item[i]);
                 
@@ -49,6 +53,60 @@ var daumSearch = {
                 ul.appendChild(search.getSearch(title,content));
             }
             return ul;
+        },
+        /** PageNumber를 그려줌. **/
+        pongPgno : function(pgno,max,func){
+            var maxpg = (pgno+6<max)?pgno+6:max;
+            
+            var div = document.createElement('div');
+            div.align = 'center';
+            div.style.clear = 'left'; 
+            
+            //좌측 화살표.
+            var left = document.createElement('a');
+            left.innerHTML = "<< ";
+            if(pgno-5>1)
+                this.onMouseDown(left,pgno-6,func);
+            else{
+                left.style.color = "gray";
+                left.style.cursor = "default";
+            }
+            div.appendChild(left);
+            
+            //페이지 번호.
+            for(var i=(pgno-5>1)?pgno-5:1; i<maxpg; i++){
+                var a = document.createElement('a');
+                a.innerHTML = " " + i + " ";
+
+                if(i==pgno){
+                    a.style.color = 'yellow';
+                    a.style.cursor = "default";
+                }
+                else
+                    this.onMouseDown(a,i,func);
+                
+                div.appendChild(a);
+            }
+            
+            //우측 화살표.
+            var right = document.createElement('a');
+            right.innerHTML = ">> ";
+            if(pgno+6<max)
+                this.onMouseDown(right,pgno+7,func);
+            else{
+                right.style.color = "gray";
+                right.style.cursor = "default";
+            }
+            div.appendChild(right);
+            
+            return div;
+        },
+        /** 마우스 이벤트. **/
+        onMouseDown: function(a, i, func){
+            a.style.cursor = 'pointer';
+            a.onmousedown = function(){
+                func(i);
+            }
         },
         /** HTML태그 안 먹게 하는 함수 **/
         escapeHtml: function (str) {
@@ -58,6 +116,12 @@ var daumSearch = {
             return str;
         }
     };
+
+    window.onload = function () {
+        daumSearch.init();
+        daumSearch.search();
+    };
+
 
     
 /*
@@ -149,7 +213,7 @@ var daumBlog = {
     },
     /** li setting **/
     getSearch : function(title,content){
-        var li = document.createElement('div');
+        var li = document.createElement('li');
        
         li.appendChild(title);
         li.appendChild(content);
@@ -160,6 +224,7 @@ var daumBlog = {
    getContent : function(z){
        var a = document.createElement('a');
        
+       a.style.color='black';
        a.target = '_blank';
        a.href = z.link;
        a.innerHTML = daumSearch.escapeHtml(z.description);
