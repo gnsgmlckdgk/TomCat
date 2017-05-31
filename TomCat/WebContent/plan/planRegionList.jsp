@@ -1,3 +1,4 @@
+<%@page import="net.images.db.ImagesDAO"%>
 <%@page import="net.plan.db.PlanTravelBean"%>
 <%@page import="net.plan.db.PlanDAO"%>
 <%@page import="java.util.List"%>
@@ -73,6 +74,32 @@
 	//조건부 검색된 값이면 c_b가 true로. 끝.
 %>
 
+<style>
+
+#zzim{
+	padding: 0 1.5em;
+	margin-left: 2em;
+	max-height: 2em;
+	vertical-align: middle;
+	line-height: 0;
+}
+
+#travel_name{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: black;
+	margin-bottom: 0.7em;
+
+}
+
+table td{
+	padding: 1em;
+	vertical-align: middle;
+}
+
+</style>
+
+
 <!-- 검색폼 -->
 
 <div class="search_div">
@@ -106,34 +133,41 @@
 <table>
 	<%
 	// 
+	ImagesDAO idao = new ImagesDAO();	// 이미지 정보 들고오기
+	String regionPath = "";
 	
 		PlanTravelBean ptb = null;
 		if (count > 0) {
 			for (int i = 0; i < ptbList.size(); i++) {
 				ptb = ptbList.get(i);
+				
+				regionPath = idao.getTravelImgPath(ptb.getTravel_id());
+				regionPath = regionPath.replace("\\", "/");	// css는 \아닌 /로 인식되서 바꿔줌
 	%>
 	<tr>
-		<td class="img_td" alt="<%=ptb.getName()%>" style="background-image: url('./upload/<%=ptb.getName()%>.jpg'); background-size: cover; min-width:2em;"></td>
+		<td class="img_td">
+			<img src="./images/plan/nation/<%=regionPath %>" alt="<%=ptb.getName()%>">
+		</td>
 		<td class="txt_td" style="text-align: left; padding-left: 1em;">
-			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=ptb.getName()%> 
+			<p id="travel_name"><%=ptb.getName()%> 
 				<%
 					if (id != null) {
 				%>
 				<input type="button" name="zzim"
 					onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜"
-					class="button special icon fa-download" />
+					class="button special icon fa-download" id="zzim"/>
 				<%
 					} else if (id == null) {
 				%>
 				<input type="button" name="zzim_noId" onclick="zzim_noId()"
-					value="찜" class="button special icon fa-download" />
+					value="찜" class="button special icon fa-download" id="zzim" />
 				<%
 					}
 				%>
 			</p>
 			
 			<p
-				style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
+				style="font-size: 1.0em; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
 		</td>
 	</tr>
 	<%
