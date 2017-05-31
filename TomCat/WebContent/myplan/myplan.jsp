@@ -523,7 +523,7 @@
 				});
 				var streetViewService = new google.maps.StreetViewService();
 				var radius = 50;
-				// 상태가 OK 라면, 파노라마 뷰가 발견되었음을 의미. In case the status is OK, which means the pano was found, compute the
+				// 상태가 OK 라면, 파노라마 뷰가 발견되었음을 의미. 
 				// streetview 이미지의 위치를 산정하고, 방향을 계산하고, 그것으로 부터 파노라마를 얻은후 옵션값을 셋팅한다.
 				
 				function getStreetView(data, status) {
