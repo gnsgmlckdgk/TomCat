@@ -53,7 +53,7 @@ public class MyPlanModifyForm implements Action {
 		request.setAttribute("goodsList", goodsList);
 		
 		
-		test t = new test();
+		DateList t = new DateList();
 		int tt= t.getDiffDay(fromdate, todate);
 		System.out.println("jjj"+tt);
 		if(tt>1){
