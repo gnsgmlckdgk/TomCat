@@ -94,7 +94,7 @@
 		<td class="txt_td">
 			<p style="font-size: 1.2em; font-weight: bold; color: black;"><%=pcb.getName()%></p>
 			<p style="font-size: 0.7em;"><%=pcb.getEn_name()%></p>
-			<p style="font-size: 1.0em; color: #6B66FF; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=pcb.getInfo()%></p>
+			<p style="font-size: 1.0em; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=pcb.getInfo()%></p>
 		</td>
 	</tr>
 	<%

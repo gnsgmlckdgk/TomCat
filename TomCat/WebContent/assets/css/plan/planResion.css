@@ -18,6 +18,21 @@ section.resion_one div.resion_info table td {
 	color: #fff;
 	font-size: 0.9em;
 }
+table tr{
+	max-height: 180px;;
+}
+
+table td.img_td img{
+	vertical-align: middle;
+	background-repeat: no-repeat;
+	background-size:contain;
+	padding: 0;
+	max-width: 15em;
+}
+
+
+
+
 section.resion_one div.resion_info_content {
 /* 	width: 60%; */
 	min-width: 600px;

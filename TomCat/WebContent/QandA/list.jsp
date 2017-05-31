@@ -30,7 +30,7 @@ if(id!=null){%>
 		<a href="./QandAWrite.qna">Q&A글쓰기</a>
 	<br>
 <%}%>
-
+<div id="combine">
 <table class="table1">
 <tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td><td>조회수</td></tr>
 <%
@@ -108,7 +108,7 @@ if(id!=null){%>
 <tr><td><a href="./QandAList.qna">목록으로</a></td></tr>
 
 </table>
-
+</div>
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

@@ -9,10 +9,13 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 
-<body>
+<body style="max-width: 1080px; margin: auto;">
 	<h1>여행장소 db 입력용</h1>
+<%String city_code = null; %>
 
-	<form action="./TravelAdminAction.td" method="post" name="fr">
+
+	<form action="./TravelAdminAction.td?city_code=<%=city_code %>" method="post" name="fr"
+		enctype="multipart/form-data">
 		<select id="type" name="type">
 			<option value="p">명소(place)</option>
 			<option value="r">맛집(restaurant)</option>
@@ -31,16 +34,11 @@
 			<%
 				}
 			%>
-		</select> &nbsp;&nbsp;&nbsp;&nbsp; <select id="city_code" name="city_code">
-
-
-		</select>
+		</select> &nbsp;&nbsp;&nbsp;&nbsp; <select id="city_code" name="city_code"></select>
 
 		<script language="javascript">
 			//상위 셀렉트로 하위 셀렉트 제어하기
 			function country(country) {
-				
-
 				
 				document.getElementById('city_code').length=0;
 				
@@ -50,7 +48,6 @@
 				PlanCityBean cb = (PlanCityBean) cityList.get(i);%>
 				
 			if (country == "<%=cb.getCountry_code()%>") {
-
 				
 					var option = document.createElement('option');
 					
@@ -61,10 +58,11 @@
 				}
 		<%}%>
 			}
+			
 		</script>
+		<br> <br> 여행지 이미지<br> <input type="file" name="file">
+
 		<br> <br>
-
-
 
 
 

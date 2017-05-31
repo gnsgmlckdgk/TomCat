@@ -19,10 +19,10 @@
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
 <section class="wrapper">
+<div id="top"></div>
 
-	<div id="top"></div>
-	<%
-	
+<div id="combine">
+	<%	
 	
 	String id = (String)session.getAttribute("id");
 	String nick = (String)session.getAttribute("nick");		
@@ -49,7 +49,7 @@ if(id!=null){%>
 	<%} %>
 	
 	<div class="table-wrapper">
-			<table class="alt" id="border">
+			<table class="alt" id="table1">
 		<%
 		//글의 갯수가 0이 아닐경우 하기실행(글 게시)	
 		if(count!=0){
@@ -70,9 +70,9 @@ if(id!=null){%>
 			%>
 		<tr>
 													<!-- 제목옆에 해당글에 댓글이 몇개 달렸는지 나타내줌 -->
-			<td colspan="4"><%=bb.getSubject() %>(댓글:<%=rdao.replyCount(bb.getNum()) %>)</td>
+			<td id="titlecolor" colspan="4"><%=bb.getSubject() %>(댓글:<%=rdao.replyCount(bb.getNum()) %>)</td>
 			</tr>		
-			<tr><td>닉네임:</td><td><%=bb.getNick()%></td>
+			<tr><td id="nickname">닉네임:</td><td id="nickname"><%=bb.getNick()%></td>
 			<td>업로드날짜:</td><td><%=bb.getDate() %></td>
 			</tr>	
 			<tr>
@@ -100,7 +100,9 @@ if(likecount%2==0){
 				if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>				
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="love" value="<%=bb.getLove()%>">
-			<input type="hidden" name="nick" value="<%=nick%>">			
+			<input type="hidden" name="nick" value="<%=nick%>">	
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">		
+					
 				
 			</form>
 			<%} %>			
@@ -116,7 +118,9 @@ if(likecount%2==0){
 			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="love" value="<%=bb.getLove()%>">
-			<input type="hidden" name="nick" value="<%=nick%>">			
+			<input type="hidden" name="nick" value="<%=nick%>">		
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">		
+				
 			
 			</form>	
 			<%} %>
@@ -178,22 +182,27 @@ if(likecount%2==0){
 <img id="crown" src="./images/instagram/crown.png">	
 <!-- 	베스트 게시글 테이블 -->
 	<table class="banner">
-	<tr><td>BEST샷</td></tr>
+	<tr><td id="paddingnone">
+	<marquee>BEST샷<marquee width=300>←♡-&lt </marquee>
+	
+	
+	
+	
+	</td></tr>
 	<tr><td>	
 
-<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/<%=bb.getImage1()%>" width=180 height=200 onerror="this.src='./images/instagram/noimage.png'"></a>
 	</td></tr>
-	<tr><td>좋아요<%=likecountall %>개</td></tr>
+	<tr><td id="paddingnone">좋아요<%=likecountall %>개</td></tr>
 	</table>
 	
+	
 <!-- 	화면 상단/ 하단 이동 아이콘 -->
-	<a href="#top"><img id="up" src="./images/instagram/up.png"></a>
-	<a href="#bottom"><img id="down" class="down" src="./images/instagram/down.png"></a>
-	
-	
-	
+	<a href="#top"><img title="상단이동" alt="상단이동" id="up" src="./images/instagram/up.png"></a>
+	<a href="#bottom"><img title="하단이동" alt="하단이동" id="down" class="down" src="./images/instagram/down.png"></a>
+		</div>
 	<div id="bottom"></div>
-
+		
 </section>
 	
 </body>
