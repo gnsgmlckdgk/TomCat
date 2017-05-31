@@ -2,6 +2,14 @@ svg {
     touch-action: none;
 }
 
+.Search .check_search{
+	background-color: white;
+}
+
+.Search .search_text{
+	background-color: white;
+}
+
 .jvectormap-container {
     width: 60em;
     height: 30em;

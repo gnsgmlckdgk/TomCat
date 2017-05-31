@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="net.plan.db.PlanCountryBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -126,25 +127,54 @@
 	/* 대륙 리스트 */
 	String[] cont = { "아시아", "유럽", "남태평양", "중남미", "북미" };
 	List countryList = (List) request.getAttribute("countL");
+	
+	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
+			Calendar cal = Calendar.getInstance();
+			int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 
 <div class="clear"></div>
 
 <section class="planMain">
 	<div>
+	
+	<!-- 현재 초 값을 받아와서, 배경이 새로고침 할때마다 바뀌도록. -->
+<%if(second==3) {%>
+<section id="banner" class="b_back<%=second%>">
+<%} else if(second==2) {%>
+<section id="banner" class="b_back<%=second%>">
+<%} else if(second==1) {%>
+<section id="banner" class="b_back<%=second%>">
+<%} else { %>
+<section id="banner" class="b_back">
+<%} %>
+
+
+	<div style="max-width: 1080px; margin: auto; padding: 1.5em 0;">
 		<!-- 검색폼 -->
-		<div class="Search">
-			<form name="fr" action="./PlanSearch.pl" class="plan_search"
+		<div class="Main_Search">
+			<form name="fr" action="./PlanSearch.pl" class="main_plan_search"
 				method="post" onsubmit="return checkSearch();">
 				<h2>어디로 여행을 가시나요?</h2>
-				<select name="check" class="check_search">
-					<option value="0">선택해주십시오</option>
-					<option value="1">국가명</option>
-					<option value="2">도시명</option>
-				</select> <input type="text" name="search" value="" class="search_text">
-				<input type="submit" value="검색" class="serch_button">
+				<div class="clear"></div>
+				<div style="max-width: 950px; margin: auto;">
+					<select name="check" class="check_search">
+						<option value="0">선택해주십시오</option>
+						<option value="1">국가명</option>
+						<option value="2">도시명</option>
+					</select> <input type="text" name="search" value="" class="search_text"
+						placeholder="임시 버튼은 아래에 있습니당"> <input type="submit"
+						value="검색" class="main_serch_button">
+				</div>
 			</form>
 		</div>
+	</div>
+
+
+
+
+
+</section>
 
 		<hr>
 		<div class="clear"></div>
