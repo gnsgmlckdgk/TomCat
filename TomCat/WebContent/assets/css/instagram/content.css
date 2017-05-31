@@ -3,8 +3,7 @@
 
 .wrapper {
 		background-attachment: fixed;
-		background-color:pink;
-/* 		background-image: url("../instagram/bridge.png");		 */
+		background-image: url("../../../images/instagram/goldengate.jpg");
 		background-position: center top;
 		background-size: cover;
 		line-height: 1.75;
@@ -21,18 +20,16 @@
 	border-radius: 20px;
 }
 
-.table2{
-	line-height:0.5em;
+.table2{		
+	line-height:0.2em;
 	width:70%;
-	height:30%;
+	height:15%;
 	margin:auto;
 	background-color: white;
-/* 	opacity: 0.85; */
 	border-radius: 20px;
 }
 
-textarea{
-	
+textarea{	
 	width:40%;
 	margin:auto;
 	background-color: white;
@@ -49,6 +46,10 @@ textarea{
 	height:2.3em;
 	border-radius: 0px;	
 	float:right;
+}
+
+#txt:hover{
+	background-color: black;	
 }
 
 textarea{
@@ -68,10 +69,7 @@ text-align: right;
 	text-align: left;	
 }
 
-h1{
-	color:white;
-	
-}
+
 
 #submit{
 	font-size:0.8em;
@@ -87,3 +85,28 @@ text-align: center;
 	font-size: 20px;
 	clear: both;
 }
+
+h1{
+	font-size:1.5em;
+	color:white;
+}
+#titlecolor{
+	background-color: #cccccc;
+	border-radius: 20px 0 0 0;
+	
+}
+#datecolor{
+	background-color: #cccccc;
+	border-radius:0 20px 0 0;
+	
+}
+#opacitynone:hover{
+	opacity:1;
+	background-color: black;
+}
+#listbutton:hover{
+	opacity:1;	
+	background-color: black;
+}
+ 
+

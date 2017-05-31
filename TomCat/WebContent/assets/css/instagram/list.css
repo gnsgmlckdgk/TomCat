@@ -89,7 +89,8 @@ img#down:HOVER {
 	opacity: 1;
 }
 
-#listpage {
+#listpage a{
+	text-decoration:none;
 	text-align: center;
 	font-size: 1.5em;
 }
@@ -100,12 +101,16 @@ img#down:HOVER {
 	width: 80%;
 }
 
+
+
+
+
 img#crown{
 width:4em;
 height:4em;
 position: fixed;
 left: 25em;
-top: 20em; 
+top: 21em;   
 animation-name:movingcrown; /*애니메이션의 이름 지정*/
 animation-duration:1s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -113,33 +118,35 @@ animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반�
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
 
-img#crown:HOVER {
-	animation-play-state: paused;
+img#crown:HOVER{
+animation-play-state:paused;
+
 }
 
-@
-keyframes movingcrown {
+@keyframes movingcrown{
 0%{
-left: 30px;
-top: 230px;
+left: 25em;
+top: 21em;   
 }
 25%{
-left:90px;
-top:180px;
+left: 27em;
+top: 19em;  
 }
+
 50%{
-left:150px;
-top:230px;
+left: 29em;
+top: 21em;   
 }
 75%{
-opacity:0.5;
-left:210px;
-top:180px;
+	opacity:0.5;
+left: 31em;
+top: 19em;  
 }
+
 100%{
-opacity:0.8;
-left:300px;
-top:230px;
+	opacity:0.8;
+left: 33em;
+top: 21em;   
 }
 }
 
@@ -154,5 +161,10 @@ top:230px;
 
 #nickname{
 	background-color:#e6e6e6;
+}
+#datecolor{	
+background-color:#f2f2f2;	
+	
+	
 }
 
