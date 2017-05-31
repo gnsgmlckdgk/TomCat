@@ -100,7 +100,9 @@ if(likecount%2==0){
 				if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>				
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="love" value="<%=bb.getLove()%>">
-			<input type="hidden" name="nick" value="<%=nick%>">			
+			<input type="hidden" name="nick" value="<%=nick%>">	
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">		
+					
 				
 			</form>
 			<%} %>			
@@ -116,7 +118,9 @@ if(likecount%2==0){
 			<%if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>			
 			<input type="hidden" name="num" value="<%=bb.getNum()%>">
 			<input type="hidden" name="love" value="<%=bb.getLove()%>">
-			<input type="hidden" name="nick" value="<%=nick%>">			
+			<input type="hidden" name="nick" value="<%=nick%>">		
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">		
+				
 			
 			</form>	
 			<%} %>

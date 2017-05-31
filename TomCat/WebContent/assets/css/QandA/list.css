@@ -19,15 +19,20 @@ body {
 }
 
 #banner {
-	border: 1px solid black;
+	border:5px solid black;
 	text-align: left;
 	width: 10em;
 	background-color: white;
 	position: absolute;
-	left: 100px;
 	top: 100px;
-	border: none;
 	border-collapse: none;
 	border: none;
-	border: none;
+}
+
+#combine {
+	margin: auto; border : 5px solid black;
+	width: 80em;
+	height: 40em;
+	position: relative;
+	border: 5px solid black;
 }
