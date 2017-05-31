@@ -165,17 +165,17 @@
 
 	<div class="container" >
 		<div class="myplan-list" >
-				<h3>
 
-				<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/all.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!-- 여행지찜리스트 전체 목록 -->
-				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/1.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정1 -->
-				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/2.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정2 -->
-				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/3.png" width="35px" height="35px" style="vertical-align:bottom"></a> <!--  일정3 -->
+
+				&nbsp;&nbsp;&nbsp;&nbsp;<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/zzim.png" width="50px" height="50px"style="vertical-align:bottom"></a>&nbsp;&nbsp; <!-- 여행지찜리스트 전체 목록 -->
+				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/plan_a.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정1 -->
+				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/plan_b.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정2 -->
+				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/plan_c.png" width="50px" height="50px" style="vertical-align:bottom"></a> &nbsp;&nbsp;<!--  일정3 -->
 
 				<!-- onclick = "location.href ='./MyPlan.pln?plan_nr=100'" modify해결하고 jqeury로 펼치기 설정 -->
-				<img class="btn"  src="./images/myplans/modify.png" width="35px" height="35px" style="vertical-align:bottom"> <!-- 일정만들기버튼 -->
+				<img class="btn"  src="./images/myplans/make.png" width="50px" height="50px" style="vertical-align:bottom"> <!-- 일정만들기버튼 -->
 				<!-- <button class="btn" >일정만들기</button> -->
-				</h3>
+				<hr>
 
 				<table border="1"  class="table" id="bestseller_books">  <!-- 여행지찜리스트 목록 및 일정별 목록 -->
 					<thead>

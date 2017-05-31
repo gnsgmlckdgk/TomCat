@@ -1,10 +1,13 @@
 @CHARSET "UTF-8";
 
+
+/* 전체 묶음 */
 .container {
 	height: 1045px;
 	width: 100%;
 }
 
+/* 일정표시 테이블 */
 .myplan-list {
 	background: #fff;
 	border: 1px solid #999;
@@ -24,6 +27,7 @@
 	padding: 0.7em;
 }
 
+/* 지도표시 */
 #map {
 	bottom: 0px;
 	/* height: 100%; */
@@ -42,6 +46,7 @@
 
 }
 
+/* 대중교통 경로 */
 #right-panel {
   float: right;
   width: 365px;
