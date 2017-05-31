@@ -16,7 +16,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/modifyNewFile5.css" />
+<link rel="stylesheet" href="assets/css/map/modifyNewFile6.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
@@ -26,6 +26,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+
+
 
 </head>
 <script >
@@ -39,11 +42,11 @@
 }); */ /* 사용안함  나중에 쓸일이 있을지 몰라 그대로 둠 */
 
 $(function(){
-	$("#left_box2").click(function(){
+	$("#left_box1").click(function(){
 		var effect = 'slide';
 		var options ='left';
 		var duration = 500;
-		$('#right_box').toggle(effect, options, duration);
+		$('#left_box2').toggle(effect, options, duration);
 	}); 
 });
 
@@ -53,6 +56,17 @@ $( function() {
     $( "#left_box2_detail" ).disableSelection();
   } );
   
+  
+/* 
+$(document).ready(function(datelist){
+	
+	var left_box1_detail li=$(this).val();
+	$('date').empty();
+	$('date').append(function(){
+		
+	});
+}); */
+
 </script>
 <body>
 	<%
@@ -98,24 +112,41 @@ $( function() {
 					<li><%=toDate%></li>
 				</ul>
 			</div>
+			
+			
+			
 			<div id="left_box2">
-				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->
+				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->	
 				<ul id="left_box2_head">
-					<li><%=fromDate %></li>
-					<li>
-						<button style="border: 1px solid red;">경로최적화</button><!-- 가능할지 의문?  -->
-						<button style="border: 1px solid red;">장소추가하기</button>
+					<li class="date">
+						<!-- <button style="border: 1px solid red;">경로최적화</button>
+						<button style="border: 1px solid red;">장소추가하기</button> -->
 					</li>
+					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
 				</ul>
 				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
-					<li>장소를 추가해 보세요~</li>
-					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
-					
-				</ul>	
+					<!-- <li>장소를 추가해 보세요~</li> -->
+						<%
+						for (int i = 0; i < goodsList.size(); i++) {
+							TravelBean tb = (TravelBean) goodsList.get(i);
+							
+						%>
+						<li><%=tb.getName()%></li>
+						<%
+							}
+						%>
+				</ul>
 			</div>	
+			
+			
+			
+			
+			
+			
 			<!-- box3 도시 찜 버튼 -->
-			 <div id="right_box">
+			 <%-- <div id="right_box">
 				<ul id="right_box_detail">
+						<li>여행지 찜 목록</li>
 						<%
 						for (int i = 0; i < goodsList.size(); i++) {
 							TravelBean tb = (TravelBean) goodsList.get(i);
@@ -125,21 +156,21 @@ $( function() {
 							}
 						%>
 				</ul>	
-			</div>
+			</div> --%>
 			<div id="map" class="f1" ></div><!-- myplan.jsp 페이지에서 지도 code 가져옴,  수정예정   -->	
 		</div>
 		
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 	function isBasket(){
 		var is=confirm("장바구니에 저장하시겠습니까?");
 		if(is==true){
-		document.gfr.action="./BasketAdd.ba";
+		document.gfr.action="./MyPlanBasketAdd.pln";
 		document.gfr.submit();
 		}else{
 			return;
 		}
 	}
-</script>
+	</script> -->
 	
 	
 	
