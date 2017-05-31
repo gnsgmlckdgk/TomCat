@@ -8,24 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.plan.action.Action;
-import net.plan.action.ActionForward;
-import net.plan.action.CityAction;
-import net.plan.action.CityAddAction;
-import net.plan.action.CityDelete;
-import net.plan.action.CityUpdate;
-import net.plan.action.CityUpdateAction;
-import net.plan.action.CountryAddAction;
-import net.plan.action.CountryDelete;
-import net.plan.action.CountryUpdate;
-import net.plan.action.CountryUpdateAction;
-import net.plan.action.DBCityListAction;
-import net.plan.action.DBCountryListAction;
-import net.plan.action.PlanMainAction;
-import net.plan.action.PlanNationAction;
-import net.plan.action.PlanRegionAction;
-import net.plan.action.PlanSearchAction;
-import net.plan.action.PlanSpot;
 
 public class ChatFrontController extends HttpServlet {
 
@@ -41,10 +23,17 @@ public class ChatFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 
-		if (command.equals("/Chat.ct")) { // DB에 국가 추가하는 폼 페이지 이동
+		if (command.equals("/Chat.ct")) { 
 			forward = new ActionForward();
 			forward.setPath("./chat/broadcast.jsp");
 			forward.setRedirect(false);
+			
+		} 	else if(command.equals("/ChatAction.ct")){	
+			action = new ChatAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();}		
 		}
 
 		if (forward != null) {
