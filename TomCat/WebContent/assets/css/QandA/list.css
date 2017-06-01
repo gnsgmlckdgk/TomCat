@@ -1,9 +1,11 @@
 @CHARSET "UTF-8";
 
 body {
-	background-image: url("../instagram/bridge.png");
-	margin: auto;
+	background-image: url("../../../images/instagram/goldengate.jpg");
+	background-attachment: fixed;
+	background-position: center top;
 	background-size: cover;
+	line-height: 1.75;
 	text-align: center;
 }
 
@@ -13,7 +15,7 @@ body {
 	margin: auto;
 	line-height: 1.75;
 	text-align: center;
-	width: 60em;
+	width: 70%;
 	background-color: white;
 	border-radius: 20px;
 }
@@ -30,7 +32,8 @@ body {
 }
 
 #combine {
-	margin: auto; border : 5px solid black;
+	margin: auto; 
+	border : 5px solid black;
 	width: 80em;
 	height: 40em;
 	position: relative;

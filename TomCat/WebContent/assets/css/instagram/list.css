@@ -3,7 +3,6 @@
 .wrapper {
 	background-image: url("../../../images/instagram/goldengate.jpg");
 	background-attachment: fixed;
-	/* 		background-color:pink; */
 	background-position: center top;
 	background-size: cover;
 	line-height: 1.75;
