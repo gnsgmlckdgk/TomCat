@@ -101,53 +101,57 @@ img#down:HOVER {
 	width: 80%;
 }
 
-
-
-
-
-img#crown{
+img#AlphbetB{
 width:4em;
 height:4em;
 position: fixed;
 left: 25em;
 top: 21em;   
-animation-name:movingcrown; /*애니메이션의 이름 지정*/
-animation-duration:1s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
 animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-
-img#crown:HOVER{
-animation-play-state:paused;
-
-}
-
-@keyframes movingcrown{
-0%{
-left: 25em;
+img#AlphbetE{
+width:4em;
+height:4em;
+position: fixed;
+left: 28em;
 top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-25%{
-left: 27em;
-top: 19em;  
-}
-
-50%{
-left: 29em;
-top: 21em;   
-}
-75%{
-	opacity:0.5;
+img#AlphbetS{
+width:4em;
+height:4em;
+position: fixed;
 left: 31em;
-top: 19em;  
-}
-
-100%{
-	opacity:0.8;
-left: 33em;
 top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
+img#AlphbetT{
+width:4em;
+height:4em;
+position: fixed;
+left: 34em;
+top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
+}
+@keyframes blink{
+0%{opacity:0.0}
+100%{opacity:1.0;}
 }
 
 #paddingnone{
@@ -159,12 +163,7 @@ top: 21em;
 	background-color: #cccccc;
 }
 
-#nickname{
+#darkgrey{
 	background-color:#e6e6e6;
-}
-#datecolor{	
-background-color:#f2f2f2;	
-	
-	
 }
 
