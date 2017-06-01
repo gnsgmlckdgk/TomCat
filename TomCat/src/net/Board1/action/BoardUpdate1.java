@@ -1,6 +1,5 @@
 package net.Board1.action;
 
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +14,11 @@ public class BoardUpdate1 implements Action1{
 		String pageNum = request.getParameter("pageNum");
 		
 		net.Board1.db.BoardDAO bdao = new net.Board1.db.BoardDAO();
+	
 		
 		net.Board1.db.BoardBean bb = bdao.getBoard(num);
+		
+		System.out.println(bb.getNum());
 		
 		request.setAttribute("bb", bb);
 		request.setAttribute("pageNum", pageNum);
