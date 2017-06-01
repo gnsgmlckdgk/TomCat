@@ -26,14 +26,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
-<!-- <style>
-	#images > div, #boards > div {float:left;width:100px;height:100px;border:1px solid #000;margin:5px;}
-	#images div img {width:100px;height:100px;}
-	#boards {clear:both;}
-	#boards > div {font-size:2em;line-height:100px;text-align:center;}
-</style> -->
-
 </head>
 <script >
 
@@ -64,6 +56,32 @@ $(document).ready(function(datelist){
 	});
 }); */
 
+if(document.test.planMaker.selectedIndex!=0){
+	alert("과목을 선택하세요");
+	document.test.se.focus();
+	return false;
+}//if
+
+</script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		//name:홍길동 age:21파라미터 넘겨서
+		//string2.jsp 결과처리 내용가져오기
+		$('#testPlanner').click(function(){
+			
+		$.ajax('myplanModify_selectBox.jsp',{
+			data:{name:'홍길동', age:21},
+			success:function(data){
+				//select 뒷부분 추가
+				alert("testtest");
+				$('#testsel').append(data);
+			}
+		});
+		
+		});
+	});
+
 </script>
 <body>
 	<%
@@ -73,10 +91,6 @@ $(document).ready(function(datelist){
 
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 		
-		String region = request.getParameter("region");
-		String city_code = (String) request.getAttribute("city_code");
-		
-
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
 		List datelist = (List)request.getAttribute("datelist");
@@ -91,9 +105,99 @@ $(document).ready(function(datelist){
     
 		%>
 
+</body>
+<div class="wrap">
+
+	<%if(plan_nr==1){%>일정A<%} %>
+    <%if(plan_nr==2){%>일정B<%} %>
+    <%if(plan_nr==3){%>일정C<%} %> 
+    
+<table border="1" class="tg" name="test">
+  <tr>
+    <th id="testPlanner" ><%=fromDate%></th>
+    <td>
+    
+  
+	    <select name="planMaker" >
+	    <option>---선택하세요---</option>
+	    <%
+	    	for (int i = 0; i < basketList.size(); i++) {
+	    		TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+	    %>
+	    	<option  value="<%=tb.getName()%>"><%=tb.getName()%></option>
+		<%}%>	
+		</select>
+		
+			
+    </td>
+    <td>	
+    </td>
+  </tr>
+  <%for(int j=0;j<datelist.size();j++){ %>
+  <tr>
+  	<th><%=datelist.get(j) %></th>
+    <td>
+      <select name="planMaker" >
+	    <option>---선택하세요---</option>
+	    <%
+	    	for (int i = 0; i < basketList.size(); i++) {
+	    		TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+	    %>
+	    	<option  value="<%=tb.getName()%>"><%=tb.getName()%></option>
+		<%}%>	
+		</select>
+    </td>
+    <td>
+    </td>
+  </tr>
+    <% } %>
+  <tr>
+  	<th><%=toDate%></th>
+    <td>
+      <select name="planMaker" >
+	    <option>---선택하세요---</option>
+	    <%
+	    	for (int i = 0; i < basketList.size(); i++) {
+	    		TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+	    %>
+	    	<option  value="<%=tb.getName()%>"><%=tb.getName()%></option>
+		<%}%>	
+		</select>
+    </td>
+    <td>
+    </td>
+  </tr>
+  
+  <tr><td colspan="7"><input type="submit" value="일정수정">
+		<input type="reset" value="다시등록"></td>
+	</tr>
+</table>
+
+<div id="testsel"></div>
+</div>
+
+
+<% 	
+for(int i=0;i<basketList.size();i++){
+	MyPlanBasketBean mpbb = (MyPlanBasketBean)basketList.get(i);
+	TravelBean tb=(TravelBean)goodsList.get(i);
+	if(mpbb.getId().equals(id)){
+	if(mpbb.getPlan_nr()== plan_nr){
+%>
+	<%
+}
+}
+}
+ 	%>
+
+
+
+		
 		<!-- <form action="./MyPlanModifyAction.pln" method="post" ></form> -->
 		<%-- <input type="text" name="plan_nr" value="<%=plan_nr%>"> --%>
-		<div class="wrap">
+		
+		
+<%-- 		<div class="wrap">
 			<div id="left_box1">
 				<!-- box1 -->
 				<ul id="left_box1_detail">
@@ -117,7 +221,7 @@ $(document).ready(function(datelist){
 				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->	
 				<ul id="left_box2_head">
 						<li><button style="border: 1px solid red;">경로최적화</button>
-						<button style="border: 1px solid red;">장소추가하기</button></li>
+						<button style="border: 1px solid red;">장소검색하기</button></li>
 				</ul>
 				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
 					<li>장소를 추가해 보세요~</li>
@@ -140,273 +244,14 @@ $(document).ready(function(datelist){
 			</ul>
 				
 			</div>
-			<div id="map" class="f1" ></div><!-- myplan.jsp 페이지에서 지도 code 가져옴,  수정예정   -->	
+			<!-- <div id="map" class="f1" ></div> -->
 		</div>
 		
 
-	
-<!-- <div id="images">
-	<div><img src="http://lorempixel.com/100/100/food" id="food"></div>
-	<div><img src="http://lorempixel.com/100/100/city" id="city"></div>
-	<div><img src="http://lorempixel.com/100/100/sports" id="sports"></div>
-	<div><img src="http://lorempixel.com/100/100/animals" id="animals"></div>
-</div>
-<div id="boards">
-	<div title="sports">sports</div>
-	<div title="food">food</div>
-	<div title="animals">animals</div>
-	<div title="city">city</div>
-</div>
-
-
-<script>
-	$(function(){
-		$("#images div img").draggable({
-			start: function(event,ui) {
-				$(this).draggable( "option", "revert", true );
-				$("#images div img").css("zIndex",10);
-				$(this).css("zIndex",100);
-			}
-		});
-		$("#boards div").droppable({
-			drop: function(event,ui) {
-				var droptitle = $(this).attr("title");
-				var drophtml = $(this).html();
-				var dragid = ui.draggable.attr("id");
-				if( dragid == droptitle ) {
-					ui.draggable.draggable( "option", "revert", false );
-					var droppableOffset = $(this).offset();
-					var x = droppableOffset.left + 1;
-					var y = droppableOffset.top + 1;
-					ui.draggable.offset({ top: y, left: x });
-				}
-			}
-		});
-	});
-	$(document).ready(function(){
-		$("#images div").sort(function(){
-			return Math.random()*10 > 5 ? 1 : -1;
-		}).each(function(){
-			$(this).appendTo( $(this).parent() );    
-		});
-		$("#boards div").sort(function(){
-			return Math.random()*10 > 5 ? 1 : -1;
-		}).each(function(){
-			$(this).appendTo( $(this).parent() );    
-		});
-	});
-</script>
-	 -->
+ --%>
 	
 	
-	
-	<script>
-      var map;
-
-      // Create a new blank array for all the listing markers.
-      var markers = [];
-      var tr_location =[];  
-      var tr_title =[];  
-      
-      
-      function initMap() {
-        // Create a styles array to use with the map.
-       
-        // Constructor creates a new map - only center and zoom are required.
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 35.096706, lng: 129.03049},
-          	zoom: 13,
-         	mapTypeControl: false
-        });
-
-       var largeInfowindow = new google.maps.InfoWindow();
-       var highlightedIcon = makeMarkerIcon('FFFF24');
-					       
-      					       
-          <%String MarkerColor;
-			String TitlePlan;
-			if (basketList.size() != 0) {
-
-				for (int i = 0; i < basketList.size(); i++) {
-					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-					TravelBean tb = (TravelBean) goodsList.get(i);
-					if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
-						continue;
-
-					switch (mpbb.getPlan_nr()) {
-						case 1 :
-							MarkerColor = "6799FF"; //light blue
-							TitlePlan = "A";
-							break;
-						case 2 :
-							MarkerColor = "F361DC"; //pink
-							TitlePlan = "B";
-							break;
-						case 3 :
-							MarkerColor = "8041D9"; //purple
-							TitlePlan = "C";
-							break;
-						case 4 :
-							MarkerColor = "47C83E"; //green
-							TitlePlan = "D";
-							break;
-						default :
-							MarkerColor = "F15F5F"; //red
-							TitlePlan = "E";
-							break;
-					}%>
-
-	        var defaultIcon = makeMarkerIcon('<%=MarkerColor%>');
-	    
-
-         	var lat = <%=tb.getLatitude()%>;
-	    	var lng = <%=tb.getLongitude()%>;
-	    	var position = new google.maps.LatLng(lat,lng); 
-
-	    	var title = '일정<%=TitlePlan%>-'+'<%=i + 1%>'+'번째 방문지: '+'<%=tb.getName()%>';
-			// Create a marker per location, and put into markers array.
-			var marker = new google.maps.Marker({
-				position : position,
-				title : title,
-				animation : google.maps.Animation.DROP,
-				icon : defaultIcon,
-				id :
-	<%=i%>
-		});
-
-			// Push the marker to our array of markers.
-			markers.push(marker);
-			// Create an onclick event to open the large infowindow at each marker.
-			marker.addListener('click', function() {
-				populateInfoWindow(this, largeInfowindow);
-			});
-	<%} //for문%>
-			showListings();
-			
-			 <%
-		      if(plan_nr!=100 & dep_lat!=null & dep_lng!=null & arr_lat!=null & arr_lng!=null){
-
-			 	String route_dep = dep_lat + ", " + dep_lng;
-			 	String route_arr= arr_lat + ", " + arr_lng;
-			 	%>
-			 	
-			 	
-			 var directionsService = new google.maps.DirectionsService; //필수
-		       var directionsDisplay = new google.maps.DirectionsRenderer({
-							           draggable: true,
-							           map: map,
-							           panel: document.getElementById('right-panel')
-							         });
-							        
-		     
-			 
-			 
-				 
-		       directionsDisplay.addListener('directions_changed', function() {
-		           computeTotalDistance(directionsDisplay.getDirections());
-		         });
-		       						displayRoute('<%=route_dep%>', '<%=route_arr%>', directionsService, directionsDisplay);
-
-							       function displayRoute(origin, destination, service, display) {
-							           service.route({
-							             origin: origin,
-							             destination: destination,
-							            // waypoints: [{location: '35.158408, 129.062038'}],
-							             travelMode: 'TRANSIT',
-							             avoidTolls: true
-							           }, function(response, status) {
-							             if (status === 'OK') {
-							               display.setDirections(response);
-							             } else {
-							               alert('Could not display directions due to: ' + status);
-							             }
-							           });
-							         }
-			
-			
-			
-			
-	<%} 
-			}//if 문%>
-		}//function initMap() 
-
-		// This function will loop through the markers array and display them all.
-
-		function showListings() {
-			var bounds = new google.maps.LatLngBounds();
-			for (var i = 0; i < markers.length; i++) {
-				markers[i].setMap(map);
-				bounds.extend(markers[i].position);
-			}
-			map.fitBounds(bounds);
-		}
-
-		function populateInfoWindow(marker, infowindow) {
-			// Check to make sure the infowindow is not already opened on this marker.
-			if (infowindow.marker != marker) {
-				// Clear the infowindow content to give the streetview time to load.
-				infowindow.setContent('');
-				infowindow.marker = marker;
-				// Make sure the marker property is cleared if the infowindow is closed.
-				infowindow.addListener('closeclick', function() {
-					infowindow.marker = null;
-				});
-				var streetViewService = new google.maps.StreetViewService();
-				var radius = 50;
-				// In case the status is OK, which means the pano was found, compute the
-				// position of the streetview image, then calculate the heading, then get a
-				// panorama from that and set the options
-				function getStreetView(data, status) {
-					if (status == google.maps.StreetViewStatus.OK) {
-						var nearStreetViewLocation = data.location.latLng;
-						var heading = google.maps.geometry.spherical
-								.computeHeading(nearStreetViewLocation,
-										marker.position);
-						infowindow.setContent('<div>' + marker.title
-								+ '</div><div id="pano"></div>');
-						var panoramaOptions = {
-							position : nearStreetViewLocation,
-							pov : {
-								heading : heading,
-								pitch : 30
-							}
-						};
-						var panorama = new google.maps.StreetViewPanorama(
-								document.getElementById('pano'),
-								panoramaOptions);
-					} else {
-						infowindow.setContent('<div>' + marker.title + '</div>'
-								+ '<div>No Street View Found</div>');
-					}
-				}
-				// Use streetview service to get the closest streetview image within
-				// 50 meters of the markers position
-				streetViewService.getPanoramaByLocation(marker.position,
-						radius, getStreetView);
-				// Open the infowindow on the correct marker.
-				infowindow.open(map, marker);
-			}
-		}
-
-		// This function takes in a COLOR, and then creates a new marker
-		// icon of that color. The icon will be 21 px wide by 34 high, have an origin
-		// of 0, 0 and be anchored at 10, 34).
-		function makeMarkerIcon(markerColor) {
-			var markerImage = new google.maps.MarkerImage(
-					'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'
-							+ markerColor + '|40|_|%E2%80%A2',
-					new google.maps.Size(21, 34), new google.maps.Point(0, 0),
-					new google.maps.Point(10, 34), new google.maps.Size(21, 34));
-			return markerImage;
-		}
-	</script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHAu8kwLgLcIk1oWIKpJhyOQQTK6RBLNI&v=3&callback=initMap">
-	</script>
-</body>
-
-<%-- 	
-		<table border="1" >
+	<%-- 		<table border="1" >
 					<tr>
 						<td>plan_nr</td>
 						<td>item_nr</td>
@@ -429,43 +274,8 @@ $(document).ready(function(datelist){
 						}
 					%>
 		</table> --%>
-<%-- <table border="1" class="tg" >
-	<%if(plan_nr==1){%>일정A<%} %>
-    <%if(plan_nr==2){%>일정B<%} %>
-    <%if(plan_nr==3){%>일정C<%} %> 
-	<% 	
-	for(int i=0;i<basketList.size();i++){
-	MyPlanBasketBean mpbb = (MyPlanBasketBean)basketList.get(i);
-	TravelBean tb=(TravelBean)goodsList.get(i);
-	if(mpbb.getId().equals(id)){
-	if(mpbb.getPlan_nr()== plan_nr){
-	%>
-  	<tr>
-    <th class="tg-031e" rowspan="2">
-   	<%=mpbb.getDay_nr()%>째날
-    </th>
-    <th class="tg-031e">낮</th>
-    <td class="tg-yw4l"></td>
-	<td class="tg-yw4l"></td>
-	<td class="tg-yw4l"></td>
-	<td class="tg-yw4l"></td>
-  	</tr>
- 	<tr>
- 	<th class="tg-yw4l">밤</th>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
-	<td class="tg-yw4l"></td>
-	<td class="tg-yw4l"></td>
-	</tr>
-	<tr><td colspan="7"><input type="submit" value="일정수정">
-	<input type="reset" value="다시등록"></td>
-	</tr>
- 	<%
-	}
-	}
-	}
-  	%>
-</table> --%>
+		
+		
 <div class="clear"></div>
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
