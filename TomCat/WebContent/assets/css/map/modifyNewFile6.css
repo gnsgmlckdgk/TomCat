@@ -63,7 +63,7 @@
 #left_box2 {
 	position: absolute;
 	z-index: 999;
-/* 	display : none; */
+ 	display : none;
 	left: 365px;	
 }
 

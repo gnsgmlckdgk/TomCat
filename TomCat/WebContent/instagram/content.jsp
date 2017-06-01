@@ -70,13 +70,13 @@ function func3(i){
 
 	%>
 	<section class="wrapper">
-	
-	<h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1>
+	<marquee behavior="scroll" width="500" scrollamount="2" scrolldelay="50"><h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1></marquee>
+
 	<table class="table1">
 		<tr>
-			<td colspan="2"><%=bb.getSubject()%></td>
-			<td><%=nick%></td>
-			<td><%=bb.getDate()%></td>
+			<td id="titlecolor" colspan="2"><%=bb.getSubject()%></td>
+			<td ><%=nick%></td>
+			<td id="datecolor"><%=bb.getDate()%></td>
 		</tr>
 		<tr>
 			<td colspan="4"><a href="./upload/<%=bb.getImage1()%>"><%=bb.getImage1()%></a></td>
@@ -96,20 +96,20 @@ function func3(i){
 		//로그인한 닉네임(세션값 닉네임)이랑 글쓴닉네임(boardContentAction 에서 받아온닉네임)이 같으면 글 수정및 삭제가가능해용
 		//BoardContentAction에서 받아온 닉네임.equals(세션값 닉네임)		
 		if(bb.getNick().equals(nick)){%>	
-	<input type="button" style="margin-left:50px;"
-	 value="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+	<input id="opacitynone" type="button" style="margin-left:50px;"
+	 value="글수정" title="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 		</td>
 		<td colspan="2">
 				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
 					<input type="hidden" value="<%=num%>" name="num"> 															
 					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
-					<input type="submit" value="글삭제">
+					<input id="opacitynone" type="submit" value="글삭제" title="글삭제">
 				</form>
-				</td>
+				</td>	
 
 		<%} %>
 <td colspan="4">
-	<input id="listbutton" type="button" value="글목록 "
+	<input id="listbutton" type="button" value="글목록 " title="글목록"
 		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">		
 	</td>		
 		</tr>		
@@ -185,13 +185,13 @@ function func3(i){
 <%
 //로그인닉넴이랑 댓글 쓴사람이 동일할때만 삭제, 수정 보이게 제어
 if(rb.getNick().equals(nick)){%>
-<input type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
+<input title="댓글삭제" type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
 <%int re_num=rb.getRe_num(); %>	
-<input type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
+<input title="댓글수정" type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
 <%}
 //로그인 되 있으면 대댓글 달수있게 제어, 대댓글 func1()누르면 맨 상단의 jQuery작동
-if(id!=null){%>
-<input type="button" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
+if(	id!=null){%>
+<input title="댓글의댓글" type="button" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
 <%} %>
 
 		</td>

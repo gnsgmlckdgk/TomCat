@@ -78,8 +78,10 @@
     <script>
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
+        slidesPerView: 'auto',
+        centeredSlides: true,
         paginationClickable: true,
-        spaceBetween: 30,
+        spaceBetween: 30
     });
     </script>
 	
@@ -104,7 +106,14 @@
 </section>
 
 <!-- Two 국가의 지역 리스트 -->
-<section id="nation_two" class="wrapper style2 special">
+<section class="two">
+	<div class="cityList">
+		<h2><%=nation%> 인기도시</h2>
+		<div class="cityListTable">	<!-- 도시 리스트 -->
+			<!-- 도시리스트 테이블 오는 자리 -->
+		</div>	<!-- "cityListTable" -->
+	</div>	<!-- "cityList" -->
+</section>
 
 <!-- Two 섹션 스크립트 -->
 <script type="text/javascript">
@@ -115,7 +124,7 @@ $(window).load(function() {
 		url: './plan/planNationCityList.jsp',
 		data : {nation:'<%=nation%>', pageNum:'1'},
 		success: function(data) {
-			$('.city_list_div').append(data);
+			$('.cityListTable').append(data);
 		},
 		error: function(xhr, status, error) {
 	        alert(error);
@@ -133,8 +142,8 @@ function cityListChange(pageNum) {
 			url: './plan/planNationCityList.jsp',
 			data : {nation:'<%=nation%>', pageNum: pageNum, search: search},
 			success: function(data) {
-				$('.city_list_div').empty();
-				$('.city_list_div').append(data);
+				$('.cityListTable').empty();
+				$('.cityListTable').append(data);
 			},
 			error: function(xhr, status, error) {
 				alert(error);
@@ -142,14 +151,6 @@ function cityListChange(pageNum) {
 		});
 }
 </script>
-	<div class="container">
-		<h2><%=nation%> 주요 도시</h2>
-		<hr>
-		<div class="city_list_div">	<!-- 도시 리스트 -->
-			<!-- 도시리스트 테이블 오는 자리 -->
-		</div>	<!-- city_list_div -->
-	</div>	<!-- container -->
-</section>
 
 
 <!-- Three -->

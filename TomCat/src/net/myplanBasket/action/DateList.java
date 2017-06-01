@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.mysql.fabric.xmlrpc.base.Array;
 
-public class test {
+public class DateList {
 
 	public List Date(String fromDate, String toDate) {
 			System.out.println("가나요?");

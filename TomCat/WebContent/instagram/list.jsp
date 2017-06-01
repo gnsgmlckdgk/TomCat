@@ -15,11 +15,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
-<section class="wrapper">
 <div id="top"></div>
+<section class="wrapper">
 
 <div id="combine">
 	<%	
@@ -73,7 +74,7 @@ if(id!=null){%>
 			<td id="titlecolor" colspan="4"><%=bb.getSubject() %>(댓글:<%=rdao.replyCount(bb.getNum()) %>)</td>
 			</tr>		
 			<tr><td id="nickname">닉네임:</td><td id="nickname"><%=bb.getNick()%></td>
-			<td>업로드날짜:</td><td><%=bb.getDate() %></td>
+			<td id="datecolor">업로드날짜:</td><td id="datecolor"><%=bb.getDate() %></td>
 			</tr>	
 			<tr>
 			<td colspan="4">
