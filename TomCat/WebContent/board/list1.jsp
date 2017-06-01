@@ -13,7 +13,7 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=4" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=12" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
@@ -22,7 +22,7 @@
 
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
-		<img src="./board/pl.png">
+		<img src="./board/rrr6.png">
 	</button>
 
 	<script type="text/javascript">

@@ -62,15 +62,16 @@
 	
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
-			<li><a href="./BoardList1.bb">함께해요</a></li>
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="./QandAList.qna">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
 			if(id==null){ %>
+				<li><a onclick="popupToggle()">함께해요</a></li>
 				<li><a onclick="popupToggle()">일정 관리</a></li>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
+					<li><a href="./BoardList1.bb?plan_nr=100">함께해요</a></li>
 					<li><a href="./MyPlan.pln?plan_nr=100">일정 관리</a></li>
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>
