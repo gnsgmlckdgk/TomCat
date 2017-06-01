@@ -16,7 +16,7 @@
 <jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/modifyNewFile6.css" />
+<link rel="stylesheet" href="assets/css/map/modifyNewFile7.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
@@ -27,28 +27,25 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
-
-
+<!-- <style>
+	#images > div, #boards > div {float:left;width:100px;height:100px;border:1px solid #000;margin:5px;}
+	#images div img {width:100px;height:100px;}
+	#boards {clear:both;}
+	#boards > div {font-size:2em;line-height:100px;text-align:center;}
+</style> -->
 
 </head>
 <script >
-/* $(function(){
-	$("#left_box1").click(function(){
-		var effect = 'slide';
-		var options ='left';
-		var duration = 500;
-		$('#left_box2').toggle(effect, options, duration);
-	}); 
-}); */ /* 사용안함  나중에 쓸일이 있을지 몰라 그대로 둠 */
 
 $(function(){
-	$("#left_box1").click(function(){
+	$("#left_box2").click(function(){
 		var effect = 'slide';
 		var options ='left';
 		var duration = 500;
-		$('#left_box2').toggle(effect, options, duration);
+		$('#right_box').toggle(effect, options, duration);
 	}); 
 });
+
 
 
 $( function() {
@@ -115,65 +112,91 @@ $(document).ready(function(datelist){
 			
 			
 			
+			
 			<div id="left_box2">
 				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->	
 				<ul id="left_box2_head">
-					<li class="date">
-						<!-- <button style="border: 1px solid red;">경로최적화</button>
-						<button style="border: 1px solid red;">장소추가하기</button> -->
-					</li>
-					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
+						<li><button style="border: 1px solid red;">경로최적화</button>
+						<button style="border: 1px solid red;">장소추가하기</button></li>
 				</ul>
 				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
-					<!-- <li>장소를 추가해 보세요~</li> -->
+					<li>장소를 추가해 보세요~</li>
+					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
+					 
+				</ul>
+			</div>	
+	
+			<!-- box3 도시 찜 버튼 -->
+			<div id="right_box">
+				 <ul id="right_box_detail">
 						<%
 						for (int i = 0; i < goodsList.size(); i++) {
 							TravelBean tb = (TravelBean) goodsList.get(i);
-							
 						%>
 						<li><%=tb.getName()%></li>
 						<%
 							}
 						%>
-				</ul>
-			</div>	
-			
-			
-			
-			
-			
-			
-			<!-- box3 도시 찜 버튼 -->
-			 <%-- <div id="right_box">
-				<ul id="right_box_detail">
-						<li>여행지 찜 목록</li>
-						<%
-						for (int i = 0; i < goodsList.size(); i++) {
-							TravelBean tb = (TravelBean) goodsList.get(i);
-						%>
-						<li><%=tb.getName()%><img src="myplan/spot_to_inspot_a.png"  onclick="javascript:isBasket()"></li>
-						<%
-							}
-						%>
-				</ul>	
-			</div> --%>
+			</ul>
+				
+			</div>
 			<div id="map" class="f1" ></div><!-- myplan.jsp 페이지에서 지도 code 가져옴,  수정예정   -->	
 		</div>
 		
-<!-- 	<script type="text/javascript">
-	function isBasket(){
-		var is=confirm("장바구니에 저장하시겠습니까?");
-		if(is==true){
-		document.gfr.action="./MyPlanBasketAdd.pln";
-		document.gfr.submit();
-		}else{
-			return;
-		}
-	}
-	</script> -->
+
 	
-	
-	
+<!-- <div id="images">
+	<div><img src="http://lorempixel.com/100/100/food" id="food"></div>
+	<div><img src="http://lorempixel.com/100/100/city" id="city"></div>
+	<div><img src="http://lorempixel.com/100/100/sports" id="sports"></div>
+	<div><img src="http://lorempixel.com/100/100/animals" id="animals"></div>
+</div>
+<div id="boards">
+	<div title="sports">sports</div>
+	<div title="food">food</div>
+	<div title="animals">animals</div>
+	<div title="city">city</div>
+</div>
+
+
+<script>
+	$(function(){
+		$("#images div img").draggable({
+			start: function(event,ui) {
+				$(this).draggable( "option", "revert", true );
+				$("#images div img").css("zIndex",10);
+				$(this).css("zIndex",100);
+			}
+		});
+		$("#boards div").droppable({
+			drop: function(event,ui) {
+				var droptitle = $(this).attr("title");
+				var drophtml = $(this).html();
+				var dragid = ui.draggable.attr("id");
+				if( dragid == droptitle ) {
+					ui.draggable.draggable( "option", "revert", false );
+					var droppableOffset = $(this).offset();
+					var x = droppableOffset.left + 1;
+					var y = droppableOffset.top + 1;
+					ui.draggable.offset({ top: y, left: x });
+				}
+			}
+		});
+	});
+	$(document).ready(function(){
+		$("#images div").sort(function(){
+			return Math.random()*10 > 5 ? 1 : -1;
+		}).each(function(){
+			$(this).appendTo( $(this).parent() );    
+		});
+		$("#boards div").sort(function(){
+			return Math.random()*10 > 5 ? 1 : -1;
+		}).each(function(){
+			$(this).appendTo( $(this).parent() );    
+		});
+	});
+</script>
+	 -->
 	
 	
 	
