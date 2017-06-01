@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <!-- Header -->
+<jsp:include page="../inc/header.jsp" />
+<section class="wrapper" style="padding:0 ;">
+<!-- Header ph -->
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,8 +20,6 @@ String pageNum=request.getParameter("pageNum");
 
 
 %>
-<h1>WebContent/board/deleteForm.jsp</h1>
-<h1>게시판 글삭제</h1>
 <form action="./BoardDelete1.bb?pageNum=<%=pageNum %>" method="post" name="fr">
 <input type="hidden" name="num" value="<%=num%>">
 비밀번호:<input type="password" name="pass"><br>
@@ -23,4 +27,4 @@ String pageNum=request.getParameter("pageNum");
 </form>
 </body>
 </html>
-
+<!-- Footer --> <jsp:include page="../inc/footer.jsp" />

@@ -13,7 +13,7 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=12" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=121" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
@@ -146,6 +146,8 @@
 <%-- 					현재 위치 <%=bb.getLocation() %> --%>
 				</div>
 
+<!-- 					<div class="clear"> -->
+					
 				<div id="2_inner_left" style="width: 30%;">
 					<!-- 프로필 -->
 					<div id="file">
@@ -205,14 +207,19 @@
 			
 					
 				</div>
-
-
-			</div>
-			
+<div class="upde">				
+<input type="button" value="글수정"
+onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
+<input type="button" value="글삭제"
+onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
+</div>
+				
 			<div class="t">
 			qe
 			</div>
-			
+
+			</div>
+
 			
 	<script type="text/javascript"> 
 // 		댓글 기능(->슬라이드)
@@ -284,4 +291,3 @@ $(document).ready(function (event){
 
  		</script>
 		<%} %>
-		
