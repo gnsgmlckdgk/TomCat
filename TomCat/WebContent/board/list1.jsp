@@ -13,16 +13,16 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=798" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=12" rel="stylesheet" type="text/css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body class="fadein">
 
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
-		<img src="./board/pl.png">
+		<img src="./board/rrr6.png">
 	</button>
 
 	<script type="text/javascript">
@@ -111,7 +111,7 @@
 		
 		<form method="post" action="./BoardWrite1.bb" class="write">
 			<input type="hidden" id="location" name="location" value="aaa">
-			<input type="submit" value="글쓰기">
+			<input type="submit" value="글쓰기"  id="mit">
 		</form>
 		<%} %>
 		
@@ -209,21 +209,26 @@
 
 			</div>
 			
+			<div class="t">
+			qe
+			</div>
+			
+			
 	<script type="text/javascript"> 
-		//댓글 기능(->슬라이드)
-// 		 $(function(){
-// 			$(".btn").click(function(){
-// 				var effect = 'slide';
-// 				var options ='left';
-// 				var duration = 500;
-// 			$('#pln_list').toggle(effect, options, duration);
-// 			}); 
-// 		});  
-// 		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
-//  		 $(function(){
-// 			 //datepicker 한국어로 사용하기 위한 언어설정
-// 		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
-// 		 });
+// 		댓글 기능(->슬라이드)
+		 $(function(){
+			$(".btn").click(function(){
+				var effect = 'slide';
+				var options ='left';
+				var duration = 500;
+			$('#pln_list').toggle(effect, options, duration);
+			}); 
+		});  
+		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+ 		 $(function(){
+			 //datepicker 한국어로 사용하기 위한 언어설정
+		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+		 });
 		</script>
  
 			<%
@@ -247,21 +252,14 @@ $(document).ready(function (event){
 		var documentHeight = $(document).height();
 
 		// 스크롤이 맨 아래로 갔는지 아닌지 확인
-		if(scrollHeight == documentHeight)
-		{
-			for(var i=0; i<10; i++)
-			{
+		if(scrollHeight == documentHeight){
+			for(var i=0; i<5; i++){
 				$('<h1>scroll2_'+i+'_</h1>').appendTo('body');
 			}
 		}
 	});
 });
 
-$(document).ready(function(){
-	for(var i=0; i<20; i++){
-		$('<h1>scroll_'+i+'_</h1>').appendTo('body');
-	}
-});
 </script>
 
 </body>
