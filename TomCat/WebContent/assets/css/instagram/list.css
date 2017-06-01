@@ -153,11 +153,10 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 0%{opacity:0.0}
 100%{opacity:1.0;}
 }
-<<<<<<< HEAD
-=======
 
 #paddingnone{
-	padding:0px;		
+	padding:0;
+	height:2px;		
 }
 #titlecolor{
 	color:black;
@@ -168,5 +167,3 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 #darkgrey{
 	background-color:#e6e6e6;
 }
-
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
