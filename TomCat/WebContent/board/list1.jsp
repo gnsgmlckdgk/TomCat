@@ -13,7 +13,7 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=78" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=48" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
@@ -209,21 +209,26 @@
 
 			</div>
 			
+			<div class="t">
+			qe
+			</div>
+			
+			
 	<script type="text/javascript"> 
-		//댓글 기능(->슬라이드)
-// 		 $(function(){
-// 			$(".btn").click(function(){
-// 				var effect = 'slide';
-// 				var options ='left';
-// 				var duration = 500;
-// 			$('#pln_list').toggle(effect, options, duration);
-// 			}); 
-// 		});  
-// 		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
-//  		 $(function(){
-// 			 //datepicker 한국어로 사용하기 위한 언어설정
-// 		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
-// 		 });
+// 		댓글 기능(->슬라이드)
+		 $(function(){
+			$(".btn").click(function(){
+				var effect = 'slide';
+				var options ='left';
+				var duration = 500;
+			$('#pln_list').toggle(effect, options, duration);
+			}); 
+		});  
+		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+ 		 $(function(){
+			 //datepicker 한국어로 사용하기 위한 언어설정
+		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+		 });
 		</script>
  
 			<%

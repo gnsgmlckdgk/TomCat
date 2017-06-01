@@ -187,3 +187,12 @@ to {
 	background-color:#4e4b56;
 	
 }
+
+.t{
+	border: 2px solid red;
+	margin-left: 800px;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 400px;
+/* 	display: none; */
+}

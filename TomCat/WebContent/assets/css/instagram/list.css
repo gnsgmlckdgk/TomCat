@@ -1,27 +1,28 @@
 @CHARSET "UTF-8";
 
 .wrapper {
-	background-image: url("../instagram/bridge.png");	
-		background-attachment: fixed;
-/* 		background-color:pink; */
-		background-position: center top;
-		background-size: cover;
-		line-height: 1.75;
-		text-align: center;
+	background-image: url("../../../images/instagram/goldengate.jpg");
+	background-attachment: fixed;
+	/* 		background-color:pink; */
+	background-position: center top;
+	background-size: cover;
+	line-height: 1.75;
+	text-align: center;
 }
 
-#border {
-	text-align:center;
+#table1 {
+	text-align: center;
 	width: 30em;
 	margin: auto;
 	background-color: white;
-/* 	opacity: 0.85; */
-	border-radius: 20px;
+	/* 	opacity: 0.85; */
+	border-radius: 0 0 20px 20px;
 }
-#contentimg{
-	margin:auto;
-	
+
+#contentimg {
+	margin: auto;
 }
+
 #like {
 	background-color: #ff6699;
 }
@@ -31,10 +32,10 @@
 }
 
 .button {
-	width: 48em;
+	width: 30em;
 	background-color: #ff6699;
 	opacity: 0.85;
-	border-radius: 20px;
+	border-radius: 20px 20px 0 0;
 }
 
 .button:hover {
@@ -46,48 +47,65 @@
 }
 
 .banner {
-	width: 10em;
+	color:black;
+	text-decoration:blink;
+	font-weight:bolder;
+	width: 6em;
+	height: 4em;
 	background-color: white;
-	opacity: 0.8;
+	opacity: 0.9;
 	position: fixed;
-	left: 30px;
-	top: 330px;
-	border: none;
+	left: 25em;
+	top: 25em;
 	border-collapse: none;
 	border: none;
 }
 
 img#up {
+	width: 4em;
+	height: 4em;
 	position: fixed;
+	opacity : 0.5;
+	right: 35em;
+	top: 30em;
 	opacity: 0.5;
-	
-	right: 30px;
-	top: 330px;
+	opacity: 0.5
 }
 
 img#down {
+	width: 4em;
+	height: 4em;
 	opacity: 0.5;
-	
 	position: fixed;
-	right: 30px;
-	top: 450px;
+	right: 35em;
+	top: 35em;
 }
 
+img#up:HOVER {
+	opacity: 1;
+}
+
+img#down:HOVER {
+	opacity: 1;
+}
 
 #listpage {
 	text-align: center;
 	font-size: 1.5em;
 }
 
-
-
-
-
+#combine {
+	position: relative;
+	margin: 0 auto;
+	width: 80%;
+}
 
 img#crown{
+width:4em;
+height:4em;
 position: fixed;
-left: 30px;
-top: 230px;	
+left: 25em;
+top: 20em; 
 animation-name:movingcrown; /*애니메이션의 이름 지정*/
 animation-duration:1s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -95,34 +113,49 @@ animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반�
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
 
-img#crown:HOVER{
-animation-play-state:paused;
-
+img#crown:HOVER {
+	animation-play-state: paused;
 }
 
-@keyframes movingcrown{
+@
+keyframes movingcrown {
 0%{
-	left: 30px;
-	top: 230px;
+left: 30px;
+top: 230px;
 }
 25%{
-	left: 90px;
-	top: 180px;
+left:90px;
+top:180px;
 }
-
 50%{
-	left: 150px;
-	top: 230px;
+left:150px;
+top:230px;
 }
 75%{
 opacity:0.5;
-	left: 210px;
-	top: 180px;
+left:210px;
+top:180px;
 }
-
 100%{
 opacity:0.8;
-	left: 300px;
-	top: 230px;
+left:300px;
+top:230px;
 }
 }
+<<<<<<< HEAD
+=======
+
+#paddingnone{
+	padding:0px;		
+}
+#titlecolor{
+	color:black;
+	font-weight:bolder;
+	background-color: #cccccc;
+}
+
+#nickname{
+	background-color:#e6e6e6;
+}
+
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
