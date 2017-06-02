@@ -379,8 +379,8 @@ public class PlanCommentDAO {
 		}
 	
 		/*관광지*/
-		// 리뷰 작성(관광지)
-		public void insertSpotComment(PlanSpotCommentBean pscb) {
+		// 리뷰 작성(관광지) : PlanSpotCommentBean 오류떠서 주석해놓음... 수정하는분 조치바람...
+		/*public void insertSpotComment(PlanSpotCommentBean pscb) {
 
 			int num = 0;
 			int spot_num = 0;
@@ -437,7 +437,7 @@ public class PlanCommentDAO {
 					e.printStackTrace();
 				}
 			}
-		}
+		}*/
 		
 
 }
