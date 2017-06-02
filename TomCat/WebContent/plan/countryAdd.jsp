@@ -61,13 +61,13 @@
 		</select>
 		
 		<span class="countryt">국가 코드</span>
-		<input type="text" name="country_code">
+		<input type="text" name="country_code" required="required">
 		
 		<span class="countryt">국가 이름</span>
-		<input type="text" name="name">
+		<input type="text" name="name" required="required">
 		
 		<span class="countryt">국가 영어이름</span>
-		<input type="text" name="en_name">
+		<input type="text" name="en_name"required="required">
 		
 		<span class="countryt">정보</span>
 		<textarea rows="10" cols="20" name="info"></textarea>

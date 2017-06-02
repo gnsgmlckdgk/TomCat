@@ -92,13 +92,18 @@ div.travelList h2 {	/* 제목 */
 	margin: 0;
 	padding-top: 30px ;
 }
-
+div.travelList .checkbox {	/* 체크박스 */
+	float: left;
+	width: 300px;
+	height: 30px;
+}
 div.travelList .search_div {	/* 검색 DIV */
 	width: 360px;
 	float: right;
 	position: relative;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	margin-top: -10px;
 }
 div.travelList .search_div #search {
 	width: 290px;
@@ -128,7 +133,7 @@ div.travelList div.travelListTable tr {
 }
 div.travelList div.travelListTable tr:hover {
 	cursor: pointer;
-	border: 1px solid #0054FF;
+	border: 1px solid #1a7ad9;
 }
 div.travelList div.travelListTable td.img_td {	/* 관광지 이미지 */
 	background-color: #fff;
@@ -142,11 +147,22 @@ div.travelList div.travelListTable td.txt_td {	/* 관광지 소개 */
 	width: 820px;
 	padding: 10px 30px 10px 20px;
 }
-div.travelList div.travelListTable td .travel_name {
+div.travelList div.travelListTable td .travel_name {	/* 관광지 이름 */
+	color: #1a7ad9;
 	font-size: 16px;
 	font-weight: 900;
 }
-
+div.travelList div.travelListTable td .zzim {	/* 찜 버튼 */
+	display: inline-block;
+	font-size: 12px;
+	padding: 0 10px;
+	float: right;
+}
+div.travelList div.travelListTable .travel_info {
+	text-indent: 5px;
+	font-size: 12px;
+	line-height: 15px;
+}
 
 
 div.travelList div.travelListTable .page {	/* 페이징 */

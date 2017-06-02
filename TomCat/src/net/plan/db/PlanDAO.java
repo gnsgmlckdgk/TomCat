@@ -1518,8 +1518,8 @@ public class PlanDAO {
 			pstmt.setString(5, pcb.getEn_name());
 
 			pstmt.executeUpdate();
-
-		} catch (Exception e) {
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 
 		} finally {

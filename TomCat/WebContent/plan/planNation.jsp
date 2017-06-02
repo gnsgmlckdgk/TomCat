@@ -123,7 +123,7 @@
 <!-- Two 국가의 지역 리스트 -->
 <section class="two">
 	<div class="cityList">
-		<h2><%=nation%> 인기도시</h2><hr>
+		<h2 name="loc1" id="loc1"><%=nation%> 인기도시</h2><hr>
 		<div class="cityListTable">	<!-- 도시 리스트 -->
 			<!-- 도시리스트 테이블 오는 자리 -->
 		</div>	<!-- "cityListTable" -->
@@ -164,6 +164,7 @@ function cityListChange(pageNum) {
 				alert(error);
 		    }   
 		});
+		location.href="#loc1";
 }
 
 /* 맵의 세로 크기를 정보테이블의 크기에 따라 변경 */
@@ -217,7 +218,7 @@ $(document).ready(function(){
 <section class="four">
 	
 	<div class="comment">
-	<h2><%=nation %> 커뮤니티</h2>
+	<h2 name="loc2" id="loc2"><%=nation %> 커뮤니티</h2>
 		<div class="review_list">
 			<!-- 리뷰 리스트 오는 자리 -->
 			<!-- 페이지 번호 오는 자리 -->
@@ -349,6 +350,8 @@ $(document).ready(function(){
 					alert(error);
 			    }
 			});
+			
+			location.href="#loc2";
 		}
 		
 		/* 리뷰 삭제하기 */

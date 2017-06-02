@@ -31,12 +31,16 @@ public class CityUpdateAction implements Action{
 		String beforeCityCode = multi.getParameter("city_code");	// 이전 도시코드
 		String beforeEnName = multi.getParameter("before_en_name");	// 이전 도시영어이름
 		
+		// info 개행 처리
+		String content = multi.getParameter("info");
+		content = content.replaceAll("\n", "<br>");
+		
 		PlanCityBean pcb =  new PlanCityBean();
 		pcb.setCity_code(multi.getParameter("en_name"));
 		pcb.setCountry_code(multi.getParameter("country_code"));
 		pcb.setName(multi.getParameter("name"));
 		pcb.setEn_name(multi.getParameter("en_name"));
-		pcb.setInfo(multi.getParameter("info"));
+		pcb.setInfo(content);
 		
 		// 이미지 작업
 		ImagesDAO idao = new ImagesDAO();

@@ -143,7 +143,7 @@
 <section class="two">
 	<!-- container -->
 	<div class="travelList">
-		<h2><%=region%> 인기 장소 </h2><hr>
+		<h2 name="loc1" id="loc1"><%=region%> 인기 장소 </h2><hr>
 
 		<!-- checkbox -->
 		<div class="checkbox" onchange="checkbox_change()">
@@ -199,8 +199,8 @@
 				url: './plan/planRegionList.jsp',
 				data : {region:'<%=region%>', pageNum: '1', search: $checkbox, city_code:'<%=city_code%>'},
 				success: function(data) {
-					$('.region_list_div').empty();
-					$('.region_list_div').append(data);
+					$('.travelListTable').empty();
+					$('.travelListTable').append(data);
 				},
 				error: function(xhr, status, error) {
 					alert(error);
@@ -211,7 +211,7 @@
 
 		// 페이지 번호를 눌렸을때 그에 맞는 게시글을 불러옴
 		function regionListChange(pageNum) {
-	
+			
 			var search = $('#search').val();
 	
 			$.ajax({
@@ -219,13 +219,14 @@
 				url: './plan/planRegionList.jsp',
 				data : {region:'<%=region%>', pageNum: pageNum, search: search, city_code:'<%=city_code%>'},
 				success : function(data) {
-					$('.region_list_div').empty();
-					$('.region_list_div').append(data);
+					$('.travelListTable').empty();
+					$('.travelListTable').append(data);
 				},
 				error : function(xhr, status, error) {
 					alert(error);
 				}
 			});
+			location.href="#loc1";
 		}
 
 		//찜 버튼 누르면 내 일정에 담김.
@@ -299,7 +300,7 @@
 <section class="four">
 	
 	<div class="comment">
-	<h2><%=region %> 커뮤니티</h2>
+	<h2 name="loc2" id="loc2"><%=region %> 커뮤니티</h2>
 		<div class="review_list">
 			<!-- 리뷰 리스트 오는 자리 -->
 			<!-- 페이지 번호 오는 자리 -->
@@ -431,6 +432,8 @@
 					alert(error);
 			    }
 			});
+			
+			location.href="#loc2";
 		}
 		
 		/* 리뷰 삭제하기 */

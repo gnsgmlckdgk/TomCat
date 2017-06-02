@@ -21,11 +21,15 @@ public class CountryAddAction implements Action {
 
 		PlanCountryBean pcb = new PlanCountryBean();
 
+		// info 개행 처리
+		String content = request.getParameter("info");
+		content = content.replaceAll("\n", "<br>");
+		
 		pcb.setContinent(request.getParameter("continent"));
 		pcb.setCountry_code(request.getParameter("country_code"));
 		pcb.setName(request.getParameter("name"));
 		pcb.setEn_name(request.getParameter("en_name"));
-		pcb.setInfo(request.getParameter("info"));
+		pcb.setInfo(content);
 
 		PlanDAO pdao = new PlanDAO();
 

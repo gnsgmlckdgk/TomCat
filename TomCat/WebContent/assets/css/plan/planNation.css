@@ -130,7 +130,7 @@ div.cityList div.cityListTable tr {
 }
 div.cityList div.cityListTable tr:hover {
 	cursor: pointer;
-	border: 1px solid #0054FF;
+	border: 1px solid #1a7ad9;
 }
 div.cityList div.cityListTable td.img_td {	/* 도시 이미지 */
 	background-color: #fff;
@@ -144,7 +144,8 @@ div.cityList div.cityListTable td.txt_td {	/* 도시 소개 */
 	width: 820px;
 	padding: 10px 30px 10px 20px;
 }
-div.cityList div.cityListTable td .city_name {
+div.cityList div.cityListTable td .city_name {	/* 도시 이름 */
+	color: #1a7ad9;
 	font-size: 16px;
 	font-weight: 900;
 }
@@ -154,6 +155,8 @@ div.cityList div.cityListTable td .city_enName {
 }
 div.cityList div.cityListTable td .city_info {
 	text-indent: 5px;
+	font-size: 12px;
+	line-height: 15px;
 }
 div.cityList div.cityListTable .page {	/* 페이징 */
 	font-size: 16px;
