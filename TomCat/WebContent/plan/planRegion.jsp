@@ -1,9 +1,17 @@
+<%@page import="net.images.db.ImagesBean"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="net.plan.db.PlanTravelBean"%>
 
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<html>
+<head>
+   	
+   	<!-- Link Swiper's CSS 슬라이드 -->
+    <link rel="stylesheet" href="./assets/dist/css/swiper.min.css">
+    
+</head>	
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <!-- Banner -->
@@ -18,56 +26,124 @@
 	int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 
-
-
 <!-- One 지역명 및 설명-->
 <%if(second==3) {%>
-<section id="banner" class="resion_one b_back<%=second%>">
+<section id="banner" class="region_one b_back<%=second%>">
 <%} else if(second==2) {%>
-<section id="banner" class="resion_one b_back<%=second%>">
+<section id="banner" class="region_one b_back<%=second%>">
 <%} else if(second==1) {%>
-<section id="banner" class="resion_one b_back<%=second%>">
+<section id="banner" class="region_one b_back<%=second%>">
 <%} else { %>
-<section id="banner" class="resion_one b_back">
+<section id="banner" class="region_one b_back">
 <%} %>
 
+	<h2><%=region%></h2>
 
+	<div class="region_info_content">
+	<!-- 국가의 도시들의 이미지 슬라이드 -->
+	<!-- Swiper -->
+    <%
+    // 도시 이미지 리스트
+    List<ImagesBean> travelImgList = null;
+    travelImgList = (List)request.getAttribute("travelImgList");
+    %>
+    <div class="swiper-container slideContainer imgSlide">
+        <div class="swiper-wrapper">
+    <%
+    ImagesBean ib = null;
+    if(travelImgList.size()>0) {
+    	for(int i=0; i<travelImgList.size(); i++) {
+    		ib = travelImgList.get(i);
+    		%>
+    		<div class="swiper-slide"><img src="./images/plan/nation/<%=ib.getFile()%>"></div>
+    		<%
+    	}
+    }else {
+    	%>
+    		<div class="swiper-slide" style="color: #fff;">이미지 정보가 없습니다.</div>
+    	<%
+    }
+    %>    
+     </div>	<!-- swiper-wrapper 끝 -->
+        <!-- Add Pagination -->
+        <div class="swiper-pagination" style="color: #fff; font-weight: 900;"></div>
+        
+         <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> 
 
-	<div class="container 75% resion_info_content" style="min-height: 0;">
-		<div class="row 200%">
-			<div class="6u 12u$(medium)">
-
-				<div class="resion_info">
-					<h2><%=region%></h2>
-					<!-- 지역 정보 -->
-					<%
-						StringBuffer region_info = (StringBuffer) request.getAttribute("region_info");
-					%>
-					<%=region_info.toString()%>
-				</div>
-			</div>
-			<div class="6u$ 12u$(medium)">
-				<!-- 수현씨 지도 부분 -->
-				<iframe width="100%" height="450" frameborder="0" style="border: 0; min-width: 280px;"
-					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>" allowfullscreen>
-				</iframe>
-			</div>
-			<!-- 수현씨 지도 부분 끝 -->
-
-		</div>
-	</div>	
+    </div>	<!-- slideContainer -->
+    
+    	
+    <!-- Swiper JS -->
+    <script src="./assets/dist/js/swiper.min.js"></script> 
+    
+    <!-- Initialize Swiper -->
+     <script>
+     
+     $(document).ready(function(){
+    	 var swiper = new Swiper('.swiper-container', {
+    	        pagination: '.swiper-pagination',
+    	        nextButton: '.swiper-button-next',
+    	        prevButton: '.swiper-button-prev',
+    	        effect: 'coverflow',
+    	        grabCursor: true,
+    	        centeredSlides: true,
+    	        slidesPerView: 'auto',
+    	        paginationType: 'fraction',
+    	        coverflow: {
+    	            rotate: 50,
+    	            stretch: 0,
+    	            depth: 100,
+    	            modifier: 1,
+    	            slideShadows : true
+    	        },
+    	        autoplay: 2500,
+    	        autoplayDisableOnInteraction: false
+    	    });
+     });
+    </script>
+       
+	</div>
+		
 </section>
 
+<section class="info">
+		<!-- 국가 정보 -->
+	<div class="region_info_content">
+	<div class="region_info">
+	<!-- 지도 -->
+	<div class="map">
+			<!-- 수현씨 지도 부분 -->
+			<iframe width="100%" height="100%" frameborder="0" style="border: 0;"
+				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>" allowfullscreen>
+			</iframe>
+		</div>
+		<!-- 수현씨 지도 부분 끝 -->
+	<!-- 지역 정보 -->
+	<%
+		StringBuffer region_info = (StringBuffer) request.getAttribute("region_info");
+	%>
+	<%=region_info.toString()%>
+	</div>
+	<div class="clear"></div>
+</div>	<!-- region_info_content -->
+</section>
+
+<script type="text/javascript">
+	/* 맵의 세로 크기를 정보테이블의 크기에 따라 변경 */
+	$(document).ready(function(){
+		var infoTableHeight = $('.region_info table').css('height');
+		$('.region_info .map').css('height', infoTableHeight);
+	});
+</script>
 
 <!-- Two -->
 <!-- 지역 리스트 -->
-<section id="nation_two" class="wrapper style2 special" style="max-width: 1080px; margin: auto;">
-
+<section class="two">
 	<!-- container -->
-	<div class="container">
-		<h2><%=region%> 주요 지역 </h2>
-		
-		<hr style="max-width: 1080px;">
+	<div class="travelList">
+		<h2><%=region%> 인기 장소 </h2><hr>
 
 		<!-- checkbox -->
 		<div class="checkbox" onchange="checkbox_change()">
@@ -77,11 +153,10 @@
 		</div>
 		<!--end checkbox -->
 
-		<!-- 도시리스트 테이블 오는 자리 -->
-		<div class="region_list_div"></div>
-		<!-- region_list_div -->
-	</div>
-	<!-- container end-->
+		<!-- 관광지 리스트 테이블 오는 자리 -->
+		<div class="travelListTable"></div>
+		
+	</div>	<!-- travelList 끝 -->
 
 
 	<!-- Two 섹션 스크립트 -->
@@ -93,7 +168,7 @@
 				url: './plan/planRegionList.jsp',
 				data : {region:'<%=region%>', pageNum:'1', city_code:'<%=city_code%>'},
 				success: function(data) {
-					$('.region_list_div').append(data);
+					$('.travelListTable').append(data);
 				},
 				error: function(xhr, status, error) {
         			alert(error);
@@ -189,7 +264,6 @@
 <!-- 지역 리스트 끝-->
 
 <div class="clear" style="clear: both;"></div>
-
 
 <!-- Three -->
 <section id="three" class="wrapper style1">
@@ -386,4 +460,3 @@
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
-

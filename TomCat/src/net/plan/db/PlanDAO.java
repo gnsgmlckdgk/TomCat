@@ -1020,6 +1020,7 @@ public class PlanDAO {
 
 	}
 
+	// 국가코드 구하기
 	public String getCountyCode(String nation) {
 		PlanCountryBean pcb = null;
 		Connection con = null;
@@ -1056,6 +1057,45 @@ public class PlanDAO {
 		}
 		return country_code;
 	}
+	
+	// 도시코드 구하기
+	public String getCityCode(String region) {
+		PlanCountryBean pcb = null;
+		Connection con = null;
+	
+		String city_code = "";
+
+		try {
+			con = getConnection();
+			sql = "select city_code from city where name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, region);
+
+			rs = pstmt.executeQuery();
+	
+			if (rs.next()) {
+				city_code = rs.getString("city_code");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+
+		} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return city_code;
+	}
+
 
 	/* 수정할 국가 가져오기(운영자 페이지) */
 	public PlanCountryBean getCountry(String country_code) {

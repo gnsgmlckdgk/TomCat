@@ -3,24 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/writeForm.css"/>	
+<link rel="stylesheet" href="./assets/css/QandA/QandAadvertise.css"/>	
 
-
-	<%
-// 	인생샷그램 글쓰는곳
-	String nick = (String)session.getAttribute("nick");	// 닉네임
-	%>	
-	<div id="combine">
 	
-		<form action="QandAWriteAction.qna" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
-<!-- 		닉네임 세션값 생성해서 readonly로 설정하기 -->
-<br> 
-		글쓴이:<input type="text" name="nick" value=<%=nick %> readonly><br>		
-		제목:<input type="text" name="subject"><br>
-		내용:<textarea rows="5" cols="20" name="content"></textarea><br>
-		<input type="file" name="image1"><br><br>	
+	<div id="combine">
+		<h2>광고 및 제휴</h2>
+	<h1>저희는 다양한 제휴·협력을 환영합니다.</h1>
+		<form action="#" method="post" name="fr">
+<br> 	
+		회사명(성명):<input type="text" name="nick" value=""><br>		
+		(이메일 주소):<input type="text" name="subject"><br>
+		문의내용:<textarea rows="5" cols="20" name="content"></textarea><br>
 		<input id="submit" type="submit" value="글쓰기"><br> 
 	</form>
+
 
 <table id="banner">
 <tr><td><a href="./QandACompanyIntro.qna">회사소개</a></td></tr>

@@ -7,7 +7,7 @@
 <!-- http://www.elandmall.com/main/initMain.action -->
 
 <!-- Footer -->
-<footer id="footer">
+<footer id="footer" style="background-color: navy;">
 
 	<nav class="copyright">
 		<ul>

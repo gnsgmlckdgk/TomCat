@@ -31,24 +31,25 @@ content=qb.getContent().replace("\r\n","<br>");
 
 %>
 
-<h1>Q&A</h1>
+<div id="combine">
+<h1 id="h1">Q&A</h1>
 
-<table>
-<tr><td><%=qb.getSubject() %></td><td><%=qb.getNick() %></td><td><%=qb.getDate() %></td></tr>
+<table id="table1">
+<tr><td><%=qb.getNick() %></td><td><%=qb.getSubject() %></td><td><%=qb.getDate() %></td></tr>
 <tr><td colspan="3"><%=qb.getContent() %></td></tr>
 <tr><td colspan="3">
 		<%if(qb.getNick().equals(nick)){%>	
-	<input type="button" value="글수정" onclick="location.href='./QandAUpdate.qna?num=<%=qb.getNum()%>&pageNum=<%=pageNum%>'">
+	<input id="txt" type="button" value="글수정" onclick="location.href='./QandAUpdate.qna?num=<%=qb.getNum()%>&pageNum=<%=pageNum%>'">
 				<form action="./QandADeleteAction.qna" method="post" name="fr" onclick="func1()">					
 					<input type="hidden" value="<%=num%>" name="num"> 															
 					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
-					<input type="submit" value="글삭제">
+					<input id="txt" type="submit" value="글삭제">
 				</form>
 <%} %>
-<input id="listbutton" type="button" value="글목록 " onclick="location.href='./QandAList.qna?pageNum=<%=pageNum%>'">		
+<input id="txt" type="button" value="글목록 " onclick="location.href='./QandAList.qna?pageNum=<%=pageNum%>'">		
 		<%if(nick!=null){%>	
 
-<input type="button" value="답글" 
+<input id="txt" type="button" value="답글" 
 onclick="location.href='./QandAReplyWrite.qna?pageNum=<%=pageNum%>&num=<%=num%>&re_ref=<%=qb.getRe_ref()%>&re_lev=<%=qb.getRe_lev()%>&re_seq=<%=qb.getRe_seq()%>'">
 
 <%
@@ -58,5 +59,17 @@ System.out.println("ref의 값"+qb.getRe_ref());
 </td></tr>
 </table>
 	
+<table id="banner">
+<tr><td><a href="./QandACompanyIntro.qna">회사소개</a></td></tr>
+<tr><td id="darker"><a href="./QandAHowToUse.qna">이용방법</a></td></tr>
+<tr><td><a href="./QandAadvertise.qna">광고 및 제휴</a></td></tr>
+<tr><td id="darker"><a href="./QandAcondition.qna">이용약관</a></td></tr>
+<tr><td><a href="./QandAprivacy.qna">개인정보 취급 방침</a></td></tr>
+<tr><td id="darker"><a href="./QandAWrite.qna">문의하기</a></td></tr>
+<tr><td><a href="./Memberintro.qna">운영진소개</a></td></tr>
+<tr><td id="darkerlast"><a href="./QandAList.qna">목록으로</a></td></tr>
+
+</table>
+</div>	
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

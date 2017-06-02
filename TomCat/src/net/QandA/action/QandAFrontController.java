@@ -82,6 +82,41 @@ public class QandAFrontController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+		if (command.equals("/QandACompanyIntro.qna")) {
+			forward = new ActionForward();
+			forward.setPath("./QandA/QandACompanyIntro.jsp");
+			forward.setRedirect(false);// forward방식으로 이동
+		} 
+		if (command.equals("/QandAHowToUse.qna")) {
+			forward = new ActionForward();
+			forward.setPath("./QandA/QandAHowToUse.jsp");
+			forward.setRedirect(false);// forward방식으로 이동
+		} 
+		if (command.equals("/QandAadvertise.qna")) {
+			forward = new ActionForward();
+			forward.setPath("./QandA/QandAadvertise.jsp");
+			forward.setRedirect(false);// forward방식으로 이동
+		} 		
+		if (command.equals("/QandAcondition.qna")) {
+			forward = new ActionForward();
+			forward.setPath("./QandA/QandAcondition.jsp");
+			forward.setRedirect(false);// forward방식으로 이동
+		} 	
+		if (command.equals("/QandAprivacy.qna")) {
+			forward = new ActionForward();
+			forward.setPath("./QandA/QandAprivacy.jsp");
+			forward.setRedirect(false);// forward방식으로 이동
+		} 		
+		if (command.equals("/Memberintro.qna")) {
+			forward = new ActionForward();
+			forward.setPath("./QandA/Memberintro.jsp");
+			forward.setRedirect(false);// forward방식으로 이동
+		} 
+		
+		
+		
+		
+		
 		
 			
 		

@@ -308,7 +308,7 @@
 			var div = document.createElement('div');
 		
 			div.style["float"]="right";
-			div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em;'>";
+			div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em; margin-right:1em;'>";
 			document.getElementById('messageWindow2').appendChild(div);
 		
 			//clear div 추가
@@ -317,7 +317,7 @@
 			document.getElementById('messageWindow2').appendChild(clear);
 		
 			//2번째 구분자 뒤에 img 단어를 넣는다.
-			webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em;'>|\|img");
+			webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em; margin-left:1em;'>|\|img");
 			
 			//div 스크롤 아래로.
 			messageWindow2.scrollTop = messageWindow2.scrollHeight;

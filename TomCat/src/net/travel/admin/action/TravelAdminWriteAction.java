@@ -23,7 +23,7 @@ public class TravelAdminWriteAction implements Action {
 
 		PlanDAO pdao = new PlanDAO();
 
-List<PlanCountryBean> countryList =  pdao.getCountryList();
+		List<PlanCountryBean> countryList =  pdao.getCountryList();
 		
 		request.setAttribute("countryList", countryList);
 		
