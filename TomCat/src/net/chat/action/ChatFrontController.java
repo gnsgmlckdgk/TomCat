@@ -23,12 +23,7 @@ public class ChatFrontController extends HttpServlet {
 		// 처리담당 객체
 		Action action = null;
 
-		if (command.equals("/Chat.ct")) { 
-			forward = new ActionForward();
-			forward.setPath("./chat/broadcast.jsp");
-			forward.setRedirect(false);
-			
-		} 	else if(command.equals("/ChatAction.ct")){	
+		if(command.equals("/Chat.ct")){	
 			action = new ChatAction();
 			try {
 				forward = action.execute(request, response);

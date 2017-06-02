@@ -4,6 +4,10 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
+<div style="max-width: 1080px; margin: auto;">
+
+
+
 <!-- Banner -->
 <section id="banner">
 
@@ -236,5 +240,7 @@
 	<!-- 입력란 들어갈 곳. 끝. -->
 </section>
 
+
+</div>
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
