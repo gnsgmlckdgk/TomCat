@@ -16,6 +16,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import net.images.db.ImagesBean;
+import net.images.db.ImagesDAO;
 import net.plan.db.PlanCityBean;
 import net.plan.db.PlanDAO;
 import net.plan.db.PlanTravelBean;
@@ -53,6 +55,14 @@ public class PlanRegionAction implements Action {
 		//지역값 받아와서 글 갯수에 조건 걸어서, 지역에 맞는 글만 가져오는 과정 필요.
 		//타입값 받아와서 글 타입에 조건 걸어서, 맛집, 관광지, 숙소 골라서 보기 가능하도록 할 필요.
 			
+		// 관광지 이미지 리스트 가져오기
+		List<ImagesBean> travelImgList = null;
+		ImagesDAO idao = new ImagesDAO();
+		String cityCode = pdao.getCityCode(region);	// region_code 를 구하기 위해 국가 정보를 가져옴
+		travelImgList = idao.getTravelImages(cityCode);
+		
+		request.setAttribute("travelImgList", travelImgList);	// 관광지 이미지들 담음
+		
 		//DB에 등록된 글의 개수.
 		int count = pdao.getTravelCount(region, city_code);
 		

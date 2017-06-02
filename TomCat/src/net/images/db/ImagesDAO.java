@@ -160,6 +160,51 @@ public class ImagesDAO {
 		return cityImgList;
 	}
 	
+	// 관광지 이미지전체 가져오기(도시페이지에서 필요)
+	public List<ImagesBean> getTravelImages(String city_code) {
+			
+		List<ImagesBean> travelImgList = new ArrayList<ImagesBean>();
+			
+		try {
+				
+			con = getConnection();
+				
+			sql = "select * from images where city_code = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, city_code);
+				
+			rs = ps.executeQuery();
+			
+			ImagesBean ib = null;
+			while(rs.next()) {
+				ib = new ImagesBean();
+				ib.setNum(rs.getInt("num"));
+				ib.setCountry_code(rs.getString("city_code"));
+				ib.setCity_code(rs.getString("city_code"));
+				ib.setTravel_id(rs.getInt("travel_id"));
+				ib.setType(rs.getString("type"));
+				ib.setName(rs.getString("name"));
+				ib.setInfo(rs.getString("info"));
+				ib.setFile(rs.getString("file"));
+				
+				travelImgList.add(ib);
+			}
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		return travelImgList;
+	}
+	
 	// 도시 이미지 경로 구하기
 	public String getCityImgPath(String city_code) {
 		
