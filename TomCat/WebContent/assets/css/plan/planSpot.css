@@ -1,22 +1,36 @@
 @CHARSET "UTF-8";
 
+
+
 section.planSpot{
 	margin:auto;
-	width: 80em;
-	height: 40em;
+	width: 1080px;
+
 }
 
 section.planSpot h1{
 	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+	margin-bottom: 2em;
 
 }
 
 section.planSpot h2{
-	font-size: 2.6em;
-	margin-top: 0.5em;
-	margin-bottom: 0em;
+	font-size: 2.8em;
+	margin:0.5em 0 0.5em 0.3em;
 	font-weight: bold;
+}
+
+section.planSpot h2 img{
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+	margin:0.2em 1em 0 0;
+}
+
+section.planSpot h2 img:HOVER{
+	cursor: pointer;
+	opacity:0.8;
+	
 }
 
 section.planSpot h2 span{
@@ -28,13 +42,24 @@ section.planSpot h2 span{
 	
 }
 
+div.travel_img{
+	float:left;
+	margin-left: 2em;
+
+}
+
+div.img_info{
+	width: 1080px;
+	height: 355px;
+	margin-bottom: 2em;
+}
+
 section.planSpot h1{
 	font-size: 1.1em;
 	line-height: 1.5em;
 }
 
 div.planSpot_tb{
-	
 	float:left;
 	width: 40em; 
 	height: 20em;
@@ -43,13 +68,15 @@ div.planSpot_tb{
 div.tr_info{
 	border: 2px solid blue;
 	float:left;
-	width:40em;
+	margin-left:3em;
+	margin-top:2em;
+	width:30em;
 	height: 20em;
 }
 
 div.month_img {
-	width: 80em;
-	height: 20em;
+	width: 1080px;
+	height: 30em;
 	margin-top:1.5em;
 	margin-bottom:1.5em;
 	border: 1px solid green; 
@@ -58,6 +85,57 @@ div.month_img {
 table.gift{
 	width: 80em;
 	height: 20em;
+}
+
+/* 블로그 정보 & 여행 후기 */
+div.blog_epil{
+	border: 1px solid red;
+	width:1080px;
+	height:7em;
+}
+
+
+div.blog_Spot, div.Spot_epilogue{
+	background-color:#323037;
+	margin-top:2em;
+	padding-top:0.2em;
+	text-align:center;
+	float: left;
+	width:500px;
+	height:2.6em;
+	border:2px solid white; 
+	border-radius:1em 1em 0 0;
+	cursor: pointer;
+}
+
+div span.text{
+	color:white;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+div.blog_Spot{
+	margin-left: 2.2em;
+}
+/* 월별 옷차림 */
+section.planSpot h3{
+	font-size: 2em;
+	margin:0.5em 0 0.5em 0.3em;
+
+}
+
+section.planSpot h3 span{
+	color: #666;
+	font-size: 0.5em;
+}
+
+div.All_mon{
+	padding-left:0.5em;
+}
+
+input.month{
+	width: 5.8em;
+	text-align: center;
 }
 
 

@@ -193,6 +193,42 @@ public class PlanFrontController extends HttpServlet {
 			forward.setRedirect(false);
 		}
 		
+		else if(command.equals("/SouvenirAddAction.pl")){ //기념품 추가
+			action=new SouvenirAddAction();
+			try{
+				forward=action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/SouvenirUpdate.pl")){ //기념품 수정하는 폼으로 이동
+			action=new SouvenirUpdate();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/SouvenirUpdateAction.pl")){ //기념품 수정
+			action=new SouvenirUpdateAction();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/SouvenirDelete.pl")){ //기념품 삭제
+			action=new SouvenirDelete();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		
 

@@ -2019,9 +2019,165 @@ public class PlanDAO {
 		return souvenirList;
 	}
 
+	/*기념품 리스트 추가하기*/
+	public void addSouvenir(PlanSouvenirBean psb){
+		int num=0;
+		try {
+
+			con = getConnection();
+			sql="select max(num) as num from souvenir";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				num=rs.getInt("num")+1;	
+			}
+			
+			sql = "insert into souvenir(num, sou_name, city_code, sou_img, ranking, info) values(?,?,?,?,?,?)";
+			
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+			pstmt.setString(2,psb.getName() );
+			pstmt.setString(3,psb.getCity_code() );
+			pstmt.setString(4,psb.getImg() );
+			pstmt.setInt(5,psb.getRanking());
+			pstmt.setString(6, psb.getInfo());
+
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+
+	}
 	/* 기념품 리스트 추가하기 */
 	public void addSouvenir() {
 
+
 	}
+
+	
+	/*기념품 정보보기*/
+	public PlanSouvenirBean getSouvenir(int num){
+		PlanSouvenirBean psb = null;
+		
+		try{
+			con=getConnection();
+			
+			sql="select * from souvenir where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				psb=new PlanSouvenirBean();
+				
+				psb.setCity_code(rs.getString("city_code"));
+				psb.setImg(rs.getString("sou_img"));
+				psb.setInfo(rs.getString("info"));
+				psb.setName(rs.getString("sou_name"));
+				psb.setNum(rs.getInt("num"));
+				psb.setRanking(rs.getInt("ranking"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		
+		return psb;
+	}
+	
+	/*기념품 수정하기*/
+	public void updateSouvenir(PlanSouvenirBean psb){
+		try{
+			con=getConnection();
+			
+			sql="update souvenir set sou_name=?, sou_img=?, ranking=?, info=? where num=?";
+			
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setString(1, psb.getName());
+			pstmt.setString(2, psb.getImg());
+			pstmt.setInt(3, psb.getRanking());
+			pstmt.setString(4, psb.getInfo());
+			pstmt.setInt(5, psb.getNum());
+			
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {rs.close();} catch (SQLException ex) {	}
+			if (pstmt != null)
+				try {pstmt.close();} catch (SQLException ex) {}
+			if (con != null)
+				try {con.close();} catch (SQLException ex) {}
+		}//finally	
+	}
+	
+	/*기념품 삭제하기*/
+	public void deleteSouvenir(int num){
+		try{
+			con=getConnection();
+			
+			sql="delete from souvenir where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {rs.close();} catch (SQLException ex) {	}
+			if (pstmt != null)
+				try {pstmt.close();} catch (SQLException ex) {}
+			if (con != null)
+				try {con.close();} catch (SQLException ex) {}
+		}//finally	
+	}
+	
+	
+
+
 
 }
