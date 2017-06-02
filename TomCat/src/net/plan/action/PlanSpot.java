@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.plan.db.PlanCityBean;
 import net.plan.db.PlanDAO;
 import net.plan.db.PlanSouvenirBean;
 import net.plan.db.PlanTravelBean;
@@ -33,8 +34,9 @@ public class PlanSpot implements Action{
 		List<PlanSouvenirBean> souvenirList = pdao.getSouvenirList(ptb.getCity_code());
 		
 		/*도시이름 가져오기*/
+		PlanCityBean pcb = pdao.getCityContent(ptb.getCity_code());
 		
-
+		request.setAttribute("pcb", pcb);
 		request.setAttribute("ptb", ptb);
 		request.setAttribute("souvenirList", souvenirList);
 		
