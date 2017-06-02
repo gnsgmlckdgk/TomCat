@@ -74,32 +74,6 @@
 	//조건부 검색된 값이면 c_b가 true로. 끝.
 %>
 
-<style>
-
-#zzim{
-	padding: 0 1.5em;
-	margin-left: 2em;
-	max-height: 2em;
-	vertical-align: middle;
-	line-height: 0;
-}
-
-#travel_name{
-	font-size: 1.2em;
-	font-weight: bold;
-	color: black;
-	margin-bottom: 0.7em;
-
-}
-
-table td{
-	padding: 1em;
-	vertical-align: middle;
-}
-
-</style>
-
-
 <!-- 검색폼 -->
 
 <div class="search_div">

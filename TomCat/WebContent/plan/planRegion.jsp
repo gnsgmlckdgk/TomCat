@@ -115,7 +115,7 @@
 	<!-- 지도 -->
 	<div class="map">
 			<!-- 수현씨 지도 부분 -->
-			<iframe width="100%" height="450" frameborder="0" style="border: 0; min-width: 280px;"
+			<iframe width="100%" height="100%" frameborder="0" style="border: 0;"
 				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=region%>" allowfullscreen>
 			</iframe>
 		</div>
@@ -143,9 +143,7 @@
 <section class="two">
 	<!-- container -->
 	<div class="travelList">
-		<h2><%=region%> 주요 지역 </h2>
-		
-		<hr style="max-width: 1080px;">
+		<h2><%=region%> 인기 장소 </h2><hr>
 
 		<!-- checkbox -->
 		<div class="checkbox" onchange="checkbox_change()">
@@ -155,11 +153,10 @@
 		</div>
 		<!--end checkbox -->
 
-		<!-- 도시리스트 테이블 오는 자리 -->
-		<div class="region_list_div"></div>
-		<!-- region_list_div -->
-	</div>
-	<!-- container end-->
+		<!-- 관광지 리스트 테이블 오는 자리 -->
+		<div class="travelListTable"></div>
+		
+	</div>	<!-- travelList 끝 -->
 
 
 	<!-- Two 섹션 스크립트 -->
@@ -171,7 +168,7 @@
 				url: './plan/planRegionList.jsp',
 				data : {region:'<%=region%>', pageNum:'1', city_code:'<%=city_code%>'},
 				success: function(data) {
-					$('.region_list_div').append(data);
+					$('.travelListTable').append(data);
 				},
 				error: function(xhr, status, error) {
         			alert(error);
@@ -267,7 +264,6 @@
 <!-- 지역 리스트 끝-->
 
 <div class="clear" style="clear: both;"></div>
-
 
 <!-- Three -->
 <section id="three" class="wrapper style1">

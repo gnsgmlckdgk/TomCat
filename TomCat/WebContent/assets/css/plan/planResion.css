@@ -85,3 +85,82 @@ div.travelList {	/* 내용물 전체 */
 	min-height: 600px;
 	margin: 30px auto;
 }
+div.travelList h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
+}
+
+div.travelList .search_div {	/* 검색 DIV */
+	width: 360px;
+	float: right;
+	position: relative;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+div.travelList .search_div #search {
+	width: 290px;
+	background-color: #fff;
+	font-size: 12px;
+	padding-left: 34px;
+	float: left;
+}
+div.travelList .search_div .search_img {	/* 검색 이미지 */
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	left: 2px;
+	top: 2px;
+}
+div.travelList .search_div input[type=submit] {
+	font-size: 10px;
+	float: right;
+}
+div.travelList div.travelListTable {	/* 관광지 리스트 테이블 전체 */
+	margin-top: 30px;
+}
+div.travelList div.travelListTable tr {
+	display: inline-block;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+}
+div.travelList div.travelListTable tr:hover {
+	cursor: pointer;
+	border: 1px solid #0054FF;
+}
+div.travelList div.travelListTable td.img_td {	/* 관광지 이미지 */
+	background-color: #fff;
+	width: 260px;
+	height: 160px;
+	max-width: 260px;
+	max-height: 160px;
+}
+div.travelList div.travelListTable td.txt_td {	/* 관광지 소개 */
+	background-color: #fff;
+	width: 820px;
+	padding: 10px 30px 10px 20px;
+}
+div.travelList div.travelListTable td .travel_name {
+	font-size: 16px;
+	font-weight: 900;
+}
+
+
+
+div.travelList div.travelListTable .page {	/* 페이징 */
+	font-size: 16px;
+	text-align: center;
+}
+div.travelList div.travelListTable .page a {
+	padding: 1px 7px;
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	text-decoration: none;
+}
+div.travelList div.travelListTable .page img {
+	width: 13px;
+	height: 13px;
+}

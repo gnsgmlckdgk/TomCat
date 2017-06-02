@@ -123,7 +123,7 @@ public class ImagesDAO {
 			
 			con = getConnection();
 			
-			sql = "select * from images where country_code = ?";
+			sql = "select * from images where country_code = ? && travel_id = 0";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, country_code);
 			
