@@ -133,7 +133,7 @@ div.cityList div.cityListTable tr {
 }
 div.cityList div.cityListTable tr:hover {
 	cursor: pointer;
-	border: 1px solid #0054FF;
+	border: 1px solid #F361A6;
 }
 div.cityList div.cityListTable td.img_td {	/* 도시 이미지 */
 	background-color: #fff;
