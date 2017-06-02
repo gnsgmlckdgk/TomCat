@@ -9,10 +9,38 @@ body {
 }
 
 #combine{
-	margin: auto; 
+	margin: auto; 	
 	width: 80em;
 	height: 40em;
 	position: relative;
+	
+}
+form{
+	background-position: center top;
+	background-attachment: fixed;
+	margin: auto;
+	line-height: 1.75;
+	text-align: center;
+	width: 50%;
+	background-color: white;
+	border-radius: 20px;	
+}
+
+#submit{	
+	margin-bottom:4.5px;
+	width:150px;
+	height:50px;
+	padding:0;
+	background-color: #ff6699;	
+}
+
+input[type=text]{
+	margin-left:100px;	
+	width:500px;
+}
+textarea{
+		margin-left:100px;	
+		width:500px;
 }
 
 
@@ -47,21 +75,3 @@ background-color: rgba(77, 77, 77,0.3);
 	color:grey;
 	font-weight: bolder;
 	}
-
-
-#table1 {
-	border-radius:10px;
-	background-color:rgba(255, 255, 255,0.8);
-	text-align: left;
-	padding: 0;
-	margin-left: 15em;
-	width: 800px;
-}
-#h1{	
-	white	
-}
-#txt{
-	text-align:center;
-	margin:1.5px;
-	float:left;
-}
