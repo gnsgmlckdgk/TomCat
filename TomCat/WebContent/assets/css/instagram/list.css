@@ -3,7 +3,6 @@
 .wrapper {
 	background-image: url("../../../images/instagram/goldengate.jpg");
 	background-attachment: fixed;
-	/* 		background-color:pink; */
 	background-position: center top;
 	background-size: cover;
 	line-height: 1.75;
@@ -89,7 +88,8 @@ img#down:HOVER {
 	opacity: 1;
 }
 
-#listpage {
+#listpage a{
+	text-decoration:none;
 	text-align: center;
 	font-size: 1.5em;
 }
@@ -100,51 +100,62 @@ img#down:HOVER {
 	width: 80%;
 }
 
-img#crown{
+img#AlphbetB{
 width:4em;
 height:4em;
 position: fixed;
 left: 25em;
-top: 20em; 
-animation-name:movingcrown; /*애니메이션의 이름 지정*/
-animation-duration:1s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
 animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-
-img#crown:HOVER {
-	animation-play-state: paused;
+img#AlphbetE{
+width:4em;
+height:4em;
+position: fixed;
+left: 28em;
+top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-
-@
-keyframes movingcrown {
-0%{
-left: 30px;
-top: 230px;
+img#AlphbetS{
+width:4em;
+height:4em;
+position: fixed;
+left: 31em;
+top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-25%{
-left:90px;
-top:180px;
+img#AlphbetT{
+width:4em;
+height:4em;
+position: fixed;
+left: 34em;
+top: 21em;   
+animation-name:blink;
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-50%{
-left:150px;
-top:230px;
-}
-75%{
-opacity:0.5;
-left:210px;
-top:180px;
-}
-100%{
-opacity:0.8;
-left:300px;
-top:230px;
-}
+@keyframes blink{
+0%{opacity:0.0}
+100%{opacity:1.0;}
 }
 
 #paddingnone{
-	padding:0px;		
+	padding:0;
+	height:2px;		
 }
 #titlecolor{
 	color:black;
@@ -152,7 +163,6 @@ top:230px;
 	background-color: #cccccc;
 }
 
-#nickname{
+#darkgrey{
 	background-color:#e6e6e6;
 }
-

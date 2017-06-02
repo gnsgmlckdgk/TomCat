@@ -88,7 +88,7 @@
 		<input type="file" name="file">
 		
 		<span class="cityt">정보</span>
-		<textarea rows="10" cols="20" name="info"></textarea>
+		<textarea rows="10" cols="20" name="info" maxlength="160"></textarea>
 	
 		<div class="btn_div">
 		<input type="submit"  value="추가" >

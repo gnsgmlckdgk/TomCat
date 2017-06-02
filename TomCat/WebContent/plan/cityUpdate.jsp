@@ -96,7 +96,7 @@
 		<input type="file" name="file"><br><br>
 		
 		정보
-		<textarea rows="10" cols="20" name="info"><%=pcb.getInfo()%></textarea>
+		<textarea rows="10" cols="20" name="info" maxlength="160"><%=pcb.getInfo()%></textarea>
 	
 		<div class="btn_div">
 		<input type="submit"  value="수정" >

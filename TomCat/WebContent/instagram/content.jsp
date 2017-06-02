@@ -67,16 +67,22 @@ function func3(i){
 		int num=((Integer)request.getAttribute("num")).intValue();
 		String pageNum = request.getParameter("pageNum");//이거는 해당 글의 페이지넘버!(댓글 페이지넘은 따로있음)
 
+		//엔터키 \r\n => <br>로 바꾸기
+		String content=bb.getContent();
+		if(content!=null){
+		content=bb.getContent().replace("\r\n","<br>");
+		}
 
 	%>
 	<section class="wrapper">
-	
-	<h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1>
+	<div id="combine">
+	<marquee behavior="scroll" width="500" scrollamount="2" scrolldelay="50"><h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1></marquee>
+
 	<table class="table1">
 		<tr>
-			<td colspan="2"><%=bb.getSubject()%></td>
-			<td><%=nick%></td>
-			<td><%=bb.getDate()%></td>
+			<td id="titlecolor" colspan="2"><%=bb.getSubject()%></td>
+			<td ><%=nick%></td>
+			<td id="datecolor"><%=bb.getDate()%></td>
 		</tr>
 		<tr>
 			<td colspan="4"><a href="./upload/<%=bb.getImage1()%>"><%=bb.getImage1()%></a></td>
@@ -96,20 +102,20 @@ function func3(i){
 		//로그인한 닉네임(세션값 닉네임)이랑 글쓴닉네임(boardContentAction 에서 받아온닉네임)이 같으면 글 수정및 삭제가가능해용
 		//BoardContentAction에서 받아온 닉네임.equals(세션값 닉네임)		
 		if(bb.getNick().equals(nick)){%>	
-	<input type="button" style="margin-left:50px;"
-	 value="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+	<input id="opacitynone" type="button" style="margin-left:50px;"
+	 value="글수정" title="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 		</td>
 		<td colspan="2">
 				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
 					<input type="hidden" value="<%=num%>" name="num"> 															
 					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
-					<input type="submit" value="글삭제">
+					<input id="opacitynone" type="submit" value="글삭제" title="글삭제">
 				</form>
-				</td>
+				</td>	
 
 		<%} %>
 <td colspan="4">
-	<input id="listbutton" type="button" value="글목록 "
+	<input id="listbutton" type="button" value="글목록 " title="글목록"
 		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">		
 	</td>		
 		</tr>		
@@ -139,8 +145,8 @@ function func3(i){
 	%>
 	<table class="table2">
 		<tr>
-			<td colspan="2">닉네임</td>
-			<td colspan="2">답 글</td>
+			<td colspan="2">닉네임</td>		
+			<td id="wordkbreak" colspan="2">답 글</td>
 			<td>작성일</td>
 		</tr>
 		<%for(int i=0;i<replylist.size();i++){
@@ -148,7 +154,7 @@ function func3(i){
 			%>
 
 <!-- =================댓글 수정시 뜨는창 맨 위에 보면 처음에는 display:none으로 숨겨놨어요=============== -->
-			<tr id="replymodify" class="replymodifyclass<%=i%>">
+		<tr id="replymodify" class="replymodifyclass<%=i%>">
 			<td colspan="2"><%=rb.getNick() %></td>
 			<td colspan="2">	
 					
@@ -174,24 +180,26 @@ function func3(i){
 			wid=40*rb.getRe_lev();
 			%>
 			<img src="./images/instagram/level.gif" width="<%=wid%>" height="15">
-			<img src="./images/instagram/re.gif">
+			<img src="./images/instagram/re.png" width="18" height="16">
+			
 			
 	<%	} %>
 		<%=rb.getNick() %>
-		</td>
+		</td>	
+	<td id="wordkbreak" colspan="2">	
 
-	<td colspan="2"><%=rb.getContent() %>
-	
+	<%=rb.getContent()%>
+
 <%
 //로그인닉넴이랑 댓글 쓴사람이 동일할때만 삭제, 수정 보이게 제어
 if(rb.getNick().equals(nick)){%>
-<input type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
+<input title="댓글삭제" type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
 <%int re_num=rb.getRe_num(); %>	
-<input type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
+<input title="댓글수정" type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
 <%}
 //로그인 되 있으면 대댓글 달수있게 제어, 대댓글 func1()누르면 맨 상단의 jQuery작동
-if(id!=null){%>
-<input type="button" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
+if(	id!=null){%>
+<input title="댓글의댓글" type="button" id="txt" value="댓글" onclick="func1(<%=rb.getRe_num()%>)">
 <%} %>
 
 		</td>
@@ -211,7 +219,7 @@ if(id!=null){%>
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					<textarea rows="2" cols="100" name="content"></textarea>
-					<input type="submit" id="submit" value="입력">
+					<input type="submit" id="txt2" value="입력">
 				</form>		
 		</td></tr>		
 <!-- 		============================================================================== -->
@@ -233,7 +241,7 @@ if(id!=null){%>
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
 					<textarea rows="2" cols="80" name="content"></textarea>
-					<input type="submit" id="submit" value="입력">
+					<input type="submit" id="txt2"  value="입력">
 				</form>
 				
 				<%
@@ -295,7 +303,7 @@ if(id!=null){%>
 				<%}%>
 
 <!-- ====================================리플끗~========================================= -->
-
+</div>
 
 
 </section>
@@ -305,4 +313,5 @@ if(id!=null){%>
 		
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
+
 

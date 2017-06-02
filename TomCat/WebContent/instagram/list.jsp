@@ -15,11 +15,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
-<section class="wrapper">
 <div id="top"></div>
+<section class="wrapper">
 
 <div id="combine">
 	<%	
@@ -42,10 +43,11 @@
 	BoardDAO bdao = new BoardDAO();//인생샷그램 글들의 DAO객체 생성
 	ReplyDAO rdao=new ReplyDAO();//댓글의 DAO생성 하는 이유는 게시판글 보여줄때 댓글 갯수가 몇개인지 제목옆에 표시해주기 위해!
 
-	//하기는 id가 있는 경우에만 글쓰기 버튼이 보이게 제어
-if(id!=null){%>			 
-		<a href="./BoardWrite.bo" class="button" >인생샷 공유해요</a>
-	<br>
+	if(id==null){%>			
+	<a onclick="popupToggle()" class="button">인생샷 공유해요</a>
+ 
+	<%}else{%>
+			<a href="./BoardWrite.bo" class="button" >인생샷 공유해요</a>
 	<%} %>
 	
 	<div class="table-wrapper">
@@ -72,8 +74,8 @@ if(id!=null){%>
 													<!-- 제목옆에 해당글에 댓글이 몇개 달렸는지 나타내줌 -->
 			<td id="titlecolor" colspan="4"><%=bb.getSubject() %>(댓글:<%=rdao.replyCount(bb.getNum()) %>)</td>
 			</tr>		
-			<tr><td id="nickname">닉네임:</td><td id="nickname"><%=bb.getNick()%></td>
-			<td>업로드날짜:</td><td><%=bb.getDate() %></td>
+			<tr><td id="darkgrey">닉네임:</td><td ><%=bb.getNick()%></td>
+			<td id="darkgrey">업로드날짜:</td><td><%=bb.getDate() %></td>
 			</tr>	
 			<tr>
 			<td colspan="4">
@@ -82,19 +84,27 @@ if(id!=null){%>
 			</a>
 			</td></tr>
 		<%
+	
+		if(id==null){
+		%>
+		<tr><td colspan="4">
+		<input type="button" value="좋아요" id="like" onclick="popupToggle()">
+		</tr></td>
+		<%		
+		}
 		
-		//아이디가 있을때만 좋아요나 좋아요취소버튼 출력
-		if(id!=null){%>			
-			<tr >
+		else{
+		%>			
+			<tr>
 			<td colspan="4">
 			
 <!-- 			====================좋아요================= -->
 <%
 //likecount(한사람이 좋아요를 누른 갯수)가 2로 나누었을때 0일떄, 즉 짝수일때는 좋아요를 누를 수 있게 구현
-if(likecount%2==0){
-%>
-			<form action="./LikeaddAction.lk" method="post" name="fr" >
-			<input type="submit" id="like" value="좋아요: )">	
+if(likecount%2==0){	
+		%>
+			<form action="./LikeaddAction.lk" method="post" name="fr" >				
+			<input type="submit" id="like" value="좋아요: )">		
 				<%
 				//likecountall은 해당글에 해당하는 총 좋아요갯수, 화면상에 표기됨
 				if(likecountall>0){ %>회원님 외<%=likecountall %>명<%} %>				
@@ -128,7 +138,7 @@ if(likecount%2==0){
 			</td>
 			</tr>
 		<%
-			}//좋아요 취소 종료		
+		}
 			}//아이디가 not null이면
 			%>
 			
@@ -178,13 +188,18 @@ if(likecount%2==0){
 	int likecountall=ldao.getLikecountall(bb.getNum());
 	%>
 
-<!-- 인생샷그램 위에 움직이는 왕관모양 -->
-<img id="crown" src="./images/instagram/crown.png">	
+<!-- 인생샷그램 위에 움직이는 왕관모양-->
+<img id="AlphbetB" src="./images/instagram/AlphbetB.png">
+<img id="AlphbetE" src="./images/instagram/AlphbetE.png">	
+<img id="AlphbetS" src="./images/instagram/AlphbetS.png">	
+<img id="AlphbetT" src="./images/instagram/AlphbetT.png">	
+
+
+
 <!-- 	베스트 게시글 테이블 -->
 	<table class="banner">
 	<tr><td id="paddingnone">
 	<marquee>BEST샷<marquee width=300>←♡-&lt </marquee>
-	
 	
 	
 	
@@ -193,7 +208,7 @@ if(likecount%2==0){
 
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/<%=bb.getImage1()%>" width=180 height=200 onerror="this.src='./images/instagram/noimage.png'"></a>
 	</td></tr>
-	<tr><td id="paddingnone">좋아요<%=likecountall %>개</td></tr>
+	<tr><td id="paddingnone">좋아	요<%=likecountall %>개</td></tr>
 	</table>
 	
 	
@@ -209,3 +224,4 @@ if(likecount%2==0){
 		
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
+
