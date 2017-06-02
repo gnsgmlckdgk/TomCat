@@ -16,7 +16,6 @@
 	}
 	
 	String gold = (String)request.getAttribute("gold");
-	out.print(gold);
 %>
 
 <!-- 함께해요 게시판에 붙일예정. -->
@@ -327,7 +326,7 @@
 	
 	function emtc_none(){
 		if (confirm("\n Gold 회원만 사용 가능한 기능입니다. \n\n 결제 화면으로 이동하시겠습니까?\n\n") == true){    //확인
-			location.href="./PayAction.pln?approval=0&id=<%=id %>";
+			location.href="./PayAction.pln?approval=0&id=<%=id %>&url='chat'";
 		}else{   //취소
 		    return;
 		}
