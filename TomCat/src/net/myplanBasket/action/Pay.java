@@ -20,9 +20,8 @@ public class Pay implements Action {
 		
 		
 		MyPlanBasketDAO mpdao = new MyPlanBasketDAO();
-		
-		
 		ActionForward forward = new ActionForward();
+		
 		if (approval == 1) {
 
 			mpdao.insertGoldMember(id);
@@ -37,7 +36,7 @@ public class Pay implements Action {
 			
 			request.setAttribute("name", mb.getName());
 			request.setAttribute("tel", mb.getTel());
-						
+			
 			forward.setPath("./Pay.pln");
 			forward.setRedirect(false);
 			return forward;
