@@ -46,11 +46,7 @@
 					<option value="bc">비씨카드</option>
 					<option value="kb">국민카드</option>
 					<option value="nh">농협카드</option>
-			</select><br>(예금주 : 박성우 국민은행 9 5035 6077 66) &nbsp; &nbsp; &nbsp; 
-			<%
-			Date date = new Date();
-			out.print(date.getDate()+2+"일까지 입금되지 않으면 취소됩니다.");
-			%>
+			</select><br>(예금주 : 박성우 국민은행 9 5035 6077 66)
 			
 			</td>
 		</tr>

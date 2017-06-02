@@ -31,10 +31,14 @@ public class CityAddAction implements Action{
 		int maxSize = 10 * 1024 * 1024;
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
+		// info 개행 처리
+		String content = multi.getParameter("info");
+		content = content.replaceAll("\n", "<br>");
+		
 		pcb.setCountry_code(multi.getParameter("country_code"));
 		pcb.setName(multi.getParameter("name"));
 		pcb.setEn_name(multi.getParameter("en_name"));
-		pcb.setInfo(multi.getParameter("info"));
+		pcb.setInfo(content);
 		pcb.setCity_code(multi.getParameter("en_name"));
 		
 		PlanDAO pdao = new PlanDAO();

@@ -67,9 +67,15 @@ function func3(i){
 		int num=((Integer)request.getAttribute("num")).intValue();
 		String pageNum = request.getParameter("pageNum");//이거는 해당 글의 페이지넘버!(댓글 페이지넘은 따로있음)
 
+		//엔터키 \r\n => <br>로 바꾸기
+		String content=bb.getContent();
+		if(content!=null){
+		content=bb.getContent().replace("\r\n","<br>");
+		}
 
 	%>
 	<section class="wrapper">
+	<div id="combine">
 	<marquee behavior="scroll" width="500" scrollamount="2" scrolldelay="50"><h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1></marquee>
 
 	<table class="table1">
@@ -139,8 +145,8 @@ function func3(i){
 	%>
 	<table class="table2">
 		<tr>
-			<td colspan="2">닉네임</td>
-			<td colspan="2">답 글</td>
+			<td colspan="2">닉네임</td>		
+			<td id="wordkbreak" colspan="2">답 글</td>
 			<td>작성일</td>
 		</tr>
 		<%for(int i=0;i<replylist.size();i++){
@@ -148,7 +154,7 @@ function func3(i){
 			%>
 
 <!-- =================댓글 수정시 뜨는창 맨 위에 보면 처음에는 display:none으로 숨겨놨어요=============== -->
-			<tr id="replymodify" class="replymodifyclass<%=i%>">
+		<tr id="replymodify" class="replymodifyclass<%=i%>">
 			<td colspan="2"><%=rb.getNick() %></td>
 			<td colspan="2">	
 					
@@ -174,14 +180,16 @@ function func3(i){
 			wid=40*rb.getRe_lev();
 			%>
 			<img src="./images/instagram/level.gif" width="<%=wid%>" height="15">
-			<img src="./images/instagram/re.gif">
+			<img src="./images/instagram/re.png" width="18" height="16">
+			
 			
 	<%	} %>
 		<%=rb.getNick() %>
-		</td>
+		</td>	
+	<td id="wordkbreak" colspan="2">	
 
-	<td colspan="2"><%=rb.getContent() %>
-	
+	<%=rb.getContent()%>
+
 <%
 //로그인닉넴이랑 댓글 쓴사람이 동일할때만 삭제, 수정 보이게 제어
 if(rb.getNick().equals(nick)){%>
@@ -211,7 +219,7 @@ if(	id!=null){%>
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					<textarea rows="2" cols="100" name="content"></textarea>
-					<input type="submit" id="submit" value="입력">
+					<input type="submit" id="txt2" value="입력">
 				</form>		
 		</td></tr>		
 <!-- 		============================================================================== -->
@@ -233,7 +241,7 @@ if(	id!=null){%>
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
 					<textarea rows="2" cols="80" name="content"></textarea>
-					<input type="submit" id="submit" value="입력">
+					<input type="submit" id="txt2"  value="입력">
 				</form>
 				
 				<%
@@ -295,7 +303,7 @@ if(	id!=null){%>
 				<%}%>
 
 <!-- ====================================리플끗~========================================= -->
-
+</div>
 
 
 </section>
@@ -305,4 +313,5 @@ if(	id!=null){%>
 		
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
+
 

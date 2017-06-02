@@ -211,10 +211,10 @@
 				for (int j = 0; j < 5; j++) {
 			%>
 
-			<h3><%=cont[j] + "  "%><a
-					onclick="popupToggle_<%=asia[j]%>()">>>지도로보기</a>
+			<h3>▶ <%=cont[j] + " "%>
+				<a onclick="popupToggle_<%=asia[j]%>()">&nbsp>> 지도로보기</a>
 			</h3>
-			<div>
+			<div style="ma">
 				<%
 					for (int i = 0; i < countryList.size(); i++) {
 							PlanCountryBean cb = (PlanCountryBean) countryList.get(i);
@@ -223,15 +223,15 @@
 
 
 				<div style="border: 1px soild red;">
-					<a href=./PlanSearch.pl?check=1&search=<%=cb.getName()%>><%=cb.getName()%></a><span><%=cb.getEn_name()%></span>
+					<a href=./PlanSearch.pl?check=1&search=<%=cb.getName()%>><%=cb.getName()%></a>&nbsp<span><%=cb.getEn_name()%></span>
 				</div>
 				<%
-				}
 					}
-			%>
+						}
+				%>
 			</div>
 			<div class="clear"></div>
-			
+
 
 
 

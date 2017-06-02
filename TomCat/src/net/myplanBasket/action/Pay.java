@@ -17,18 +17,28 @@ public class Pay implements Action {
 		// content
 		String id = (String) request.getParameter("id");
 		int approval = Integer.parseInt(request.getParameter("approval"));
+//		String url = (String)request.getParameter("url");
+//		if(url == null){
+//			url ="";
+//		}
 		
 		
 		MyPlanBasketDAO mpdao = new MyPlanBasketDAO();
-		
-		
 		ActionForward forward = new ActionForward();
+		
 		if (approval == 1) {
 
 			mpdao.insertGoldMember(id);
 
 			forward.setRedirect(true);
-			forward.setPath("./MyPlan.pln?plan_nr=100");
+			
+			System.out.println("왔는가");
+			
+//			if(url != null){
+//				forward.setPath("./Main.me");
+//			} else {
+				forward.setPath("./MyPlan.pln?plan_nr=100");
+//			}
 			return forward;
 
 		} else {
@@ -37,7 +47,8 @@ public class Pay implements Action {
 			
 			request.setAttribute("name", mb.getName());
 			request.setAttribute("tel", mb.getTel());
-						
+			
+
 			forward.setPath("./Pay.pln");
 			forward.setRedirect(false);
 			return forward;

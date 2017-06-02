@@ -34,8 +34,8 @@
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=34"/>	<!-- 국가페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=23"/>	<!-- 지역(도시)페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=42"/>	<!-- 국가페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=41"/>	<!-- 지역(도시)페이지 -->
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
@@ -62,15 +62,16 @@
 	
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
-			<li><a href="./BoardList1.bb">함께해요</a></li>
 			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
 			<li><a href="./QandAList.qna">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 			<%
 			if(id==null){ %>
+				<li><a onclick="popupToggle()">함께해요</a></li>
 				<li><a onclick="popupToggle()">일정 관리</a></li>
 				<li><a onclick="popupToggle()" class="login_txt">로그인/회원가입</a></li>
 			<%}else { %>
+					<li><a href="./BoardList1.bb?plan_nr=100">함께해요</a></li>
 					<li><a href="./MyPlan.pln?plan_nr=100">일정 관리</a></li>
 					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
 				<%} %>

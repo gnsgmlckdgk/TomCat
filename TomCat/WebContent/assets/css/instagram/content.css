@@ -2,12 +2,18 @@
 
 
 .wrapper {
+		height:55em;
 		background-attachment: fixed;
 		background-image: url("../../../images/instagram/goldengate.jpg");
 		background-position: center top;
 		background-size: cover;
 		line-height: 1.75;
 		text-align: center;
+		}
+#combine {
+	position: relative;
+	margin: 0 auto;
+	width: 80%;
 }
 
 
@@ -18,35 +24,59 @@
 	background-color: white;
 	opacity: 0.85;
 	border-radius: 20px;
+	float:left;	
 }
 
-.table2{		
-	line-height:0.2em;
-	width:70%;
-	height:15%;
+.table2{
+	table-layout:fixed;	
+	color:black;
+	width:65%;
+	height:10%;
 	margin:auto;
-	background-color: white;
 	border-radius: 20px;
 }
-
+.table2 a{
+	color:white;
+	text-decoration: none;	
+}
+.table2 a:hover{
+	font-weight:bolder;	
+	color:black;
+}
 textarea{	
 	width:40%;
 	margin:auto;
 	background-color: white;
-	opacity: 0.85;
-	
+	opacity: 0.85;	
 }
 
 #txt{
+	border-radius: 15px;
+	background-color:rgba(72, 0, 79,0.8);
 	margin:0.1em;
 	padding:0em;
 	font-size:0.8em;
-	color:black;
 	width:2.8em;
 	height:2.3em;
-	border-radius: 0px;	
 	float:right;
+	line-height:0em;
 }
+
+#txt2{
+	background-color:rgba(255, 0, 255,0.7);
+	text-align:center;	
+	margin:0.5em;
+	font-size:0.8em;
+	width:4.5em;
+	height:2.3em;
+	border-radius: 20px;	
+	padding:0;
+	line-height:0em;
+}
+#txt2:hover{
+background-color: #730099;		
+}
+
 
 #txt:hover{
 	background-color: black;	
@@ -71,11 +101,6 @@ text-align: right;
 
 
 
-#submit{
-	font-size:0.8em;
-	padding:0 5px 0 5px;
-	background-color: #666666;	
-}
 #listbutton{
 text-align: center;
 }
@@ -108,5 +133,83 @@ h1{
 	opacity:1;	
 	background-color: black;
 }
+
+
+img#boy{
+width:6em;
+height:6em;
+position: absolute;
+left: 5em;
+top: 1em;   
+animation-name:movingboy; /*애니메이션의 이름 지정*/
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
+}
+
+img#girl{
+width:6em;
+height:6em;
+position: absoulute;
+left: 38em;
+top: 30em;   
+animation-name:movinggirl; /*애니메이션의 이름 지정*/
+animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
+animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
+animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
+animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
+}
+
+
+/* @keyframes movingboy{ */
+/* 0%{ */
+/* width:6em; */
+/* height:6em; */
+/* left: 18em; */
+/* top: 30em;     */
+/* } */
+/* 25%{ */
+/* width:5em; */
+/* height:5em; */
+/* left: 18em; */
+/* top: 25em;   */
+/* } */
+
+/* 50%{ */
+/* width:4em; */
+/* height:4em; */
+/* left: 18em; */
+/* top: 20em;    */
+/* } */
+/* 75%{ */
+/* width:5em; */
+/* height:5em; */
+/* opacity:0.5; */
+/* left: 18em; */
+/* top: 25em;   */
+/* } */
+
+/* 100%{ */
+/* width:6em; */
+/* height:6em; */
+/* opacity:0.8; */
+/* left: 18em; */
+/* top: 30em;    */
+/* } */
+/* } */
+
  
 
+#buttons{
+	border:1px solid black;
+	position:
+	width:100px;
+	height:100px;
+}
+
+#wordkbreak{
+	width:50%;	
+	table-layout:fixed;
+	word-wrap:break-word;	
+}

@@ -21,28 +21,29 @@ BoardDAO bdao=new BoardDAO();
 //BoardBean bb=메서드호출 getBoard(num)
 boardBean bb=bdao.getBoard(num);
 %>
-
-	<h1>인생샷그램 글수정</h1>
-		<form id="form" action="./BoardUpdateAction.bo?num=<%=num %>&pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
+<form action="./BoardUpdateAction.bo?num=<%=num %>&pageNum=<%=pageNum%>" method="post" name="fr" enctype="multipart/form-data">
 <!-- 		hidden으로 숨겨서 num값 넘겨주기 -->
+<div id="combine">
+<div id="form">
 		<input type="hidden" name="num" value="<%=num%>">
-		
+		<br>	
 		글쓴이:<input type="text" name="nick" value="<%=bb.getNick()%>"><br> 
 		제목:<input type="text" name="subject" value="<%=bb.getSubject()%>"><br>
 <!-- 		textarea는 value값이 없움 -->
-		내용:<textarea rows="10" cols="20" name="content"><%=bb.getContent()%></textarea><br>
+		내용:<textarea rows="5" cols="8" name="content"><%=bb.getContent()%></textarea><br>
+		<input type="submit" value="글수정"><br> 
 		
+		</div>
+	
+		<div id="upload">
 		<img src="./upload/<%=bb.getImage1()%>" width=200 height=200><br>
-		
 <!-- 		파일 첨부할때 type2개 만들어 놓기(하나는  hidden) -->
-		파일첨부:<input type="file" name="image1">
+		<input type="file" name="image1">
 		<input type="hidden" name="image2" value="<%=bb.getImage1()%>">
-		
-		
-		<br>
-				<input type="submit" value="글수정"><br> 
-		
+		</div>
+		</div>
 	</form>
+	
 
 </section>
 </body>

@@ -79,13 +79,13 @@
 		<!-- 도시 코드  ==> 도시영어이름과 동일 -->
 		
 		<span class="cityt">도시 이름</span>
-		<input type="text" name="name">
+		<input type="text" name="name" required="required">
 		
 		<span class="cityt">도시 영어이름</span>
-		<input type="text" name="en_name">
+		<input type="text" name="en_name" required="required">
 		
 		<span class="cityt">도시 이미지</span>
-		<input type="file" name="file">
+		<input type="file" name="file" required="required">
 		
 		<span class="cityt">정보</span>
 		<textarea rows="10" cols="20" name="info" maxlength="160"></textarea>

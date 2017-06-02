@@ -15,7 +15,7 @@
     
         series: {
           regions: [{
-            scale: ['#47d147', '#001a00'],
+            scale: ['#ffffe6', '#33cc33'],
             normalizeFunction: 'polynomial',
             values: {
               "BD": 16.63,

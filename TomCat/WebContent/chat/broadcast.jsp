@@ -14,6 +14,8 @@
 	} else {
 		nick = "NULL";
 	}
+	
+	String gold = (String)request.getAttribute("gold");
 %>
 
 <!-- 함께해요 게시판에 붙일예정. -->
@@ -32,11 +34,20 @@
 
 <div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(255,215,247,0.89)"></div>
 
+<%if(gold.equals("유료회원")){ %>
 <div style="background-color: white; max-width: 20em;">
-<%for(int i=1; i<=9; i++){ %><!-- i값의 범위를 이모티콘의 개수로 한다. -->
-	<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc(<%=i %>)" style="width:2em; vertical-align: middle;">
-<%} %>
+	<%for(int i=1; i<=9; i++){ %><!-- i값의 범위를 이모티콘의 개수로 한다. -->
+			<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc(<%=i %>)" style="width:2em; vertical-align: middle;">
+	<%} %>
 </div>
+<%} else { %>
+<div style="background-color: white; max-width: 20em;">
+	<%for(int i=1; i<=9; i++){ %><!-- i값의 범위를 이모티콘의 개수로 한다. -->
+			<img src='./images/chat/emoticon/emoticons_<%=i %>.png' onclick="emtc_none()" style="width:2em; vertical-align: middle;">
+	<%} %>
+</div>
+<%} %>
+
 
 <input id="inputMessage" type="text"
 	onkeydown="if(event.keyCode==13){send();}" style="width:20em; background-color: white;" placeholder="Enter로 전송"/>
@@ -53,6 +64,8 @@
 	
 	//같은 이가 여러번 보낼때 이름 판별할 변수
 	var re_send = "";
+	
+	var gold = <%=gold%>;
 
 	webSocket.onerror = function(event) {
 		onError(event)
@@ -291,22 +304,32 @@
 	
 	//이모티콘 함수
 	function emtc(i){
-		var div = document.createElement('div');
 		
-		div.style["float"]="right";
-		div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em;'>";
-		document.getElementById('messageWindow2').appendChild(div);
+			var div = document.createElement('div');
 		
-		//clear div 추가
-		var clear = document.createElement('div');
-		clear.style["clear"] = "both";
-		document.getElementById('messageWindow2').appendChild(clear);
+			div.style["float"]="right";
+			div.innerHTML = "<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em; margin-right:1em;'>";
+			document.getElementById('messageWindow2').appendChild(div);
 		
-		//2번째 구분자 뒤에 img 단어를 넣는다.
-		webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em;'>|\|img");
+			//clear div 추가
+			var clear = document.createElement('div');
+			clear.style["clear"] = "both";
+			document.getElementById('messageWindow2').appendChild(clear);
 		
-		//div 스크롤 아래로.
-		messageWindow2.scrollTop = messageWindow2.scrollHeight;
+			//2번째 구분자 뒤에 img 단어를 넣는다.
+			webSocket.send("<%=nick%>|\|<img src='./images/chat/emoticon/emoticons_"+i+ ".png' style='height:5em; margin-left:1em;'>|\|img");
+			
+			//div 스크롤 아래로.
+			messageWindow2.scrollTop = messageWindow2.scrollHeight;
+
+	}
+	
+	function emtc_none(){
+		if (confirm("\n Gold 회원만 사용 가능한 기능입니다. \n\n 결제 화면으로 이동하시겠습니까?\n\n") == true){    //확인
+			location.href="./PayAction.pln?approval=0&id=<%=id %>&url='chat'";
+		}else{   //취소
+		    return;
+		}
 	}
 	
 </script>

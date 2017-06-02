@@ -29,7 +29,7 @@
 				for (int i = 0; i < countryList.size(); i++) {
 					PlanCountryBean pcb = (PlanCountryBean) countryList.get(i);
 			%>
-			<option id="country" value="<%=pcb.getCountry_code()%>"><%=pcb.getName()%></option>
+			<option id="country" value="<%=pcb.getCountry_code()%>" required="required"><%=pcb.getName()%></option>
 
 			<%
 				}
@@ -60,7 +60,7 @@
 			}
 			
 		</script>
-		<br> <br> 여행지 이미지<br> <input type="file" name="file">
+		<br> <br> 여행지 이미지<br> <input type="file" name="file" required="required">
 
 		<br> <br>
 

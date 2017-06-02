@@ -25,7 +25,7 @@
 <div class="clear"></div>
 <section>
 	<%
-		String city_code="";
+		String city_code=(String)request.getAttribute("city_code");
 		List souvenirList = (List)request.getAttribute("souvenirList");
 		String pageNum=(String)request.getAttribute("pageNum");
 		if(pageNum==null){
@@ -41,6 +41,7 @@
 		<td>이미지</td>
 		<td>순위</td>
 		<td>정보</td>
+		<td>수정/삭제</td>
 		</tr>
 		
 		<%
@@ -53,6 +54,7 @@
 			for(int i=0;i<souvenirList.size();i++){
 				PlanSouvenirBean psb=(PlanSouvenirBean)souvenirList.get(i);
 				city_code=psb.getCity_code();
+				
 		%>
 			<tr>
 				<td><%=psb.getCity_code() %></td>
@@ -60,6 +62,10 @@
 				<td><%=psb.getImg() %></td>
 				<td><%=psb.getRanking() %>위</td>
 				<td><%=psb.getInfo() %></td>
+				<td>
+					<input type="button" value="수정" onclick="location.href='./SouvenirUpdate.pl?city_code=<%=city_code%>&num=<%=psb.getNum()%>'">
+					<input type="button" value="삭제" onclick="location.href='./SouvenirDelete.pl?city_code=<%=city_code%>&num=<%=psb.getNum()%>'">
+				</td>
 			</tr>
 		<%
 			}

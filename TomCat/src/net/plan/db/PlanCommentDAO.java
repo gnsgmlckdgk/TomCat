@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-/* 국가페이지, 도시페이지 리뷰 커뮤니티관련 DB작업 */
+/* 국가페이지, 도시페이지, 관광지 리뷰 커뮤니티관련 DB작업 */
 public class PlanCommentDAO {
 
 	Connection con = null;
@@ -378,5 +378,66 @@ public class PlanCommentDAO {
 			}
 		}
 	
+		/*관광지*/
+		// 리뷰 작성(관광지) : PlanSpotCommentBean 오류떠서 주석해놓음... 수정하는분 조치바람...
+		/*public void insertSpotComment(PlanSpotCommentBean pscb) {
+
+			int num = 0;
+			int spot_num = 0;
+
+			String content = pscb.getContent().replaceAll("\n", "<br>");
+
+			try {
+
+				con = getConnection();
+
+				// 전체 국가페이지 리뷰글의 num 파악
+				sql = "select max(num) as num from spot_comment";
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					num = rs.getInt("num") + 1; // 넣을 num 값
+				}
+
+				// 특정 국가의 num 파악
+				sql = "select max(spot_num) as nation_num from spot_comment where spot=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, pscb.getSpot());
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					spot_num = rs.getInt("spot_num") + 1; // 넣을 nation_num 값
+				}
+
+				// DB에 넣기
+				sql = "insert into spot_comment(num, spot, spot_num, nick, date, eval, content)"
+						+ "values(?, ?, ?, ?, ?, ?, ?)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, num);
+				ps.setString(2, pscb.getSpot());
+				ps.setInt(3, spot_num);
+				ps.setString(4, pscb.getNick());
+				Timestamp date = new Timestamp(System.currentTimeMillis()); // 현재시간
+				ps.setTimestamp(5, date);
+				ps.setInt(6, pscb.getEval());
+				ps.setString(7, pscb.getContent());
+
+				ps.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (ps != null)
+						ps.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}*/
+		
 
 }

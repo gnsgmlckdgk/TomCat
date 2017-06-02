@@ -29,6 +29,7 @@ public class PlanNationAction implements Action{
 		
 		// 파라미터 값 가져오기
 		String nation = request.getParameter("nation");	// 국가페이지
+		System.out.println("nation: " + nation);
 		
 		// html 가져오기
 		Document doc;

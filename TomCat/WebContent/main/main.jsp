@@ -295,7 +295,7 @@
 		<li><a href="./CountryList.pl" class="button special big">국가
 				DB</a></li>
 		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
-		<li><a href="./PlanSpot.pl?travel=태종대" class="button special big">추천장소
+		<li><a href="./PlanSpot.pl?travel=자연사 박물관" class="button special big">추천장소
 				상세보기</a></li>
 		<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
 	</ul>
