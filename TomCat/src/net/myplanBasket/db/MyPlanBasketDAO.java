@@ -349,35 +349,44 @@ public class MyPlanBasketDAO {
 			// rs2=>자바빈 저장 => goodsList한칸 저장
 			while (rs.next()) {
 				MyPlanBasketBean mpbb = new MyPlanBasketBean();
+				
 				mpbb.setId(rs.getString("id"));
 				mpbb.setPlan_nr(rs.getInt("plan_nr"));
 				mpbb.setTravel_id(rs.getInt("travel_id"));
 				mpbb.setItem_nr(rs.getInt("item_nr"));
 				mpbb.setFirstday(rs.getString("firstday"));
+
 				mpbb.setLastday(rs.getString("lastday"));
 				mpbb.setDay_nr(rs.getInt("day_nr"));
 				mpbb.setDay_night(rs.getString("day_night"));
 				mpbb.setUser_lat(rs.getFloat("user_lat"));
 				mpbb.setUser_lng(rs.getFloat("user_lng"));
+
 				mpbb.setDate(rs.getString("date"));
 				mpbb.setMemo(rs.getString("memo"));
 				mpbb.setPlan_done_nr(rs.getInt("plan_done_nr"));
+
 				basketList.add(mpbb);
 
 				sql = "select * from travel where travel_id=?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1, mpbb.getTravel_id());
 				rs2 = pstmt2.executeQuery();
+				
 				if (rs2.next()) {
+					
 					TravelBean tb = new TravelBean();
+					
 					tb.setType(rs2.getString("type"));
 					tb.setCountry_code(rs2.getString("country_code"));
 					tb.setCity_code(rs2.getString("city_code"));
 					tb.setName(rs2.getString("name"));
 					tb.setLatitude(rs2.getFloat("latitude"));
+					
 					tb.setLongitude(rs2.getFloat("longitude"));
 					tb.setInfo(rs2.getString("info"));
 					tb.setAddress(rs2.getString("address"));
+					
 					goodsList.add(tb);
 				}
 
