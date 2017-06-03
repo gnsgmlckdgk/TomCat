@@ -93,6 +93,8 @@
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
 		List datelist = (List) request.getAttribute("datelist");
+		
+		out.println("datelist : " + datelist);
 
 		System.out.println("fromDate : " + fromDate);
 
@@ -121,79 +123,80 @@
 		}
 	%>
 
-	<table border="1" class="tg" name="test">
+		<table border="1" class="tg" name="test">
 
-		<!-- 첫째날 -->
-		<tr>
-			<th id="testPlanner"><%=fromDate%></th>
-			<td><select name="planMaker">
-					<option>---선택하세요---</option>
-					<%
-						if (basketList != null) {
-							for (int i = 0; i < basketList.size(); i++) {
-								TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-					%>
-					<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-					<%
-						}
-						}
-					%>
-			</select></td>
-			<td></td>
-		</tr>
-		<!-- 첫째날 끝.-->
-
-		<!-- 첫째날과 마지막날 사이 -->
-		<%
-			for (int j = 0; j < datelist.size(); j++) {
-		%>
-		<tr>
-			<th><%=datelist.get(j)%></th>
-			<td><select name="planMaker">
-					<option>---선택하세요---</option>
-					<%
-						if (basketList != null) {
+			<!-- 첫째날 -->
+			<tr>
+				<th id="testPlanner"><%=fromDate%></th>
+				<td><select name="planMaker">
+						<option>---선택하세요---</option>
+						<%
+							if (basketList != null) {
 								for (int i = 0; i < basketList.size(); i++) {
 									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-					%>
-					<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-					<%
-						}
+						%>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<%
 							}
-					%>
-			</select></td>
-			<td></td>
-		</tr>
-		<%
-			}
-		%>
-		<!-- 첫째날과 마지막날 사이 끝.-->
+							}
+						%>
+				</select></td>
+				<td></td>
+			</tr>
+			<!-- 첫째날 끝.-->
 
-		<!-- 마지막날 -->
-		<tr>
-			<th><%=toDate%></th>
-			<td><select name="planMaker">
-					<option>---선택하세요---</option>
-					<%
-						if (basketList != null) {
-							for (int i = 0; i < basketList.size(); i++) {
-								TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-					%>
-					<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-					<%
-						}
-						}
-					%>
-			</select></td>
-			<td></td>
-		</tr>
-		<!-- 마지막날 끝.-->
+			<!-- 첫째날과 마지막날 사이 -->
+			<%
+				for (int j = 0; j < datelist.size(); j++) {
+			%>
+			<tr>
+				<th><%=datelist.get(j)%></th>
+				<td><select name="planMaker">
+						<option>---선택하세요---</option>
+						<%
+							if (basketList != null) {
+									for (int i = 0; i < basketList.size(); i++) {
+										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+						%>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<%
+							}
+								}
+						%>
+				</select></td>
+				<td></td>
+			</tr>
+			<%
+				}
+			%>
+			<!-- 첫째날과 마지막날 사이 끝.-->
 
-		<tr>
-			<td colspan="7"><input type="submit" value="일정수정"> <input
-				type="reset" value="다시등록"></td>
-		</tr>
-	</table>
+			<!-- 마지막날 -->
+			<tr>
+				<th><%=toDate%></th>
+				<td><select name="planMaker">
+						<option>---선택하세요---</option>
+						<%
+							if (basketList != null) {
+								for (int i = 0; i < basketList.size(); i++) {
+									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+						%>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<%
+							}
+							}
+						%>
+				</select></td>
+				<td></td>
+			</tr>
+			<!-- 마지막날 끝.-->
+
+			<tr>
+				<td colspan="7"><input type="submit" value="일정수정"> <input
+					type="reset" value="다시등록"></td>
+			</tr>
+		</table>
+
 
 	<div id="testsel"></div>
 </div>

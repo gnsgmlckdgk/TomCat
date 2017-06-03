@@ -279,16 +279,15 @@
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr">
-				<input type="text" name="fromDate" id="fromDate" value="시작일"
+				<input type="text" name="fromDate" id="fromDate" 
 					style="	background-image: url('myplan/pn_cal_btn.png');
 							background-repeat: no-repeat;
-							background-position: 110px 13px;"> 
-				<input type="text" name="toDate" id="toDate" value="종료일"
+							background-position: 110px 13px;" required="required" placeholder="시작일"> 
+				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일"
 					style="	background-image: url('myplan/pn_cal_btn.png');
 							background-repeat: no-repeat;
 							background-position: 110px 13px;">
-				<select name="plan_nr">
-					<option value="choice">여행 타이틀을 선택하세요</option>
+				<select name="plan_nr" id="plan_nr" required="required">
 					<option value="1" >일정A</option>
 					<option value="2">일정B</option>
 					<%if(gold.equals("유료회원")){ %>
@@ -314,7 +313,8 @@
 
 
 
-	<script>
+	<script>	
+	
       var map;
 
       // Create a new blank array for all the listing markers.
@@ -403,7 +403,7 @@
 	      <%--   var defaultIcon = makeMarkerIcon('<%=MarkerColor%>'); --%>
 	    
 
-         	var lat = <%=tb.getLatitude()%>;
+			var lat = <%=tb.getLatitude()%>;
 	    	var lng = <%=tb.getLongitude()%>;
 	    	var position = new google.maps.LatLng(lat,lng); 
 

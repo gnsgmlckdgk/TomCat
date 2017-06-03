@@ -321,11 +321,13 @@ public class MyPlanBasketDAO {
 
 	// getBasketList(id)
 	public Vector getBasketList(String id) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt2 = null;
 		ResultSet rs2 = null;
+		
 		String sql = "";
 		Vector vector = new Vector();
 		List basketList = new ArrayList();
@@ -397,6 +399,7 @@ public class MyPlanBasketDAO {
 			vector.add(goodsList);
 			System.out.println("basketList.size" + basketList.size());
 			System.out.println("goodsList.size" + goodsList.size());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
