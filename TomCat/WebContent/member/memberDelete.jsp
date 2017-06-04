@@ -7,8 +7,8 @@
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Main -->
-<section id="main" class="wrapper memberManager">
-	<div class="container">
+<section class="memberManager">
+	<div class="memberContainer">
 	<%
 		String id = (String)session.getAttribute("id");
 		if(id==null) {
@@ -20,12 +20,22 @@
 		<jsp:include page="subMenu/memberManager.jsp"/>
 		
 		<!-- 컨텐츠 -->
-		<div class="content">
+		<div class="memberContent">
 			<div class="content_member_memberDelete">
-				<h1>회원 탈퇴</h1>
-				
-				<div class="pass_form">
+			<header>
+				<h1>회원탈퇴</h1><hr>
+			</header>
+	
+				<div class="passDelete_form">
 					<form action="./MemberDeleteAction.me" method="post" onsubmit="return passCheck()">
+						
+						<p class="delete_txt">
+						사용하고 계신 <span style="color: #1fbc02;"><%=id %></span> 계정을 탈퇴할 경우 복구가
+						불가능합니다.<br> 
+						탈퇴후 회원 정보 및 서비스 이용기록은 모두 삭제되오니 신중하게 선택하여 주시기 바랍니다.<br>
+						회원탈퇴를 위해 비밀번호를 입력해 주세요.
+						</p>
+						
 						<label for="pass">비밀번호 입력</label><input type="password" name="pass" id="pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용">
 				
 					<!-- RSA암호화 공개키 -->
@@ -76,10 +86,10 @@
 				</script>
 				
 				</div>	<!-- pass_form -->
-			</div> <!-- content_member_info -->
-		</div>	<!-- content -->
+			</div> <!-- content_member_memberDelete -->
+		</div>	<!-- memberContent -->
 	
-	</div>
+	</div>	<!-- memberContainer -->
 </section>
 
 <div class="clear"></div>

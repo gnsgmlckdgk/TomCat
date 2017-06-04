@@ -35,28 +35,32 @@
 <div id="profileImg_enl"></div>
 
 <!-- Main -->
-<section id="main" class="wrapper memberManager">
-	<div class="container">
+<section class="memberManager">
+	<div class="memberContainer">	<!-- 전체 내용물 = 서브메뉴 + 컨텐츠 -->
+	
+		<div class="clear"></div>
+	
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
+		<%
+		// 세션값 없으면 Main으로
+		String id = (String)session.getAttribute("id");
+		if(id==null) {
+			response.sendRedirect("./Main.me");
+			return;
+		}		
+		// 회원정보 가져오기
+		MemberBean mb = (MemberBean)request.getAttribute("mb");
+		%>
 		
 		<!-- 컨텐츠 -->
-		<div class="content">
-			<div class="content_member_info">
-				<h1>회원정보</h1>
-				
-				<%
-				// 세션값 없으면 Main으로
-				String id = (String)session.getAttribute("id");
-				if(id==null) {
-					response.sendRedirect("./Main.me");
-					return;
-				}
-				
-				// 회원정보 가져오기
-				MemberBean mb = (MemberBean)request.getAttribute("mb");
-				
-				%>
+		<div class="memberContent">
+			<header>
+				<h1>회원정보 수정</h1><hr>
+				<span style="color: #1fbc02;"><%=id %></span>님의 회원정보 입니다.<br>
+				회원정보는 개인정보처리방침에 따라 안전하게 보호되며, 회원님의 명백한 동의 없이 공개 또는 제 3자에게 제공되지 않습니다.
+				<a href="./QandAprivacy.qna" target="_blank">개인정보처리방침</a>
+			</header>
 								
 				<div class="info_form">
 					
@@ -75,7 +79,7 @@
 							<tr><th>닉네임</th>
 								<td><input type="text" value="<%=mb.getNick() %>" name="nick" id="nick" maxlength="9" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"></td></tr>
 							<tr><th>성별</th>
-								<td>
+								<td id="genderTh">
 									<input type="radio" id="priority-normal man" name="gender" value="남" <%if(mb.getGender().equals("남")){ %>checked<%} %>>
 									<label for="priority-normal man">남</label>
 									<input type="radio" id="priority-normal woman" name="gender" value="여" <%if(mb.getGender().equals("여")){ %>checked<%} %>>
@@ -229,16 +233,16 @@
 
 					// 바뀐정보는 글자 색을 바꿈
 					$('#name').on('change', function() {
-						$(this).css('color', '#6B66FF');
+						$(this).css('color', '#1a7ad9');
 					});
 					$('#nick').on('change', function() {
-						$(this).css('color', '#6B66FF');
+						$(this).css('color', '#1a7ad9');
 					});
 					$('#tel').on('change', function() {
-						$(this).css('color', '#6B66FF');
+						$(this).css('color', '#1a7ad9');
 					});
 					$('#profile').on('change', function() {
-						$(this).css('color', '#6B66FF');
+						$(this).css('color', '#1a7ad9');
 					});
 
 					// 수정완료 전 체크
@@ -310,10 +314,10 @@
 
 					</script>
 					
-				</div>	<!-- info_form -->
+				</div>	<!-- memberContent -->
 				
-			</div> <!-- content_member_info -->
-		</div>	<!-- content -->
+			</div> <!-- memberContainer -->
+			<div class="clear"></div>
 	
 	</div>
 </section>

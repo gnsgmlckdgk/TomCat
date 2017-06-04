@@ -17,71 +17,70 @@
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/modifyNewFile7.css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
-<script >
 
-$(function(){
-	$("#left_box2").click(function(){
-		var effect = 'slide';
-		var options ='left';
-		var duration = 500;
-		$('#right_box').toggle(effect, options, duration);
-	}); 
-});
-
-
-
-$( function() {
-    $( "#left_box2_detail" ).sortable();
-    $( "#left_box2_detail" ).disableSelection();
-  } );
-  
-  
-/* 
-$(document).ready(function(datelist){
-	
-	var left_box1_detail li=$(this).val();
-	$('date').empty();
-	$('date').append(function(){
-		
+<script>
+	$(function() {
+		$("#left_box2").click(function() {
+			var effect = 'slide';
+			var options = 'left';
+			var duration = 500;
+			$('#right_box').toggle(effect, options, duration);
+		});
 	});
-}); */
 
-if(document.test.planMaker.selectedIndex!=0){
-	alert("과목을 선택하세요");
-	document.test.se.focus();
-	return false;
-}//if
+	$(function() {
+		$("#left_box2_detail").sortable();
+		$("#left_box2_detail").disableSelection();
+	});
 
-</script>
-<script type="text/javascript">
+	/* 
+	 $(document).ready(function(datelist){
+	
+	 var left_box1_detail li=$(this).val();
+	 $('date').empty();
+	 $('date').append(function(){
+	
+	 });
+	 }); */
 
-	$(document).ready(function(){
+	if (document.test.planMaker.selectedIndex != 0) {
+		alert("과목을 선택하세요");
+		document.test.se.focus();
+		return false;
+	}//if
+
+	$(document).ready(function() {
 		//name:홍길동 age:21파라미터 넘겨서
 		//string2.jsp 결과처리 내용가져오기
-		$('#testPlanner').click(function(){
-			
-		$.ajax('myplanModify_selectBox.jsp',{
-			data:{name:'홍길동', age:21},
-			success:function(data){
-				//select 뒷부분 추가
-				alert("testtest");
-				$('#testsel').append(data);
-			}
-		});
-		
+		$('#testPlanner').click(function() {
+
+			$.ajax('myplanModify_selectBox.jsp', {
+				data : {
+					name : '홍길동',
+					age : 21
+				},
+				success : function(data) {
+					//select 뒷부분 추가
+					alert("testtest");
+					$('#testsel').append(data);
+				}
+			});
+
 		});
 	});
-
 </script>
 <body>
 	<%
@@ -90,113 +89,139 @@ if(document.test.planMaker.selectedIndex!=0){
 		String id = (String) session.getAttribute("id");
 
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
-		
+
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
-		List datelist = (List)request.getAttribute("datelist");
-		System.out.println(fromDate);
+		List datelist = (List) request.getAttribute("datelist");
 		
-		
-		
-		String dep_lat =  (String) request.getParameter("dlat");
-		String dep_lng =  (String) request.getParameter("dlng");
-		String arr_lat =  (String) request.getParameter("alat");
-		String arr_lng =  (String) request.getParameter("alng");
-    
-		%>
+		out.println("datelist : " + datelist);
+
+		System.out.println("fromDate : " + fromDate);
+
+		String dep_lat = (String) request.getParameter("dlat");
+		String dep_lng = (String) request.getParameter("dlng");
+		String arr_lat = (String) request.getParameter("alat");
+		String arr_lng = (String) request.getParameter("alng");
+	%>
 
 </body>
-<div class="wrap">
+<div class="wrap" style="max-width: 1080px; margin: auto;">
 
-	<%if(plan_nr==1){%>일정A<%} %>
-    <%if(plan_nr==2){%>일정B<%} %>
-    <%if(plan_nr==3){%>일정C<%} %> 
-    
-<table border="1" class="tg" name="test">
-  <tr>
-    <th id="testPlanner" ><%=fromDate%></th>
-    <td>
-    
-  
-	    <select name="planMaker" >
-	    <option>---선택하세요---</option>
-	    <%
-	    	for (int i = 0; i < basketList.size(); i++) {
-	    		TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-	    %>
-	    	<option  value="<%=tb.getName()%>"><%=tb.getName()%></option>
-		<%}%>	
-		</select>
-		
-			
-    </td>
-    <td>	
-    </td>
-  </tr>
-  <%for(int j=0;j<datelist.size();j++){ %>
-  <tr>
-  	<th><%=datelist.get(j) %></th>
-    <td>
-      <select name="planMaker" >
-	    <option>---선택하세요---</option>
-	    <%
-	    	for (int i = 0; i < basketList.size(); i++) {
-	    		TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-	    %>
-	    	<option  value="<%=tb.getName()%>"><%=tb.getName()%></option>
-		<%}%>	
-		</select>
-    </td>
-    <td>
-    </td>
-  </tr>
-    <% } %>
-  <tr>
-  	<th><%=toDate%></th>
-    <td>
-      <select name="planMaker" >
-	    <option>---선택하세요---</option>
-	    <%
-	    	for (int i = 0; i < basketList.size(); i++) {
-	    		TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-	    %>
-	    	<option  value="<%=tb.getName()%>"><%=tb.getName()%></option>
-		<%}%>	
-		</select>
-    </td>
-    <td>
-    </td>
-  </tr>
-  
-  <tr><td colspan="7"><input type="submit" value="일정수정">
-		<input type="reset" value="다시등록"></td>
-	</tr>
-</table>
+	<%
+		if (plan_nr == 1) {
+	%>일정A<%
+		}
+	%>
+	<%
+		if (plan_nr == 2) {
+	%>일정B<%
+		}
+	%>
+	<%
+		if (plan_nr == 3) {
+	%>일정C<%
+		}
+	%>
 
-<div id="testsel"></div>
+		<table border="1" class="tg" name="test">
+
+			<!-- 첫째날 -->
+			<tr>
+				<th id="testPlanner"><%=fromDate%></th>
+				<td><select name="planMaker">
+						<option>---선택하세요---</option>
+						<%
+							if (basketList != null) {
+								for (int i = 0; i < basketList.size(); i++) {
+									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+						%>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<%
+							}
+							}
+						%>
+				</select></td>
+				<td></td>
+			</tr>
+			<!-- 첫째날 끝.-->
+
+			<!-- 첫째날과 마지막날 사이 -->
+			<%
+				for (int j = 0; j < datelist.size(); j++) {
+			%>
+			<tr>
+				<th><%=datelist.get(j)%></th>
+				<td><select name="planMaker">
+						<option>---선택하세요---</option>
+						<%
+							if (basketList != null) {
+									for (int i = 0; i < basketList.size(); i++) {
+										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+						%>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<%
+							}
+								}
+						%>
+				</select></td>
+				<td></td>
+			</tr>
+			<%
+				}
+			%>
+			<!-- 첫째날과 마지막날 사이 끝.-->
+
+			<!-- 마지막날 -->
+			<tr>
+				<th><%=toDate%></th>
+				<td><select name="planMaker">
+						<option>---선택하세요---</option>
+						<%
+							if (basketList != null) {
+								for (int i = 0; i < basketList.size(); i++) {
+									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+						%>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<%
+							}
+							}
+						%>
+				</select></td>
+				<td></td>
+			</tr>
+			<!-- 마지막날 끝.-->
+
+			<tr>
+				<td colspan="7"><input type="submit" value="일정수정"> <input
+					type="reset" value="다시등록"></td>
+			</tr>
+		</table>
+
+
+	<div id="testsel"></div>
 </div>
 
 
-<% 	
-for(int i=0;i<basketList.size();i++){
-	MyPlanBasketBean mpbb = (MyPlanBasketBean)basketList.get(i);
-	TravelBean tb=(TravelBean)goodsList.get(i);
-	if(mpbb.getId().equals(id)){
-	if(mpbb.getPlan_nr()== plan_nr){
+<%
+	// 	for (int i = 0; i < basketList.size(); i++) {
+	// 		MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
+	// 		TravelBean tb = (TravelBean) goodsList.get(i);
+	// 		if (mpbb.getId().equals(id)) {
+	// 			if (mpbb.getPlan_nr() == plan_nr) {
 %>
-	<%
-}
-}
-}
- 	%>
+<%
+	// 	}
+	// 		}
+	// 	}
+%>
 
 
 
-		
-		<!-- <form action="./MyPlanModifyAction.pln" method="post" ></form> -->
-		<%-- <input type="text" name="plan_nr" value="<%=plan_nr%>"> --%>
-		
-		
+
+<!-- <form action="./MyPlanModifyAction.pln" method="post" ></form> -->
+<%-- <input type="text" name="plan_nr" value="<%=plan_nr%>"> --%>
+
+
 <%-- 		<div class="wrap">
 			<div id="left_box1">
 				<!-- box1 -->
@@ -249,9 +274,9 @@ for(int i=0;i<basketList.size();i++){
 		
 
  --%>
-	
-	
-	<%-- 		<table border="1" >
+
+
+<%-- 		<table border="1" >
 					<tr>
 						<td>plan_nr</td>
 						<td>item_nr</td>
@@ -274,8 +299,8 @@ for(int i=0;i<basketList.size();i++){
 						}
 					%>
 		</table> --%>
-		
-		
+
+
 <div class="clear"></div>
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

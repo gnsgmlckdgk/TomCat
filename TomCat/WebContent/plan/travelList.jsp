@@ -117,6 +117,9 @@
 				top: 0;
 				left: 37em;
 			}
+			div.cityList input[type="button"] {
+				font-size: 12px;
+			}
 		</style>
 			
 	</head>

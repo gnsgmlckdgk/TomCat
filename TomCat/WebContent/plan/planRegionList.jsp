@@ -74,32 +74,6 @@
 	//조건부 검색된 값이면 c_b가 true로. 끝.
 %>
 
-<style>
-
-#zzim{
-	padding: 0 1.5em;
-	margin-left: 2em;
-	max-height: 2em;
-	vertical-align: middle;
-	line-height: 0;
-}
-
-#travel_name{
-	font-size: 1.2em;
-	font-weight: bold;
-	color: black;
-	margin-bottom: 0.7em;
-
-}
-
-table td{
-	padding: 1em;
-	vertical-align: middle;
-}
-
-</style>
-
-
 <!-- 검색폼 -->
 
 <div class="search_div">
@@ -145,29 +119,26 @@ table td{
 				regionPath = regionPath.replace("\\", "/");	// css는 \아닌 /로 인식되서 바꿔줌
 	%>
 	<tr>
-		<td class="img_td">
-			<img src="./images/plan/nation/<%=regionPath %>" alt="<%=ptb.getName()%>">
+		<td class="img_td"
+			style="background-image: url('./images/plan/nation/<%=regionPath %>'); background-size: cover;">
 		</td>
-		<td class="txt_td" style="text-align: left; padding-left: 1em;">
-			<p id="travel_name"><%=ptb.getName()%> 
+		<td class="txt_td">
+			<span id="travel_name" class="travel_name"><%=ptb.getName()%></span>
 				<%
 					if (id != null) {
 				%>
 				<input type="button" name="zzim"
-					onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜"
-					class="button special icon fa-download" id="zzim"/>
+					onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜하기"
+					class="button special icon fa-download zzim" id="zzim"/>
 				<%
 					} else if (id == null) {
 				%>
 				<input type="button" name="zzim_noId" onclick="zzim_noId()"
-					value="찜" class="button special icon fa-download" id="zzim" />
+					value="찜하기" class="button special icon fa-download zzim" id="zzim"/>
 				<%
 					}
 				%>
-			</p>
-			
-			<p
-				style="font-size: 1.0em; line-height: 20px; letter-spacing: -1px; word-spacing: 4px;"><%=ptb.getInfo()%></p>
+			<br><br><span class="travel_info"><%=ptb.getInfo()%></span>
 		</td>
 	</tr>
 	<%
@@ -175,7 +146,7 @@ table td{
 		} else {
 	%>
 	<tr>
-		<td colspan="2"><p>찾으시는 정보가 없습니다.</p></td>
+		<td colspan="2" style="display: block; text-align: center; width: 1080px;">찾으시는 정보가 없습니다.</td>
 	</tr>
 	<%
 		}

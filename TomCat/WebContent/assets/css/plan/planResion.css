@@ -2,60 +2,199 @@
 
 /* 지역(도시) 페이지 */
 
-/* 첫번재 섹션 : 지역(도시) 정보 */
+body {
+	background-color: #fff;
+}
+
+/* 첫번재 섹션 : 국가 정보 */
 section#banner {
 	/* 맨 윗부분 */
 }
-section.resion_one {
-	position: relative;
+section.region_one {
+	/* position: relative; */
 }
-section.resion_one div.resion_info table th {
-	color: #fff;
-	font-size: 1em;
-	min-width: 82px;
-}
-section.resion_one div.resion_info table td {
-	color: #fff;
-	font-size: 0.9em;
-}
-table tr{
-	max-height: 180px;;
-}
-
-table td.img_td img{
-	vertical-align: middle;
-	background-repeat: no-repeat;
-	background-size:contain;
+section.region_one .region_info_content {	/* 내용물 전체 */
+	margin: 0 auto;
 	padding: 0;
-	max-width: 15em;
+	width: 1092px;
+	background-color: rgba(255, 255, 255, 0.4);
+}
+section.region_one .region_info_content .imgSlide {	/* 이미지 슬라이드 DIV */
+	width: 800px;
+	height: 369px;
+}
+section.region_one .region_info_content .swiper-slide {	/* 슬라이드 이미지 DIV */
+	width: 600px;
+}
+section.region_one .region_info_content .imgSlide img {	/* 슬라이드 이미지들 */
+	width: 600px;
+	height: 369px;
 }
 
-
-
-
-section.resion_one div.resion_info_content {
-/* 	width: 60%; */
-	min-width: 600px;
-	max-width: 1080px;
+/* 첫번째 섹션에서 따로 섹션 분리해 정보표시 */
+section.info {	/* 도시 정보 */
+	padding-top: 30px;
 }
-
-.container h2{
-	max-width: 1080px;
+section.info .region_info_content {
+	width: 1200px;
+	padding: 0;
+	margin: 0 auto;
 }
-
-.checkbox{
+section.info .region_info_content .region_info table {	
+	margin: 0;
+	padding: 10px 20px;
+	background-color: #f7f7f7;
+	display: block;
+	width: 670px;
+	min-height: 300px;
+	float: right;
+}
+section.info .region_info_content .region_info tr {
+	background-color: #f7f7f7;
+	border: none;
+}
+section.info .region_info_content .region_info th {
+	border: none;
+	width: 100px;
+	font-size: 16px;
+	color: #1a7ad9;
+}
+section.info .region_info_content .region_info td {
+	border: none;
+	font-size: 14px;
+	width: 560px;
+}
+section.info .region_info_content .map {	/* 지도 */
+	width: 520px;
+	height: 300px;
 	float: left;
-	width: 45%;
+	margin: 0;
 }
-.search_div{
+
+
+
+/* 두번째 섹션 : 관광지 리스트 */
+section.two {	/* 두번째 섹션 전체 */
+	font-size: 12px;
+	border-bottom: 1px solid #ccc;
+	background-color: #f7f7f7;
+	margin: 0;
+}
+div.travelList {	/* 내용물 전체 */
+	width: 1080px;
+	min-height: 600px;
+	margin: 30px auto;
+}
+div.travelList h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
+}
+div.travelList .checkbox {	/* 체크박스 */
 	float: left;
-	width: 50%;
+	width: 300px;
+	height: 30px;
+}
+div.travelList .search_div {	/* 검색 DIV */
+	width: 360px;
+	float: right;
+	position: relative;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: -10px;
+}
+div.travelList .search_div #search {
+	width: 290px;
+	background-color: #fff;
+	font-size: 12px;
+	padding-left: 34px;
+	float: left;
+}
+div.travelList .search_div .search_img {	/* 검색 이미지 */
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	left: 2px;
+	top: 2px;
+}
+div.travelList .search_div input[type=submit] {
+	font-size: 10px;
+	float: right;
+}
+div.travelList div.travelListTable {	/* 관광지 리스트 테이블 전체 */
+	margin-top: 30px;
+}
+div.travelList div.travelListTable tr {
+	display: inline-block;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+}
+div.travelList div.travelListTable tr:hover {
+	cursor: pointer;
+	border: 1px solid #1a7ad9;
+}
+div.travelList div.travelListTable td.img_td {	/* 관광지 이미지 */
+	background-color: #fff;
+	width: 260px;
+	height: 160px;
+	max-width: 260px;
+	max-height: 160px;
+}
+div.travelList div.travelListTable td.txt_td {	/* 관광지 소개 */
+	background-color: #fff;
+	width: 820px;
+	padding: 10px 30px 10px 20px;
+}
+div.travelList div.travelListTable td .travel_name {	/* 관광지 이름 */
+	color: #1a7ad9;
+	font-size: 16px;
+	font-weight: 900;
+}
+div.travelList div.travelListTable td .zzim {	/* 찜 버튼 */
+	display: inline-block;
+	font-size: 12px;
+	padding: 0 10px;
+	float: right;
+}
+div.travelList div.travelListTable .travel_info {
+	text-indent: 5px;
+	font-size: 12px;
+	line-height: 15px;
 }
 
-.region_list_div{
-	max-width: 1080px;
+
+div.travelList div.travelListTable .page {	/* 페이징 */
+	font-size: 16px;
+	text-align: center;
+}
+div.travelList div.travelListTable .page a {
+	padding: 1px 7px;
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	text-decoration: none;
+}
+div.travelList div.travelListTable .page img {
+	width: 13px;
+	height: 13px;
 }
 
-#three .container{
-	max-width: 1080px;
+/* 세번째 섹션, 여행 후기 블로그 */
+section.three {
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+}
+div.travel_con {	/* 내용물 전체 */
+	width: 1080px;
+	margin: 0 auto;
+}
+div.travel_con h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
 }

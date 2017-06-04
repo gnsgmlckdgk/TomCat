@@ -1,3 +1,4 @@
+var src = "";
 
 var daumSearch = { 
         /** 초기화. **/ 
@@ -20,7 +21,7 @@ var daumSearch = {
             s.type = 'text/javascript'; 
             s.charset = 'utf-8'; 
             s.src = api + this.query + '&pageno=' + pgno + '&callback=' + callback + '&result='+result ;  
-             
+            
             ds.appendChild(s); 
         }, 
         /**4. 결과를 뿌려줌. **/ 
@@ -29,14 +30,22 @@ var daumSearch = {
             //기존 수정 전 코드에서는 div 대신에 ul을 사용했다. 변수명은 그대로 사용.
             
             for(var i=0; i<z.channel.item.length; i++){
-                var title = document.createElement('h4'); //id가 daumImage인 부분에 추가. h1~h6까지 사진 설명 글자 크기.
+                var title = document.createElement('h3'); //id가 daumImage인 부분에 추가. h1~h6까지 사진 설명 글자 크기.
                 title.className = 'content';
+                title.style["font-size"] = "14px";
+                title.style["margin-top"] = "61px";
+                title.style["text-decoration"] = "underline";
+                title.style["padding"] = "5px 1px";
+                
                 
                 //사진 설명 글의 하이퍼링크 시작.
                 var a = document.createElement('a'); 
                 a.href = z.channel.item[i].link; 
                 a.target = '_blank'; 
                 a.innerHTML = this.escapeHtml(z.channel.item[i].title); 
+
+                src = $(a).attr('href');
+                
                 title.appendChild(a); //이 부분이 없으면 아예 사진 설명 출력 없음.
                //사진 설명 글의 하이퍼링크 끝.
                 
@@ -146,28 +155,47 @@ var daumSearch = {
             //수정 전 코드에서는 div 대신에 li를 만들었다. 변수명은 li계속 사용.
             
             //선택자.style[css명령어]='css value값';
-            //li.style["border"]="5px solid red"; //낱개 이미지 박스.
+            li.style["border"]="1px solid #ccc"; //낱개 이미지 박스.
+            li.style["margin-left"]="20px";
+            li.style.width = '510px';
+            li.style["padding"] = "5px";
             
-             
+            // content style
+            $(li).mouseover(function(){
+            	$(li).css({
+            		'background-color' : '#3c9cfb',
+            		'cursor' : 'pointer'
+            	});
+            });
+            $(li).mouseout(function(){
+            	$(li).css({
+            		'background-color' : '#fff'
+            	});
+            });
+            $(li).click(function(){
+            	window.open(src, '_blank'); 
+            });
+            
             //content.appendChild(document.createElement('br')); 
-            li.appendChild(content); //리스트에 content출력
             li.appendChild(title); //리스트에 사진 설명 출력
+            li.appendChild(content); //리스트에 content출력
              
             return li; 
         }, 
         /** 설명 return **/ 
        getContent : function(z){ 
            var a = document.createElement("div");
-           a.className = 'image rounded';
+           a.className = 'blogImage';
            var img = document.createElement('img'); 
             
            a.target = '_blank'; //img 하이퍼링크 타겟
            a.href = z.image; //img 하이퍼링크 대상 경로
            //a.href = 'http://naver.com';	//img 하이퍼링크 테스트
            
-           //img.height = 100; //이미지 높이
-           img.style.width = '11.5em';  //이미지 폭
-           //img.style["border-radius"]="100px";
+           img.style.width = '150px';  //이미지 폭   
+           img.style.height = '150px';
+           img.style["border"]="none";
+           img.style["border-radius"]="100px";
            img.src = z.thumbnail; 
             
            a.appendChild(img); 

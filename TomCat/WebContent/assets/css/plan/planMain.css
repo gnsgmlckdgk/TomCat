@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 section.planMain{
-	width: 85em;
-	margin: auto auto;
+	width: 1080px;
+	margin:auto auto;
+	board:1px solid red;
 }
 
 section.planMain h3{
@@ -33,34 +34,37 @@ div.Search{
 form.plan_search {
 	padding:0px auto 0px auto;
 	margin: 6em auto;
-	width: 47.5em;	
+	width: 39em;	
 }
 
 form.plan_search select{
-	width: 12.5em;
+	width: 9em;
 	float: left;
-	height: 3em;
+	height: 2.5em;
 }
 
 form input.search_text{
-	width: 28.2em;
+	width: 23em;
 	float: left;
-	height: 3em;
+	height: 2.5em;
 }
 
 form input.serch_button{
 	float: left;
+	line-height:0px;
+	height: 2.5em;
+	
 }
 
 
 /* 인기여행지 리스트 */
 div.bestTrip {
 	margin:2em auto;
-	width: 85em;
+	width: 1080px;
 }
 
 div.bestTripMenu ul{
-	padding-right:4.5em;
+	padding-right:3em;
 	text-align:right;
 	float:right;
 	list-style: none;
@@ -74,13 +78,13 @@ div.bestTripMenu ul li{
 
 div.bestTripimg table {
 	margin:auto;
-	width:70em;
-	 board:1px solid red;
+	width:1080px;
 }
 
 div.bestTripimg table tr{	
 	background-color:#fff;
 	height: 15em;
+	overflow: hidden;
 }
 
 div.bestTripimg table td{
@@ -88,15 +92,21 @@ div.bestTripimg table td{
 	text-align: center;
 	padding-top:6em;
 	border: 10px solid white;
+	overflow: hidden;
 }
+ div.bestTripimg table td:HOVER{
+ 	
+	
+} 
 
 div.bestTripimg td span,div.bestTripimg td span a{
 	font-size:1.3em;
-	color:#999;
+	color:white;
 	font-weight:bold;
 	text-shadow: 2px 2px 2px black;
 	margin-top:10em;
 	text-decoration: none;
+	
 }
 
 div.bestTripimg td span a:hover{
@@ -106,12 +116,12 @@ div.bestTripimg td span a:hover{
 div.bestTripimg div{
 	color:#f32853;
 	margin: auto;
-	padding-top:9em;
+	padding-top:6em;
 	text-align: center;
 }
 div.bestTripimg div span{
-	font-size:2em;
-	margin-top:40em;
+	font-size:1.5em;
+	margin-top:30em;
 	color:#666;
 	text-shadow: 2px 2px 2px #666;
 
@@ -119,14 +129,17 @@ div.bestTripimg div span{
 
 /* 국가 리스트 */
 div.countryList{
-	width:80em;
+	width:1080px;
 	margin: 2em auto;
+}
+div.countryList div{
+	margin-bottom: 0.5em;
 }
 
 div.countryList div div{
 	float:left;
 	height:5em;
-	width:20em;
+	width:15.5em;
 	padding-left: 4.5em;
 }
 
@@ -143,9 +156,8 @@ div.countryList div div span{
 }
 
 section.planMain h3 a{
-	font-size: 0.6em;
+	font-size: 0.8em;
 	cursor: pointer;
-	
 }
 
 /* 팝업창 뜰때 팝업 이외의 화면은 가려주는 div */

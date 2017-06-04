@@ -83,19 +83,21 @@
 %>
 
 <!-- Main -->
-<section id="main" class="wrapper memberManager">
+<section class="memberManager">
 		
-		<div class = "container adminMemberInfo">
+		<div class = "memberContainer">
 			<!-- 서브메뉴 -->
 			<jsp:include page="subMenu/memberManager.jsp" />
 			
 			<!-- 주내용 -->
-			<div class="content">
+			<div class="memberContent">
 
-				<h1>회원 정보관리</h1>
+				<header>
+					<h1>회원정보 관리</h1><hr>
+				</header>
 				
 				<!-- 제목 뺀 내용 -->
-				<div class="inner_content">
+				<div class="adminMemberInfo">
 				
 				<!-- 프로필 사진 -->
 				<img src="./upload/images/profileImg/<%=mb.getProfile() %>" onerror="this.src='./images/error/noImage.png'">	
@@ -141,14 +143,13 @@
 					</tr>
 				</table>
 				
-				</div><!-- inner_content -->
-				
 				<input type="button" value="뒤로가기" 
 				onclick="location.href='./MemberManager.me?pageNum=<%=pageNum %>&search=<%=search %>&sort=<%=isort %>';" 
-				class="button special">
+				class="button special backBtn">
 				
-			</div><!-- content -->
-		</div>	<!-- adminMemberInfo -->
+				</div><!-- adminMemberInfo -->	
+			</div><!-- memberContent -->
+		</div>	<!-- memberContainer -->
 		
 </section>
 

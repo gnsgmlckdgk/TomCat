@@ -34,22 +34,16 @@
 <%} else { %>
 <section id="banner" class="nation_one b_back">
 <%} %>
-
-
 	<h2><%=nation%></h2>
 	<div class="nation_info_content">
-<!-- 국가의 도시들의 이미지 슬라이드 -->
-<!-- Swiper -->
+	<!-- 국가의 도시들의 이미지 슬라이드 -->
+	<!-- Swiper -->
     <%
-/*     // 도시 리스트
-    List<PlanCityBean> cityList = null;
-    cityList = (List)request.getAttribute("cityList");	// 도시 리스트, 필요없을지도... */
-    
     // 도시 이미지 리스트
     List<ImagesBean> cityImgList = null;
     cityImgList = (List)request.getAttribute("cityImgList");
     %>
-    <div class="swiper-container slideContainer">
+    <div class="swiper-container slideContainer imgSlide">
         <div class="swiper-wrapper">
     <%
     ImagesBean ib = null;
@@ -66,56 +60,77 @@
     	<%
     }
     %>
-     </div>
+     </div>	<!-- swiper-wrapper 끝 -->
         <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+        <div class="swiper-pagination" style="color: #fff; font-weight: 900;"></div>
+         
+         <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>     
+    </div>	<!-- slideContainer -->
+    
     	
     <!-- Swiper JS -->
     <script src="./assets/dist/js/swiper.min.js"></script>
 
     <!-- Initialize Swiper -->
-    <script>
+     <script>
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
-        slidesPerView: 'auto',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        effect: 'coverflow',
+        grabCursor: true,
         centeredSlides: true,
-        paginationClickable: true,
-        spaceBetween: 30
+        slidesPerView: 'auto',
+        paginationType: 'fraction',
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        },
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
     });
     </script>
-	
+    
+	</div>
+</section>
+
+<section class="info">
+		<!-- 국가 정보 -->
+	<div class="nation_info_content">
+	<div class="nation_info">
+	<!-- 지도 -->
 	<div class="map">
 		<!-- 수현씨 지도 부분 -->
 		<iframe width="100%" height="100%" frameborder="0" style="border: 0"
 			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=nation%>"
 			allowfullscreen> </iframe>
 	</div> <!-- 수현씨 지도 부분 끝 -->
-	
+	<%
+	// PlanNationAction에서 가져옴
+	StringBuffer nation_info = (StringBuffer)request.getAttribute("nation_info");
+	%>
+	<%=nation_info.toString() %>
+	</div>
 	<div class="clear"></div>
-			
-			<div class="nation_info">
-				 <%
-				 // PlanNationAction에서 가져옴
-				 StringBuffer nation_info = (StringBuffer)request.getAttribute("nation_info");
-				 %>
-				 <%=nation_info.toString() %>
-			</div>
-			
-		</div>
+</div>	<!-- nation_info_content -->
 </section>
 
 <!-- Two 국가의 지역 리스트 -->
 <section class="two">
 	<div class="cityList">
-		<h2><%=nation%> 인기도시</h2>
+		<h2 name="loc1" id="loc1"><%=nation%> 인기도시</h2><hr>
 		<div class="cityListTable">	<!-- 도시 리스트 -->
 			<!-- 도시리스트 테이블 오는 자리 -->
 		</div>	<!-- "cityListTable" -->
 	</div>	<!-- "cityList" -->
 </section>
 
-<!-- Two 섹션 스크립트 -->
+<!-- info, Two 섹션 스크립트 -->
 <script type="text/javascript">
 // 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
 $(window).load(function() {
@@ -149,53 +164,50 @@ function cityListChange(pageNum) {
 				alert(error);
 		    }   
 		});
+		location.href="#loc1";
 }
+
+/* 맵의 세로 크기를 정보테이블의 크기에 따라 변경 */
+$(document).ready(function(){
+	var infoTableHeight = $('.nation_info table').css('height');
+	$('.nation_info_content .map').css('height', infoTableHeight);
+});
+
 </script>
 
 
 <!-- Three -->
-<section id="three" class="wrapper style1">
-	<div class="container">
-		<header class="major special">
-			<h2><%=nation %>
-				여행 후기
-			</h2>
-			<!-- <p>Feugiat sed lorem ipsum magna</p> -->
-		</header>
-
+<section class="three">
+	<div class="travel_con">
+			<h2><%=nation %> 여행 후기</h2><hr>
+			
 		<div class="feature-grid">
 
 			<!-- 이미지 서치 시작.-->
-
-			<script src="./assets/js/plan/daumSearch3.js"></script>
-
+			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
 			<div id="daumForm">
-				<input id="daumSearch" type="hidden" value="<%=nation %>+여행"
+				<input id="daumSearch" type="hidden" value="<%=nation %>+여행후기"
 					onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
 				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
 				<!-- 					type="submit" value="검색" /> -->
 			</div>
-
 			<div id="daumView">
 				<div id="daumImage"></div>
 			</div>
-
 			<div id="daumScript">
 				<div id="daumImageScript"></div>
 			</div>
-		</div>
+			
+		</div>	<!-- feature-grid 끝 -->
 		<!-- 이미지 서치 끝. -->
-
-
-	</div>
-	
+	</div>	<!-- travel_con 끝 -->
 </section>
 
 <!-- Four 여행 후기, 리뷰 등 댓글 -->
 <section class="four">
 	
 	<div class="comment">
-	<h2><%=nation %> 커뮤니티</h2>
+	<h2 name="loc2" id="loc2"><%=nation %> 커뮤니티</h2>
 		<div class="review_list">
 			<!-- 리뷰 리스트 오는 자리 -->
 			<!-- 페이지 번호 오는 자리 -->
@@ -327,6 +339,8 @@ function cityListChange(pageNum) {
 					alert(error);
 			    }
 			});
+			
+			location.href="#loc2";
 		}
 		
 		/* 리뷰 삭제하기 */

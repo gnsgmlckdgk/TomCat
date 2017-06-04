@@ -102,10 +102,11 @@
 			%>
 
 			<td
-				style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg'); 
-					   background-size: cover; 
-					   width:10em;
-					   height:15em;"
+				style="background-image: url('./images/plan/nation/<%=pcb.getCountry_code()%>/<%=pcb.getEn_name()%>.jpg') ; 
+					   background-size:cover;
+					   width:15em;
+					   height:15em;
+					   "
 					   >
 					   
 				<span><a href="./PlanSearch.pl?check=2&search=<%=pcb.getName()%>"><%=pcb.getName()%></a></span>
@@ -165,7 +166,7 @@
 			else{
 				%>
 			
-				<div style="width: 85em ; height: 20em; border: 1px dotted #999;">
+				<div style="width: 1080px ; height: 15em; border: 2px dotted #999;">
 					<span>현재 등록된 여행지가 없습니다.ㅠ ㅅ ㅠ</span>
 				</div>
 			<%	

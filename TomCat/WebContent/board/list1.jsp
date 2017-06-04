@@ -289,7 +289,7 @@ $(document).ready(function (event){
 		$(window).load(function() {
 			$.ajax({
 				type: 'post',
-				url: './chat/broadcast.jsp',
+				url: './Chat.ct',
 				success: function(data) {
 					$('#chat').append(data);
 				},

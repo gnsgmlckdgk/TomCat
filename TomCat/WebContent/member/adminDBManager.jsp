@@ -29,43 +29,46 @@
 <jsp:include page="../inc/header.jsp" />
 	
 <!-- Main -->
-<section id="main" class="wrapper memberManager">
-	<div class="container">
+<section class="memberManager">
+	<div class="memberContainer">
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
 		
 		<!-- 컨텐츠 -->
-		<div class="content DBManager">
-			<h2>DB 통합 관리</h2><hr>
+		<div class="memberContent">
 			
-				<a href = "javascript:countryInput()">국가 DB 관리</a><br>
+		<header>
+			<h1>DB 통합 관리</h1><hr>
+		</header>
+						
+			<a href = "javascript:countryInput()">국가 DB 관리</a><br>
 				
-				<a href = "javascript:cityInput()">도시(지역) DB 관리</a><br>
+			<a href = "javascript:cityInput()">도시(지역) DB 관리</a><br>
 				
-				<a href = "javascript:travelInput()">여행지 DB 입력</a><br>
+			<a href = "javascript:travelInput()">여행지 DB 입력</a><br>
 					
-			</div>	<!-- content -->	
-		</div>	
+		</div>	<!-- memberContent -->	
+	</div>	<!-- memberContainer -->
 	
 		<!-- 스크립트 추가 -->
 		<script type="text/javascript">
-			
+			//  이까지 수정함
 			function countryInput() {
 				var left = (screen.width - 1200)/2;
 				var availHeight = screen.availHeight-67;
-				window.open("./CountryList.pl", "window", "width=1200, height="+availHeight*3/4+", top=0, left="+left);
+				window.open("./CountryList.pl", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 			
 			function cityInput() {
 				var left = (screen.width - 1200)/2;
 				var availHeight = screen.availHeight-67;
-				window.open("./CityList.pl", "window", "width=1200, height="+availHeight*3/4+", top=0, left="+left);
+				window.open("./CityList.pl", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 			
 			function travelInput() {
 				var left = (screen.width - 1200)/2;
 				var availHeight = screen.availHeight-67;
-				window.open("./TravelAdminList.td", "window", "width=1200, height="+availHeight*3/4+", top=0, left="+left);
+				window.open("./TravelAdminList.td", "window", "width=1200, height="+availHeight+", top=0, left="+left);
 			}
 	
 		</script>

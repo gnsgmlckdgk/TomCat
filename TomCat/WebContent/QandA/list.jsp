@@ -26,6 +26,10 @@ QandADAO qdao=new QandADAO();
 %>
 
 <div id="combine">
+
+	<img id="question" src="./images/QandA/questionmark.png">
+
+
 <table class="table1">
 <tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td><td>조회수</td></tr>
 <%
@@ -42,7 +46,7 @@ QandADAO qdao=new QandADAO();
 			wid=40*qb.getRe_lev();
 			%>
 			<img src="./images/QandA/level.gif" width="<%=wid%>" height="15">
-			<img src="./images/instagram/re.png" width="18" height="16">
+			<img src="./images/instagram/re.png" width="20" height="16">
 			
 	<%	} %>
 
@@ -96,11 +100,15 @@ QandADAO qdao=new QandADAO();
 
 			} %>
 </table>
-
 <table id="banner">
-<tr><td><a href="./QandAWrite.qna">Q&A글쓰기</a></td></tr>
-<tr><td><a href="#">자주묻는 질문</a></td></tr>
-<tr><td><a href="./QandAList.qna">목록으로</a></td></tr>
+<tr><td><a href="./QandACompanyIntro.qna">회사소개</a></td></tr>
+<tr><td id="darker"><a href="./QandAHowToUse.qna">이용방법</a></td></tr>
+<tr><td><a href="./QandAadvertise.qna">광고 및 제휴</a></td></tr>
+<tr><td id="darker"><a href="./QandAcondition.qna">이용약관</a></td></tr>
+<tr><td><a href="./QandAprivacy.qna">개인정보 취급 방침</a></td></tr>
+<tr><td id="darker"><a href="./QandAWrite.qna">문의하기</a></td></tr>
+<tr><td><a href="./Memberintro.qna">운영진소개</a></td></tr>
+<tr><td id="darkerlast"><a href="./QandAList.qna">목록으로</a></td></tr>
 
 </table>
 </div>

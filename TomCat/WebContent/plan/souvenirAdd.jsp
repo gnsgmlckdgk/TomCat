@@ -19,13 +19,18 @@
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 			
 	</head>
+	<%
+		String city_code = request.getParameter("city_code");
+	%>
 
 <body>
 <div class="clear"></div>
 <!-- 도시 기념품 추가하기 -->
 <section>
 	<div class="souvenirAdd">
-		<form action="./SouvenirAdd.pl" name="sou_fr" method="post" enctype="multipart/form-data">
+		<form action="./SouvenirAddAction.pl" name="sou_fr" method="post" enctype="multipart/form-data">
+			<label>도시</label>
+			<input type="text" value="<%=city_code%>" name="city_code" readonly>
 			
 			<label>순위</label>
 			<input type="text" name="ranking">
@@ -34,15 +39,16 @@
 			<input type="text" name="name">
 			
 			<label>이미지</label>
-			<input type="file" name="file">
+			<input type="file" name="img">
 			
 			<label>설명</label>
 			<textarea rows="10" cols="20" name="info"></textarea>
 			
+			<input type="submit" value="추가하기">
+			
 			<div class="clear"></div>	
 		</form>
-	
-	
+
 	</div>
 
 </section>

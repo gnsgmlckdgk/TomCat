@@ -19,6 +19,7 @@ public class PlanSearchAction implements Action{
 		
 		// search => 검색어    /  check => 국가&도시 구분
 		String search = request.getParameter("search");
+		System.out.println("search: " + search);
 		int check = Integer.parseInt(request.getParameter("check"));
 		
 		// 도시를 검색했을 때

@@ -13,70 +13,63 @@ section#banner {
 section.nation_one {
 	/* position: relative; */
 }
-section.nation_one .nation_info_content {
+section.nation_one .nation_info_content {	/* 내용물 전체 */
 	margin: 0 auto;
 	padding: 0;
+	width: 1092px;
+	background-color: rgba(255, 255, 255, 0.4);
 }
-section.nation_one div.nation_info {
-	background-color: #fff;
-	
-	width: 100%;
-	margin: 50px auto;
+section.nation_one .nation_info_content .imgSlide {	/* 이미지 슬라이드 DIV */
+	width: 800px;
+	height: 369px;
 }
-section.nation_one h2 {
-	display: block;
+section.nation_one .nation_info_content .swiper-slide {	/* 슬라이드 이미지 DIV */
+	width: 600px;
 }
-section.nation_one div.nation_info table {
-	
+section.nation_one .nation_info_content .imgSlide img {	/* 슬라이드 이미지들 */
+	width: 600px;
+	height: 369px;
 }
-section.nation_one div.nation_info table tr {
-	border: none;
-	background-color: #fff;
-	
-	display: block;
-	margin-bottom: 10px;
-}
-section.nation_one div.nation_info table th {
-	color: #000;
-	font-size: 1em;
-	min-width: 82px;
-	border-right: 3px solid #ccc;
 
-	width: 10em;
+/* 첫번째 섹션에서 따로 섹션 분리해 정보표시 */
+section.info {	/* 국가 정보 */
+	padding-top: 30px;
 }
-section.nation_one div.nation_info table td {
-	color: #000;
-	font-size: 0.9em;
-}
-section.nation_one div.nation_info_content {
-	width: 1250px;
-	min-width: 600px;
+section.info .nation_info_content {
+	width: 1200px;
 	padding: 0;
+	margin: 0 auto;
 }
-		/* 국가페이지 도시 이미지 슬라이드 planNation */
-    	div.slideContainer {
-    		z-index: 9;
-    		width: 600px;
-    		height: 400px;
-    		background-color: rgba(255, 255, 255, 0);
-    		float: left;
-    	}
-    	div.slideContainer div img {
-    		width: 100%;
-    		height: 100%;
-    	}
-
-		/* 지도  */
-		section.nation_one div.map {
-			padding: 0;
-			width: 600px;
-			height: 400px;
-			z-index: 9;
-			
-			float: left;
-			margin-left: 50px;
-		}
-
+section.info .nation_info_content .nation_info table {	
+	margin: 0;
+	padding: 10px 20px;
+	background-color: #f7f7f7;
+	display: block;
+	width: 670px;
+	min-height: 300px;
+	float: right;
+}
+section.info .nation_info_content .nation_info tr {
+	background-color: #f7f7f7;
+	border: none;
+}
+section.info .nation_info_content .nation_info th {
+	border: none;
+	width: 100px;
+	font-size: 16px;
+	color: #1a7ad9;
+}
+section.info .nation_info_content .nation_info td {
+	border: none;
+	font-size: 14px;
+	width: 560px;
+}
+section.info .nation_info_content .map {	/* 지도 */
+	width: 520px;
+	height: 300px;
+	float: left;
+	margin: 0;
+}
 
 
 
@@ -84,8 +77,8 @@ section.nation_one div.nation_info_content {
 /* 두번째 섹션 : 국가 리스트 */
 section.two {	/* 두번째 섹션 전체 */
 	font-size: 12px;
-	border-bottom: 1px solid #ccc;
-	background-color: #fff;
+	background-color: #f7f7f7;
+	margin: 0;
 }
 div.cityList {	/* 내용물 전체 */
 	width: 1080px;
@@ -96,6 +89,8 @@ div.cityList h2 {	/* 제목 */
 	font-size: 28px;
 	text-shadow: 2px 2px 3px #abc;
 	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
 }
 
 div.cityList .search_div {	/* 검색 DIV */
@@ -107,6 +102,7 @@ div.cityList .search_div {	/* 검색 DIV */
 }
 div.cityList .search_div #search {
 	width: 290px;
+	background-color: #fff;
 	font-size: 12px;
 	padding-left: 34px;
 	float: left;
@@ -133,7 +129,7 @@ div.cityList div.cityListTable tr {
 }
 div.cityList div.cityListTable tr:hover {
 	cursor: pointer;
-	border: 1px solid #0054FF;
+	border: 1px solid #1a7ad9;
 }
 div.cityList div.cityListTable td.img_td {	/* 도시 이미지 */
 	background-color: #fff;
@@ -147,7 +143,8 @@ div.cityList div.cityListTable td.txt_td {	/* 도시 소개 */
 	width: 820px;
 	padding: 10px 30px 10px 20px;
 }
-div.cityList div.cityListTable td .city_name {
+div.cityList div.cityListTable td .city_name {	/* 도시 이름 */
+	color: #1a7ad9;
 	font-size: 16px;
 	font-weight: 900;
 }
@@ -157,6 +154,8 @@ div.cityList div.cityListTable td .city_enName {
 }
 div.cityList div.cityListTable td .city_info {
 	text-indent: 5px;
+	font-size: 12px;
+	line-height: 15px;
 }
 div.cityList div.cityListTable .page {	/* 페이징 */
 	font-size: 16px;
@@ -172,6 +171,25 @@ div.cityList div.cityListTable .page a {
 div.cityList div.cityListTable .page img {
 	width: 13px;
 	height: 13px;
+}
+
+
+/* 세번째 섹션, 여행 후기 블로그 */
+section.three {
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+}
+div.travel_con {	/* 내용물 전체 */
+	width: 1080px;
+	margin: 0 auto;
+}
+div.travel_con h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
 }
 
 /* 국가, 도시 리뷰 커뮤니티(국가페이지, 도시페이지 공통) */

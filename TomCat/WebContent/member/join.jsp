@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%-- <!-- Header -->
-<jsp:include page="../inc/header.jsp" /> --%>
-
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,12 +27,12 @@
 
 		<!-- 추가한 스타일 -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css?ver=10"/>
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=52"/>
 
 		<!-- 추가한 스크립트 -->
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
-			<script type="text/javascript" src="./assets/js/member/join.js?ver=10"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+			<script type="text/javascript" src="./assets/js/member/join.js?ver=51"></script>	<!-- 회원가입 제약조건 및 암호화 -->
 
 </head>
 	
@@ -60,14 +57,15 @@
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
 		<!-- Main -->
-			<section id="main" class="wrapper joinSection">
-				<div class="container">
+			<section class="joinSection">
+				<div class="joinContainer">
 				
 					<!-- 회원가입 -->
 					<div class="join_div">
 						<h1>회원가입</h1>
-							<h4 style="color: #ccc;">★ 모든 입력란에 입력해주세요.</h4>
 						<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return validateEncryptedForm()" >
+							
+							<h4> - 모든 입력란에 입력해주세요.</h4>
 							
 							<label for="id">아이디</label> 
 								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." onchange="re_requestEmailCheck()">
@@ -85,7 +83,7 @@
 								<input type="text" name="name" id="name" maxlength="30">
 							<label for="nick">닉네임</label> 
 								<input type="text" name="nick" id="nick" maxlength="9" placeholder="2~9자 영문 대 소문자, 한글로 시작하고 숫자 사용"  onchange="check_change()">
-								<input type="button" name="nick_check" value="닉네임 중복확인" onclick="nickOverlapCheck()" class="button alt small" >
+								<input type="button" name="nick_check" value="닉네임 중복확인" onclick="nickOverlapCheck()" class="button alt small nickCheckBtn" >
 							
 							<label for="gender">성별</label> 
 							<div class="radio_box">
