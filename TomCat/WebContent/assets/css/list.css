@@ -187,12 +187,12 @@ to {
 	
 }
 
-.t{
+.replybb{
 	border: 2px solid #8c8c8c;
 	border-radius: 40px;
 	width: 400px;
 	height: 600px;
-/* 	display: none; */
+	display: none;
 	background-color: rgba(246, 246, 246, 0.8);
 	position: relative;
 	top: -650px;
@@ -200,19 +200,27 @@ to {
 	margin: 0;
 
 }
+
 .up{
 	margin-top: 300px;
-	border-radius:50px;
 	opcity:0.85;
 }
 .up:hover{
 	background-color:#E91E63;
 }
 .de{
-		border-radius:50px;
 	opcity:0.85;
 }
 
 .de:hover{
+	background-color:#E91E63;
+}
+.re{
+	float:right;
+	display: block;
+	opcity:0.85;
+	font-size: 15px;	
+}
+.re:hover{
 	background-color:#E91E63;
 }

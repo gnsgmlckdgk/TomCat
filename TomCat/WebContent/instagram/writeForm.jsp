@@ -2,11 +2,7 @@
 <%@page import="net.board.db.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>톰캣의여행커뮤니티</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="assets/css/main.css" />
 
@@ -19,8 +15,9 @@ if(document.fr.image1.value==""){
 	return false;}
 	
 document.fr.submit();
-
 }
+
+
 
 </script>
 <!-- Header -->
@@ -29,24 +26,33 @@ document.fr.submit();
 
 
 <section class="wrapper">
-  <div id="combine">
 	<%
 // 	인생샷그램 글쓰는곳
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 	%>
-	<div id="form">
-		<form action="./BoardWriteAction.bo" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
+	
+		<form id="form" action="./BoardWriteAction.bo" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
 <!-- 		닉네임 세션값 생성해서 readonly로 설정하기 -->
 <br> 
+<<<<<<< HEAD
 		글쓴이:<input type="text" name="nick" value=<%=nick %>><br>		
 		제목:<input type="text" name="subject" ><br>
 		내용:<textarea rows="7" cols="15" name="content" ></textarea><br>
+=======
+
+		글쓴이<input type="text" name="nick" value=<%=nick %> readonly><br>		
+		제목<input type="text" name="subject" required><br>
+		내용<textarea rows="5" cols="10" name="content" required></textarea><br>
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 		<input type="file" name="image1"><br><br>	
 		<input id="submit" type="submit" value="글쓰기"><br> 
 	</form>
-	</div>
-</div>
 </section>
-</body>
+
+
+<img id="girl" src="./images/instagram/girl.png">
+<img id="boy" src="./images/instagram/boy.png">
+
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
+

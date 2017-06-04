@@ -23,13 +23,8 @@ int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
 
 QandADAO qdao=new QandADAO();
+%>
 
-if(id!=null){%>
-
-
-		<a href="./QandAWrite.qna">Q&A글쓰기</a>
-	<br>
-<%}%>
 <div id="combine">
 <table class="table1">
 <tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td><td>조회수</td></tr>
@@ -47,7 +42,7 @@ if(id!=null){%>
 			wid=40*qb.getRe_lev();
 			%>
 			<img src="./images/QandA/level.gif" width="<%=wid%>" height="15">
-			<img src="./images/QandA/re.gif">
+			<img src="./images/instagram/re.png" width="18" height="16">
 			
 	<%	} %>
 

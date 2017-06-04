@@ -13,7 +13,7 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=121" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=4" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
@@ -212,30 +212,40 @@
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
 <input type="button" value="글삭제"
 onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
+
+<input type="button" value="댓글<%=bb.getNum()%>" onclick="ply(<%=bb.getNum()%>)" class="re" >	
 </div>
-				
-			<div class="t">
-			qe
+<script type="text/javascript">
+
+function ply(k) {
+document.getElementById('plybb'+k).style.display = "block";
+
+alert("test");
+}
+
+</script>		
+
+			<div id="plybb<%=bb.getNum()%>"   class="replybb"  >
+			<%=bb.getNum()%>
+			some output of text
 			</div>
 
 			</div>
-
-			
+	
 	<script type="text/javascript"> 
-// 		댓글 기능(->슬라이드)
-		 $(function(){
-			$(".btn").click(function(){
-				var effect = 'slide';
-				var options ='left';
-				var duration = 500;
-			$('#pln_list').toggle(effect, options, duration);
-			}); 
-		});  
-		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
- 		 $(function(){
-			 //datepicker 한국어로 사용하기 위한 언어설정
-		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
-		 });
+// 		 $(function(){
+// 			$(".btn").click(function(){
+// 				var effect = 'slide';
+// 				var options ='left';
+// 				var duration = 500;
+// 			$('#pln_list').toggle(effect, options, duration);
+// 			}); 
+// 		});  
+// 		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+//  		 $(function(){
+// 			 //datepicker 한국어로 사용하기 위한 언어설정
+// 		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+// 		 });
 		</script>
  
 			<%

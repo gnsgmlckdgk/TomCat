@@ -180,7 +180,8 @@ function func3(i){
 			wid=40*rb.getRe_lev();
 			%>
 			<img src="./images/instagram/level.gif" width="<%=wid%>" height="15">
-			<img src="./images/instagram/re.gif">
+			<img src="./images/instagram/re.png" width="18" height="16">
+			
 			
 	<%	} %>
 		<%=rb.getNick() %>
