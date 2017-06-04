@@ -68,6 +68,9 @@
 			div.cityList th:nth-of-type(6) {	/* 수정 / 삭제 */
 				width: 21%;
 			}
+			div.cityList input[type="button"] {
+				font-size: 12px;
+			}
 
 			div.cityList .page a {
 				border: 1px solid #ccc;

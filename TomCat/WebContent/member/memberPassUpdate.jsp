@@ -6,8 +6,8 @@
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Main -->
-<section id="main" class="wrapper memberManager">
-	<div class="container">
+<section class="memberManager">
+	<div class="memberContainer">
 
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
@@ -22,11 +22,18 @@
 		%>
 		
 		<!-- 컨텐츠 -->
-		<div class="content">
+		<div class="memberContent">
 			<div class="content_member_passUpdate">
-				<h1>비밀번호 변경</h1>
+				<header>
+					<h1>비밀번호 변경</h1><hr>
+					안전한 비밀번호로 내정보를 보호하세요.<br>
+					<ul>
+						<li><span style="color: #1fbc02;">다른 아이디/사이트에서 사용한 적 없는 비밀번호</span></li>
+						<li><span style="color: #1fbc02;">이전에 사용한 적 없는 비밀번호</span>가 안전합니다.</li>
+					</ul>
+				</header>
 				
-				<div class="pass_form">
+				<div class="passUpdate_form">
 					
 					<form action="./MemberPassUpdateAction.me" method="post" onsubmit="return updatePassCheck()">
 						<table>	
@@ -35,7 +42,7 @@
 								<td><input type="password" name="cur_pass" id="cur_pass" maxlength="16" placeholder="6~16자 영문 대 소문자로 시작하고, 숫자, 특수문자를 사용"></td>
 							</tr>
 							<tr>
-								<th colspan="2"><hr></th>	<!-- 구분 행 -->
+								<td colspan="2"></td>	<!-- 구분 행 -->
 							</tr>
 							<tr>
 								<th>새로운 비밀번호</th>
@@ -119,12 +126,12 @@
 					
 					</script>
 					
-				</div>	<!-- info_form -->
+				</div>	<!-- pass_form -->
 				
-			</div> <!-- content_member_info -->
-		</div>	<!-- content -->
+			</div> <!-- content_member_passUpdate -->
+		</div>	<!-- memberContent -->
 	
-	</div>
+	</div>	<!-- memberContainer -->
 </section>
 
 <div class="clear"></div>

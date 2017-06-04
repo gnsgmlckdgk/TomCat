@@ -30,12 +30,12 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=9"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=50"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=42"/>	<!-- 국가페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=41"/>	<!-- 지역(도시)페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=43"/>	<!-- 국가페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=45"/>	<!-- 지역(도시)페이지 -->
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->

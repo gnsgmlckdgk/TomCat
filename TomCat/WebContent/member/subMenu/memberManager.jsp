@@ -18,7 +18,7 @@
 <!-- 서브메뉴 -->
 <div id="submenu">
 	<ul>
-		<li><a href="./MemberInfo.me">회원정보</a></li>
+		<li><a href="./MemberInfo.me">회원정보 수정</a></li>
 		<li><a href="./MemberPassUpdate.me">비밀번호 변경</a></li>
 		<li><a href="#">내가 쓴 게시글 관리</a></li>
 		<li><a href="#">내가 쓴 댓글 관리</a></li>

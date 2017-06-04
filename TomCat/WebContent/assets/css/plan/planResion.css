@@ -180,3 +180,21 @@ div.travelList div.travelListTable .page img {
 	width: 13px;
 	height: 13px;
 }
+
+/* 세번째 섹션, 여행 후기 블로그 */
+section.three {
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+}
+div.travel_con {	/* 내용물 전체 */
+	width: 1080px;
+	margin: 0 auto;
+}
+div.travel_con h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
+}

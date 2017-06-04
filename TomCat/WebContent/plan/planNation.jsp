@@ -177,41 +177,30 @@ $(document).ready(function(){
 
 
 <!-- Three -->
-<section id="three" class="wrapper style1">
-	<div class="container">
-		<header class="major special">
-			<h2><%=nation %>
-				여행 후기
-			</h2>
-			<!-- <p>Feugiat sed lorem ipsum magna</p> -->
-		</header>
-
+<section class="three">
+	<div class="travel_con">
+			<h2><%=nation %> 여행 후기</h2><hr>
+			
 		<div class="feature-grid">
 
 			<!-- 이미지 서치 시작.-->
-
-			<script src="./assets/js/plan/daumSearch3.js"></script>
-
+			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
 			<div id="daumForm">
-				<input id="daumSearch" type="hidden" value="<%=nation %>+여행"
+				<input id="daumSearch" type="hidden" value="<%=nation %>+여행후기"
 					onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
 				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
 				<!-- 					type="submit" value="검색" /> -->
 			</div>
-
 			<div id="daumView">
 				<div id="daumImage"></div>
 			</div>
-
 			<div id="daumScript">
 				<div id="daumImageScript"></div>
 			</div>
-		</div>
+			
+		</div>	<!-- feature-grid 끝 -->
 		<!-- 이미지 서치 끝. -->
-
-
-	</div>
-	
+	</div>	<!-- travel_con 끝 -->
 </section>
 
 <!-- Four 여행 후기, 리뷰 등 댓글 -->

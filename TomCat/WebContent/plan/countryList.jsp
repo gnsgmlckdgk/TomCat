@@ -114,6 +114,9 @@
 				top: 0;
 				left: 37em;
 			}
+			div.country_list input[type="button"] {
+				font-size: 12px;
+			}
 
 		</style>
 			

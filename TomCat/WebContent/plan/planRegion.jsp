@@ -267,18 +267,13 @@
 <div class="clear" style="clear: both;"></div>
 
 <!-- Three -->
-<section id="three" class="wrapper style1">
-	<div class="container">
-		<header class="major special">
-			<h2><%=region%>
-				여행 후기
-			</h2>
-
-		</header>
+<section class="three">
+	<div class="travel_con">
+			<h2><%=region%> 여행 후기</h2><hr>
 
 		<!-- 이미지 서치 시작.-->
 		<div class="feature-grid">
-			<script src="./assets/js/plan/daumSearch3.js"></script>
+			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
 
 			<div id="daumForm">
 				<input id="daumSearch" type="hidden" value="<%=region%>+여행" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />

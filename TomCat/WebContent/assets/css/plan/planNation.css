@@ -77,7 +77,6 @@ section.info .nation_info_content .map {	/* 지도 */
 /* 두번째 섹션 : 국가 리스트 */
 section.two {	/* 두번째 섹션 전체 */
 	font-size: 12px;
-	border-bottom: 1px solid #ccc;
 	background-color: #f7f7f7;
 	margin: 0;
 }
@@ -172,6 +171,25 @@ div.cityList div.cityListTable .page a {
 div.cityList div.cityListTable .page img {
 	width: 13px;
 	height: 13px;
+}
+
+
+/* 세번째 섹션, 여행 후기 블로그 */
+section.three {
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+}
+div.travel_con {	/* 내용물 전체 */
+	width: 1080px;
+	margin: 0 auto;
+}
+div.travel_con h2 {	/* 제목 */
+	font-size: 28px;
+	text-shadow: 2px 2px 3px #abc;
+	text-align: center;
+	margin: 0;
+	padding-top: 30px ;
 }
 
 /* 국가, 도시 리뷰 커뮤니티(국가페이지, 도시페이지 공통) */
