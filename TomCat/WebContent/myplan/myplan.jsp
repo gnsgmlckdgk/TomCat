@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
 <!-- 스타일 불러오기 -->
-<link rel="stylesheet" href="assets/css/map/myplanNew.css?ver=2" />
+<link rel="stylesheet" href="assets/css/map/myplanNew.css?ver=3" />
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -231,7 +231,7 @@
 					%>
 					 <tbody>
 					<tr>
-<%-- 						<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
+<%-- 					<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
 						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 --> --%>
 						<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
 						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
