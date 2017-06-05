@@ -442,7 +442,6 @@ public class MyPlanBasketDAO {
 			pstmt.setString(1, myplanbean.getFirstday());
 			pstmt.setString(2, myplanbean.getLastday());
 			pstmt.setInt(3, myplanbean.getPlan_nr());
-			
 			pstmt.setString(4, myplanbean.getId());
 			
 
