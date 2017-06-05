@@ -24,13 +24,13 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=7"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=60"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=50"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=62"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=20"/>	<!-- 메인페이지 -->
@@ -40,11 +40,62 @@
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=10"></script>	<!-- 로그인 스크립트 -->
-			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/memberManager.js?ver=61"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js?ver=30"></script>
 			
+			
+			<style type="text/css">
+			header.subject .logo {
+				font-size: 18px;
+			}
+			header.subject .logo strong {
+				color: #49b2e9;
+			}
+			
+			#nav li {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+			#nav a {
+				font-family: "나눔 고딕" , "맑은 고딕", sans-serif;
+				font-size: 15px;
+				font-weight: bold;
+				line-height: 50px;
+				color: #000;
+			}
+			#nav a:hover {
+				cursor: pointer;
+			}
+			</style>
+			
+			<script type="text/javascript">
+			$(document).ready(function() {
+				/* 헤더 */
+				var wid = screen.width;
+				$('.subject').css('width', wid);
+				$('.subject nav').css('text-align', 'center');
+				
+				/* 회원정보 팝업 */
+				var memberInfoMenuTxt = $(".memberInfoMenuTxt");        
+				var divX = memberInfoMenuTxt.offset().left;
+				var divY = memberInfoMenuTxt.offset().top;
+				
+				$('.memberManagerNav').css({
+					'left' : divX,
+					'top' : divY+53
+				});
+				first_li
+				var first_li = $(".first_li"); 
+				var liX = first_li.offset().left;
+				var liY = first_li.offset().top;
+				
+				$('.logo').css({
+					'left' : liX-260
+				});
+			});
+			</script>
 	</head>
 	
 <body>
@@ -55,16 +106,17 @@
 %>
 
 <!-- Header -->
-<header id="header">
-	<h1>
+<header id="header" class="subject">
+	<h1 class="logo">
 		<a href="./Main.me"><strong>Before</strong> you go...</a>
 	</h1>
 	
 	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
 		<ul>
-			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
+			<li class="first_li"><a href="./PlanMain.pl">여행지</a></li>
 			<li><a href="./QandAList.qna">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
+			
 			<%
 			if(id==null){ %>
 				<li><a onclick="popupToggle()">함께해요</a></li>
@@ -73,7 +125,7 @@
 			<%}else { %>
 					<li><a href="./BoardList1.bb?plan_nr=100">함께해요</a></li>
 					<li><a href="./MyPlan.pln?plan_nr=100">일정 관리</a></li>
-					<li><a class="memberInfoMenuTxt login_txt"><%=nick %></a></li>
+					<li><a class="memberInfoMenuTxt login_txt" style="color: #ff9320;"><%=nick %></a></li>
 				<%} %>
 		</ul>
 	</nav> 

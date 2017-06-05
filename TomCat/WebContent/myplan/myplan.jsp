@@ -7,11 +7,8 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
 <!-- 스타일 불러오기 -->
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/map/myplanNew.css" />
+<link rel="stylesheet" href="assets/css/map/myplanNew.css?ver=2" />
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -137,14 +134,12 @@
 		
 	 -->	
 <!-- 드래그 삽입 종료-->
-		
-		
-		
-		
-		
 
 </head>
 <body>
+	<!-- Header -->
+	<jsp:include page="../inc/header.jsp" />
+
 	<%
 		String gold = (String) request.getAttribute("gold");
 		String id = (String) session.getAttribute("id");
@@ -163,11 +158,10 @@
  		int j=0;  //일정목록 넘버링을 위함
 	%>
 
-	<div class="container" >
+	<div class="myplanContainer" >
 		<div class="myplan-list" >
 
-
-				&nbsp;&nbsp;&nbsp;&nbsp;<a href='./MyPlan.pln?plan_nr=100'"><img src="./images/myplans/zzim.png" width="50px" height="50px"style="vertical-align:bottom"></a>&nbsp;&nbsp; <!-- 여행지찜리스트 전체 목록 -->
+				&nbsp;&nbsp;&nbsp;&nbsp;<a href='./MyPlan.pln?plan_nr=100'><img src="./images/myplans/zzim.png" width="50px" height="50px"style="vertical-align:bottom"></a>&nbsp;&nbsp; <!-- 여행지찜리스트 전체 목록 -->
 				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/plan_a.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정1 -->
 				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/plan_b.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정2 -->
 				<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/plan_c.png" width="50px" height="50px" style="vertical-align:bottom"></a> &nbsp;&nbsp;<!--  일정3 -->
