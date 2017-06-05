@@ -18,7 +18,7 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/list.css"/>	
+<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=3"/>	
 <div id="top"></div>
 <section class="wrapper">
 
