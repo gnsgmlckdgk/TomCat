@@ -325,6 +325,146 @@ $(window).load(function() {
 	});
 });
 
+//
+
+
+//오른쪽 박스에 추가
+   function gor(argSel,argRes)    {
+	
+	alert(argSel +" " + argRes);
+	
+         formSel=eval("document.reg."+argSel);  //(form 이름주소 + select box 이름)을 계산해서 formsel 에 저장
+         
+         j=formSel.length; //formsel 의 길이값을 j 에 저장
+         
+         for(var i=0;i<document.reg.a.length;i++) {/* 리스트에 있는 아이템 갯수 만큼 for문 돌림 */
+         
+                         if(document.reg.a.options[i].selected && document.reg.a.options[i].value)  {/* i번째 항목이 선택이 된 상태고, value 값이 존재한다면 */
+                        
+                         document.reg.a.options[i].selected=false; //선택한 것을 false 로 바꾼다= 선태해제한다.
+         
+                         chk_same=0;  //좌측 박스의 선택된 값과 변수 fromsel 값이 같은지 체크하는 변수 선언
+         
+//                                  for(var k=0;k<formSel.length;k++){
+//                                          if(document.reg.a.options[i].value==formSel.options[k].value)
+//                                             /* 왼쪽 list box에선 i번째 선택한 값 value 가 우측 list 에 k번째 값이 같다면  */
+//                                          {
+//                                          chk_same=1;      //                          
+//                                          }        
+//                                  }                        
+         
+                                 if(!chk_same)
+                                 {
+                                 formSel.options[j]=new Option(document.reg.a.options[i].text,document.reg.a.options[i].value);
+         
+                                 j++;
+                                 }
+                         }
+         }
+         
+         get_result(argSel,argRes)
+   }
+   
+   function gol(argSel,argRes)    {
+         formSel=eval("document.reg."+argSel);
+         
+         buff=new Array();
+         j=0;
+         
+         for(var i=formSel.length-1;i>=0;i--)
+         {
+                         if(formSel.options[i].selected && formSel.options[i].value)
+                         {
+                         formSel.options[i] = null;
+                         }
+         }
+         
+         get_result(argSel,argRes);
+   }
+   
+   function get_result(argSel,argRes) {
+         formSel=eval("document.reg."+argSel);
+         formRes=eval("document.reg."+argRes);
+         
+         res=new Array();
+         
+         for(var i=0;i<formSel.length;i++)
+         {
+         res[i]=formSel.options[i].value;
+         }
+         
+         res=res.join("@");
+         formRes.value=res;
+   }
+   
+   
+   function gou(argSel,argRes) {
+         formSel = eval("document.reg."+argSel);
+         
+                 if(!formSel.value)
+                 {
+                 return;
+                 }
+         
+         thisIndex = formSel.selectedIndex;
+         
+                 if(!thisIndex)
+                 {
+                 return;
+                 }
+         
+         formSel.value=null;
+         
+          
+         
+         
+         prevIndex=thisIndex-1;
+         
+         tempText=formSel.options[prevIndex].text;
+         tempValue=formSel.options[prevIndex].value;
+         
+         formSel.options[prevIndex]= new Option(formSel.options[thisIndex].text,formSel.options[thisIndex].value);
+         
+         formSel.options[thisIndex]= new Option(tempText,tempValue);
+         
+         formSel.value=formSel.options[prevIndex].value;
+         
+         get_result(argSel,argRes);
+   }
+
+   
+   function god(argSel,argRes) {
+         formSel                = eval("document.reg."+argSel);
+         
+                 if(!formSel.value)
+                 {
+                 return;
+                 }
+         
+         thisIndex        = formSel.selectedIndex;
+         
+                 if(thisIndex+1>=formSel.length)
+                 {
+                 return;
+                 }
+         
+         formSel.value=null;
+         
+         prevIndex=thisIndex+1;
+         
+         tempText=formSel.options[prevIndex].text;
+         tempValue=formSel.options[prevIndex].value;
+         
+         formSel.options[prevIndex]        = new Option(formSel.options[thisIndex].text,formSel.options[thisIndex].value);
+         
+         formSel.options[thisIndex]        = new Option(tempText,tempValue);
+         
+         formSel.value=formSel.options[prevIndex].value;
+         
+         get_result(argSel,argRes);
+   }
+
+//
 
 </script>
 

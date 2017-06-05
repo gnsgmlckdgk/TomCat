@@ -385,6 +385,7 @@ public class MyPlanBasketDAO {
 					tb.setName(rs2.getString("name"));
 					tb.setLatitude(rs2.getFloat("latitude"));
 					
+					tb.setTravel_id(rs2.getInt("travel_id"));
 					tb.setLongitude(rs2.getFloat("longitude"));
 					tb.setInfo(rs2.getString("info"));
 					tb.setAddress(rs2.getString("address"));
@@ -500,7 +501,10 @@ public class MyPlanBasketDAO {
 			// 5 데이터 있으면 자바빈객체 생성
 			// rs => 자바빈 저장
 			if (rs.next()) {
+				
 				mypalnbasketbean = new MyPlanBasketBean();
+				
+				mypalnbasketbean.setMyplans_id(rs.getInt("myplans_id"));
 				mypalnbasketbean.setId(rs.getString("id"));
 				mypalnbasketbean.setPlan_nr(rs.getInt("plan_nr"));
 				mypalnbasketbean.setTravel_id(rs.getInt("travel_id"));
