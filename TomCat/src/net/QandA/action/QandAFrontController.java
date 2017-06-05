@@ -111,7 +111,18 @@ public class QandAFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./QandA/Memberintro.jsp");
 			forward.setRedirect(false);// forward방식으로 이동
-		} 
+
+	} else if (command.equals("/QandASearchAction.qna")) {
+		action = new QandASearchAction();
+		try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+		
+		
+		
 		
 		
 		

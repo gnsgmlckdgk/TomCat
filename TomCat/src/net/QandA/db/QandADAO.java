@@ -530,8 +530,118 @@ public class QandADAO {
 			}
 		}// insertRepley() end
 		
+
+		
+		
+		public int getQandAcount(String search) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+			int count = 0;
+			try {
+				// 1,2 디비연결 메서드 호출
+				con = getConnection();
+				// 3 sql 함수 count(*) 이용
+				sql = "select count(*) from qanda where subject like ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,"%"+search+"%");			
+				// 4 rs실행저장
+				rs = pstmt.executeQuery();
+				// 5 데이터있으면 count저장
+				// select에서 검색한 첫번째 열에 값이 있는지 없는지 확인하는 작업
+				if (rs.next()) {
+					count = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null)
+					try {
+						rs.close();
+					} catch (SQLException ex) {
+					}
+				if (pstmt != null)
+					try {
+						pstmt.close();
+					} catch (SQLException ex) {
+					}
+				if (con != null)
+					try {
+						con.close();
+					} catch (SQLException ex) {
+					}
+			} // finally
+			return count;
+		}// getBoardcount
 	 
-	 
-	 
+		public List getQandAList(int startrow, int pageSize,String search) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			String sql = "";
+			ResultSet rs = null;
+
+			// 배열(컬렉션)객체 생성- 여러개의 기억공간 사용+기억공간 추가해서 사용
+			List<QandABean> QandAList = new ArrayList<QandABean>();
+			try {
+				// 1,2 디비연결 메서드 호출
+				con = getConnection();
+				// 3 sql gram의모든 데이터 가져오기(select*from gram)
+				// num에 의한 내림차순 정렬(order by num)
+				// 글 잘라 오기 limit(시작행-1, 개수) startrow을 기준으로 pageSize만큼 자른다!
+				sql = "select *from qanda where subject like ? order by re_ref desc, re_seq asc limit ?, ? ";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+search+"%");
+				pstmt.setInt(2, startrow - 1);
+				pstmt.setInt(3, pageSize);
+				// 4 결과 rs에 저장
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					QandABean qb = new QandABean();
+					
+					System.out.println(rs.getInt("num"));
+
+					
+					qb.setNum(rs.getInt("num"));
+					qb.setNick(rs.getString("nick"));
+					qb.setSubject(rs.getString("subject"));
+					qb.setContent(rs.getString("content"));
+					qb.setImage1(rs.getString("image1"));
+					qb.setRe_lev(rs.getInt("re_lev"));
+					qb.setRe_seq(rs.getInt("re_seq"));
+					qb.setRe_ref(rs.getInt("re_ref"));
+					qb.setReadcount(rs.getInt("readcount"));
+					qb.setDate(rs.getDate("date"));
+
+					// boardList 한칸 저장
+					QandAList.add(qb);			
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (rs != null)
+					try {
+						rs.close();
+					} catch (SQLException ex) {
+					}
+				if (pstmt != null)
+					try {
+						pstmt.close();
+					} catch (SQLException ex) {
+					}
+				if (con != null)
+					try {
+						con.close();
+					} catch (SQLException ex) {
+					}
+
+			} // finally
+			return QandAList;
+		}
+		
+		
 	 
 }// 클래스 end

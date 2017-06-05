@@ -37,7 +37,7 @@ content=qb.getContent().replace("\r\n","<br>");
 <table id="table1">
 <tr><td><%=qb.getNick() %></td><td><%=qb.getSubject() %></td><td><%=qb.getDate() %></td></tr>
 <tr><td colspan="3"><%=qb.getContent() %></td></tr>
-<tr><td colspan="3">
+<tr><td id="center" colspan="3">
 		<%if(qb.getNick().equals(nick)){%>	
 	<input id="txt" type="button" value="글수정" onclick="location.href='./QandAUpdate.qna?num=<%=qb.getNum()%>&pageNum=<%=pageNum%>'">
 				<form action="./QandADeleteAction.qna" method="post" name="fr" onclick="func1()">					

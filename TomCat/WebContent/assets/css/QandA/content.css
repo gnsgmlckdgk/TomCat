@@ -65,3 +65,7 @@ background-color: rgba(77, 77, 77,0.3);
 	margin:1.5px;
 	float:left;
 }
+
+#center{
+	text-align: center;
+}
