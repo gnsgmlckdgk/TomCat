@@ -1347,7 +1347,13 @@ public class PlanDAO {
 
 		return count;
 	}
-
+	
+	// 도시코드로 관광지 리스트 가져오기
+	public List<PlanTravelBean> getTravelList(String city_code) {
+		// 수정해야함
+		return null;
+	}
+	
 	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region, String city_code) {
 		ResultSet rs = null;
 		List<PlanTravelBean> planTravelList = new ArrayList<PlanTravelBean>();
