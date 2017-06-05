@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
 <!-- 스타일 불러오기 -->
-<link rel="stylesheet" href="assets/css/map/myplanNew.css?ver=3" />
+<link rel="stylesheet" href="assets/css/map/myplanNew.css?ver=80" />
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -72,6 +72,10 @@
 	}); */
 });  
 //날짜 선택하기 
+
+
+
+
 </script>
 
 
@@ -278,31 +282,54 @@
 		</div>
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
- 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr">
- 				<input type="text" name="fromDate" id="fromDate" required="required" placeholder="시작일"
- 							style="	background-image: url('myplan/pn_cal_btn.png');
-									background-repeat: no-repeat; 
-									background-position: 110px 13px;">
-				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" 
-							style="	background-image: url('myplan/pn_cal_btn.png'); 
-									background-repeat: no-repeat;
-									background-position: 110px 13px;">
- 				<select name="plan_nr" id="plan_nr" required="required"> 
-						<option value="1" >일정A</option> 
-	 					<option value="2">일정B</option> 
- 					<%if(gold.equals("유료회원")){ %> 
-						<option value="일정C">일정C</option> 
- 					<%}%> 
- 				</select> 
- 					<%if(gold.equals("무료회원")){ %> 
- 						<input type="submit" value="상세일정만들기" class="pln_sub_free">
-						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
- 					<%} else {%>
-						<input type="submit" value="상세일정만들기" class="pln_sub">
-					<%} %> 
-	
+
+<!-- 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr"> -->
+<!-- 				<input type="text" name="fromDate" id="fromDate"  -->
+<!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
+
+<!-- 							background-position: 110px 13px;" required="required" placeholder="시작일">  -->
+<!-- 				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" -->
+<!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
+
+<!-- 							background-position: 110px 13px;"> -->
+<!-- 				<select name="plan_nr" id="plan_nr" required="required"> -->
+<!-- 					<option value="1" >일정A</option> -->
+<!-- 					<option value="2">일정B</option> -->
+<%-- 					<%if(gold.equals("유료회원")){ %> --%>
+<!-- 						<option value="일정C">일정C</option> -->
+<%-- 					<%}%> --%>
+<!-- 				</select> -->
+
 				
- 			</form>  		 
+
+<%-- 					<%if(gold.equals("무료회원")){ %> --%>
+<!-- 						<input type="submit" value="상세일정만들기" class="pln_sub_free"> -->
+<%-- 						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기"> --%>
+<%-- 					<%} else {%> --%>
+<!-- 						<input type="submit" value="상세일정만들기" class="pln_sub">	 -->
+<%-- 					<%} %> --%>
+				
+<!-- 			</form>  		 -->
+
+<script type="text/javascript">
+$(window).load(function() {
+	$.ajax({
+		type: 'post',
+		url: './myplan/myplanModify.jsp',
+		success: function(data) {
+			$('#pln_list').append(data);
+		},
+		error: function(xhr, status, error) {
+			alert(error);
+		}   
+	});
+});
+
+
+</script>
+
+
+
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
 	<%if(plan_nr!=100) { %>

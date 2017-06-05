@@ -60,6 +60,7 @@
 			}
 			
 		</script>
+		
 		<br> <br> 여행지 이미지<br> <input type="file" name="file" required="required">
 
 		<br> <br>

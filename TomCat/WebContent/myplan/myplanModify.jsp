@@ -1,3 +1,6 @@
+<%@page import="net.myplanBasket.action.DateList"%>
+<%@page import="java.util.Vector"%>
+<%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.text.DateFormat"%>
@@ -10,10 +13,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<html>
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
+
+
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/modifyNewFile7.css" />
@@ -30,6 +31,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
+
 
 <script>
 	$(function() {
@@ -83,77 +85,66 @@
 	});
 </script>
 <body>
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
 	<%
-		List basketList = (List) request.getAttribute("basketList");
-		List goodsList = (List) request.getAttribute("goodsList");
 		String id = (String) session.getAttribute("id");
 
-		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
+		//ajax를 위해서 모델 1 방식으로 진행할 코드
 
-		String gold = (String) request.getAttribute("gold");
-		String fromDate = (String) request.getParameter("fromDate");
-		String toDate = (String) request.getParameter("toDate");
-		List datelist = (List) request.getAttribute("datelist");
 
-		out.println("datelist : " + datelist + "\n\n");
-		System.out.println("fromDate : " + fromDate);
+		MyPlanBasketDAO basketdao = new MyPlanBasketDAO();
+		MyPlanBasketBean mpbb = new MyPlanBasketBean();
 
-		String dep_lat = (String) request.getParameter("dlat");
-		String dep_lng = (String) request.getParameter("dlng");
-		String arr_lat = (String) request.getParameter("alat");
-		String arr_lng = (String) request.getParameter("alng");
+		Vector vector = basketdao.getBasketList(id);
+		// List basketList = vector 첫번째데이터
+		List basketList = (List) vector.get(0);
+		// List goodsList = vector 두번째데이터
+		List goodsList = (List) vector.get(1);
+
+		//datelist
+		DateList t = new DateList();
+		//int tt = t.getDiffDay(fromdate, todate);
+		// 		List datelist = datelist = new ArrayList();
+		// 		datelist.add(fromdate);
+		// 		datelist.add(todate);
+		// 		datelist = t.Date(fromdate, todate);
+		//datelist. 끝.
+
+		//ajax를 위해서 모델 1 방식으로 진행할 코드. 끝.
 	%>
 
 </body>
 
 <form action="./MyPlanModifyAction.pln" method="post">
-	<div class="wrap" style="max-width: 1080px; margin: auto;">
- 	<%-- 			<input type="text" name="fromDate" id="fromDate" required="required" placeholder="시작일"
- 							style="	background-image: url('myplan/pn_cal_btn.png');
-									background-repeat: no-repeat; 
-									background-position: 110px 13px;">
-				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" 
-							style="	background-image: url('myplan/pn_cal_btn.png'); 
-									background-repeat: no-repeat;
-									background-position: 110px 13px;">
- 				<select name="plan_nr" id="plan_nr" required="required"> 
-						<option value="1" >일정A</option> 
-	 					<option value="2">일정B</option> 
- 					<%if(gold.equals("유료회원")){ %> 
-						<option value="일정C">일정C</option> 
- 					<%}%> 
- 				</select> 
- 					<%if(gold.equals("무료회원")){ %> 
- 						<input type="submit" value="상세일정만들기" class="pln_sub_free">
-						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
- 					<%} else {%>
-						<input type="submit" value="상세일정만들기" class="pln_sub">
-					<%} %>  --%>
-	
 
-		<%
-			if (plan_nr == 1) {
-		%>일정A<%
-			}
-		%>
-		<%
-			if (plan_nr == 2) {
-		%>일정B<%
-			}
-		%>
-		<%
-			if (plan_nr == 3) {
-		%>일정C<%
-			}
-		%>
-		<input type="hidden" value="<%=plan_nr%>" name="plan_nr">
-		<input type="hidden" value="<%=fromDate%>" name="first_day">
-		<input type="hidden" value="<%=toDate%>" name="first_day"><!-- 라스튿이 -->
 
-		<table border="1" class="tg" name="test">
+<!-- 	<div class="wrap" style="max-width: 1080px; margin: auto;"> -->
+<div style="max-width: 1080px; margin: auto;">
+		<%-- 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr"> --%>
+		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
+		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
+		<!-- 라스튿이 -->
+
+
+
+
+
+			출발일 :
+			<input type="date" name="fromDate" required="required">
+			<br> 도착일 :
+			<input type="date" name="toDate" required="required">
+
+			<select name="plan_nr" id="plan_nr" required="required">
+				<option value="1">Plan A</option>
+				<option value="2">Plan B</option>
+				<option value="3">Plan C</option>
+			</select>
+
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
-				for (int j = 1; j < datelist.size()+2; j++) {
+				//for (int j = 1; j < datelist.size() + 2; j++) {
+				for (int j = 1; j < 4; j++) {
 			%>
 			<tr>
 				<th><%=j%> 일차</th>
@@ -170,12 +161,15 @@
 								}
 						%>
 				</select></td>
-				<td></td>
 			</tr>
 			<%
 				}
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
 					type="reset" value="다시등록"></td>
@@ -185,106 +179,5 @@
 </form>
 
 
-<%
-	// 	for (int i = 0; i < basketList.size(); i++) {
-	// 		MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-	// 		TravelBean tb = (TravelBean) goodsList.get(i);
-	// 		if (mpbb.getId().equals(id)) {
-	// 			if (mpbb.getPlan_nr() == plan_nr) {
-%>
-<%
-	// 	}
-	// 		}
-	// 	}
-%>
-
-
-
-
-<!-- <form action="./MyPlanModifyAction.pln" method="post" ></form> -->
-<%-- <input type="text" name="plan_nr" value="<%=plan_nr%>"> --%>
-
-
-<%-- 		<div class="wrap">
-			<div id="left_box1">
-				<!-- box1 -->
-				<ul id="left_box1_detail">
-					<!-- myplanModify.css -->
-					<li id="size"><%if (plan_nr == 1) {%>일정A<%}%><%if (plan_nr == 2) {%>일정B<%}%></li>
-					<li>전체일정보기</li>
-					<li><%=fromDate%></li>
-					<%for(int i=0;i<datelist.size();i++){ %>
-					<li>
-						<%=datelist.get(i) %>
-					</li>		
-						<% } %>
-					<li><%=toDate%></li>
-				</ul>
-			</div>
-			
-			
-			
-			
-			<div id="left_box2">
-				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->	
-				<ul id="left_box2_head">
-						<li><button style="border: 1px solid red;">경로최적화</button>
-						<button style="border: 1px solid red;">장소검색하기</button></li>
-				</ul>
-				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
-					<li>장소를 추가해 보세요~</li>
-					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
-					 
-				</ul>
-			</div>	
-	
-			<!-- box3 도시 찜 버튼 -->
-			<div id="right_box">
-				 <ul id="right_box_detail">
-						<%
-						for (int i = 0; i < goodsList.size(); i++) {
-							TravelBean tb = (TravelBean) goodsList.get(i);
-						%>
-						<li><%=tb.getName()%></li>
-						<%
-							}
-						%>
-			</ul>
-				
-			</div>
-			<!-- <div id="map" class="f1" ></div> -->
-		</div>
-		
-
- --%>
-
-
-<%-- 		<table border="1" >
-					<tr>
-						<td>plan_nr</td>
-						<td>item_nr</td>
-						<td>name</td>
-					</tr>
-				
-					<%
-						for (int i = 0; i < basketList.size(); i++) {
-							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-							TravelBean tb = (TravelBean) goodsList.get(i);
-						/* 	if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
-								continue; */
-					%>
-					<tr>
-						<td><%=mpbb.getPlan_nr()%></td>
-						<td><%=mpbb.getItem_nr()%></td>
-						<td><%=tb.getName()%></td>
-					</tr>
-					<%
-						}
-					%>
-		</table> --%>
-
-
 <div class="clear"></div>
-<!-- Footer -->
-<jsp:include page="../inc/footer.jsp" />
-</html>
+
