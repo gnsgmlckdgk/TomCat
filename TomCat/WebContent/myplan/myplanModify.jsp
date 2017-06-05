@@ -93,9 +93,8 @@
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
 		List datelist = (List) request.getAttribute("datelist");
-		
-		out.println("datelist : " + datelist);
 
+		out.println("datelist : " + datelist + "\n\n");
 		System.out.println("fromDate : " + fromDate);
 
 		String dep_lat = (String) request.getParameter("dlat");
@@ -105,31 +104,36 @@
 	%>
 
 </body>
-<div class="wrap" style="max-width: 1080px; margin: auto;">
 
-	<%
-		if (plan_nr == 1) {
-	%>일정A<%
-		}
-	%>
-	<%
-		if (plan_nr == 2) {
-	%>일정B<%
-		}
-	%>
-	<%
-		if (plan_nr == 3) {
-	%>일정C<%
-		}
-	%>
+<form action="./MyPlanModifyAction.pln" method="post">
+
+	<div class="wrap" style="max-width: 1080px; margin: auto;">
+
+		<%
+			if (plan_nr == 1) {
+		%>일정A<%
+			}
+		%>
+		<%
+			if (plan_nr == 2) {
+		%>일정B<%
+			}
+		%>
+		<%
+			if (plan_nr == 3) {
+		%>일정C<%
+			}
+		%>
+
+		<input type="hidden" value="<%=plan_nr%>" name="plan_nr">
 
 		<table border="1" class="tg" name="test">
 
 			<!-- 첫째날 -->
 			<tr>
 				<th id="testPlanner"><%=fromDate%></th>
-				<td><select name="planMaker">
-						<option>---선택하세요---</option>
+				<td><select name="first_day">
+						<option value="null">---선택하세요---</option>
 						<%
 							if (basketList != null) {
 								for (int i = 0; i < basketList.size(); i++) {
@@ -151,8 +155,8 @@
 			%>
 			<tr>
 				<th><%=datelist.get(j)%></th>
-				<td><select name="planMaker">
-						<option>---선택하세요---</option>
+				<td><select name="<%=datelist.get(j)%>">
+						<option value="null">---선택하세요---</option>
 						<%
 							if (basketList != null) {
 									for (int i = 0; i < basketList.size(); i++) {
@@ -174,8 +178,8 @@
 			<!-- 마지막날 -->
 			<tr>
 				<th><%=toDate%></th>
-				<td><select name="planMaker">
-						<option>---선택하세요---</option>
+				<td><select name="last_day">
+						<option value="null">---선택하세요---</option>
 						<%
 							if (basketList != null) {
 								for (int i = 0; i < basketList.size(); i++) {
@@ -198,8 +202,10 @@
 		</table>
 
 
-	<div id="testsel"></div>
-</div>
+		<div id="testsel"></div>
+	</div>
+
+</form>
 
 
 <%
