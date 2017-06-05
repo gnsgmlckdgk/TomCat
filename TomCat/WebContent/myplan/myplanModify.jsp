@@ -43,12 +43,12 @@
 		});
 	});
 
-	$(function() {
+	/* $(function() {
 		$("#left_box2_detail").sortable();
 		$("#left_box2_detail").disableSelection();
-	});
+	}); 
 
-	/* 
+
 	 $(document).ready(function(datelist){
 	
 	 var left_box1_detail li=$(this).val();
@@ -56,7 +56,7 @@
 	 $('date').append(function(){
 	
 	 });
-	 }); */
+	 });
 
 	if (document.test.planMaker.selectedIndex != 0) {
 		alert("과목을 선택하세요");
@@ -83,6 +83,10 @@
 
 		});
 	});
+	
+	*/
+	
+	
 </script>
 <body>
 <!-- Header -->
@@ -129,17 +133,15 @@
 
 
 
+			출발일 : <input type="date" name="fromDate" required="required" >
+			<br> 
+			도착일 : <input type="date" name="toDate" required="required" >
 
-			출발일 :
-			<input type="date" name="fromDate" required="required">
-			<br> 도착일 :
-			<input type="date" name="toDate" required="required">
-
-			<select name="plan_nr" id="plan_nr" required="required">
-				<option value="1">Plan A</option>
-				<option value="2">Plan B</option>
-				<option value="3">Plan C</option>
-			</select>
+				<select name="plan_nr" id="plan_nr" required="required">
+					<option value="1">Plan A</option>
+					<option value="2">Plan B</option>
+					<option value="3">Plan C</option>
+				</select>
 
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
@@ -147,7 +149,7 @@
 				for (int j = 1; j < 4; j++) {
 			%>
 			<tr>
-				<th><%=j%> 일차</th>
+				<th><%=j%>일차</th>
 				<td><select name="<%=j%>">
 						<option value="null">---선택하세요---</option>
 						<%
@@ -157,19 +159,16 @@
 						%>
 						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
 						<%
+								}	
 							}
-								}
 						%>
-				</select></td>
+					</select></td>
 			</tr>
 			<%
 				}
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
 					type="reset" value="다시등록"></td>
