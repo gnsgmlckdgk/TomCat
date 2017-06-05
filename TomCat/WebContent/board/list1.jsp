@@ -8,7 +8,6 @@
 
 <html>
 <!-- Header -->
-<jsp:include page="../inc/header.jsp" />
 <section class="wrapper" style="padding:0 ;">
 <!-- Header ph -->
 
@@ -22,6 +21,9 @@
 </head>
 
 <body class="fadein">
+
+<jsp:include page="../inc/header.jsp" />
+
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
 		<img src="./board/rrr6.png">

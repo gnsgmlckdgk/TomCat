@@ -8,39 +8,59 @@
 /* join.jsp */
 section.joinSection {
 	background-color: #f0f0f0;
-	margin-top: -35px;
-	margin-bottom: -35px;
+	margin-top: -34px;
+	margin-bottom: -100px;
 }
 div.joinContainer {
 	width: 1080px;
-	margin: 30px auto;
+	margin: auto;
 	font-size: 14px;
 }
 div.join_div {
-	padding: 30px;
+	background-color: #fff;
+	width: 740px;
+	margin: auto;
 }
+
+div.join_div .mainTitle {	/* 메인 제목 */
+	border-bottom: 1px solid #ccc;
+	padding: 30px 0;
+	text-align: center;
+	font-size: 30px;
+	font-family: "나눔 고딕", "맑은 고딕", sans-serif;
+}
+
+div.join_div div.join_desc {	/* 회원가입 설명 */
+	border-bottom: 1px solid #ccc;
+	margin-top: -70px;
+	margin-bottom: 30px;
+	text-align: center;
+	padding: 30px 0;
+}
+div.join_desc h1 {	/* 제목 */
+	font-size: 24px;
+	font-family: "나눔 고딕", "맑은 고딕", sans-serif;
+	letter-spacing: -1px;
+	font-weight: 400;
+}
+div.join_desc h4 {	/* 제목 밑 설명 */
+	font-size: 16px;
+	color: #999;
+	letter-spacing: -1px;
+}
+
 div.join_div form {
-	width: 480px;
+	width: 700px;
 	margin: 0 auto 100px auto;
-	border: 3px solid #f32853;
 	padding: 40px;
 	background-color: #fff;
-}
-div.join_div h1 {	/* 제목 */
-	font-size: 28px;
-	margin-top: 30px;
-	text-align: center;
-}
-div.join_div h4 {	/* 제목 밑 설명 */
-	font-size: 16px;
-	color: #333;
 }
 div.join_div label {
 	margin-bottom: -7px;
 }
 input[type="text"], input[type="email"], input[type="password"] {
 	padding: 3px 10px;
-	width: 400px;
+	width: 620px;
 	height: 35px;
 	background-color: #fff;
 	margin-bottom: 10px;
@@ -67,5 +87,6 @@ div.join_div input[type="submit"] {
 }
 div.join_div div.join_btn {
 	margin-top: 30px;
+	margin-bottom: 30px;
 	text-align: center;
 }

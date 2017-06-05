@@ -22,39 +22,62 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
        		
        	<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=2"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=77"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 
 		<!-- 추가한 스타일 -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css?ver=52"/>
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=79"/>
+
+			<!-- Header -->
+			<style type="text/css">
+			header.subject .logo {
+				font-size: 18px;
+			}
+			header.subject .logo strong {
+				color: #49b2e9;
+			}
+			
+			#nav li {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+			#nav a {
+				font-family: "나눔 고딕" , "맑은 고딕", sans-serif;
+				font-size: 15px;
+				font-weight: bold;
+				line-height: 50px;
+				color: #000;
+			}
+			#nav a:hover {
+				cursor: pointer;
+			}
+			</style>
 
 		<!-- 추가한 스크립트 -->
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
-			<script type="text/javascript" src="./assets/js/member/join.js?ver=51"></script>	<!-- 회원가입 제약조건 및 암호화 -->
+			<script type="text/javascript" src="./assets/js/member/join.js?ver=92"></script>	<!-- 회원가입 제약조건 및 암호화 -->
 
 </head>
 	
 <body>
 
 <!-- Header -->
-<header id="header">
+<!-- Header -->
+<header id="header" class="subject">
 	<h1>
 		<a href="./Main.me"><strong>Before</strong> you go...</a>
 	</h1>
 	
-	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
+	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif;">
 		<ul>
-			<li><a href="#">함께해요</a></li>
-			<li><a href="./PlanMain.pl">여행일정플래너</a></li>
-			<li><a href="#">여행일정Q&A</a></li>
+			<li><a href="./PlanMain.pl">여행지</a></li>
+			<li><a href="./QandAList.qna">여행일정Q&A</a></li>
 			<li><a href="./BoardList.bo">인생샷그램</a></li>
 		</ul>
 	</nav> 
 </header>
-
-<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 
 		<!-- Main -->
 			<section class="joinSection">
@@ -62,10 +85,17 @@
 				
 					<!-- 회원가입 -->
 					<div class="join_div">
-						<h1>회원가입</h1>
+					
+						<h1 class="mainTitle">
+							<a href="./Main.me"><strong style="color: #4d87ef;">Before</strong> you go...</a>
+						</h1>
+						
 						<form action="./MemberJoinAction.me" method="post" name="fr" onsubmit="return validateEncryptedForm()" >
 							
-							<h4> - 모든 입력란에 입력해주세요.</h4>
+							<div class="join_desc">
+								<h1>가입 정보 입력</h1>
+								<h4>모든 입력란에 입력해주세요.</h4>
+							</div>
 							
 							<label for="id">아이디</label> 
 								<input type="email" name="id" id="id" placeholder="이메일을 입력해주세요." onchange="re_requestEmailCheck()">
@@ -109,11 +139,11 @@
 								<input type="reset" class="button" value="다시쓰기" >
 							</div>
 							
-						</form> 
+						</form>
 					
 					</div>	<!-- join_div -->
 					
-				</div>	<!-- container -->
+				</div>	<!-- joinContainer -->
 		</section>
 		
 <!-- Footer -->

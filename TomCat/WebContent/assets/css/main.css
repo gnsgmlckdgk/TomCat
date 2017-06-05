@@ -2373,17 +2373,15 @@ body.is-touch .wrapper.style3 {
 	color: #484848;
 	cursor: default;
 	font-size: 1.25em;
-	/* height: 4.5em; */
+	width: 100%;
+	min-width: 1080px;
 	height: 70px;
-	left: 0;
-	/* line-height: 4.4em; */
 	line-height: 65px;
-	position: fixed;
+	position: absolute;
 	text-transform: uppercase;
 	top: 0;
-	width: 100%;
+	left: 0;
 	z-index: 10000;
-	z-index: 10001;
 }
 
 #header h1 {
@@ -2411,12 +2409,13 @@ body.is-touch .wrapper.style3 {
 	list-style: none;
 	margin: 0;
 	padding-left: 0;
+	text-align: center;
 }
 
 #header nav ul li {
 	border-radius: 4px;
 	display: inline-block;
-	margin-left: 2.5em;
+	margin-left: 40px;
 	padding-left: 0;
 }
 
@@ -2853,6 +2852,7 @@ body.is-touch #banner {
 
 /* Footer */
 #footer {
+	min-width: 1080px;
 	min-height: 100px;
 	background-color: #363c48;
 	margin: 30px auto 0px auto;
@@ -3339,7 +3339,6 @@ div.main_container {
 
 
 .explain_gif h4{
-	
 	background-color: white;
 	width: 90%;
 	margin: 1.5em auto;

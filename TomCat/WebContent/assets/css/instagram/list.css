@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.wrapper {
+section.gramList {
 	background-image: url("../../../images/instagram/goldengate.jpg");
 	background-attachment: fixed;
 	background-position: center top;
@@ -8,9 +8,13 @@
 	line-height: 1.75;
 	text-align: center;
 	margin-top: -48px;
+	margin-bottom: -48px;
+	
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
-#table1 {
+section.gramList #table1 {
 	text-align: center;
 	width: 30em;
 	margin: auto;
@@ -19,34 +23,34 @@
 	border-radius: 0 0 20px 20px;
 }
 
-#contentimg {
+section.gramList #contentimg {
 	margin: auto;
 }
 
-#like {
+section.gramList #like {
 	background-color: #ff6699;
 }
 
-#dislike {
+section.gramList #dislike {
 	background-color: #996699;
 }
 
-.button {
+section.gramList .button {
 	width: 30em;
 	background-color: #ff6699;
 	opacity: 0.85;
 	border-radius: 20px 20px 0 0;
 }
 
-.button:hover {
+section.gramList .button:hover {
 	letter-spacing: 5px;
 }
 
-.bottomline {
+section.gramList .bottomline {
 	border-bottom: 1px solid #A9A9A9;
 }
 
-.banner {
+section.gramList .banner {
 	color:black;
 	text-decoration:blink;
 	font-weight:bolder;
@@ -55,13 +59,13 @@
 	background-color: white;
 	opacity: 0.9;
 	position: fixed;
-	left: 25em;
-	top: 25em;
+	left: 410px;
+	top: 390px;
 	border-collapse: none;
 	border: none;
 }
 
-img#up {
+section.gramList img#up {
 	width: 4em;
 	height: 4em;
 	position: fixed;
@@ -72,7 +76,7 @@ img#up {
 	opacity: 0.5
 }
 
-img#down {
+section.gramList img#down {
 	width: 4em;
 	height: 4em;
 	opacity: 0.5;
@@ -81,68 +85,71 @@ img#down {
 	top: 35em;
 }
 
-img#up:HOVER {
+section.gramList img#up:HOVER {
 	opacity: 1;
 }
 
-img#down:HOVER {
+section.gramList img#down:HOVER {
 	opacity: 1;
 }
 
-#listpage a{
+section.gramList #listpage a{
 	text-decoration:none;
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 18px
+}
+section.gramList #listpage a:hover {
+	color: #0080ff;
 }
 
-#combine {
+section.gramList #combine {
 	position: relative;
 	margin: 0 auto;
-	width: 80%;
+	width: 1080px;
 }
 
-img#AlphbetB{
+section.gramList img#AlphbetB{
 width:4em;
 height:4em;
 position: fixed;
-left: 25em;
-top: 21em;   
+left: 400px;
+top: 320px;   
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
 animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-img#AlphbetE{
+section.gramList img#AlphbetE{
 width:4em;
 height:4em;
 position: fixed;
-left: 28em;
-top: 21em;   
+left: 455px;
+top: 320px;  
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
 animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-img#AlphbetS{
+section.gramList img#AlphbetS{
 width:4em;
 height:4em;
 position: fixed;
-left: 31em;
-top: 21em;   
+left: 510px;
+top: 320px;   
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
 animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반복)지정*/
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
-img#AlphbetT{
+section.gramList img#AlphbetT{
 width:4em;
 height:4em;
 position: fixed;
-left: 34em;
-top: 21em;   
+left: 565px;
+top: 320px;   
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -154,16 +161,16 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 100%{opacity:1.0;}
 }
 
-#paddingnone{
+section.gramList #paddingnone{
 	padding:0;
 	height:2px;		
 }
-#titlecolor{
+section.gramList #titlecolor{
 	color:black;
 	font-weight:bolder;
 	background-color: #cccccc;
 }
 
-#darkgrey{
+section.gramList #darkgrey{
 	background-color:#e6e6e6;
 }
