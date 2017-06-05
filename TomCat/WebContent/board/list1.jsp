@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
 </head>
 
-<body class="fadein">
+<body class="fadein" >
 
 <jsp:include page="../inc/header.jsp" />
 
