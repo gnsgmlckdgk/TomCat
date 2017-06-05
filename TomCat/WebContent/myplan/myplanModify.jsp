@@ -126,36 +126,20 @@
 		%>
 
 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr">
+		<input type="hidden" value="<%=fromDate%>" name="first_day">
+		<input type="hidden" value="<%=fromDate%>" name="first_day"><!-- 라스튿이 -->
 
 		<table border="1" class="tg" name="test">
 
-			<!-- 첫째날 -->
-			<tr>
-				<th id="testPlanner"><%=fromDate%></th>
-				<td><select name="first_day">
-						<option value="null">---선택하세요---</option>
-						<%
-							if (basketList != null) {
-								for (int i = 0; i < basketList.size(); i++) {
-									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-						%>
-						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-						<%
-							}
-							}
-						%>
-				</select></td>
-				<td></td>
-			</tr>
-			<!-- 첫째날 끝.-->
+
 
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
-				for (int j = 0; j < datelist.size(); j++) {
+				for (int j = 1; j < datelist.size()+2; j++) {
 			%>
 			<tr>
-				<th><%=datelist.get(j)%></th>
-				<td><select name="<%=datelist.get(j)%>">
+				<th><%=j%> 일차</th>
+				<td><select name="<%=j%>">
 						<option value="null">---선택하세요---</option>
 						<%
 							if (basketList != null) {
@@ -175,25 +159,7 @@
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
 
-			<!-- 마지막날 -->
-			<tr>
-				<th><%=toDate%></th>
-				<td><select name="last_day">
-						<option value="null">---선택하세요---</option>
-						<%
-							if (basketList != null) {
-								for (int i = 0; i < basketList.size(); i++) {
-									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-						%>
-						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-						<%
-							}
-							}
-						%>
-				</select></td>
-				<td></td>
-			</tr>
-			<!-- 마지막날 끝.-->
+
 
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
