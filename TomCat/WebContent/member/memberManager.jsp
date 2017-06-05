@@ -132,9 +132,9 @@
 								<tr title="가입날짜: <%=mb.getReg_date() %>">
 									<td class="img_td" style="background-image: url('./upload/images/profileImg/<%=mb.getProfile() %>');"></td>
 									<td class="id_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>&pageNum=<%=pageNum%>&search=<%=search%>&sort=<%=isort%>';">
-									<span <%if(mb.getGold()==1){%>style="color: gold; text-shadow: 1px 1px 1px black;"<%} %>><%=mb.getId() %></span></td>
+									<span <%if(mb.getGold()==1){%>style="color: #f7870f; font-weight: bold;"<%} %>><%=mb.getId() %></span></td>
 									<td class="nick_td" onclick="location.href='./AdminMemberInfo.me?memberId=<%=mb.getId()%>&pageNum=<%=pageNum%>&search=<%=search%>&sort=<%=isort%>';">
-									<span <%if(mb.getGold()==1){%>style="color: gold; text-shadow: 1px 1px 1px black;"<%} %>><%=mb.getNick() %></span>
+									<span <%if(mb.getGold()==1){%>style="color: #f7870f; font-weight: bold;"<%} %>><%=mb.getNick() %></span>
 									</td>	
 									<td class="auth_select_box">
 										<select name="auth" onchange="auth_change('<%=mb.getId()%>', this.options[this.selectedIndex].value);">

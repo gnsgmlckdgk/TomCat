@@ -29,7 +29,7 @@
 		%>
 			<li style="margin-top: 160px; border-bottom: 1px solid #ccc;">관리자 전용</li>
 			<li><a href="./MemberManager.me?pageNum=1">회원관리</a></li>
-			<li><a href="./AdminDBManager.me">관리자 DB작성</a></li>
+			<li><a href="./AdminDBManager.me" style="border-bottom: none;">관리자 DB작성</a></li>
 		<%
 		}
 		%>
