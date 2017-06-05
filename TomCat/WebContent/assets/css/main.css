@@ -2860,7 +2860,18 @@ body.is-touch #banner {
 	background: #f6f6f6;
 	color: #aaa;
 	text-align: center;
+	
+	margin: 0;
+	border: 1px solid red;	/* 확인용 */
 }
+
+	/* footer 새로 추가한거 */
+	#footer div.footContainer {
+		border: 1px solid blue;	/* 확인용 */
+		width: 1080px;
+		min-height: 200px;
+		margin: 30px auto;
+	}
 
 #footer a {
 	-moz-transition: color 0.2s ease-in-out;

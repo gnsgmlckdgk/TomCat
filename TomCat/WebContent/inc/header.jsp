@@ -24,7 +24,7 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=68"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=69"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
@@ -90,10 +90,6 @@
 				var first_li = $(".first_li"); 
 				var liX = first_li.offset().left;
 				var liY = first_li.offset().top;
-				
-				$('.logo').css({
-					'left' : liX-260
-				});
 			});
 			</script>
 	</head>
@@ -107,11 +103,11 @@
 
 <!-- Header -->
 <header id="header" class="subject">
-	<h1 class="logo">
+	<h1>
 		<a href="./Main.me"><strong>Before</strong> you go...</a>
 	</h1>
 	
-	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif; " >
+	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif;">
 		<ul>
 			<li class="first_li"><a href="./PlanMain.pl">여행지</a></li>
 			<li><a href="./QandAList.qna">여행일정Q&A</a></li>
