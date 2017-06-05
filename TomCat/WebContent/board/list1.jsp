@@ -257,19 +257,19 @@ $(document).ready(function (event){
 	<div id="chat"></div>
  
 		<script type="text/javascript">
-		// 채팅을 불러온다.
-		$(window).load(function() {
-			$.ajax({
-				type: 'post',
-				url: './chat/broadcast.jsp',
-				success: function(data) {
-					$('#chat').append(data);
-				},
-				error: function(xhr, status, error) {
-        			alert(error);
-    			}   
-			});
-		});
+	     // 채팅을 불러온다.
+      $(window).load(function() {
+         $.ajax({
+            type: 'post',
+            url: './Chat.ct',
+            success: function(data) {
+               $('#chat').append(data);
+            },
+            error: function(xhr, status, error) {
+                 alert(error);
+             }   
+         });
+      });
 
  		</script>
 		<%} %>
