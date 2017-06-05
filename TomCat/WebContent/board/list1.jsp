@@ -4,7 +4,9 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<html>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 <section class="wrapper" style="padding:0 ;">
@@ -13,15 +15,13 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=1" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
-<link rel="stylesheet" href="animate.min.css"> 
 </head>
 
 <body class="fadein">
-
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
 		<img src="./board/rrr6.png">
@@ -209,7 +209,7 @@
 			
 					
 				</div>
-<div class="upde">				
+				<div class="upde">				
 <input type="button" value="글수정"
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
 <input type="button" value="글삭제"
@@ -248,10 +248,10 @@ $(document).ready(function (event){
 		}
 	});
 });
-
 </script>
-
+</section>
 </body>
+
 <%if(id!=null){ %>
 
 	<div id="chat"></div>
@@ -284,3 +284,4 @@ $(".re").click(function(){
 	   }
 });
 </script>      
+</html>
