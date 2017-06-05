@@ -227,7 +227,7 @@
 					%>
 					 <tbody>
 					<tr>
-<%-- 						<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
+<%-- 					<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
 						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 --> --%>
 						<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
 						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
