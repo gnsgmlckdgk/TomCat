@@ -28,7 +28,7 @@ public class MyPlanModifyAction implements Action {
 		mpbb.setLastday(request.getParameter("last_day"));
 		mpbb.setPlan_nr(Integer.parseInt(request.getParameter("plan_nr")));
 		
-		
+		System.out.println("이거"+Integer.parseInt(request.getParameter("plan_nr")));
 //		mpbb.setTravel_id(Integer.parseInt(request.getParameter("travel_id")));
 //		mpbb.setItem_nr(Integer.parseInt(request.getParameter("item_nr")));
 		

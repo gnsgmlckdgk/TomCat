@@ -92,6 +92,7 @@
 
 		//ajax를 위해서 모델 1 방식으로 진행할 코드
 
+
 		MyPlanBasketDAO basketdao = new MyPlanBasketDAO();
 		MyPlanBasketBean mpbb = new MyPlanBasketBean();
 
@@ -117,6 +118,7 @@
 
 <form action="./MyPlanModifyAction.pln" method="post">
 
+
 <!-- 	<div class="wrap" style="max-width: 1080px; margin: auto;"> -->
 <div style="max-width: 1080px; margin: auto;">
 		<%-- 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr"> --%>
@@ -124,7 +126,8 @@
 		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
 		<!-- 라스튿이 -->
 
-		<table border="1" class="tg" name="test">
+
+
 
 
 			출발일 :
@@ -137,9 +140,6 @@
 				<option value="2">Plan B</option>
 				<option value="3">Plan C</option>
 			</select>
-
-
-
 
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
@@ -166,17 +166,16 @@
 				}
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
 					type="reset" value="다시등록"></td>
 			</tr>
 		</table>
-
-
-		<div id="testsel"></div>
 	</div>
-
 </form>
 
 

@@ -282,6 +282,7 @@
 		</div>
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
+
 <!-- 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr"> -->
 <!-- 				<input type="text" name="fromDate" id="fromDate"  -->
 <!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
@@ -298,7 +299,9 @@
 <!-- 						<option value="일정C">일정C</option> -->
 <%-- 					<%}%> --%>
 <!-- 				</select> -->
+
 				
+
 <%-- 					<%if(gold.equals("무료회원")){ %> --%>
 <!-- 						<input type="submit" value="상세일정만들기" class="pln_sub_free"> -->
 <%-- 						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기"> --%>
@@ -324,6 +327,7 @@ $(window).load(function() {
 
 
 </script>
+
 
 
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->

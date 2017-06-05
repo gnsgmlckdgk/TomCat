@@ -10,7 +10,7 @@
 <table id="table1">
 
 <tr><td id="tdsize">
-<h1>step1</h1>
+<h1 id="h1">step1</h1>
  로그인 후 가고싶은 장소를 검색하세요
 </td>
 <td>
@@ -20,7 +20,7 @@
 </tr>
 
 <tr>
-<td><h1>step2</h1>
+<td><h1 id="h1">step2</h1>
 가고싶은 장소를 찜하세요
 </td>
 <td>
@@ -31,7 +31,7 @@
 </tr>
 
 <tr>
-<td><h1>step3</h1>
+<td><h1 id="h1">step3</h1>
 찜한 장소로 일정을 짜보세요
 </td>
 <td>
@@ -41,7 +41,7 @@
 </tr>
 
 <tr>
-<td><h1>step4</h1>
+<td><h1 id="h1">step4</h1>
 지금 여행지에 혼자 있다면<br>
  함께해요를 통해 같이 여행을 할 친구를 찾아봐요<br>
 Tip 현재 당신이 위치한 곳을 지도상에 나타낼 수 있습니다.<br>
@@ -52,7 +52,7 @@ Tip 현재 당신이 위치한 곳을 지도상에 나타낼 수 있습니다.<b
 </tr>
 
 <tr>
-<td><h1>step5</h1>
+<td><h1 id="h1">step5</h1>
 여행을 가서 찍은 멋진 사진을 공유해보세요
 Tip 좋아요가 가장많은 Best Shot으로 선정되신 분은<br>
  소정의 사은품을 보내드립니다.<br>
@@ -81,4 +81,7 @@ Tip 좋아요가 가장많은 Best Shot으로 선정되신 분은<br>
 
 
 <!-- Footer -->
+<div id="footerposition">
 <jsp:include page="../inc/footer.jsp" />
+
+</div>
