@@ -1,9 +1,6 @@
 
 /* 로그인 팝업 */
 function popupToggle() {
-	
-	$(document).ready(function(){
-		
 		// 팝업 띄움
 		if($('#loginPopContainer').css('display')=="none") {
 			
@@ -42,8 +39,6 @@ function popupToggle() {
 			});
 			$('#loginPopContainer').css('display', 'none');
 		}
-		
-	});		// ready
 }
 
 /* 로그인 인증 */
@@ -114,7 +109,7 @@ function validateEncryptedLoginForm() {
 function idFinderPopup() {
 	
 	window.open('./MemberIdFinder.me',  '_blank', 
-			'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+			'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=320, top=200, left=400');
 
 }
 
@@ -122,7 +117,7 @@ function idFinderPopup() {
 function passFinderPopup() {
 
 	window.open('./MemberPassFinder.me',  '_blank', 
-	'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=350, top=200, left=400');
+	'toolbar=no, location=no, status=no, menubar=no, scrollbars=no, resizable=no, directories=no, width=600, height=320, top=200, left=400');
 	
 }z
 

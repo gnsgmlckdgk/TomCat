@@ -7,21 +7,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
-<section class="wrapper" style="padding:0 ;">
-<!-- Header ph -->
 
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=1" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
 </head>
 
 <body class="fadein">
+
+<jsp:include page="../inc/header.jsp" />
+
+<!-- Header -->
+<section class="together_section">
+
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
 		<img src="./board/rrr6.png">
@@ -232,23 +234,32 @@ onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNu
 
 		</div>
 	</div>
-		
-<script type="text/javascript">
-$(document).ready(function (event){
-	$(window).scroll(function (){
 
-		var scrollHeight = $(window).scrollTop() + $(window).height();
-		var documentHeight = $(document).height();
 
-		// 스크롤이 맨 아래로 갔는지 아닌지 확인
-		if(scrollHeight == documentHeight){
-			for(var i=0; i<5; i++){
-				$('<h1>scroll2_'+i+'_</h1>').appendTo('body');
-			}
-		}
-	});
-});
-</script>
+<%
+//페이지 출력
+if(count!=0){
+	// 전체 페이지수 구하기   게시판 글 50개 한화면에 보여줄 글개수 10 => 5 전체페이지 +0=>5
+			//  게시판 글 56개 한화면에 보여줄 글개수 10 => 5 전체페이지 +1(나머지)=>6 
+	// 한 화면에 보여줄 페이지 번호 개수 
+	// 시작페이지 번호구하기   1~10=>1   11~20=>11  21 ~30 => 21
+	
+	// 끝페이지 번호 구하기  
+	//이전
+	if(startPage>pageBlock){
+		%><a href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
+	}
+	// 1..10  11..20  21...30
+	for(int i=startPage;i<=endPage;i++){
+		%><a href="./BoardList1.bb?pageNum=<%=i%>">[<%=i%>]</a><%
+	}
+	// 다음
+	if(endPage < pageCount){
+		%><a href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>">[다음]</a><%
+	}
+}
+%>
+
 </section>
 </body>
 
@@ -285,3 +296,4 @@ $(".re").click(function(){
 });
 </script>      
 </html>
+<!-- Footer --> <jsp:include page="../inc/footer.jsp" />.21

@@ -25,14 +25,12 @@
 	
 }
 
-body {
+section .together_section {
 	background-image: url("../../images/kk.jpg");
-	
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	max-width: 1080px;
-/* 	margin-right: 550px; */
-	
+	width: 1080px;
+	border: 1px solid red;
 }
 
 .btn_up_layer {
@@ -112,8 +110,8 @@ body {
 	position:fixed;
 	top:7em;
 	right:0;
-	z-index: 50;
-	margin-bottom: 50px;
+	z-index: 5;
+	margin-bottom: 80px;
 	margin-right: 100px;
 	
 }
