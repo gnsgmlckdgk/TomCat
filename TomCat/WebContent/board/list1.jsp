@@ -13,9 +13,11 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=4" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
+<link rel="stylesheet" href="animate.min.css"> 
 </head>
 
 <body class="fadein">
@@ -213,52 +215,22 @@ onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNu
 <input type="button" value="글삭제"
 onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
 
-<input type="button" value="댓글<%=bb.getNum()%>" onclick="ply(<%=bb.getNum()%>)" class="re" >	
+<input type="button" value="댓글"  class="re" >   
+
 </div>
-<script type="text/javascript">
 
-function ply(k) {
-document.getElementById('plybb'+k).style.display = "block";
 
-alert("test");
-}
+         <div id="plybb<%=bb.getNum()%>"   class="replybb animated swing"   style="display: none">
+         <%=bb.getNum()%>
+         some output of text
+         </div>
+         </div>
 
-</script>		
-
-			<div id="plybb<%=bb.getNum()%>"   class="replybb"  >
-			<%=bb.getNum()%>
-			some output of text
-			</div>
-
-			</div>
-	
-	<script type="text/javascript"> 
-// 		 $(function(){
-// 			$(".btn").click(function(){
-// 				var effect = 'slide';
-// 				var options ='left';
-// 				var duration = 500;
-// 			$('#pln_list').toggle(effect, options, duration);
-// 			}); 
-// 		});  
-// 		//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
-//  		 $(function(){
-// 			 //datepicker 한국어로 사용하기 위한 언어설정
-// 		   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
-// 		 });
-		</script>
- 
 			<%
-				}
-				
-					
-				
+			}		
 			%>
 
 		</div>
-		
-		
-
 	</div>
 		
 <script type="text/javascript">
@@ -289,7 +261,7 @@ $(document).ready(function (event){
 		$(window).load(function() {
 			$.ajax({
 				type: 'post',
-				url: './Chat.ct',
+				url: './chat/broadcast.jsp',
 				success: function(data) {
 					$('#chat').append(data);
 				},
@@ -301,3 +273,14 @@ $(document).ready(function (event){
 
  		</script>
 		<%} %>
+
+<!-- 댓글 슬라이드 -->
+<script type="text/javascript">
+$(".re").click(function(){
+	if($(this).parents(".e").find(".replybb").css("display")  == 'none'){
+		$(this).parents(".e").find(".replybb").css("display","block");
+	   }else{
+		   $(this).parents(".e").find(".replybb").css("display","none");
+	   }
+});
+</script>      
