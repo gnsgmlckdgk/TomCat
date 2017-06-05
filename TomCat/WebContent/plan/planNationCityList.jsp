@@ -98,9 +98,21 @@
 		<td class="txt_td">
 			<span class="city_name"><%=pcb.getName()%></span><br>
 			<span class="city_enName"><%=pcb.getEn_name()%></span><br>
-			<span class="city_info">
+			<span class="city_info" style="font-weight: 600; font-size: 13px;">
 				<%
-					// 관광지 목록 불러와 출력 할 예쩡
+					if(travelList.size()>0) {
+						for(int j=0; j<travelList.size(); j++) {
+							PlanTravelBean ptb = travelList.get(j);
+							%>
+							<%=ptb.getName() %><%if(j<travelList.size()-1){%>, <%}%> 
+							<%
+						}
+					}else {
+						%>
+						관광지 정보가 없습니다.
+						<%
+					}
+					
 				%>
 			</span>
 		</td>

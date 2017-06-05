@@ -1350,8 +1350,51 @@ public class PlanDAO {
 	
 	// 도시코드로 관광지 리스트 가져오기
 	public List<PlanTravelBean> getTravelList(String city_code) {
-		// 수정해야함
-		return null;
+		
+		List<PlanTravelBean> travelList = new ArrayList<PlanTravelBean>();
+		
+		try {
+			con = getConnection();
+			
+			sql = "select *"
+					+ "from travel where city_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, city_code);
+			
+			rs = pstmt.executeQuery();
+			
+			PlanTravelBean ptb = null;
+			
+			int i = 0;
+			while(rs.next()) {
+				ptb = new PlanTravelBean();
+				ptb.setCity_code(city_code);
+				ptb.setConuntry_code(rs.getString("country_code"));
+				ptb.setFile(rs.getString("file"));
+				ptb.setInfo(rs.getString("info"));
+				ptb.setLatitude(rs.getFloat("latitude"));
+				ptb.setLongitude(rs.getFloat("longitude"));
+				ptb.setName(rs.getString("name"));
+				ptb.setTravel_id(rs.getInt("travel_id"));
+				ptb.setType(rs.getString("type"));
+				ptb.setAddress(rs.getString("address"));
+				
+				travelList.add(ptb);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return travelList;
 	}
 	
 	public List<PlanTravelBean> getTravelList(int startRow, int pageSize, String region, String city_code) {
