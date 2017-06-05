@@ -2374,10 +2374,10 @@ body.is-touch .wrapper.style3 {
 	cursor: default;
 	font-size: 1.25em;
 	/* height: 4.5em; */
-	height: 60px;
+	height: 70px;
 	left: 0;
 	/* line-height: 4.4em; */
-	line-height: 60px;
+	line-height: 65px;
 	position: fixed;
 	text-transform: uppercase;
 	top: 0;
@@ -2853,36 +2853,120 @@ body.is-touch #banner {
 
 /* Footer */
 #footer {
-	/* 추가한거 */
 	min-height: 100px;
-	/* 추가한거 */
-	/* padding: 8em 0 6em 0; */
-	background: #f6f6f6;
-	color: #aaa;
-	text-align: center;
-	
-	margin: 0;
-	border: 1px solid red;	/* 확인용 */
+	background-color: #363c48;
+	margin: 30px auto 0px auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
 	/* footer 새로 추가한거 */
-	#footer div.footContainer {
-		border: 1px solid blue;	/* 확인용 */
+	#footer div.footContainer {	/* 내용물 전체 */
 		width: 1080px;
-		min-height: 200px;
-		margin: 30px auto;
+		min-height: 100px;
+		margin: 0 auto;
+	}
+	/* left div */
+	#footer div.footContainer .left {	/* 왼쪽 내용물 */
+		width: 245px;
+		font-size: 12px;
+		float: left;
+		margin-right: 10px;
+		text-align: left;
+	}
+	#footer div.footContainer .left h4 {	/* 부제목 */
+		font-size: 16px;
+		color: #999999;
+		border-bottom: 1px solid #999999;
+	}
+	#footer div.footContainer .left ul {
+		list-style: none;
+	}
+	#footer div.footContainer .left li {
+		padding: 0;
+		height: 20px;
+	}
+	#footer div.footContainer .left a {
+		color: #fff;
+		text-decoration: none;	
+		border: 1xp solid #fff;
+	}
+	
+	/* center div */
+	#footer div.footContainer .center {	/* 왼쪽 내용물 */
+		width: 245px;
+		font-size: 12px;
+		float: left;
+		margin-right: 10px;
+		text-align: left;
+	}
+	#footer div.footContainer .center h4 {	/* 부제목 */
+		font-size: 16px;
+		color: #999999;
+		border-bottom: 1px solid #999999;
+	}
+	#footer div.footContainer .center ul {
+		list-style: none;
+	}
+	#footer div.footContainer .center li {
+		padding: 0;
+		height: 20px;
+	}
+	#footer div.footContainer .center a {
+		color: #fff;
+		text-decoration: none;	
+		border: 1xp solid #fff;
 	}
 
-#footer a {
+	/* right div */
+	#footer div.footContainer .right {	/* 왼쪽 내용물 */
+		width: 245px;
+		font-size: 12px;
+		float: left;
+		margin-right: 10px;
+		text-align: left;
+	}
+	#footer div.footContainer .right h4 {	/* 부제목 */
+		font-size: 16px;
+		color: #999999;
+		border-bottom: 1px solid #999999;
+	}
+	#footer div.footContainer .right ul {
+		list-style: none;
+	}
+	#footer div.footContainer .right li {
+		padding: 0;
+		height: 20px;
+	}
+	#footer div.footContainer .right a {
+		color: #fff;
+		text-decoration: none;	
+		border: 1xp solid #fff;
+	}
+	#footer div.footContainer .footer_logo {	/* 제일 오른쪽 */
+		width: 300px;
+		height: 150px;
+		text-align: center;
+		line-height: 150px;
+		float: left;
+		margin-right: 10px;	
+	}
+	#footer div.footContainer .footer_logo a {
+		font-size: 30px;
+		text-decoration: none;
+		color: #fff;
+	}
+
+/* #footer a {
 	-moz-transition: color 0.2s ease-in-out;
 	-webkit-transition: color 0.2s ease-in-out;
 	-ms-transition: color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out;
 	color: #aaa;
 	text-decoration: none;
-}
+} 
 
-#footer a:active, #footer a:hover {
+ #footer a:active, #footer a:hover {
 	color: #666;
 }
 
@@ -2916,9 +3000,9 @@ body.is-touch #banner {
 	border-left: 0;
 	margin-left: 0;
 	padding-left: 0;
-}
+} 
 
-/* @media screen and (max-width: 980px) {
+ @media screen and (max-width: 980px) {
 	#footer {
 		padding: 6em 0 4em 0;
 	}
