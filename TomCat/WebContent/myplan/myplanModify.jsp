@@ -90,6 +90,7 @@
 
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 
+		String gold = (String) request.getAttribute("gold");
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
 		List datelist = (List) request.getAttribute("datelist");
@@ -106,8 +107,29 @@
 </body>
 
 <form action="./MyPlanModifyAction.pln" method="post">
-
 	<div class="wrap" style="max-width: 1080px; margin: auto;">
+ 	<%-- 			<input type="text" name="fromDate" id="fromDate" required="required" placeholder="시작일"
+ 							style="	background-image: url('myplan/pn_cal_btn.png');
+									background-repeat: no-repeat; 
+									background-position: 110px 13px;">
+				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" 
+							style="	background-image: url('myplan/pn_cal_btn.png'); 
+									background-repeat: no-repeat;
+									background-position: 110px 13px;">
+ 				<select name="plan_nr" id="plan_nr" required="required"> 
+						<option value="1" >일정A</option> 
+	 					<option value="2">일정B</option> 
+ 					<%if(gold.equals("유료회원")){ %> 
+						<option value="일정C">일정C</option> 
+ 					<%}%> 
+ 				</select> 
+ 					<%if(gold.equals("무료회원")){ %> 
+ 						<input type="submit" value="상세일정만들기" class="pln_sub_free">
+						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
+ 					<%} else {%>
+						<input type="submit" value="상세일정만들기" class="pln_sub">
+					<%} %>  --%>
+	
 
 		<%
 			if (plan_nr == 1) {
@@ -124,15 +146,11 @@
 		%>일정C<%
 			}
 		%>
-
 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr">
 		<input type="hidden" value="<%=fromDate%>" name="first_day">
-		<input type="hidden" value="<%=fromDate%>" name="first_day"><!-- 라스튿이 -->
+		<input type="hidden" value="<%=toDate%>" name="first_day"><!-- 라스튿이 -->
 
 		<table border="1" class="tg" name="test">
-
-
-
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
 				for (int j = 1; j < datelist.size()+2; j++) {
@@ -158,19 +176,12 @@
 				}
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
-
-
-
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
 					type="reset" value="다시등록"></td>
 			</tr>
 		</table>
-
-
-		<div id="testsel"></div>
 	</div>
-
 </form>
 
 

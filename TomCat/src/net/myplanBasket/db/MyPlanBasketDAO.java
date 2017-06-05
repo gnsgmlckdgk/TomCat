@@ -445,7 +445,7 @@ public class MyPlanBasketDAO {
 			
 			pstmt.setString(4, myplanbean.getId());
 			
-			
+
 //			pstmt.setInt(4, myplanbean.getItem_nr());
 			
 			
