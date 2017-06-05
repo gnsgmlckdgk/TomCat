@@ -10,13 +10,13 @@ div.memberManagerNav {
 	border: 2px solid #000;
 	box-shadow: 2px 2px 5px #333;
 	background-color: white;
- 	position: fixed;
- /* right: 5px;
-	top: 6em; */
+ 	position: absolute;
+ 	top: 0px;
+ 	right: 0px;
 	width: 305px;
 	height: 124px;
 	display: none;
-	z-index: 9;
+	z-index: 10001;
 }
 
 div.memberManagerNav img {

@@ -34,19 +34,19 @@
 
 <!-- 추가한 스타일 -->
 	<style type="text/css">
-		div#container {
+		div#passFinderContainer {
 			width: 550px;
-			height: 300px;
-			margin: 0 auto;
-			padding: 10px 50px;
+			height: 290px;
+			margin: -60px auto;
 		}
 		
-		div#container label {
+		div#passFinderContainer label {
 			margin-bottom: -7px;
 		}
 		
-		div#container input[type=submit] {
-			margin: 20px 0 0 140px;
+		div#passFinderContainer input[type=submit] {
+			display: block;
+			margin: 20px auto;
 		}
 	
 	</style>
@@ -54,7 +54,7 @@
 </head>
 <body>
 	
-	<div id="container">
+	<div id="passFinderContainer">
 		<h4>비밀번호 찾기</h4>
 		<form action="./MemberPassFinderAction.me" name="pass_finder_form" method="post" onsubmit="return passFind();">
 		

@@ -37,19 +37,19 @@
 
 	<!-- 추가한 스타일 -->
 	<style type="text/css">
-		div#container {
+		div#idFinderContainer {
 			width: 550px;
-			height: 300px;
-			margin: 0 auto;
-			padding: 10px 50px;
+			height: 290px;
+			margin: -60px auto;
 		}
 		
-		div#container label {
+		div#idFinderContainer label {
 			margin-bottom: -7px;
 		}
 		
-		div#container input[type=submit] {
-			margin: 20px 0 0 140px;
+		div#idFinderContainer input[type=submit] {
+			display: block;
+			margin: 20px auto;
 		}
 	
 	</style>
@@ -59,7 +59,7 @@
 	<!-- 아이디 찾는 페이지 -->
 	<!-- 팝업 브라우저 창 띄워서 할거라 include 안함 -->
 	
-	<div id="container">
+	<div id="idFinderContainer">
 		<h4>아이디 찾기</h4>
 		<form action="./MemberIdFinderAction.me" name="id_finder_form" method="post" onsubmit="return idFind();">
 		

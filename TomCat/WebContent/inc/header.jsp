@@ -24,13 +24,13 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=73"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=77"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=62"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=78"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=63"/>	<!-- 메인페이지 -->
@@ -39,8 +39,8 @@
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=66"></script>	<!-- 로그인 스크립트 -->
-			<script type="text/javascript" src="./assets/js/member/memberManager.js?ver=67"></script>	<!-- 정보관리 팝업 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=91"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js?ver=69"></script>
@@ -69,29 +69,6 @@
 				cursor: pointer;
 			}
 			</style>
-			
-			<script type="text/javascript">
-			$(document).ready(function() {
-				/* 헤더 */
-				var wid = screen.width;
-				$('.subject').css('width', wid);
-				$('.subject nav').css('text-align', 'center');
-				
-				/* 회원정보 팝업 */
-				var memberInfoMenuTxt = $(".memberInfoMenuTxt");        
-				var divX = memberInfoMenuTxt.offset().left;
-				var divY = memberInfoMenuTxt.offset().top;
-				
-				$('.memberManagerNav').css({
-					'left' : divX,
-					'top' : divY+53
-				});
-				first_li
-				var first_li = $(".first_li"); 
-				var liX = first_li.offset().left;
-				var liY = first_li.offset().top;
-			});
-			</script>
 	</head>
 	
 <body>
@@ -127,9 +104,6 @@
 	</nav> 
 </header>
 
-<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-
-
 <!-- 로그인 팝업 창 -->
 
 <!-- 로그인 팝업창 뜰때 배경 -->
@@ -155,6 +129,19 @@
 </div>
 
 <!-- 회원관리/로그아웃 선택 팝업 메뉴 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(window).resize(function(){
+			var loginTxt = $('.memberInfoMenuTxt');
+			var left = loginTxt.offset().left;
+			
+			$('.memberManagerNav').css({
+				'left' : left,
+				'top' : '70px'
+			});
+		}).resize();
+	});
+</script>
 <%
 	if(nick!=null) {	// 로그인 되어 있을때만
 			MemberDAO mdao = new MemberDAO();
@@ -170,8 +157,8 @@
 				<%
 			%>
 				<ul>
-					<li><a href="./MemberInfo.me">정보관리</a></li>
-					<li><a href="./MemberLogout.me">로그아웃</a></li>
+					<li><a href="./MemberInfo.me" class="infoManager">정보관리</a></li>
+					<li><a href="./MemberLogout.me" class="logout">로그아웃</a></li>
 				</ul>
 			</div>
 		<%	

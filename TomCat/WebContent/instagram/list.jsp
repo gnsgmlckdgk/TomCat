@@ -1,5 +1,3 @@
-<%-- <%@page import="java.sql.Statement"%> --%>
-
 <%@page import="net.like.db.LikeDAO"%>
 <%@page import="net.like.db.LikeBean"%>
 <%@page import="net.member.db.MemberBean"%>
@@ -18,9 +16,9 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=3"/>	
+<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=4"/>	
 <div id="top"></div>
-<section class="wrapper">
+<section class="gramList">
 
 <div id="combine">
 	<%	
@@ -144,7 +142,6 @@ if(likecount%2==0){
 			
 			<tr>
 			<td colspan="4" id="listpage">
-			
 			<%
 // 			=======================페이지출력===================
 			
@@ -159,7 +156,7 @@ if(likecount%2==0){
 				}
 				//1...10
 				for(int i=startPage;i<=endPage;i++){
-					%><a href="./BoardList.bo?pageNum=<%=i%>">[<%=i%>]
+					%><a href="./BoardList.bo?pageNum=<%=i%>" <%if(currentPage==i){%>style="color:#0080ff;"<%} %>>[<%=i%>]
 			</a>
 			<%
 				}
@@ -200,15 +197,12 @@ if(likecount%2==0){
 	<table class="banner">
 	<tr><td id="paddingnone">
 	<marquee>BEST샷<marquee width=300>←♡-&lt </marquee>
-	
-	
-	
 	</td></tr>
 	<tr><td>	
 
 <a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/<%=bb.getImage1()%>" width=180 height=200 onerror="this.src='./images/instagram/noimage.png'"></a>
 	</td></tr>
-	<tr><td id="paddingnone">좋아	요<%=likecountall %>개</td></tr>
+	<tr><td id="paddingnone">좋아요<%=likecountall %>개</td></tr>
 	</table>
 	
 	
@@ -220,8 +214,10 @@ if(likecount%2==0){
 		
 </section>
 	
+	<!-- Footer -->
+	<jsp:include page="../inc/footer.jsp" />
+	
 </body>
 		
-<!-- Footer -->
-<jsp:include page="../inc/footer.jsp" />
+
 
