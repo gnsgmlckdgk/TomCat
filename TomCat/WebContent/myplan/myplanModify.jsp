@@ -13,10 +13,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<html>
-<!-- Header -->
-<jsp:include page="../inc/header.jsp" />
+
+
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet" href="assets/css/map/modifyNewFile7.css" />
@@ -87,6 +85,8 @@
 	});
 </script>
 <body>
+<!-- Header -->
+<jsp:include page="../inc/header.jsp" />
 	<%
 		String id = (String) session.getAttribute("id");
 
@@ -117,8 +117,8 @@
 
 <form action="./MyPlanModifyAction.pln" method="post">
 
-	<div class="wrap" style="max-width: 1080px; margin: auto;">
-
+<!-- 	<div class="wrap" style="max-width: 1080px; margin: auto;"> -->
+<div style="max-width: 1080px; margin: auto;">
 		<%-- 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr"> --%>
 		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
 		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
@@ -127,28 +127,40 @@
 		<table border="1" class="tg" name="test">
 
 
+			출발일 :
+			<input type="date" name="fromDate" required="required">
+			<br> 도착일 :
+			<input type="date" name="toDate" required="required">
+
+			<select name="plan_nr" id="plan_nr" required="required">
+				<option value="1">Plan A</option>
+				<option value="2">Plan B</option>
+				<option value="3">Plan C</option>
+			</select>
+
+
+
 
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
 				//for (int j = 1; j < datelist.size() + 2; j++) {
-					for (int j = 1; j < 3; j++) {
+				for (int j = 1; j < 4; j++) {
 			%>
 			<tr>
 				<th><%=j%> 일차</th>
 				<td><select name="<%=j%>">
 						<option value="null">---선택하세요---</option>
 						<%
-// 							if (basketList != null) {
-// 									for (int i = 0; i < basketList.size(); i++) {
-// 										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+							if (basketList != null) {
+									for (int i = 0; i < basketList.size(); i++) {
+										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
 						%>
-						<option value="<%//=tb.getName()%>"><%//=tb.getName()%></option>
+						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
 						<%
-// 							}
-// 								}
+							}
+								}
 						%>
 				</select></td>
-				<td></td>
 			</tr>
 			<%
 				}
@@ -169,6 +181,4 @@
 
 
 <div class="clear"></div>
-<!-- Footer -->
-<jsp:include page="../inc/footer.jsp" />
-</html>
+
