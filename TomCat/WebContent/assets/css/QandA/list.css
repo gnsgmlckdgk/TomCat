@@ -63,4 +63,15 @@ background-color: rgba(77, 77, 77,0.3);
 	color:grey;
 	font-weight: bolder;
 	}
+	#table_search{
+margin-top: 2px;
+	}
 
+#qandasearch{
+	width:20%;
+	color:white;
+	margin-left:40%;
+	background-color: rgba(172, 0, 230,0.5);
+	
+	
+}
