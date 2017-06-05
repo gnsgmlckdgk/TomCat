@@ -10,9 +10,9 @@ div.memberManagerNav {
 	border: 2px solid #000;
 	box-shadow: 2px 2px 5px #333;
 	background-color: white;
-	position: fixed;
-	right: 5px;
-	top: 6em;
+ 	position: fixed;
+ /* right: 5px;
+	top: 6em; */
 	width: 305px;
 	height: 124px;
 	display: none;
@@ -26,7 +26,7 @@ div.memberManagerNav img {
 div.memberManagerNav ul {
 	position: absolute;
 	padding: 0;
-	left: 105px;
+ 	left: 105px;
 	top: 10px;
 }
 
@@ -122,9 +122,10 @@ div.memberContent header {	/* 내용물 헤더부분 */
     margin-bottom: 40px;
 }
 div.memberContent header h1 {	/* 제목 */
-	text-shadow: 2px 2px 2px #ffb3b3;
 	margin-bottom: 10px;
 	font-size: 27px;
+	font-weight: bold;
+	font-family: "나눔 고딕", "맑은 고딕", sans-serif;
 }
 
 div.memberContent {	/* 내용물 */

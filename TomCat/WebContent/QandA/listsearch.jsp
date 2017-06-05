@@ -21,6 +21,8 @@ int currentPage=((Integer)request.getAttribute("currentPage")).intValue();
 int pageCount=((Integer)request.getAttribute("pageCount")).intValue();
 int startPage=((Integer)request.getAttribute("startPage")).intValue();
 int endPage=((Integer)request.getAttribute("endPage")).intValue();
+String search=(String)request.getAttribute("search");
+
 
 QandADAO qdao=new QandADAO();
 %>
@@ -74,18 +76,18 @@ QandADAO qdao=new QandADAO();
 					endPage=pageCount;}
 				//이전
 				if(startPage>pageSize){
-					%><a href="./QandAList.qna?pageNum=<%=startPage-pageSize%>">[이전]</a>
+					%><a href="./QandAList.qna?pageNum=<%=startPage-pageSize%>&search=<%=search%>">[이전]</a>
 			<%
 				}
 				//1...10
 				for(int j=startPage;j<=endPage;j++){
-					%><a href="./QandAList.qna?pageNum=<%=j%>">[<%=j%>]
+					%><a href="./QandAList.qna?pageNum=<%=j%>&search=<%=search%>">[<%=j%>]
 			</a>
 			<%
 				}
 				//다음
 				if(endPage< pageCount){
-					%><a href="./QandAList.qna?pageNum=<%=startPage+pageSize %>">[다음]</a>
+					%><a href="./QandAList.qna?pageNum=<%=startPage+pageSize%>&search=<%=search%>">[다음]</a>
 			<%}		
 			}		
 			%>	

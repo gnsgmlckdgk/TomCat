@@ -433,20 +433,30 @@ public class MyPlanBasketDAO {
 			// 1,2 디비연결
 			con = getConnection();
 			// 3 sql num 에 해당하는
-			sql = "update myplans set item_nr=? where plan_nr=?,,firstday=?,lastday=?"
-					+ ",day_nr=?,day_night=?,user_lat=?,user_lng=?,date=?,memo=?,plan_done_nr=? ";
+//			sql = "update myplans set item_nr=? where plan_nr=?,,firstday=?,lastday=?"
+//					+ ",day_nr=?,day_night=?,user_lat=?,user_lng=?,date=?,memo=?,plan_done_nr=? ";
+			sql = "update myplans set firstday=?, lastday=?, plan_nr=? where id=? ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, myplanbean.getItem_nr());
-			pstmt.setInt(2, myplanbean.getPlan_nr());
-			pstmt.setString(3, myplanbean.getFirstday());
-			pstmt.setString(4, myplanbean.getLastday());
-			pstmt.setInt(5, myplanbean.getDay_nr());
-			pstmt.setString(6, myplanbean.getDay_night());
-			pstmt.setFloat(7, myplanbean.getUser_lat());
-			pstmt.setFloat(8, myplanbean.getUser_lng());
-			pstmt.setString(9, myplanbean.getDate());
-			pstmt.setString(10, myplanbean.getMemo());
-			pstmt.setInt(11, myplanbean.getPlan_done_nr());
+			
+			
+			pstmt.setString(1, myplanbean.getFirstday());
+			pstmt.setString(2, myplanbean.getLastday());
+			pstmt.setInt(3, myplanbean.getPlan_nr());
+			
+			pstmt.setString(4, myplanbean.getId());
+			
+
+//			pstmt.setInt(4, myplanbean.getItem_nr());
+			
+			
+			
+//			pstmt.setInt(5, myplanbean.getDay_nr());
+//			pstmt.setString(6, myplanbean.getDay_night());
+//			pstmt.setFloat(7, myplanbean.getUser_lat());
+//			pstmt.setFloat(8, myplanbean.getUser_lng());
+//			pstmt.setString(9, myplanbean.getDate());
+//			pstmt.setString(10, myplanbean.getMemo());
+//			pstmt.setInt(11, myplanbean.getPlan_done_nr());
 
 			// 4실행
 			pstmt.executeUpdate();

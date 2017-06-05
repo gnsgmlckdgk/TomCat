@@ -90,12 +90,12 @@
 
 		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
 
+		String gold = (String) request.getAttribute("gold");
 		String fromDate = (String) request.getParameter("fromDate");
 		String toDate = (String) request.getParameter("toDate");
 		List datelist = (List) request.getAttribute("datelist");
-		
-		out.println("datelist : " + datelist);
 
+		out.println("datelist : " + datelist + "\n\n");
 		System.out.println("fromDate : " + fromDate);
 
 		String dep_lat = (String) request.getParameter("dlat");
@@ -105,54 +105,60 @@
 	%>
 
 </body>
-<div class="wrap" style="max-width: 1080px; margin: auto;">
 
-	<%
-		if (plan_nr == 1) {
-	%>일정A<%
-		}
-	%>
-	<%
-		if (plan_nr == 2) {
-	%>일정B<%
-		}
-	%>
-	<%
-		if (plan_nr == 3) {
-	%>일정C<%
-		}
-	%>
+<form action="./MyPlanModifyAction.pln" method="post">
+	<div class="wrap" style="max-width: 1080px; margin: auto;">
+ 	<%-- 			<input type="text" name="fromDate" id="fromDate" required="required" placeholder="시작일"
+ 							style="	background-image: url('myplan/pn_cal_btn.png');
+									background-repeat: no-repeat; 
+									background-position: 110px 13px;">
+				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" 
+							style="	background-image: url('myplan/pn_cal_btn.png'); 
+									background-repeat: no-repeat;
+									background-position: 110px 13px;">
+ 				<select name="plan_nr" id="plan_nr" required="required"> 
+						<option value="1" >일정A</option> 
+	 					<option value="2">일정B</option> 
+ 					<%if(gold.equals("유료회원")){ %> 
+						<option value="일정C">일정C</option> 
+ 					<%}%> 
+ 				</select> 
+ 					<%if(gold.equals("무료회원")){ %> 
+ 						<input type="submit" value="상세일정만들기" class="pln_sub_free">
+						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기">
+ 					<%} else {%>
+						<input type="submit" value="상세일정만들기" class="pln_sub">
+					<%} %>  --%>
+	
+
+		<%
+			if (plan_nr == 1) {
+		%>일정A<%
+			}
+		%>
+		<%
+			if (plan_nr == 2) {
+		%>일정B<%
+			}
+		%>
+		<%
+			if (plan_nr == 3) {
+		%>일정C<%
+			}
+		%>
+		<input type="hidden" value="<%=plan_nr%>" name="plan_nr">
+		<input type="hidden" value="<%=fromDate%>" name="first_day">
+		<input type="hidden" value="<%=toDate%>" name="first_day"><!-- 라스튿이 -->
 
 		<table border="1" class="tg" name="test">
-
-			<!-- 첫째날 -->
-			<tr>
-				<th id="testPlanner"><%=fromDate%></th>
-				<td><select name="planMaker">
-						<option>---선택하세요---</option>
-						<%
-							if (basketList != null) {
-								for (int i = 0; i < basketList.size(); i++) {
-									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-						%>
-						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-						<%
-							}
-							}
-						%>
-				</select></td>
-				<td></td>
-			</tr>
-			<!-- 첫째날 끝.-->
-
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
-				for (int j = 0; j < datelist.size(); j++) {
+				for (int j = 1; j < datelist.size()+2; j++) {
 			%>
 			<tr>
-				<th><%=datelist.get(j)%></th>
-				<td><select name="planMaker">
-						<option>---선택하세요---</option>
+				<th><%=j%> 일차</th>
+				<td><select name="<%=j%>">
+						<option value="null">---선택하세요---</option>
 						<%
 							if (basketList != null) {
 									for (int i = 0; i < basketList.size(); i++) {
@@ -170,36 +176,13 @@
 				}
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
-
-			<!-- 마지막날 -->
-			<tr>
-				<th><%=toDate%></th>
-				<td><select name="planMaker">
-						<option>---선택하세요---</option>
-						<%
-							if (basketList != null) {
-								for (int i = 0; i < basketList.size(); i++) {
-									TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-						%>
-						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-						<%
-							}
-							}
-						%>
-				</select></td>
-				<td></td>
-			</tr>
-			<!-- 마지막날 끝.-->
-
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
 					type="reset" value="다시등록"></td>
 			</tr>
 		</table>
-
-
-	<div id="testsel"></div>
-</div>
+	</div>
+</form>
 
 
 <%

@@ -14,7 +14,7 @@
 여기 자기가 한 것, 하고싶은 말 쓸거에용
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="500" height="300">
+	<img src="./images/QandA/step1.png" width="300" height="300">
 
 </td>
 </tr>
@@ -70,7 +70,7 @@
 <td><h1 id="h1">이승민</h1>
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="500" height="300">
+	<img src="./images/QandA/step1.png" width="300" height="300">
 </td>
 </tr>
 </table>
