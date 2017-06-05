@@ -64,12 +64,12 @@
 	width: 335px;
 	height: 218px;
 	position: absolute;
-	left: 378px;
-	top: 10px;
-	z-index: 999;
+	top: 10em;
+	z-index: 9999;
 	background: #fff;
 	border-radius: 5px;
 	display: none;
+	margin: auto;
 }
 
 .myplanContainer #pln_list #pln_form {
