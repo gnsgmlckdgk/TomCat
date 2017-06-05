@@ -31,6 +31,60 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+
+	<style>
+#reg {
+	width: 100%;
+	border: 1px solid red;
+	font-size: 0.8em;
+}
+
+tr {
+	width: 100%;
+	padding: 0;
+}
+
+.setdate {
+	width: calc(100%/3);
+	margin: auto;
+	border: 1px solid green;
+}
+
+.set_plan {
+	width: cal(100%/ 3);
+	vertical-align: middle;
+	margin: auto;
+}
+
+.x_wrap {
+	margin-left: 250px;
+	overflow-x:scroll;
+	overflow-y:hidden;
+	width: 1080px;
+	height: 100%;
+	white-space: nowrap;
+	float: left;
+	
+}
+.inner_x_wrap{
+	width: 200px;
+	float: left;
+}
+
+
+.x_wrap select {
+	height: 20em;
+}
+
+.myplanContainer #pln_list select {
+	width: 100%;
+}
+
+table td {
+	vertical-align: middle;
+}
+</style>
 </head>
 
 
@@ -117,51 +171,6 @@
 	%>
 
 
-	<style>
-#reg {
-	width: 100%;
-	border: 1px solid red;
-	font-size: 0.8em;
-}
-
-tr {
-	width: 100%;
-	padding: 0;
-}
-
-.setdate {
-	width: calc(100%/3);
-	margin: auto;
-	border: 1px solid green;
-}
-
-.set_plan {
-	width: cal(100%/ 3);
-	vertical-align: middle;
-	margin: auto;
-}
-
-.x_wrap {
-	margin-left: 250px;
-	overflow-x: scroll;
-	width: 1080px;
-	height: 100%;
-	white-space: nowrap;
-	float: left;
-}
-
-.x_wrap select {
-	height: 20em;
-}
-
-.myplanContainer #pln_list select {
-	width: 100%;
-}
-
-table td {
-	vertical-align: middle;
-}
-</style>
 
 
 	<form action="./MyPlanModifyAction.pln" method="post"
@@ -228,9 +237,8 @@ table td {
 					for (int i = 1; i < 10; i++) {
 				%>
 
-				<div
-					style="width: 800px; float: left; height: 100%; white-space: nowrap; overflow-x: scroll; border: 1px solid blue">
-					<div>1일차</div>
+				<div class="inner_x_wrap">
+					<div><%=i %> 일차</div>
 
 					<!-- 					<div -->
 					<!-- 						style="width: 12%; float: left; vertical-align: middle; margin: auto;"> -->
