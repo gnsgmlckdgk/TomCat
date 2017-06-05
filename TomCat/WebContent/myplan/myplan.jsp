@@ -75,6 +75,10 @@
 	}); */
 });  
 //날짜 선택하기 
+
+
+
+
 </script>
 
 
@@ -287,11 +291,11 @@
 <!-- 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr"> -->
 <!-- 				<input type="text" name="fromDate" id="fromDate"  -->
 <!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
-/* 							background-repeat: no-repeat; */
+
 <!-- 							background-position: 110px 13px;" required="required" placeholder="시작일">  -->
 <!-- 				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" -->
 <!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
-/* 							background-repeat: no-repeat; */
+
 <!-- 							background-position: 110px 13px;"> -->
 <!-- 				<select name="plan_nr" id="plan_nr" required="required"> -->
 <!-- 					<option value="1" >일정A</option> -->
@@ -309,6 +313,25 @@
 <%-- 					<%} %> --%>
 				
 <!-- 			</form>  		 -->
+
+<script type="text/javascript">
+$(window).load(function() {
+	$.ajax({
+		type: 'post',
+		url: './myplan/myplanModify.jsp',
+		success: function(data) {
+			$('#pln_list').append(data);
+		},
+		error: function(xhr, status, error) {
+			alert(error);
+		}   
+	});
+});
+
+
+</script>
+
+
 		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
 	<%if(plan_nr!=100) { %>

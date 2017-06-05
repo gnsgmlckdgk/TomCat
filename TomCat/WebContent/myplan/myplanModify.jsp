@@ -1,3 +1,6 @@
+<%@page import="net.myplanBasket.action.DateList"%>
+<%@page import="java.util.Vector"%>
+<%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.text.DateFormat"%>
@@ -30,6 +33,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
+
 
 <script>
 	$(function() {
@@ -84,23 +88,29 @@
 </script>
 <body>
 	<%
-		List basketList = (List) request.getAttribute("basketList");
-		List goodsList = (List) request.getAttribute("goodsList");
 		String id = (String) session.getAttribute("id");
 
-		int plan_nr = Integer.parseInt(request.getParameter("plan_nr"));
+		//ajax를 위해서 모델 1 방식으로 진행할 코드
 
-		String fromDate = (String) request.getParameter("fromDate");
-		String toDate = (String) request.getParameter("toDate");
-		List datelist = (List) request.getAttribute("datelist");
+		MyPlanBasketDAO basketdao = new MyPlanBasketDAO();
+		MyPlanBasketBean mpbb = new MyPlanBasketBean();
 
-		out.println("datelist : " + datelist + "\n\n");
-		System.out.println("fromDate : " + fromDate);
+		Vector vector = basketdao.getBasketList(id);
+		// List basketList = vector 첫번째데이터
+		List basketList = (List) vector.get(0);
+		// List goodsList = vector 두번째데이터
+		List goodsList = (List) vector.get(1);
 
-		String dep_lat = (String) request.getParameter("dlat");
-		String dep_lng = (String) request.getParameter("dlng");
-		String arr_lat = (String) request.getParameter("alat");
-		String arr_lng = (String) request.getParameter("alng");
+		//datelist
+		DateList t = new DateList();
+		//int tt = t.getDiffDay(fromdate, todate);
+		// 		List datelist = datelist = new ArrayList();
+		// 		datelist.add(fromdate);
+		// 		datelist.add(todate);
+		// 		datelist = t.Date(fromdate, todate);
+		//datelist. 끝.
+
+		//ajax를 위해서 모델 1 방식으로 진행할 코드. 끝.
 	%>
 
 </body>
@@ -109,25 +119,10 @@
 
 	<div class="wrap" style="max-width: 1080px; margin: auto;">
 
-		<%
-			if (plan_nr == 1) {
-		%>일정A<%
-			}
-		%>
-		<%
-			if (plan_nr == 2) {
-		%>일정B<%
-			}
-		%>
-		<%
-			if (plan_nr == 3) {
-		%>일정C<%
-			}
-		%>
-
-		<input type="hidden" value="<%=plan_nr%>" name="plan_nr">
-		<input type="hidden" value="<%=fromDate%>" name="first_day">
-		<input type="hidden" value="<%=fromDate%>" name="first_day"><!-- 라스튿이 -->
+		<%-- 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr"> --%>
+		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
+		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
+		<!-- 라스튿이 -->
 
 		<table border="1" class="tg" name="test">
 
@@ -135,21 +130,22 @@
 
 			<!-- 첫째날과 마지막날 사이 -->
 			<%
-				for (int j = 1; j < datelist.size()+2; j++) {
+				//for (int j = 1; j < datelist.size() + 2; j++) {
+					for (int j = 1; j < 3; j++) {
 			%>
 			<tr>
 				<th><%=j%> 일차</th>
 				<td><select name="<%=j%>">
 						<option value="null">---선택하세요---</option>
 						<%
-							if (basketList != null) {
-									for (int i = 0; i < basketList.size(); i++) {
-										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+// 							if (basketList != null) {
+// 									for (int i = 0; i < basketList.size(); i++) {
+// 										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
 						%>
-						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
+						<option value="<%//=tb.getName()%>"><%//=tb.getName()%></option>
 						<%
-							}
-								}
+// 							}
+// 								}
 						%>
 				</select></td>
 				<td></td>
@@ -158,8 +154,6 @@
 				}
 			%>
 			<!-- 첫째날과 마지막날 사이 끝.-->
-
-
 
 			<tr>
 				<td colspan="7"><input type="submit" value="일정수정"> <input
@@ -172,105 +166,6 @@
 	</div>
 
 </form>
-
-
-<%
-	// 	for (int i = 0; i < basketList.size(); i++) {
-	// 		MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-	// 		TravelBean tb = (TravelBean) goodsList.get(i);
-	// 		if (mpbb.getId().equals(id)) {
-	// 			if (mpbb.getPlan_nr() == plan_nr) {
-%>
-<%
-	// 	}
-	// 		}
-	// 	}
-%>
-
-
-
-
-<!-- <form action="./MyPlanModifyAction.pln" method="post" ></form> -->
-<%-- <input type="text" name="plan_nr" value="<%=plan_nr%>"> --%>
-
-
-<%-- 		<div class="wrap">
-			<div id="left_box1">
-				<!-- box1 -->
-				<ul id="left_box1_detail">
-					<!-- myplanModify.css -->
-					<li id="size"><%if (plan_nr == 1) {%>일정A<%}%><%if (plan_nr == 2) {%>일정B<%}%></li>
-					<li>전체일정보기</li>
-					<li><%=fromDate%></li>
-					<%for(int i=0;i<datelist.size();i++){ %>
-					<li>
-						<%=datelist.get(i) %>
-					</li>		
-						<% } %>
-					<li><%=toDate%></li>
-				</ul>
-			</div>
-			
-			
-			
-			
-			<div id="left_box2">
-				<!-- box2 찜 바구니, 날짜마다 바구니 다르게 할 예정 ajax 찾는중-->	
-				<ul id="left_box2_head">
-						<li><button style="border: 1px solid red;">경로최적화</button>
-						<button style="border: 1px solid red;">장소검색하기</button></li>
-				</ul>
-				<ul id="left_box2_detail"><!-- 빈 공간으로 두고 right box에서 찜하기 버튼 눌러서 리스트 채울 예정 -->
-					<li>장소를 추가해 보세요~</li>
-					<li>Drag & Drop 으로 일정순서를 변경해 보세요~</li>
-					 
-				</ul>
-			</div>	
-	
-			<!-- box3 도시 찜 버튼 -->
-			<div id="right_box">
-				 <ul id="right_box_detail">
-						<%
-						for (int i = 0; i < goodsList.size(); i++) {
-							TravelBean tb = (TravelBean) goodsList.get(i);
-						%>
-						<li><%=tb.getName()%></li>
-						<%
-							}
-						%>
-			</ul>
-				
-			</div>
-			<!-- <div id="map" class="f1" ></div> -->
-		</div>
-		
-
- --%>
-
-
-<%-- 		<table border="1" >
-					<tr>
-						<td>plan_nr</td>
-						<td>item_nr</td>
-						<td>name</td>
-					</tr>
-				
-					<%
-						for (int i = 0; i < basketList.size(); i++) {
-							MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-							TravelBean tb = (TravelBean) goodsList.get(i);
-						/* 	if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
-								continue; */
-					%>
-					<tr>
-						<td><%=mpbb.getPlan_nr()%></td>
-						<td><%=mpbb.getItem_nr()%></td>
-						<td><%=tb.getName()%></td>
-					</tr>
-					<%
-						}
-					%>
-		</table> --%>
 
 
 <div class="clear"></div>
