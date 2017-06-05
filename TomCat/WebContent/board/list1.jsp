@@ -7,14 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<!-- Header -->
-<section class="wrapper" style="padding:0 ;">
-<!-- Header ph -->
 
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css?ver=46" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
@@ -23,6 +20,9 @@
 <body class="fadein" >
 
 <jsp:include page="../inc/header.jsp" />
+
+<!-- Header -->
+<section class="together_section">
 
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
