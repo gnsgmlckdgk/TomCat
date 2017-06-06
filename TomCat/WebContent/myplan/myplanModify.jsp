@@ -45,7 +45,7 @@ tr {
 }
 
 .setdate {
-	width: calc(100%/3);
+	width: calc(100%/ 3);
 	margin: auto;
 	border: 1px solid green;
 }
@@ -58,19 +58,18 @@ tr {
 
 .x_wrap {
 	margin-left: 250px;
-	overflow-x:scroll;
-	overflow-y:hidden;
+	overflow-x: scroll;
+	overflow-y: hidden;
 	width: 1080px;
 	height: 100%;
 	white-space: nowrap;
 	float: left;
-	
 }
-.inner_x_wrap{
+
+.inner_x_wrap {
 	width: 200px;
 	float: left;
 }
-
 
 .x_wrap select {
 	height: 20em;
@@ -235,7 +234,9 @@ table td {
 				%>
 
 				<div class="inner_x_wrap">
-					<div><%=i %> 일차</div>
+					<div><%=i%>
+						일차
+					</div>
 
 					<!-- 					<div -->
 					<!-- 						style="width: 12%; float: left; vertical-align: middle; margin: auto;"> -->
@@ -245,7 +246,7 @@ table td {
 						onclick="gol('b<%=i%>','res<%=i%>')">&nbsp;
 					<!-- 					</div> -->
 					<!-- 					<div style="width: 70%; float: left;"> -->
-					<select name=b<%=i%> size=5 style="width: 100%;">
+					<select name=b <%=i%> size=5 style="width: 100%;">
 						<input type=text name=res <%=i%> size=30>
 						<br>
 					</select>
@@ -277,67 +278,5 @@ table td {
 
 </body>
 
-<<<<<<< HEAD
 </html>
-=======
-<form action="./MyPlanModifyAction.pln" method="post">
 
-
-<!-- 	<div class="wrap" style="max-width: 1080px; margin: auto;"> -->
-<div style="max-width: 1080px; margin: auto;">
-		<%-- 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr"> --%>
-		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
-		<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
-		<!-- 라스튿이 -->
-
-
-
-
-			출발일 : <input type="date" name="fromDate" required="required" >
-			<br> 
-			도착일 : <input type="date" name="toDate" required="required" >
-
-				<select name="plan_nr" id="plan_nr" required="required">
-					<option value="1">Plan A</option>
-					<option value="2">Plan B</option>
-					<option value="3">Plan C</option>
-				</select>
-
-			<!-- 첫째날과 마지막날 사이 -->
-			<%
-				//for (int j = 1; j < datelist.size() + 2; j++) {
-				for (int j = 1; j < 4; j++) {
-			%>
-			<tr>
-				<th><%=j%>일차</th>
-				<td><select name="<%=j%>">
-						<option value="null">---선택하세요---</option>
-						<%
-							if (basketList != null) {
-									for (int i = 0; i < basketList.size(); i++) {
-										TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-						%>
-						<option value="<%=tb.getName()%>"><%=tb.getName()%></option>
-						<%
-								}	
-							}
-						%>
-					</select></td>
-			</tr>
-			<%
-				}
-			%>
-			<!-- 첫째날과 마지막날 사이 끝.-->
-
-			<tr>
-				<td colspan="7"><input type="submit" value="일정수정"> <input
-					type="reset" value="다시등록"></td>
-			</tr>
-		</table>
-	</div>
-</form>
-
-
-<div class="clear"></div>
-
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
