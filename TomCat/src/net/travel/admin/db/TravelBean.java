@@ -10,10 +10,18 @@ public class TravelBean {
 	private float  longitude;
 	private String info;
 	private String address;
-
+	private int travel_id;
 	
 	
 	
+	
+	
+	public int getTravel_id() {
+		return travel_id;
+	}
+	public void setTravel_id(int travel_id) {
+		this.travel_id = travel_id;
+	}
 	public float getLatitude() {
 		return latitude;
 	}

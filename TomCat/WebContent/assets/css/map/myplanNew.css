@@ -61,15 +61,16 @@
 }
 
 .myplanContainer #pln_list {
-	width: 335px;
-	height: 218px;
+/* 	width: 800px; */
+	max-height:800px;
 	position: absolute;
 	top: 10em;
-	z-index: 9999;
+	z-index: 10000;
 	background: #fff;
 	border-radius: 5px;
 	display: none;
-	margin: auto;
+	margin-left: 5px;
+	overflow: auto;
 }
 
 .myplanContainer #pln_list #pln_form {
@@ -84,7 +85,7 @@
 
 .myplanContainer #pln_list select {
 	width: 285px;
-	margin-bottom:10px;
+/* 	margin-bottom:10px; */
 }
 
 .myplanContainer #pln_list .pln_sub {

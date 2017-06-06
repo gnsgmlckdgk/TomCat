@@ -64,25 +64,19 @@
 
 <!-- 메인 -->
 
-
 <!-- 아시아 -->
-
 <div id="map1" style="width: 60em; height: 30em;"></div>
 
 <!-- 유럽 -->
-
 <div id="map2" style="width: 60em; height: 30em;"></div>
 
 <!-- 남태평양 -->
-
 <div id="map3" style="width: 60em; height: 30em;"></div>
 
 <!-- 남미 -->
-
 <div id="map4" style="width: 60em; height: 30em;"></div>
 
 <!-- 북미 -->
-
 <div id="map5" style="width: 60em; height: 30em;"></div>
 
 <!-- 대륙별 국가리스트 출력 -->
@@ -150,7 +144,7 @@
 <%} %>
 
 
-	<div style="max-width: 1080px; margin: auto; padding: 1.5em 0;">
+	<div class="Search">
 		<!-- 검색폼 -->
 		<div class="Main_Search">
 			<form name="fr" action="./PlanSearch.pl" class="main_plan_search"
@@ -204,6 +198,7 @@
 		<div class="clear"></div>
 
 		<!-- 국가 리스트  -->
+		<hr>
 		<div class="countryList">
 			<h2>국가 리스트</h2>
 			<%

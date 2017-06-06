@@ -1,3 +1,4 @@
+<%@page import="net.plan.db.PlanTravelBean"%>
 <%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.images.db.ImagesDAO"%>
 <%@page import="net.plan.db.PlanDAO"%>
@@ -85,6 +86,9 @@
 		if (count > 0) {
 			for (int i = 0; i < pcbList.size(); i++) {
 				pcb = pcbList.get(i);
+				
+				List<PlanTravelBean> travelList = pdao.getTravelList(pcb.getCity_code());	/* 도시의 관광지들 */
+				
 				cityPath = idao.getCityImgPath(pcb.getCity_code());
 				cityPath = cityPath.replace("\\", "/");	// css는 \아닌 /로 인식되서 바꿔줌
 	%>
@@ -94,12 +98,28 @@
 		<td class="txt_td">
 			<span class="city_name"><%=pcb.getName()%></span><br>
 			<span class="city_enName"><%=pcb.getEn_name()%></span><br>
-			<span class="city_info"><%=pcb.getInfo()%></span>
+			<span class="city_info" style="font-weight: 600; font-size: 13px;">
+				<%
+					if(travelList.size()>0) {
+						for(int j=0; j<travelList.size(); j++) {
+							PlanTravelBean ptb = travelList.get(j);
+							%>
+							<%=ptb.getName() %><%if(j<travelList.size()-1){%>, <%}%> 
+							<%
+						}
+					}else {
+						%>
+						관광지 정보가 없습니다.
+						<%
+					}
+					
+				%>
+			</span>
 		</td>
 	</tr>
 	<%
-		}
-		} else {
+}
+	} else {
 	%>
 	<tr>
 		<td colspan="2" style="display: block; text-align: center; width: 1080px;">찾으시는 정보가 없습니다.</td>

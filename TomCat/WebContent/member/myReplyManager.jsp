@@ -7,23 +7,28 @@
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Main -->
-<section id="main" class="wrapper">
-	<div class="container">
+<!-- Main -->
+<section class="memberManager">
+	<div class="memberContainer">	<!-- 서브메뉴 + 내용물 -->
 
 		<!-- 서브메뉴 -->
 		<jsp:include page="subMenu/memberManager.jsp"/>
 		
 		<!-- 컨텐츠 -->
-		<div class="content">
-			<div class="content_member_myReplyManager">
-				<h1>내가 쓴 답글 관리</h1>
+		<div class="memberContent">	<!-- 내용물 -->
+			
+			<header>
+				<h1>내가 작성한 댓글</h1><hr>
+			</header>
+			
+			<div class="myReplyManager">	<!-- 게시판들 -->
 
-				
-			</div> <!-- content_member_info -->
-		</div>	<!-- content -->
+			</div> <!-- myReplyManager -->
+		
+		</div>	<!-- memberContent -->
 	
-	</div>
-</section>
+	</div>	<!-- memberContainer -->
+</section>	<!-- memberManager -->
 
 <div class="clear"></div>
 

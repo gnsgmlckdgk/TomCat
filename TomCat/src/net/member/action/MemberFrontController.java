@@ -248,6 +248,19 @@ public class MemberFrontController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
+		}else if(command.equals("/myBoardManager.me")) {	// 자기가 쓴 게시물 관리 페이지
+			
+			forward = new ActionForward();
+			forward.setPath("./member/myBoardManager.jsp");
+			forward.setRedirect(false);
+			
+		}else if(command.equals("/myReplyManager.me")) {	// 자기가 쓴 댓글 관리 페이지
+
+			forward = new ActionForward();
+			forward.setPath("./member/myReplyManager.jsp");
+			forward.setRedirect(false);
+		
 		}
 		
 		

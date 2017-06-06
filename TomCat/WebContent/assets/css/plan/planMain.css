@@ -1,6 +1,11 @@
 @CHARSET "UTF-8";
+
+body {
+	font-family: "나눔고딕", "맑은 고딕", sans-serif;
+}
+
 section.planMain{
-	width: 1080px;
+	min-width: 1080px;
 	margin:auto auto;
 	board:1px solid red;
 }
@@ -8,7 +13,7 @@ section.planMain{
 section.planMain h3{
 	padding:0 0 0.8em 1em;
 	font-weight:bold;
-	font-size: 1.2em;
+	font-size: 16px;
 	color: #f32853;
 	border-bottom: 1px solid #c0c0c0;
 
@@ -16,44 +21,28 @@ section.planMain h3{
 
 section.planMain h2{
 	text-align: center;
-	font-size: 1.8em;
+	font-size: 30px;
 }
 
 section.planMain form h2{
 	text-align: center;
-	font-size: 2em;
+	font-size: 30px;
 }
 
 /* 검색폼 */
 div.Search{
-	height: 12.5em;
-	padding:0 auto;	
-
+	height: 180px;
+	padding:0 auto;
+	font-size: 14px;
 }
-
-form.plan_search {
-	padding:0px auto 0px auto;
-	margin: 6em auto;
-	width: 39em;	
+form.main_plan_search select{
+	font-size: 14px;
 }
-
-form.plan_search select{
-	width: 9em;
-	float: left;
-	height: 2.5em;
+form.main_plan_search input{
+	font-size: 14px;
 }
-
-form input.search_text{
-	width: 23em;
-	float: left;
-	height: 2.5em;
-}
-
-form input.serch_button{
-	float: left;
-	line-height:0px;
-	height: 2.5em;
-	
+form.main_plan_search input.serch_button{
+	font-size: 12px;
 }
 
 

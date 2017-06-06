@@ -76,32 +76,29 @@
     
     	
     <!-- Swiper JS -->
-    <script src="./assets/dist/js/swiper.min.js"></script> 
+    <script src="./assets/dist/js/swiper.min.js?ver=94"></script> 
     
     <!-- Initialize Swiper -->
-     <script>
-     
-     $(document).ready(function(){
-    	 var swiper = new Swiper('.swiper-container', {
-    	        pagination: '.swiper-pagination',
-    	        nextButton: '.swiper-button-next',
-    	        prevButton: '.swiper-button-prev',
-    	        effect: 'coverflow',
-    	        grabCursor: true,
-    	        centeredSlides: true,
-    	        slidesPerView: 'auto',
-    	        paginationType: 'fraction',
-    	        coverflow: {
-    	            rotate: 50,
-    	            stretch: 0,
-    	            depth: 100,
-    	            modifier: 1,
-    	            slideShadows : true
-    	        },
-    	        autoplay: 2500,
-    	        autoplayDisableOnInteraction: false
-    	    });
-     });
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        paginationType: 'fraction',
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        },
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
     </script>
        
 	</div>

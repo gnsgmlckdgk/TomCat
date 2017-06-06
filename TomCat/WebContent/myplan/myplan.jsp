@@ -283,34 +283,6 @@
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
 
-<!-- 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr"> -->
-<!-- 				<input type="text" name="fromDate" id="fromDate"  -->
-<!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
-
-<!-- 							background-position: 110px 13px;" required="required" placeholder="시작일">  -->
-<!-- 				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" -->
-<!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
-
-<!-- 							background-position: 110px 13px;"> -->
-<!-- 				<select name="plan_nr" id="plan_nr" required="required"> -->
-<!-- 					<option value="1" >일정A</option> -->
-<!-- 					<option value="2">일정B</option> -->
-<%-- 					<%if(gold.equals("유료회원")){ %> --%>
-<!-- 						<option value="일정C">일정C</option> -->
-<%-- 					<%}%> --%>
-<!-- 				</select> -->
-
-				
-
-<%-- 					<%if(gold.equals("무료회원")){ %> --%>
-<!-- 						<input type="submit" value="상세일정만들기" class="pln_sub_free"> -->
-<%-- 						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기"> --%>
-<%-- 					<%} else {%> --%>
-<!-- 						<input type="submit" value="상세일정만들기" class="pln_sub">	 -->
-<%-- 					<%} %> --%>
-				
-<!-- 			</form>  		 -->
-
 <script type="text/javascript">
 $(window).load(function() {
 	$.ajax({
@@ -325,12 +297,214 @@ $(window).load(function() {
 	});
 });
 
+//
 
+
+//오른쪽 박스에 추가
+   function gor(argSel,argRes)    {
+	
+	alert(argSel +" " + argRes);
+	
+         formSel=eval("document.reg."+argSel);  //(form 이름주소 + select box 이름)을 계산해서 formsel 에 저장
+         
+         j=formSel.length; //formsel 의 길이값을 j 에 저장
+         
+         for(var i=0;i<document.reg.a.length;i++) {/* 리스트에 있는 아이템 갯수 만큼 for문 돌림 */
+         
+                         if(document.reg.a.options[i].selected && document.reg.a.options[i].value)  {/* i번째 항목이 선택이 된 상태고, value 값이 존재한다면 */
+                        
+                         document.reg.a.options[i].selected=false; //선택한 것을 false 로 바꾼다= 선태해제한다.
+         
+                         chk_same=0;  //좌측 박스의 선택된 값과 변수 fromsel 값이 같은지 체크하는 변수 선언
+         
+//                                  for(var k=0;k<formSel.length;k++){
+//                                          if(document.reg.a.options[i].value==formSel.options[k].value)
+//                                             /* 왼쪽 list box에선 i번째 선택한 값 value 가 우측 list 에 k번째 값이 같다면  */
+//                                          {
+//                                          chk_same=1;      //                          
+//                                          }        
+//                                  }                        
+         
+                                 if(!chk_same)
+                                 {
+                                 formSel.options[j]=new Option(document.reg.a.options[i].text,document.reg.a.options[i].value);
+         
+                                 j++;
+                                 }
+                         }
+         }
+         
+         get_result(argSel,argRes)
+   }
+   
+   function gol(argSel,argRes)    {
+         formSel=eval("document.reg."+argSel);
+         
+         buff=new Array();
+         j=0;
+         
+         for(var i=formSel.length-1;i>=0;i--)
+         {
+                         if(formSel.options[i].selected && formSel.options[i].value)
+                         {
+                         formSel.options[i] = null;
+                         }
+         }
+         
+         get_result(argSel,argRes);
+   }
+   
+   function get_result(argSel,argRes) {
+         formSel=eval("document.reg."+argSel);
+         formRes=eval("document.reg."+argRes);
+         
+         res=new Array();
+         
+         for(var i=0;i<formSel.length;i++)
+         {
+         res[i]=formSel.options[i].value;
+         }
+         
+         res=res.join("@");
+         formRes.value=res;
+   }
+   
+   
+   function gou(argSel,argRes) {
+         formSel = eval("document.reg."+argSel);
+         
+                 if(!formSel.value)
+                 {
+                 return;
+                 }
+         
+         thisIndex = formSel.selectedIndex;
+         
+                 if(!thisIndex)
+                 {
+                 return;
+                 }
+         
+         formSel.value=null;
+         
+          
+         
+         
+         prevIndex=thisIndex-1;
+         
+         tempText=formSel.options[prevIndex].text;
+         tempValue=formSel.options[prevIndex].value;
+         
+         formSel.options[prevIndex]= new Option(formSel.options[thisIndex].text,formSel.options[thisIndex].value);
+         
+         formSel.options[thisIndex]= new Option(tempText,tempValue);
+         
+         formSel.value=formSel.options[prevIndex].value;
+         
+         get_result(argSel,argRes);
+   }
+
+   
+   function god(argSel,argRes) {
+         formSel                = eval("document.reg."+argSel);
+         
+                 if(!formSel.value)
+                 {
+                 return;
+                 }
+         
+         thisIndex        = formSel.selectedIndex;
+         
+                 if(thisIndex+1>=formSel.length)
+                 {
+                 return;
+                 }
+         
+         formSel.value=null;
+         
+         prevIndex=thisIndex+1;
+         
+         tempText=formSel.options[prevIndex].text;
+         tempValue=formSel.options[prevIndex].value;
+         
+         formSel.options[prevIndex]        = new Option(formSel.options[thisIndex].text,formSel.options[thisIndex].value);
+         
+         formSel.options[thisIndex]        = new Option(tempText,tempValue);
+         
+         formSel.value=formSel.options[prevIndex].value;
+         
+         get_result(argSel,argRes);
+   }
+
+   
+   
+   
+//
+
+</script>
+<script type="text/javascript">
+// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
+	function from_to(){
+		
+		from = document.getElementById("fromDate");
+		to = document.getElementById("toDate");
+				
+		plan = $("#set_plan option:selected").val();
+						
+		if(from.value != "" & to.value != ""){
+					
+			var arr1 = from.value.split('-');
+	    	var arr2 = to.value.split('-');
+		    var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
+		    var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
+		
+		
+			var diff = dat2 - dat1;
+			var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+			
+			diff_day = Number(parseInt(diff/currDay));
+// 			alert("일 수 차이는 " + diff_day + "일 입니다.");
+
+			if(diff_day >= 0){
+				
+				alert(diff_day+1 + "일간 " + plan + "에 저장");
+				
+				$(".x_wrap").empty();
+// 				$(".x_wrap").append("<div class='inner_x_wrap' style='border:5px solid red; width:100%;'></div>");
+				
+				for( i = 1; i <= diff_day+1; i++){
+				
+// 					$(".inner_x_wrap").append("<div style='border:1px solid purple; float:left; width:200px;' id='bb"+i+"'>");
+					
+					$(".x_wrap").append("<div>"+i+" 일차</div><br>");
+					$(".x_wrap").append("<input class='button' type='button' value=' > ' onclick='gor(b"+i+", res"+i+")'>");
+// 					$(".x_wrap").append("<input class='button' type='button' value=' < ' onclick='gol('b"+i+"', 'res"+i+"')'>");
+					
+					$(".x_wrap").append("<select name=b"+i+" size='5' style='width: 100%;'></select>");
+					
+// 					$(".x_wrap").append("<input class='button' type='button' value=' ↑ ' onclick='gou('b"+i+"', 'res"+i+"')'>");
+// 					$(".x_wrap").append("<input class='button' type='button' value=' ↓ ' onclick='god('b"+i+"', 'res"+i+"')'>");
+					
+					
+					$(".x_wrap").append("<div class='clear'></div>");
+					$(".x_wrap").append("<hr>");
+					
+// 					$(".inner_x_wrap").append("</div>");
+				}
+// 				$(".x_wrap").append('<input class="button" type="button" value=" > " onclick="gor(b1, res1)">');
+// 				$(".x_wrap").append("<select name=b1 size='5' style='width: 100%;'>");
+// 				$(".x_wrap").append("<input type='text' name='res1' size='30'>");
+// 				$(".x_wrap").append("</select>");
+			}
+
+		}
+	}
+	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트. 끝.
 </script>
 
 
 
-		</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
+</div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
 	<%if(plan_nr!=100) { %>
    	<div id="right-panel">    </div> <!-- 방문지간 대중교통 이동 정보 표시 패널 -->

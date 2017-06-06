@@ -892,7 +892,6 @@ public class MemberDAO {
 		}
 		return nick;
 	}
-	
 
 	// SHA256 암호화(단방향)
 	public String encSHA256(String str){
