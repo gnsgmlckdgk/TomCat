@@ -24,26 +24,26 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
         	
 		<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=100"/>
+		<link rel="stylesheet" href="./assets/css/main.css"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 		
 		<!-- 추가한 css -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/loginPop.css?ver=100"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=100"/>
+			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css"/>
 			
 			<!-- plan -->
-			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=100"/>	<!-- 메인페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planNation.css?ver=100"/>	<!-- 국가페이지 -->
-			<link rel="stylesheet" href="./assets/css/plan/planResion.css?ver=100"/>	<!-- 지역(도시)페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>	<!-- 메인페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planNation.css"/>	<!-- 국가페이지 -->
+			<link rel="stylesheet" href="./assets/css/plan/planResion.css"/>	<!-- 지역(도시)페이지 -->
 			
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
-			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=91"></script>	<!-- 로그인 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/loginPop.js"></script>	<!-- 로그인 스크립트 -->
 			<script type="text/javascript" src="./assets/js/member/memberManager.js"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
-			<script type="text/javascript" src="./assets/js/plan/planMain.js?ver=69"></script>
+			<script type="text/javascript" src="./assets/js/plan/planMain.js"></script>
 			
 			<style type="text/css">
 			header.subject {
@@ -68,6 +68,7 @@
 			}
 			#nav li a:hover {
 				text-decoration: underline;
+				cursor: pointer;
 			}
 			</style>
 						
@@ -103,7 +104,7 @@
 		<a href="./Main.me"><strong>Before</strong> you go...</a>
 	</h1>
 	
-	<nav id="nav" style="font-family: '나눔고딕' , '맑은고딕', sans-serif;">
+	<nav id="nav" style="font-family: '나눔고딕' , '맑은 고딕', sans-serif;">
 		<ul>
 			<li class="first_li"><a href="./PlanMain.pl" class="pl">여행지</a></li>
 			<li><a href="./QandAList.qna" class="qna">여행일정Q&A</a></li>

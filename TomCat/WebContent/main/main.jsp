@@ -49,9 +49,11 @@
 		section.sectionThree header h1 {
 			font-size: 18px;
 			color: #f44066;
+			text-align: center;
 		}
 		section.sectionThree header h2 {
 			font-size: 20px;
+			text-align: center;
 		}
 		div.main3 article {
 			margin-right: 0;

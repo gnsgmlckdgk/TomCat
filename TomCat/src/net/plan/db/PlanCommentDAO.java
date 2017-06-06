@@ -134,7 +134,6 @@ public class PlanCommentDAO {
 		List<PlanNationCommentBean> list = new ArrayList<PlanNationCommentBean>();
 
 		try {
-
 			con = getConnection();
 
 			sql = "select * from nation_comment where nation = ? order by nation_num desc limit ?, ?";

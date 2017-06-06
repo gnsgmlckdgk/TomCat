@@ -261,7 +261,7 @@ $(document).ready(function(){
 	<script type="text/javascript">
 		
 		var toggleBtn = 0;
-		$(document).ready(function(data){
+
 			/* 리뷰 작성 버튼 */
 			$('#writeBtn').click(function(){
 				if(toggleBtn==0) {
@@ -278,8 +278,7 @@ $(document).ready(function(){
 				}
 			});
 			
-			
-			/* 최초 리뷰 리스트 가져오기 */
+			/* 리뷰 리스트 가져오기 페이지 처음 들어왔을때 */
 			$.ajax({
 				type: 'post',
 				url: './plan/planComment/planNationCommentList.jsp',
@@ -292,8 +291,7 @@ $(document).ready(function(){
 					alert(error);
 			    } 
 			});
-		});
-		
+
 		/* 리뷰 작성완료 DB작업 */
 		function writeComplete() {
 			var con = $('textarea').val();

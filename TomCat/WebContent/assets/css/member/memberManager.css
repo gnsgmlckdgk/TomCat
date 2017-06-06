@@ -79,7 +79,6 @@ div#submenu {
 	width: 200px;
 	min-height: 480px;
 	background-color: #fff;
-	font-weight: bold;
 	float: left;
 }
 
@@ -248,6 +247,80 @@ div.memberContent .passUpdate_form input[type="password"] {
 }
 div.memberContent .passUpdate_form .form_btn input[type="submit"] {
 	margin-right: 40px;
+}
+
+/* 내가 쓴 게시글 관리 */
+div.myBoardManager h2 {
+	border-top: 1px solid #ccc;
+	padding-top: 30px;
+}
+div.myBoardManager th {	
+	padding: 10px 0;
+	text-align: center;
+}
+div.myBoardManager th:nth-of-type(1) {	/* 글 번호 */
+	width: 50px;
+}
+div.myBoardManager th:nth-of-type(2) {	/* 글 제목 */
+	width: 400px;
+}
+div.myBoardManager th:nth-of-type(3) {	/* 작성한 날짜 */
+	width: 200px;
+}
+div.myBoardManager th:nth-of-type(4) {	/* 관리 */
+	width: 50px;
+}
+div.myBoardManager td {	
+	padding: 10px 0;
+	text-align: center;
+}
+div.myBoardManager td:nth-of-type(2):hover {
+	cursor: pointer;
+	color: #1a7ad9;
+}
+div.myBoardManager div.page {	/* 페이징 번호 */
+	text-align: center;
+	margin-bottom: 30px;
+}
+div.myBoardManager div.page a {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	text-decoration: none;
+	margin-right: 10px;
+}
+div.myBoardManager div.page a:hover {
+	background-color: #f0f0f0;
+}
+
+/* 내가 쓴 댓글 관리 */
+div.myReplyManager {	/* 내용물 */
+	border: 1px solid red;	/* 확인용 */
+}
+div.myReplyManager th {	
+	padding: 10px 0;
+	text-align: center;
+}
+/* div.myReplyManager th:nth-of-type(1) {	글 번호
+	width: 50px;
+}
+div.myReplyManager th:nth-of-type(2) {	글 제목
+	width: 400px;
+}
+div.myReplyManager th:nth-of-type(3) {	작성한 날짜
+	width: 200px;
+}
+div.myReplyManager th:nth-of-type(4) {	관리
+	width: 50px;
+} */
+div.myReplyManager td {	
+	padding: 10px 0;
+	text-align: center;
+}
+div.myReplyManager div.page {	/* 페이징 번호 */
+	border: 1px solid red;	/* 확인용 */
+	text-align: center;
+	margin-bottom: 30px;
 }
 
 /* 회원 탈퇴 memberDelete.jsp */
