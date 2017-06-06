@@ -35,7 +35,7 @@
 <style>
 #reg {
 	width: 100%;
-	border: 1px solid red;
+/* 	border: 1px solid red; */
 	font-size: 0.8em;
 }
 
@@ -47,7 +47,7 @@ tr {
 .setdate {
 	width: calc(100%/ 3);
 	margin: auto;
-	border: 1px solid green;
+/* 	border: 1px solid green; */
 }
 
 .set_plan {
@@ -56,26 +56,26 @@ tr {
 	margin: auto;
 }
 
-.x_wrap {
-	margin-left: 250px;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	width: 1080px;
-	height: 700px;
-	white-space:nowrap;
-	float: left;
-}
+/* .x_wrap { */
+/* 	margin-left: 250px; */
+/* 	overflow-x: scroll; */
+/* 	overflow-y: auto; */
+/* 	width: 1080px; */
+/* 	height: 700px; */
+/* 	white-space:nowrap; */
+/* 	float: left; */
+/* } */
 
-.inner_x_wrap {
-	width: 200px;
-	float: left;
-	height:698px;
-	border: 1px solid red;
-}
+/* .inner_x_wrap { */
+/* 	width: 200px; */
+/* 	float: left; */
+/* 	height:698px; */
+/* 	border: 1px solid red; */
+/* } */
 
-.x_wrap select {
-	height: 20em;
-}
+/* .x_wrap select { */
+/* 	height: 20em; */
+/* } */
 
 .myplanContainer #pln_list select {
 	width: 100%;
@@ -115,7 +115,7 @@ table td {
 		 }); */
 
 		if (document.test.planMaker.selectedIndex != 0) {
-			alert("과목을 선택하세요");
+// 			alert("과목을 선택하세요");
 			document.test.se.focus();
 			return false;
 		}//if
@@ -200,9 +200,9 @@ table td {
 			<div class="clear" />
 
 			<div
-				style="position: fixed; left: 1px; top: 25em; width: 250px; height: 700px;">
+				style="position:absolute; left: 1px;  width: 250px; height: 500px; background-color: white;">
 
-				<select name=a style="width: 100%; height: 40em;" multiple>
+				<select name=a style="width: 100%; height: 35em;" multiple>
 
 					<%
 						if (basketList != null) {
@@ -223,42 +223,40 @@ table td {
 			</div>
 
 
-			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap">
+			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap" style="position:relative; left:250px; overflow-y:hidden; overflow-x:scroll; width: 750px; height:800px; ">
 
-				<%
-					for (int i = 1; i < 10; i++) {
-				%>
 
-				<div class="inner_x_wrap">
-					<div><%=i%>
-						일차
-					</div>
 
-					<!-- 					<div -->
-					<!-- 						style="width: 12%; float: left; vertical-align: middle; margin: auto;"> -->
-					&nbsp;<input class=button type=button value=' > '
-						onclick="gor('b<%=i%>','res<%=i%>')">&nbsp; <br>
-					&nbsp;<input class=button type=button value=' < '
-						onclick="gol('b<%=i%>','res<%=i%>')">&nbsp;
-					<!-- 					</div> -->
-					<!-- 					<div style="width: 70%; float: left;"> -->
-					<select name="b<%=i%>" size=5 style="width: 100%;">
-						<input type=text name=res <%=i%> size=30>
+
+
+<!-- 				<div class="inner_x_wrap"> -->
+<!-- 					<div>10 -->
+<!-- 						일차 -->
+<!-- 					</div> -->
+
+<!-- 										<div -->
+<!-- 											style="width: 12%; float: left; vertical-align: middle; margin: auto;"> -->
+<!-- 					&nbsp;<input class=button type=button value=' > ' -->
+<!-- 						onclick="gor('b10','res10')">&nbsp; <br> -->
+<%-- 					&nbsp;<input class=button type=button value=' < ' --%>
+<!-- 						onclick="gol('b10','res10')">&nbsp; -->
+<!-- 										</div> -->
+<!-- 										<div style="width: 70%; float: left;"> -->
+<!-- 					<select name="b10" size=5 style="width: 100%;"> -->
+<!-- 						<input type=text name=res1 size=30> 
 						<br>
 					</select>
-					<!-- 					</div> -->
-					<!-- 					<div style="width: 12%; float: left; margin: auto;"> -->
+										</div>
+										<div style="width: 12%; float: left; margin: auto;">
 					&nbsp;<input class=button type=button value=' ↑ '
-						onclick="gou('b<%=i%>','res<%=i%>')">&nbsp; <br>
+						onclick="gou('b10','res10')">&nbsp; <br>
 					&nbsp; <input class=button type=button value=' ↓ '
-						onclick="god('b<%=i%>','res<%=i%>')">&nbsp;
-					<!-- 					</div> -->
+						onclick="god('b10','res10')">&nbsp;
+										</div>
 
 				</div>
 
-				<%
-					}
-				%>
+
 
 
 			</div>
