@@ -32,6 +32,7 @@ div#loginPop {
 	background-color: white;
 	left: 35%;
 	top: 30%;
+	font-family: "나눔고딕", "맑은 고딕", sans-serif;
 	
 	font-size: 0.9em;
 	z-index: 10;

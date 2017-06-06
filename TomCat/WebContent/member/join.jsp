@@ -22,20 +22,22 @@
        		<script type="text/javascript" src="./assets/js/rsa/rng.js"></script>
        		
        	<!-- 스타일 불러오기 -->
-		<link rel="stylesheet" href="./assets/css/main.css?ver=77"/>
+		<link rel="stylesheet" href="./assets/css/main.css?ver=100"/>
 		<link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>	<!-- 애니메이트 css -->
 
 		<!-- 추가한 스타일 -->
 			<!-- member -->
-			<link rel="stylesheet" href="./assets/css/member/join.css?ver=79"/>
+			<link rel="stylesheet" href="./assets/css/member/join.css?ver=100"/>
 
 			<!-- Header -->
 			<style type="text/css">
-			header.subject .logo {
+			header.subject {
 				font-size: 18px;
+				font-family: "나눔고딕" , "맑은 고딕", sans-serif;
+				font-weight: bold;
 			}
-			header.subject .logo strong {
-				color: #49b2e9;
+			header.subject strong {
+				color: #f44066;
 			}
 			
 			#nav li {
@@ -43,14 +45,14 @@
 				margin-bottom: 0;
 			}
 			#nav a {
-				font-family: "나눔 고딕" , "맑은 고딕", sans-serif;
+				font-family: "나눔고딕" , "맑은 고딕", sans-serif;
 				font-size: 15px;
 				font-weight: bold;
 				line-height: 50px;
 				color: #000;
 			}
-			#nav a:hover {
-				cursor: pointer;
+			#nav li a:hover {
+				text-decoration: underline;
 			}
 			</style>
 

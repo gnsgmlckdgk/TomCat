@@ -7,7 +7,7 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/list.css"/>	
+<link rel="stylesheet" href="./assets/css/QandA/list.css?ver=1"/>	
 
 <%
 String id = (String)session.getAttribute("id");

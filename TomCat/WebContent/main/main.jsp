@@ -1,10 +1,85 @@
-
 <%@page import="java.util.Calendar"%>
 <%@page import="net.board.db.boardBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<html>
+<head>
+	
+	<style type="text/css">
+		
+		body {
+			font-family: "나눔고딕", "맑은 고딕", sans-serif;
+		}
+		
+		/* 첫번째 섹션 */
+		div.main1 {	/* 내용물 */
+			width: 1080px;
+			margin: 0 auto;
+		}
+		div.main1 input, div.main1 select {
+			font-size: 12px;
+		}
+		
+		/* 두번째 섹션 */
+		div.main2 {
+			width: 1080px;
+			margin: 0 auto;
+			padding: 30px;
+			font-size: 12px;	
+			letter-spacing: -1px;
+		}
+		div.main2 h1 {
+			font-size: 28px;
+		}
+		div.main2 h1 span {
+			color: #f44066;
+		}
+		div.main2 div.main_explain {
+			width: 1080px;
+		}
+		
+		/* 세번째 섹션 */
+		section.sectionThree {
+			font-size: 12px;
+			padding: 30px;
+			background-color: #f0f0f0;
+		}
+		section.sectionThree header h1 {
+			font-size: 18px;
+			color: #f44066;
+		}
+		section.sectionThree header h2 {
+			font-size: 20px;
+		}
+		div.main3 article {
+			margin-right: 0;
+		}
+		div.main3 img {
+			width: 213px;
+			height: 213px;
+		}
+		
+		/* 네번째 섹션 */
+		section.sectionFour {
+			font-size: 12px;
+			padding: 30px;
+			background-color: #fff;
+			min-height: 600px;
+		}
+		div.main4 {
+			width: 1080px;
+			min-height: 600px;	/* 확인용 */
+			margin: 0 auto;
+			border: 1px solid red;	/* 확인용 */
+		}
+		
+	</style>
+
+</head>
+
+<body>
 <%
 	String id = "";
 	if (session.getAttribute("id") != null) {
@@ -26,18 +101,18 @@
 <!-- Banner -->
 <!-- 현재 초 값을 받아와서, 배경이 새로고침 할때마다 바뀌도록. -->
 <%if(second==3) {%>
-<section id="banner" class="b_back<%=second%>">
+<section id="banner" class="b_back<%=second%> sectionOne">
 <%} else if(second==2) {%>
-<section id="banner" class="b_back<%=second%>">
+<section id="banner" class="b_back<%=second%> sectionOne">
 <%} else if(second==1) {%>
-<section id="banner" class="b_back<%=second%>">
+<section id="banner" class="b_back<%=second%> sectionOne">
 <%} else { %>
-<section id="banner" class="b_back">
+<section id="banner" class="b_back sectionOne">
 <%} %>
 
 
-	<div style="max-width: 1080px; margin: auto; padding: 1.5em 0;">
-		<span class="small">나만의 여행 플래너</span><span class="head1"> <b>BEFORE</b>
+	<div class="main1">
+		<span class="small">나만의 여행 플래너</span><span class="head1"> <b style="color: #f44066">BEFORE</b>
 			YOU GO...
 		</span>
 		<!-- 검색폼 -->
@@ -52,7 +127,7 @@
 						<option value="1">국가명</option>
 						<option value="2">도시명</option>
 					</select> <input type="text" name="search" value="" class="search_text"
-						placeholder="임시 버튼은 아래에 있습니당"> <input type="submit"
+						placeholder="국가, 도시 이름을 검색해주세요."> <input type="submit"
 						value="검색" class="main_serch_button">
 				</div>
 			</form>
@@ -67,10 +142,10 @@
 
 
 <!-- Two -->
-<section id="two" class="wrapper style2 special">
-	<div class="main_container" style="max-width: 1080px;">
-		<header class="major">
-			<p class="pa">BEFORE YOU GO 에서</p>
+<section class="sectionTwo">
+	<div class="main2">
+		<header>
+			<h1><span>BEFORE</span> YOU GO 에서</h1>
 			<h2>성공적인 여행을 시작하세요</h2>
 
 		</header>
@@ -115,8 +190,7 @@
 	</div>
 </section>
 
-<!-- Carousel -->
-
+<!-- Carousel, Three -->
 <script src="assets/js/main/jquery.min.js"></script>
 <script src="assets/js/main/jquery.dropotron.min.js"></script>
 <script src="assets/js/main/jquery.scrolly.min.js"></script>
@@ -125,14 +199,14 @@
 <script src="assets/js/main/util.js"></script>
 <script src="assets/js/main/main.js"></script>
 
-<section class="carousel">
-	<header class="major" style="text-align: center;">
-		<p>인생샷그램에서</p>
+<section class="carousel sectionThree">
+	
+	<header>
+		<h1>인생샷그램에서</h1>
 		<h2>당신의 여행을 공유하세요!</h2>
-
 	</header>
 
-	<div class="reel">
+	<div class="reel main3">
 
 		<%
 			List boardList = (List) request.getAttribute("bl");
@@ -166,88 +240,15 @@
 </section>
 <!-- Carousel end-->
 
-
-
-<!-- Three -->
-<!-- <section id="three" class="wrapper style1"> -->
-<!-- 	<div class="container"> -->
-<!-- 		<header class="major special"> -->
-<!-- 			<h2>Mauris vulputate dolor</h2> -->
-<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
-<!-- 		</header> -->
-<!-- 		<div class="feature-grid"> -->
-<!-- 			<div class="feature"> -->
-<!-- 				<div class="image rounded"> -->
-<!-- 					<img src="./images/pic04.jpg" alt="" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="content"> -->
-<!-- 					<header> -->
-<!-- 						<h4>Lorem ipsum</h4> -->
-<!-- 						<p>Lorem ipsum dolor sit</p> -->
-<!-- 					</header> -->
-<!-- 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. -->
-<!-- 						Labore esse tenetur accusantium porro omnis, unde mollitia totam -->
-<!-- 						sit nesciunt consectetur.</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="feature"> -->
-<!-- 				<div class="image rounded"> -->
-<!-- 					<img src="./images/pic05.jpg" alt="" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="content"> -->
-<!-- 					<header> -->
-<!-- 						<h4>Recusandae nemo</h4> -->
-<!-- 						<p>Ratione maiores a, commodi</p> -->
-<!-- 					</header> -->
-<!-- 					<p>Animi mollitia optio culpa expedita. Dolorem alias minima -->
-<!-- 						culpa repellat. Dolores, fuga maiores ut obcaecati blanditiis, at -->
-<!-- 						aperiam doloremque.</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="feature"> -->
-<!-- 				<div class="image rounded"> -->
-<!-- 					<img src="./images/pic06.jpg" alt="" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="content"> -->
-<!-- 					<header> -->
-<!-- 						<h4>Laudantium fugit</h4> -->
-<!-- 						<p>Possimus ex reprehenderit eaque</p> -->
-<!-- 					</header> -->
-<!-- 					<p>Maiores iusto inventore fugit architecto est iste expedita -->
-<!-- 						commodi sed, quasi feugiat nam neque mollitia vitae omnis, ea -->
-<!-- 						natus facere.</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="feature"> -->
-<!-- 				<div class="image rounded"> -->
-<!-- 					<img src="./images/pic07.jpg" alt="" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="content"> -->
-<!-- 					<header> -->
-<!-- 						<h4>Porro aliquam</h4> -->
-<!-- 						<p>Quaerat, excepturi eveniet laboriosam</p> -->
-<!-- 					</header> -->
-<!-- 					<p>Vitae earum unde, autem labore voluptas ex, iste dolorum -->
-<!-- 						inventore natus consequatur iure similique obcaecati aut corporis -->
-<!-- 						hic in! Porro sed.</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </section> -->
-
 <!-- Four -->
-<!-- <section id="four" class="wrapper style3 special"> -->
-<!-- 	<div class="container"> -->
-<!-- 		<header class="major"> -->
-<!-- 			<h2>Aenean elementum ligula</h2> -->
-<!-- 			<p>Feugiat sed lorem ipsum magna</p> -->
-<!-- 		</header> -->
-<!-- 		<ul class="actions"> -->
-<!-- 			<li><a href="#" class="button special big">Get in touch</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
-<!-- </section> -->
+<section class="sectionFour">
+	
+	<div class="main4">
+		<h1>인기여행일정 오는 자리???</h1>
+		
+	</div>
+
+</section>
 
 <!-- 테스트용 버튼들. -->
 <div style="max-width: 1080px; margin: auto; border:5px solid red;">
