@@ -223,27 +223,26 @@ table td {
 			</div>
 
 
-			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap" style="position:relative; left:250px; overflow-y:hidden; overflow-x:scroll; width: 750px; height:800px; ">
+			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap" style="position:relative; width:350px; overflow:auto; left:270px; height:610px; ">
 
 
 
 
 
-<!-- 				<div class="inner_x_wrap"> -->
-<!-- 					<div>10 -->
-<!-- 						일차 -->
-<!-- 					</div> -->
-
-<!-- 										<div -->
-<!-- 											style="width: 12%; float: left; vertical-align: middle; margin: auto;"> -->
-<!-- 					&nbsp;<input class=button type=button value=' > ' -->
-<!-- 						onclick="gor('b10','res10')">&nbsp; <br> -->
-<%-- 					&nbsp;<input class=button type=button value=' < ' --%>
-<!-- 						onclick="gol('b10','res10')">&nbsp; -->
-<!-- 										</div> -->
-<!-- 										<div style="width: 70%; float: left;"> -->
-<!-- 					<select name="b10" size=5 style="width: 100%;"> -->
-<!-- 						<input type=text name=res1 size=30> 
+ 		<!-- 		<div class="inner_x_wrap"> 
+ 					<div>10 
+ 						일차 
+ 					</div> 
+ 										<div 
+ 											style="width: 12%; float: left; vertical-align: middle; margin: auto;"> 
+ 					&nbsp;<input class=button type=button value=' > '
+ 						onclick="gor('b10','res10')">&nbsp; <br>
+ 					&nbsp;<input class=button type=button value=' < ' 
+ 						onclick="gol('b10','res10')">&nbsp;
+ 										</div>
+ 										<div style="width: 70%; float: left;">
+ 					<select name="b10" size=5 style="width: 100%;">
+  						<input type=text name=res1 size=30> 
 						<br>
 					</select>
 										</div>
@@ -255,7 +254,7 @@ table td {
 										</div>
 
 				</div>
-
+		-->
 
 
 

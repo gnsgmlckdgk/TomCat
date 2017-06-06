@@ -470,28 +470,31 @@ $(window).load(function() {
 				alert(diff_day+1 + "일간 " + plan + "에 저장");
 				
 				$(".x_wrap").empty();
-				$(".x_wrap").append("<div class='inner_x_wrap' style='border:5px solid red; width:100%; overflow-x:scroll'></div>");
+// 				$(".x_wrap").append("<div class='inner_x_wrap' style='border:5px solid red; width:100%;'></div>");
 				
 				for( i = 1; i <= diff_day+1; i++){
 				
-					$(".inner_x_wrap").append("<div style='border:1px solid purple; float:left; width:200px;' id='bb"+i+"'>");
+// 					$(".inner_x_wrap").append("<div style='border:1px solid purple; float:left; width:200px;' id='bb"+i+"'>");
 					
-					$("#bb"+i+"").append("<div>"+i+" 일차</div>");
-					$("#bb"+i+"").append("<input class='button' type='button' value=' > ' onclick='gor(b"+i+", res"+i+")'>");
-// 					$("#bb"+i+"").append("<input class='button' type='button' value=' < ' onclick='gol('b"+i+"', 'res"+i+"')'>");
+					$(".x_wrap").append("<div>"+i+" 일차</div><br>");
+					$(".x_wrap").append("<input class='button' type='button' value=' > ' onclick='gor(b"+i+", res"+i+")'>");
+// 					$(".x_wrap").append("<input class='button' type='button' value=' < ' onclick='gol('b"+i+"', 'res"+i+"')'>");
 					
-// 					$("#bb"+i+"").append("<select name='b1' size='5' style='width: 100%;'></select>");
+					$(".x_wrap").append("<select name=b"+i+" size='5' style='width: 100%;'></select>");
 					
-// 					$("#bb"+i+"").append("<input class='button' type='button' value=' ↑ ' onclick='gou('b"+i+"', 'res"+i+"')'>");
-// 					$("#bb"+i+"").append("<input class='button' type='button' value=' ↓ ' onclick='god('b"+i+"', 'res"+i+"')'>");
+// 					$(".x_wrap").append("<input class='button' type='button' value=' ↑ ' onclick='gou('b"+i+"', 'res"+i+"')'>");
+// 					$(".x_wrap").append("<input class='button' type='button' value=' ↓ ' onclick='god('b"+i+"', 'res"+i+"')'>");
 					
 					
-					$(".inner_x_wrap").append("</div>");
+					$(".x_wrap").append("<div class='clear'></div>");
+					$(".x_wrap").append("<hr>");
+					
+// 					$(".inner_x_wrap").append("</div>");
 				}
-// 				$(".x_wrap").append('<input class="button" type="button" value=" > " onclick="gor(b'+1+', res'+1+')">');
-				$(".x_wrap").append("<select name=b1 size='5' style='width: 100%;'></select>");
-				$(".x_wrap").append("<input type='text' name='res1' size='30'>");
-				
+// 				$(".x_wrap").append('<input class="button" type="button" value=" > " onclick="gor(b1, res1)">');
+// 				$(".x_wrap").append("<select name=b1 size='5' style='width: 100%;'>");
+// 				$(".x_wrap").append("<input type='text' name='res1' size='30'>");
+// 				$(".x_wrap").append("</select>");
 			}
 
 		}
