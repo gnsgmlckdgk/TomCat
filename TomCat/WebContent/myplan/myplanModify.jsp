@@ -61,14 +61,16 @@ tr {
 	overflow-x: scroll;
 	overflow-y: hidden;
 	width: 1080px;
-	height: 100%;
-	white-space: nowrap;
+	height: 700px;
+	white-space:nowrap;
 	float: left;
 }
 
 .inner_x_wrap {
 	width: 200px;
 	float: left;
+	height:698px;
+	border: 1px solid red;
 }
 
 .x_wrap select {
@@ -172,21 +174,15 @@ table td {
 	<form action="./MyPlanModifyAction.pln" method="post"
 		style="background-color: white; color: black;" name=reg id="reg">
 
-
-
 		<div>
-			<%-- 		<input type="hidden" value="<%=plan_nr%>" name="plan_nr"> --%>
-			<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
-			<%-- 		<input type="hidden" value="<%=fromDate%>" name="first_day"> --%>
-			<!-- 라스튿이 -->
 
 			<table>
 				<tr>
-					<td class="setdate">출발일 : <input type="date" name="fromDate"
+					<td class="setdate" onchange="from_to()">출발일 : <input type="date" name="fromDate" id="fromDate"
 						required="required"> <br> 도착일 : <input type="date"
-						name="toDate" required="required">
+						name="toDate" id="toDate" required="required">
 					</td>
-					<td class="set_plan"><select name="plan_nr" id="plan_nr"
+					<td class="set_plan" id="set_plan" onchange="from_to()"><select name="plan_nr" id="plan_nr"
 						required="required">
 							<option value="1">Plan A</option>
 							<option value="2">Plan B</option>
@@ -246,7 +242,7 @@ table td {
 						onclick="gol('b<%=i%>','res<%=i%>')">&nbsp;
 					<!-- 					</div> -->
 					<!-- 					<div style="width: 70%; float: left;"> -->
-					<select name=b <%=i%> size=5 style="width: 100%;">
+					<select name="b<%=i%>" size=5 style="width: 100%;">
 						<input type=text name=res <%=i%> size=30>
 						<br>
 					</select>

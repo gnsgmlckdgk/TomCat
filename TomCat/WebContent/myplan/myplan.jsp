@@ -283,34 +283,6 @@
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
 
-<!-- 			<form id="pln_form" action="./MyPlanModify.pln" method="post" name="fr"> -->
-<!-- 				<input type="text" name="fromDate" id="fromDate"  -->
-<!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
-
-<!-- 							background-position: 110px 13px;" required="required" placeholder="시작일">  -->
-<!-- 				<input type="text" name="toDate" id="toDate" required="required" placeholder="마지막일" -->
-<!-- 					style="	background-image: url('myplan/pn_cal_btn.png'); -->
-
-<!-- 							background-position: 110px 13px;"> -->
-<!-- 				<select name="plan_nr" id="plan_nr" required="required"> -->
-<!-- 					<option value="1" >일정A</option> -->
-<!-- 					<option value="2">일정B</option> -->
-<%-- 					<%if(gold.equals("유료회원")){ %> --%>
-<!-- 						<option value="일정C">일정C</option> -->
-<%-- 					<%}%> --%>
-<!-- 				</select> -->
-
-				
-
-<%-- 					<%if(gold.equals("무료회원")){ %> --%>
-<!-- 						<input type="submit" value="상세일정만들기" class="pln_sub_free"> -->
-<%-- 						<input type="button" class="pln_sub_btn_free" onclick="location.href='./PayAction.pln?approval=0&id=<%=id %>'" value="일정C 사용하기"> --%>
-<%-- 					<%} else {%> --%>
-<!-- 						<input type="submit" value="상세일정만들기" class="pln_sub">	 -->
-<%-- 					<%} %> --%>
-				
-<!-- 			</form>  		 -->
-
 <script type="text/javascript">
 $(window).load(function() {
 	$.ajax({
@@ -464,8 +436,42 @@ $(window).load(function() {
          get_result(argSel,argRes);
    }
 
+   
+   
+   
 //
 
+</script>
+<script type="text/javascript">
+// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
+	function from_to(){
+		
+		from = document.getElementById("fromDate");
+		to = document.getElementById("toDate");
+				
+		plan = $("#set_plan option:selected").val();
+						
+		if(from.value != "" & to.value != ""){
+					
+			var arr1 = from.value.split('-');
+	    	var arr2 = to.value.split('-');
+		    var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
+		    var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
+		
+		
+			var diff = dat2 - dat1;
+			var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+			
+			diff_day = Number(parseInt(diff/currDay));
+// 			alert("일 수 차이는 " + diff_day + "일 입니다.");
+
+			if(diff_day >= 0){
+				alert(diff_day+1 + "일간 " + plan + "에 저장");
+			}
+
+		}
+	}
+	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트. 끝.
 </script>
 
 
