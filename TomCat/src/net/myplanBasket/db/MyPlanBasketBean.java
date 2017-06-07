@@ -3,12 +3,12 @@ package net.myplanBasket.db;
 public class MyPlanBasketBean {
 	private int myplans_id;
 	private String id;
-	private int plan_nr;
+	private String plan_nr;
 	private int travel_id;
-	private int item_nr;
+	private String item_nr;
 	private String firstday;
 	private String lastday;
-	private int day_nr;
+	private String day_nr;
 	private String day_night;
 	private float user_lat;
 	private float user_lng;
@@ -28,10 +28,10 @@ public class MyPlanBasketBean {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getPlan_nr() {
+	public String getPlan_nr() {
 		return plan_nr;
 	}
-	public void setPlan_nr(int plan_nr) {
+	public void setPlan_nr(String plan_nr) {
 		this.plan_nr = plan_nr;
 	}
 	public int getTravel_id() {
@@ -40,10 +40,10 @@ public class MyPlanBasketBean {
 	public void setTravel_id(int travel_id) {
 		this.travel_id = travel_id;
 	}
-	public int getItem_nr() {
+	public String getItem_nr() {
 		return item_nr;
 	}
-	public void setItem_nr(int item_nr) {
+	public void setItem_nr(String item_nr) {
 		this.item_nr = item_nr;
 	}
 	public String getFirstday() {
@@ -58,10 +58,10 @@ public class MyPlanBasketBean {
 	public void setLastday(String lastday) {
 		this.lastday = lastday;
 	}
-	public int getDay_nr() {
+	public String getDay_nr() {
 		return day_nr;
 	}
-	public void setDay_nr(int day_nr) {
+	public void setDay_nr(String day_nr) {
 		this.day_nr = day_nr;
 	}
 	public String getDay_night() {

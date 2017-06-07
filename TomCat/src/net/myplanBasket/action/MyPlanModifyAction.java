@@ -22,11 +22,11 @@ public class MyPlanModifyAction implements Action {
 		
 		String id = (String)session.getAttribute("id");
 		
-		// 폼 => 자바빈 멤버변수 저장
+		// 폼 => 자바빈 멤버변수 저장.
 		mpbb.setId(id);
 		mpbb.setFirstday(request.getParameter("fromDate"));
 		mpbb.setLastday(request.getParameter("toDate"));
-		mpbb.setPlan_nr(Integer.parseInt(request.getParameter("plan_nr")));
+		mpbb.setPlan_nr(request.getParameter("plan_nr"));
 		
 		System.out.println("이거"+Integer.parseInt(request.getParameter("plan_nr")));
 //		mpbb.setTravel_id(Integer.parseInt(request.getParameter("travel_id")));
