@@ -9,6 +9,7 @@
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
                 
+              	<property name="project.name" value="TomCat"/>
                 <property name="web.dir" value="WebContent"/>              	
            	 <property name="src.dir" value="src" />
                 <property name="dist.dir" value="dist"/>
@@ -69,6 +70,7 @@
     	              	    </target>
 
     	              	 <target name="prepare" depends="datentime, clean" description="copy web contents">
+    	              	 	
     	              	  <mkdir dir="${build.dir}"/>
     	              	  <mkdir dir="${build.dir}/WEB-INF" />
     	              	  <mkdir dir="${build.dir}/WEB-INF/classes" />
