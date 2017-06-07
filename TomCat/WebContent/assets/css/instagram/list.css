@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 section.gramList {
-	background-image: url("../../../images/instagram/goldengate.jpg");
+	background-image: url("../../../images/instagram/beach.jpg");
 	background-attachment: fixed;
 	background-position: center top;
 	background-size: cover;
@@ -50,21 +50,6 @@ section.gramList .bottomline {
 	border-bottom: 1px solid #A9A9A9;
 }
 
-section.gramList .banner {
-	color:black;
-	text-decoration:blink;
-	font-weight:bolder;
-	width: 6em;
-	height: 4em;
-	background-color: white;
-	opacity: 0.9;
-	position: fixed;
-	left: 410px;
-	top: 390px;
-	border-collapse: none;
-	border: none;
-}
-
 section.gramList img#up {
 	width: 4em;
 	height: 4em;
@@ -108,12 +93,32 @@ section.gramList #combine {
 	width: 1080px;
 }
 
+div.bestShot {
+	position: fixed;
+	top: 200px;
+	width: 240px;
+	height: 400px;
+}
+div.bestShot table.banner {
+	color:black;
+	text-decoration:blink;
+	font-weight:bolder;
+	width: 6em;
+	height: 4em;
+	background-color: white;
+	opacity: 0.9;
+	/* position: fixed;
+	left: 410px;
+	top: 390px; */
+	border-collapse: none;
+	border: none;
+	margin: 0 auto;
+}
+
 section.gramList img#AlphbetB{
 width:4em;
 height:4em;
-position: fixed;
-left: 400px;
-top: 320px;   
+margin-right:-20px;
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -123,9 +128,7 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 section.gramList img#AlphbetE{
 width:4em;
 height:4em;
-position: fixed;
-left: 455px;
-top: 320px;  
+margin-right:-20px;
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -135,9 +138,7 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 section.gramList img#AlphbetS{
 width:4em;
 height:4em;
-position: fixed;
-left: 510px;
-top: 320px;   
+margin-right:-20px;
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -147,9 +148,7 @@ animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  �
 section.gramList img#AlphbetT{
 width:4em;
 height:4em;
-position: fixed;
-left: 565px;
-top: 320px;   
+  
 animation-name:blink;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
