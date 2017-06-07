@@ -40,7 +40,6 @@
 		</textarea><br></b>
 		<input type="checkbox" checked="checked" name="chk_location" id="chk_location" onchange="checkbox_change()"><label for="chk_location" id="texta">현재위치 보이기</label>
 		<input type="text" value="<%=location %>" name="location" id="location" readonly="readonly">
-		
 		<input type="submit" value="올리기">
 	</form>
 	</div>

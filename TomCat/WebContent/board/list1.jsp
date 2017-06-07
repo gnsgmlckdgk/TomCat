@@ -12,7 +12,7 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=7" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
@@ -253,15 +253,15 @@ if(count!=0){
 	// 끝페이지 번호 구하기  
 	//이전
 	if(startPage>pageBlock){
-		%><a href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
+		%><a href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>" style="text-decoration:none; color:black;">[이전]</a><%
 	}
 	// 1..10  11..20  21...30
 	for(int i=startPage;i<=endPage;i++){
-		%><a href="./BoardList1.bb?pageNum=<%=i%>">[<%=i%>]</a><%
+		%><b><a href="./BoardList1.bb?pageNum=<%=i%>" style="text-decoration:none; color:black;">『<%=i%>』</a></b><%
 	}
 	// 다음
 	if(endPage < pageCount){
-		%><a href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>">[다음]</a><%
+		%><a href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>" style="text-decoration:none; color:black;">[다음]</a><%
 	}
 }
 %>
