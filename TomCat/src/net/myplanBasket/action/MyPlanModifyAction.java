@@ -19,28 +19,47 @@ public class MyPlanModifyAction implements Action {
 		MyPlanBasketBean mpbb = new MyPlanBasketBean();
 
 		HttpSession session = request.getSession();
-		
-		String id = (String)session.getAttribute("id");
-		
+
+		String id = (String) session.getAttribute("id");
+
 		// 폼 => 자바빈 멤버변수 저장.
 		mpbb.setId(id);
-		mpbb.setFirstday(request.getParameter("fromDate"));//출발일
-		mpbb.setLastday(request.getParameter("toDate"));//도착일
-		mpbb.setPlan_nr(request.getParameter("plan_nr"));//plan a or b or c
-		
-		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
-		
-//		mpbb.setTravel_id(Integer.parseInt(request.getParameter("travel_id")));
-//		mpbb.setItem_nr(Integer.parseInt(request.getParameter("item_nr")));
-		
-//		mpbb.setDay_nr(Integer.parseInt(request.getParameter("day_nr")));
-//		mpbb.setDay_night(request.getParameter("day_night"));
-//		mpbb.setUser_lat(Float.parseFloat(request.getParameter("user_lat")));
-//		mpbb.setUser_lng(Float.parseFloat(request.getParameter("user_lng")));
+		mpbb.setFirstday(request.getParameter("fromDate"));// 출발일
+		mpbb.setLastday(request.getParameter("toDate"));// 도착일
+		mpbb.setPlan_nr(request.getParameter("plan_nr"));// plan a or b or c
 
-//		mpbb.setDate(request.getParameter("date"));
-//		mpbb.setMemo(request.getParameter("memo"));
-//		mpbb.setPlan_done_nr(Integer.parseInt(request.getParameter("plan_done_nr")));
+		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
+
+		System.out.println(request.getParameter("res" + 1));
+
+		String b[] = new String[diff_day];
+		String plan_nr[] = new String[diff_day];
+
+		String[] day_nr = null;
+
+		for (int i = 1; i <= diff_day; i++) {
+			b[i - 1] = request.getParameter("res" + i);
+			plan_nr[i - 1] = request.getParameter("plan_nr" + i);
+			// day_nr[i] = request.getParameter("day_nr"+i+1);
+		}
+
+		for (int i = 0; i < diff_day; i++) {
+			System.out.println(b[i]);
+			// System.out.println(plan_nr[i]);
+			// System.out.println(day_nr[i]);
+		}
+
+		// mpbb.setTravel_id(Integer.parseInt(request.getParameter("travel_id")));
+		// mpbb.setItem_nr(Integer.parseInt(request.getParameter("item_nr")));
+
+		// mpbb.setDay_nr(Integer.parseInt(request.getParameter("day_nr")));
+		// mpbb.setDay_night(request.getParameter("day_night"));
+		// mpbb.setUser_lat(Float.parseFloat(request.getParameter("user_lat")));
+		// mpbb.setUser_lng(Float.parseFloat(request.getParameter("user_lng")));
+
+		// mpbb.setDate(request.getParameter("date"));
+		// mpbb.setMemo(request.getParameter("memo"));
+		// mpbb.setPlan_done_nr(Integer.parseInt(request.getParameter("plan_done_nr")));
 
 		// 디비객체 생성 agdao
 		MyPlanBasketDAO mpbd = new MyPlanBasketDAO();
@@ -51,7 +70,7 @@ public class MyPlanModifyAction implements Action {
 		// 이동 ./GoodsList.ag
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./MyPlan.pln?plan_nr="+mpbb.getPlan_nr());
+		forward.setPath("./MyPlan.pln?plan_nr=" + mpbb.getPlan_nr());
 		return forward;
 	}
 }
