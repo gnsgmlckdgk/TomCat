@@ -28,11 +28,12 @@ public class MyPlanModifyAction implements Action {
 		
 		// 폼 => 자바빈 멤버변수 저장.
 		mpbb.setId(id);
-		mpbb.setFirstday(request.getParameter("fromDate"));
-		mpbb.setLastday(request.getParameter("toDate"));
-		mpbb.setPlan_nr(request.getParameter("plan_nr"));
+		mpbb.setFirstday(request.getParameter("fromDate"));//출발일
+		mpbb.setLastday(request.getParameter("toDate"));//도착일
+		mpbb.setPlan_nr(request.getParameter("plan_nr"));//plan a or b or c
 		
-		System.out.println("이거"+Integer.parseInt(request.getParameter("plan_nr")));
+		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
+		
 //		mpbb.setTravel_id(Integer.parseInt(request.getParameter("travel_id")));
 //		mpbb.setItem_nr(Integer.parseInt(request.getParameter("item_nr")));
 		

@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-	background-image: url("../../../images/instagram/beach.jpg");
+	background-image: url("../../../images/instagram/goldengate.jpg");
 	background-attachment: fixed;
 	background-position: center top;
 	background-size: cover;
@@ -10,11 +10,13 @@ body {
 }
 
 #combine {
+	border: 1px solid red;
 	margin: auto;
-	width: 80%;
+	width: 1300px;
 	height: 50%;
 	position: relative;
 	min-height: 700px;
+	padding: auto;
 }
 
 #question{
@@ -30,12 +32,13 @@ body {
 	width: 70%;
 	background-color: white;
 	border-radius: 20px;
+	margin-bottom: 10px;
 }
 
 #banner {
 	border-radius:10px;
 	text-align: left;
-	width:9em;
+	width:10em;
 	background-color: white;
 	position: absolute;
 	top: 150px;
@@ -63,15 +66,22 @@ background-color: rgba(77, 77, 77,0.3);
 	color:grey;
 	font-weight: bolder;
 	}
-	#table_search{
-margin-top: 2px;
+#table_search{
+width: 70%;
+margin: auto;
 	}
 
 #qandasearch{
-	width:20%;
+	height:46px;
+	width:30%;
 	color:white;
-	margin-left:40%;
-	background-color: rgba(172, 0, 230,0.5);
-	
-	
+	margin-left:50%;
+	float:left;
+	background-color: rgba(172, 0, 230,0.5);	
+}
+
+input.btn{
+	margin-left: 0px;
+	padding:auto auto;
+	text-align: center;
 }

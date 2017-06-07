@@ -305,9 +305,7 @@ $(window).load(function() {
 
 
 //오른쪽 박스에 추가
-   function gor(argSel,argRes)    {
-	
-	alert(argSel +" " + argRes);
+   function gor(argSel,argRes,argPlan_nr,plan, day_nr, dn)    {
 	
          formSel=eval("document.reg."+argSel);  //(form 이름주소 + select box 이름)을 계산해서 formsel 에 저장
          
@@ -338,39 +336,60 @@ $(window).load(function() {
                          }
          }
          
-         get_result(argSel,argRes)
+         get_result(argSel,argRes,argPlan_nr,plan, day_nr, dn);
    }
    
-   function gol(argSel,argRes)    {
+   function gol(argSel,argRes,argPlan_nr,plan, day_nr, dn)    {
          formSel=eval("document.reg."+argSel);
          
-         buff=new Array();
+         
          j=0;
          
-         for(var i=formSel.length-1;i>=0;i--)
-         {
-                         if(formSel.options[i].selected && formSel.options[i].value)
-                         {
-                         formSel.options[i] = null;
-                         }
-         }
+        for(var i=formSel.length-1; i>=0; i--){
+			
+        	if(formSel.options[i].selected && formSel.options[i].value){
+             	formSel.options[i] = null;
+			}
+		
+        }
          
-         get_result(argSel,argRes);
+         
+        get_result(argSel,argRes,argPlan_nr,plan, day_nr, dn);
    }
    
-   function get_result(argSel,argRes) {
+   function get_result(argSel,argRes,argPlan_nr,plan,day_nr, dn) {
          formSel=eval("document.reg."+argSel);
          formRes=eval("document.reg."+argRes);
+         formPlan_nr = eval("document.reg."+argPlan_nr);
+         formDay_nr = eval("document.reg."+day_nr);
          
          res=new Array();
+         plan_nr = new Array();
+         day = new Array();
          
          for(var i=0;i<formSel.length;i++)
          {
-         res[i]=formSel.options[i].value;
+         	res[i]		= formSel.options[i].value;
+         	
+         	plan_nr[i]	= plan;
+         	if(formSel.options[i].value == null){
+         		plan_nr[i]	= null;
+         	}
+         	
+         	day[i]	= dn;
+         	if(formSel.options[i].value == null){
+         		day[i]	= null;
+         	}
+
          }
          
+         day=day.join("@");
          res=res.join("@");
-         formRes.value=res;
+         plan_nr=plan_nr.join("@");
+         
+         formDay_nr.value = day;
+         formRes.value		=	res;
+         formPlan_nr.value	=	plan_nr;
    }
    
    

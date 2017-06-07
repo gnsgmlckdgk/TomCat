@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="coBody">
 <h1>글내용보기</h1>
 <%
 BoardBean bb = (BoardBean)request.getAttribute("bb");

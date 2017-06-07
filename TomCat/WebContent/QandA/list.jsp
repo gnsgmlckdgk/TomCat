@@ -7,7 +7,7 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/list.css?ver=2"/>	
+<link rel="stylesheet" href="./assets/css/QandA/list.css?ver=1"/>	
 
 <%
 String id = (String)session.getAttribute("id");
@@ -30,7 +30,7 @@ QandADAO qdao=new QandADAO();
 	<img id="question" src="./images/QandA/questionmark.png">
 
 
-<table class="table1">
+<table class="table1"style="border: 1px solid red;">
 <tr><td>글넘버</td><td>글쓴이</td><td>제목</td><td>날짜</td><td>조회수</td></tr>
 <%
 		if(count!=0){
@@ -104,7 +104,7 @@ QandADAO qdao=new QandADAO();
 <div id="table_search">
 <form action="QandASearchAction.qna" method="get">
 <input type="text" id="qandasearch"name="search" class="input_box">
-<input type="submit" value="search" class="btn">
+<input type="submit" value="search" class="btn" style="border: 1px solid red;">
 </form>
 </div>
 

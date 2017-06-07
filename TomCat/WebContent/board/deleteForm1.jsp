@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="deBody">
 <%
 //int  num     String  pageNum 파라미터 가져오기
 int num=Integer.parseInt(request.getParameter("num"));

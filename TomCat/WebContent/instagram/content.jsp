@@ -54,7 +54,7 @@ function func3(i){
 
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/content.css"/>	
+<link rel="stylesheet" href="./assets/css/instagram/content.css?ver=2"/>	
 	<%	
 	
 	String id = (String)session.getAttribute("id");			// 아이디

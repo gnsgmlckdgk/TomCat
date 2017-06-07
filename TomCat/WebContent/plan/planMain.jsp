@@ -134,19 +134,19 @@
 	
 	<!-- 현재 초 값을 받아와서, 배경이 새로고침 할때마다 바뀌도록. -->
 <%if(second==3) {%>
-<section id="banner" class="b_back<%=second%>">
+<section id="banner" class="b_back<%=second%>"  style="height: 400px;">
 <%} else if(second==2) {%>
-<section id="banner" class="b_back<%=second%>">
+<section id="banner" class="b_back<%=second%>"  style="height: 400px;">
 <%} else if(second==1) {%>
-<section id="banner" class="b_back<%=second%>">
+<section id="banner" class="b_back<%=second%>"  style="height: 400px;">
 <%} else { %>
-<section id="banner" class="b_back">
+<section id="banner" class="b_back"  style="height: 400px;">
 <%} %>
 
 
 	<div class="Search">
 		<!-- 검색폼 -->
-		<div class="Main_Search">
+		<div class="Main_Search" style="max-width: 1080px; margin: auto; padding: 4em 0;">
 			<form name="fr" action="./PlanSearch.pl" class="main_plan_search"
 				method="post" onsubmit="return checkSearch();">
 				<h2>어디로 여행을 가시나요?</h2>
@@ -204,7 +204,7 @@
 			<%
 				String[] asia = { "asia", "europe", "oceania", "south", "north" };
 				for (int j = 0; j < 5; j++) {
-			%>
+					%>
 
 			<h3>▶ <%=cont[j] + " "%>
 				<a onclick="popupToggle_<%=asia[j]%>()">&nbsp>> 지도로보기</a>

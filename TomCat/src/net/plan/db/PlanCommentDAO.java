@@ -377,9 +377,9 @@ public class PlanCommentDAO {
 			}
 		}
 	
-		/*관광지*/
-		// 리뷰 작성(관광지) : PlanSpotCommentBean 오류떠서 주석해놓음... 수정하는분 조치바람...
-		/*public void insertSpotComment(PlanSpotCommentBean pscb) {
+		/*관광지 리뷰작성*/
+		
+		public void insertSpotComment(PlanSpotCommentBean pscb) {
 
 			int num = 0;
 			int spot_num = 0;
@@ -390,7 +390,6 @@ public class PlanCommentDAO {
 
 				con = getConnection();
 
-				// 전체 국가페이지 리뷰글의 num 파악
 				sql = "select max(num) as num from spot_comment";
 				ps = con.prepareStatement(sql);
 				rs = ps.executeQuery();
@@ -398,14 +397,12 @@ public class PlanCommentDAO {
 					num = rs.getInt("num") + 1; // 넣을 num 값
 				}
 
-				// 특정 국가의 num 파악
-				sql = "select max(spot_num) as nation_num from spot_comment where spot=?";
+				sql = "select max(spot_num) as spot_num from spot_comment where spot=?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, pscb.getSpot());
 				rs = ps.executeQuery();
 				if (rs.next()) {
-					spot_num = rs.getInt("spot_num") + 1; // 넣을 nation_num 값
-				}
+					spot_num = rs.getInt("spot_num") + 1;
 
 				// DB에 넣기
 				sql = "insert into spot_comment(num, spot, spot_num, nick, date, eval, content)"
@@ -419,6 +416,120 @@ public class PlanCommentDAO {
 				ps.setTimestamp(5, date);
 				ps.setInt(6, pscb.getEval());
 				ps.setString(7, pscb.getContent());
+
+				ps.executeUpdate();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (ps != null)
+						ps.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+
+		//관광지 리뷰 갯수 구하기
+		public int getSpotCount(String spot) {
+
+			int count = 0;
+
+			try {
+				con = getConnection();
+
+				sql = "select count(*) as count from spot_comment where spot = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, spot);
+
+				rs = ps.executeQuery();
+
+				if (rs.next()) {
+					count = rs.getInt("count");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (ps != null)
+						ps.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			return count;
+		}
+
+		// 특정 리뷰 리스트 가져오기(관광지)
+		public List<PlanSpotCommentBean> getSpotListComment(String spot, int startRow, int pageSize) {
+
+			List<PlanSpotCommentBean> list = new ArrayList<PlanSpotCommentBean>();
+
+			try {
+
+				con = getConnection();
+
+				sql = "select * from spot_comment where spot = ? order by spot_num desc limit ?, ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, spot);
+				ps.setInt(2, startRow - 1);
+				ps.setInt(3, pageSize);
+				rs = ps.executeQuery();
+
+				while (rs.next()) {
+					PlanSpotCommentBean pcb = new PlanSpotCommentBean();
+					pcb.setContent(rs.getString("content"));
+					pcb.setDate(rs.getTimestamp("date"));
+					pcb.setEval(rs.getInt("eval"));
+					pcb.setSpot(rs.getString("spot"));
+					pcb.setSpot_num(rs.getInt("spot_num"));
+					pcb.setNick(rs.getString("nick"));
+					pcb.setNum(rs.getInt("num"));
+
+					list.add(pcb);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (ps != null)
+						ps.close();
+					if (con != null)
+						con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			return list;
+		}
+
+		// 관광지 리뷰 삭제하기
+		public void deleteSpotReview(int num) {
+
+			try {
+
+				con = getConnection();
+
+				sql = "delete from spot_comment where num = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, num);
 
 				ps.executeUpdate();
 
@@ -436,7 +547,7 @@ public class PlanCommentDAO {
 					e.printStackTrace();
 				}
 			}
-		}*/
-		
+		}
+	
 
 }

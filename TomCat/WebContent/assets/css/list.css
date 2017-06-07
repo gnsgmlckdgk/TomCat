@@ -18,18 +18,15 @@
 	padding :20px;
 	width: 600px;
 	background-color: rgba(246, 246, 246, 0.8);
-	margin-left:100px;
+	margin-left:50px;
 	margin-bottom: 100px;
 	height: 800px;
-	
 }
-
-section .together_section {
-	background-image: url("../../images/kk.jpg");
+#ima{
+	background-image: url("./beach.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	width: 1080px;
-	border: 1px solid red;
 }
 
 .btn_up_layer {
@@ -40,7 +37,8 @@ section .together_section {
 	background-color: white;
 	margin-bottom: 30px;
 	padding: 5px 10px;
-	z-index: 1;
+	z-index: 5;
+	
 	background-color: rgba(255,255,255,0);
 }
 
@@ -54,8 +52,6 @@ section .together_section {
 	position:fixed;
 	margin-top: 3em;
 	margin-left: 1em;
-
-	
 }
 
 #sub {
@@ -66,7 +62,6 @@ section .together_section {
 }
 
 #con {
-	
 	width: 70%;
 	padding-top : 1em;
 	float: right;
@@ -74,7 +69,6 @@ section .together_section {
 	overflow-y : scroll;
 	word-wrap : break-word;
 	font-family: 'Hanna', serif;
-
 }
 
 #file {
@@ -99,26 +93,26 @@ section .together_section {
 	height: 100px;
 	border-radius: 250px;
 }
-프로필 이미지 끝
+/* 프로필 이미지 끝 */
 
-chat css
+/* chat css */
 #chat{
 	width: 20%;
 	min-width:100px;
-	height: 75em;
+/* 	height: 75em; */
 	position:fixed;
 	top:7em;
 	right:0;
 	z-index: 5;
-	margin-bottom: 80px;
-	margin-right: 100px;
+/* 	margin-bottom: 80px; */
+/* 	margin-right: 100px; */
 	
 }
 
 #chat input{
 	min-width: 100px;
 }
-chat css 끝
+/* chat css 끝 */
 
 
 .gl {
@@ -174,7 +168,7 @@ to {
 }
 
 	#mit{
-	background-color:#E91E63;
+	background-color:#2196F3;
 	border-radius:20px;
 	opcity:0.85;
 	}
@@ -195,22 +189,22 @@ to {
 	top: -650px;
 	left: 580px;
 	margin: 0;
-
 }
-
 .up{
 	margin-top: 300px;
 	opcity:0.85;
+	font-size: 0.8em;
+	border-radius:50px;
 }
 .up:hover{
-	background-color:#E91E63;
+	background-color:#2196F3;
 }
 .de{
 	opcity:0.85;
+	font-size: 0.8em;
 }
-
 .de:hover{
-	background-color:#E91E63;
+	background-color:#2196F3;
 }
 .re{
 	float:right;
@@ -219,5 +213,26 @@ to {
 	font-size: 15px;	
 }
 .re:hover{
-	background-color:#E91E63;
+	background-color:#2196F3;
+}
+.form1{
+	border-right: 30px;
+	max-width: 1080px;
+}
+#page1{
+	margin-left: 380px;
+	font-size: 1.2em;
+	text-decoration: none;
+}
+#upBody{
+	background-image: url("./beach.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	width: 1080px;
+}
+#wrBody{
+	background-image: url("./beach.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	width: 1080px;
 }

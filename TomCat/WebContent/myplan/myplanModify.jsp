@@ -140,6 +140,7 @@ table td {
 						type="date" name="fromDate" id="fromDate" required="required">
 						<br> 도착일 : <input type="date" name="toDate" id="toDate"
 						required="required">
+						
 					</td>
 					<%
 						}
@@ -154,7 +155,7 @@ table td {
 						type="reset" value="다시등록"></td>
 
 				</tr>
-
+<input type="hidden" value="<%=diff_day %>" name="diff_day">
 			</table>
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
@@ -203,7 +204,7 @@ table td {
 							 -->
 
 
-				<div class="inner_x_wrap">
+				<div class="inner_x_wrap" style="border:1px solid blue">
 					<div><%=i%>
 						일차. css가 필요합니다.
 					</div>
@@ -213,21 +214,22 @@ table td {
 					<div
 						style="width: 12%; float: left; vertical-align: middle; margin: auto;">
 						&nbsp;<input class=button type=button value=' > '
-							onclick="gor('b<%=i%>','res<%=i%>')">&nbsp; <br>
+							onclick="gor('b<%=i%>','res<%=i%>', 'plan_nr<%=i %>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp; <br>
 						&nbsp;<input class=button type=button value=' < '
-							onclick="gol('b<%=i%>','res<%=i%>')">&nbsp;
+							onclick="gol('b<%=i%>','res<%=i%>', 'plan_nr<%=i %>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
 					</div>
 					
 					
 					
 					<div style="width: 70%; float: left;">
-						<select name="b<%=i%>" size=5 style="width: 100%;">
+						<select name="b<%=i%>" size=5 style="width: 100%; height:10em;">
 							
 						</select>
 					</div>
 					
-					<input type='text' name='res<%=i %>' size=30 placeholder="mpbb2.getMyplans_id()">
-<%-- 					<input type='text' name='res<%=i %>' size=30 placeholder="mpbb2.getMyplans_id()"> --%>
+					<input type='text' name='res<%=i %>' placeholder="mpbb2.getMyplans_id()">
+					<input type='text' name='plan_nr<%=i %>' placeholder="plan_nr">
+					<input type='text' name='day_nr<%=i %>' placeholder="day_nr">
 					
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '
