@@ -2858,6 +2858,7 @@ body.is-touch #banner {
 	margin: 30px auto 0px auto;
 	padding-top: 30px;
 	padding-bottom: 30px;
+	border:1px solid red;
 }
 
 	/* footer 새로 추가한거 */

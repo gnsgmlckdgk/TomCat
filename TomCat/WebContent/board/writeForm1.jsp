@@ -6,7 +6,7 @@
 <section class="wrapper">
 
 <head>
-
+<link href="./assets/css/list.css?ver=5" rel="stylesheet" type="text/css">
 <%
 	String nick = (String) session.getAttribute("nick"); // 닉네임
 	String location =(String) request.getParameter("location");
@@ -21,7 +21,7 @@
 </style>
 
 </head>
-<body id="wrBody">
+<body id="ima">
 
 	<div class="wide">
 
@@ -31,14 +31,14 @@
 
 <div class="form1">
 	<form action="./BoardWriteAction1.bb" method="post" name="fr">
-<b>글쓴이: <input type="text" name="nick_name" value=<%=nick%> readonly><br></b>
-<b>제목: <input type="text" name="subject" id="subject" required ><br></b>
-<b>내용: <textarea rows="10" cols="20" name="content" >
+<b>글쓴이: <input type="text" name="nick_name" value=<%=nick%> readonly id="texta"><br></b>
+<b>제목: <input type="text" name="subject" id="subject"  required; ><br></b>
+<b>내용: <textarea rows="10" cols="20" name="content"  id="texta">
 이름:
 나이:
 여행지:
 		</textarea><br></b>
-		<input type="checkbox" checked="checked" name="chk_location" id="chk_location" onchange="checkbox_change()"><label for="chk_location">현재위치 보이기</label>
+		<input type="checkbox" checked="checked" name="chk_location" id="chk_location" onchange="checkbox_change()"><label for="chk_location" id="texta">현재위치 보이기</label>
 		<input type="text" value="<%=location %>" name="location" id="location" readonly="readonly">
 		
 		<input type="submit" value="올리기">
