@@ -16,7 +16,7 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=4"/>	
+<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=3"/>	
 <div id="top"></div>
 <section class="gramList">
 
@@ -185,13 +185,12 @@ if(likecount%2==0){
 	int likecountall=ldao.getLikecountall(bb.getNum());
 	%>
 
+<div class="bestShot">
 <!-- 인생샷그램 위에 움직이는 왕관모양-->
 <img id="AlphbetB" src="./images/instagram/AlphbetB.png">
 <img id="AlphbetE" src="./images/instagram/AlphbetE.png">	
 <img id="AlphbetS" src="./images/instagram/AlphbetS.png">	
 <img id="AlphbetT" src="./images/instagram/AlphbetT.png">	
-
-
 
 <!-- 	베스트 게시글 테이블 -->
 	<table class="banner">
@@ -204,7 +203,7 @@ if(likecount%2==0){
 	</td></tr>
 	<tr><td id="paddingnone">좋아요<%=likecountall %>개</td></tr>
 	</table>
-	
+</div>
 	
 <!-- 	화면 상단/ 하단 이동 아이콘 -->
 	<a href="#top"><img title="상단이동" alt="상단이동" id="up" src="./images/instagram/up.png"></a>
