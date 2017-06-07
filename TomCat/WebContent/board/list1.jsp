@@ -218,9 +218,9 @@
 					
 				</div>
 				<div class="upde">				
-<input type="button" value="글수정"
+<input type="button" value="수정"
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
-<input type="button" value="글삭제"
+<input type="button" value="삭제"
 onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
 <%-- <%} %> --%>
 <input type="button" value="댓글"  class="re" >   
