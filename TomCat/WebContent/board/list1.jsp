@@ -12,7 +12,7 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <<<<<<< HEAD
-<link href="assets/css/list.css?ver=9" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=8" rel="stylesheet" type="text/css">
 =======
 <link href="./assets/css/board/list.css?ver=1" rel="stylesheet" type="text/css">
 >>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
