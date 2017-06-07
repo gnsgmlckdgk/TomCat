@@ -35,6 +35,93 @@ public class MemberBoardDAO {
 		return con;
 	}
 
+	// Q&A 게시글 갯수 구하기
+	public int getQandAcction(String nick) {
+		int count = 0;
+		try {
+			// 1,2 디비연결 메서드 호출
+			con = getConnection();
+			// 3 sql 함수 count(*) 이용
+			sql = "select count(*) from qanda where nick = ?";
+
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nick);
+			// 4 rs실행저장
+			rs = ps.executeQuery();
+			// 5 데이터있으면 count저장
+
+			// select에서 검색한 첫번째 열에 값이 있는지 없는지 확인하는 작업
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try{
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		} // finally
+		return count;		
+	}
+	
+	// Q&A 게시글 리스트 가져오기
+	public List<QandABean> getQandAList(int startRow, int pageSize, String nick) {
+		// 배열(컬렉션)객체 생성- 여러개의 기억공간 사용+기억공간 추가해서 사용
+				List<QandABean> QandAList = new ArrayList<QandABean>();
+				try {
+					// 1,2 디비연결 메서드 호출
+					con = getConnection();
+					// 3 sql gram의모든 데이터 가져오기(select*from gram)
+					// num에 의한 내림차순 정렬(order by num)
+					// 글 잘라 오기 limit(시작행-1, 개수) startrow을 기준으로 pageSize만큼 자른다!
+					sql = "select *from qanda where nick = ? order by date desc limit ?, ? ";
+
+					ps = con.prepareStatement(sql);
+					ps.setString(1, nick);
+					ps.setInt(2, startRow - 1);
+					ps.setInt(3, pageSize);
+					// 4 결과 rs에 저장
+					rs = ps.executeQuery();
+
+					while (rs.next()) {
+						QandABean qb = new QandABean();
+						
+						System.out.println(rs.getInt("num"));
+
+						
+						qb.setNum(rs.getInt("num"));
+						qb.setNick(rs.getString("nick"));
+						qb.setSubject(rs.getString("subject"));
+						qb.setContent(rs.getString("content"));
+						qb.setImage1(rs.getString("image1"));
+						qb.setRe_lev(rs.getInt("re_lev"));
+						qb.setRe_seq(rs.getInt("re_seq"));
+						qb.setRe_ref(rs.getInt("re_ref"));
+						qb.setReadcount(rs.getInt("readcount"));
+						qb.setDate(rs.getDate("date"));
+
+						// boardList 한칸 저장
+						QandAList.add(qb);			
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try{
+						if(rs!=null) rs.close();
+						if(ps!=null) ps.close();
+						if(con!=null) con.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				} // finally
+				return QandAList;
+	}
+	
 	// 인생샷그램 게시글 갯수 구하기
 	public int getGramCount(String nick) {
 		int count = 0;

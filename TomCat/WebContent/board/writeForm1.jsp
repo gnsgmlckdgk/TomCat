@@ -28,25 +28,22 @@
 <iframe width="100%" height="400" frameborder="0" style="border: 0"
 	src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=location%>" allowfullscreen>
 </iframe>
-	<form action="./BoardWriteAction1.bb" method="post" name="fr">
-		<b>글쓴이: <input type="text" name="nick_name" value=<%=nick%> readonly><br></b>
-		<b>제목: <input type="text" name="subject" id="subject" required ><br></b>
-		<b>내용: <textarea rows="10" cols="20" name="content" >=====『기본정보』======
-	이름:
-	나이:
-	여행지:
-	간단한 여행루트:
-	거주지:
-	직업:
-	기타:
 
+<div class="form1">
+	<form action="./BoardWriteAction1.bb" method="post" name="fr">
+<b>글쓴이: <input type="text" name="nick_name" value=<%=nick%> readonly><br></b>
+<b>제목: <input type="text" name="subject" id="subject" required ><br></b>
+<b>내용: <textarea rows="10" cols="20" name="content" >
+이름:
+나이:
+여행지:
 		</textarea><br></b>
 		<input type="checkbox" checked="checked" name="chk_location" id="chk_location" onchange="checkbox_change()"><label for="chk_location">현재위치 보이기</label>
 		<input type="text" value="<%=location %>" name="location" id="location" readonly="readonly">
 		
 		<input type="submit" value="올리기">
 	</form>
-	
+	</div>
 	</div>
 	
 	

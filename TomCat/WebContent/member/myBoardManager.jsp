@@ -23,7 +23,7 @@
 			<div class="myBoardManager">	<!-- 게시판들 -->
 			
 			<div class="qnaBoard">	<!-- Q&A게시판 -->
-<!-- 			<script type="text/javascript">
+ 			<script type="text/javascript">
 				$(document).ready(function(){
 					/* 페이지 처음 실행시 게시글 목록 조회 */
 					$.ajax({
@@ -38,11 +38,11 @@
 		       		 }   
 					});
 				});
-			</script> -->
+			</script>
 				
 				<h2>Q&A게시판</h2>
 				
-				<div class="table">추후 추가예정</div>
+				<div class="table"></div>
 				
 			</div> <!-- qnaBoard -->
 			

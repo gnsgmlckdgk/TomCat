@@ -22,7 +22,6 @@ String pageNum=request.getParameter("pageNum");
 %>
 <form action="./BoardDelete1.bb?pageNum=<%=pageNum %>" method="post" name="fr">
 <input type="hidden" name="num" value="<%=num%>">
-<b>비밀번호:<input type="password" name="pass"><br></b>
 <input type="submit" value="글삭제">
 </form>
 </body>
