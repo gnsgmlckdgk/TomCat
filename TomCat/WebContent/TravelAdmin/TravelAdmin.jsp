@@ -4,14 +4,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
+
+<!-- 관광지 DB 입력 페이지 -->
 <html>
+
+<head>
+	<style type="text/css">
+	
+		div.travelAdminContainer {	/* 전체 내용물 DIV */
+			margin: -60px auto 70px auto;
+			width: 800px;
+			font-weight: bold;
+		}
+		div.formBtn {
+			margin-top: 30px;
+			text-align: center;
+		}
+		div.formBtn input {
+			margin-right: 30px;
+		}
+	
+	</style>
+
+</head>
 
 <!-- 스타일 불러오기 -->
 <link rel="stylesheet" href="assets/css/main.css" />
 
-<body style="max-width: 1080px; margin: auto;">
-	<h1>여행장소 db 입력용</h1>
-<%String city_code = null; %>
+<body>
+<div class="travelAdminContainer">
+
+
+	<%String city_code = null; %>
 
 
 	<form action="./TravelAdminAction.td?city_code=<%=city_code %>" method="post" name="fr"
@@ -71,18 +95,25 @@
 국가코드(kr, jp, ph) 3개중에 하나만 넣으세요:<input type="text" name="country_code"><br>
 도시코드(seoul, busan, tokyo, osaca, manila, cebu) 6개중에 하나만 넣으세요 :<input type="text" name="city_code"><br> -->
 		명칭(ex 조선비치호텔) : <input type="text" name="name"><br> 주소 :
-		<input type="text" name="address"><br> 장소소개 : <input
-			type="text" name="info"><br> lat : <input type="text"
-			name="latitude"><br> lng : <input type="text"
-			name="longitude"> <br> lat,lng 값은 <a
-			href="https://www.google.co.kr/maps" target="blank">구글맵</a>에서 특정 장소
+		<input type="text" name="address"><br> 
+		장소소개 : <input type="text" name="info"><br> 
+		lat : <input type="text" name="latitude"><br> 
+		lng : <input type="text" name="longitude"><br> 
+		lat,lng 값은 <a href="https://www.google.co.kr/maps" target="blank">구글맵</a>에서 특정 장소
 		검색후 <br> marker 가 뜨면 마우스 우클릭하여 "이곳이 궁금한가요?" 클릭하면 lat, lng 정보 확인가능<br>
-		화면 좌측에 해당장소의 주소 복사해서 아래 주소칸에 넣으세요<br> <input type="submit"
-			value="정보저장">
-
+		화면 좌측에 해당장소의 주소 복사해서 아래 주소칸에 넣으세요<br> 
+		
+		<div class="formBtn">
+			<input type="submit" value="정보저장">
+			<input type="reset" value="다시쓰기"><br><br>
+			<input type="button" value="뒤로가기" class="button special" onclick="history.back();">
+		</div>
+	
 	</form>
+	
+		
+	
+	</div>
 </body>
-
-<div class="clear"></div>
 
 </html>

@@ -14,6 +14,12 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class TravelAdminDAO {
+	
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	String sql = "";
+	
 	// Connection pool
 	private Connection getConnection() throws Exception {
 		Connection con = null;
@@ -25,23 +31,9 @@ public class TravelAdminDAO {
 
 	// 여행정보 저장
 	public void insertTravel(TravelBean tBean) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "";
 
-		/*int num=0;*/
 		try {
 			con = getConnection();
-			
-			/*sql="select max(num) from travel";
-			ps=con.prepareStatement(sql);
-			rs=ps.executeQuery();
-			if(rs.next()){
-				num=rs.getInt(1)+1;
-			}else{
-				num=1;
-			}*/
 			
 			sql = "insert into travel(type,country_code,city_code,name,latitude,longitude,info,address)"
 					+ "values(?,?,?,?,?,?,?,?)";
@@ -69,6 +61,48 @@ public class TravelAdminDAO {
 			}
 		}
 		
+	}
+	
+	// 관광지 정보 가져오기(하나)
+	public TravelBean getTravelBean(int travel_id) {
+		
+		TravelBean tb = new TravelBean();
+		
+		try {
+
+			con = getConnection();
+			
+			sql = "select * from travel where travel_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, travel_id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				tb.setAddress(rs.getString("address"));
+				tb.setCity_code(rs.getString("city_code"));
+				tb.setCountry_code(rs.getString("country_code"));
+				tb.setInfo(rs.getString("info"));
+				tb.setLatitude(rs.getFloat("latitude"));
+				tb.setLongitude(rs.getFloat("longitude"));
+				tb.setName(rs.getString("name"));
+				tb.setTravel_id(travel_id);
+				tb.setType(rs.getString("type"));
+
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}try{
+			if(rs!=null) rs.close();
+			if(ps!=null) ps.close();
+			if(con!=null) con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return tb;
 	}
 	
 /*	// 아이디(이메일) 중복체크

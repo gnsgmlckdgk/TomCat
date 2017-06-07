@@ -227,7 +227,7 @@ $(document).ready(function() {
 </script>
 
 <div class="cityList">
-<h3 onclick="location.href='./TravelAdminList.td'">DB 도시 개수 :<%=count %> </h3>
+<h3 onclick="location.href='./TravelAdminList.td'">DB 관광지 개수 :<%=count %> </h3>
 
 	<!-- 국가 리스트 출력 -->
 	<table>
@@ -253,7 +253,7 @@ $(document).ready(function() {
 			<span id="showInfo<%=i%>" style="display: none"><a href="javascript:toggleInfo('<%=i%>', '0');">접기</a><br><%=tb.getInfo() %></span></td>
 			
 			<td>
-				<input type = "button" name="update" value="수정" onclick="location.href='#'">
+				<input type = "button" name="update" value="수정" onclick="location.href='./TravelAdminUpdate.td?pageNum?pageNume=<%=pageNum%>&travel_id=<%=tb.getTravel_id()%>'">
 <%-- 				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'"> --%>
 				<input type = "button" name="delete" value="삭제" onclick="">
 <%-- 				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=tb.getCity_code()%>');"> --%>
@@ -276,7 +276,7 @@ $(document).ready(function() {
 	<div class="clear"></div>
 	
 	<!-- 국가 추가 버튼 -->
-	<input type="button" onclick="location.href='./TravelAdminWriteAction.td'" value="여행지 추가하기" class="addCityBtn">
+	<input type="button" onclick="location.href='./TravelAdminWriteAction.td'" value="관광지 추가하기" class="addCityBtn">
 	
 	<!-- 페이지 출력 -->
 	<div class="page">

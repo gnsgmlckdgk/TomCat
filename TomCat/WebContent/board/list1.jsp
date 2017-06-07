@@ -12,7 +12,7 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=1" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=3" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>

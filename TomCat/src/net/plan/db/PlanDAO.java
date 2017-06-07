@@ -319,12 +319,9 @@ public class PlanDAO {
 		try {
 			con = getConnection();
 
-			// country_code 값 가져오기
 			sql = "select * from city";
 			pstmt = con.createStatement();
 			rs = pstmt.executeQuery(sql);
-
-			
 			
 			while (rs.next()) {
 				pcb = new PlanCityBean();
@@ -356,9 +353,9 @@ public class PlanDAO {
 		return cityList;
 	}
 
-	// 국가페이지의 도시리스트 전체 가져오기
+	// 국가페이지의 도시리스트 전체 가져오기(이름으로)
 	public List<PlanCityBean> getCityList(String str) {
-
+		
 		String country_code = "";
 		List<PlanCityBean> list = new ArrayList<PlanCityBean>();
 
@@ -420,6 +417,52 @@ public class PlanDAO {
 		return list;
 	}
 
+	// 국가페이지의 도시리스트 전체 가져오기(국가코드로)
+			public List<PlanCityBean> getCityList2(String country_code) {
+				
+				List<PlanCityBean> cityList = new ArrayList<PlanCityBean>();
+				PlanCityBean pcb = null;
+				PreparedStatement pstmt = null;
+				
+				try {
+					con = getConnection();
+					
+					sql = "select * from city where country_code = ?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, country_code);
+					
+					rs = pstmt.executeQuery();
+					
+					while (rs.next()) {
+						pcb = new PlanCityBean();
+
+						pcb.setCity_code(rs.getString("city_code"));
+						pcb.setName(rs.getString("name"));
+						pcb.setEn_name(rs.getString("en_name"));
+						pcb.setInfo(rs.getString("info"));
+						pcb.setCountry_code(rs.getString("country_code"));
+
+						cityList.add(pcb);
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if (rs != null)
+							rs.close();
+						if (pstmt != null)
+							pstmt.close();
+						if (con != null)
+							con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+				return cityList;
+			}
+	
 	// 국가페이지의 도시리스트 가져오기
 	public List<PlanCityBean> getCityList(String str, int startRow, int pageSize) {
 
@@ -493,6 +536,7 @@ public class PlanDAO {
 		List<PlanCityBean> list = new ArrayList<PlanCityBean>();
 
 		String nation = str;
+	
 		if ("한국".equals(nation)) {
 			nation = "대한민국";
 		}
@@ -722,7 +766,8 @@ public class PlanDAO {
 
 			while (rs.next()) {
 				tb = new PlanTravelBean();
-
+				
+				tb.setTravel_id(rs.getInt("travel_id"));
 				tb.setConuntry_code(rs.getString("country_code"));
 				tb.setName(rs.getString("name"));
 				tb.setInfo(rs.getString("info"));
