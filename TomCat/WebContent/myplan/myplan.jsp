@@ -235,8 +235,7 @@
 						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 --> --%>
 						<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
 						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
-						<td><%=mpbb.getMyplans_id()%></td>
-						<td><a href="./MyPlanBasketDelete.pln?myplans_id=<%=mpbb.getMyplans_id()%>">삭제</a></td>
+						<td><a href="./MyPlanBasketDelete.pln?myplans_id=<%=mpbb.getMyplans_id()%>">삭제</a></td><!-- 찜 리스트 삭제 버튼 -->
 						<%
 						if(Integer.parseInt(plan_nr)!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
 							%>
@@ -394,7 +393,7 @@ $(window).load(function() {
    }
    
    
-   function gou(argSel,argRes) {
+   function gou(argSel,argRes,argPlan_nr,plan, day_nr, dn) {
          formSel = eval("document.reg."+argSel);
          
                  if(!formSel.value)
@@ -425,11 +424,11 @@ $(window).load(function() {
          
          formSel.value=formSel.options[prevIndex].value;
          
-         get_result(argSel,argRes);
+         get_result(argSel,argRes,argPlan_nr,plan, day_nr, dn);
    }
 
    
-   function god(argSel,argRes) {
+   function god(argSel,argRes,argPlan_nr,plan, day_nr, dn) {
          formSel                = eval("document.reg."+argSel);
          
                  if(!formSel.value)
@@ -457,7 +456,7 @@ $(window).load(function() {
          
          formSel.value=formSel.options[prevIndex].value;
          
-         get_result(argSel,argRes);
+         get_result(argSel,argRes,argPlan_nr,plan, day_nr, dn);
    }
 
    

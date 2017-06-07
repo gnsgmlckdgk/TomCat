@@ -11,8 +11,8 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<link href="./assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 
-<link href="./assets/css/list.css?ver=3" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
@@ -218,9 +218,9 @@
 					
 				</div>
 				<div class="upde">				
-<input type="button" value="글수정"
+<input type="button" value="수정"
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
-<input type="button" value="글삭제"
+<input type="button" value="삭제"
 onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
 <%-- <%} %> --%>
 <input type="button" value="댓글"  class="re" >   
@@ -253,15 +253,15 @@ if(count!=0){
 	// 끝페이지 번호 구하기  
 	//이전
 	if(startPage>pageBlock){
-		%><a href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>">[이전]</a><%
+		%><a href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>" style="text-decoration:none; color:black;">[이전]</a><%
 	}
 	// 1..10  11..20  21...30
 	for(int i=startPage;i<=endPage;i++){
-		%><a href="./BoardList1.bb?pageNum=<%=i%>">[<%=i%>]</a><%
+		%><b><a href="./BoardList1.bb?pageNum=<%=i%>" style="text-decoration:none; color:black;">『<%=i%>』</a></b><%
 	}
 	// 다음
 	if(endPage < pageCount){
-		%><a href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>">[다음]</a><%
+		%><a href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>" style="text-decoration:none; color:black;">[다음]</a><%
 	}
 }
 %>
@@ -271,7 +271,7 @@ if(count!=0){
 
 <%if(id!=null){ %>
 
-	<div id="chat"></div>
+	<div id="chat">
  
 		<script type="text/javascript">
 	   //  채팅을 불러온다.
@@ -290,7 +290,7 @@ if(count!=0){
 
  		</script>
 		<%} %>
-
+</div>
 <!-- 댓글 슬라이드 -->
 <script type="text/javascript">
 $(".re").click(function(){
@@ -301,6 +301,7 @@ $(".re").click(function(){
 	   }
 });
 </script> 
-<!-- Footer --> <jsp:include page="../inc/footer.jsp" />
+<!-- Footer -->
+ <jsp:include page="../inc/footer.jsp" />
 </body>     
 </html>

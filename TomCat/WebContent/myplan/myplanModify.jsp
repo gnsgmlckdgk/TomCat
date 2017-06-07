@@ -155,7 +155,7 @@ table td {
 						type="reset" value="다시등록"></td>
 
 				</tr>
-<input type="hidden" value="<%=diff_day %>" name="diff_day">
+				<input type="hidden" value="<%=diff_day %>" name="diff_day">
 			</table>
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
@@ -194,8 +194,14 @@ table td {
 					if (diff_day != 0) {
 						for (int i = 1; i <= diff_day; i++) {
 				%>
-
-
+							
+							<!--
+							
+							 plan_nr 여행종류 A,B
+							day_nr 몇일 차 
+							item_nr 몇번째
+							
+							 -->
 
 
 				<div class="inner_x_wrap" style="border:1px solid blue">
@@ -227,9 +233,9 @@ table td {
 					
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '
-							onclick="gou('b<%=i%>','res<%=i%>')">&nbsp; <br>
+							onclick="gou('b<%=i%>','res<%=i%>', 'plan_nr<%=i %>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp; <br>
 						&nbsp; <input class=button type=button value=' ↓ '
-							onclick="god('b<%=i%>','res<%=i%>')">&nbsp;
+							onclick="god('b<%=i%>','res<%=i%>', 'plan_nr<%=i %>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
 					</div>
 				</div>
 
