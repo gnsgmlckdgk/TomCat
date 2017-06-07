@@ -19,15 +19,15 @@ BoardBean bb = (BoardBean)request.getAttribute("bb");
 String pageNum = (String)request.getAttribute("pageNum");
 
 %>
-
+<div class="update1">
 <form action="./BoardUpdateAction1.bb?pageNum=<%=pageNum%>" method="post" name="fr">
 <input type="hidden" name="num" value="<%=bb.getNum()%>">
 <b>글쓴이:<input type="text" name="name" value="<%=bb.getNick_name()%>"><br></b>
-<b>비밀번호:<input type="password" name="pass"><br></b>
 <b>제목:<input type="text" name="subject" value="<%=bb.getSubject()%>"><br></b>
 <b>내용:<textarea rows="10" cols="20" name="content"><%=bb.getContent() %></textarea><br></b>
 <input type="submit" value="글수정">
 </form>
+</div>
 </body>
 </html>
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />

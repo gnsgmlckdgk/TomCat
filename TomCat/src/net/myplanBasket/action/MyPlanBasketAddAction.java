@@ -39,11 +39,11 @@ public class MyPlanBasketAddAction implements Action {
 		
 
 		if (request.getParameter("plan_nr") != null) {
-			basketbean.setPlan_nr(Integer.parseInt(request.getParameter("plan_nr")));
-			basketbean.setItem_nr(Integer.parseInt(request.getParameter("item_nr")));
+			basketbean.setPlan_nr(request.getParameter("plan_nr"));
+			basketbean.setItem_nr(request.getParameter("item_nr"));
 			basketbean.setFirstday(request.getParameter("firstday"));
 			basketbean.setLastday(request.getParameter("lastday"));
-			basketbean.setDay_nr(Integer.parseInt(request.getParameter("day_nr")));
+			basketbean.setDay_nr(request.getParameter("day_nr"));
 			basketbean.setDay_night(request.getParameter("day_night"));
 			basketbean.setUser_lat(Float.parseFloat(request.getParameter("user_lat")));
 			basketbean.setUser_lng(Float.parseFloat(request.getParameter("user_lng")));
