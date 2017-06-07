@@ -352,6 +352,7 @@ public class MyPlanBasketDAO {
 			while (rs.next()) {
 				MyPlanBasketBean mpbb = new MyPlanBasketBean();
 				
+				mpbb.setMyplans_id(rs.getInt("myplans_id"));	
 				mpbb.setId(rs.getString("id"));
 				mpbb.setPlan_nr(rs.getInt("plan_nr"));
 				mpbb.setTravel_id(rs.getInt("travel_id"));
@@ -481,6 +482,33 @@ public class MyPlanBasketDAO {
 		}
 	}
 
+	//바구니 삭제하기 
+	public void basketDelete(int myplans_id){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		try {
+			//1,2 디비연결
+			con=getConnection();
+			//3 sql plan_nr 에 해당하는 장바구니 삭제
+			System.out.println(myplans_id);
+			sql="delete from myplans where myplans_id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, myplans_id);
+			//4 실행
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null)try{rs.close();}catch(SQLException ex){}
+			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+			if(con!=null)try{con.close();}catch(SQLException ex){}
+		}
+	}
+	
+	
+	
 	public MyPlanBasketBean get(int myplans_id) {
 		// TODO Auto-generated method stub
 		Connection con = null;

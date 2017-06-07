@@ -21,15 +21,16 @@ public class MyPlanBasketDeleteAction implements Action{
 			forward.setPath("./MemberLogin.me");
 			return forward;
 		}
-		// b_num 가져오기
-		int b_num=Integer.parseInt(request.getParameter("b_num"));
+		//  가져오기
+		int myplans_id =Integer.parseInt(request.getParameter("myplans_id"));
 		// 디비객체 생성 basketdao
+		System.out.println("basket삭제 확인");
 		MyPlanBasketDAO basketdao=new MyPlanBasketDAO();
 		//메서드호출 basketDelete(b_num)
-		//basketdao.basketDelete(b_num);
+		basketdao.basketDelete(myplans_id);
 		//이동 ./BasketList.ba
 		forward.setRedirect(true);
-		forward.setPath("./BasketList.ba");
+		forward.setPath("./MyPlan.pln?plan_nr=100");
 		return forward;
 	}
 }
