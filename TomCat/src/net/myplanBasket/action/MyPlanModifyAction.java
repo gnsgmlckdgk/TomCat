@@ -45,32 +45,17 @@ public class MyPlanModifyAction implements Action {
 			plan_nr[i - 1] = request.getParameter("plan_nr" + i);
 			day_nr[i - 1] = request.getParameter("day_nr" + i);
 		}
+		
 
-		String final_plan_nr = null;
-		String final_day_nr = null;
 
 		for (int i = 0; i < diff_day; i++) {
 
 			// 잘들어왔는지 확인하는 곳
-//			System.out.println("b[" + i + "] " + b[i]);
-//			System.out.println("plan_nr[" + i + "] " + plan_nr[i]);
-//			System.out.println("day_nr[" + i + "] " + day_nr[i]);
+			System.out.println("b[" + i + "] " + b[i]);
+			System.out.println("plan_nr[" + i + "] " + plan_nr[i]);
+			System.out.println("day_nr[" + i + "] " + day_nr[i]);
 
-			if (final_plan_nr == null) {
-				final_plan_nr = plan_nr[i];
-			} else {
-				final_plan_nr = final_plan_nr + "@" + plan_nr[i];
-			}
-			
-			if (final_day_nr == null) {
-				final_day_nr = day_nr[i];
-			} else {
-				final_day_nr = final_day_nr + "@" + day_nr[i];
-			}
-			
-			
-			System.out.println(final_plan_nr);
-			System.out.println(final_day_nr);
+
 
 		}
 
