@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-	background-image: url("../../../images/instagram/beach.jpg");
+	background-image: url("../../../images/instagram/goldengate.jpg");
 	background-attachment: fixed;
 	background-position: center top;
 	background-size: cover;
@@ -25,7 +25,7 @@ body {
 #banner {
 	border-radius:10px;
 	text-align: left;
-	width:9em;
+	width:10em;
 	background-color: white;
 	position: absolute;
 	top: 150px;
@@ -63,7 +63,7 @@ background-color: rgba(77, 77, 77,0.3);
 }
 
 #tdsize {
-	width: 250px;
+	width:160px;
 }
 
 #table1 td {
