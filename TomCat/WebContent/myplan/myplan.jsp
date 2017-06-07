@@ -235,7 +235,8 @@
 						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 --> --%>
 						<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
 						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
-						
+						<td><%=mpbb.getMyplans_id()%></td>
+						<td><a href="./MyPlanBasketDelete.pln?myplans_id=<%=mpbb.getMyplans_id()%>">삭제</a></td>
 						<%
 						if(Integer.parseInt(plan_nr)!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
 							%>
@@ -261,12 +262,14 @@
 						}
 						%>
 					</tr>	
+					
 						<%
 						}
 
 					%>
+					
 					</tbody>
-
+				
 				</table>
 
 			
@@ -279,6 +282,7 @@
 			<%
 				}
 			%>
+			
 		</div>
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
