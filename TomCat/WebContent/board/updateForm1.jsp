@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body id="upBody">
 <%
 BoardBean bb = (BoardBean)request.getAttribute("bb");
 String pageNum = (String)request.getAttribute("pageNum");

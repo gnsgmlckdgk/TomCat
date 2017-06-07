@@ -32,7 +32,7 @@
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
-<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(255,215,247,0.89)"></div>
+<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(206,223,251,0.8)"></div>
 
 <%if(gold.equals("유료회원")){ %>
 <div style="background-color: white; max-width: 20em;">
@@ -244,7 +244,7 @@
 			
 			//	서버에 보낼때 날아가는 값.
 			webSocket.send("<%=nick%>|\|" + inputMessage.value);
-			
+					
 			// 채팅화면 div에 붙일 내용
 			var div=document.createElement('div');
 			
@@ -253,10 +253,13 @@
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="rgba(255, 0, 0, 0.15)";
+			div.style["background-color"]="rgba(255, 255, 255, 0.95)";
 			div.style["padding"]="3px";
-			div.style["border-radius"]="3px";
+			div.style["border-radius"]="30px";
 			div.style["margin-right"]="3px";
+			div.style["margin-top"]="8px";
+			
+			
 
 			//input message를 secret_msg에 넣어서 귓속말인지 판별하도록 한다.
 			var secret_msg = (inputMessage.value).split(" ");

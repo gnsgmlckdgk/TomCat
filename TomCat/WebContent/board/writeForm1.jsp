@@ -5,7 +5,6 @@
 <jsp:include page="../inc/header.jsp" />
 <section class="wrapper">
 
-
 <head>
 
 <%
@@ -17,11 +16,12 @@
 	.wide{
 		max-width: 1080px;
 		margin: auto;
+		
 	}
 </style>
 
 </head>
-
+<body id="wrBody">
 
 	<div class="wide">
 
@@ -72,3 +72,5 @@
 	
 
 <!-- Footer --> <jsp:include page="../inc/footer.jsp" />
+</section>
+</body>

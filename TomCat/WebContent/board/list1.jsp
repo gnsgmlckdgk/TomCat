@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
 </head>
 
-<body class="fadein"  id="ima">
+<body class="fadein"  id="ima" >
 
 <jsp:include page="../inc/header.jsp" />
 
@@ -27,7 +27,7 @@
 
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
-		<img src="./board/rrr6.png">
+		<img src="./board/up.png">
 	</button>
 
 	<script type="text/javascript">
@@ -156,8 +156,8 @@
 				<div id="2_inner_left" style="width: 30%;">
 					<!-- 프로필 -->
 					<div id="file">
-						<img src="./upload/images/profileImg/basic/man.png">
-						<%-- 					<img src="./upload/images/profileImg/<%=mb.getProfile()%>"> --%>
+						<img src="./upload/images/profileImg/pl.png">
+<%-- 											<img src="./upload/images/profileImg/<%=mb.getProfile()%>"> --%>
 					</div>
 
 					<!-- 닉네임,날짜 -->
@@ -241,7 +241,7 @@ onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNu
 		</div>
 	</div>
 
-
+<div id="page1">
 <%
 //페이지 출력
 if(count!=0){
@@ -265,28 +265,28 @@ if(count!=0){
 	}
 }
 %>
-
+</div>
 </section>
-</body>
+
 
 <%if(id!=null){ %>
 
 	<div id="chat"></div>
  
 		<script type="text/javascript">
-	     // 채팅을 불러온다.
-//       $(window).load(function() {
-//          $.ajax({
-//             type: 'post',
-//             url: './Chat.ct',
-//             success: function(data) {
-//                $('#chat').append(data);
-//             },
-//             error: function(xhr, status, error) {
-//                  alert(error);
-//              }   
-//          });
-//       });
+	   //  채팅을 불러온다.
+      $(window).load(function() {
+         $.ajax({
+            type: 'post',
+            url: './Chat.ct',
+            success: function(data) {
+               $('#chat').append(data);
+            },
+            error: function(xhr, status, error) {
+                 alert(error);
+             }   
+         });
+      });
 
  		</script>
 		<%} %>
@@ -300,6 +300,7 @@ $(".re").click(function(){
 		   $(this).parents(".e").find(".replybb").css("display","none");
 	   }
 });
-</script>      
+</script> 
+<!-- Footer --> <jsp:include page="../inc/footer.jsp" />
+</body>     
 </html>
-<!-- Footer --> <jsp:include page="../inc/footer.jsp" />.21
