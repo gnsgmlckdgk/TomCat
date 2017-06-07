@@ -140,6 +140,7 @@ table td {
 						type="date" name="fromDate" id="fromDate" required="required">
 						<br> 도착일 : <input type="date" name="toDate" id="toDate"
 						required="required">
+						
 					</td>
 					<%
 						}
@@ -154,7 +155,7 @@ table td {
 						type="reset" value="다시등록"></td>
 
 				</tr>
-
+<input type="hidden" value="<%=diff_day %>" name="diff_day">
 			</table>
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
