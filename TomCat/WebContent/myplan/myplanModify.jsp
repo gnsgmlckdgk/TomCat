@@ -194,8 +194,14 @@ table td {
 					if (diff_day != 0) {
 						for (int i = 1; i <= diff_day; i++) {
 				%>
-
-
+							
+							<!--
+							
+							 plan_nr 여행종류 A,B
+							day_nr 몇일 차 
+							item_nr 몇번째
+							
+							 -->
 
 
 				<div class="inner_x_wrap" style="border:1px solid blue">

@@ -352,7 +352,7 @@ public class MyPlanBasketDAO {
 			while (rs.next()) {
 				MyPlanBasketBean mpbb = new MyPlanBasketBean();
 				
-				mpbb.setMyplans_id(rs.getInt("myplans_id"));	
+				
 				mpbb.setId(rs.getString("id"));
 				mpbb.setMyplans_id(rs.getInt("myplans_id"));
 				mpbb.setPlan_nr(rs.getString("plan_nr"));
@@ -483,6 +483,122 @@ public class MyPlanBasketDAO {
 		}
 	}
 
+	
+	
+	
+	
+	// getBasketList_Plan_nr()
+	public Vector getBasketList_Plan_nr(MyPlanBasketBean mpbb) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		
+		String sql = "";
+		Vector vector1 = new Vector();
+		List basketList1 = new ArrayList();
+		List goodsList1 = new ArrayList();
+
+		try {
+			// 1,2 디비연결
+			con = getConnection();
+			// 3 sql id에 해당하는 장바구니 정보 가져오기
+			sql = "select * from myplans where id=? and plan_nr=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mpbb.getId());
+			pstmt.setString(2, mpbb.getPlan_nr());
+			// 4 rs 실행 저장
+			rs = pstmt.executeQuery();
+			// 5 rs 데이터 있으면 장바구니 자바빈 객체 생성
+			// rs => 자바빈 저장 =>basketList 배열한칸 저장
+			// rs => b_g_num
+			// 3 sql b_g_num 해당하는 상품정보가져오기
+			// 4 rs2 pstmt2 실행저장
+			// 5 rs2데이터 있으면 상품 자바빈 객체 생성
+			// rs2=>자바빈 저장 => goodsList한칸 저장
+			while (rs.next()) {
+				MyPlanBasketBean mpbb1 = new MyPlanBasketBean();
+				
+				mpbb1.setId(rs.getString("id"));
+				mpbb1.setMyplans_id(rs.getInt("myplans_id"));
+				mpbb1.setPlan_nr(rs.getString("plan_nr"));
+				mpbb1.setTravel_id(rs.getInt("travel_id"));
+				mpbb1.setItem_nr(rs.getString("item_nr"));
+				mpbb1.setFirstday(rs.getString("firstday"));
+
+				mpbb1.setLastday(rs.getString("lastday"));
+				mpbb1.setDay_nr(rs.getString("day_nr"));
+				mpbb1.setDay_night(rs.getString("day_night"));
+				mpbb1.setUser_lat(rs.getFloat("user_lat"));
+				mpbb1.setUser_lng(rs.getFloat("user_lng"));
+
+				mpbb1.setDate(rs.getString("date"));
+				mpbb1.setMemo(rs.getString("memo"));
+				mpbb1.setPlan_done_nr(rs.getInt("plan_done_nr"));
+
+				basketList1.add(mpbb1);
+
+				sql = "select * from travel where travel_id=?";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1, mpbb1.getTravel_id());
+				rs2 = pstmt2.executeQuery();
+				
+				if (rs2.next()) {
+					
+					TravelBean tb = new TravelBean();
+					
+					tb.setType(rs2.getString("type"));
+					tb.setCountry_code(rs2.getString("country_code"));
+					tb.setCity_code(rs2.getString("city_code"));
+					tb.setName(rs2.getString("name"));
+					tb.setLatitude(rs2.getFloat("latitude"));
+					
+					tb.setTravel_id(rs2.getInt("travel_id"));
+					tb.setLongitude(rs2.getFloat("longitude"));
+					tb.setInfo(rs2.getString("info"));
+					tb.setAddress(rs2.getString("address"));
+					
+					goodsList1.add(tb);
+				}
+
+			}
+			// vector 첫번째 칸 basketList 저장
+			// vector 두번째 칸 goodsList 저장
+			vector1.add(basketList1);
+			vector1.add(goodsList1);
+			System.out.println("basketList.size" + basketList1.size());
+			System.out.println("goodsList.size" + goodsList1.size());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+		}
+		return vector1;
+
+	}
+
+	
+	
+	
+	
+	
 	//바구니 삭제하기 
 	public void basketDelete(int myplans_id){
 		Connection con=null;
