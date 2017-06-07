@@ -1,4 +1,4 @@
-<%-- <%@page import="net.QandA.db.QandABean"%>
+<%@page import="net.QandA.db.QandABean"%>
 <%@page import="java.util.List"%>
 <%@page import="net.member.db.MemberBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,7 +17,7 @@ if(pageNum==null) {	// 처음 시작시 무조건 1페이지
 	pageNum = "1";
 }
 int currentPage = Integer.parseInt(pageNum);
-int count = mbdao.getQandAcount(nick);
+int count = mbdao.getQandAcction(nick);
 int pageSize = 5;
 int startRow = (currentPage - 1) * pageSize + 1;
 
@@ -27,6 +27,27 @@ if(count != 0) {
 }
 
 %>
+<script type="text/javascript">
+	function deleteCheck_qna(num) {
+		var check = confirm("글을 삭제하시겠습니까?");
+		if(check==true) {
+			$.ajax({
+				type : "GET",
+				url : "./QandADeleteAction.qna?num="+num,
+				data : {num : num},
+				async: false,
+				success : function(data) {
+					alert("삭제되었습니다.");
+					location.reload(true);
+				},
+				error : function(xhr, status, error) {
+					alert(status+", "+error);
+				}
+			});
+		}
+	}
+</script>
+
 <table>
 <tr>
 	<th>글 번호</th><th>제목</th><th>작성한 날짜</th><th>관리</th>
@@ -46,7 +67,10 @@ if(count == 0) {
 		qab = list.get(i);
 		%>
 		<tr>
-			<td><%= %></td><td><%= %></td><td><%= %></td><td><a href="#">삭제</a></td>
+			<td><%=qab.getNum() %></td>
+			<td onclick="location.href='./QandAContentAction.qna?num=<%=qab.getNum() %>&pageNum=1';"><%=qab.getSubject() %></td>
+			<td><%=qab.getDate() %></td>
+			<td><a href="javascript:deleteCheck_qna(<%=qab.getNum()%>)">삭제</a></td>
 		</tr>
 		<%
 	}
@@ -132,4 +156,4 @@ if(count == 0) {
 			%>
 		</div>
 	<%
-}%> --%>
+}%>
