@@ -52,7 +52,7 @@ public class MyPlanModifyAction implements Action {
 		// 메서드호출 
 		mpbd.modifyMyPlan(mpbb);
 
-		Vector vector1= mpbd.getBasketList_Plan_nr(mpbb);
+		/*Vector vector1= mpbd.getBasketList_Plan_nr(mpbb);
 	
 		List basketList1=(List)vector1.get(0);
 		List goodsList1=(List)vector1.get(1);
@@ -89,7 +89,7 @@ public class MyPlanModifyAction implements Action {
 					System.out.println(st2.nextToken());
 				}
 			}
-
+*/
 	
 		
 		
