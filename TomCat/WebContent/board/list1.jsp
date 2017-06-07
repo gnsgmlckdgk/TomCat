@@ -12,7 +12,7 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=1" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=7" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
@@ -271,7 +271,7 @@ if(count!=0){
 
 <%if(id!=null){ %>
 
-	<div id="chat"></div>
+	<div id="chat">
  
 		<script type="text/javascript">
 	   //  채팅을 불러온다.
@@ -290,7 +290,7 @@ if(count!=0){
 
  		</script>
 		<%} %>
- 
+</div>
 <!-- 댓글 슬라이드 -->
 <script type="text/javascript">
 $(".re").click(function(){
@@ -301,6 +301,7 @@ $(".re").click(function(){
 	   }
 });
 </script> 
-<!-- Footer --> <jsp:include page="../inc/footer.jsp" />
+<!-- Footer -->
+ <jsp:include page="../inc/footer.jsp" />
 </body>     
 </html>
