@@ -116,7 +116,7 @@
             		 
             		<delete file="${build.dir}/META-INF/context.xml"/>
             		<copy todir="${build.dir}/META-INF">
-            		             	 	   <fileset dir="${build.dir}/META-INF/temp/context.xml" />
+            		             	 	   <fileset dir="${build.dir}/META-INF/temp/" />
             		 </copy>
             		<mkdir dir="${dist.dir}"/>       
                     <jar destfile="${war.file}" basedir="${build.dir}" />
