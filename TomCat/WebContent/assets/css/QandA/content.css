@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 body {
-	background-image: url("../../../images/instagram/goldengate.jpg");
+	background-image: url("../../../images/instagram/beach.jpg");
 	background-attachment: fixed;
 	background-position: center top;
 	background-size: cover;
@@ -9,8 +9,9 @@ body {
 }
 
 #combine{
+	border:1px solid red;
 	margin: auto; 
-	width: 80em;
+	width: 1400px;
 	height: 40em;
 	position: relative;
 }

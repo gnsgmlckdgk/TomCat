@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.images.db.ImagesBean;
+import net.images.db.ImagesDAO;
 import net.plan.db.PlanCityBean;
 import net.plan.db.PlanDAO;
 import net.plan.db.PlanSouvenirBean;
@@ -23,12 +25,13 @@ public class PlanSpot implements Action{
 		String travel = request.getParameter("travel");
 	
 		PlanDAO pdao = new PlanDAO();
+		ImagesDAO idao = new ImagesDAO();
 		
 		/*해당 장소 가져오기*/
 		PlanTravelBean ptb = pdao.getTravel(travel);
 		
 		/*해당장소에 맞는 이미지 가져오기  */
-		List spotimagelist = pdao.getSpotImages(ptb.getTravel_id());
+		ImagesBean ib = idao.getIsSpotImage(ptb.getTravel_id());
 		
 		/*해당 장소 선물 리스트*/
 		List<PlanSouvenirBean> souvenirList = pdao.getSouvenirList(ptb.getCity_code());
@@ -39,6 +42,7 @@ public class PlanSpot implements Action{
 		request.setAttribute("pcb", pcb);
 		request.setAttribute("ptb", ptb);
 		request.setAttribute("souvenirList", souvenirList);
+		request.setAttribute("ib", ib);
 		
 		forward = new ActionForward();
 		forward.setRedirect(false);

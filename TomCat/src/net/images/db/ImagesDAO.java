@@ -385,4 +385,46 @@ public class ImagesDAO {
 		
 	}
 	
+	/*관광지 이미지 가져오기(관광지 페이지에서 필요)*/
+public ImagesBean getIsSpotImage(int travel_id) {
+		
+		ImagesBean ib = null;
+		try {
+			con = getConnection();
+			
+			sql = "select * from images where travel_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, travel_id);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				ib = new ImagesBean();
+				ib.setNum(rs.getInt("num"));
+				ib.setCountry_code(rs.getString("city_code"));
+				ib.setCity_code(rs.getString("city_code"));
+				ib.setTravel_id(rs.getInt("travel_id"));
+				ib.setType(rs.getString("type"));
+				ib.setName(rs.getString("name"));
+				ib.setInfo(rs.getString("info"));
+				ib.setFile(rs.getString("file"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return ib;
+		
+	}
+	
 }
