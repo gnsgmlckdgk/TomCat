@@ -85,7 +85,7 @@ public class TravelListAction implements Action{
 		request.setAttribute("travelList", travelList);
 		
 		forward = new ActionForward();
-		forward.setPath("./plan/travelList.jsp");
+		forward.setPath("./TravelAdmin/travelList.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

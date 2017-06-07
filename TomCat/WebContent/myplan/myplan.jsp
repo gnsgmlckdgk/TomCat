@@ -393,7 +393,7 @@ $(window).load(function() {
    }
    
    
-   function gou(argSel,argRes) {
+   function gou(argSel,argRes,argPlan_nr,plan, day_nr, dn) {
          formSel = eval("document.reg."+argSel);
          
                  if(!formSel.value)
@@ -424,11 +424,11 @@ $(window).load(function() {
          
          formSel.value=formSel.options[prevIndex].value;
          
-         get_result(argSel,argRes);
+         get_result(argSel,argRes,argPlan_nr,plan, day_nr, dn);
    }
 
    
-   function god(argSel,argRes) {
+   function god(argSel,argRes,argPlan_nr,plan, day_nr, dn) {
          formSel                = eval("document.reg."+argSel);
          
                  if(!formSel.value)
@@ -456,7 +456,7 @@ $(window).load(function() {
          
          formSel.value=formSel.options[prevIndex].value;
          
-         get_result(argSel,argRes);
+         get_result(argSel,argRes,argPlan_nr,plan, day_nr, dn);
    }
 
    

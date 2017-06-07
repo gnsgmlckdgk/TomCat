@@ -233,9 +233,9 @@ table td {
 					
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '
-							onclick="gou('b<%=i%>','res<%=i%>')">&nbsp; <br>
+							onclick="gou('b<%=i%>','res<%=i%>', 'plan_nr<%=i %>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp; <br>
 						&nbsp; <input class=button type=button value=' ↓ '
-							onclick="god('b<%=i%>','res<%=i%>')">&nbsp;
+							onclick="god('b<%=i%>','res<%=i%>', 'plan_nr<%=i %>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
 					</div>
 				</div>
 
