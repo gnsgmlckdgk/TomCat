@@ -72,7 +72,8 @@ public class MyPlanModifyAction implements Action {
 		mpbd.modifyMyPlan(mpbb);
 
 
-		/*Vector vector1= mpbd.getBasketList_Plan_nr(mpbb);
+		/*
+		Vector vector1= mpbd.getBasketList_Plan_nr(mpbb);
 	
 		List basketList1=(List)vector1.get(0);
 		List goodsList1=(List)vector1.get(1);
@@ -97,28 +98,22 @@ public class MyPlanModifyAction implements Action {
 			for (int j = 0; j < n; j++) {
 				System.out.println(st.nextToken());
 			}
+			StringTokenizer st1 = new StringTokenizer(mpbb1.getItem_nr(), "@");
+			int n1 = st1.countTokens(); // 남아있는 토큰의 개수를 반환
+			for (int j1 = 0; j1 < n1; j1++) {
+				System.out.println(st1.nextToken());
+			}
 
-*/
-	
+			StringTokenizer st2 = new StringTokenizer(mpbb1.getPlan_nr(), "@");
+			int n2 = st2.countTokens(); // 남아있는 토큰의 개수를 반환
+			for (int j2 = 0; j2 < n2; j2++) {
+				System.out.println(st2.nextToken());
+			}
+
+		}
+		*/
 		
 		
-		
-		
-
-
-//			StringTokenizer st1 = new StringTokenizer(mpbb1.getItem_nr(), "@");
-//			int n1 = st1.countTokens(); // 남아있는 토큰의 개수를 반환
-//			for (int j1 = 0; j1 < n1; j1++) {
-//				System.out.println(st1.nextToken());
-//			}
-//
-//			StringTokenizer st2 = new StringTokenizer(mpbb1.getPlan_nr(), "@");
-//			int n2 = st2.countTokens(); // 남아있는 토큰의 개수를 반환
-//			for (int j2 = 0; j2 < n2; j2++) {
-//				System.out.println(st2.nextToken());
-//			}
-//		}
-
 
 		// 이동 ./GoodsList.ag
 		ActionForward forward = new ActionForward();
