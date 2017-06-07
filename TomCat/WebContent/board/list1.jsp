@@ -290,7 +290,7 @@ if(count!=0){
 
  		</script>
 		<%} %>
-
+ 
 <!-- 댓글 슬라이드 -->
 <script type="text/javascript">
 $(".re").click(function(){
