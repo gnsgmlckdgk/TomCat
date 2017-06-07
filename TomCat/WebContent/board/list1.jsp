@@ -11,18 +11,18 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="assets/css/list.css" rel="stylesheet" type="text/css">
+<link href="assets/css/list.css?ver=9" rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
 </head>
 
-<body class="fadein" >
+<body class="fadein"  id="ima">
 
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Header -->
-<section class="together_section">
+<section id="main">
 
 	<!-- 버튼 : 위로 -->
 	<button type="button" class="btn_up_layer">
@@ -208,6 +208,11 @@
 				<%} %>
 				<!-- 수현씨 지도 부분 끝 -->
 			</div>
+<%-- 			<%if(id==null){%> --%>
+<!-- 			세션에 있는 닉값  -->
+<!-- 			글에있는 닉값 비교 -->
+			
+			
 			
 					
 				</div>
@@ -216,7 +221,7 @@
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
 <input type="button" value="글삭제"
 onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
-
+<%-- <%} %> --%>
 <input type="button" value="댓글"  class="re" >   
 
 </div>
@@ -269,18 +274,18 @@ if(count!=0){
  
 		<script type="text/javascript">
 	     // 채팅을 불러온다.
-      $(window).load(function() {
-         $.ajax({
-            type: 'post',
-            url: './Chat.ct',
-            success: function(data) {
-               $('#chat').append(data);
-            },
-            error: function(xhr, status, error) {
-                 alert(error);
-             }   
-         });
-      });
+//       $(window).load(function() {
+//          $.ajax({
+//             type: 'post',
+//             url: './Chat.ct',
+//             success: function(data) {
+//                $('#chat').append(data);
+//             },
+//             error: function(xhr, status, error) {
+//                  alert(error);
+//              }   
+//          });
+//       });
 
  		</script>
 		<%} %>

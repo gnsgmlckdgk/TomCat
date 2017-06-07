@@ -25,12 +25,17 @@
 	
 }
 
-section .together_section {
-	background-image: url("../../images/kk.jpg");
-	background-repeat: no-repeat;
+#ima{
+	background-image: url("../../../images/instagram/goldengate.jpg");
 	background-attachment: fixed;
-	width: 1080px;
-	border: 1px solid red;
+	background-position: center top;
+	background-size: cover;
+	line-height: 1.75;
+	text-align: center;
+}
+
+#main{
+	max-width:1080px;
 }
 
 .btn_up_layer {
@@ -67,8 +72,8 @@ section .together_section {
 }
 
 #con {
-	
 	width: 70%;
+	text-align:left;
 	padding-top : 1em;
 	float: right;
 	position: relative;
@@ -202,12 +207,14 @@ to {
 .up{
 	margin-top: 300px;
 	opcity:0.85;
+	font-size: 0.8em;
 }
 .up:hover{
 	background-color:#E91E63;
 }
 .de{
 	opcity:0.85;
+	font-size: 0.8em;
 }
 
 .de:hover{
@@ -221,4 +228,10 @@ to {
 }
 .re:hover{
 	background-color:#E91E63;
+}
+.form1{
+	border-right: 30px;
+}
+.update1{
+	
 }
