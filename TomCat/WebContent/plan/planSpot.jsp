@@ -33,6 +33,7 @@
 %>
 
 <script type="text/javascript">
+var toggleBtn = 0;
 	$(document).ready(function(){
 
 		$('input.month').click(function(){
@@ -68,6 +69,37 @@
 		
 			
 		});
+		
+		$('#writeBtn').click(function(){
+			if(toggleBtn==0) {
+				$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
+				$('.reviewWriterDiv').css('display', 'inline-block');
+				
+				toggleBtn = 1;
+			}else {
+				$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
+				setTimeout(function(){
+					$('.reviewWriterDiv').hide();
+				}, 700)
+				toggleBtn = 0;
+			}
+		});
+		
+
+		/* 최초 리뷰 리스트 가져오기 */
+		$.ajax({
+			type: 'post',
+			url: './plan/planComment/planSpotCommentList.jsp',
+			data : {spot:'<%=ptb.getName()%>'},
+			success: function(data) {
+				$('div.comment .review_list').empty();
+				$('div.comment .review_list').append(data);
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+		    } 
+		});
+		
 	});
 
 	/* 처음 화면 */
@@ -195,11 +227,11 @@
     	<input id="daumSearch" type="hidden" value="<%=pcb.getName()%> 여행 <%=ptb.getName() %>" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
 	</div>
 	
-        <div id="daumBlog" style="border: 1px solid red;display:none;"></div> <!-- 블로그 후기 나타나는 div -->
+       <div id="daumBlog" style="display:none;"></div> <!-- 블로그 후기 나타나는 div -->
 		
 		
 		<!-- 후기 작성 추가 -->
-		<div id="Spot_epilogue" style="width: 1000px; height: 500px; border: 1px solid blue; ">
+		<div id="Spot_epilogue" style="width: 1000px; height: 500px;">
 			<div class="comment">
 				<div class="comment_right">
 					<%
@@ -251,40 +283,12 @@
 		<!-- 후기작성 스크립트 -->	
 			<script type="text/javascript">
 
-			var toggleBtn = 0;
+		/* 
 			$(document).ready(function(data){
-				/* 리뷰 작성 버튼 */
-				$('#writeBtn').click(function(){
-					if(toggleBtn==0) {
-						$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
-						$('.reviewWriterDiv').css('display', 'inline-block');
-						
-						toggleBtn = 1;
-					}else {
-						$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
-						setTimeout(function(){
-							$('.reviewWriterDiv').hide();
-						}, 700)
-						toggleBtn = 0;
-					}
-				});
+				/* 리뷰 작성 버튼 
 				
-
-				/* 최초 리뷰 리스트 가져오기 */
-				$.ajax({
-					type: 'post',
-					url: './plan/planComment/planRegionCommentList.jsp',
-					data : {spot:'<%=ptb.getName()%>'},
-					success: function(data) {
-						$('div.comment .review_list').empty();
-						$('div.comment .review_list').append(data);
-					},
-					error: function(xhr, status, error) {
-						alert(error);
-				    } 
-				});
 			});
-			
+			 */
 			/* 리뷰 작성완료 DB작업 */
 			function writeComplete() {
 				var con = $('textarea').val();
@@ -300,7 +304,7 @@
 				
 				$.ajax({
 					type: 'post',
-					url: './plan/planComment/planRegionCommentWrite.jsp',
+					url: './plan/planComment/planSpotCommentWrite.jsp',
 					data : {spot:'<%=ptb.getName()%>', content : con, eval : sel},
 					async: false,
 					success: function(data) {
@@ -317,11 +321,11 @@
 			}
 			
 			/* 페이징 변경이나 다른 작업 후 다시 리뷰 리스트를 로딩할때 */
-			function regionCommentList(pageNum) {
+			function spotCommentList(pageNum) {
 				$.ajax({
 					type: 'post',
-					url: './plan/planComment/planRegionCommentList.jsp',
-					data : {region:'<%=%>', pageNum : pageNum},
+					url: './plan/planComment/planSpotCommentList.jsp',
+					data : {spot:'<%=ptb.getName()%>', pageNum : pageNum},
 					success: function(data) {
 						$('div.comment .review_list').empty();
 						$('div.comment .review_list').append(data);
@@ -335,17 +339,8 @@
 			</script>
 			
 			</div>
-		
-		
-		
-		
-		
-		
-		
-		</div>
-	
+
 	<div id="daumBlogScript"></div>
-</div>
 
 
 

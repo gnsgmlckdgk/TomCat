@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/Memberintro.css?ver=2"/>	
+<link rel="stylesheet" href="./assets/css/QandA/Memberintro.css"/>	
 
 	<div id="combine">
 
