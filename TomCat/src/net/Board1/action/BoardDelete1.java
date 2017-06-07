@@ -16,9 +16,7 @@ public class BoardDelete1 implements Action1 {
 
 		int num = Integer.parseInt(request.getParameter("num"));
 
-		String pass = request.getParameter("pass");
-
-		int check = bdao.deleteBoard(num, pass);
+		int check = bdao.deleteBoard(num);
 
 		if (check == 0) {
 			response.setContentType("text/html; charset=utf-8");
