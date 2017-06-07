@@ -113,8 +113,10 @@
     
     </target>
             	<target name="dist" depends="build" description="make war file from build to dist">
-            		 <copy todir="${build.dir}/META-INF">
-            		             	 	   <fileset dir="${build.dir}/META-INF/temp" />
+            		 
+            		<delete file="${build.dir}/META-INF/context.xml"/>
+            		<copy todir="${build.dir}/META-INF">
+            		             	 	   <fileset dir="${build.dir}/META-INF/temp/context.xml" />
             		 </copy>
             		<mkdir dir="${dist.dir}"/>       
                     <jar destfile="${war.file}" basedir="${build.dir}" />
