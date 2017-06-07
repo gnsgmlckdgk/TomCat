@@ -35,7 +35,7 @@
 <style>
 #reg {
 	width: 100%;
-/* 	border: 1px solid red; */
+	/* 	border: 1px solid red; */
 	font-size: 0.8em;
 }
 
@@ -47,7 +47,7 @@ tr {
 .setdate {
 	width: calc(100%/ 3);
 	margin: auto;
-/* 	border: 1px solid green; */
+	/* 	border: 1px solid green; */
 }
 
 .set_plan {
@@ -76,7 +76,6 @@ tr {
 /* .x_wrap select { */
 /* 	height: 20em; */
 /* } */
-
 .myplanContainer #pln_list select {
 	width: 100%;
 }
@@ -88,58 +87,6 @@ table td {
 </head>
 
 <body>
-
-	<script language=javascript>
-		$(function() {
-			$("#left_box2").click(function() {
-				var effect = 'slide';
-				var options = 'left';
-				var duration = 500;
-				$('#right_box').toggle(effect, options, duration);
-			});
-		});
-
-		$(function() {
-			$("#left_box2_detail").sortable();
-			$("#left_box2_detail").disableSelection();
-		});
-
-		/* 
-		 $(document).ready(function(datelist){
-		
-		 var left_box1_detail li=$(this).val();
-		 $('date').empty();
-		 $('date').append(function(){
-		
-		 });
-		 }); */
-
-		if (document.test.planMaker.selectedIndex != 0) {
-// 			alert("과목을 선택하세요");
-			document.test.se.focus();
-			return false;
-		}//if
-
-		$(document).ready(function() {
-			//name:홍길동 age:21파라미터 넘겨서
-			//string2.jsp 결과처리 내용가져오기
-			$('#testPlanner').click(function() {
-
-				$.ajax('myplanModify_selectBox.jsp', {
-					data : {
-						name : '홍길동',
-						age : 21
-					},
-					success : function(data) {
-						//select 뒷부분 추가
-						alert("testtest");
-						$('#testsel').append(data);
-					}
-				});
-
-			});
-		});
-	</script>
 
 
 	<%
@@ -156,16 +103,17 @@ table td {
 		// 		// List goodsList = vector 두번째데이터
 		List goodsList = (List) vector.get(1);
 
-		//datelist
-		DateList t = new DateList();
-		//int tt = t.getDiffDay(fromdate, todate);
-		// 		List datelist = datelist = new ArrayList();
-		// 		datelist.add(fromdate);
-		// 		datelist.add(todate);
-		// 		datelist = t.Date(fromdate, todate);
-		//datelist. 끝.
-
 		//ajax를 위해서 모델 1 방식으로 진행할 코드. 끝.
+
+		//diff_day 일간
+		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
+
+		//1이면 plan a, 2이면 plan b, 3이면 plan c
+		int plan = Integer.parseInt(request.getParameter("plan"));
+
+		//from, to 날짜값 받아오기.
+		String from = request.getParameter("from");
+		String to = request.getParameter("to");
 	%>
 
 
@@ -174,19 +122,33 @@ table td {
 	<form action="./MyPlanModifyAction.pln" method="post"
 		style="background-color: white; color: black;" name=reg id="reg">
 
-		<div>
+		<div style="width: 800px;">
 
 			<table>
 				<tr>
-					<td class="setdate" onchange="from_to()">출발일 : <input type="date" name="fromDate" id="fromDate"
-						required="required"> <br> 도착일 : <input type="date"
-						name="toDate" id="toDate" required="required">
-					</td>
-					<td class="set_plan" id="set_plan" onchange="from_to()"><select name="plan_nr" id="plan_nr"
+					<%
+						if (from != null & to != null) {
+					%>
+					<td class="setdate" onchange="from_to()">출발일 : <input
+						type="date" name="fromDate" id="fromDate" required="required"
+						value="<%=from%>"> <br> 도착일 : <input type="date"
+						name="toDate" id="toDate" required="required" value="<%=to%>">
+						<%
+							} else {
+						%>
+					<td class="setdate" onchange="from_to()">출발일 : <input
+						type="date" name="fromDate" id="fromDate" required="required">
+						<br> 도착일 : <input type="date" name="toDate" id="toDate"
 						required="required">
-							<option value="1">Plan A</option>
-							<option value="2">Plan B</option>
-							<option value="3">Plan C</option>
+					</td>
+					<%
+						}
+					%>
+					<td class="set_plan" id="set_plan" onchange="from_to()"><select
+						name="plan_nr" id="plan_nr" required="required">
+							<option value="1" <%if(plan == 1){%> selected <%} %>>Plan A</option>
+							<option value="2" <%if(plan == 2){%> selected <%} %>>Plan B</option>
+							<option value="3" <%if(plan == 3){%> selected <%} %>>Plan C</option>
 					</select></td>
 					<td><input type="submit" value="일정수정"><br> <input
 						type="reset" value="다시등록"></td>
@@ -200,7 +162,7 @@ table td {
 			<div class="clear" />
 
 			<div
-				style="position:absolute; left: 1px;  width: 250px; height: 500px; background-color: white;">
+				style="position: absolute; left: 1px; width: 250px; height: 500px; background-color: white;">
 
 				<select name=a style="width: 100%; height: 35em;" multiple>
 
@@ -223,39 +185,60 @@ table td {
 			</div>
 
 
-			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap" style="position:relative; width:350px; overflow:auto; left:270px; height:610px; ">
+			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap"
+				style="position: relative; width:500px; overflow: auto; left: 270px; height: 610px;">
+
+
+				<%
+					if (diff_day != 0) {
+						for (int i = 1; i <= diff_day; i++) {
+				%>
 
 
 
 
-
- 		<!-- 		<div class="inner_x_wrap"> 
- 					<div>10 
- 						일차 
- 					</div> 
- 										<div 
- 											style="width: 12%; float: left; vertical-align: middle; margin: auto;"> 
- 					&nbsp;<input class=button type=button value=' > '
- 						onclick="gor('b10','res10')">&nbsp; <br>
- 					&nbsp;<input class=button type=button value=' < ' 
- 						onclick="gol('b10','res10')">&nbsp;
- 										</div>
- 										<div style="width: 70%; float: left;">
- 					<select name="b10" size=5 style="width: 100%;">
-  						<input type=text name=res1 size=30> 
-						<br>
-					</select>
-										</div>
-										<div style="width: 12%; float: left; margin: auto;">
-					&nbsp;<input class=button type=button value=' ↑ '
-						onclick="gou('b10','res10')">&nbsp; <br>
-					&nbsp; <input class=button type=button value=' ↓ '
-						onclick="god('b10','res10')">&nbsp;
-										</div>
-
+				<div class="inner_x_wrap">
+					<div><%=i%>
+						일차. css가 필요합니다.
+					</div>
+					
+					
+					
+					<div
+						style="width: 12%; float: left; vertical-align: middle; margin: auto;">
+						&nbsp;<input class=button type=button value=' > '
+							onclick="gor('b<%=i%>','res<%=i%>')">&nbsp; <br>
+						&nbsp;<input class=button type=button value=' < '
+							onclick="gol('b<%=i%>','res<%=i%>')">&nbsp;
+					</div>
+					
+					
+					
+					<div style="width: 70%; float: left;">
+						<select name="b<%=i%>" size=5 style="width: 100%;">
+							
+						</select>
+					</div>
+					
+					<input type='text' name='res<%=i %>' size=30 placeholder="mpbb2.getMyplans_id()">
+<%-- 					<input type='text' name='res<%=i %>' size=30 placeholder="mpbb2.getMyplans_id()"> --%>
+					
+					<div style="width: 12%; float: left; margin: auto;">
+						&nbsp;<input class=button type=button value=' ↑ '
+							onclick="gou('b<%=i%>','res<%=i%>')">&nbsp; <br>
+						&nbsp; <input class=button type=button value=' ↓ '
+							onclick="god('b<%=i%>','res<%=i%>')">&nbsp;
+					</div>
 				</div>
-		-->
 
+<hr>
+
+				<div class="clear"></div>
+
+				<%
+					}
+					}
+				%>
 
 
 			</div>

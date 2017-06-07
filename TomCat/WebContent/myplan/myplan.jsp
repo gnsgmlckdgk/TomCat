@@ -150,7 +150,7 @@
 
 		List basketList = (List) request.getAttribute("basketList"); //여행지찜리스트 myplans List
 		List goodsList = (List) request.getAttribute("goodsList"); //상품 travel List
-		int plan_nr = Integer.parseInt(request.getParameter("plan_nr")); //일정 종류
+		String plan_nr = request.getParameter("plan_nr"); //일정 종류
 		
 
 		String dep_lat =  (String) request.getParameter("dlat"); //경로 표시를 위한 출발장소의 lat 값
@@ -188,14 +188,14 @@
 						<th>item</th> -->
 						<th width="100px" align="center">
 							<% // 전체 목록표시와 세부 일정일때 테이블 제목 각기 다르게 표시
-							if(plan_nr==100)%>찜갯수 <%
+							if(plan_nr.equals("100"))%>찜갯수 <%
 							else %> 순서</th>
 						<th width="400px" align="center">
 							<%// 전체 목록표시와 세부 일정일때 테이블 제목 각기 다르게 표시
-							if(plan_nr==100)%>찜목록 <%
+							if(plan_nr.equals("100"))%>찜목록 <%
 							else %> 방문지</th>
 						<% /* 전체목록 표시(plan_nr=100)할 때에는 경로 column 숨기기 */
-						if(plan_nr!=100){
+						if(!plan_nr.equals("100")){
 							%>	
 						<th width="100px">경로</th>
 						<%
@@ -209,7 +209,7 @@
 						MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
 						/* 일정종류(plan_nr) 가 여행지찜리스트의 일정종류와 다를 때에는 갯수 계산 안함. 
 						일정종류(plan_nr) 가 목록표시일 경우에도 갯수 계산 안함 */
-						if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)    
+						if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100)    
 							continue;
 						plan_item_nr=plan_item_nr+1;    	 						
 					} /* 선택한 일정의 방문지 갯수 계산 완료 */
@@ -226,7 +226,7 @@
 					
 							/* 여행지찜리스트에서 선택한 일정종류(plan_nr) 와 일정종류가 다를 땐, 목록테이블 만들지 않고 pass. 
 							일정종류(plan_nr) 가 목록표시(100)일 경우에도  목록테이블 만들지 않고 pass????????? */
-							if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100)
+							if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100)
 								continue;
 					%>
 					 <tbody>
@@ -237,7 +237,7 @@
 						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
 						
 						<%
-						if(plan_nr!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
+						if(Integer.parseInt(plan_nr)!=100){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
 							%>
 						<td>
 
@@ -288,6 +288,7 @@ $(window).load(function() {
 	$.ajax({
 		type: 'post',
 		url: './myplan/myplanModify.jsp',
+		data : {diff_day:0, plan:1},
 		success: function(data) {
 			$('#pln_list').append(data);
 		},
@@ -467,34 +468,23 @@ $(window).load(function() {
 
 			if(diff_day >= 0){
 				
-				alert(diff_day+1 + "일간 " + plan + "에 저장");
+// 				alert(diff_day+1 + "일간 " + plan + "에 저장");
 				
-				$(".x_wrap").empty();
-// 				$(".x_wrap").append("<div class='inner_x_wrap' style='border:5px solid red; width:100%;'></div>");
+				$('#pln_list').empty();
 				
-				for( i = 1; i <= diff_day+1; i++){
-				
-// 					$(".inner_x_wrap").append("<div style='border:1px solid purple; float:left; width:200px;' id='bb"+i+"'>");
+				$.ajax({
+					type: 'post',
+					url: './myplan/myplanModify.jsp',
+					data : {diff_day:diff_day+1, plan:plan, from:from.value, to:to.value},
+					success: function(data) {
+						$('#pln_list').append(data);
+					},
+					error: function(xhr, status, error) {
+						alert(error);
+					}   
+				});
 					
-					$(".x_wrap").append("<div>"+i+" 일차</div><br>");
-					$(".x_wrap").append("<input class='button' type='button' value=' > ' onclick='gor(b"+i+", res"+i+")'>");
-// 					$(".x_wrap").append("<input class='button' type='button' value=' < ' onclick='gol('b"+i+"', 'res"+i+"')'>");
 					
-					$(".x_wrap").append("<select name=b"+i+" size='5' style='width: 100%;'></select>");
-					
-// 					$(".x_wrap").append("<input class='button' type='button' value=' ↑ ' onclick='gou('b"+i+"', 'res"+i+"')'>");
-// 					$(".x_wrap").append("<input class='button' type='button' value=' ↓ ' onclick='god('b"+i+"', 'res"+i+"')'>");
-					
-					
-					$(".x_wrap").append("<div class='clear'></div>");
-					$(".x_wrap").append("<hr>");
-					
-// 					$(".inner_x_wrap").append("</div>");
-				}
-// 				$(".x_wrap").append('<input class="button" type="button" value=" > " onclick="gor(b1, res1)">');
-// 				$(".x_wrap").append("<select name=b1 size='5' style='width: 100%;'>");
-// 				$(".x_wrap").append("<input type='text' name='res1' size='30'>");
-// 				$(".x_wrap").append("</select>");
 			}
 
 		}
@@ -506,7 +496,7 @@ $(window).load(function() {
 
 </div><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작-->
 
-	<%if(plan_nr!=100) { %>
+	<%if(Integer.parseInt(plan_nr)!=100) { %>
    	<div id="right-panel">    </div> <!-- 방문지간 대중교통 이동 정보 표시 패널 -->
 <%
 }%>
@@ -552,7 +542,7 @@ $(window).load(function() {
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
 					TravelBean tb = (TravelBean) goodsList.get(i);
 						//목록보기 일때에는 마커생성 안함. 찜목록중에 일정별로 해당 목록표시
-						if (plan_nr != mpbb.getPlan_nr() & plan_nr != 100) 
+						if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100) 
 						continue;
 
 						
@@ -627,7 +617,7 @@ $(window).load(function() {
 			
 			//일정별 초기 화면에서만 전체 경로 표시해줌
 			<%
-			    if(plan_nr!=100 & dep_lat==null & dep_lng==null & arr_lat==null & arr_lng==null){
+			    if(Integer.parseInt(plan_nr)!=100 & dep_lat==null & dep_lng==null & arr_lat==null & arr_lng==null){
 			%>
 						TotalPath.push(position);
 			<%
@@ -644,7 +634,7 @@ $(window).load(function() {
 			flightPath();
 			 <%
 			 //전체목록보기가 아니고, 출발지 도착지 lat lng 값 모두 null 이 아닐때 => 경로 표시
-		      if(plan_nr!=100 & dep_lat!=null & dep_lng!=null & arr_lat!=null & arr_lng!=null){
+		      if(Integer.parseInt(plan_nr)!=100 & dep_lat!=null & dep_lng!=null & arr_lat!=null & arr_lng!=null){
 
 						 	String route_dep = dep_lat + ", " + dep_lng;   // 출발지 lat lng 값 변수 하나로 저장
 						 	String route_arr= arr_lat + ", " + arr_lng;  //도착지 lat lng 값 변수 하나로 저장

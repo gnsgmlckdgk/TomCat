@@ -74,12 +74,12 @@ public class MyPlanBasketDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, myplans_id);
 			pstmt.setString(2, basketbean.getId());
-			pstmt.setInt(3, basketbean.getPlan_nr());
+			pstmt.setString(3, basketbean.getPlan_nr());
 			pstmt.setInt(4, basketbean.getTravel_id());
 			pstmt.setInt(5, item_nr);
 			pstmt.setString(6, basketbean.getFirstday());
 			pstmt.setString(7, basketbean.getLastday());
-			pstmt.setInt(8, basketbean.getDay_nr());
+			pstmt.setString(8, basketbean.getDay_nr());
 			pstmt.setString(9, basketbean.getDay_night());
 			pstmt.setFloat(10, basketbean.getUser_lat());
 			pstmt.setFloat(11, basketbean.getUser_lng());
@@ -139,7 +139,7 @@ public class MyPlanBasketDAO {
 					+ "and user_lat=? and user_lng=? and date=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, basketbean.getId());
-			pstmt.setInt(2, basketbean.getPlan_nr());
+			pstmt.setString(2, basketbean.getPlan_nr());
 			pstmt.setInt(3, basketbean.getTravel_id());
 			pstmt.setFloat(4, basketbean.getUser_lat());
 			pstmt.setFloat(5, basketbean.getUser_lng());
@@ -353,13 +353,14 @@ public class MyPlanBasketDAO {
 				MyPlanBasketBean mpbb = new MyPlanBasketBean();
 				
 				mpbb.setId(rs.getString("id"));
-				mpbb.setPlan_nr(rs.getInt("plan_nr"));
+				mpbb.setMyplans_id(rs.getInt("myplans_id"));
+				mpbb.setPlan_nr(rs.getString("plan_nr"));
 				mpbb.setTravel_id(rs.getInt("travel_id"));
-				mpbb.setItem_nr(rs.getInt("item_nr"));
+				mpbb.setItem_nr(rs.getString("item_nr"));
 				mpbb.setFirstday(rs.getString("firstday"));
 
 				mpbb.setLastday(rs.getString("lastday"));
-				mpbb.setDay_nr(rs.getInt("day_nr"));
+				mpbb.setDay_nr(rs.getString("day_nr"));
 				mpbb.setDay_night(rs.getString("day_night"));
 				mpbb.setUser_lat(rs.getFloat("user_lat"));
 				mpbb.setUser_lng(rs.getFloat("user_lng"));
@@ -442,7 +443,7 @@ public class MyPlanBasketDAO {
 			
 			pstmt.setString(1, myplanbean.getFirstday());
 			pstmt.setString(2, myplanbean.getLastday());
-			pstmt.setInt(3, myplanbean.getPlan_nr());
+			pstmt.setString(3, myplanbean.getPlan_nr());
 			pstmt.setString(4, myplanbean.getId());
 			
 
@@ -505,12 +506,12 @@ public class MyPlanBasketDAO {
 				
 				mypalnbasketbean.setMyplans_id(rs.getInt("myplans_id"));
 				mypalnbasketbean.setId(rs.getString("id"));
-				mypalnbasketbean.setPlan_nr(rs.getInt("plan_nr"));
+				mypalnbasketbean.setPlan_nr(rs.getString("plan_nr"));
 				mypalnbasketbean.setTravel_id(rs.getInt("travel_id"));
-				mypalnbasketbean.setItem_nr(rs.getInt("item_nr"));
+				mypalnbasketbean.setItem_nr(rs.getString("item_nr"));
 				mypalnbasketbean.setFirstday(rs.getString("firstday"));
 				mypalnbasketbean.setLastday(rs.getString("lastday"));
-				mypalnbasketbean.setDay_nr(rs.getInt("day_nr"));
+				mypalnbasketbean.setDay_nr(rs.getString("day_nr"));
 				mypalnbasketbean.setDay_night(rs.getString("day_night"));
 				mypalnbasketbean.setUser_lat(rs.getFloat("user_lat"));
 				mypalnbasketbean.setUser_lng(rs.getFloat("user_lng"));
