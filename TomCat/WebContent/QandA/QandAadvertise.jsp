@@ -14,7 +14,7 @@
 		회사명(성명):<input type="text" name="nick" value=""><br>		
 		(이메일 주소):<input type="text" name="subject"><br>
 		문의내용:<textarea rows="5" cols="20" name="content"></textarea><br>
-		<input id="submit" type="submit" value="글쓰기"><br> 
+		<input id="submit" type="submit" value="글쓰기" class="com_mail" style="background-color: #333; margin-bottom: 30px;"><br> 
 	</form>
 
 

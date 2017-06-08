@@ -5,12 +5,15 @@
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/QandA/QandACompanyIntro.css"/>	
 
-	<div id="combine">
+<div id="combine">
+
+<h1 class="combine_logo"><span>BEFORE</span> YOU GO</h1>
 
 <table id="intropic">
 
+
 <tr><td>
-<h1>당신만의 여행을<br>
+<h1><br>당신만의 여행을<br>
  디자인 하세요.<br>
 TOMCAT♡</h1>
 </td>
@@ -29,9 +32,9 @@ TOMCAT♡</h1>
 
 
 
-<table id="contact">
+<table class="contact">
 
-<tr><td><h2>문의</h2></td></tr>
+<tr><td><div>문의 </div></td></tr>
 <tr><td>대표전화:051.111.1111</td></tr>
 <tr><td>팩스:051.222.2222</td></tr>
 <tr><td>마케팅/제휴문의:5678@gmail.com</td></tr>

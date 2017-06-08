@@ -49,6 +49,7 @@ div.travel_img{
 	margin-top:2em;
 	width:450px;
 	height: 300px;
+	border: 1px solid red;
 }
 
 div.img_info{
@@ -102,11 +103,12 @@ div.blog_Spot, div.Spot_epilogue{
 	padding-top:0.2em;
 	text-align:center;
 	float: left;
-	width:500px;
+	width:520px;
 	height:2.6em;
 	border:2px solid white; 
 	border-radius:1em 1em 0 0;
 	cursor: pointer;
+	
 }
 div.blog_Spot:HOVER, div.Spot_epilogue:HOVER{
 	cursor: pointer;

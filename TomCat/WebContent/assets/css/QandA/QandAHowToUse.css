@@ -15,11 +15,37 @@ body {
 	height: 50%;
 	position: relative;
 	color: white;
+	text-shadow:1px 1px 2px #111;
+	border: 1px solid rgba(77, 77, 77,0);
+}
+
+h1.combine_logo {
+	color: white; width : 70%;
+	margin:17px auto 0 auto;
+	font-size: 3em;
+	text-shadow: 1px 1px 2px #333;
+	width: 70%;
+}
+
+h1.combine_logo span {
+	color: #f43e66;
+}
+
+table td.left{
+	text-align: right;
 }
 
 #h1 {
 	color: white;
 	font-size: 3em;
+}
+#table1 {
+	text-align: left;
+	padding: 0;
+	margin:55px auto 0 auto;
+	width: 70%;
+	height: 500px;
+
 }
 
 #banner {
@@ -28,10 +54,8 @@ body {
 	width:10em;
 	background-color: white;
 	position: absolute;
-	top: 150px;
+	top: 175px;
 	border-collapse: none;
-	border: none;
-	
 }
 #banner td{
 	text-align:center;
@@ -55,13 +79,7 @@ background-color: rgba(77, 77, 77,0.3);
 	}
 
 
-#table1 {
-	text-align: left;
-	padding: 0;
-	margin-left: 15em;
-	width: 1000px;
-	height: 500px;
-}
+
 
 #tdsize {
 	width: 250px;

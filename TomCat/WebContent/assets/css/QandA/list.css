@@ -25,7 +25,7 @@ body {
 .table1 {
 	background-position: center top;
 	background-attachment: fixed;
-	margin: auto;
+	margin:auto;
 	line-height: 1.75;
 	text-align: center;
 	width: 70%;
@@ -65,24 +65,32 @@ background-color: rgba(77, 77, 77,0.3);
 	color:grey;
 	font-weight: bolder;
 	}
+
 #table_search{
 width: 70%;
 margin: auto;
-border: 1px solid red;
 	}
 
 #qandasearch{
 	height:52px;
-	width:30%;
+	width:295px;
 	color:white;
-	margin-left:500px;
 	float:left;
-	background-color: rgba(172, 0, 230,0.5);	
+	margin-left:540px;
+	background-color: rgba(217, 217, 217,1);	
 }
 
 input.btn{
-	float:right;
 	height:52px;
+	width: 140px;
 	padding:auto auto;
 	text-align: center;
+}
+
+input.input_box{
+	
+}
+
+form.search_fr{
+
 }

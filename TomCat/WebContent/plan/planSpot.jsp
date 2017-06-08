@@ -38,73 +38,6 @@
 
 <script type="text/javascript">
 var toggleBtn = 0;
-	$(document).ready(function(){
-
-		$('input.month').click(function(){
-			$('input.month').css('background-color','#323037');//진한회색	
-			$(this).css('background-color','#f32853');//핑크색
-			var month=$(this).val();
-			//다른 월 선택시 부르기
-			$.ajax({
-				type:'post',
-				url:'./plan/travelStyle.jsp',
-				data:{month : month, city_name:'<%=pcb.getName()%>'},
-				success:function(data){
-					$('div.month_img').empty(data);
-					$('div.month_img').append(data);
-				},
-				error:function(xhr, status, error){
-					alert(error);
-				}
-			});
-		});
-		$('.blog_Spot').click(function(){
-			$('.Spot_epilogue').css('background-color','#323037');
-			$(this).css('background-color','#f32853');
-			$('#Spot_epilogue').css('display','none');
-			$('#daumView').css('display','block');
-		});
-		
-		$('.Spot_epilogue').click(function(){
-			$('.blog_Spot').css('background-color','#323037');
-			$(this).css('background-color','#f32853');
-			$('#daumView').css('display','none');
-			$('#Spot_epilogue').css('display','block');
-		
-			
-		});
-		
-		$('#writeBtn').click(function(){
-			if(toggleBtn==0) {
-				$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
-				$('.reviewWriterDiv').css('display', 'inline-block');
-				
-				toggleBtn = 1;
-			}else {
-				$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
-				setTimeout(function(){
-					$('.reviewWriterDiv').hide();
-				}, 700)
-				toggleBtn = 0;
-			}
-		});
-		
-
-		/* 최초 리뷰 리스트 가져오기 */
-		$.ajax({
-			type: 'post',
-			url: './plan/planComment/planSpotCommentList.jsp',
-			data : {spot:'<%=ptb.getName()%>'},
-			success: function(data) {
-				$('div.comment .review_list').empty();
-				$('div.comment .review_list').append(data);
-			},
-			error: function(xhr, status, error) {
-				alert(error);
-		    } 
-		});
-		
-	});
 
 	/* 처음 화면 */
 	$(window).load(function(){
@@ -114,6 +47,56 @@ var toggleBtn = 0;
 			$('.blog_Spot').css('background-color','#f32853');
 			$('#Spot_epilogue').css('display','none');
 			$('#daumView').css('display','block');
+			
+			$('#writeBtn').click(function(){
+				if(toggleBtn==0) {
+					$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
+					$('.reviewWriterDiv').css('display', 'inline-block');
+					
+					toggleBtn = 1;
+				}else {
+					$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
+					setTimeout(function(){
+						$('.reviewWriterDiv').hide();
+					}, 700)
+					toggleBtn = 0;
+				}
+			});
+			
+			$('.blog_Spot').click(function(){
+				$('.Spot_epilogue').css('background-color','#323037');
+				$(this).css('background-color','#f32853');
+				$('#Spot_epilogue').css('display','none');
+				$('#daumView').css('display','block');
+			});
+			
+			$('.Spot_epilogue').click(function(){
+				$('.blog_Spot').css('background-color','#323037');
+				$(this).css('background-color','#f32853');
+				$('#daumView').css('display','none');
+				$('#Spot_epilogue').css('display','block');
+			
+				
+			});
+			
+			$('input.month').click(function(){
+				$('input.month').css('background-color','#323037');//진한회색	
+				$(this).css('background-color','#f32853');//핑크색
+				var month=$(this).val();
+				//다른 월 선택시 부르기
+				$.ajax({
+					type:'post',
+					url:'./plan/travelStyle.jsp',
+					data:{month : month, city_name:'<%=pcb.getName()%>'},
+					success:function(data){
+						$('div.month_img').empty(data);
+						$('div.month_img').append(data);
+					},
+					error:function(xhr, status, error){
+						alert(error);
+					}
+				});
+			});
 		});
 		$.ajax({ //1월 검색값 불러오기(월, 도시이름 넘겨줌)
 			type:'post',
@@ -125,6 +108,19 @@ var toggleBtn = 0;
 			error:function(xhr, status, error){
 				alert(error);
 			}
+		});
+		
+		$.ajax({
+			type: 'post',
+			url: './plan/planComment/planSpotCommentList.jsp',
+			data : {spot:'<%=ptb.getName()%>'},
+			success: function(data) {
+				$('div.comment .review_list').empty();
+				$('div.comment .review_list').append(data);
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+		    } 
 		});
 	});
 	
@@ -155,7 +151,7 @@ var toggleBtn = 0;
 
 <div class="img_info">
 	<div class="travel_img" >
- 		<img alt="관광지 이미지" src="./images/plan/nation/<%=ib.getFile()%>" width="450px">
+ 		<img alt="관광지 이미지" src="./images/plan/nation/<%=ib.getFile()%>" width="450px" height="300px">
  	</div>
 	
 
@@ -248,18 +244,18 @@ if(souvenirList.size()==0){
 				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
 				<!-- 					type="submit" value="검색" /> -->
 			</div>
-			<div id="daumView" style="display: none;">
+			<div id="daumView" style="display: block;height: 800px; margin-left:1em; margin-top: 5px;">
 				<div id="daumImage"></div>
 			</div>
-			<div id="daumScript">
+			<div id="daumScript" style="display: block;">
 				<div id="daumImageScript"></div>
 			</div>
-			
+			<div class="clear"></div>
 		</div> <!-- 블로그 후기 나타나는 div -->
-		
+		<div class="clear"></div>
 		
 		<!-- 후기 작성 추가 -->
-		<div id="Spot_epilogue" style="width: 1000px; height: 500px;">
+		<div id="Spot_epilogue" style="height: 800px; margin-left:2em; margin-top: 5px;">
 		
 			<div class="comment">
 			
@@ -377,8 +373,8 @@ if(souvenirList.size()==0){
 
 
 
-
 </div>
+
 </section>
 <div class="clear"></div>
 
