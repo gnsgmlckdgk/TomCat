@@ -69,7 +69,7 @@ public class MyPlanModifyAction implements Action {
 				
 				System.out.println(mpbb2.getPlan_nr());
 				
-				if (mpbb.getPlan_nr() == null) { // 3. 비었으면 이쪽으로.
+				if (mpbb2.getPlan_nr() == null) { // 3. 비었으면 이쪽으로.
 					
 					System.out.println("비었네");
 					
