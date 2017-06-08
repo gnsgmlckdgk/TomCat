@@ -10,7 +10,7 @@
 
 	// 파라미터 값 가져오기
 	String country_code = request.getParameter("country_code");
-	//String tCity_code = request.getParameter("tCity_code");
+	
 
 	PlanDAO pdao = new PlanDAO();
 	List<PlanCityBean> cityList = pdao.getCityList2(country_code);

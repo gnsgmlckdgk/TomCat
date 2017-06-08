@@ -27,7 +27,7 @@ public class MyPlanModifyAction implements Action {
 		String id = (String) session.getAttribute("id");
 
 		// 폼 => 자바빈 멤버변수 저장.
-
+		
 		// mpbb.setPlan_nr(request.getParameter("plan_nr"));// plan a or b or c
 
 		// 디비객체 생성
@@ -52,17 +52,18 @@ public class MyPlanModifyAction implements Action {
 		String fin_d_nr = null; // day_nr에 들어갈 내용
 		String fin_i_nr = null; // item_nr에 들어갈 내용
 
-		for (int i = 0; i < diff_day; i++) { // 몇일째 일정인지 구분.
+		for (int i = 0; i < diff_day; i++) { //몇일째 일정인지 구분.
 
-			for (int k = 0; k < bb[i].split("@").length; k++) {// 그날의 몇번째 일정인지
-																// 구분.
+			for (int k = 0; k < bb[i].split("@").length; k++) {//그날의 몇번째 일정인지 구분.
 
 				mpbb = new MyPlanBasketBean();
-
+				
 				mpbb.setId(id);
+
 
 				String first = request.getParameter("fromDate");
 				String last = request.getParameter("toDate");
+
 
 				fin_mpln_id = bb[i].split("@")[k];
 
@@ -71,17 +72,21 @@ public class MyPlanModifyAction implements Action {
 
 				// 2. fin_mpln_id 값으로 plan_nr이 비어있는지 확인한 후,
 				MyPlanBasketBean mpbb2 = mpbd.selectModifyMyPlan(fin_mpln_id);
-
+				
 				System.out.println(mpbb2.getPlan_nr());
-
+				
 				if (mpbb2.getPlan_nr() == null) { // 3. 비었으면 이쪽으로.
-
+					
+					System.out.println("비었네");
+					
 					fin_p_nr = pplan_nr[i].split("@")[k] + "@";
 					fin_d_nr = dday_nr[i].split("@")[k] + "@";
 					fin_i_nr = (k + 1) + "@";
 
-				} else if (mpbb2.getPlan_nr() != null) { // 4. 안비었으면 이쪽으로.
-
+				} else if (mpbb2.getPlan_nr() != null){ // 4. 안비었으면 이쪽으로.
+					
+					System.out.println("안비었네.");
+					
 					fin_p_nr = mpbb2.getPlan_nr() + pplan_nr[i].split("@")[k] + "@";
 					fin_d_nr = mpbb2.getDay_nr() + dday_nr[i].split("@")[k] + "@";
 					fin_i_nr = mpbb2.getItem_nr() + (k + 1) + "@";
@@ -98,10 +103,12 @@ public class MyPlanModifyAction implements Action {
 				System.out.println(fin_mpln_id + "에 plan_nr은 " + fin_p_nr + "이고, ");
 				System.out.println("day_nr은 " + fin_d_nr + ", item_nr은 " + fin_i_nr);
 				System.out.println("");
+				
 
-			} // 그날의 몇번째 일정인지 구분. 끝.
+			}//그날의 몇번째 일정인지 구분. 끝.
 
-		} // 몇일째 일정인지 구분. 끝.
+			
+		}//몇일째 일정인지 구분. 끝.
 
 		// 이동 ./GoodsList.ag
 		ActionForward forward = new ActionForward();

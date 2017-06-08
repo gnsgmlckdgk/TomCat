@@ -12,6 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.travel.admin.db.TravelBean;
+
 public class PlanDAO {
 
 	Connection con = null;
@@ -31,7 +33,7 @@ public class PlanDAO {
 		return con;
 	}
 
-	/* 국가 페이지 */
+	/* 국가 페이지 */	
 	// 국가의 도시 리스트 갯수
 	public int getCityCount(String str) {
 		int count = 0;
@@ -146,6 +148,40 @@ public class PlanDAO {
 		}
 
 		return count;
+	}
+	
+	
+	/* 도시 영어이름(도시코드) */
+	public String getCityEnName(String city_code) {
+		
+		String en_name = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select en_name from city where city_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, city_code);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				en_name = rs.getString("en_name");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return en_name;
 	}
 
 	/* DB 도시 개수(운영자 페이지) */
@@ -1638,7 +1674,7 @@ public class PlanDAO {
 		}
 
 	}
-
+	
 	/* 수정할 도시 가져오기(운영자 페이지) */
 	public PlanCityBean getCityContent(String city_code) {
 		PlanCityBean pcb = null;
@@ -2059,6 +2095,113 @@ public class PlanDAO {
 		return cityList;
 
 	}
+	
+	
+	/* city_code 로 국가코드 가져오기 */
+	public String getCountryCode(String city_code) {
+		
+		String country_code = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select country_code from city where city_code = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, city_code);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				country_code = rs.getString("country_code");
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(rs!=null) rs.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return country_code;
+	}
+	
+	/* travel_id 로 국가코드 가져오기 */
+	public String getCountryCode(int travel_id) {
+		
+		String country_code = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select country_code from travel where travel_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, travel_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				country_code = rs.getString("country_code");
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(rs!=null) rs.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return country_code;
+	}
+	
+	/* DB 관광지 삭제 (운영자 페이지) */
+	public int deleteTravel(int travel_id) {
+		int check = 0;
+		try {
+			con = getConnection();
+
+			sql = "delete from travel where travel_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, travel_id);
+
+			pstmt.executeUpdate();
+			check = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+			}
+		}
+		return check;
+	}
 
 	/* 기념품 리스트 뽑아 오기 */
 	public List<PlanSouvenirBean> getSouvenirList(String city_code) {
@@ -2113,6 +2256,42 @@ public class PlanDAO {
 		return souvenirList;
 	}
 
+	// 관광지 수정
+	public void updateTravel(TravelBean tb) {
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "update travel set type=?, country_code=?, city_code=?, name=?, latitude=?, longitude=?, info=?, address=? "
+					+ "where travel_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, tb.getType());
+			pstmt.setString(2, tb.getCountry_code());
+			pstmt.setString(3, tb.getCity_code());
+			pstmt.setString(4, tb.getName());
+			pstmt.setFloat(5, tb.getLatitude());
+			pstmt.setFloat(6, tb.getLongitude());
+			pstmt.setString(7, tb.getInfo());
+			pstmt.setString(8, tb.getAddress());
+			pstmt.setInt(9, tb.getTravel_id());
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(rs!=null) rs.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	/*기념품 리스트 추가하기*/
 	public void addSouvenir(PlanSouvenirBean psb){
 		int num=0;

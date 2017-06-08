@@ -15,14 +15,31 @@ body {
 	position: relative;
 	
 }
+
+#combine h2{
+	font-size: 2.5em;
+	margin-bottom:10px;
+	color: white;
+	text-shadow: 1px 1px 2px #222;
+}
+
+
+input.com_mail:HOVER{
+	opacity:0.8;
+}
+
+#combine h1{
+	color: #333;
+}
 form{
+	
 	background-position: center top;
 	background-attachment: fixed;
-	margin: auto;
+	margin: 35px auto 0 auto;
 	line-height: 1.75;
 	text-align: center;
 	width: 50%;
-	background-color: white;
+	background-color: rgba(255, 255, 255,1);
 	border-radius: 20px;	
 }
 
@@ -50,7 +67,7 @@ textarea{
 	width:10em;
 	background-color: white;
 	position: absolute;
-	top: 150px;
+	top: 175px;
 	border-collapse: none;
 	border: none;
 	

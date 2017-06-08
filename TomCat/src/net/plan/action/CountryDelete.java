@@ -22,16 +22,10 @@ public class CountryDelete implements Action{
 		String pageNum = request.getParameter("pageNum");
 		String country_code = request.getParameter("country_code");
 		
+		// 실제 경로의 폴더 삭제
+		deleteAllFiles(request.getSession().getServletContext().getRealPath("/images/plan/nation/"+country_code));
+		
 		// DB의 국가 이미지 정보 삭제
-		File file = new File(request.getSession().getServletContext().getRealPath("/images/plan/nation/"+country_code));	// 국가 폴더
-		if(file.exists()) {	
-			// 내부 파일들 삭제
-			File[] inFile = file.listFiles();
-			for(int i=0; i<inFile.length; i++) {
-				inFile[i].delete();
-			}
-			file.delete();	// 디렉토리 삭제
-		}
 		ImagesDAO idao = new ImagesDAO();
 		idao.deleteCountryImages(country_code);
 		
@@ -51,6 +45,27 @@ public class CountryDelete implements Action{
 		}
 		
 		return null;
+	}
+
+	// 폴더내의 모든 파일 삭제후 폴더 삭제
+	public static void deleteAllFiles(String path){ 
+		
+		File file = new File(path);
+		File[] inFile = file.listFiles();	// 폴더 내 파일을 가져온다
+		
+		if(inFile.length > 0) {
+			
+			for(int i = 0; i < inFile.length; i++) {
+				
+				if(inFile[i].isFile()) {
+					inFile[i].delete();
+				}else {
+					deleteAllFiles(inFile[i].getPath());
+				}
+				inFile[i].delete();
+			}
+			file.delete();	// 디렉토리 삭제
+		}
 	}
 
 }

@@ -159,11 +159,12 @@
 <script type="text/javascript">
 
 // 삭제 버튼 눌렀을때 한번더 확인
-function delConfirm(pageNum, city_code) {
+function delConfirm(pageNum, travel_id, sort) {
 	var result = confirm("정말 삭제하시겠습니까?");
+
 	if(result==true) {
-// 		location.href="./CityDelete.pl?pageNum="+pageNum+"&city_code="+city_code;				
-		location.href="#";		
+		location.href="./TravelAdminDelete.td?pageNum="+pageNum+"&travel_id="+travel_id+"&sort="+sort;	
+	
 	}
 }
 
@@ -224,6 +225,8 @@ $(document).ready(function() {
 	}
 });
 
+	
+
 </script>
 
 <div class="cityList">
@@ -253,10 +256,8 @@ $(document).ready(function() {
 			<span id="showInfo<%=i%>" style="display: none"><a href="javascript:toggleInfo('<%=i%>', '0');">접기</a><br><%=tb.getInfo() %></span></td>
 			
 			<td>
-				<input type = "button" name="update" value="수정" onclick="location.href='./TravelAdminUpdate.td?pageNum?pageNume=<%=pageNum%>&travel_id=<%=tb.getTravel_id()%>'">
-<%-- 				<input type = "button" name="update" value="수정" onclick="location.href='./CityUpdate.pl?pageNum=<%=pageNum%>&city_code=<%=tb.getCity_code() %>'"> --%>
-				<input type = "button" name="delete" value="삭제" onclick="">
-<%-- 				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=tb.getCity_code()%>');"> --%>
+				<input type = "button" name="update" value="수정" onclick="location.href='./TravelAdminUpdate.td?pageNum=<%=pageNum%>&travel_id=<%=tb.getTravel_id()%>&sort=<%=isort%>'">
+				<input type = "button" name="delete" value="삭제" onclick="delConfirm('<%=pageNum%>', '<%=tb.getTravel_id()%>', '<%=isort%>');">
 			</td>
 			
 		</tr>

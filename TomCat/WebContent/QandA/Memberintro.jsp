@@ -25,7 +25,7 @@
 
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="300" height="300">
+	<img src="./images/QandA/psu.jpg" width="300" height="300">
 
 </td>
 	
@@ -35,7 +35,7 @@
 <td><h1 id="h1">강수현</h1>
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="300" height="300">
+	<img src="./images/QandA/ksh.jpg" width="300" height="300">
 </td>
 
 </tr>

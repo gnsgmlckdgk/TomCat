@@ -35,7 +35,7 @@ public class CountryUpdateAction implements Action{
 				// 폴더 이름이 변경 되었으면(country_code가 변경되었으면)
 				if(!beforeCountryCode.equals(request.getParameter("country_code"))) {
 					ImagesDAO idao = new ImagesDAO();
-
+					
 					String newCountry_code = request.getParameter("country_code");
 					String curFilePath = request.getSession().getServletContext().getRealPath("/images/plan/nation/"+beforeCountryCode);
 					String newFilePath = request.getSession().getServletContext().getRealPath("/images/plan/nation/"+newCountry_code);
@@ -47,6 +47,8 @@ public class CountryUpdateAction implements Action{
 					if(curFile.exists()) {
 						curFile.renameTo(newFile);
 					}
+					
+					idao.updatePathCountry(beforeCountryCode, newCountry_code);
 				}
 				
 		// 새 정보로 업데이트

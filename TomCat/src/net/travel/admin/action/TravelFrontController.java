@@ -48,11 +48,31 @@ public class TravelFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/TravelAdminUpdate.td")) {	// 관광지 DB리스트 수정 페이지
+		}else if(command.equals("/TravelAdminUpdate.td")) {	// 관광지 DB 수정 페이지
+			
+			action = new TravelAdminUpdate();
+			try {
+				forward = action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/TravelAdminUpdateAction.td")) {	// 관광지 DB 수정 작업 처리
 			
 			action = new TravelAdminUpdateAction();
 			try {
 				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/TravelAdminDelete.td"))	{	// 관광지 DB에서 삭제
+			
+			action = new TravelAdminDeleteAction();
+			try {
+				forward = action.execute(request, response);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

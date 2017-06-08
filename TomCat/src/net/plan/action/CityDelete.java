@@ -34,6 +34,22 @@ public class CityDelete implements Action{
 		if(file.exists()) {
 			file.delete();
 		}
+		
+		String country_code = pdao.getCountryCode(city_code);	// 국가 코드
+		String en_name = pdao.getCityEnName(city_code);			// 도시 영어이름
+		File file2 = new File(request.getSession().getServletContext().getRealPath("/images/plan/nation/"+country_code+"/"+en_name));
+		System.out.println("file2 경로 : "+file2);
+
+		if(file2.exists()) {	
+			// 내부 파일들 삭제
+			File[] inFile = file2.listFiles();
+			for(int i=0; i<inFile.length; i++) {
+				inFile[i].delete();
+			}
+			file2.delete();	// 디렉토리 삭제
+		}
+		
+		// 도시정보 삭제
 		int check =  pdao.deleteCity(city_code);
 
 		if(check==1){
