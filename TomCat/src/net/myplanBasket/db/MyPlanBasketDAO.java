@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -13,6 +14,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import net.member.db.MemberBean;
+import net.plan.db.PlanCityBean;
 import net.travel.admin.db.TravelBean;
 
 public class MyPlanBasketDAO {
@@ -425,7 +427,7 @@ public class MyPlanBasketDAO {
 		return vector;
 
 	}
-	
+		
 
 	public MyPlanBasketBean selectModifyMyPlan(String myplans_id) {
 		Connection con = null;
@@ -546,6 +548,54 @@ public class MyPlanBasketDAO {
 	}
 
 	
+//	public List<MyPlanBasketBean> getMyplansList(String id) {
+//
+//		List<MyPlanBasketBean> myplanList = new ArrayList<MyPlanBasketBean>();
+//		MyPlanBasketBean mpbb = null;
+//		PreparedStatement pstmt = null;
+//		String sql = "";
+//		ResultSet rs = null;
+//		Connection con=null;
+//		
+//		try {
+//			con = getConnection();
+//
+//			sql = "select * from myplans where id=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setString(1, id);
+//			
+//			rs = pstmt.executeQuery(sql);
+//			
+//			while (rs.next()) {
+//				mpbb = new MyPlanBasketBean();
+//
+//				mpbb.setPlan_nr(rs.getString("plan_nr"));
+//				mpbb.setTravel_id(rs.getInt("travel_id"));
+//				mpbb.setItem_nr(rs.getString("item_nr"));
+//				mpbb.setFirstday(rs.getString("firstday"));
+//				mpbb.setLastday(rs.getString("lastday"));
+//				mpbb.setDay_nr(rs.getString("day_nr"));
+//
+//				myplanList.add(mpbb);
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (rs != null)
+//					rs.close();
+//				if (pstmt != null)
+//					pstmt.close();
+//				if (con != null)
+//					con.close();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		return myplanList;
+//	}
 	
 	
 	

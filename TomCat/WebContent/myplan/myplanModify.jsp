@@ -94,10 +94,10 @@ table td {
 
 		//ajax를 위해서 모델 1 방식으로 진행할 코드
 
-		MyPlanBasketDAO basketdao = new MyPlanBasketDAO();
+		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
 		MyPlanBasketBean mpbb = new MyPlanBasketBean();
 
-		Vector vector = basketdao.getBasketList(id);
+		Vector vector = mpbdao.getBasketList(id);
 		// 		// List basketList = vector 첫번째데이터
 		List basketList = (List) vector.get(0);
 		// 		// List goodsList = vector 두번째데이터
@@ -111,6 +111,29 @@ table td {
 		//1이면 plan a, 2이면 plan b, 3이면 plan c
 		int plan = Integer.parseInt(request.getParameter("plan"));
 
+		
+		//plan a 혹은 b 혹은 c에 해당하는 db안에 값이 있는지. 있으면 처리하기.
+		if(plan == 1){
+			out.println("플랜 a 실행.");
+			
+			for(int i=0; i < basketList.size(); i++){
+				
+				MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
+				
+				out.println("m_pln_id" + mpbb2.getMyplans_id());
+				out.println("p_nr" + i+" " + mpbb2.getPlan_nr());
+				out.println("d_nr" + i+" " + mpbb2.getDay_nr());
+				out.println("i_nr" + i+" " + mpbb2.getItem_nr());
+				
+				
+				
+				
+				
+			}
+						
+		}
+		
+		
 		//from, to 날짜값 받아오기.
 		String from = request.getParameter("from");
 		String to = request.getParameter("to");
@@ -227,9 +250,9 @@ table td {
 						</select>
 					</div>
 					
-					<input type='text' name='res<%=i %>' placeholder="mpbb2.getMyplans_id()">
-					<input type='text' name='plan_nr<%=i %>' placeholder="plan_nr">
-					<input type='text' name='day_nr<%=i %>' placeholder="day_nr">
+					<input type='hidden' name='res<%=i %>' placeholder="mpbb2.getMyplans_id()">
+					<input type='hidden' name='plan_nr<%=i %>' placeholder="plan_nr">
+					<input type='hidden' name='day_nr<%=i %>' placeholder="day_nr">
 					
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '

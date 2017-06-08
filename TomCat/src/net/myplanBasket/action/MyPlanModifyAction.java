@@ -60,10 +60,15 @@ public class MyPlanModifyAction implements Action {
 				mpbb = new MyPlanBasketBean();
 
 				mpbb.setId(id);
-				mpbb.setFirstday(request.getParameter("fromDate"));// 출발일
-				mpbb.setLastday(request.getParameter("toDate"));// 도착일
+
+				String first = request.getParameter("fromDate");
+				String last = request.getParameter("toDate");
 
 				fin_mpln_id = bb[i].split("@")[k];
+
+				mpbb.setFirstday(first);// 출발일
+				mpbb.setLastday(last);// 도착일
+
 				// 2. fin_mpln_id 값으로 plan_nr이 비어있는지 확인한 후,
 				MyPlanBasketBean mpbb2 = mpbd.selectModifyMyPlan(fin_mpln_id);
 
