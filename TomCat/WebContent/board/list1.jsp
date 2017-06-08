@@ -10,15 +10,15 @@
 
 <head>
 
-<<<<<<< HEAD
+
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=6" rel="stylesheet" type="text/css">
-=======
+<link href="./assets/css/list.css?ver=9" rel="stylesheet" type="text/css">
+
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <link href="./assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
 
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
@@ -145,7 +145,7 @@
 			%>
 
 
-			<div class="e" id="<%=i%>">
+			<div class="e"  id="<%=i%>">
 
 				<!--  제목 -->
 				<div id="sub">
@@ -157,7 +157,6 @@
 					<%=content%><br>
 <%-- 					현재 위치 <%=bb.getLocation() %> --%>
 				</div>
-
 <!-- 					<div class="clear"> -->
 					
 				<div id="2_inner_left" style="width: 30%;">
@@ -225,18 +224,37 @@
 					
 				</div>
 				<div class="upde">
-<%-- 				<%if(nick.equals(bb.getNick_name())){ %>				 --%>
+				<%if(nick.equals(bb.getNick_name())){ %>				
 <input type="button" value="수정"
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
 <input type="button" value="삭제"
-onclick="location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
-<%-- <%} %> --%>
-<input type="button" value="댓글"  class="re" >   
+onclick="button_event(); location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
+
+<script type="text/javascript">
+
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == false){    //확인
+
+	    document.form.submit();
+
+	}else{   //취소
+
+	    return;
+
+	}
+
+	}
+
+</script>
+
+<%} %>
+<input type="button" value="댓글"  class="re button alt" >   
 
 </div>
 
 
-         <div id="plybb<%=bb.getNum()%>"   class="replybb animated swing"   style="display: none">
+         <div id="plybb<%=bb.getNum()%>"   class="replybb animated rollIn"   style="display: none">
          <%=bb.getNum()%>
          some output of text
          </div>

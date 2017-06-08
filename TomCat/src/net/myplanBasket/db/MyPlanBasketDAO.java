@@ -425,10 +425,68 @@ public class MyPlanBasketDAO {
 		return vector;
 
 	}
+	
 
+	public MyPlanBasketBean selectModifyMyPlan(String myplans_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		MyPlanBasketBean mpbbSelect = new MyPlanBasketBean();
+		
+		int mid = Integer.parseInt(myplans_id);
+		try {
+			con = getConnection();
+			sql = "select * from myplans where myplans_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+
+			// 4. 실행
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){		
+				
+				mpbbSelect.setPlan_nr(rs.getString("plan_nr"));
+				mpbbSelect.setDay_nr(rs.getString("day_nr"));
+				mpbbSelect.setItem_nr(rs.getString("item_nr"));
+				
+			}
+			
+//			pstmt.setInt(4, myplanbean.getItem_nr());
+						
+//			pstmt.setInt(5, myplanbean.getDay_nr());
+//			pstmt.setString(6, myplanbean.getDay_night());
+//			pstmt.setFloat(7, myplanbean.getUser_lat());
+//			pstmt.setFloat(8, myplanbean.getUser_lng());
+//			pstmt.setString(9, myplanbean.getDate());
+//			pstmt.setString(10, myplanbean.getMemo());
+//			pstmt.setInt(11, myplanbean.getPlan_done_nr());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+				}
+		}
+		return mpbbSelect;
+	}
+	
 	
 	// modifyGoods(GoodsBean goodsbean)
-	public void modifyMyPlan(MyPlanBasketBean myplanbean) {
+	public void modifyMyPlan(MyPlanBasketBean myplanbean, String myplans_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -439,14 +497,17 @@ public class MyPlanBasketDAO {
 			// 3 sql num 에 해당하는
 //			sql = "update myplans set item_nr=? where plan_nr=?,,firstday=?,lastday=?"
 //					+ ",day_nr=?,day_night=?,user_lat=?,user_lng=?,date=?,memo=?,plan_done_nr=? ";
-			sql = "update myplans set firstday=?, lastday=?, plan_nr=? where id=? ";
+			sql = "update myplans set firstday=?, lastday=?, plan_nr=?, day_nr=?, item_nr=? where myplans_id=? ";
 			pstmt = con.prepareStatement(sql);
 			
 			
 			pstmt.setString(1, myplanbean.getFirstday());
 			pstmt.setString(2, myplanbean.getLastday());
 			pstmt.setString(3, myplanbean.getPlan_nr());
-			pstmt.setString(4, myplanbean.getId());
+			pstmt.setString(4, myplanbean.getDay_nr());
+			pstmt.setString(5, myplanbean.getItem_nr());
+			
+			pstmt.setInt(6, Integer.parseInt(myplans_id));
 			
 
 //			pstmt.setInt(4, myplanbean.getItem_nr());
