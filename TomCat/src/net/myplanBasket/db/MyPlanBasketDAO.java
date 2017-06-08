@@ -425,9 +425,10 @@ public class MyPlanBasketDAO {
 		return vector;
 
 	}
+	
 
 	// modifyGoods(GoodsBean goodsbean)
-	public void modifyMyPlan(MyPlanBasketBean myplanbean) {
+	public void modifyMyPlan(MyPlanBasketBean myplanbean, String myplans_id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -438,14 +439,14 @@ public class MyPlanBasketDAO {
 			// 3 sql num 에 해당하는
 //			sql = "update myplans set item_nr=? where plan_nr=?,,firstday=?,lastday=?"
 //					+ ",day_nr=?,day_night=?,user_lat=?,user_lng=?,date=?,memo=?,plan_done_nr=? ";
-			sql = "update myplans set firstday=?, lastday=?, plan_nr=? where id=? ";
+			sql = "update myplans set firstday=?, lastday=?, plan_nr=? where myplans_id=? ";
 			pstmt = con.prepareStatement(sql);
 			
 			
 			pstmt.setString(1, myplanbean.getFirstday());
 			pstmt.setString(2, myplanbean.getLastday());
 			pstmt.setString(3, myplanbean.getPlan_nr());
-			pstmt.setString(4, myplanbean.getId());
+			pstmt.setInt(4, Integer.parseInt(myplans_id));
 			
 
 //			pstmt.setInt(4, myplanbean.getItem_nr());
