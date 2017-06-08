@@ -13,15 +13,16 @@
 }
 
 .e {
-	border: 2px solid #8c8c8c;
+	border: 2px solid #e2dfdf;
 	border-radius: 40px;
 	padding :20px;
 	width: 600px;
-	background-color: rgba(246, 246, 246, 0.8);
+	background-color:rgba(0, 0, 0, 0.6) !important;
 	margin-left:50px;
 	margin-bottom: 100px;
 	height: 800px;
 }
+
 #ima{
 	background-image: url("./beach.jpg");
 	background-size:cover;
@@ -48,7 +49,6 @@
 }
 
 .write{
-
 	position:fixed;
 	margin-top: 3em;
 	margin-left: 1em;
@@ -56,9 +56,10 @@
 
 #sub {
 	text-align: center;
-
+	color:white
 	font-family: 'Hanna', serif;
 	font-size: 1.5em;
+	color:white
 }
 
 #con {
@@ -69,21 +70,25 @@
 	overflow-y : scroll;
 	word-wrap : break-word;
 	font-family: 'Hanna', serif;
+	color:white
 }
 
 #file {
 	width: 100px;
 	border-radius: 250px;
 	margin: auto;
+	color:white
 }
 
 #nick{
 	text-align: center;
 	font-size: 1.5em;
 	font-family: 'Hanna', serif;
+	color:white
 }
 #date{
 	text-align: center;
+	color:white
 }
 
 /* 프로필 이미지 */
@@ -180,12 +185,12 @@ to {
 }
 
 .replybb{
-	border: 2px solid #8c8c8c;
+	border: 2px solid #e2dfdf !important;
 	border-radius: 40px;
 	width: 400px;
 	height: 600px;
 	display: none;
-	background-color: rgba(246, 246, 246, 0.8);
+	background-color: rgba(0, 0, 0, 0.8) !important;
 	position: relative;
 	top: -650px;
 	left: 580px;
@@ -198,23 +203,25 @@ to {
 	border-radius:50px;
 }
 .up:hover{
-	background-color:#2196F3;
+	background-color:#2196F3 !important;
 }
 .de{
 	opcity:0.85;
 	font-size: 0.8em;
 }
 .de:hover{
-	background-color:#2196F3;
+	background-color:#2196F3 !important;
 }
 .re{
 	float:right;
 	display: block;
 	opcity:0.85;
-	font-size: 12px;	
+	font-size: 12px;
+	background-color: rgba(255,255,255,0.79) !important;
+	color: black !important;
 }
 .re:hover{
-	background-color:#2196F3;
+	background-color:#2196F3 !important;
 }
 .form1{
 	border-right: 30px;
