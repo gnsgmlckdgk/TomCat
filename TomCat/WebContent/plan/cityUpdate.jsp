@@ -63,7 +63,7 @@
 <div class="city_update">
 	<form action="./CityUpdateAction.pl" name="city_fr" method="post" enctype="multipart/form-data">
 		국가코드
-		<select name="country_code">
+		<%-- <select name="country_code" >
 			<optgroup label="현제 국가코드">
 				<option value=<%=pcb.getCountry_code() %>><%=pcb.getCountry_code() %></option>
 			</optgroup>
@@ -77,7 +77,8 @@
 				}
 			%>
 			</optgroup>
-		</select>  
+		</select> --%>
+		<input type="text" name="country_code" value="<%=pcb.getCountry_code() %>" readonly="readonly">
 		
 		<!-- 이전 국가코드 : 국가코드 변경시 필요 -->
 		<input type="hidden" name="beforeCountryCode" value="<%=pcb.getCountry_code() %>">
@@ -89,7 +90,7 @@
 		<input type="text" name="name" value="<%=pcb.getName()%>">
 		
 		도시 영어이름
-		<input type="text" name="en_name" value="<%=pcb.getEn_name()%>">
+		<input type="text" name="en_name" value="<%=pcb.getEn_name()%>" readonly="readonly">
 		<input type="hidden" name="before_en_name" value="<%=pcb.getEn_name() %>">
 		
 		<br>이미지 변경

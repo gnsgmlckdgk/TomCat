@@ -325,6 +325,74 @@ public class ImagesDAO {
 		}	
 	}
 	
+	// 관광지 삭제시 이미지도 같이 삭제
+	public void deleteTravelImages(int travel_id) {
+		try {
+			con = getConnection();
+			
+			sql = "delete from images where travel_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, travel_id);
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}	
+		}	
+	}
+	
+	// 국가코드가 변경시 이미지 경로의 앞부분이 바뀌기 때문에 그 부분만 바꾸기 위한 메소드
+	public void updatePathCountry(String beforeCountryCode, String newCountryCode) {
+		
+		try {
+			
+			con = getConnection();
+			
+			// 기존의 파일경로 가져오기
+			sql = "select file from images where country_code = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, beforeCountryCode);
+			
+			rs = ps.executeQuery();
+			
+			String path = "";
+			if(rs.next()) {
+				path = rs.getString("file");
+				path = path.replaceFirst(beforeCountryCode, newCountryCode);	// 국가 폴더명 변경
+			}
+			
+			
+			sql = "update images set country_code = ?, file = ? where country_code = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, newCountryCode);
+			ps.setString(2, path);
+			ps.setString(3, beforeCountryCode);
+			
+			ps.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}	
+		}	
+		
+	}
+	
 	// 국가코드 변경
 	public void updateCityCode(String beforeCityCode, String newCountryCode, String newPath) {
 		
@@ -384,5 +452,34 @@ public class ImagesDAO {
 		}	
 		
 	}
+	
+	// 관광지수정 으로인한 수정
+		public void updateTravelFile(ImagesBean ib) {
+			
+			try {
+				
+				con = getConnection();
+				
+				sql = "update images set file = ? where travel_id = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, ib.getFile());
+				ps.setInt(2, ib.getTravel_id());
+				
+				ps.executeUpdate();
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(rs!=null) rs.close();
+					if(ps!=null) ps.close();
+					if(con!=null) con.close();
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}	
+			}	
+			
+		}
 	
 }

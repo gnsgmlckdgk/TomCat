@@ -13,6 +13,10 @@
 	div.DBManager a {
 		text-decoration: none;
 	}
+	
+	.memberContent a {
+		font-size: 16px;
+	}
 
 </style>
 
@@ -39,12 +43,13 @@
 			
 		<header>
 			<h1>DB 통합 관리</h1><hr>
+			도시, 관광지 수정 시<br>
+			<span style="color: orange;">국가나 도시 변경시 이미지 이동에 오류</span>가 있어 <span style="color: red;">국가, 도시 변경은 임시로 막아놓음</span><br> 
+			추후 수정 예정
 		</header>
 						
 			<a href = "javascript:countryInput()">국가 DB 관리</a><br>
-				
 			<a href = "javascript:cityInput()">도시(지역) DB 관리</a><br>
-				
 			<a href = "javascript:travelInput()">여행지 DB 입력</a><br>
 					
 		</div>	<!-- memberContent -->	
