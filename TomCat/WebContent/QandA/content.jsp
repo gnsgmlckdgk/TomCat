@@ -32,12 +32,15 @@ content=qb.getContent().replace("\r\n","<br>");
 %>
 
 <div id="combine">
-<h1 id="h1">Q&A</h1>
+<img id="question" src="./images/QandA/questionmark.png">
+
 
 <table id="table1">
-<tr><td><%=qb.getNick() %></td><td><%=qb.getSubject() %></td><td><%=qb.getDate() %></td></tr>
-<tr><td colspan="3"><%=qb.getContent() %></td></tr>
-<tr><td id="center" colspan="3">
+<tr class="com_sub"><td colspan="4"><%=qb.getSubject() %></td></tr>
+<tr class="com_sub"><td style="border-right: 1px solid #999;">글쓴이</td><td style="border-right: 1px solid #999;"><%=qb.getNick() %></td><td style="border-right: 1px solid #999;">날짜</td><td><%=qb.getDate() %></td></tr>
+<tr style="padding-left: 20px;"><td colspan="4"  style="padding-left: 20px;"><%=qb.getContent() %></td></tr>
+
+<tr><td id="center" colspan="3" class="com_sub_right">
 		<%if(qb.getNick().equals(nick)){%>	
 	<input id="txt" type="button" value="글수정" onclick="location.href='./QandAUpdate.qna?num=<%=qb.getNum()%>&pageNum=<%=pageNum%>'">
 				<form action="./QandADeleteAction.qna" method="post" name="fr" onclick="func1()">					

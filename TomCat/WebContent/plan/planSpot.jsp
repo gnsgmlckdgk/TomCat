@@ -1,3 +1,4 @@
+<%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="net.plan.db.PlanSouvenirBean"%>
 <%@page import="net.plan.db.PlanTravelBean"%>
@@ -28,79 +29,15 @@
 	//선물리스트 가져오기
 	List souvenirList = (List)request.getAttribute("souvenirList");
 	
+	//관광지 이미가져오기
+	ImagesBean ib = (ImagesBean)request.getAttribute("ib");
+	
 	//아이디 
 	String id =(String)session.getAttribute("id");
 %>
 
 <script type="text/javascript">
 var toggleBtn = 0;
-	$(document).ready(function(){
-
-		$('input.month').click(function(){
-			$('input.month').css('background-color','#323037');//진한회색	
-			$(this).css('background-color','#f32853');//핑크색
-			var month=$(this).val();
-			//다른 월 선택시 부르기
-			$.ajax({
-				type:'post',
-				url:'./plan/travelStyle.jsp',
-				data:{month : month, city_name:'<%=pcb.getName()%>'},
-				success:function(data){
-					$('div.month_img').empty(data);
-					$('div.month_img').append(data);
-				},
-				error:function(xhr, status, error){
-					alert(error);
-				}
-			});
-		});
-		$('.blog_Spot').click(function(){
-			$('.Spot_epilogue').css('background-color','#323037');
-			$(this).css('background-color','#f32853');
-			$('#Spot_epilogue').css('display','none');
-			$('#daumBlog').css('display','block');
-		});
-		
-		$('.Spot_epilogue').click(function(){
-			$('.blog_Spot').css('background-color','#323037');
-			$(this).css('background-color','#f32853');
-			$('#daumBlog').css('display','none');
-			$('#Spot_epilogue').css('display','block');
-		
-			
-		});
-		
-		$('#writeBtn').click(function(){
-			if(toggleBtn==0) {
-				$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
-				$('.reviewWriterDiv').css('display', 'inline-block');
-				
-				toggleBtn = 1;
-			}else {
-				$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
-				setTimeout(function(){
-					$('.reviewWriterDiv').hide();
-				}, 700)
-				toggleBtn = 0;
-			}
-		});
-		
-
-		/* 최초 리뷰 리스트 가져오기 */
-		$.ajax({
-			type: 'post',
-			url: './plan/planComment/planSpotCommentList.jsp',
-			data : {spot:'<%=ptb.getName()%>'},
-			success: function(data) {
-				$('div.comment .review_list').empty();
-				$('div.comment .review_list').append(data);
-			},
-			error: function(xhr, status, error) {
-				alert(error);
-		    } 
-		});
-		
-	});
 
 	/* 처음 화면 */
 	$(window).load(function(){
@@ -109,7 +46,57 @@ var toggleBtn = 0;
 			$('input#first').css('background-color','#f32853');
 			$('.blog_Spot').css('background-color','#f32853');
 			$('#Spot_epilogue').css('display','none');
-			$('#daumBlog').css('display','block');
+			$('#daumView').css('display','block');
+			
+			$('#writeBtn').click(function(){
+				if(toggleBtn==0) {
+					$('.reviewWriterDiv').removeClass('animated fadeOutUp').addClass('animated fadeInDown');
+					$('.reviewWriterDiv').css('display', 'inline-block');
+					
+					toggleBtn = 1;
+				}else {
+					$('.reviewWriterDiv').removeClass('animated fadeInDown').addClass('animated fadeOutUp');
+					setTimeout(function(){
+						$('.reviewWriterDiv').hide();
+					}, 700)
+					toggleBtn = 0;
+				}
+			});
+			
+			$('.blog_Spot').click(function(){
+				$('.Spot_epilogue').css('background-color','#323037');
+				$(this).css('background-color','#f32853');
+				$('#Spot_epilogue').css('display','none');
+				$('#daumView').css('display','block');
+			});
+			
+			$('.Spot_epilogue').click(function(){
+				$('.blog_Spot').css('background-color','#323037');
+				$(this).css('background-color','#f32853');
+				$('#daumView').css('display','none');
+				$('#Spot_epilogue').css('display','block');
+			
+				
+			});
+			
+			$('input.month').click(function(){
+				$('input.month').css('background-color','#323037');//진한회색	
+				$(this).css('background-color','#f32853');//핑크색
+				var month=$(this).val();
+				//다른 월 선택시 부르기
+				$.ajax({
+					type:'post',
+					url:'./plan/travelStyle.jsp',
+					data:{month : month, city_name:'<%=pcb.getName()%>'},
+					success:function(data){
+						$('div.month_img').empty(data);
+						$('div.month_img').append(data);
+					},
+					error:function(xhr, status, error){
+						alert(error);
+					}
+				});
+			});
 		});
 		$.ajax({ //1월 검색값 불러오기(월, 도시이름 넘겨줌)
 			type:'post',
@@ -121,6 +108,19 @@ var toggleBtn = 0;
 			error:function(xhr, status, error){
 				alert(error);
 			}
+		});
+		
+		$.ajax({
+			type: 'post',
+			url: './plan/planComment/planSpotCommentList.jsp',
+			data : {spot:'<%=ptb.getName()%>'},
+			success: function(data) {
+				$('div.comment .review_list').empty();
+				$('div.comment .review_list').append(data);
+			},
+			error: function(xhr, status, error) {
+				alert(error);
+		    } 
 		});
 	});
 	
@@ -137,6 +137,7 @@ var toggleBtn = 0;
 <div class="clear"></div>
 <!-- 본문 -->
 <section class = "planSpot">
+<div class = "planSpot">
 <h2>
 	<%=ptb.getName() %><span><%=ptb.getAddress() %></span>
 
@@ -150,12 +151,12 @@ var toggleBtn = 0;
 
 <div class="img_info">
 	<div class="travel_img" >
- 		<img alt="임시이미지" src="./images/pic02.jpg" width="450px">
+ 		<img alt="관광지 이미지" src="./images/plan/nation/<%=ib.getFile()%>" width="450px" height="300px">
  	</div>
 	
 
 <!-- 추가정보(검색설명) -->
-<div class="tr_info" style="">지도</div>
+<div class="tr_info">지도</div>
 
 </div>
 
@@ -166,7 +167,7 @@ var toggleBtn = 0;
 
 <!-- 월별 옷차림(검색) -->
 
-<h3>월별 옷차림 &nbsp<span>계절에 맞는 이 지역 코디를 검색해 보세요</span></h3>
+<h3>월별 옷차림 &nbsp<!-- <span>계절에 맞는 이 지역 코디를 검색해 보세요</span> --></h3>
 <div class="All_mon">
 <input type="button"  value="1월" class="month" id="first">
 <input type="button" value="2월" class="month">
@@ -194,11 +195,18 @@ var toggleBtn = 0;
 <!-- <img alt="이전" src="./images/Spot/arrow2.png"> -->
 
 <%
+if(souvenirList.size()==0){
+	%>
+	<div class="souvenir">
+	<h4>등록된 기념품이 없습니다</h4>
+	</div>
+	<%
+}
 	for(int i=0; i<souvenirList.size();i++){
 		PlanSouvenirBean psb = (PlanSouvenirBean)souvenirList.get(i);
 	%>
-	<div style="">
 	
+	<div >
 	<table class="souvenir" style="float: left; width: 300px; margin-right: 50px; border: none; height: ">
 		
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getName() %></td></tr>
@@ -206,11 +214,12 @@ var toggleBtn = 0;
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getInfo() %></td></tr>
 		
 	</table>
-	
 	</div>
+	
 	<%
 	}
 %>
+
 <!-- <img alt="이후" src="./images/Spot/arrow.png">
  -->
 
@@ -223,16 +232,37 @@ var toggleBtn = 0;
 <div class="Spot_epilogue"><span class="text"><%=ptb.getName()%> 여행 후기</span></div>
 <div class="clear"></div>
 <script src="./assets/js/plan/planSpotSearch.js"></script>
-<div id="daumForm" style="display: none;">
-    	<input id="daumSearch" type="hidden" value="<%=pcb.getName()%> 여행 <%=ptb.getName() %>" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();"/>
-	</div>
+
 	
-       <div id="daumBlog" style="display:none;"></div> <!-- 블로그 후기 나타나는 div -->
-		
+       <div class="feature-grid">
+
+			<!-- 이미지 서치 시작.-->
+			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
+			<div id="daumForm" >
+				<input id="daumSearch" type="hidden" value="<%=ptb.getName() %>+여행후기"
+					onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
+				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
+				<!-- 					type="submit" value="검색" /> -->
+			</div>
+			<div id="daumView" style="display: block;height: 800px; margin-left:1em; margin-top: 5px;">
+				<div id="daumImage"></div>
+			</div>
+			<div id="daumScript" style="display: block;">
+				<div id="daumImageScript"></div>
+			</div>
+			<div class="clear"></div>
+		</div> <!-- 블로그 후기 나타나는 div -->
+		<div class="clear"></div>
 		
 		<!-- 후기 작성 추가 -->
-		<div id="Spot_epilogue" style="width: 1000px; height: 500px;">
+		<div id="Spot_epilogue" style="height: 800px; margin-left:2em; margin-top: 5px;">
+		
 			<div class="comment">
+			
+			<div class="review_list">
+			<!-- 리뷰 리스트 오는 자리 -->
+			<!-- 페이지 번호 오는 자리 -->
+		</div>
 				<div class="comment_right">
 					<%
 					if(id!=null){
@@ -317,7 +347,7 @@ var toggleBtn = 0;
 				    } 
 				});
 				
-				regionCommentList(1);
+				spotCommentList(1);
 			}
 			
 			/* 페이징 변경이나 다른 작업 후 다시 리뷰 리스트를 로딩할때 */
@@ -340,14 +370,13 @@ var toggleBtn = 0;
 			
 			</div>
 
-	<div id="daumBlogScript"></div>
 
 
 
-
+</div>
 
 </section>
 <div class="clear"></div>
 
-<%-- <!-- footer -->
-<jsp:include page="../inc/footer.jsp" /> --%>
+<!-- Footer -->
+<jsp:include page="../inc/footer.jsp" />

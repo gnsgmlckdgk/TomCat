@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 body {
-	background-image: url("../../../images/instagram/goldengate.jpg");
+	background-image: url("../../../images/instagram/beach.jpg");
 	background-attachment: fixed;
 	background-position: center top;
 	background-size: cover;
@@ -10,14 +10,14 @@ body {
 
 #combine{
 	margin: auto;
-	width: 80%;
+	width: 1400px;
 	height: 50%;
 	position: relative;
 }
 form{
 	background-position: center top;
 	background-attachment: fixed;
-	margin: auto;
+	margin: 0px auto 0 auto;
 	line-height: 1.75;
 	text-align: center;
 	width: 50%;
@@ -26,20 +26,21 @@ form{
 }
 
 #submit{	
-	margin-bottom:3px;
+	margin-bottom:40px;
 	width:150px;
 	height:50px;
 	padding:0;
-	background-color: #ff6699;	
+	background-color: #333;	
+
 }
 
 input[type=text]{
 	margin-left:100px;	
-	width:80%;
+	width:500px;
 }
 textarea{
 		margin-left:100px;
-		width:80%;
+		width:500px;
 }
 
 
@@ -49,7 +50,7 @@ textarea{
 	width:10em;
 	background-color: white;
 	position: absolute;
-	top: 150px;
+	top: 175px;
 	border-collapse: none;
 	border: none;
 	

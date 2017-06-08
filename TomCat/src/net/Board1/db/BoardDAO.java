@@ -151,9 +151,7 @@ public class BoardDAO {
 				bb.setContent(rs.getString("content"));
 				bb.setDate(rs.getTimestamp("date"));
 				bb.setFile(rs.getString("file"));
-		
 				bb.setRe_ref(rs.getInt("re_ref"));
-			
 				bb.setReadcount(rs.getInt("readcount"));
 				bb.setLocation(rs.getString("location"));
 				
@@ -196,11 +194,11 @@ public class BoardDAO {
 				bb.setContent(rs.getString("content"));
 				bb.setDate(rs.getTimestamp("date"));
 				bb.setFile(rs.getString("file"));
-				bb.setIp(rs.getString("ip"));
-			
 				bb.setRe_ref(rs.getInt("re_ref"));
-
 				bb.setReadcount(rs.getInt("readcount"));
+				bb.setLocation(rs.getString("location"));
+				System.out.println("BoardDAO getBoard nick_name"+bb.getNick_name());
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -256,20 +254,17 @@ public class BoardDAO {
 			//                    틀리면 check=0
 			//         없으면 check=-1
 			if(rs.next()){
-				if(bb.getPass().equals(rs.getString("pass"))){
+				System.out.println(bb.getNick_name());
 					//3 sql update
-					sql="update board set name=?,subject=?,content=? where num=?";
+					sql="update board set nick_name=?,subject=?,content=? where num=?";
 					pstmt=con.prepareStatement(sql);
-				
+					pstmt.setString(1,bb.getNick_name());
 					pstmt.setString(2, bb.getSubject());
 					pstmt.setString(3, bb.getContent());
 					pstmt.setInt(4, bb.getNum());
 					//4 실행
 					pstmt.executeUpdate();
-					check=1;
-				}else{
-					check=0;
-				}
+					check=1;	
 			}else{
 				check=-1;
 			}
@@ -283,7 +278,7 @@ public class BoardDAO {
 		return check;
 	}//updateBoard(BoardBean bb)
 	
-	public int deleteBoard(int num,String pass){
+	public int deleteBoard(int num){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		String sql="";
@@ -305,7 +300,7 @@ public class BoardDAO {
 			//                    틀리면 check=0
 			//         없으면 check=-1
 			if(rs.next()){
-				if(pass.equals(rs.getString("pass"))){
+				
 					//3 sql delete
 					sql="delete from board where num=?";
 					pstmt=con.prepareStatement(sql);
@@ -313,9 +308,6 @@ public class BoardDAO {
 					//4 실행
 					pstmt.executeUpdate();
 					check=1;
-				}else{
-					check=0;
-				}
 			}else{
 				check=-1;
 			}

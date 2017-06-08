@@ -10,16 +10,15 @@ public class BoardUpdate1 implements Action1{
 	@Override
 	public ActionForward1 execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("boardupdate");
+		request.setCharacterEncoding("utf-8");
 		int num = Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		
 		net.Board1.db.BoardDAO bdao = new net.Board1.db.BoardDAO();
-	
-		
 		net.Board1.db.BoardBean bb = bdao.getBoard(num);
 		
-		System.out.println(bb.getNum());
-		
+		System.out.println("Boardupdate1 num"+bb.getNum());
+		System.out.println("Boardupdate1 nick_name"+bb.getNick_name());
 		request.setAttribute("bb", bb);
 		request.setAttribute("pageNum", pageNum);
 		

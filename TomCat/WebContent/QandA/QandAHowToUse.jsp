@@ -5,7 +5,9 @@
 <jsp:include page="../inc/header.jsp" />
 <link rel="stylesheet" href="./assets/css/QandA/QandAHowToUse.css"/>	
 
-	<div id="combine">
+<div id="combine">
+	
+	<h1 class="combine_logo"><span>BEFORE</span> YOU GO</h1>
 
 <table id="table1">
 
@@ -13,7 +15,7 @@
 <h1 id="h1">step1</h1>
  로그인 후 가고싶은 장소를 검색하세요
 </td>
-<td>
+<td class="left">
 	<img src="./images/QandA/step1.png" width="500" height="300">
 
 </td>
@@ -34,7 +36,7 @@
 <td><h1 id="h1">step3</h1>
 찜한 장소로 일정을 짜보세요
 </td>
-<td>
+<td class="left">
 	<img src="./images/QandA/step3.png" width="500" height="300">
 </td>
 
@@ -46,7 +48,7 @@
  함께해요를 통해 같이 여행을 할 친구를 찾아봐요<br>
 Tip 현재 당신이 위치한 곳을 지도상에 나타낼 수 있습니다.<br>
 </td>
-<td>
+<td class="left">
 	<img src="./images/QandA/step4.png" width="500" height="300">
 </td>
 </tr>
@@ -57,7 +59,7 @@ Tip 현재 당신이 위치한 곳을 지도상에 나타낼 수 있습니다.<b
 Tip 좋아요가 가장많은 Best Shot으로 선정되신 분은<br>
  소정의 사은품을 보내드립니다.<br>
 </td>
-<td>
+<td class="left">
 	<img src="./images/QandA/step5.png" width="500" height="300">
 </td>
 </tr>

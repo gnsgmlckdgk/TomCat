@@ -11,6 +11,7 @@
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 	%>	
 	<div id="combine">
+	<img id="question" src="./images/QandA/questionmark.png">
 	
 		<form action="QandAWriteAction.qna" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
 <!-- 		닉네임 세션값 생성해서 readonly로 설정하기 -->
