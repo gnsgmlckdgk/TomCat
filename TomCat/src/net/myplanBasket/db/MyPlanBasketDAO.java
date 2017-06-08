@@ -427,6 +427,7 @@ public class MyPlanBasketDAO {
 	}
 	
 
+	
 	// modifyGoods(GoodsBean goodsbean)
 	public void modifyMyPlan(MyPlanBasketBean myplanbean, String myplans_id) {
 		Connection con = null;

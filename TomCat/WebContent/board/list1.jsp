@@ -10,9 +10,15 @@
 
 <head>
 
+<<<<<<< HEAD
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
+<link href="./assets/css/list.css?ver=6" rel="stylesheet" type="text/css">
+=======
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <link href="./assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
+
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <link rel="stylesheet" href="./assets/css/animate/animate.min.css"/>
@@ -96,6 +102,7 @@
 			// request.setAttribute("pageBlock", pageBlock);
 			// request.setAttribute("startPage", startPage);
 			// request.setAttribute("endPage", endPage);
+			String nick=(String) session.getAttribute("nick");
 			String id = (String) session.getAttribute("id");
 			List boardList = (List) request.getAttribute("boardList");
 			String pageNum = (String) request.getAttribute("pageNum");
@@ -217,7 +224,8 @@
 			
 					
 				</div>
-				<div class="upde">				
+				<div class="upde">
+<%-- 				<%if(nick.equals(bb.getNick_name())){ %>				 --%>
 <input type="button" value="수정"
 onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
 <input type="button" value="삭제"
@@ -253,15 +261,15 @@ if(count!=0){
 	// 끝페이지 번호 구하기  
 	//이전
 	if(startPage>pageBlock){
-		%><a href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>" style="text-decoration:none; color:black;">[이전]</a><%
+		%><a id="page2" href="./BoardList1.bb?pageNum=<%=startPage-pageBlock%>" style="text-decoration:none; color:black;">[이전]</a><%
 	}
 	// 1..10  11..20  21...30
 	for(int i=startPage;i<=endPage;i++){
-		%><b><a href="./BoardList1.bb?pageNum=<%=i%>" style="text-decoration:none; color:black;">『<%=i%>』</a></b><%
+		%><b><a id="page2"  href="./BoardList1.bb?pageNum=<%=i%>" style="text-decoration:none; color:black;">『<%=i%>』</a></b><%
 	}
 	// 다음
 	if(endPage < pageCount){
-		%><a href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>" style="text-decoration:none; color:black;">[다음]</a><%
+		%><a id="page2"  href="./BoardList1.bb?pageNum=<%=startPage+pageBlock%>" style="text-decoration:none; color:black;">[다음]</a><%
 	}
 }
 %>

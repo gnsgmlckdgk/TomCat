@@ -120,45 +120,50 @@ public class MyPlanModifyAction implements Action {
 
 		
 
-		/*
-		 * Vector vector1= mpbd.getBasketList_Plan_nr(mpbb);
-		 * 
-		 * List basketList1=(List)vector1.get(0); List
-		 * goodsList1=(List)vector1.get(1);
-		 * 
-		 * //String str = "plan_nr@day_nr@item_nr"; //String[]result =
-		 * mpbd.split("@");
-		 * 
-		 * 
-		 * request.setAttribute("basketList", basketList1);
-		 * request.setAttribute("goodsList", goodsList1);
-		 * 
-		 * // System.out.println("이거이거"+basketList1);
-		 * 
-		 * for (int i = 0; i < basketList1.size(); i++) { MyPlanBasketBean mpbb1
-		 * = (MyPlanBasketBean) basketList1.get(i);
-		 * System.out.println(mpbb1.getDay_nr());
-		 * System.out.println(mpbb1.getItem_nr());
-		 * System.out.println(mpbb1.getPlan_nr());
-		 * 
-		 * StringTokenizer st = new StringTokenizer(mpbb1.getDay_nr(), "@"); int
-		 * n = st.countTokens(); // 남아있는 토큰의 개수를 반환 for (int j = 0; j < n; j++)
-		 * { System.out.println(st.nextToken()); }
-		 * 
-		 */
 
-		// StringTokenizer st1 = new StringTokenizer(mpbb1.getItem_nr(), "@");
-		// int n1 = st1.countTokens(); // 남아있는 토큰의 개수를 반환
-		// for (int j1 = 0; j1 < n1; j1++) {
-		// System.out.println(st1.nextToken());
-		// }
-		//
-		// StringTokenizer st2 = new StringTokenizer(mpbb1.getPlan_nr(), "@");
-		// int n2 = st2.countTokens(); // 남아있는 토큰의 개수를 반환
-		// for (int j2 = 0; j2 < n2; j2++) {
-		// System.out.println(st2.nextToken());
-		// }
-		// }
+
+		/*
+		
+		  Vector vector1= mpbd.getBasketList_Plan_nr(mpbb);
+		  
+		  List basketList1=(List)vector1.get(0); List
+		  goodsList1=(List)vector1.get(1);
+		  
+		  request.setAttribute("basketList", basketList1);
+		  request.setAttribute("goodsList", goodsList1);
+		  
+
+			// System.out.println("이거이거"+basketList1);
+	
+			for (int i = 0; i < basketList1.size(); i++) {
+			MyPlanBasketBean mpbb1 = (MyPlanBasketBean) basketList1.get(i);
+			System.out.println(mpbb1.getDay_nr());
+			System.out.println(mpbb1.getItem_nr());
+			System.out.println(mpbb1.getPlan_nr());
+
+			StringTokenizer st = new StringTokenizer(mpbb1.getDay_nr(), "@");
+			int n = st.countTokens(); // 남아있는 토큰의 개수를 반환
+			for (int j = 0; j < n; j++) {
+				System.out.println(st.nextToken());
+			}
+			StringTokenizer st1 = new StringTokenizer(mpbb1.getItem_nr(), "@");
+			int n1 = st1.countTokens(); // 남아있는 토큰의 개수를 반환
+			for (int j1 = 0; j1 < n1; j1++) {
+				System.out.println(st1.nextToken());
+			}
+
+			StringTokenizer st2 = new StringTokenizer(mpbb1.getPlan_nr(), "@");
+			int n2 = st2.countTokens(); // 남아있는 토큰의 개수를 반환
+			for (int j2 = 0; j2 < n2; j2++) {
+				System.out.println(st2.nextToken());
+			}
+
+		}
+		
+		*/
+		
+		
+
 
 		// 이동 ./GoodsList.ag
 		ActionForward forward = new ActionForward();

@@ -222,7 +222,7 @@
 
 		<article>
 			<a href="#" class="image featured"> <img
-				src="./upload/<%=bb.getImage1()%>" width=300 height=300
+				src="./upload/<%=bb.getImage1()%>" width="300" height="300"
 				onerror="this.src='./images/instagram/noimage.png'">
 			</a>
 			<header>

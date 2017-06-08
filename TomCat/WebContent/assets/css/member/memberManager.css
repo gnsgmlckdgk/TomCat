@@ -350,19 +350,32 @@ div.content_member_memberManager th {
 	padding: 10px 0;
 }
 div.content_member_memberManager th.th_img {	/* 프로필 이미지 th */
-	width: 100px;
+	width: 60px;
 }
 .content_member_memberManager th:hover {
 	cursor: pointer;
 }
+div.content_member_memberManager th.th_id {
+	width: 300px;
+}
+div.content_member_memberManager th.th_nick {
+	width: 200px;
+}
+div.content_member_memberManager th.th_auth {
+	width: 150px;
+}
+div.content_member_memberManager th.th_delete {
+	width: 100px;
+}
+
 div.content_member_memberManager td {
 	text-align: center;
 	margin: 0;
 	padding: 0;	
 	border: 1px solid #f0f0f0;
 	font-size: 16px;
-	height: 65px;
-	line-height: 65px;
+	height: 60px;
+	line-height: 60px;
 	font-weight: 500;
 }
 div.content_member_memberManager td.img_td {
@@ -468,13 +481,14 @@ div.memberContent div.adminMemberInfo td {
 	width: 350px;
 	position: relative;
 	padding-left: 30px;
+	font-size: 14px;
 }
 
 div.memberContent div.adminMemberInfo td input[type="text"] { /* 닉네임 폼 */
 	border: none;
 	background-color: #fff;
 	width: 170px;
-	font-size: 12px;
+	font-size: 14px;
 	border: 1px solid #ccc;
 }
 

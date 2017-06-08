@@ -30,7 +30,7 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=1"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=4"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css"/>	<!-- 메인페이지 -->

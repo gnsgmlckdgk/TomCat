@@ -118,13 +118,13 @@
 		 <input id="go" type="hidden" value="Go">
 		 <input id="pageno2" type="hidden" value="3">
 	</form>
-	<div id="fr">
+	<div id="fr" style="padding-left: 20px;">
 	
 	</div>
-	<div id="fr2">
+	<div id="fr2" style="padding-left: 20px;">
 	
 	</div>
-
+	<div class="clear"></div>
 
 
 </body>
