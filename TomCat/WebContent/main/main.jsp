@@ -148,6 +148,7 @@
     <div class="swiper-container imgContainer">
         <div class="swiper-wrapper imgs">
         <%
+        
     	for(int i=0; i<boardList.size(); i++) {
     		boardBean bb = (boardBean) boardList.get(i);
     	%>
@@ -158,6 +159,7 @@
 			</div>
     	<%
     	}
+        
    		%>
         </div>
         <!-- Add Pagination -->
