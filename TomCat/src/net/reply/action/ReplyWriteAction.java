@@ -25,7 +25,11 @@ public class ReplyWriteAction implements Action {
 		ReplyBean rb = new ReplyBean();
 
 		boardBean bb = new boardBean();
-		bb.setSubject(request.getParameter("subject"));
+		
+		String subject = request.getParameter("content");
+		subject = subject.replaceAll("\n", "<br>");
+		
+		bb.setSubject(subject);
 
 		String pageNum = request.getParameter("pageNum");
 		int num = Integer.parseInt(request.getParameter("num"));

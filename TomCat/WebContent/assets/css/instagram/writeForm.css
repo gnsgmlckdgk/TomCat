@@ -1,12 +1,20 @@
 @CHARSET "UTF-8";
 
-.wrapper{
-	height:45em;	
-	background-attachment: fixed;
+section.writeSection{
 	background-image: url("../../../images/instagram/beach.jpg");
-	background-position: center center;
 	background-size: cover;
-		}
+	min-width: 1080px;
+	margin-top: -40px;
+	margin-bottom: -40px;
+	}
+
+div.writeContainer {
+	position: relative;
+	width: 1080px;
+	margin-top: 30px;
+	margin: 0 auto;
+	padding: 100px;
+}
 
 #form{
 	background-color:white;
@@ -16,10 +24,9 @@
 	width:700px;
 	height:700px;	
 	font-weight:bold;
-	margin: auto;	
 	opacity: 0.85;	
-	border-radius: 20px;			
-	position: relative;
+	border-radius: 20px;	
+	margin: 0 auto;		
 }
 
 #submit{	
@@ -41,10 +48,9 @@ textarea{
 
 
 img#girl{
-
-position: fixed;
-right: 24em;
-top: 10em;   
+position: absolute;
+right: 30px;
+top: 100px;
 animation-name:blinking;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/
@@ -52,10 +58,9 @@ animation-iteration-count:infinite;/*애니메이션의 진행횟수(무한반�
 animation-timing-function:cubic-bezier(.71,.31,.37,.87);/*애니메이션의  가속감속 지정*/
 }
 img#boy{
-
-position: fixed;
-left: 24em;
-top: 10em;   
+position: absolute;
+left: 30px;
+top: 100px;   
 animation-name:blinking;
 animation-duration:3s;/*애니메이션의 진행시간(단위는 s나 ms)*/
 animation-play-state:running;/*애니메이션의 자동실행 지정(running/paused)*/

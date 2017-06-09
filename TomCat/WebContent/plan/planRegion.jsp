@@ -346,7 +346,7 @@
 	<script type="text/javascript">
 		
 		var toggleBtn = 0;
-		$(document).ready(function(data){
+
 			/* 리뷰 작성 버튼 */
 			$('#writeBtn').click(function(){
 				if(toggleBtn==0) {
@@ -377,7 +377,7 @@
 					alert(error);
 			    } 
 			});
-		});
+
 		
 		/* 리뷰 작성완료 DB작업 */
 		function writeComplete() {

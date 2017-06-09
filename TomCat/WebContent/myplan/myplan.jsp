@@ -286,13 +286,18 @@
 			
 		     
          <table>
-         <%for(int z=1;z< basketList.size()+1;z++){ %>
+         <%
+         
+         for(int z=1;z< basketList.size()+1;z++){ 
+         if(!plan_nr.equals("100")){
+         %>
          <tr><td colspan="4"><%=z %>일차</td></tr>
-         <%         
+         <%}         
             for (int i = 0; i < basketList.size(); i++) {
                MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
                TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-
+               
+               if(mpbb.getPlan_nr()!=null){
                String a=mpbb.getPlan_nr();
                String b=mpbb.getDay_nr();
                String c=mpbb.getItem_nr();
@@ -323,7 +328,8 @@
                 }
        	
             }
-                  }
+           }
+         }
          %>
     </table>
 		

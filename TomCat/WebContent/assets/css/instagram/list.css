@@ -12,6 +12,8 @@ section.gramList {
 	
 	padding-top: 30px;
 	padding-bottom: 30px;
+	
+	min-width: 1080px;
 }
 
 section.gramList #table1 {
@@ -143,14 +145,13 @@ section.gramList #darkgrey{
 }
 
 div.topBottomBtn {	/* 화면 상단 / 하단 이동 링크 div */
-	border: 1px solid red;	/* 확인용 */
 	width: 100px;
 	height: 140px;
 	z-index: 9;
 	position: fixed;
 	
-	top: 300px;
-	right: 500px;
+	top: 500px;
+	margin-left: 800px;
 }
 section.gramList img#up {
 	width: 4em;
