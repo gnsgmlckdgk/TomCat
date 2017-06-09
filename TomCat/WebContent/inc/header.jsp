@@ -30,7 +30,7 @@
 		<!-- 추가한 css -->
 			<!-- member -->
 			<link rel="stylesheet" href="./assets/css/member/loginPop.css"/>
-			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=6"/>
+			<link rel="stylesheet" href="./assets/css/member/memberManager.css?ver=7"/>
 			
 			<!-- plan -->
 			<link rel="stylesheet" href="./assets/css/plan/planMain.css?ver=6"/>	<!-- 메인페이지 -->
@@ -40,7 +40,7 @@
 		<!-- 추가한 js(스크립트 파일은 사용하는 페이지에서 외부 스크립트 불러오도록 합시다. 다른 외부 스크립트의 이름과 중복되서 오류날 수 도 있음) -->
 			<!-- member -->
 			<script type="text/javascript" src="./assets/js/member/loginPop.js?ver=6"></script>	<!-- 로그인 스크립트 -->
-			<script type="text/javascript" src="./assets/js/member/memberManager.js?ver=6"></script>	<!-- 정보관리 팝업 스크립트 -->
+			<script type="text/javascript" src="./assets/js/member/memberManager.js?ver=7"></script>	<!-- 정보관리 팝업 스크립트 -->
 			
 			<!-- plan -->
 			<script type="text/javascript" src="./assets/js/plan/planMain.js?ver=6"></script>

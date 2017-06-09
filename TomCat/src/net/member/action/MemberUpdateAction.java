@@ -35,6 +35,8 @@ public class MemberUpdateAction implements Action {
 		String tel = multi.getParameter("tel");
 		String profile = multi.getFilesystemName("profile");
 		
+		System.out.println("profile: " + profile);
+		
 		// 파라미터 값 빈에 담기
 		MemberBean mb = new MemberBean();
 		mb.setId(id);

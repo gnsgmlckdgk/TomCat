@@ -29,10 +29,22 @@
 	<script type="text/javascript">
 	function deleteCheck_tog(num) {
 		var check = confirm("글을 삭제하시겠습니까?");
-		if(check==true) {
-			location.href="./BoardDelete1.bb?num="+num;
+			if(check==true) {
+				$.ajax({
+					type : "GET",
+					url : "./BoardDelete1.bb?num="+num,
+					data : {num : num},
+					async: false,
+					success : function(data) {
+						alert("삭제되었습니다.");
+						location.reload(true);
+					},
+					error : function(xhr, status, error) {
+						alert(status+", "+error);
+					}
+				});
+			}	
 		}
-	}
 </script>
 	<table>
 	<tr>

@@ -19,17 +19,14 @@ public class BoardUpdateAction implements Action{
 		System.out.println("BoardUpdateAction execute()");
 		
 		request.setCharacterEncoding("utf-8");
-		String realPath = request.getRealPath("/upload");
+		String realPath = request.getRealPath("/upload/images/gram/");
 		int maxSize=5*1024*1024;	//5MB
 
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
-
 				
 		BoardDAO bdao=new BoardDAO();
 		boardBean bb=new boardBean();
-		
-
-		
+			
 		String pageNum=multi.getParameter("pageNum");
 		bb.setNum(Integer.parseInt(multi.getParameter("num")));		
 		bb.setNick(multi.getParameter("nick"));
@@ -42,7 +39,7 @@ public class BoardUpdateAction implements Action{
 			}
 		//image1이 빈칸이다 = 추가한 파일이 없다 => 기존의 image2파일을 그대로 사용한다.
 		else{
-			bb.setImage1(multi.getParameter("image2"));	
+			bb.setImage1(multi.getParameter("prevImg"));	
 		}	
 	
 		
