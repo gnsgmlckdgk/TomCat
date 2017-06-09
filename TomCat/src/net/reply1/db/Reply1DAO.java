@@ -29,27 +29,27 @@ public class Reply1DAO {
 
 	
 //	댓글 입력되는 메소드
-	public void insertRepley(Reply1Bean rb) {		
+	public void insertRepley(Reply1Bean rr) {		
 		int re_num=0;
 
 		try {
 			con = getConnection();
 
-			sql = "select max(re_num) from gram_reply ";
+			sql = "select max(re_num) from board_reply ";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();						
 			
 			 if(rs.next()){re_num=rs.getInt(1)+1;}
 
 
-			sql = "insert into gram_reply(num,content,re_ref,re_lev,re_seq,nick,re_num,date) " + "values(?,?,?,?,?,?,?,now())";
+			sql = "insert into board_reply(num,content,re_ref,re_lev,re_seq,nick,re_num,date) " + "values(?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rb.getNum()); // 일반글의 글번호
-			pstmt.setString(2, rb.getContent());
+			pstmt.setInt(1, rr.getNum()); // 일반글의 글번호
+			pstmt.setString(2, rr.getContent());
 			pstmt.setInt(3, re_num);//re_ref 답변글 그룹==일반글의 글번호
 			pstmt.setInt(4,0); // re_lev 답변글 들여쓰기, 일반글 들여쓰기 없음값 0
 			pstmt.setInt(5,0);// re_seq 답변글 순서, 일반글 순서 맨위값 0
-			pstmt.setString(6, rb.getNick());
+			pstmt.setString(6, rr.getNick());
 			pstmt.setInt(7, re_num);
 
 			pstmt.executeUpdate();
@@ -86,7 +86,7 @@ public class Reply1DAO {
 		try {
 			con = getConnection();
 
-			sql = "select count(*) from gram_reply where num=?";
+			sql = "select count(*) from board_reply where num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			//센 값을 rs에 담아줍니당
@@ -129,7 +129,7 @@ public class Reply1DAO {
 		List<Reply1Bean> replyList = new ArrayList<Reply1Bean>();
 		try {
 			con = getConnection();// 1,2디비연결 메서드호출
-			sql = "select * from gram_reply where num=? order by re_ref desc, re_seq asc limit ?, ? ";
+			sql = "select * from board_reply where num=? order by re_ref desc, re_seq asc limit ?, ? ";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setInt(1, num);
 			pstmt.setInt(2, startRow - 1);
@@ -137,17 +137,17 @@ public class Reply1DAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				Reply1Bean rb = new Reply1Bean();
-				rb.setNum(rs.getInt("num"));
-				rb.setContent(rs.getString("content"));
-				rb.setRe_lev(rs.getInt("re_lev"));
-				rb.setRe_seq(rs.getInt("re_seq"));
-				rb.setNick(rs.getString("nick"));
-				rb.setDate(rs.getTimestamp("date"));
-				rb.setRe_num(rs.getInt("re_num"));
-				rb.setRe_ref(rs.getInt("re_ref"));
+				Reply1Bean rr = new Reply1Bean();
+				rr.setNum(rs.getInt("num"));
+				rr.setContent(rs.getString("content"));
+				rr.setRe_lev(rs.getInt("re_lev"));
+				rr.setRe_seq(rs.getInt("re_seq"));
+				rr.setNick(rs.getString("nick"));
+				rr.setDate(rs.getTimestamp("date"));
+				rr.setRe_num(rs.getInt("re_num"));
+				rr.setRe_ref(rs.getInt("re_ref"));
 				
-				replyList.add(rb);
+				replyList.add(rr);
 			}
 
 		} catch (Exception e) {
@@ -223,7 +223,7 @@ public class Reply1DAO {
 
 		try {
 			con = getConnection();
-				sql = "delete from gram_reply where re_num=?";
+				sql = "delete from board_reply where re_num=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,re_num);
 				pstmt.executeUpdate();
@@ -252,16 +252,16 @@ public class Reply1DAO {
 		}
 	} // deleteReply() end
 
-	public void updateReply(Reply1Bean rb) {
+	public void updateReply(Reply1Bean rr) {
 		ResultSet rs = null;
 		try {
 			
 			con = getConnection();
-					sql = "update gram_reply set content=?,nick=? where re_num=?";
+					sql = "update board_reply set content=?,nick=? where re_num=?";
 					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, rb.getContent());
-					pstmt.setString(2, rb.getNick());
-					pstmt.setInt(3, rb.getRe_num());
+					pstmt.setString(1, rr.getContent());
+					pstmt.setString(2, rr.getNick());
+					pstmt.setInt(3, rr.getRe_num());
 					
 					pstmt.executeUpdate();
 					
@@ -291,37 +291,37 @@ public class Reply1DAO {
 	}// updateReply() end
 	
 
-	public void insertRepleyReply(Reply1Bean rb) {		
+	public void insertRepleyReply(Reply1Bean rr) {		
 		int re_num=0;
 
 		try {
-			System.out.println("insertRepleyReply의 re_ref의값:"+rb.getRe_ref());
+			System.out.println("insertRepleyReply의 re_ref의값:"+rr.getRe_ref());
 			con = getConnection();
 
-			sql = "select max(re_num) from gram_reply";			
+			sql = "select max(re_num) from board_reply";			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();						
 			
 			 if(rs.next()){re_num=rs.getInt(1)+1;}
 
-			 System.out.println(rb.getRe_ref()+"여기는DAO에 insertRepleyReply메소드 입니당");
+			 System.out.println(rr.getRe_ref()+"여기는DAO에 insertRepleyReply메소드 입니당");
 			 
-			 sql="update gram_reply set re_seq=re_seq+1 where re_ref=? and re_seq>?";			
+			 sql="update board_reply set re_seq=re_seq+1 where re_ref=? and re_seq>?";			
 			 pstmt = con.prepareStatement(sql);
-			 pstmt.setInt(1,rb.getRe_ref());
-			 pstmt.setInt(2,rb.getRe_seq());
+			 pstmt.setInt(1,rr.getRe_ref());
+			 pstmt.setInt(2,rr.getRe_seq());
 			 
 			 pstmt.executeUpdate();
 	
 
-			sql = "insert into gram_reply(num,content,re_ref,re_lev,re_seq,nick,re_num,date) " + "values(?,?,?,?,?,?,?,now())";
+			sql = "insert into board_reply(num,content,re_ref,re_lev,re_seq,nick,re_num,date) " + "values(?,?,?,?,?,?,?,now())";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rb.getNum()); // 일반글의 글번호
-			pstmt.setString(2, rb.getContent());	
-			pstmt.setInt(3, rb.getRe_ref());//re_ref 기존글 그룹번호 같게함
-			pstmt.setInt(4, rb.getRe_lev()+1); // re_lev 답변글 들여쓰기, 일반글 들여쓰기 없음값 0
-			pstmt.setInt(5, rb.getRe_seq()+1);// re_seq 답변글 순서, 일반글 순서 맨위값 0			
-			pstmt.setString(6, rb.getNick());
+			pstmt.setInt(1, rr.getNum()); // 일반글의 글번호
+			pstmt.setString(2, rr.getContent());	
+			pstmt.setInt(3, rr.getRe_ref());//re_ref 기존글 그룹번호 같게함
+			pstmt.setInt(4, rr.getRe_lev()+1); // re_lev 답변글 들여쓰기, 일반글 들여쓰기 없음값 0
+			pstmt.setInt(5, rr.getRe_seq()+1);// re_seq 답변글 순서, 일반글 순서 맨위값 0			
+			pstmt.setString(6, rr.getNick());
 			pstmt.setInt(7, re_num);
 
 			pstmt.executeUpdate();

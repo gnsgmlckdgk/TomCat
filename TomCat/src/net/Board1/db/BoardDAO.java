@@ -375,4 +375,83 @@ public class BoardDAO {
 		}
 	}//reInsertBoard(bb)
 	
+	public List getBoardList(int startRow,int pageSize,String search){
+		Connection con=null;
+		PreparedStatement pstmt=null; 
+		String sql="";
+		ResultSet rs=null;
+		List boardList=new ArrayList();
+		try {
+			//1,2 디비연결 메서드호출
+			con=getConnection();
+			//3 sql 객체 생성
+			// sql  select * from board
+			// 최글글위로 re_ref 그룹별내림차순 정렬  re_seq오름차순
+			//      re_ref desc,re_seq asc
+			// 글잘라오기    limit  시작행-1,개수 
+			sql="select * from board where subject like ? order by num desc limit ?,?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,"%"+search+"%");
+			pstmt.setInt(2, startRow-1);//시작행-1
+			pstmt.setInt(3, pageSize);//몇개글
+			//4 rs 실행 저장
+			rs=pstmt.executeQuery();
+			//5 rs while 데이터 있으면 
+			// 자바빈 객체 생성 BoardBean bb
+			// bb 멤버변수 <= rs열데이터 가져와서 저장
+			// bb게시판 글 하나 => boardList 한칸 저장
+			while(rs.next()){
+				BoardBean bb=new BoardBean();
+				bb.setNum(rs.getInt("num"));
+				bb.setNick_name(rs.getString("nick_name"));
+				bb.setSubject(rs.getString("subject"));
+				bb.setContent(rs.getString("content"));
+				bb.setDate(rs.getTimestamp("date"));
+				bb.setFile(rs.getString("file"));
+				bb.setRe_ref(rs.getInt("re_ref"));
+				bb.setReadcount(rs.getInt("readcount"));
+				bb.setLocation(rs.getString("location"));
+				
+				//boardList  한칸 저장
+				boardList.add(bb);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(rs!=null){try {rs.close();}catch(SQLException ex){}}
+			if(pstmt!=null){try {pstmt.close();}catch(SQLException ex){}}
+			if(con!=null){try {con.close();}catch(SQLException ex) {}}
+		}
+		return boardList;
+	}//getBoardList(startRow,pageSize)
+	public int getBoardCount(String search){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		ResultSet rs=null;
+		int count=0;
+		try {
+			//1,2 디비연결 메서드호출
+			con=getConnection();
+			//3 sql  함수  count(*) 이용
+			sql="select count(*) from board where subject like ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,"%"+search+"%");
+			//4 rs 실행 저장
+			rs=pstmt.executeQuery();
+			//5 rs 데이터 있으면  count 저장
+			if(rs.next()){
+				count=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null){try {rs.close();}catch(SQLException ex){}}
+			if(pstmt!=null){try {pstmt.close();}catch(SQLException ex){}}
+			if(con!=null){try {con.close();}catch(SQLException ex) {}}
+		}
+		return count;
+	}//getBoardCount()
+	
+	
 }//클래스

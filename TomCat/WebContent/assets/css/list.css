@@ -16,12 +16,47 @@
 	border: 2px solid #e2dfdf;
 	border-radius: 40px;
 	padding :20px;
+	padding-top:40px;
 	width: 600px;
 	background-color:rgba(0, 0, 0, 0.6) !important;
 	margin-left:50px;
 	margin-bottom: 100px;
 	height: 800px;
 }
+
+/* 수정 삭제 댓글 버튼 부분 시작 */
+.upde {
+	/* border: 2px solid red; */
+	height: 80px;
+	position: relative;
+	top:250px;
+}
+.upde input[type=button]{
+	/* border: 2px solid red; */
+	float:left ;
+	padding: 0 1.5em ;
+	margin: 0;
+	position: absolute;
+	top: 10px;
+	border-radius:50px;
+	background-color: #2196f3;
+	}
+.upde input[type=button]:nth-of-type(1){
+	left:0px;
+}
+.upde input[type=button]:nth-of-type(2){
+	left:80px;
+}
+.upde input[type=button]:nth-of-type(3){
+	right:0px;
+	
+}
+
+.upde input[type=button]:HOVER{
+	background-color: #4e4b56;
+}
+/* 수정 삭제 댓글 버튼 부분  끝*/
+
 
 #ima{
 	background-image: url("./beach.jpg");
@@ -59,25 +94,28 @@
 	color:white
 	font-family: 'Hanna', serif;
 	font-size: 1.5em;
-	color:white
+	color:white;
+	margin-bottom: 20px;
 }
 
 #con {
 	width: 70%;
+	height:80%;
 	padding-top : 1em;
 	float: right;
 	position: relative;
-	overflow-y : scroll;
+	overflow-y : auto;
 	word-wrap : break-word;
 	font-family: 'Hanna', serif;
-	color:white
+	color:white;
 }
 
 #file {
 	width: 100px;
 	border-radius: 250px;
 	margin: auto;
-	color:white
+	color:white;
+	margin-bottom: 5px;
 }
 
 #nick{
@@ -185,44 +223,38 @@ to {
 }
 
 .replybb{
-	border: 2px solid #e2dfdf !important;
+	border: 2px solid #e2dfdf;
 	border-radius: 40px;
 	width: 400px;
-	height: 600px;
+	height: 600px; /* 수정부분 */
 	display: none;
-	background-color: rgba(0, 0, 0, 0.8) !important;
-	position: relative;
-	top: -650px;
-	left: 580px;
+	background-color: rgba(0, 0, 0, 0.8)  !important;
+	/* 아래가 수정부분  */
+	position: absolute;
+	top: 80px;
+	left: 620px;
 	margin: 0;
 }
+
 .up{
-	margin-top: 300px;
-	opcity:0.85;
+	position: absolute;
+	margin-top: 300px; 
+	opacity:0.85;
 	font-size: 0.8em;
 	border-radius:50px;
 }
-.up:hover{
-	background-color:#2196F3 !important;
-}
-.de{
-	opcity:0.85;
-	font-size: 0.8em;
-}
-.de:hover{
-	background-color:#2196F3 !important;
-}
 .re{
+	position: absolute;
 	float:right;
-	display: block;
-	opcity:0.85;
+	display: block; 
+	opacity:0.85;
 	font-size: 12px;
-	background-color: rgba(255,255,255,0.79) !important;
-	color: black !important;
+	background-color: rgba(255,255,255,0.79);
+	color: black;
 }
 .re:hover{
-	background-color:#2196F3 !important;
-}
+	background-color:#2196F3;
+} 
 .form1{
 	border-right: 30px;
 	max-width: 1080px;
