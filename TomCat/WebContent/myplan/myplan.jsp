@@ -1,4 +1,6 @@
 
+<%@page import="java.util.Vector"%>
+<%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="com.sun.xml.internal.bind.v2.runtime.Location"%>
 <%@page import="net.travel.admin.db.TravelBean"%>
 <%@page import="net.myplanBasket.db.MyPlanBasketBean"%>
@@ -466,14 +468,57 @@ $(window).load(function() {
 
 </script>
 <script type="text/javascript">
-// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
+	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
 	function from_to(){
 		
 		from = document.getElementById("fromDate");
 		to = document.getElementById("toDate");
-				
 		plan = $("#set_plan option:selected").val();
-						
+
+
+		<%
+		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
+		Vector vector = mpbdao.getBasketList(id);
+		List basket_l = (List) vector.get(0);
+		
+		//myplans에 담긴 세션아이디가 몇 행인지.
+		for(int i=0; i < basket_l.size(); i++){
+			
+			MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
+			
+			if(mpbb2.getFirstday() != null ){
+			
+				%>
+				
+				//여기까지 왔다면 분명히 계산해야될 값이 있는 것.
+				
+				alert("//여기까지 왔다면 분명히 계산해야될 값이 있는 것.");
+				
+					$('#pln_list').empty();
+					
+					$.ajax({
+						type: 'post',
+						url: './myplan/myplanModify.jsp',
+						data : {diff_day:9999, plan:plan},
+						success: function(data) {
+							$('#pln_list').append(data);
+						},
+						error: function(xhr, status, error) {
+							alert(error);
+						}   
+					});
+				
+				<%
+			
+			}
+		}
+		
+		
+		%>
+		
+		
+		
+		
 		if(from.value != "" & to.value != ""){
 					
 			var arr1 = from.value.split('-');
@@ -508,8 +553,9 @@ $(window).load(function() {
 					
 					
 			}
-
 		}
+		
+ 		
 	}
 	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트. 끝.
 </script>
