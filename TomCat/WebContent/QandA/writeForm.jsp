@@ -3,7 +3,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/writeForm.css"/>	
+<link rel="stylesheet" href="./assets/css/QandA/writeForm.css"/>
+
+<script type="text/javascript">
+function func1(){
+	if(document.fr.subject.value==""){
+		alert("제목을 입력하세요");
+		document.fr.subject.focus();
+		return false;
+	}
+	if(document.fr.content.value==""){
+		alert("질문할 내용을 입력하세요");
+		document.fr.content.focus();
+		return false;
+	}
+}
+
+</script>
 
 
 	<%

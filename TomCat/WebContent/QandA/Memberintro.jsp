@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="./assets/css/QandA/Memberintro.css"/>	
 
 	<div id="combine">
+	<h1 class="combine_logo"><span>BEFORE</span> YOU GO</h1>
 
 <table id="table1">
-
 <tr><td id="tdsize">
 <h1 id="h1">김형주(조장)</h1>
 여기 자기가 한 것, 하고싶은 말 쓸거에용
@@ -25,7 +25,7 @@
 
 </td>
 <td>
-	<img src="./images/QandA/psu.jpg" width="300" height="300">
+	<img src="./images/QandA/psu.jpg" width="300" height="300" >
 
 </td>
 	
@@ -44,8 +44,8 @@
 <td><h1 id="h1">김규아</h1>
  인생샷그램(글쓰기,수정,삭제 좋아요, best shot,댓글,대댓글), Q&A 페이지의 기능 구현 및 디자인을 담당하였습니다.
   이용 시 불편하거나 문의사항이 있으면 다이렉트 051.555.555로 연락해 주세요.<br>
-e-mail:rbdk1219@gmail.com<br>
-phone:010.1111.1111<br>
+e-mail : rbdk1219@gmail.com<br>
+phone : 010.1111.1111<br>
 </td>
 <td>
 	<img src="./images/QandA/kyuakim.jpg" width="300" height="300">
@@ -56,7 +56,7 @@ phone:010.1111.1111<br>
 <td><h1 id="h1">황창하</h1>
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="300" height="300">
+	<img src="./images/QandA/HCH.jpg" width="300" height="300" >
 </td>
 </tr>
 
@@ -64,7 +64,7 @@ phone:010.1111.1111<br>
 <td><h1 id="h1">구민정</h1>
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="300" height="300">
+	<img src="./images/QandA/GMJ.jpg" width="300" height="300" >
 </td>
 </tr>
 
@@ -73,7 +73,7 @@ phone:010.1111.1111<br>
 <td><h1 id="h1">이승민</h1>
 </td>
 <td>
-	<img src="./images/QandA/step1.png" width="300" height="300">
+	<img src="./images/QandA/LSM.jpg" width="300" height="300">
 </td>
 </tr>
 </table>
