@@ -284,7 +284,55 @@
 				}
 			%>
 			
+		     
+         <table>
+         <%for(int z=1;z< basketList.size()+1;z++){ %>
+         <tr><td colspan="4"><%=z %>일차</td></tr>
+         <%         
+            for (int i = 0; i < basketList.size(); i++) {
+               MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
+               TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+
+               String a=mpbb.getPlan_nr();
+               String b=mpbb.getDay_nr();
+               String c=mpbb.getItem_nr();
+           
+               String[] Array1 = a.split("@");
+               String[] Array2 = b.split("@");
+               String[] Array3 = c.split("@");
+               System.out.println("길이"+Array1.length+"값"+Array1[i]);            
+           			
+               for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
+                System.out.println("첫번째for문의 증가하는 k값"+k); 
+
+               int ar2=Integer.parseInt(Array2[k]);
+               
+            	   if (plan_nr.equals(Array1[k])&&ar2==z){
+            		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
+            	   %>
+            	   <tr>
+            	   
+                	<td><%=Array1[k] %><%=Array2[k] %><%=Array3[k] %></td>
+                	<td colspan="2"><%=tb.getName() %></td>                	
+                	<td><%=tb.getLatitude() %></td>
+                	</tr>  
+            	   
+            	   <%
+                  }
+            	   
+                }
+       	
+            }
+                  }
+         %>
+    </table>
+		
+		
+		
+		
 		</div>
+	
+		
 		<div id="map" class="f1" ></div><!-- map -->		
 		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
 
