@@ -67,8 +67,8 @@
 				color: #000;
 			}
 			#nav li a:hover {
-				text-decoration: underline;
 				cursor: pointer;
+				font-size: 20px;
 			}
 			</style>
 						

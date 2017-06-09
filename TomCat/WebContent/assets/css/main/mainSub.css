@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+		body {
+			font-family: "나눔고딕", "맑은 고딕", sans-serif;
+		}
+		
+		/* 첫번째 섹션 */
+		div.main1 {	/* 내용물 */
+			width: 1080px;
+			margin: 0 auto;
+		}
+		div.main1 input, div.main1 select {
+			font-size: 12px;
+		}
+		
+		/* 두번째 섹션 */
+		div.main2 {
+			width: 1080px;
+			margin: 0 auto;
+			padding: 40px 30px 70px 30px;
+			font-size: 12px;	
+			letter-spacing: -1px;
+		}
+		div.main2 h1 {
+			font-size: 28px;
+		}
+		div.main2 h1 span {
+			color: #f44066;
+		}
+		div.main2 div.main_explain {
+			width: 1080px;
+		}
+		
+		/* 세번째 섹션 */
+		section.sectionThree {
+			font-size: 12px;
+			padding: 30px;
+			background-color: #f0f0f0;
+		}
+		section.sectionThree header h1 {
+			font-size: 24px;
+			font-weight: bold;
+			color: #fff;
+			text-align: center;
+		}
+		section.sectionThree header h1 a{
+			font-size: 30px;
+			font-weight: bold;
+		}
+		section.sectionThree header h2 {
+			font-size: 24px;
+			text-align: center;
+		}
+		
+		section.sectionThree div.imgContainer {	/* 내용물 전체 */
+			width: 1480px;
+			height: 450px;
+			
+			
+		}
+		section.sectionThree div.imgContainer .imgs div {
+			width: 300px;
+			height: 400px;
+		}
+		section.sectionThree div.imgContainer .imgs div .imgsSubject {	/* 인생샷 이미지 제목 */
+			display: block;
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			font-size: 16px;
+			font-weight: bold;
+			color: #1a7ad9;
+			background-color: #f0f0f0;
+		}
+		
+		section.sectionThree div.imgContainer a {	/* 링크 */
+			text-decoration: none;		
+		}
+		
+		/* 네번째 섹션 */
+		section.sectionFour {
+			font-size: 12px;
+			padding: 30px;
+			background-color: #fff;
+			min-height: 600px;
+		}
+		div.main4 {
+			width: 1080px;
+			min-height: 600px;	/* 확인용 */
+			margin: 0 auto;
+			border: 1px solid red;	/* 확인용 */
+		}

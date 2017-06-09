@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,9 +8,21 @@
 <div style="max-width: 1080px; margin: auto;">
 
 
-
+<%
+	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
+	Calendar cal = Calendar.getInstance();
+	int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
+%>
 <!-- Banner -->
-<section id="banner">
+<%if(second==3) {%>
+<section id="banner" class="region_one b_back<%=second%>">
+<%} else if(second==2) {%>
+<section id="banner" class="region_one b_back<%=second%>">
+<%} else if(second==1) {%>
+<section id="banner" class="region_one b_back<%=second%>">
+<%} else { %>
+<section id="banner" class="region_one b_back">
+<%} %>
 
 	<!-- 입력란 들어갈 곳. -->
 

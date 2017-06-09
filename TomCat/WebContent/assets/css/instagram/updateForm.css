@@ -4,6 +4,8 @@ section.updateFormSection{
 	background-image: url("../../../images/instagram/beach.jpg");
 	background-position: center center;
 	background-size: cover;
+	margin-top: -40px;
+	margin-bottom: -40px;
 }
 		
 div.combine {
@@ -17,9 +19,27 @@ div.combine form {
 	border: 1px solid red;	/* 확인용 */
 	background-color: #fff;
 	width: 700px;
-	padding: 30px;
+	padding: 40px;
 	border-radius: 30px;
 	margin: 0 auto;
+	font-size: 14px;
+}
+div.combine form span {
+	display: block;
+	margin-top: -30px;
+}
+div.combine form input[type="text"] {
+	font-size: 14px;
+	letter-spacing: -1px;
+	margin-top: -7px;
+}
+div.combine form textarea {
+	font-size: 14px;
+	letter-spacing: -1px;
+	line-height: 16px;
+}
+div.combine form input[type="file"] {
+	font-size: 12px;
 }
 
 div.combine div.imgManager {	/* 이미지 관리 폼 */
@@ -29,6 +49,10 @@ div.combine div.imgManager div.left {	/* 왼쪽 *//
 	width: 300px;
 	float: left;
 }
+div.combine div.imgManager div.left img {	/* 현재 이미지 */
+	margin-top: -30px;
+}
+
 div.combine div.imgManager div.right {	/* 오른쪽 */
 	float: right;
 }
@@ -40,6 +64,13 @@ div.combine div.imgManager div.right #previewImg { /* 미리보기 div */
 
 div.combine div.btnDiv {	/* 버튼 모여있는 div */
 	margin-top: 30px;
-	text-align: center;	
+	text-align: center;
+	border-top: 1px solid #ccc;
+	padding-top: 30px;
 }
-
+div.combine div.btnDiv input {
+	font-size: 12px;
+}
+div.combine div.btnDiv input[type="button"] {	/* 뒤로가기 버튼 */
+	margin-top: 10px;
+}

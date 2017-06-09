@@ -7,77 +7,10 @@
 <html>
 <head>
 	
-	<style type="text/css">
-		
-		body {
-			font-family: "나눔고딕", "맑은 고딕", sans-serif;
-		}
-		
-		/* 첫번째 섹션 */
-		div.main1 {	/* 내용물 */
-			width: 1080px;
-			margin: 0 auto;
-		}
-		div.main1 input, div.main1 select {
-			font-size: 12px;
-		}
-		
-		/* 두번째 섹션 */
-		div.main2 {
-			width: 1080px;
-			margin: 0 auto;
-			padding: 30px;
-			font-size: 12px;	
-			letter-spacing: -1px;
-		}
-		div.main2 h1 {
-			font-size: 28px;
-		}
-		div.main2 h1 span {
-			color: #f44066;
-		}
-		div.main2 div.main_explain {
-			width: 1080px;
-		}
-		
-		/* 세번째 섹션 */
-		section.sectionThree {
-			font-size: 12px;
-			padding: 30px;
-			background-color: #f0f0f0;
-		}
-		section.sectionThree header h1 {
-			font-size: 18px;
-			color: #f44066;
-			text-align: center;
-		}
-		section.sectionThree header h2 {
-			font-size: 20px;
-			text-align: center;
-		}
-		div.main3 article {
-			margin-right: 0;
-		}
-		div.main3 img {
-			width: 213px;
-			height: 213px;
-		}
-		
-		/* 네번째 섹션 */
-		section.sectionFour {
-			font-size: 12px;
-			padding: 30px;
-			background-color: #fff;
-			min-height: 600px;
-		}
-		div.main4 {
-			width: 1080px;
-			min-height: 600px;	/* 확인용 */
-			margin: 0 auto;
-			border: 1px solid red;	/* 확인용 */
-		}
-		
-	</style>
+	<!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./assets/dist/css/swiper.min.css">
+	
+	<link rel="stylesheet" href="./assets/css/main/mainSub.css?ver=9">
 
 </head>
 
@@ -192,55 +125,68 @@
 	</div>
 </section>
 
-<!-- Carousel, Three -->
-<script src="assets/js/main/jquery.min.js"></script>
-<script src="assets/js/main/jquery.dropotron.min.js"></script>
-<script src="assets/js/main/jquery.scrolly.min.js"></script>
-<script src="assets/js/main/jquery.onvisible.min.js"></script>
-<script src="assets/js/main/skel.min.js"></script>
-<script src="assets/js/main/util.js"></script>
-<script src="assets/js/main/main.js"></script>
+<%if(second==3) {%>
+<section id="banner" class="b_back<%=second%> sectionThree">
+<%} else if(second==2) {%>
+<section id="banner" class="b_back<%=second%> sectionThree">
+<%} else if(second==1) {%>
+<section id="banner" class="b_back<%=second%> sectionThree">
+<%} else { %>
+<section id="banner" class="b_back sectionThree">
+<%} %>
 
-<section class="carousel sectionThree">
-	
 	<header>
-		<h1>인생샷그램에서</h1>
+		<h1><a href="./BoardList.bo">인생샷그램</a>에서</h1>
 		<h2>당신의 여행을 공유하세요!</h2>
 	</header>
 
-	<div class="reel main3">
-
-		<%
-			List boardList = (List) request.getAttribute("bl");
-
-			if (boardList != null) {
-				for (int i = 0; i < boardList.size(); i++) {
-
-					//자바빈(boardBean) 변수=배열한칸 접근 배열변수.get()
-					boardBean bb = (boardBean) boardList.get(i);
-		%>
-
-		<article>
-			<a href="#" class="image featured"> <img
-				src="./upload/<%=bb.getImage1()%>" width="300" height="300"
+	<%
+	List boardList = (List)request.getAttribute("bl");
+	
+	%>
+	 <!-- Swiper -->
+    <div class="swiper-container imgContainer">
+        <div class="swiper-wrapper imgs">
+        <%
+    	for(int i=0; i<boardList.size(); i++) {
+    		boardBean bb = (boardBean) boardList.get(i);
+    	%>
+    		<div class="swiper-slide"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img
+				src="./upload/images/gram/<%=bb.getImage1()%>" width="300" height="300"
 				onerror="this.src='./images/instagram/noimage.png'">
-			</a>
-			<header>
-				<h3>
-					<a href="#"><%=bb.getSubject()%></a>
-				</h3>
-			</header>
-			<p><%=bb.getNick()%></p>
-		</article>
+				<span class="imgsSubject"><%=bb.getSubject() %></span></a>
+			</div>
+    	<%
+    	}
+   		%>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> 
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="./assets/dist/js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30,
+        autoplay: 1500
+    });
+    </script>
 
 
-		<%
-			}
-			}
-		%>
-	</div>
 </section>
-<!-- Carousel end-->
 
 <!-- Four -->
 <section class="sectionFour">
@@ -251,62 +197,6 @@
 	</div>
 
 </section>
-
-<!-- 테스트용 버튼들. -->
-<div style="max-width: 1080px; margin: auto; border:5px solid red;">
-
-
-
-	<p>
-		임시 메인화면 입니다. <br /> 현재 session의 id는
-		<%=id%>, nick은
-		<%=nick%>입니다.
-	</p>
-	<ul class="actions">
-		<li><a href="./BoardList1.bb" class="button special big">함께해요</a></li>
-		<li><a href="./PlanMain.pl" class="button special big">여행 일정
-				플래너</a></li>
-		<li><a href="./BoardList.bo" class="button special big">인생샷그램</a></li>
-		<li><a href="#" class="button special big">Q & A</a></li>
-	</ul>
-
-	<br> 아래는 연습용 버튼입니다.
-	<ul class="actions">
-
-		<li><a href="./MemberJoin.me" class="button special big">회원가입</a></li>
-
-
-		<%
-			if (!id.equals("")) {
-		%>
-		<li><a href="./MyPlan.pln?plan_nr=100" class="button special big">나의일정관리</a></li>
-		<%
-			} else if (id.equals("")) {
-		%>
-		<li><a onclick="popupToggle()" class="button special big">나의일정관리</a></li>
-
-		<%
-			}
-		%>
-
-		<li><form action="./PlanRegion.pl" method="get">
-				<input type="text" name="region" style="background-color: white"
-					placeholder="암거나 검색"> <input type="submit" value="검색"
-					class="button special">
-			</form></li>
-
-		<li><a href="./CountryList.pl" class="button special big">국가
-				DB</a></li>
-		<li><a href="./CityList.pl" class="button special big">도시 DB</a></li>
-		<li><a href="./PlanSpot.pl?travel=자연사 박물관" class="button special big">추천장소
-				상세보기</a></li>
-		<li><a href="./Chat.ct" class="button special big">채팅 테스트</a></li>
-	</ul>
-
-
-
-</div>
-<!-- 테스트용 버튼들 끝. -->
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

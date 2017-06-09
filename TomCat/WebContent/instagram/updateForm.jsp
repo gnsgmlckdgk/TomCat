@@ -11,7 +11,7 @@
 <script type="text/javascript" src="./assets/js/member/join.js"></script>
 <!-- 회원가입 제약조건 및 암호화 -->
 <link rel="stylesheet"
-	href="./assets/css/instagram/updateForm.css?ver=9" />
+	href="./assets/css/instagram/updateForm.css?ver=10" />
 
 <section class="updateFormSection">
 	<%
@@ -29,19 +29,19 @@
 			action="./BoardUpdateAction.bo?num=<%=num%>&pageNum=<%=pageNum%>"
 			method="post" name="fr" enctype="multipart/form-data">
 
-			<input type="hidden" name="num" value="<%=num%>"> 글쓴이<input
-				type="text" name="nick" value="<%=bb.getNick()%>"><br>
-			제목<input type="text" name="subject" value="<%=bb.getSubject()%>"><br>
+			<input type="hidden" name="num" value="<%=num%>"> 
+			글쓴이<input type="text" name="nick" value="<%=bb.getNick()%>"><br>
+			<span>제목</span><input type="text" name="subject" value="<%=bb.getSubject()%>"><br>
 
-			내용
+			<span>내용</span>
 			<textarea rows="5" cols="8" name="content"><%=bb.getContent()%></textarea>
 			<br>
 
 
 			<div class="imgManager">
 				<div class="left">
-					현재 이미지<br> <img src="./upload/images/gram/<%=bb.getImage1()%>" width=200
-						height=200><br>
+					<span>현재 이미지</span><br> <img src="./upload/images/gram/<%=bb.getImage1()%>" width=250
+						height=250><br>
 					<!-- 현재 이미지 -->
 					<input type="file" id="imgFile" name="image1" onchange="loadImageFile();">
 					<!--이미지 변경 안했을때 쓰기위해 현재 이미지 저장 -->
@@ -50,7 +50,7 @@
 				</div>
 
 				<div class="right">
-					변경된 이미지
+					<span>변경된 이미지</span>
 					<div id="previewImg">
 						<!-- 변경된 이미지 오는 자리 -->
 					</div>
@@ -108,7 +108,7 @@
 			
 			<div class="btnDiv">
 				<input type="submit" value="글수정" style="margin-right: 30px;">
-				<input type="reset" value="되돌리기"><br><br>
+				<input type="reset" value="되돌리기"><br>
 				<input type="button" value="뒤로가기" onclick="history.back();" class="button special">
 			</div>
 		
