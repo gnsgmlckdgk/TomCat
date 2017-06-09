@@ -50,34 +50,6 @@ section.gramList .bottomline {
 	border-bottom: 1px solid #A9A9A9;
 }
 
-section.gramList img#up {
-	width: 4em;
-	height: 4em;
-	position: fixed;
-	opacity : 0.5;
-	right: 35em;
-	top: 30em;
-	opacity: 0.5;
-	opacity: 0.5
-}
-
-section.gramList img#down {
-	width: 4em;
-	height: 4em;
-	opacity: 0.5;
-	position: fixed;
-	right: 35em;
-	top: 35em;
-}
-
-section.gramList img#up:HOVER {
-	opacity: 1;
-}
-
-section.gramList img#down:HOVER {
-	opacity: 1;
-}
-
 section.gramList #listpage a{
 	text-decoration:none;
 	text-align: center;
@@ -99,17 +71,13 @@ div.bestShot {
 	width: 240px;
 	height: 400px;
 }
-div.bestShot table.banner {
+div.bestShot table.bestBanner {
 	color:black;
 	text-decoration:blink;
 	font-weight:bolder;
 	width: 6em;
 	height: 4em;
-	background-color: white;
-	opacity: 0.9;
-	/* position: fixed;
-	left: 410px;
-	top: 390px; */
+	background-color: #fff;
 	border-collapse: none;
 	border: none;
 	margin: 0 auto;
@@ -172,4 +140,31 @@ section.gramList #titlecolor{
 
 section.gramList #darkgrey{
 	background-color:#e6e6e6;
+}
+
+div.topBottomBtn {	/* 화면 상단 / 하단 이동 링크 div */
+	border: 1px solid red;	/* 확인용 */
+	width: 100px;
+	height: 140px;
+	z-index: 9;
+	position: fixed;
+	
+	top: 300px;
+	right: 500px;
+}
+section.gramList img#up {
+	width: 4em;
+	height: 4em;
+	opacity : 0.5;
+}
+section.gramList img#down {
+	width: 4em;
+	height: 4em;
+	opacity: 0.5;
+}
+section.gramList img#up:HOVER {
+	opacity: 1;
+}
+section.gramList img#down:HOVER {
+	opacity: 1;
 }
