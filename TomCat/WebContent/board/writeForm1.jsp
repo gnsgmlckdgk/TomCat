@@ -32,7 +32,7 @@
 <div class="form1">
 	<form action="./BoardWriteAction1.bb" method="post" name="fr">
 <b>글쓴이: <input type="text" name="nick_name" value=<%=nick%> readonly id="texta"><br></b>
-<b>제목: <input type="text" name="subject" id="subject"  required; ><br></b>
+<b>제목: <input type="text" name="subject" id="subject"  required><br></b>
 <b>내용: <textarea rows="10" cols="20" name="content"  id="texta">
 이름:
 나이:

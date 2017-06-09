@@ -13,11 +13,9 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=9" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=5" rel="stylesheet" type="text/css">
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link href="./assets/css/list.css?ver=2" rel="stylesheet" type="text/css">
-
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -145,7 +143,7 @@
 			%>
 
 
-			<div class="e"  id="<%=i%>">
+			<div class="e"  id="<%=i%>" style="position: relative;">
 
 				<!--  제목 -->
 				<div id="sub">
@@ -219,16 +217,13 @@
 <!-- 			세션에 있는 닉값  -->
 <!-- 			글에있는 닉값 비교 -->
 			
-			
-			
 					
 				</div>
 				<div class="upde">
-				<%if(nick.equals(bb.getNick_name())){ %>				
-<input type="button" value="수정"
-onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="up">
-<input type="button" value="삭제"
-onclick="button_event(); location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'" class="de">
+				<%if(nick.equals(bb.getNick_name())){ %>
+				<% %>				
+<input type="button" value="수정" onclick="location.href='./BoardUpdate1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+<input type="button" value="삭제" onclick="button_event(); location.href='./BoardDelete1.bb?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 
 <script type="text/javascript">
 
@@ -249,14 +244,16 @@ function button_event(){
 </script>
 
 <%} %>
-<input type="button" value="댓글"  class="re button alt" >   
-
+<input type="button" value="댓글">   
 </div>
 
-
-         <div id="plybb<%=bb.getNum()%>"   class="replybb animated rollIn"   style="display: none">
+         <div id="plybb<%=bb.getNum()%>" class="replybb animated rollIn"   style="display: none">
          <%=bb.getNum()%>
-         some output of text
+         <form action="./ReplyWriteAction1.rr ?pageNum=<%=pageNum %>" method="post" name="fr" >
+         <textarea rows="2" cols="80" name="re_name" > </textarea>
+         </form>
+         
+         
          </div>
          </div>
 
@@ -319,7 +316,7 @@ if(count!=0){
 </div>
 <!-- 댓글 슬라이드 -->
 <script type="text/javascript">
-$(".re").click(function(){
+$(".upde").click(function(){
 	if($(this).parents(".e").find(".replybb").css("display")  == 'none'){
 		$(this).parents(".e").find(".replybb").css("display","block");
 	   }else{
