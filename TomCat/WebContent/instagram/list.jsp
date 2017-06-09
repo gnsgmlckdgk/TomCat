@@ -78,7 +78,7 @@
 			<tr>
 			<td colspan="4">
 			<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>">
-			<img id="contentimg" src="./upload/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
+			<img id="contentimg" src="./upload/images/gram/<%=bb.getImage1()%>" width=300 height=300 onerror="this.src='./images/instagram/noimage.png'">
 			</a>
 			</td></tr>
 		<%
@@ -210,22 +210,6 @@ if(likecount%2==0){
 		<a href="#top"><img title="상단이동" alt="상단이동" id="up" src="./images/instagram/up.png"></a>
 		<a href="#bottom"><img title="하단이동" alt="하단이동" id="down" class="down" src="./images/instagram/down.png"></a>
 	</div>
-	<script type="text/javascript">
-	$(window).resize(function (){
-		var width_size = window.innerWidth;
-		var minusVal = width_size/4;
-		alert(minusVal);
-		if(minusVal > 255) {
-			$('.topBottomBtn').css('left', width_size - minusVal);
-		}else {
-			$('.topBottomBtn').css('position', 'absolute');
-		}
-		
-			
-	}).resize();
-	
-	</script>
-
 	
 	<div class="clear"></div>
 	

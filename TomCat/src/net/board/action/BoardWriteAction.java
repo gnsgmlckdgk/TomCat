@@ -18,7 +18,7 @@ public class BoardWriteAction implements Action{
 		System.out.println("BoardWriteAction execute()");
 
 		request.setCharacterEncoding("utf-8");
-		String realPath = request.getRealPath("/upload");
+		String realPath = request.getRealPath("/upload/images/gram/");
 		int maxSize=5*1024*1024;	//5MB
 
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());

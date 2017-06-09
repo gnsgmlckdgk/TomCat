@@ -1,58 +1,45 @@
 @CHARSET "UTF-8";
 
-.wrapper{
-	position:relative;
-	height:45em;
-	background-attachment: fixed;
+section.updateFormSection{
 	background-image: url("../../../images/instagram/beach.jpg");
 	background-position: center center;
 	background-size: cover;
-	margin:0 auto;
-		}
-#combine{
-	width:80%;
 }
-form{	
-	margin-left:20em;
-	
-}
-
-#form{
-	
-	float:left;
-	background-color:white;
-	text-align:center;	
-	font-size:1.5em;
-	color:black;
-	width:700px;
-	height:600px;	
-	font-weight:bold;
-	margin: auto;	
-	opacity: 0.85;	
-	border-radius: 20px;			
-	position: relative;
+		
+div.combine {
+	width: 1080px;
+	margin: 0 auto;
+	padding: 30px;
+	font-weight: bold;
 }
 
-#submit{	
-	width:150px;
-	height:50px;
-	padding:0;
-	background-color: #ff6699;	
+div.combine form {
+	border: 1px solid red;	/* 확인용 */
+	background-color: #fff;
+	width: 700px;
+	padding: 30px;
+	border-radius: 30px;
+	margin: 0 auto;
 }
 
-input[type=text]{
-	margin-left:100px;
-	width:500px;
+div.combine div.imgManager {	/* 이미지 관리 폼 */
+
 }
-textarea{
-		margin-left:100px;	
-		width:500px;
+div.combine div.imgManager div.left {	/* 왼쪽 *//
+	width: 300px;
+	float: left;
 }
-#upload{
-	color:white;
-	font-weight:bolder;
-	position:relative;
-	top:400px;
-	left:60px;
+div.combine div.imgManager div.right {	/* 오른쪽 */
+	float: right;
+}
+div.combine div.imgManager div.right #previewImg { /* 미리보기 div */
+	border: 1px solid #f0f0f0;
+	width: 250px;
+	height: 250px;
+}
+
+div.combine div.btnDiv {	/* 버튼 모여있는 div */
+	margin-top: 30px;
+	text-align: center;	
 }
 

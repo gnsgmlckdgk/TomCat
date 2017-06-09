@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/main.css?ver=3" />
 
 <script type="text/javascript">
 
@@ -22,36 +22,34 @@ document.fr.submit();
 </script>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/writeForm.css?ver=2"/>	
+<link rel="stylesheet" href="./assets/css/instagram/writeForm.css?ver=4"/>	
 
 
-<section class="wrapper">
+<section class="writeSection">
 	<%
 // 	인생샷그램 글쓰는곳
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 	%>
 	
+	<div class="writeContainer">
+	
 		<form id="form" action="./BoardWriteAction.bo" method="post" name="fr" onsubmit="return func1()" enctype="multipart/form-data">
 <!-- 		닉네임 세션값 생성해서 readonly로 설정하기 -->
 <br> 
-<<<<<<< HEAD
-		글쓴이:<input type="text" name="nick" value=<%=nick %>><br>		
-		제목:<input type="text" name="subject" ><br>
-		내용:<textarea rows="7" cols="15" name="content" ></textarea><br>
-=======
 
 		글쓴이<input type="text" name="nick" value=<%=nick %> readonly><br>		
 		제목<input type="text" name="subject" required><br>
 		내용<textarea rows="5" cols="10" name="content" required></textarea><br>
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
+
 		<input type="file" name="image1"><br><br>	
 		<input id="submit" type="submit" value="글쓰기"><br> 
 	</form>
+	
+	<img id="girl" src="./images/instagram/girl.png">
+	<img id="boy" src="./images/instagram/boy.png">
+	
+	</div>
 </section>
-
-
-<img id="girl" src="./images/instagram/girl.png">
-<img id="boy" src="./images/instagram/boy.png">
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

@@ -1,3 +1,5 @@
+<%@page import="net.member.db.MemberBean"%>
+<%@page import="net.member.db.MemberDAO"%>
 <%@page import="net.reply.db.ReplyBean"%>
 <%@page import="java.util.List"%>
 <%@page import="net.reply.db.ReplyDAO"%>
@@ -26,6 +28,7 @@ display:none;
 // 그 이유는 아이디는 기존에 display:none값을 display로 해제하기위함이고
 // replyreply클래스는 뒤에 변수를 넘겨서 클릭한 해당댓글에만 창이 뜨게 하기 위해서이다.
 // (처음 css에서 none속성을 주고싶은데 변수까지 제어가 안되어 두개준것임)
+
 function func1(re_num){
 	$(document).ready(function() {	
 		var x=document.getElementById('replytextarea');		
@@ -33,9 +36,17 @@ function func1(re_num){
 		$('.replyreply'+re_num).toggle('slow',function(){				
 			});	
 	});	
-	}	
-function func2(){alert("정말 삭제하시겠습니까?");}
-
+	}
+	
+// 삭제 확인
+function func2(){
+	
+	var c = confirm("정말 삭제하시겠습니까?");
+	if(c==true) {
+		return true;
+	}
+	return false;
+}
 
 function func3(i){
 	// 댓글 수정 버튼을 누를 때 뜨는 창도
@@ -45,16 +56,31 @@ function func3(i){
 		x.style.display='none';		
 			$('.replymodifyclass'+i).toggle('slow',function(){				
 			});	
-	});
-	
+	});	
 }
 
+// textarea 길이 제한
+function textLimit() {
+	
+	var txtLength = $('.replyWrite').val().length;
+	// 100자를 넘어가면 뒤에 입력된 값은 지움
+	if(txtLength > 100) {
+		$('.replyWrite').val($('.replyWrite').val().substring(0, 100));
+	}
+	
+	var txtLength2 = $('.replyWrite2').val().length;
+	// 100자를 넘어가면 뒤에 입력된 값은 지움
+	if(txtLength2 > 100) {
+		$('.replyWrite2').val($('.replyWrite2').val().substring(0, 100));
+	}
+	
+}
 
 </script>
 
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/content.css?ver=2"/>	
+<link rel="stylesheet" href="./assets/css/instagram/content.css?ver=10"/>	
 	<%	
 	
 	String id = (String)session.getAttribute("id");			// 아이디
@@ -74,53 +100,81 @@ function func3(i){
 		}
 
 	%>
-	<section class="wrapper">
+	<section class="instaSection">
 	<div id="combine">
-	<marquee behavior="scroll" width="500" scrollamount="2" scrolldelay="50"><h1><%=bb.getNick() %>님의 멋진 인생샷♡</h1></marquee>
-
+		
+		
+	<div class="instaImgDiv">
+	
+	<div class="clear"></div>
+	
 	<table class="table1">
-		<tr>
+		<tr>	<!-- 글 정보 행 -->
 			<td id="titlecolor" colspan="2"><%=bb.getSubject()%></td>
 			<td ><%=nick%></td>
 			<td id="datecolor"><%=bb.getDate()%></td>
 		</tr>
-		<tr>
-			<td colspan="4"><a href="./upload/<%=bb.getImage1()%>"><%=bb.getImage1()%></a></td>
-		</tr>
-		<tr>
+		
+		<tr>	<!-- 이미지 행 -->
 			<td colspan="4">
-<!-- 			onerror의 쓰임새는 이미지 에러가 뜰때는 noimage를 출력시켜라...  -->
-			<img src="./upload/<%=bb.getImage1()%>"
+			<!-- onerror의 쓰임새는 이미지 에러가 뜰때는 noimage를 출력시켜라 -->
+			<img src="./upload/images/gram/<%=bb.getImage1()%>"
 				width=400 height=400 onerror="this.src='./images/instagram/noimage.png'"></td>
 		</tr>
-		<tr>
+	
+		<tr>	<!-- 글 내용 -->
 			<td colspan="4"><%=bb.getContent()%></td>
 		</tr>
+		
 		<tr>
-		<td>
-		<%
-		//로그인한 닉네임(세션값 닉네임)이랑 글쓴닉네임(boardContentAction 에서 받아온닉네임)이 같으면 글 수정및 삭제가가능해용
-		//BoardContentAction에서 받아온 닉네임.equals(세션값 닉네임)		
-		if(bb.getNick().equals(nick)){%>	
-	<input id="opacitynone" type="button" style="margin-left:50px;"
-	 value="글수정" title="글수정" onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+			<td colspan="4" class="btnTd">
+			<div>
+			<%
+			//로그인한 닉네임(세션값 닉네임)이랑 글쓴닉네임(boardContentAction 에서 받아온닉네임)이 같으면 글 수정및 삭제가가능해용
+			//BoardContentAction에서 받아온 닉네임.equals(세션값 닉네임)		
+			MemberDAO mdao = new MemberDAO();
+			MemberBean mb = mdao.getMember(id);
+			if(bb.getNick().equals(nick) && mb.getAuth()==0){%>	
+			<input id="opacitynone" type="button"
+	 		value="글수정" title="글수정" 
+	 		onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'"
+	 		style="margin-left: 80px;"><%}else if(bb.getNick().equals(nick)){ %>
+	 			<input id="opacitynone" type="button"
+	 			value="글수정" title="글수정" 
+	 			onclick="location.href='./BoardUpdate.bo?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'"
+	 			style="margin-left: 160px;">
+	 		 <%} %>
+		
+			<form action="./BoardDeleteAction.bo" method="post" name="fr" onsubmit="return func2()">					
+				<input type="hidden" value="<%=num%>" name="num"> 															
+				<input type="hidden" value="<%=pageNum%>" name="pageNum">					
+				<%
+				if(bb.getNick().equals(nick)) {
+					%>
+					<input id="opacitynone" type="submit" value="글삭제" title="글삭제" style="margin-left: 65px;">
+					<%
+				%>
+				<%}else if(mb.getAuth()==0) { %>
+					<input id="opacitynone" type="submit" value="글삭제" title="글삭제" style="margin-left: 175px;">
+				<%} %>
+			</form>
+		
+		<div class="clear"></div>
+		
+		</div>
+	
 		</td>
-		<td colspan="2">
-				<form action="./BoardDeleteAction.bo" method="post" name="fr" onclick="func2()">					
-					<input type="hidden" value="<%=num%>" name="num"> 															
-					<input type="hidden" value="<%=pageNum%>" name="pageNum">					
-					<input id="opacitynone" type="submit" value="글삭제" title="글삭제">
-				</form>
-				</td>	
-
-		<%} %>
-<td colspan="4">
-	<input id="listbutton" type="button" value="글목록 " title="글목록"
-		onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">		
-	</td>		
+		</tr>
+		
+		<tr>
+		<td colspan="4">
+			<input id="listbutton" type="button" class="button special" value="글목록 " title="글목록"
+			onclick="location.href='BoardList.bo?pageNum=<%=pageNum%>'">		
+		</td>
+			
 		</tr>		
 	</table>
-
+</div>
 <!-- ==========================여기서부터는 댓글입니당 ~~~~========================= -->
 	<%
 	
@@ -143,6 +197,8 @@ function func3(i){
 			if(replycount!=0){//댓글이 하나라도 있을때 실행
 
 	%>
+	<div class="instaReplyDiv">
+	<marquee behavior="scroll" width="500" scrollamount="2" scrolldelay="50"><h1 class="subjectMarquee"><%=bb.getNick() %>님의 멋진 인생샷♡</h1></marquee>
 	<table class="table2">
 		<tr>
 			<td colspan="2">닉네임</td>		
@@ -192,9 +248,14 @@ function func3(i){
 
 <%
 //로그인닉넴이랑 댓글 쓴사람이 동일할때만 삭제, 수정 보이게 제어
-if(rb.getNick().equals(nick)){%>
+if(rb.getNick().equals(nick) || mb.getAuth()==0){%>
 <input title="댓글삭제" type="button" id="txt" value="삭제" onclick="location.href='./ReplyDelete.re?num=<%=rb.getNum()%>&pageNum=<%=pageNum%>&re_num=<%=rb.getRe_num()%>'">
-<%int re_num=rb.getRe_num(); %>	
+<% } 
+
+int re_num=rb.getRe_num(); 
+
+if(rb.getNick().equals(nick)) {
+%>	
 <input title="댓글수정" type="button" id="txt" value="수정" onclick="func3(<%=i%>)">
 <%}
 //로그인 되 있으면 대댓글 달수있게 제어, 대댓글 func1()누르면 맨 상단의 jQuery작동
@@ -218,7 +279,7 @@ if(	id!=null){%>
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">
 									
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
-					<textarea rows="2" cols="100" name="content"></textarea>
+					<textarea rows="2" cols="80" name="content"></textarea>
 					<input type="submit" id="txt2" value="입력">
 				</form>		
 		</td></tr>		
@@ -231,7 +292,7 @@ if(	id!=null){%>
 		<tr id="replytextarea2">
 			<td colspan="6">
 
-				<form action="./ReplyWriteAction.re" method="post" name="fr">
+				<form action="./ReplyWriteAction.re" method="post" name="fr" class="replyWrite">
 					<input type="hidden" value="<%=nick%>" name="nick"> 
 					<input type="hidden" value="<%=num%>" name="num"> 
 					<input type="hidden" value="<%=rb.getRe_ref() %>" name="re_ref">								
@@ -240,8 +301,8 @@ if(	id!=null){%>
 					<input type="hidden" value="<%=rb.getRe_num() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
-					<textarea rows="2" cols="80" name="content"></textarea>
-					<input type="submit" id="txt2"  value="입력">
+					<textarea rows="2" cols="80" name="content" class="replyWrite2" onkeyup="textLimit()" placeholder="100자이내로 입력해주세요."></textarea>
+					<input type="submit" id="txt2" value="입력">
 				</form>
 				
 				<%
@@ -284,7 +345,7 @@ if(	id!=null){%>
 		
 		}
 		if(replycount==0){
-// 			댓글 누르면 뜨는 대댓글창
+// 			댓글 입력폼(입력되있는 댓글이 없을 경우)
 			%>
 					<form action="./ReplyWriteAction.re" method="post" name="fr">
 					<input type="hidden" value="<%=bb.getSubject()%>" name="nick">							
@@ -297,21 +358,25 @@ if(	id!=null){%>
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
 					
-					<textarea rows="2" cols="80" name="content"></textarea>
-					<input type="submit" value="입력">
+					<textarea rows="2" cols="80" name="content" class="replyWrite" onkeyup="textLimit()"  placeholder="100자이내로 입력해주세요."></textarea>
+					<input type="submit" value="입력" id="txt2">
 				</form>
 				<%}%>
 
 <!-- ====================================리플끗~========================================= -->
+	</div>
 </div>
 
 
+<div class="clear"></div>
+
 </section>
 
-</body>
-</html>
-		
+
+
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
+		
+
 
 
