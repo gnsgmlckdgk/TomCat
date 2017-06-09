@@ -1,4 +1,4 @@
-<Context>
+ <Context>
 	<Resource
 		name = "jdbc/mySQL"
 		auth = "Container"
