@@ -77,16 +77,8 @@
 			text-decoration: none;		
 		}
 		
-		/* 네번째 섹션 */
-		section.sectionFour {
-			font-size: 12px;
-			padding: 30px;
-			background-color: #fff;
-			min-height: 600px;
+		/* 네번째 섹션  */
+		section.sectionFour a{
+			font-size: 1.2em;
 		}
-		div.main4 {
-			width: 1080px;
-			min-height: 600px;	/* 확인용 */
-			margin: 0 auto;
-			border: 1px solid red;	/* 확인용 */
-		}
+		
