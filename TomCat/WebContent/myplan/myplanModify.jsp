@@ -155,9 +155,21 @@ table td {
 					//myplans의 i행, k열의 plan_nr이 선택한 plan과 같은지.
 					if(Integer.parseInt(mpbb2.getPlan_nr().split("@")[k]) == plan){
 						
-						out.print("test2");
-						
 						//선택한 plan과 같으면, 출력하자.
+// 						mpbb2.getPlan_nr().split("@")[k]
+						
+						%>
+						<script type="text/javascript">
+						
+							
+						$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getMyplans_id()%>'+'@');
+							$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getPlan_nr().split("@")[k]%>'+'@');
+							$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getDay_nr().split("@")[k]%>'+'@');
+							
+						</script>
+						
+						<%
+						
 
 						
 					}
