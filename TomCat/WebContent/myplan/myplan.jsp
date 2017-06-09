@@ -286,7 +286,9 @@
 			
 		     
          <table>
-         <%for(int z=1;z< basketList.size()+1;z++){ %>
+         <%
+         if(basketList.size()!=0){
+         for(int z=1;z< basketList.size()+1;z++){ %>
          <tr><td colspan="4"><%=z %>일차</td></tr>
          <%         
             for (int i = 0; i < basketList.size(); i++) {
@@ -324,6 +326,7 @@
        	
             }
                   }
+         }
          %>
     </table>
 		
