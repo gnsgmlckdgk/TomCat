@@ -124,8 +124,8 @@ table td {
 				from = mpbb2.getFirstday();
 				to = mpbb2.getLastday();
 				
-				out.println("출발일=" + from);
-				out.println("도착일=" + to);
+// 				out.println("출발일=" + from);
+// 				out.println("도착일=" + to);
 				
 				long diffDays = 0;
 
@@ -138,7 +138,7 @@ table td {
 					long diff = endDate.getTime() - beginDate.getTime();
 					diffDays = diff / (24 * 60 * 60 * 1000) + 1;
 
-					out.println("날짜차이=" + diffDays);
+// 					out.println("날짜차이=" + diffDays);
 
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -146,6 +146,25 @@ table td {
 
 				//기 저장된 일정이 몇일짜리인지 불러온다.
 				diff_day = (int) diffDays;
+				
+				//myplans 의 i행에 몇 열까지 있는지.
+				for(int k=0; k < mpbb2.getPlan_nr().split("@").length; k++){
+					
+// 					out.println(k + " a " + mpbb2.getPlan_nr().split("@")[k] + "<br>");
+					
+					//myplans의 i행, k열의 plan_nr이 선택한 plan과 같은지.
+					if(Integer.parseInt(mpbb2.getPlan_nr().split("@")[k]) == plan){
+						
+						out.print("test2");
+						
+						//선택한 plan과 같으면, 출력하자.
+
+						
+					}
+					
+				}
+				
+				
 				
 			}
 			
@@ -157,63 +176,6 @@ table td {
 			
 		}
 		
-		
-
-		
-
-		//plan a 혹은 b 혹은 c에 해당하는 값이 있는지. 있으면 처리하기.
-// 		if (plan == 1) {
-// 			// out.println("플랜 a 실행.");
-
-// 			if (basketList.size() != 0) {
-
-// 				for (int i = 0; i < basketList.size(); i++) {
-
-// 					//myplans에 들어 있는 값을 불러온다.(id에 맞는 애들)
-// 					MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
-
-// 					//myplans에는 있으나, 기 저장된 firstday값이 있으면 불러온다.
-// 					if (mpbb2.getFirstday() != null) {
-
-// 						//기 저장된 출발일, 도착일을 불러온다.
-// 						from = mpbb2.getFirstday();
-// 						to = mpbb2.getLastday();
-
-// 						long diffDays = 0;
-
-// 						try {
-// 							SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-// 							Date beginDate = formatter.parse(from);
-// 							Date endDate = formatter.parse(to);
-
-// 							// 시간차이를 시간,분,초를 곱한 값으로 나누면 하루 단위가 나옴
-// 							long diff = endDate.getTime() - beginDate.getTime();
-// 							diffDays = diff / (24 * 60 * 60 * 1000) + 1;
-
-// 							out.println("날짜차이=" + diffDays);
-
-// 						} catch (ParseException e) {
-// 							e.printStackTrace();
-// 						}
-
-// 						//기 저장된 일정이 몇일짜리인지 불러온다.
-// 						diff_day = (int) diffDays;
-						
-						
-						
-						
-
-// 					}
-
-// 				}
-
-// 			}
-
-// 		} else {
-// 			from = null;
-// 			to = null;
-// 			diff_day = 0;
-// 		}
 	%>
 
 
