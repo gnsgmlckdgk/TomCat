@@ -1,4 +1,3 @@
-
 <%@page import="java.util.Vector"%>
 <%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="com.sun.xml.internal.bind.v2.runtime.Location"%>
@@ -287,8 +286,36 @@
 		     
          <table>
          <%
+         int gapdday=0;
          
-         for(int z=1;z< basketList.size()+1;z++){ 
+         for (int h = 0; h < basketList.size(); h++) {
+             MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(h);
+             
+             String fday=mpbb.getFirstday();
+             String lday=mpbb.getLastday();
+             
+            String fday1=fday.substring(0,4);
+            String fday2=fday.substring(5,7);
+            String fday3=fday.substring(8,10);
+            
+            
+            String ㅣday1=lday.substring(0,4);
+            String ㅣday2=lday.substring(5,7);
+            String ㅣday3=lday.substring(8,10);
+            
+            int fdaynum=Integer.parseInt(fday1+fday2+fday3);
+            int ㅣdaynum=Integer.parseInt(ㅣday1+ㅣday2+ㅣday3);
+            
+            gapdday=(ㅣdaynum-fdaynum);
+            System.out.println("내가구하려는 값"+gapdday);
+      
+         }
+         
+         
+       
+         
+         
+         for(int z=1;z<gapdday+1;z++){ 
          if(!plan_nr.equals("100")){
          %>
          <tr><td colspan="4"><%=z %>일차</td></tr>
