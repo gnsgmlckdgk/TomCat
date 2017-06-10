@@ -107,10 +107,11 @@
 					   width:15em;
 					   height:15em;
 					   "
+				onclick="location.href='./PlanSearch.pl?check=2&search=<%=pcb.getName()%>'"
 					   >
 					   
-				<span><a href="./PlanSearch.pl?check=2&search=<%=pcb.getName()%>"><%=pcb.getName()%></a></span>
-			
+				<span><%=pcb.getName()%></span>
+		
 			</td>
 			<%
 				break;
@@ -142,8 +143,9 @@
 					   background-size: cover; 
 					   width:10em;
 					   height:15em;"
+					   onclick="location.href='./PlanSearch.pl?check=2&search=<%=pcb.getName()%>'"
 					   >
-					<span><a href="./PlanSearch.pl?check=2&search='<%=pcb.getName()%>'"><%=pcb.getName()%></a></span>
+					<span><%=pcb.getName()%></span>
 				</td>
 				<%
 					break;

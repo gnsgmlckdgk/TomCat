@@ -15,10 +15,26 @@ body {
 	height: 50%;
 	position: relative;
 	color: white;
+	text-shadow: 1px 1px 1px #222;
 }
+
+h1.combine_logo {
+	color: white; width : 70%;
+	margin:0 auto 0 auto;
+	padding-top:17px;
+	font-size: 3em;
+	text-shadow: 1px 1px 2px #333;
+	width: 70%;
+}
+
+h1.combine_logo span {
+	color: #f43e66;
+}
+
 
 #h1 {
 	color: white;
+	text-shadow:1px 1px 1px #333;
 	font-size: 3em;
 }
 
@@ -56,14 +72,16 @@ background-color: rgba(77, 77, 77,0.3);
 
 #table1 {
 	text-align: left;
-	padding: 0;
-	margin-left: 15em;
-	width: 1080px;
+	padding:0;
+	margin:40px auto 0 auto;
+	width: 70%;
 	height: 500px;
+	
 }
 
 #tdsize {
-	width:160px;
+	width:750px;
+
 }
 
 #table1 td {

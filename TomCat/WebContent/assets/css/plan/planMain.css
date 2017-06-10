@@ -63,8 +63,17 @@ div.bestTripMenu ul li{
 	float: left;
 	margin-left:1.5em;
 	font-size: 0.8em;
+	font-weight: bold;
+	
 }
 
+div.bestTripMenu ul li a{
+	text-decoration: none;
+}
+
+div.bestTripMenu ul li a:HOVER{
+	text-decoration:underline;
+}
 div.bestTripimg table {
 	margin:auto;
 	width:1080px;
@@ -82,8 +91,10 @@ div.bestTripimg table td{
 	padding-top:6em;
 	border: 10px solid white;
 	overflow: hidden;
+	font-weight: bold;
 }
  div.bestTripimg table td:HOVER{
+ 	cursor: pointer;
  	
 	
 } 

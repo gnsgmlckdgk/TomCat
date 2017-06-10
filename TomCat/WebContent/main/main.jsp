@@ -188,13 +188,69 @@
 
 </section>
 
+<!-- <script>
+	window.onload=CountryList();
+</script> -->
+
+<script type="text/javascript">
+	$(window).load(function(){
+		$.ajax({
+			type:'post',
+			url:'./plan/planMainCityList.jsp',
+			data:{continent:'All'},
+			success:function(data){
+				$('div.bestTripimg').append(data);
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
+		});
+	});
+	
+	function cityListchange(continent) {
+		$.ajax({
+			type:'post',
+			url:'./plan/planMainCityList.jsp',
+			data:{continent : continent},
+			success:function(data){
+				$('div.bestTripimg').empty();
+				$('div.bestTripimg').append(data);
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
+		});
+	
+	}
+</script>
+
 <!-- Four -->
 <section class="sectionFour">
 	
-	<div class="main4">
-		<h1>인기여행일정 오는 자리???</h1>
-		
-	</div>
+	<!-- 인기여행지 리스트(대륙별 도시추천) -->
+		<div class="bestTrip">
+		<h1 style="font-size: 2.2em;text-align: center;margin:50px 0 10px 0;"> 인기 여행지</h1>
+			<h3 style="text-align: center;font-size: 1.3em;"><span style="color: #f44066">대륙별</span> 추천도시로 <span style="color: #f44066">여행</span>을 떠나보세요!</h3>
+			<div class="bestTripMenu">
+				<ul class="bestTrip_cont">
+					<li><a href="javascript:cityListchange('All');">추천</a></li>
+					<li><a href="javascript:cityListchange('asia');">아시아</a></li>
+					<li><a href="javascript:cityListchange('europe');">유럽</a></li>
+					<li><a href="javascript:cityListchange('oceania');">남태평양</a></li>
+					<li><a href="javascript:cityListchange('south');">중남미</a></li>
+					<li><a href="javascript:cityListchange('north');">북미</a></li>
+				</ul>
+			</div>
+
+			<div class="clear"></div>
+
+			<!-- 인기여행지 이미지리스트(대륙별 도시추천) -->
+			<div class="bestTripimg">
+				
+			</div>
+		</div>
+
+		<div class="clear"></div>
 
 </section>
 
