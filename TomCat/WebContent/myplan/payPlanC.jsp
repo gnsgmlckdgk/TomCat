@@ -5,9 +5,6 @@
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
 
-<div style="max-width: 1080px; margin: auto;">
-
-
 <%
 	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
 	Calendar cal = Calendar.getInstance();
@@ -15,20 +12,22 @@
 %>
 <!-- Banner -->
 <%if(second==3) {%>
-<section id="banner" class="region_one b_back<%=second%>">
+<section id="banner" class="region_one b_back<%=second%> paySection">
 <%} else if(second==2) {%>
-<section id="banner" class="region_one b_back<%=second%>">
+<section id="banner" class="region_one b_back<%=second%> paySection">
 <%} else if(second==1) {%>
-<section id="banner" class="region_one b_back<%=second%>">
+<section id="banner" class="region_one b_back<%=second%> paySection">
 <%} else { %>
-<section id="banner" class="region_one b_back">
+<section id="banner" class="region_one b_back paySection">
 <%} %>
 
 	<!-- 입력란 들어갈 곳. -->
 
-	<link rel="stylesheet" href="assets/css/myplan/payPlanC.css" />
+	<link rel="stylesheet" href="assets/css/myplan/payPlanC.css?ver=3" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<script src="assets/js/jquery.min.js"></script>
+
+	<div class="payContainer">	<!-- 내용물 전체 -->
 
 	<%
 		String id = (String) session.getAttribute("id");
@@ -94,12 +93,12 @@
 	<!-- 결제 수단 선택 하면 동작할 함수 끝-->
 
 
-	<h2>결제</h2>
+	<h2>결제정보입력</h2>
 	<form action="./PayAction.pln" method="post">
 		<!-- 왼쪽 배송 장소 및 수단 선택 공간. -->
 
-		<div>
-			<h4>결제하실 정보</h4>
+		<div class="billInfo">
+			<h1>결제정보</h1>
 			<table>
 				<tr>
 					<th>선택사항</th>
@@ -108,26 +107,25 @@
 					<th>할인</th>
 					<th>할인금액</th>
 					<th>주문금액</th>
-					<th>배송정보</th>
 				</tr>
 				<tr>
-					<td>일정C</td>
+					<td><span style="color: gold; text-shadow: 1px 1px 1px #000;">GOLD</span> 회원권</td>
 					<td><%=gold_price%>원</td>
 					<td>1</td>
 					<td>-</td>
 					<td><%=discount_price%>원</td>
-					<td><b><%=gold_price - discount_price%>원</b></td>
-					<td><%=send_fee%>원</td>
+					<td><strong><%=gold_price - discount_price%>원<strong></td>
 				</tr>
 			</table>
 			<br>
-
-			<h4>배송 정보</h4>
+	
+			<div class="buyInfo">
+			<h1>구매자 정보</h1>
 			<table>
 				<tr>
-					<th>주문하시는 분</th>
+					<th>구매자 정보</th>
 					<td>
-						<table class="innerTable">
+						<table class="buyer">
 							<tr>
 								<td>이름</td>
 								<td><input type="text" name="name" value="<%=name%>"
@@ -147,7 +145,7 @@
 					</td>
 				</tr>
 
-				<tr>
+				<%-- <tr>
 					<th>받으시는 분</th>
 					<td>
 						<table class="innerTable">
@@ -175,16 +173,19 @@
 				<tr>
 					<th>총배송비</th>
 					<td><%=send_fee%>원</td>
-				</tr>
+				</tr> --%>
 			</table>
+		</div>
 
-			<h4>할인혜택</h4>
+		<div class="onSale">
+			<h1>할인혜택</h1>
 			현재 적용 가능한 할인혜택이 없습니다. <br> <br> <br>
+		</div>
 
-			<h4>결제수단</h4>
-
+		<div class="mpayment">
+			<h1>결제수단</h1>
 			<div class="pay_way">
-				<div class="pay_way_radio 4u 12u$(xsmall)"
+				<div class="pay_way_radio"
 					onchange="payway_change()">
 					<!-- radio 버튼으로 구현하고 하는 결제수단 선택 -->
 
@@ -193,21 +194,27 @@
 					<input id="rdb3" type="radio" name="p_w" /><label for="rdb3">휴대폰
 						결제</label><br> <input id="rdb4" type="radio" name="p_w" /><label
 						for="rdb4">믿음</label>
-
 				</div>
 				<!-- radio 버튼으로 구현하고 하는 결제수단 선택 끝-->
+
+				<div class="clear"></div>
 
 				<!-- 결제수단에서 선택하면 나올 공간 -->
 				<div class="pay_way_form" style="height: 300px;"></div>
 				<!-- 결제수단에서 선택하면 나올 공간 끝 -->
 			</div>
 		</div>
+		
+	</div>	<!-- billInfo -->
+	
 	</form>
 	<!-- 왼쪽 배송 장소 및 수단 선택 공간 끝.-->
 
-	<div class="banner">
+	</div>	<!-- payContainer -->
+
+	<div class="result_banner">
 		<!-- fix 된 오른쪽 사이드 출력 -->
-		<h4>최종 결제 정보</h4>
+		<h1>최종 결제 정보</h1>
 
 		<div class="result">
 
@@ -225,7 +232,7 @@
 					<td><%=send_fee%>원</td>
 				</tr>
 				<tr>
-					<th><span> 총 결제금액 </span></th>
+					<th><span class="final_price"> 총 결제금액 </span></th>
 					<td><span class="final_price"><%=gold_price - discount_price + send_fee%>원</span></td>
 				</tr>
 
@@ -249,11 +256,11 @@
 
 	</div>
 	<!-- fix 된 오른쪽 사이드 출력 끝-->
+	
+	<div class="clear"></div>
 
 	<!-- 입력란 들어갈 곳. 끝. -->
 </section>
 
-
-</div>
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
