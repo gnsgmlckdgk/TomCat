@@ -9,7 +9,7 @@
 <!DOCTYPE HTML>
 <html>
 <!-- 스타일 불러오기 -->
-<link rel="stylesheet" href="assets/css/member/map/myplanNew.css?ver=80" />
+<link rel="stylesheet" href="assets/css/member/map/myplanNewChange.css" />
 <link rel="stylesheet" href="assets/css/myplan/pay_button.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -73,10 +73,6 @@
 	}); */
 });  
 //날짜 선택하기 
-
-
-
-
 </script>
 
 
@@ -210,9 +206,9 @@
 						MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
 						/* 일정종류(plan_nr) 가 여행지찜리스트의 일정종류와 다를 때에는 갯수 계산 안함. 
 						일정종류(plan_nr) 가 목록표시일 경우에도 갯수 계산 안함 */
-						if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100)    
-							continue;
-						plan_item_nr=plan_item_nr+1;    	 						
+							 	if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100)    
+									continue;
+								plan_item_nr=plan_item_nr+1; 						
 					} /* 선택한 일정의 방문지 갯수 계산 완료 */
 					
 					
@@ -283,84 +279,84 @@
 				}
 			%>
 			
-		     
-         <table>
-         <%
-         int gapdday=0;
-         
-         for (int h = 0; h < basketList.size(); h++) {
-             MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(h);
-             
-             String fday=mpbb.getFirstday();
-             String lday=mpbb.getLastday();
-             
-            String fday1=fday.substring(0,4);
-            String fday2=fday.substring(5,7);
-            String fday3=fday.substring(8,10);
-            
-            
-            String ㅣday1=lday.substring(0,4);
-            String ㅣday2=lday.substring(5,7);
-            String ㅣday3=lday.substring(8,10);
-            
-            int fdaynum=Integer.parseInt(fday1+fday2+fday3);
-            int ㅣdaynum=Integer.parseInt(ㅣday1+ㅣday2+ㅣday3);
-            
-            gapdday=(ㅣdaynum-fdaynum);
-            System.out.println("내가구하려는 값"+gapdday);
-      
-         }
-         
-         
-       
-         
-         
-         for(int z=1;z<gapdday+1;z++){ 
-         if(!plan_nr.equals("100")){
-         %>
-         <tr><td colspan="4"><%=z %>일차</td></tr>
-         <%}         
-            for (int i = 0; i < basketList.size(); i++) {
-               MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
-               TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
-               
-               if(mpbb.getPlan_nr()!=null){
-               String a=mpbb.getPlan_nr();
-               String b=mpbb.getDay_nr();
-               String c=mpbb.getItem_nr();
-           
-               String[] Array1 = a.split("@");
-               String[] Array2 = b.split("@");
-               String[] Array3 = c.split("@");
-               System.out.println("길이"+Array1.length+"값"+Array1[i]);            
-           			
-               for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
-                System.out.println("첫번째for문의 증가하는 k값"+k); 
 
-               int ar2=Integer.parseInt(Array2[k]);
-               
-            	   if (plan_nr.equals(Array1[k])&&ar2==z){
-            		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
-            	   %>
-            	   <tr>
-            	   
-                	<td><%=Array1[k] %><%=Array2[k] %><%=Array3[k] %></td>
-                	<td colspan="2"><%=tb.getName() %></td>                	
-                	<td><%=tb.getLatitude() %></td>
-                	</tr>  
-            	   
-            	   <%
-                  }
-            	   
-                }
-       	
+        <table>
+        <%
+        int gapdday=0;
+        
+        for (int h = 0; h < basketList.size(); h++) {
+            MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(h);
+            
+            String fday=mpbb.getFirstday();
+            String lday=mpbb.getLastday();
+            
+           String fday1=fday.substring(0,4);
+           String fday2=fday.substring(5,7);
+           String fday3=fday.substring(8,10);
+           
+           
+           String ㅣday1=lday.substring(0,4);
+           String ㅣday2=lday.substring(5,7);
+           String ㅣday3=lday.substring(8,10);
+           
+           int fdaynum=Integer.parseInt(fday1+fday2+fday3);
+           int ㅣdaynum=Integer.parseInt(ㅣday1+ㅣday2+ㅣday3);
+           
+           gapdday=(ㅣdaynum-fdaynum);
+           System.out.println("내가구하려는 값"+gapdday);
+     
+        }
+        
+        
+      
+        
+        
+        for(int z=1;z<gapdday+1;z++){ 
+        if(!plan_nr.equals("100")){
+        %>
+        <tr><td colspan="4"><%=z %>일차</td></tr>
+        <%}         
+           for (int i = 0; i < basketList.size(); i++) {
+              MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
+              TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
+              
+              if(mpbb.getPlan_nr()!=null){
+              String a=mpbb.getPlan_nr();
+              String b=mpbb.getDay_nr();
+              String c=mpbb.getItem_nr();
+          
+              String[] Array1 = a.split("@");
+              String[] Array2 = b.split("@");
+              String[] Array3 = c.split("@");
+              System.out.println("길이"+Array1.length+"값"+Array1[i]);            
+          			
+              for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
+               System.out.println("첫번째for문의 증가하는 k값"+k); 
+
+              int ar2=Integer.parseInt(Array2[k]);
+              
+           	   if (plan_nr.equals(Array1[k])&&ar2==z){
+           		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
+           	   %>
+           	   <tr>
+           	   
+               	<td><%=Array1[k] %><%=Array2[k] %><%=Array3[k] %></td>
+               	<td colspan="2"><%=tb.getName() %></td>                	
+               	<td><%=tb.getLatitude() %></td>
+               	</tr>  
+	            	   
+           	   <%
+                 }
+           	   
+               }
+      	
             }
            }
          }
          %>
-    </table>
-		
-		
+   		</table>
+
+
 		
 		
 		</div>
@@ -689,12 +685,12 @@ $(window).load(function() {
 			
 			if (basketList.size() != 0) { //여행찜 목록이 존재할 때
 
-				for (int i = 0; i < basketList.size(); i++) {  //여행찜 목록 만큼 for 문 실행
+				for (int i = 0; i < basketList.size(); i++) { //여행찜 목록 만큼 for 문 실행
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
 					TravelBean tb = (TravelBean) goodsList.get(i);
 						//목록보기 일때에는 마커생성 안함. 찜목록중에 일정별로 해당 목록표시
-						if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100) 
-						continue;
+/* 	if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100) 
+	continue; */
 
 						
 						
