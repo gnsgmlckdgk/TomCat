@@ -23,7 +23,7 @@
 
 	<!-- 입력란 들어갈 곳. -->
 
-	<link rel="stylesheet" href="assets/css/myplan/payPlanC.css?ver=3" />
+	<link rel="stylesheet" href="assets/css/myplan/payPlanC.css?ver=7" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<script src="assets/js/jquery.min.js"></script>
 

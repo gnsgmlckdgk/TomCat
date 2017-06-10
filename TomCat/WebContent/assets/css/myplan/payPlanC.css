@@ -11,11 +11,9 @@ section.paySection {
 div.payContainer { /* 내용물 전체 */
 	width: 1080px;
 	margin: 30px auto;
-	border: 1px solid blue; /* 확인용 */
 }
 
 div.payContainer form {
-	border: 1px solid red; /* 확인용 */
 	background-color: white;
 	width: 700px;
 	text-align: center;
@@ -108,7 +106,6 @@ div.mpayment div.pay_way_radio { /* 결제수단 라디오 버튼 */
 }
 
 div.mpayment div.pay_way_form {
-	border: 1px solid red; /* 확인용 */
 	margin: 0px 30px;
 }
 

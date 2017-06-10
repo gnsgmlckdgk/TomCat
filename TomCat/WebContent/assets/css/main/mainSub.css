@@ -78,6 +78,9 @@
 		}
 		
 		/* 네번째 섹션  */
+		section.sectionFour {
+			padding-bottom: 70px;
+		}
 		section.sectionFour a{
 			font-size: 1.2em;
 		}

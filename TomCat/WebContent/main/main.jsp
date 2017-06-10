@@ -10,7 +10,7 @@
 	<!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="./assets/dist/css/swiper.min.css">
 	
-	<link rel="stylesheet" href="./assets/css/main/mainSub.css?ver=9">
+	<link rel="stylesheet" href="./assets/css/main/mainSub.css?ver=10">
 
 </head>
 
