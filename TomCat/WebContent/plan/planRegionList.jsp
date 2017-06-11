@@ -122,9 +122,9 @@
 		<td class="img_td"
 			style="background-image: url('./images/plan/nation/<%=regionPath %>'); background-size: cover;">
 		</td>
-		<td class="txt_td">
+		<td class="txt_td" onclick="location.href='./PlanSpot.pl?travel=<%=ptb.getName()%>'">
 			<span id="travel_name" class="travel_name"><%=ptb.getName()%></span>
-				<%
+				<%-- <%
 					if (id != null) {
 				%>
 				<input type="button" name="zzim"
@@ -137,8 +137,24 @@
 					value="찜하기" class="button special icon fa-download zzim" id="zzim"/>
 				<%
 					}
-				%>
+				%> --%>
 			<br><br><span class="travel_info"><%=ptb.getInfo()%></span>
+		</td>
+		<td style="background-color: white;">
+		<%
+					if (id != null) {
+				%>
+				<input type="button" name="zzim"
+					onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜하기"
+					class="button special icon fa-download zzim" id="zzim"/>
+				<%
+					} else if (id == null) {
+				%>
+				<input type="button" name="zzim_noId" onclick="zzim_noId()"
+					value="찜하기" class="button special icon fa-download zzim" id="zzim"/>
+				<%
+					}
+				%> 
 		</td>
 	</tr>
 	<%

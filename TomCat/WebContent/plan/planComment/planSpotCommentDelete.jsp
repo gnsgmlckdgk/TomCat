@@ -7,6 +7,7 @@
 	
 	// 파라미터 값 가져오기
 	String num = request.getParameter("num");
+	System.out.println(num);
 	int inum = Integer.parseInt(num);
 	
 	// 삭제 작업

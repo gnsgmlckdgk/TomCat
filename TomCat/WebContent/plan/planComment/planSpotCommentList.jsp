@@ -77,7 +77,7 @@
 	</table>
 	<%
 	// 전체 글의 갯수 구하기
-	int count = pcdao.getCount(spot);
+	int count = pcdao.getSpotCount(spot);
 	
 	// 필요한 페이지 갯수
 	int pageCount = count/pageSize + (count%pageSize==0 ? 0:1);
@@ -112,9 +112,9 @@
 				<img src="./images/etc/next_icon.png">
 			</a><%
 		}
-		%>
-		
+		%>	
 	</div>
+
 	<%
 }
 %>

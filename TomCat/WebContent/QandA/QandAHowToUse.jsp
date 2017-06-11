@@ -25,7 +25,7 @@
 <td><h1 id="h1">step2</h1>
 가고싶은 장소를 찜하세요
 </td>
-<td>
+<td class="left">
 	<img src="./images/QandA/step2.png" width="500" height="300">
 
 </td>

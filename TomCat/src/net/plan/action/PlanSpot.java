@@ -26,12 +26,13 @@ public class PlanSpot implements Action{
 	
 		PlanDAO pdao = new PlanDAO();
 		ImagesDAO idao = new ImagesDAO();
-		
+		ImagesBean ib=null;
 		/*해당 장소 가져오기*/
 		PlanTravelBean ptb = pdao.getTravel(travel);
-		
+		System.out.println();
 		/*해당장소에 맞는 이미지 가져오기  */
-		ImagesBean ib = idao.getIsSpotImage(ptb.getTravel_id());
+		ib = idao.getIsSpotImage(ptb.getTravel_id());
+		System.out.println(ib);
 		
 		/*해당 장소 선물 리스트*/
 		List<PlanSouvenirBean> souvenirList = pdao.getSouvenirList(ptb.getCity_code());

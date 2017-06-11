@@ -157,7 +157,7 @@
 						<option value="1">국가명</option>
 						<option value="2">도시명</option>
 					</select> <input type="text" name="search" value="" class="search_text"
-						placeholder="임시 버튼은 아래에 있습니당"> <input type="submit"
+						placeholder="국가  , 도시 이름을 검색해주세요"> <input type="submit"
 						value="검색" class="main_serch_button">
 				</div>
 			</form>

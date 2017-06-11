@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="net.plan.db.PlanSouvenirBean"%>
@@ -34,6 +35,10 @@
 	
 	//아이디 
 	String id =(String)session.getAttribute("id");
+
+	//바뀌는 배경을 초 단위로 하기 위해서 현재 시간 불러오기.
+	Calendar cal = Calendar.getInstance();
+	int second = cal.get(Calendar.SECOND)%4;//배경 갯수에 따라서 나누는 값 바꾸기
 %>
 
 <script type="text/javascript">
@@ -123,7 +128,6 @@ var toggleBtn = 0;
 		    } 
 		});
 	});
-	
 </script>
 
 <!-- include jQuery library -->
@@ -131,18 +135,40 @@ var toggleBtn = 0;
 <!-- include Cycle plugin -->
 <script type="text/javascript" src="http://malsup.github.com/jquery.cycle.all.js"></script>
 
-
-
-
 <div class="clear"></div>
+
+<!-- 배경-->
+<%if(second==3) {%>
+<section id="banner" class="region_one b_back<%=second%>">
+<%} else if(second==2) {%>
+<section id="banner" class="region_one b_back<%=second%>">
+<%} else if(second==1) {%>
+<section id="banner" class="region_one b_back<%=second%>">
+<%} else { %>
+<section id="banner" class="region_one b_back">
+<%} %>
 <!-- 본문 -->
-<section class = "planSpot">
 <div class = "planSpot">
 <h2>
 	<%=ptb.getName() %><span><%=ptb.getAddress() %></span>
 
 <!-- 찜하기 -->
-	<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기">
+
+<%
+					if (id != null) {
+				%>
+				<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기" name="zzim"
+					onclick="zzim_add('<%=ptb.getTravel_id()%>')"
+					/>
+				<%
+					} else if (id == null) {
+				%>
+				<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기" name="zzim_noId" onclick="popupToggle()"
+					/>
+				<%
+					}
+				%> 
+	
 	
 </h2>
 
@@ -151,23 +177,45 @@ var toggleBtn = 0;
 
 <div class="img_info">
 	<div class="travel_img" >
+	<%
+	if(ib!=null){
+	%>
  		<img alt="관광지 이미지" src="./images/plan/nation/<%=ib.getFile()%>" width="450px" height="300px">
+ 	<%
+	}else{	
+ 	%>
+ 	<img alt="관광지 이미지" src="./images/pic01.jpg" width="450px" height="300px">
+ 	<%
+	}
+ 	%>
  	</div>
-	
-
-<!-- 추가정보(검색설명) -->
-<div class="tr_info">지도</div>
-
+ 	<!-- 추가정보(검색설명) -->
+	<div class="tr_info">
+	<div class="map">
+			<!-- 수현씨 지도 부분 -->
+			<iframe width="100%" height="100%" frameborder="0" style="border: 0;"
+				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwZMwcmxMBI0VQAUkusmqbMVHy-b4FuKQ&q=<%=ptb.getName()%>" allowfullscreen>
+			</iframe>
+		</div>
+	</div>
 </div>
-
-<div class="clear"></div>
-
-<!-- 장소 설명(db에서 받아온 설명) -->
 <h1>&nbsp▶&nbsp<%=ptb.getInfo() %></h1>
 
-<!-- 월별 옷차림(검색) -->
+<!-- 장소 설명(db에서 받아온 설명) -->
 
-<h3>월별 옷차림 &nbsp<!-- <span>계절에 맞는 이 지역 코디를 검색해 보세요</span> --></h3>
+</div>
+</section>
+
+
+
+<section class = "planSpot">
+
+<!-- 월별 옷차림(검색) -->
+<div class="clear"></div>
+<div class = "planSpot">
+
+<h3>월별 옷차림 &nbsp<br><span>계절에 맞는 이 지역 코디를 검색해 보세요</span></h3>
+<hr>
 <div class="All_mon">
 <input type="button"  value="1월" class="month" id="first">
 <input type="button" value="2월" class="month">
@@ -187,11 +235,14 @@ var toggleBtn = 0;
 <div class="month_img">
 
 </div>
+</div>
 <div class="clear"></div>
 
 <!-- 선물리스트(1위 2위 3위)(db에서 받아오기) -->
-
-<h3>선물 리스트</h3>
+<section class="giftList">
+<div class = "planSpot">
+<h3>선물 리스트<br><span>이 지역을 여행하신다면 한번 구매해보세요</span></h3>
+<hr>
 <!-- <img alt="이전" src="./images/Spot/arrow2.png"> -->
 
 <%
@@ -201,124 +252,153 @@ if(souvenirList.size()==0){
 	<h4>등록된 기념품이 없습니다</h4>
 	</div>
 	<%
-}
+}%>
+<div class="souvenir_list">
+<%
 	for(int i=0; i<souvenirList.size();i++){
 		PlanSouvenirBean psb = (PlanSouvenirBean)souvenirList.get(i);
 	%>
 	
-	<div >
-	<table class="souvenir" style="float: left; width: 300px; margin-right: 50px; border: none; height: ">
+	
+	<table class="souvenir" style="float: left; width: 300px; margin-right: 50px;">
 		
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getName() %></td></tr>
-			<tr style="background: none; border: none"><td style="text-align: center;"><img alt="" src="./upload/<%=psb.getImg()%>" width="200" height="200"></td></tr>
+			<tr style="background: none; border: none"><td style="text-align: center;"><img alt="" src="./upload/<%=psb.getImg()%>" width="200" height="200" style="border: 1px solid #999;"></td></tr>
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getInfo() %></td></tr>
 		
 	</table>
-	</div>
+	
 	
 	<%
 	}
 %>
-
+</div>
 <!-- <img alt="이후" src="./images/Spot/arrow.png">
  -->
-
+ </div>
+</section>
 
 <!-- 장소에 대한 후기 작성(시간나면) -->
 <div class="clear"></div>
+<section style="height:800px;">
+<div class="planSpot">
+	<h3>
+		<span style="color: #f44066; font-size: 28px;"><%=ptb.getName()%></span>의
+		여러 <span style="color: #f44066; font-size: 28px;">후기</span>들을 알아보세요 <br>
+	</h3>
+	<hr>
+	<div class="blog_epil">
+		<div class="blog_Spot">
+			<span class="text">블로그 후기</span>
+		</div>
+		<div class="Spot_epilogue">
+			<span class="text" name="loc2">직접 작성한 여행 후기</span>
+		</div>
+		<div class="clear"></div>
 
-<div class="blog_epil">
-<div class="blog_Spot"><span class="text">블로그 정보</span></div>
-<div class="Spot_epilogue"><span class="text"><%=ptb.getName()%> 여행 후기</span></div>
-<div class="clear"></div>
-<script src="./assets/js/plan/planSpotSearch.js"></script>
+		<script src="./assets/js/plan/planSpotSearch.js"></script>
 
-	
-       <div class="feature-grid">
+
+		<div class="feature-grid">
 
 			<!-- 이미지 서치 시작.-->
 			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
-			<div id="daumForm" >
-				<input id="daumSearch" type="hidden" value="<%=ptb.getName() %>+여행후기"
+			<div id="daumForm">
+				<input id="daumSearch" type="hidden"
+					value="<%=ptb.getName()%>+여행후기"
 					onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />
 				<!-- 				<input id="daumSubmit" onclick="javascript:daumSearch.search()" -->
 				<!-- 					type="submit" value="검색" /> -->
 			</div>
-			<div id="daumView" style="display: block;height: 800px; margin-left:1em; margin-top: 5px;">
+			<div id="daumView"
+				style="display: block; height: 800px; margin-left: 2px; margin-top: 5px;">
 				<div id="daumImage"></div>
 			</div>
 			<div id="daumScript" style="display: block;">
 				<div id="daumImageScript"></div>
 			</div>
-			<div class="clear"></div>
-		</div> <!-- 블로그 후기 나타나는 div -->
-		<div class="clear"></div>
-		
-		<!-- 후기 작성 추가 -->
-		<div id="Spot_epilogue" style="height: 800px; margin-left:2em; margin-top: 5px;">
-		
-			<div class="comment">
-			
-			<div class="review_list">
-			<!-- 리뷰 리스트 오는 자리 -->
-			<!-- 페이지 번호 오는 자리 -->
 		</div>
+		<!-- 블로그 후기 나타나는 div -->
+		<div class="clear"></div>
+
+		<!-- 후기 작성 추가 -->
+		<div id="Spot_epilogue"
+			style="height: 800px; margin-left: 10px; margin-top: 5px;">
+
+			<div class="comment">
+
+				<div class="review_list">
+					<!-- 리뷰 리스트 오는 자리 -->
+					<!-- 페이지 번호 오는 자리 -->
+				</div>
 				<div class="comment_right">
 					<%
-					if(id!=null){
+						if (id != null) {
 					%>
-					<input type="button" value="리뷰쓰기" id="writeBtn" class="button alt writeBtn">
+					<input type="button" value="리뷰쓰기" id="writeBtn"
+						class="button alt writeBtn">
 					<%
-					}
+						}
 					%>
 					<!-- 숨겨진 공간 -->
-				<div class="reviewWriterDiv">
-					<form action="javascript:writeComplete()" method="post">
-						<select id="eval">
-							<option value="-1" style="font-weight: 900; color: #6B66FF">평가하기</option>
-							<option value="1" style="color: orange;">좋아요!</option>
-							<option value="2" style="color: blue;">괜찮아요.</option>
-							<option value="3" style="color: red;">별로에요!</option>
-						</select>
-						<textarea rows="5" cols="5" maxlength="1000" name="content"></textarea>
-						<div class="formBtnDiv">
-							<input type="submit" value="작성완료" class="submitBtn"> <input
-								type="reset" value="다시쓰기" class="resetBtn">
+					<div class="reviewWriterDiv">
+						<form action="javascript:writeComplete()" method="post">
+							<select id="eval">
+								<option value="-1" style="font-weight: 900; color: #6B66FF">평가하기</option>
+								<option value="1" style="color: orange;">좋아요!</option>
+								<option value="2" style="color: blue;">괜찮아요.</option>
+								<option value="3" style="color: red;">별로에요!</option>
+							</select>
+							<textarea rows="5" cols="5" maxlength="1000" name="content"></textarea>
+							<div class="formBtnDiv">
+								<input type="submit" value="작성완료" class="submitBtn"> <input
+									type="reset" value="다시쓰기" class="resetBtn">
+							</div>
+
+						</form>
+
+					</div>
+					<!-- 리뷰작성 div(숨겨진 공간) -->
+
+					<%
+						if (id == null) {
+					%>
+					<div class="comment_member">
+						<!-- 로그인, 회원가입 DIV -->
+						<span>도움이 필요하신가요?<br>로그인하여 커뮤니티에 참여해 보세요!
+						</span><br>
+						<div class="comment_member_btn">
+							<input type="button" value="로그인" onclick="popupToggle()">
+							<input type="button" value="회원가입"
+								onclick="location.href='./MemberJoin.me';">
 						</div>
-
-					</form>
-
+					</div>
+					<!-- .comment_member -->
+					<%
+						}
+					%>
 				</div>
-				<!-- 리뷰작성 div(숨겨진 공간) -->
-				
-				<%
-			if(id==null) {
-			%>
-			<div class="comment_member">	<!-- 로그인, 회원가입 DIV -->
-				<span>도움이 필요하신가요?<br>로그인하여 커뮤니티에 참여해 보세요!</span><br>
-				<div class="comment_member_btn">
-					<input type="button" value="로그인" onclick="popupToggle()">
-					<input type="button" value="회원가입" onclick="location.href='./MemberJoin.me';">
-				</div>
-			</div>	<!-- .comment_member -->
-			<%
-			}
-			%>	
-		</div>	<!-- .comment_right -->
-		
-	<div class="clear"></div>
-	</div>	<!-- .comment -->
+				<!-- .comment_right -->
 
+				<div class="clear"></div>
 			</div>
+			<!-- .comment -->
+
+		</div>
+	</div>
+
+
+
+
+</div>
+</section>
+</section>
+<div class="clear"></div>
 		<!-- 후기작성 스크립트 -->	
 			<script type="text/javascript">
+			
+			
 
-		/* 
-			$(document).ready(function(data){
-				/* 리뷰 작성 버튼 
-				
-			});
-			 */
 			/* 리뷰 작성완료 DB작업 */
 			function writeComplete() {
 				var con = $('textarea').val();
@@ -364,19 +444,66 @@ if(souvenirList.size()==0){
 						alert(error);
 				    }
 				});
+				location.href="#loc2";
 			}
+			
+			/* 리뷰 삭제하기 */
+			function spotCommentDelete(num, pageNum) {
+				
+				var con = confirm("리뷰를 삭제하시겠습니까?");
+				
+				if(con == true) {
+					$.ajax({
+						type: 'post',
+						url: './plan/planComment/planSpotCommentDelete.jsp',
+						data : {num : num},
+						success: function(data) {
+							alert("삭제 되었습니다.");
+							spotCommentList(pageNum);
+						},
+						error: function(xhr, status, error) {
+							alert(error);
+					    }
+					});
+				}
+			}
+			
+
+			//찜 버튼 누르면 내 일정에 담김.
+			function zzim_add(travel_id) {
+
+				$.ajax({
+					type : 'POST',
+					url : './MyPlanBasketAdd.pln',
+					data : {
+						'travel_id' : travel_id
+					},
+					dataType : 'text',
+					async : false,
+					success : function(data) {
+						console.log(data)
+
+					}
+				});
+				
+			//찜 버튼이 동작한 후, 페이지 이동을 물어본다.
+			if (confirm("\n나의 일정에 추가되었습니다.\n\n나의 일정 페이지로 이동하시겠습니까?") == true){    //확인
+				location.href="./MyPlan.pln?plan_nr=100";
+			}else{   //취소
+				   return;
+			}//찜 버튼이 동작한 후, 페이지 이동을 물어본다. 끝
+				
+			}//찜 버튼 끝.
+
+			//비로그인 상태에서 찜버튼을 누르면 로그인 창 활성화.
+			function zzim_noId() {
+				popupToggle()
+			}
+			
 			
 			</script>
 			
-			</div>
-
-
-
-
-</div>
-
-</section>
-<div class="clear"></div>
+	
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

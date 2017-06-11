@@ -14,10 +14,10 @@ body {
 	height: 50%;
 	position: relative;
 }
-#form{
+form{
 	background-position: center top;
 	background-attachment: fixed;
-	margin: auto;
+	margin: 0px auto 0 auto;
 	line-height: 1.75;
 	text-align: center;
 	width: 50%;
@@ -26,19 +26,22 @@ body {
 }
 
 #submit{	
-	margin-bottom:2px;
+	margin-bottom:40px;
 	width:150px;
 	height:50px;
 	padding:0;
-	background-color: #ff6699;	
+	background-color: #333;	
+
 }
 
 input[type=text]{
 	margin-left:100px;	
 	width:500px;
 }
+
+
 textarea{
-		margin-left:100px;	
+		margin-left:100px;
 		width:500px;
 }
 

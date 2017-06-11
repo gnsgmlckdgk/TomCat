@@ -547,6 +547,7 @@ public ImagesBean getIsSpotImage(int travel_id) {
 				ib.setInfo(rs.getString("info"));
 				ib.setFile(rs.getString("file"));
 			}
+			System.out.println(ib);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
