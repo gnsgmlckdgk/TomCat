@@ -1,3 +1,5 @@
+<%@page import="java.util.regex.Matcher"%>
+<%@page import="java.util.regex.Pattern"%>
 <%@page import="java.util.Vector"%>
 <%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="com.sun.xml.internal.bind.v2.runtime.Location"%>
@@ -156,7 +158,9 @@
 		String arr_lng =  (String) request.getParameter("alng"); //경로 표시를 위한 도착장소의 lnt 값
 
  		int plan_item_nr=0;  // 일정종류별 방문지 갯수 계산을 위함
+ 		int plan_item_nr1=0;  // 일정종류별 방문지 갯수 계산을 위함
  		int j=0;  //일정목록 넘버링을 위함
+ 		String pfirstday=""; //일정의 첫째날
 	%>
 
 	<div class="myplanContainer" >
@@ -189,7 +193,14 @@
 				<!-- <button class="btn" >일정만들기</button> -->
 				<hr>
 
-				<table border="1"  class="table" id="bestseller_books">  <!-- 여행지찜리스트 목록 및 일정별 목록 -->
+
+
+
+
+
+
+
+<%-- 				<table border="1"  class="table">  <!-- 여행지찜리스트 목록 및 일정별 목록 -->
 					<thead>
 					<tr>
 						<!-- <th>plan</th>
@@ -233,14 +244,14 @@
 							TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
 					
 							/* 여행지찜리스트에서 선택한 일정종류(plan_nr) 와 일정종류가 다를 땐, 목록테이블 만들지 않고 pass. 
-							일정종류(plan_nr) 가 목록표시(100)일 경우에도  목록테이블 만들지 않고 pass????????? */
+							일정종류(plan_nr) 가 목록표시(100)일 경우에도  목록테이블 만들지 않고 pass */
 							if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100)
 								continue;
 					%>
 					 <tbody>
 					<tr>
-<%-- 					<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
-						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 --> --%>
+					<td><%=mpbb.getPlan_nr()%></td>  <!-- 일정 종류 표시, 전체 목록표시때에만 표시 -->
+						<td class='priority'><%=mpbb.getItem_nr()%></td> <!--  1~ 값( for문의 i 값 으로 변경 예정 -->
 						<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
 						<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
 						<td><a href="./MyPlanBasketDelete.pln?myplans_id=<%=mpbb.getMyplans_id()%>">삭제</a></td><!-- 찜 리스트 삭제 버튼 -->
@@ -277,7 +288,7 @@
 					
 					</tbody>
 				
-				</table>
+				</table> --%>
 
 			
 			<% /* 찜한 방문지가 없을 때 안내멘트 표시 */
@@ -291,9 +302,35 @@
 			%>
 			
 
-		     
+
          <table>
+         
          <%
+         //배열 크기 결정을 위해, 선택한 plan 의 방문지 갯수 계산하기
+//          for (int q= 0; q < basketList.size(); q++) {  
+// 				MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(q);
+// 				/* 일정종류(plan_nr) 가 여행지찜리스트의 일정종류와 다를 때에는 갯수 계산 안함. 
+// 				일정종류(plan_nr) 가 목록표시일 경우에도 갯수 계산 안함 */
+// 					 /* 	if (plan_nr != mpbb.getPlan_nr() & Integer.parseInt(plan_nr) != 100)    
+// 							continue; */
+							
+// 				if(Integer.parseInt(plan_nr) != 100 & mpbb.getPlan_nr()!=null )continue;		
+					
+// 					Pattern p = Pattern.compile(plan_nr); 
+// 					Matcher m = p.matcher(mpbb.getPlan_nr());
+// 					for(int k=0; m.find(k);k=m.end()){
+// 						plan_item_nr1=plan_item_nr1+1; 
+// 					}
+// 			} 
+//          	System.out.println("일정내 방문지 갯수"+plan_item_nr1);
+         	/* 선택한 일정의 방문지 갯수 계산 완료 */
+			int button_nr1=0; //경로 표시 버튼의 각  id 값 생성을 위한 초기 값(for문)
+			//float[][] route1=new float[plan_item_nr1][2];  // 두 지점간의 경로표시를 위해 for 문내에서(출발지의 lat, lng 도착지의 lat, lng 값)을 2차원 배열에 저장
+			float[][] route1=new float[50][2];  // 두 지점간의 경로표시를 위해 for 문내에서(출발지의 lat, lng 도착지의 lat, lng 값)을 2차원 배열에 저장
+			
+			
+			
+			
          int gapdday=0;
                           
          for (int h = 0; h < basketList.size(); h++) {
@@ -302,6 +339,7 @@
              if(mpbb.getFirstday() != null){
              
              String fday=mpbb.getFirstday();
+             pfirstday=mpbb.getFirstday();
              String lday=mpbb.getLastday();
              
             String fday1=fday.substring(0,4);
@@ -322,15 +360,40 @@
       
          }
          
+  	
+     	if(plan_nr.equals("100")&&basketList.size()!=0){%>
+     	<tr width="100px" align="center">
+			<th width="100px" align="center">찜순</th>        
+         	<th width="400px" align="center">찜목록 </th>
+         	<th width="100px" align="center">삭제</th>
+         </tr><% 
+     	
+     	
+	         for (int p = 0; p < basketList.size(); p++) {
+					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(p); /* 찜목록 DB Bean */ 
+					TravelBean tb = (TravelBean) goodsList.get(p); /*  여행지(상품) DB Bean */
+			%>
+			 
+			<tr>
+				<td align="center"><%=++j%></td>   <!-- 일정 목록 넘버링 -->
+				<td><%=tb.getName()%></td> <!-- 일정별 찜한 여행지명 출력-->
+				<td><a href="./MyPlanBasketDelete.pln?myplans_id=<%=mpbb.getMyplans_id()%>">
+					<img src="./images/myplans/delete.png" width="30px" height="30px" style="vertical-align:bottom">
+					</a></td><!-- 찜 리스트 삭제 버튼 -->
+			
+				<%} %>
+			</tr>	
+		<%} else {	//if(!plan_nr.equals("100"))
+  	
+         for(int z=1;z<gapdday+1;z++){ %>
+<!-- 	         if(!plan_nr.equals("100")){ -->
+	       
+	       	<th width="100px" align="center"><%=z%>일차</th>
+	        <th width="400px" align="center"><%=pfirstday%></th>
+	        <th width="100px" align="center">경로</th>	
+<%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
+         <%
          
-       
-         
-         
-         for(int z=1;z<gapdday+1;z++){ 
-         if(!plan_nr.equals("100")){
-         %>
-         <tr><td colspan="4"><%=z %>일차</td></tr>
-         <%}         
             for (int i = 0; i < basketList.size(); i++) {
                MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
                TravelBean tb = (TravelBean) goodsList.get(i); /*  여행지(상품) DB Bean */
@@ -343,31 +406,72 @@
                String[] Array1 = a.split("@");
                String[] Array2 = b.split("@");
                String[] Array3 = c.split("@");
-               System.out.println("길이"+Array1.length+"값"+Array1[i]);            
+  //             System.out.println("길이"+Array1.length+"값"+Array1[i]);            
            			
+
                for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
-                System.out.println("첫번째for문의 증가하는 k값"+k); 
+					System.out.println("첫번째for문의 증가하는 k값"+k);
+					
+					int ar2=Integer.parseInt(Array2[k]);
+					if (plan_nr.equals(Array1[k])&&ar2==z){
+		           		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
+		           		
+		   %>
+		     <tr>
+				<td><%
+				String ptype="";
+				switch (tb.getType()) {
+						case "r" :
+							ptype = "식당"; 
+							break;
+						case "h" :
+							ptype = "숙소";  
+							break;
+						case "p" :
+							ptype = "명소";  
+							break;
+						
+					}   /* switch 문 종료 */%> 
+				<%=ptype %>  <%-- <%=Array1[k] %><%=Array2[k] %><%=Array3[k] %> --%></td>
+		        <td><%=tb.getName() %></td>                	
+			 	<%-- <td><%=tb.getLatitude() %></td> --%>
+		               	
+		               	
+		               	
+		               	<%
+		               	if(!plan_nr.equals("100")){ /* 전체목록표시 아닐때에만 경로표시 버튼 생성 */
+							%>
+						<td>
 
+								<% /* 일정별 방문지 목록에서 각 여행지의 lat, lnt 값을  이차원 배열의 각 행에 저장 */
+									route1[button_nr1][0] = tb.getLatitude();  
+									route1[button_nr1][1] = tb.getLongitude();
+									if(button_nr1!=0){  /* 첫번째 방문지(button_nr=0)에는 경로버튼 표시하지 않음 */
+									%>	
+									
+										<!-- 경로표시 버튼 눌렀을 때, plan_nr 과, 출발지 lat, lng, 도착지 lat, lng 값을 다음페이지(경로표시페이지)에 넘겨줌 -->
+										<a href='./MyPlan.pln?plan_nr=<%=plan_nr%>&dlat=<%=route1[button_nr1-1][0]%>&dlng=<%=route1[button_nr1-1][1]%>&alat=<%=route1[button_nr1][0]%>&alng=<%=route1[button_nr1][1]%>'>
+				  						<!-- 경로표시 버튼 이미지 -->
+				  						<img src="./images/myplans/bus_trans.png" width="30px" height="30px" style="vertical-align:bottom"> </a> 
+		  						<%
+		  							}
+									button_nr1=button_nr1+1; /* 경로표시 버튼 넘버링 */			
+		  						%>
 
-              int ar2=Integer.parseInt(Array2[k]);
-              
-           	   if (plan_nr.equals(Array1[k])&&ar2==z){
-           		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
-           	   %>
-           	   <tr>
-           	   
-               	<td><%=Array1[k] %><%=Array2[k] %><%=Array3[k] %></td>
-               	<td colspan="2"><%=tb.getName() %></td>                	
-               	<td><%=tb.getLatitude() %></td>
-               	</tr>  
-	            	   
-           	   <%
-                 }
+						</td>
+						<%
+						}
+						%>
+		               	</tr>  
+			            	   
+		           	   <%
+	                 }
            	   
                }
       	
             }
            }
+         }
          }
          %>
    		</table>
