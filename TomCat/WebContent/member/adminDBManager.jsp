@@ -42,7 +42,7 @@
 		<div class="memberContent">
 			
 		<header>
-			<h1>DB 통합 관리</h1><hr>
+			<h1>여행지 DB관리</h1><hr>
 			도시, 관광지 수정 시<br>
 			<span style="color: orange;">국가나 도시 변경시 이미지 이동에 오류</span>가 있어 <span style="color: red;">국가, 도시 변경은 임시로 막아놓음</span><br> 
 			추후 수정 예정

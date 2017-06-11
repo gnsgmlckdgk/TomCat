@@ -1,3 +1,4 @@
+<%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
 <%@page import="net.plan.db.PlanCountryBean"%>
 <%@page import="java.util.List"%>
@@ -27,6 +28,8 @@
 		
 		section {
 				text-align: center;
+				
+				font-weight: bold;
 			}
 		
 			div.city_update {
@@ -38,6 +41,22 @@
 			
 			div.city_update .btn_div {
 				margin-top: 20px;
+			}
+			
+			/* 이미지 BOX */
+			div.city_update div.imgBox {	
+				width: 800px;
+				margin: 0 auto 30px auto;
+			}
+			div.city_update div.imgBox .beforeBox {
+				width: 350px;
+				float: left;
+				margin-left: 30px;
+			}
+			div.city_update div.imgBox .previewBox {
+				width: 300px;
+				float: left;
+				margin-left: 30px;
 			}
 	
 	</style>
@@ -55,7 +74,7 @@
 	
 	String pageNum = (String)request.getAttribute("pageNum");
 	
-	String cityImgPath = (String)request.getAttribute("cityImgPath");
+	ImagesBean cityImage = (ImagesBean)request.getAttribute("ib");
 %>
 
 <section>
@@ -94,7 +113,49 @@
 		<input type="hidden" name="before_en_name" value="<%=pcb.getEn_name() %>">
 		
 		<br>이미지 변경
-		<input type="file" name="file"><br><br>
+		<input type="file" id="cityfile" name="file" value="<%=cityImage.getFile()%>" onchange="loadImageFile();"><br>
+		
+		<div class="imgBox">
+			<div class="beforeBox"><span>현재 이미지</span><img src="./images/plan/nation/<%=cityImage.getFile()%>" width="300" height="200"></div>
+			<div class="previewBox"><span>변경할 이미지</span><div id="preview" style="width: 300; height: 200;"></div></div>
+			
+			<div class="clear"></div>
+		</div>
+		
+		<script type="text/javascript">
+		// 이미지 미리보기
+		var loadImageFile = (function () {
+	        if (window.FileReader) {
+	            var oPreviewImg = null, oFReader = new window.FileReader(),
+	                rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+	            oFReader.onload = function (oFREvent) {
+	                if (!oPreviewImg) {
+	                    var newPreview = document.getElementById("preview");	// 보여줄 화면
+	                    oPreviewImg = new Image();
+	                    oPreviewImg.style.width = (newPreview.offsetWidth).toString() + "px";
+	                    oPreviewImg.style.height = (newPreview.offsetHeight).toString() + "px";
+	                    newPreview.appendChild(oPreviewImg);
+	                }
+	                oPreviewImg.src = oFREvent.target.result;
+	            };
+
+	            return function () {
+	                var aFiles = document.getElementById("cityfile").files;		// 파일 입력 폼
+	                if (aFiles.length === 0) { return; }
+	                if (!rFilter.test(aFiles[0].type)) { alert("You must select a valid image file!"); return; }
+	                oFReader.readAsDataURL(aFiles[0]);
+	            }
+
+	        }
+	        if (navigator.appName === "Microsoft Internet Explorer") {
+	            return function () {
+	                document.getElementById("preview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("cityfile").value;
+
+	            }
+	        }
+	    })();
+		</script>
 		
 		정보
 		<textarea rows="10" cols="20" name="info" maxlength="160"><%=pcb.getInfo()%></textarea>

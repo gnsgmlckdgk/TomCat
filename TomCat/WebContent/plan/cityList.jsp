@@ -51,11 +51,11 @@
 				cursor: pointer;
 			}
 			div.cityList th:nth-of-type(2) {	/* 도시이름 */
-				width: 9%;
+				width: 10%;
 				cursor: pointer;
 			}
 			div.cityList th:nth-of-type(3) {	/* 국가코드 */
-				width: 8%;
+				width: 10%;
 				cursor: pointer;
 			}
 			div.cityList th:nth-of-type(4) {	/* 영문이름 */
@@ -63,10 +63,10 @@
 				cursor: pointer;
 			}
 			div.cityList th:nth-of-type(5) {	/* 정보 */
-				width: 44%;
+				width: 42%;
 			} 
 			div.cityList th:nth-of-type(6) {	/* 수정 / 삭제 */
-				width: 21%;
+				width: 20%;
 			}
 			div.cityList input[type="button"] {
 				font-size: 12px;

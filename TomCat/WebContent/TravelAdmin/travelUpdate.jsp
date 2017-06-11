@@ -35,11 +35,26 @@
 			margin-bottom: -7px;
 			font-size: 16px;
 		}
-		.tupdateContainer img {	/* 관광지 이미지 */
-			float: left;
-		}
 		.tupdateContainer .btndiv {	/* 버튼들 */
 			text-align: center;
+		}
+		
+		/* 이미지 */
+		div.imgBox {
+			width: 800px;
+		}
+		div.imgBox div.beforeImg {
+			width: 350px;
+			float: left;
+			margin-left: 30px;
+		}
+		div.imgBox div.afterImg {
+			width: 350px;
+			float: left;
+			margin-left: 30px;
+		}
+		div.imgBox span {
+			font-weight: bold;
 		}
 		
 	</style>	
@@ -162,9 +177,14 @@
 					
 				})();
 				</script>
+				
 				<input type="file" name="file" id="travelImg" onchange="loadImageFile();">
-				<img src="./images/plan/nation/<%=travelImgPath%>" width="300" height="200" onerror="this.src='./images/error/noImage.png';">
-				<div id="previewImg" style="width: 300px; height: 200px;"><!-- 이미지 변경 시 미리보기 -->변경된 이미지</div>
+				
+				<div class="imgBox">
+					<div class="beforeImg"><span>현재 이미지</span><img src="./images/plan/nation/<%=travelImgPath%>" width="300" height="200" onerror="this.src='./images/error/noImage.png';"></div>
+					<div class="afterImg"><span>변경할 이미지</span><div id="previewImg" style="width: 300px; height: 200px;"><!-- 이미지 변경 시 미리보기 --></div></div>
+					<div class="clear"></div>
+				</div>
 				
 				<div class="clear"></div>
 			

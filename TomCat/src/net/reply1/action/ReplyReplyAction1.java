@@ -65,7 +65,7 @@ public class ReplyReplyAction1 implements Action1{
 		forward.setPath("./instagram/content.jsp");
 		forward.setRedirect(false);
 		
-		return forward
+		return forward;
 
 	
 	}

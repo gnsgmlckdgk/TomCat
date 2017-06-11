@@ -34,7 +34,7 @@ public class ReplyFrontController1 extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();}	
 			
-		} else if (command.equals("/RreplyUpdateAction.re")) {
+		} /*else if (command.equals("/RreplyUpdateAction.re")) {
 			action= new RreplyUpdateAction1();
 			try {
 				forward = action.execute(request, response);
@@ -58,7 +58,7 @@ public class ReplyFrontController1 extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("./instagram/replyreplyform.jsp");
 			forward.setRedirect(false);
-		}
+		}*/
 			
 
 

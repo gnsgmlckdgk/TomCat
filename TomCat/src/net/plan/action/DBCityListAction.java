@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.images.db.ImagesBean;
+import net.images.db.ImagesDAO;
 import net.plan.db.PlanCityBean;
 import net.plan.db.PlanCountryBean;
 import net.plan.db.PlanDAO;
