@@ -16,6 +16,7 @@ import net.QandA.db.QandABean;
 import net.board.db.boardBean;
 import net.plan.db.PlanNationCommentBean;
 import net.plan.db.PlanRegionCommentBean;
+import net.reply.db.ReplyBean;
 
 /* 회원이 쓴 글 조회하는 클래스 */
 public class MemberBoardDAO {
@@ -216,6 +217,86 @@ public class MemberBoardDAO {
 
 		return boardList;
 	}
+	
+	// 인생샷그램 댓글 갯수 구하기
+	public int getGramReplyCount(String nick) {
+		
+		int count = 0;
+		try {
+			
+			con = getConnection();
+			
+			sql = "select count(*) as count from gram_reply where nick = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nick);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+	
+	// 인생샷그램 댓글 리스트 가져오기
+public List<ReplyBean> getGramReplyList(int startRow, int pageSize, String nick) {
+		
+		List<ReplyBean> list = new ArrayList<ReplyBean>();
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "select * from gram_reply where nick = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, nick);
+			
+			rs = ps.executeQuery();
+			
+			ReplyBean rb = null;
+			while(rs.next()) {
+				rb = new ReplyBean();
+				
+				rb.setContent(rs.getString("content"));
+				rb.setDate(rs.getDate("date"));
+				rb.setNick(rs.getString("nick"));
+				rb.setNum(rs.getInt("num"));
+				rb.setRe_lev(rs.getInt("re_lev"));
+				rb.setRe_num(rs.getInt("re_num"));
+				rb.setRe_ref(rs.getInt("re_ref"));
+				rb.setRe_seq(rs.getInt("re_seq"));
+				
+				list.add(rb);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 
 	// 함께해요 게시글 갯수 구하기
 	public int getTogetherCount(String nick) {

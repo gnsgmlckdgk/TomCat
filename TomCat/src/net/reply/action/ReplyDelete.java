@@ -18,12 +18,11 @@ public class ReplyDelete implements Action {
 		ReplyDAO rdao=new ReplyDAO();
 		ReplyBean rb=new ReplyBean();
 		
-		int num=Integer.parseInt(request.getParameter("num"));		
+		int num=Integer.parseInt(request.getParameter("num"));
 		String pageNum = request.getParameter("pageNum");
 		int re_num=Integer.parseInt(request.getParameter("re_num"));
 			
 		rdao.deleteReply(re_num);
-				
 		
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();		

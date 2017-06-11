@@ -61,12 +61,28 @@
 		           		 alert(error);
 		       		 }   
 					});
+					
+					/* 페이지 처음 실행시 댓글 목록 조회 */
+					$.ajax({
+						type:"POST",
+		       		 url:"./member/getBoardList/gramBoardReplyList.jsp",
+		       		 data : {},
+		       		 success: function(data){
+		         		$('.gramBoard .table2').append(data);
+		      		  },
+		        		error: function(xhr, status, error) {
+		           		 alert(error);
+		       		 }   
+					});
 				});
 			</script>
 				
 				<h2>인생샷그램</h2>
-				
 				<div class="table"></div>
+				
+				<h3>인생샷그램 댓글</h3>
+				<div class="table2"></div>
+				
 				
 			</div> <!-- "gramBoard" -->
 			

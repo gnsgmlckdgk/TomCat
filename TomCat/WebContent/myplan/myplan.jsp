@@ -163,13 +163,24 @@
 		<div class="myplan-list" >
 
 				&nbsp;&nbsp;&nbsp;&nbsp;<a href='./MyPlan.pln?plan_nr=100'><img src="./images/myplans/zzim.png" width="50px" height="50px"style="vertical-align:bottom"></a>&nbsp;&nbsp; <!-- 여행지찜리스트 전체 목록 -->
-				<a href='./MyPlan.pln?plan_nr=1'"><img src="./images/myplans/plan_a.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정1 -->
-				<a href='./MyPlan.pln?plan_nr=2'"><img src="./images/myplans/plan_b.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정2 -->
+				<a href='./MyPlan.pln?plan_nr=1'><img src="./images/myplans/plan_a.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정1 -->
+				<a href='./MyPlan.pln?plan_nr=2'><img src="./images/myplans/plan_b.png" width="50px" height="50px" style="vertical-align:bottom"></a> <!--  일정2 -->
 				
 				<%if(gold.equals("유료회원")){ %>
-					<a href='./MyPlan.pln?plan_nr=3'"><img src="./images/myplans/plan_c.png" width="50px" height="50px" style="vertical-align:bottom"></a> &nbsp;&nbsp;<!--  일정3 -->
+					<a href='./MyPlan.pln?plan_nr=3'><img src="./images/myplans/plan_c.png" width="50px" height="50px" style="vertical-align:bottom"></a> &nbsp;&nbsp;<!--  일정3 -->
 				<%} else {%>
-					<a href='./PayAction.pln?approval=0&id=<%=id %>'"><img src="./images/myplans/plan_c.png" width="50px" height="50px" style="vertical-align:bottom"></a> &nbsp;&nbsp;<!--  일정3 -->
+					<a href='javascript:goldMemberConfirm();'><img src="./images/myplans/plan_c.png" width="50px" height="50px" style="vertical-align:bottom"></a> &nbsp;&nbsp;<!--  일정3 -->
+					<script type="text/javascript">
+						function goldMemberConfirm() {
+							var con = confirm("Gold 회원만 이용가능합니다.\n결제페이지로 이동하시겠습니까?");
+							if(con) {
+								location.href="./PayAction.pln?approval=0&id=<%=id %>";
+							}else {
+								return false;
+							}
+							
+						}
+					</script>
 				<%} %>
 				
 

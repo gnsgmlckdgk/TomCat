@@ -47,7 +47,7 @@
 </script>
 	<table>
 	<tr>
-		<th>글 번호</th><th>제목</th><th>작성한 날짜</th><th>관리</th>
+		<th>글 번호</th><th>내용</th><th>작성한 날짜</th><th>관리</th>
 	</tr>
 	<%
 	
