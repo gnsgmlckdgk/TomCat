@@ -149,6 +149,8 @@
         <div class="swiper-wrapper imgs">
         <%
         
+        if(boardList.size() != 0){
+        
     	for(int i=0; i<boardList.size(); i++) {
     		boardBean bb = (boardBean) boardList.get(i);
     	%>
@@ -159,6 +161,7 @@
 			</div>
     	<%
     	}
+        }
         
    		%>
         </div>

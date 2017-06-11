@@ -287,9 +287,11 @@
          <table>
          <%
          int gapdday=0;
-         
+                          
          for (int h = 0; h < basketList.size(); h++) {
              MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(h);
+             
+             if(mpbb.getFirstday() != null){
              
              String fday=mpbb.getFirstday();
              String lday=mpbb.getLastday();
@@ -308,6 +310,7 @@
             
             gapdday=(ㅣdaynum-fdaynum);
             System.out.println("내가구하려는 값"+gapdday);
+            }
       
          }
          
