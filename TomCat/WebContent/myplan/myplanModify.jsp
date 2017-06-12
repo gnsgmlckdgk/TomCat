@@ -163,7 +163,7 @@
 					도착일 : <input type="date" name="toDate" id="toDate" required="required">
 					</td>
 					<%
-						}
+						}//
 					%>
 					<td class="set_plan" id="set_plan" onchange="from_to()">
 						<select
