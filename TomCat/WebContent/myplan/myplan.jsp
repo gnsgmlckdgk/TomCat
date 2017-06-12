@@ -671,6 +671,7 @@ $(window).load(function() {
 		from = document.getElementById("fromDate");
 		to = document.getElementById("toDate");
 		plan = $("#set_plan option:selected").val();
+		a = true;
 
 
 		<%
@@ -690,6 +691,8 @@ $(window).load(function() {
 				//여기까지 왔다면 분명히 계산해야될 값이 있는 것.
 				
 // 				alert("//여기까지 왔다면 분명히 계산해야될 값이 있는 것.");
+				
+					a = false;
 				
 					$('#pln_list').empty();
 					
@@ -717,7 +720,7 @@ $(window).load(function() {
 		
 		
 		
-		
+		if(a == true){
 		if(from.value != "" & to.value != ""){
 					
 			var arr1 = from.value.split('-');
@@ -752,6 +755,7 @@ $(window).load(function() {
 					
 					
 			}
+		}
 		}
 		
  		

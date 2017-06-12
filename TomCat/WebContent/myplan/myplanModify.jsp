@@ -172,7 +172,7 @@
 						<!-- <input type="image" name="reset" src="./images/myplans/다시등록.png" width="50px" height="50px" style="vertical-align:bottom;" value=""  /> -->
 					</td>
 				</tr>
-				<%-- <input type="hidden" value="<%=diff_day%>" name="diff_day"> --%>
+				<input type="hidden" value="<%=diff_day%>" name="diff_day">
 			</table>
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
