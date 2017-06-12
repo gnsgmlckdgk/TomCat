@@ -155,9 +155,9 @@
 		
 	</div>	<!-- travelList 끝 -->
 
-
 	<!-- Two 섹션 스크립트 -->
 	<script type="text/javascript">
+	
 		// 페이지에 처음 왔을때 도시 리스트를 불러옴, 페이지번호는 1로 시작
 		$(window).load(function() {
 			$.ajax({
@@ -210,8 +210,9 @@
 		function regionListChange(pageNum) {
 			
 			var search = $('#search').val();
-	
+			
 			$.ajax({
+				
 				type: 'post',
 				url: './plan/planRegionList.jsp',
 				data : {region:'<%=region%>', pageNum: pageNum, search: search, city_code:'<%=city_code%>'},
@@ -227,8 +228,8 @@
 		}
 
 		//찜 버튼 누르면 내 일정에 담김.
-		function zzim_add(travel_id) {
-
+		function zzim_add(travel_id, pageNum) {
+			
 			$.ajax({
 				type : 'POST',
 				url : './MyPlanBasketAdd.pln',
@@ -238,20 +239,31 @@
 				dataType : 'text',
 				async : false,
 				success : function(data) {
-					console.log(data)
-
+					console.log(data);
 				}
 			});
-			
-			//찜 버튼이 동작한 후, 페이지 이동을 물어본다.
-			if (confirm("\n나의 일정에 추가되었습니다.\n\n나의 일정 페이지로 이동하시겠습니까?") == true){    //확인
-				location.href="./MyPlan.pln?plan_nr=100";
-			}else{   //취소
-			    return;
-			}//찜 버튼이 동작한 후, 페이지 이동을 물어본다. 끝
+			regionListChange(pageNum);	// 리스트 업데이트
 			
 		}//찜 버튼 끝.
 
+		// 찜취소 버튼 누르면 내일정에서 삭제
+		function zzim_delete(travel_id, pageNum) {
+			$.ajax({
+				type : 'POST',
+				url : './MyPlanBasketDelete.pln',
+				data : {
+					'travel_id' : travel_id,
+					'id' : '<%=id %>'
+				},
+				dataType : 'text',
+				async : false,
+				success : function(data) {
+					console.log(data);
+				}
+			});
+			regionListChange(pageNum);	// 리스트 업데이트
+		}
+		
 		//비로그인 상태에서 찜버튼을 누르면 로그인 창 활성화.
 		function zzim_noId() {
 			popupToggle()

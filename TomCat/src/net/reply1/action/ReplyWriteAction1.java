@@ -22,7 +22,7 @@ public class ReplyWriteAction1 implements Action {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		String nick = (String) session.getAttribute("nick");
+		String nick_name = (String) session.getAttribute("nick_name");
 
 		Reply1DAO rdao = new Reply1DAO();
 		Reply1Bean rr = new Reply1Bean();
@@ -34,11 +34,11 @@ public class ReplyWriteAction1 implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		rr.setNum(num);
 
-		System.out.println("ReplyWrite액션에서num의 값" + num);
-		System.out.println("ReplyWrite액션에서nick의 값" + nick);
+//		System.out.println("ReplyWrite액션에서num의 값" + num);
+		System.out.println("ReplyWrite액션에서nick의 값" + nick_name);
 
 		rr.setContent(request.getParameter("content"));
-		rr.setNick(nick);
+		rr.setNick(nick_name);
 
 		rr.setRe_lev(Integer.parseInt(request.getParameter("re_ref")));
 		rr.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));

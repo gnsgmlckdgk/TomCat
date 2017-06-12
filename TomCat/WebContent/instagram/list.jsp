@@ -16,7 +16,7 @@
     
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=8"/>	
+<link rel="stylesheet" href="./assets/css/instagram/list.css?ver=2"/>	
 <div id="top"></div>
 <section class="gramList">
 

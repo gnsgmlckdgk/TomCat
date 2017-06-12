@@ -722,6 +722,34 @@ public class MyPlanBasketDAO {
 		}
 	}
 	
+	// 특정 아이디가 찜한 목록 중 특정 찜을 삭제함
+	public void zzimBasketDelete(String id, int travel_id) {
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "delete from myplans where id = ? and travel_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, travel_id);
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null)try{rs.close();}catch(SQLException ex){}
+			if(pstmt!=null)try{pstmt.close();}catch(SQLException ex){}
+			if(con!=null)try{con.close();}catch(SQLException ex){}
+		}
+		
+	}
 	
 	
 	public MyPlanBasketBean get(int myplans_id) {
