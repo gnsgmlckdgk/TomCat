@@ -488,8 +488,8 @@
 		</div>
 	
 		
-		<div id="map" class="f1" ></div><!-- map -->		
-		<div id="pln_list"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
+		<div id="map" class="f1"></div><!-- map -->		
+		<div id="pln_list" style="background-color: #f0f0f5;/*  opacity:0.9 */"><!-- 일정수정 버튼 시 오른쪽 슬라이드 시작 -->
 
 <script type="text/javascript">
 $(window).load(function() {
