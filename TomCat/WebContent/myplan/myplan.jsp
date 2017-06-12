@@ -745,9 +745,6 @@ $(window).load(function() {
 		$('#from_date').val(from_date);
 		$('#to_date').val(to_date);
 		
-		alert(from_date);
-		alert(to_date);
-		
 		plan = $("#set_plan option:selected").val();
 
 		<%
