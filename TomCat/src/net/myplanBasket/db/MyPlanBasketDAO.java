@@ -811,5 +811,55 @@ public class MyPlanBasketDAO {
 
 		return MyPlanBasketBean;
 	}
+	
+	
+	// 일정 삭제(일정 하나)
+	public void deletePlan(String id, String plan_nr) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		List<String> planList = new ArrayList<String>();	// DB의 plan_nr값
+		List<String> itemList = new ArrayList<String>();	// DB의 item_nr값
+		List<String> dayList = new ArrayList<String>();			// DB의 day_nr값
+		
+		try {
+			
+			con = getConnection();
+			
+			// plan_nr, item_nr, day_nr 값 가져오기
+			sql = "select plan_nr, item_nr, day_nr where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				planList.add(rs.getString("plan_nr"));
+				itemList.add(rs.getString("item_nr"));
+				dayList.add(rs.getString("day_nr"));
+			}
+			
+			String[][] plan = new String[planList.size()][];
+			String[][] item = new String[itemList.size()][];
+			String[][] day = new String[dayList.size()][];
+			
+			int j = 0;
+			for(int i=0; i<planList.size(); i++) {
+				plan[i][j] = planList.get(i);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				
+			}catch(Exception e) {
+				
+			}
+		}
+	}
+	
 
 }

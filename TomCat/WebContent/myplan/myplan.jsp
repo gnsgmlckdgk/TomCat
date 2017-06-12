@@ -149,6 +149,10 @@
 	<%
 		String gold = (String) request.getAttribute("gold");
 		String id = (String) session.getAttribute("id");
+		if(id==null) {
+			response.sendRedirect("./Main.me");
+			return;
+		}
 
 		List basketList = (List) request.getAttribute("basketList"); //여행지찜리스트 myplans List
 		List goodsList = (List) request.getAttribute("goodsList"); //상품 travel List
@@ -365,6 +369,36 @@
       
          }
          
+         // 일정 삭제
+         if(!plan_nr.equals("100")&&basketList.size()!=0){
+        	 %>
+        	 <tr class="planManageTr">
+        	 	<th colspan="3">
+        	 		<input type="button" value="일정삭제" class="planDeleteBtn" onclick="planDelete()">
+        	 		<input type="button" value="일정수정" class="planUpdateBtn" onclick="planUpdate()">
+        	 		
+        	 		<script type="text/javascript">
+        	 			
+        	 			// 일정 삭제
+        	 			function planDelete() {
+        	 				var con = confirm("일정을 삭제하시겠습니까?");
+        	 				if(con) {
+        	 					location.href="./MyPlanDelete.pln?plan_nr=<%=plan_nr%>";
+        	 				}
+        	 			}
+        	 			
+        	 			// 일정 수정
+        	 			function planUpdate() {
+        	 				alert("일정 수정");
+        	 			}
+        	 		
+        	 		</script>
+        	 		
+        	 	</th>
+        	 </tr>
+        	 <%
+         }
+         
   	
      	if(plan_nr.equals("100")&&basketList.size()!=0){%>
      	<tr width="100px" align="center">
@@ -415,7 +449,7 @@ System.out.println("이고이고2"+today);
 	       	
 	        <th width="400px" align="center"><%=today%></th>
 	        <th width="100px" align="center">경로</th>
-	        </tr>	
+	       </tr>	
 <%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
          <%
 }//basketList.size()!=0
