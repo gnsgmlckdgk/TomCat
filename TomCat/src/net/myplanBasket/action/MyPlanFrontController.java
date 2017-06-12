@@ -79,7 +79,10 @@ public class MyPlanFrontController extends HttpServlet{
 			
 		}else if(command.equals("/MyPlanDelete.pln")) {	// 일정 삭제 처리
 			
+			action = new MyPlanDelete();
 			try {
+				
+				forward = action.execute(request, response);
 				
 			}catch(Exception e) {
 				e.printStackTrace();

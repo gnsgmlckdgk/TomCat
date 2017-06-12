@@ -35,7 +35,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
  $(function(){
-	$(".btn").click(function(){
+	$(".btn, .planUpdateBtn").click(function(){
 		var effect = 'slide';
 		var options ='left';
 		var duration = 500;
@@ -387,11 +387,6 @@
         	 				}
         	 			}
         	 			
-        	 			// 일정 수정
-        	 			function planUpdate() {
-        	 				alert("일정 수정");
-        	 			}
-        	 		
         	 		</script>
         	 		
         	 	</th>
@@ -406,8 +401,6 @@
          	<th width="400px" align="center">찜목록 </th>
          	<th width="100px" align="center">삭제</th>
          </tr><% 
-     	
-     	
 	         for (int p = 0; p < basketList.size(); p++) {
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(p); /* 찜목록 DB Bean */ 
 					TravelBean tb = (TravelBean) goodsList.get(p); /*  여행지(상품) DB Bean */
@@ -434,7 +427,12 @@
 <%
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-Date date = sdf.parse(pfirstday);
+Date date = new Date();
+if(!pfirstday.equals("")) {
+	date = sdf.parse(pfirstday);
+}else {	// 오류 제어
+	date.setDate(0);
+}
 
 // System.out.println("이고이고"+date);
 
@@ -469,7 +467,7 @@ today = sdf.format(cal.getTime());
                String[] Array2 = b.split("@");
                String[] Array3 = c.split("@");
   //             System.out.println("길이"+Array1.length+"값"+Array1[i]);            
-           			
+              
 
                for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
 // 					System.out.println("첫번째for문의 증가하는 k값"+k);

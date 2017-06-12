@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-   
+
 public class MemberFrontController extends HttpServlet {
       
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class MemberFrontController extends HttpServlet {
 		RSAKeySetting rsa_key;
 		
 		if(command.equals("/Main.me")) {	// 메인 페이지
-			action = new MainListAction();			
+			action = new MainListAction();		
 			try {
 				forward = action.execute(request, response);
 				

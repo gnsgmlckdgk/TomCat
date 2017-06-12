@@ -227,9 +227,10 @@ form#reg, td.tr_head {
 
 
 					<%
-						if (basketList != null) {
+						if (basketList != null) {							
+							
 							for (int i = 0; i < basketList.size(); i++) {
-
+	
 								TravelBean tb = (TravelBean) goodsList.get(i);
 								MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
 								/*  여행지(상품) DB Bean */
