@@ -95,7 +95,8 @@ form#reg, td.tr_head {
 					long diff = endDate.getTime() - beginDate.getTime();
 					diffDays = diff / (24 * 60 * 60 * 1000) + 1;
 
-// 					out.println("날짜차이=" + diffDays);
+// 					out.println("날짜차이=" + diffDays);;;;
+//
 
 				} catch (ParseException e) {
 					e.printStackTrace();
