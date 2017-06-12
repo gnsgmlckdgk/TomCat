@@ -79,8 +79,13 @@ form#reg, td.tr_head {
 				MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
 				TravelBean tb = (TravelBean) goodsList.get(i);
 				
-				from = mpbb2.getFirstday();
-				to = mpbb2.getLastday();
+				if(mdf==0) {
+					from = mpbb2.getFirstday();
+					to = mpbb2.getLastday();
+				}else {
+					from = request.getParameter("from");
+					to = request.getParameter("to");
+				}
 				
 // 				out.println("출발일=" + from);
 // 				out.println("도착일=" + to);
@@ -148,7 +153,6 @@ form#reg, td.tr_head {
 			//from, to 날짜값 받아오기.
 			from = request.getParameter("from");
 			to = request.getParameter("to");
-
 		}
 	%>
 	
