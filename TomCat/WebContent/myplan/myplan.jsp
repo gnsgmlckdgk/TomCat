@@ -390,7 +390,10 @@
 			</tr>	
 		<%} else {	//if(!plan_nr.equals("100"))
   	
-         for(int z=1;z<gapdday+2;z++){ %>
+         for(int z=1;z<gapdday+2;z++){
+        if(basketList.size()!=0){
+        	 %>
+         
 <!-- 	         if(!plan_nr.equals("100")){ -->
 	       <tr>
 	       	<th width="100px" align="center"><%=z%>일차</th>	  
@@ -415,6 +418,8 @@ System.out.println("이고이고2"+today);
 	        </tr>	
 <%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
          <%
+}//basketList.size()!=0
+
          
             for (int i = 0; i < basketList.size(); i++) {
                MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
@@ -1067,5 +1072,6 @@ $(window).load(function() {
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
 </html>
+
 
 
