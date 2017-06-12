@@ -1,3 +1,6 @@
+<%@page import="net.myplanBasket.db.MyPlanBasketBean"%>
+<%@page import="java.util.Vector"%>
+<%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="net.images.db.ImagesDAO"%>
 <%@page import="net.plan.db.PlanTravelBean"%>
 <%@page import="net.plan.db.PlanDAO"%>
@@ -11,7 +14,7 @@
 	String search = request.getParameter("search"); // 검색값
 	String city_code = request.getParameter("city_code"); // city_code 값
 	String id = (String) session.getAttribute("id");
-
+	
 	//객체 생성
 	PlanDAO pdao = new PlanDAO();
 
@@ -108,6 +111,12 @@
 	<%
 	// 
 	ImagesDAO idao = new ImagesDAO();	// 이미지 정보 들고오기
+	
+	MyPlanBasketDAO mbdao = new MyPlanBasketDAO();	// 로그인한 아이디의 찜목록 불러오기
+	Vector idPlanList = mbdao.getBasketList(id);
+	List basketList = (List)idPlanList.get(0);
+	List goodsList = (List)idPlanList.get(1);
+	
 	String regionPath = "";
 	
 		PlanTravelBean ptb = null;
@@ -143,18 +152,30 @@
 		<td style="background-color: white;">
 		<%
 					if (id != null) {
-				%>
-				<input type="button" name="zzim"
-					onclick="zzim_add('<%=ptb.getTravel_id()%>')" value="찜하기"
-					class="button special icon fa-download zzim" id="zzim"/>
-				<%
-					} else if (id == null) {
-				%>
-				<input type="button" name="zzim_noId" onclick="zzim_noId()"
-					value="찜하기" class="button special icon fa-download zzim" id="zzim"/>
-				<%
+						int swit = 0;	// 이미 찜을 했다면 1, 찜을 한적이 없으면 0
+						
+						for(int j=0; j<basketList.size(); j++) {	// 찜을 한적이 있는가 없는가 확인
+							MyPlanBasketBean mpbb = (MyPlanBasketBean)basketList.get(j);
+						
+							if(ptb.getTravel_id()==mpbb.getTravel_id()) {
+								swit = 1;
+							}
+						}		
+						if(swit == 0) {	// 찜을 한적이 없음
+							%>
+							<input type="button" name="zzim"
+							onclick="zzim_add('<%=ptb.getTravel_id()%>', '<%=pageNum %>')" value="찜하기"
+							class="button special icon fa-download zzim" id="zzim"/>
+							<%
+						}else {	// 찜을 한적이 있음
+							%>
+							<input type="button" name="zzim"
+							onclick="zzim_delete('<%=ptb.getTravel_id() %>', '<%=pageNum %>')" value="찜취소"
+							class="zzim" id="zzim"/>
+							<%
+						}
 					}
-				%> 
+				%>
 		</td>
 	</tr>
 	<%

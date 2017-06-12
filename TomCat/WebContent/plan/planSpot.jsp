@@ -1,3 +1,6 @@
+<%@page import="java.util.Vector"%>
+<%@page import="net.myplanBasket.db.MyPlanBasketBean"%>
+<%@page import="net.myplanBasket.db.MyPlanBasketDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="net.images.db.ImagesBean"%>
 <%@page import="net.plan.db.PlanCityBean"%>
@@ -155,18 +158,40 @@ var toggleBtn = 0;
 <!-- 찜하기 -->
 
 <%
-					if (id != null) {
-				%>
-				<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기" name="zzim"
-					onclick="zzim_add('<%=ptb.getTravel_id()%>')"
-					/>
-				<%
-					} else if (id == null) {
-				%>
-				<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기" name="zzim_noId" onclick="popupToggle()"
-					/>
-				<%
+		MyPlanBasketDAO mpbd = new MyPlanBasketDAO();
+
+		Vector idPlanList = mpbd.getBasketList(id);
+		List basketList = (List)idPlanList.get(0);
+		List goodsList = (List)idPlanList.get(1);
+		
+				if (id != null) {
+					
+					int swit = 0;	// 이미 찜을 했다면 1, 찜을 한적이 없으면 0
+					
+					for(int i = 0; i < basketList.size(); i++) {
+						MyPlanBasketBean mpbb = (MyPlanBasketBean)basketList.get(i);
+						
+						if(mpbb.getTravel_id()==ptb.getTravel_id()) {
+							swit = 1;
+						}
 					}
+					
+					if(swit == 0) {	// 찜을 한적이 없음
+						%>
+						<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기" name="zzim"
+					onclick="zzim_add('<%=ptb.getTravel_id()%>')"/>
+						<%
+					}else {	// 이미 찜을 함
+						%>
+						<img alt="찜하기" src="./images/Spot/minus.png" title="이장소 찜삭제" name="zzim"
+					onclick="zzim_delete('<%=ptb.getTravel_id()%>')"/>
+						<%
+					}
+				}else if (id == null) {
+				%>
+				<img alt="찜하기" src="./images/Spot/plus.png" title="이장소 찜하기" name="zzim_noId" onclick="popupToggle()"/>
+				<%
+				}
 				%> 
 	
 	
@@ -471,7 +496,6 @@ if(souvenirList.size()==0){
 
 			//찜 버튼 누르면 내 일정에 담김.
 			function zzim_add(travel_id) {
-
 				$.ajax({
 					type : 'POST',
 					url : './MyPlanBasketAdd.pln',
@@ -482,18 +506,28 @@ if(souvenirList.size()==0){
 					async : false,
 					success : function(data) {
 						console.log(data)
-
 					}
 				});
-				
-			//찜 버튼이 동작한 후, 페이지 이동을 물어본다.
-			if (confirm("\n나의 일정에 추가되었습니다.\n\n나의 일정 페이지로 이동하시겠습니까?") == true){    //확인
-				location.href="./MyPlan.pln?plan_nr=100";
-			}else{   //취소
-				   return;
-			}//찜 버튼이 동작한 후, 페이지 이동을 물어본다. 끝
-				
+				location.reload(true);
 			}//찜 버튼 끝.
+			
+			// 찜취소 버튼 누르면 내일정에서 삭제
+			function zzim_delete(travel_id) {
+				$.ajax({
+					type : 'POST',
+					url : './MyPlanBasketDelete.pln',
+					data : {
+						'travel_id' : travel_id,
+						'id' : '<%=id %>'
+					},
+					dataType : 'text',
+					async : false,
+					success : function(data) {
+						console.log(data);
+					}
+				});
+				location.reload(true);
+			}
 
 			//비로그인 상태에서 찜버튼을 누르면 로그인 창 활성화.
 			function zzim_noId() {
