@@ -552,7 +552,6 @@ public class MyPlanBasketDAO {
 	
 	public void nullAction(String id) {
 
-
 		PreparedStatement pstmt = null;
 		String sql = "";
 		ResultSet rs = null;
@@ -565,7 +564,7 @@ public class MyPlanBasketDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			
-			rs = pstmt.executeQuery(sql);
+			pstmt.executeUpdate();
 			
 
 		} catch (Exception e) {
@@ -583,7 +582,7 @@ public class MyPlanBasketDAO {
 			}
 		}
 	}
-	
+
 	
 	
 	// getBasketList_Plan_nr()

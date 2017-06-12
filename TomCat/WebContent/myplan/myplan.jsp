@@ -720,7 +720,7 @@ $(window).load(function() {
 				<%
 				
 				//ajax 실행 이후 for문 정지.
-// 				break;
+				break;
 			}
 		}
 		
