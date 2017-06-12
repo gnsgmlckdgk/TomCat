@@ -729,12 +729,10 @@ $(window).load(function() {
 </script>
 <script type="text/javascript">
 	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
-	var a = false;
-	window.onload = function() {
-		a = true;
-	}
 	
 	function from_to() {
+		
+		a = true;
 		
 		from = document.getElementById("fromDate");
 		to = document.getElementById("toDate");
@@ -744,14 +742,14 @@ $(window).load(function() {
 		
 		$('#from_date').val(from_date);
 		$('#to_date').val(to_date);
-		
-		plan = $("#set_plan option:selected").val();
 
+		plan = $("#set_plan option:selected").val();
+		
 		<%
 		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
 		Vector vector = mpbdao.getBasketList(id);
 		List basket_l = (List) vector.get(0);
-		
+
 		//myplans에 담긴 세션아이디가 몇 행인지.
 		for(int i=0; i < basket_l.size(); i++){
 			
@@ -764,13 +762,14 @@ $(window).load(function() {
 
 // 				alert("//여기까지 왔다면 분명히 계산해야될 값이 있는 것.");
 					a = false;
-
+					
 					$('#pln_list').empty();
 					
 					$.ajax({
 						type: 'post',
 						url: './myplan/myplanModify.jsp',
-						data : {diff_day:9999, plan:plan},
+						data : {diff_day:9999, plan:plan, 'from':from_date, 'to':to_date},
+						async: false,
 						success: function(data) {
 							$('#pln_list').append(data);
 						},
@@ -791,7 +790,7 @@ $(window).load(function() {
 		
 		%>
 		
-		if(a == false){
+		if(a == true){
 		if(from.value != "" & to.value != ""){
 			
 			/* var arr1 = from.value.split('-');
@@ -801,8 +800,7 @@ $(window).load(function() {
 	    	var arr2 = to_date.split('-');
 		    var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
 		    var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
-		
-		
+
 			var diff = dat2 - dat1;
 			var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 			
@@ -814,11 +812,12 @@ $(window).load(function() {
 // 				alert(diff_day+1 + "일간 " + plan + "에 저장");
 				
 				$('#pln_list').empty();
-				
+
 				$.ajax({
 					type: 'post',
 					url: './myplan/myplanModify.jsp',
-					data : {diff_day:diff_day+1, plan:plan, from:from_date, to:to_date},
+					data : {diff_day:diff_day+1, plan:plan, 'from': from_date, 'to': to_date},
+					async: false,
 					success: function(data) {
 						$('#pln_list').append(data);
 					},
