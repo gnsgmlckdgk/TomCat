@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 section.writeSection{
-	background-image: url("../../../images/instagram/beach.jpg");
+	background-image: url("../../../images/beach.jpg");
 	background-size: cover;
 	min-width: 1080px;
 	margin-top: -40px;

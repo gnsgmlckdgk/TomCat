@@ -59,7 +59,7 @@
 
 
 #ima{
-	background-image: url("./beach.jpg");
+	background-image: url("../../../images/beach.jpg");
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;

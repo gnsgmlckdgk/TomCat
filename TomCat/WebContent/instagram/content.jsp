@@ -80,10 +80,10 @@ function textLimit() {
 
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/content.css?ver=10"/>	
+<link rel="stylesheet" href="./assets/css/instagram/content.css?ver=2"/>	
 	<%	
 	
-	String id = (String)session.getAttribute("id");			// 아이디
+	String id = (String)session.getAttribute("id");		// 아이디
 	String nick = (String)session.getAttribute("nick");	// 닉네임
 	
 	

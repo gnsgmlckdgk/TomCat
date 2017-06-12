@@ -12,7 +12,7 @@
    
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/content.css"/>	
+<link rel="stylesheet" href="./assets/css/QandA/content.css?ver=1"/>	
 <%
 String id = (String)session.getAttribute("id");			// 아이디
 String nick = (String)session.getAttribute("nick");	// 닉네임

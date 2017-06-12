@@ -92,10 +92,6 @@ public class MyPlanBasketListAction implements Action{
 	}//plan_nr==1 끝
 		*/
 		
-		
-		
-		
-		
 		System.out.println("myplanbasketlistaction 진입");
 		forward.setRedirect(false);
 		forward.setPath("./myplan/myplan.jsp");
