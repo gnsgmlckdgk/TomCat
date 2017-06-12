@@ -14,7 +14,7 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=8" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=9" rel="stylesheet" type="text/css">
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
@@ -246,28 +246,18 @@ function button_event(){
 
 <%} %>
 
-<%
-
-Reply1Bean rr=new Reply1Bean();
-
-%>
 
 <input type="button" value="댓글">   
 </div>
 		
          <div id="plybb<%=bb.getNum()%>" class="replybb animated rollIn"   style="display: none">
          <%=bb.getNum()%>
-         <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr" >
-         <input type="hidden" value="<%=bb.getSubject()%>" name="nick">							
-					<input type="hidden" value="<%=rr.getNick() %>" name="nick"> 
-					<input type="hidden" value="<%=rr.getNum()%>" name="num"> 
-					<input type="hidden" value="<%=rr.getRe_ref() %>" name="re_ref">								
-					<input type="hidden" value="<%=rr.getRe_lev() %>" name="re_lev">
-					<input type="hidden" value="<%=rr.getRe_seq() %>" name="re_seq">
-					<input type="hidden" value="<%=rr.getRe_num() %>" name="re_num">										
+         <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr" >			
+					<input type="hidden" value="<%=session.getAttribute("id")%>" name="nick"> 						
+					<input type="hidden" value="<%=bb.getNum() %>" name="re_num">										
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
          
-         <textarea rows="2" cols="80" name="re_name"  class="re_id"> </textarea>
+         <textarea rows="2" cols="80" name="content"  class="re_id"> </textarea>
          <input type="submit"  id="txt1"  value="입력" >
          </form>
          
