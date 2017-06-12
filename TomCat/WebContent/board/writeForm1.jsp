@@ -6,7 +6,7 @@
 <section class="wrapper">
 
 <head>
-<link href="./assets/css/list.css?ver=5" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=10" rel="stylesheet" type="text/css">
 <%
 	String nick = (String) session.getAttribute("nick"); // 닉네임
 	String location =(String) request.getParameter("location");

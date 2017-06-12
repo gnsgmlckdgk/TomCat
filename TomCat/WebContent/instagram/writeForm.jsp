@@ -22,7 +22,7 @@ document.fr.submit();
 </script>
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/instagram/writeForm.css?ver=4"/>	
+<link rel="stylesheet" href="./assets/css/instagram/writeForm.css?ver=2"/>	
 
 
 <section class="writeSection">

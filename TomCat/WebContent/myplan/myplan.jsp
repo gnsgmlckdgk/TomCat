@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.regex.Matcher"%>
 <%@page import="java.util.regex.Pattern"%>
@@ -333,6 +335,8 @@
 			
 			
          int gapdday=0;
+         String today = null;
+
                           
          for (int h = 0; h < basketList.size(); h++) {
              MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(h);
@@ -355,11 +359,7 @@
             int fdaynum=Integer.parseInt(fday1+fday2+fday3);
             int ㅣdaynum=Integer.parseInt(ㅣday1+ㅣday2+ㅣday3);
             
-
-            gapdday=(ㅣdaynum-fdaynum);
-            System.out.println("내가구하려는 값1"+pfirstday);
-            System.out.println("내가구하려는 값2"+(pfirstday+1));
-            
+	           gapdday=(ㅣdaynum-fdaynum);   
             
             }
       
@@ -390,15 +390,36 @@
 			</tr>	
 		<%} else {	//if(!plan_nr.equals("100"))
   	
-         for(int z=1;z<gapdday+2;z++){ %>
+         for(int z=1;z<gapdday+2;z++){
+        if(basketList.size()!=0){
+        	 %>
+         
 <!-- 	         if(!plan_nr.equals("100")){ -->
 	       <tr>
-	       	<th width="100px" align="center"><%=z%>일차</th>
-	        <th width="400px" align="center"><%=pfirstday%></th>
+	       	<th width="100px" align="center"><%=z%>일차</th>	  
+<%
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Date date = sdf.parse(pfirstday);
+System.out.println("이고이고"+date);
+
+Calendar cal = Calendar.getInstance();
+cal.setTime(date);
+
+cal.add(Calendar.DATE,+z);	         
+today = sdf.format(cal.getTime());
+
+System.out.println("이고이고2"+today);
+
+%>
+	       	
+	        <th width="400px" align="center"><%=today%></th>
 	        <th width="100px" align="center">경로</th>
 	        </tr>	
 <%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
          <%
+}//basketList.size()!=0
+
          
             for (int i = 0; i < basketList.size(); i++) {
                MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
@@ -720,7 +741,7 @@ $(window).load(function() {
 				<%
 				
 				//ajax 실행 이후 for문 정지.
-// 				break;
+				break;
 			}
 		}
 		
@@ -1051,4 +1072,6 @@ $(window).load(function() {
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
 </html>
+
+
 

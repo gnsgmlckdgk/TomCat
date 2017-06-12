@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/Memberintro.css"/>	
+<link rel="stylesheet" href="./assets/css/QandA/Memberintro.css?ver=1"/>	
 
 	<div id="combine">
 	<h1 class="combine_logo"><span>BEFORE</span> YOU GO</h1>
@@ -79,8 +79,10 @@ phone : 010.1111.1111<br>
 부족한 점이 많고 미숙한 점도 있지만 많은 노력 끝에
 피드 형식의 게시판과 채팅, 차별점을 둔 글 쓴 시간
 또 특이점이 온 채팅창을 구현해내는 기염을 토했습니다
-고집과 아집을 버리고 전체 분위기에 맞는 디자인을
-만들어 냈습니다.혹여 이용 시 불편한 점이 있으시면 참으세요! 개굳<br>
+고집과 아집을 버리고 전체 분위기에 맞는 디자인으로
+부담스럽지 않은 시각의 즐거움까지 포함하였습니다.
+혹여 이용 시 불편한 점이 있으시면 바로 문의주세요<br>
+e-mail : most8482@gmail.com
 </td>
 <td>
 	<img src="./images/QandA/LSM.jpg" width="300" height="300">
