@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.regex.Matcher"%>
 <%@page import="java.util.regex.Pattern"%>
 <%@page import="java.util.Vector"%>
@@ -354,8 +355,12 @@
             int fdaynum=Integer.parseInt(fday1+fday2+fday3);
             int ㅣdaynum=Integer.parseInt(ㅣday1+ㅣday2+ㅣday3);
             
+
             gapdday=(ㅣdaynum-fdaynum);
-            System.out.println("내가구하려는 값"+gapdday);
+            System.out.println("내가구하려는 값1"+pfirstday);
+            System.out.println("내가구하려는 값2"+(pfirstday+1));
+            
+            
             }
       
          }
@@ -385,12 +390,13 @@
 			</tr>	
 		<%} else {	//if(!plan_nr.equals("100"))
   	
-         for(int z=1;z<gapdday+1;z++){ %>
+         for(int z=1;z<gapdday+2;z++){ %>
 <!-- 	         if(!plan_nr.equals("100")){ -->
-	       
+	       <tr>
 	       	<th width="100px" align="center"><%=z%>일차</th>
 	        <th width="400px" align="center"><%=pfirstday%></th>
-	        <th width="100px" align="center">경로</th>	
+	        <th width="100px" align="center">경로</th>
+	        </tr>	
 <%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
          <%
          
@@ -1042,3 +1048,4 @@ $(window).load(function() {
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
 </html>
+
