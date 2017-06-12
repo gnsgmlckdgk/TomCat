@@ -246,7 +246,7 @@ function button_event(){
 
 <input type="button" value="댓글">   
 </div>
-		
+		<div class="aa"></div>
          <div id="plybb<%=bb.getNum()%>" class="replybb animated flip"   style="display: none">
          <%=bb.getNum()%>
          <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr" >			
@@ -326,8 +326,8 @@ $(".upde").click(function(){
 		$(this).parents(".e").find(".replybb").css("display","block");
 	   }else{
 		   $(this).parents(".e").find(".replybb").css("display","none");
-	   }
-});
+	   } 
+    });
 </script> 
 <!-- Footer -->
  <jsp:include page="../inc/footer.jsp" />

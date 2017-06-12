@@ -75,6 +75,10 @@ phone : 010.1111.1111<br>
 
 <tr>
 <td><h1 id="h1">구민정</h1>
+여행지 페이지의 일부 기능과 css를 담당하였습니다 
+더많은 여행지의 자료를 원하시거나 이용시 불편한 점이 있으시면 문의해 주세요<br>
+e-mail : zlxl2723@gmail.com<br>
+phone : 010.9999.9999<br> 
 </td>
 <td>
 	<img src="./images/QandA/GMJ.jpg" width="300" height="300" >

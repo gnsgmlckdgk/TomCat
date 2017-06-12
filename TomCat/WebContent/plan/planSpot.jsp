@@ -288,7 +288,7 @@ if(souvenirList.size()==0){
 	<table class="souvenir" style="float: left; width: 300px; margin-right: 50px;">
 		
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getName() %></td></tr>
-			<tr style="background: none; border: none"><td style="text-align: center;"><img alt="" src="./upload/<%=psb.getImg()%>" width="200" height="200" style="border: 1px solid #999;"></td></tr>
+			<tr style="background: none; border: none"><td style="text-align: center;"><img alt="" src="./upload/images/souvenir/<%=psb.getImg()%>" width="200" height="200" style="border: 1px solid #999;"></td></tr>
 			<tr style="background: none; border: none"><td style="text-align: center;"><%=psb.getInfo() %></td></tr>
 		
 	</table>
