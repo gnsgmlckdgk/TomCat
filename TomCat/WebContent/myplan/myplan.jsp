@@ -40,39 +40,40 @@
 		var options ='left';
 		var duration = 500;
 		$('#pln_list').toggle(effect, options, duration);
+		
 	}); 
 });  
-//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+ //일정수정 버튼 클릭시 오른쪽으로 슬라이드  
  $(function(){
 	 //datepicker 한국어로 사용하기 위한 언어설정
-   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+   //	$.datepicker.setDefaults($.datepicker.regional['ko']); 
     // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
     // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
 
 	//시작일
 	$('#fromDate').datepicker({
-		showOn: "focus",
-		dateFormat:"yy-mm-dd",
-		changeMonth:true,
-		onClose: function(selectedDate){
+	  	 showOn: "focus",
+		 dateFormat:"yy-mm-dd",
+		 changeMonth:true,
+		 onClose: function(selectedDate){
             // 시작일(fromDate) datepicker가 닫힐때
             // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
             $("#toDate").datepicker( "option", "minDate", selectedDate );
 		}
 	});
 
-    
     //종료일
     $('#toDate').datepicker({
-   	 	 showOn: "focus", 
+       	 showOn: "focus", 
          dateFormat: "yy-mm-dd",
          changeMonth: true,
          onClose: function( selectedDate ) {
              // 종료일(toDate) datepicker가 닫힐때
              // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
              $("#fromDate").datepicker( "option", "maxDate", selectedDate );
-         } 
+         }
    	});
+
 	/* $( '.datepicker').datepicker({
 		altField: ".selecter"
 	}); */
@@ -728,12 +729,26 @@ $(window).load(function() {
 </script>
 <script type="text/javascript">
 	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
-	function from_to(){
+	var a = false;
+	window.onload = function() {
+		a = true;
+	}
+	
+	function from_to() {
 		
 		from = document.getElementById("fromDate");
 		to = document.getElementById("toDate");
+		
+		var from_date = from.value;
+		var to_date = to.value;
+		
+		$('#from_date').val(from_date);
+		$('#to_date').val(to_date);
+		
+		alert(from_date);
+		alert(to_date);
+		
 		plan = $("#set_plan option:selected").val();
-		a = true;
 
 		<%
 		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
@@ -748,13 +763,11 @@ $(window).load(function() {
 			if(mpbb2.getFirstday() != null ){
 			
 				%>
-				
 				//여기까지 왔다면 분명히 계산해야될 값이 있는 것.
-				
+
 // 				alert("//여기까지 왔다면 분명히 계산해야될 값이 있는 것.");
-				
 					a = false;
-				
+
 					$('#pln_list').empty();
 					
 					$.ajax({
@@ -781,13 +794,14 @@ $(window).load(function() {
 		
 		%>
 		
-		
-		
-		if(a == true){
+		if(a == false){
 		if(from.value != "" & to.value != ""){
-					
-			var arr1 = from.value.split('-');
-	    	var arr2 = to.value.split('-');
+			
+			/* var arr1 = from.value.split('-');
+	    	var arr2 = to.value.split('-'); */
+	    	
+	    	var arr1 = from_date.split('-');
+	    	var arr2 = to_date.split('-');
 		    var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
 		    var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
 		
@@ -807,7 +821,7 @@ $(window).load(function() {
 				$.ajax({
 					type: 'post',
 					url: './myplan/myplanModify.jsp',
-					data : {diff_day:diff_day+1, plan:plan, from:from.value, to:to.value},
+					data : {diff_day:diff_day+1, plan:plan, from:from_date, to:to_date},
 					success: function(data) {
 						$('#pln_list').append(data);
 					},
