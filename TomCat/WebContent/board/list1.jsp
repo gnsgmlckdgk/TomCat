@@ -249,6 +249,7 @@ function button_event(){
 <%
 
 Reply1Bean rr=new Reply1Bean();
+
 %>
 
 <input type="button" value="댓글">   
