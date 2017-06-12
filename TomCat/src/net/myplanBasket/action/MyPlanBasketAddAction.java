@@ -30,7 +30,8 @@ public class MyPlanBasketAddAction implements Action {
 		}
 		// 한글처리
 		request.setCharacterEncoding("utf-8");
-		// 자바빈 파일 만들기 net.basket.db BasketBean
+		// 자바빈 파일 만들기 net.basket.db BasketBean...
+		//
 		// 객체생성 BasketBean basketbean
 		MyPlanBasketBean basketbean = new MyPlanBasketBean();
 		// 폼 => 자바빈 저장 num amount size color id
