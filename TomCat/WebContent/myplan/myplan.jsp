@@ -493,10 +493,12 @@
 
 <script type="text/javascript">
 $(window).load(function() {
+	
+
 	$.ajax({
 		type: 'post',
 		url: './myplan/myplanModify.jsp',
-		data : {diff_day:0, plan:1},
+		data : {diff_day:0, plan:100},
 		success: function(data) {
 			$('#pln_list').append(data);
 		},
@@ -679,7 +681,6 @@ $(window).load(function() {
 		plan = $("#set_plan option:selected").val();
 		a = true;
 
-
 		<%
 		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
 		Vector vector = mpbdao.getBasketList(id);
@@ -713,11 +714,13 @@ $(window).load(function() {
 							alert(error);
 						}   
 					});
+					
+					
 				
 				<%
 				
 				//ajax 실행 이후 for문 정지.
-				break;
+// 				break;
 			}
 		}
 		
