@@ -4,12 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.Board1.db.BoardBean;
 import net.board.db.boardBean;
 import net.reply.action.Action;
 import net.reply.action.ActionForward;
 
 import net.reply.db.ReplyBean;
 import net.reply.db.ReplyDAO;
+import net.reply1.db.Reply1Bean;
+import net.reply1.db.Reply1DAO;
 
 public class ReplyWriteAction1 implements Action {
 
@@ -21,32 +24,31 @@ public class ReplyWriteAction1 implements Action {
 		HttpSession session = request.getSession();
 		String nick = (String) session.getAttribute("nick");
 
-		ReplyDAO rdao = new ReplyDAO();
-		ReplyBean rb = new ReplyBean();
+		Reply1DAO rdao = new Reply1DAO();
+		Reply1Bean rr = new Reply1Bean();
 
-		boardBean bb = new boardBean();
+		BoardBean bb = new BoardBean();
 		bb.setSubject(request.getParameter("subject"));
 
 		String pageNum = request.getParameter("pageNum");
 		int num = Integer.parseInt(request.getParameter("num"));
-		rb.setNum(num);
+		rr.setNum(num);
 
 		System.out.println("ReplyWrite액션에서num의 값" + num);
 		System.out.println("ReplyWrite액션에서nick의 값" + nick);
 
-		rb.setContent(request.getParameter("content"));
-		rb.setNick(nick);
+		rr.setContent(request.getParameter("content"));
+		rr.setNick(nick);
 
-		rb.setRe_lev(Integer.parseInt(request.getParameter("re_ref")));
-		rb.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
-		rb.setRe_num(Integer.parseInt(request.getParameter("re_num")));
-		rb.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
+		rr.setRe_lev(Integer.parseInt(request.getParameter("re_ref")));
+		rr.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
+		rr.setRe_num(Integer.parseInt(request.getParameter("re_num")));
+		rr.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
 
-		rdao.insertRepley(rb);
+		rdao.insertRepley(rr);
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardContent.bo?num=" + num + "&pageNum=" + pageNum);
-
+		forward.setPath("./BoardContent1.bb?num=" + num + "&pageNum=" + pageNum);
 		forward.setRedirect(true);
 		return forward;
 	}

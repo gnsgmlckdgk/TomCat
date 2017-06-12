@@ -70,8 +70,8 @@
 		<servlet-name>BoardFrontController</servlet-name>
 		<url-pattern>*.bo</url-pattern>
 	</servlet-mapping>
+	
 	<!-- 인생샷그램 댓글~-->
-
 	<servlet>
 		<servlet-name>ReplyFrontController</servlet-name>
 		<servlet-class>net.reply.action.ReplyFrontController</servlet-class>
@@ -115,7 +115,7 @@
 <!-- 	함께해요 댓글~ -->
 	<servlet>
 		<servlet-name>ReplyFrontController1</servlet-name>
-		<servlet-class>net.Board_reply.action.ReplyFrontController1</servlet-class>
+		<servlet-class>net.reply1.action.ReplyFrontController1</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ReplyFrontController1</servlet-name>

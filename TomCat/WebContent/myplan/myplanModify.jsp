@@ -182,7 +182,7 @@
 				
 					</td>
 				</tr>
-				<%-- <input type="hidden" value="<%=diff_day%>" name="diff_day"> --%>
+				<input type="hidden" value="<%=diff_day%>" name="diff_day">
 			</table>
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
