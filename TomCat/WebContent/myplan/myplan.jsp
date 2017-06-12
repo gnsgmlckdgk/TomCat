@@ -1,3 +1,6 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.regex.Matcher"%>
 <%@page import="java.util.regex.Pattern"%>
 <%@page import="java.util.Vector"%>
@@ -332,6 +335,8 @@
 			
 			
          int gapdday=0;
+         String today = null;
+
                           
          for (int h = 0; h < basketList.size(); h++) {
              MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(h);
@@ -354,8 +359,8 @@
             int fdaynum=Integer.parseInt(fday1+fday2+fday3);
             int ㅣdaynum=Integer.parseInt(ㅣday1+ㅣday2+ㅣday3);
             
-            gapdday=(ㅣdaynum-fdaynum);
-            System.out.println("내가구하려는 값"+gapdday);
+	           gapdday=(ㅣdaynum-fdaynum);   
+            
             }
       
          }
@@ -385,14 +390,36 @@
 			</tr>	
 		<%} else {	//if(!plan_nr.equals("100"))
   	
-         for(int z=1;z<gapdday+1;z++){ %>
+         for(int z=1;z<gapdday+2;z++){
+        if(basketList.size()!=0){
+        	 %>
+         
 <!-- 	         if(!plan_nr.equals("100")){ -->
-	       
-	       	<th width="100px" align="center"><%=z%>일차</th>
-	        <th width="400px" align="center"><%=pfirstday%></th>
-	        <th width="100px" align="center">경로</th>	
+	       <tr>
+	       	<th width="100px" align="center"><%=z%>일차</th>	  
+<%
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Date date = sdf.parse(pfirstday);
+System.out.println("이고이고"+date);
+
+Calendar cal = Calendar.getInstance();
+cal.setTime(date);
+
+cal.add(Calendar.DATE,+z);	         
+today = sdf.format(cal.getTime());
+
+System.out.println("이고이고2"+today);
+
+%>
+	       	
+	        <th width="400px" align="center"><%=today%></th>
+	        <th width="100px" align="center">경로</th>
+	        </tr>	
 <%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
          <%
+}//basketList.size()!=0
+
          
             for (int i = 0; i < basketList.size(); i++) {
                MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(i);
@@ -487,10 +514,12 @@
 
 <script type="text/javascript">
 $(window).load(function() {
+	
+
 	$.ajax({
 		type: 'post',
 		url: './myplan/myplanModify.jsp',
-		data : {diff_day:0, plan:1},
+		data : {diff_day:0, plan:100},
 		success: function(data) {
 			$('#pln_list').append(data);
 		},
@@ -671,7 +700,7 @@ $(window).load(function() {
 		from = document.getElementById("fromDate");
 		to = document.getElementById("toDate");
 		plan = $("#set_plan option:selected").val();
-
+		a = true;
 
 		<%
 		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
@@ -691,6 +720,8 @@ $(window).load(function() {
 				
 // 				alert("//여기까지 왔다면 분명히 계산해야될 값이 있는 것.");
 				
+					a = false;
+				
 					$('#pln_list').empty();
 					
 					$.ajax({
@@ -704,11 +735,13 @@ $(window).load(function() {
 							alert(error);
 						}   
 					});
+					
+					
 				
 				<%
 				
 				//ajax 실행 이후 for문 정지.
-				break;
+// 				break;
 			}
 		}
 		
@@ -717,7 +750,7 @@ $(window).load(function() {
 		
 		
 		
-		
+		if(a == true){
 		if(from.value != "" & to.value != ""){
 					
 			var arr1 = from.value.split('-');
@@ -752,6 +785,7 @@ $(window).load(function() {
 					
 					
 			}
+		}
 		}
 		
  		
@@ -1038,3 +1072,6 @@ $(window).load(function() {
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />
 </html>
+
+
+
