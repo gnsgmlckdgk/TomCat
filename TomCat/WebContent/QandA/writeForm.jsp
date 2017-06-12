@@ -20,11 +20,10 @@ function func1(){
 }
 
 </script>
-
-
 	<%
-// 	인생샷그램 글쓰는곳
+	// 	QnA 글쓰는곳
 	String nick = (String)session.getAttribute("nick");	// 닉네임
+	String id = (String)session.getAttribute("id"); //id
 	%>	
 	<div id="combine">
 	<img id="question" src="./images/QandA/questionmark.png">
@@ -45,7 +44,17 @@ function func1(){
 <tr><td><a href="./QandAadvertise.qna">광고 및 제휴</a></td></tr>
 <tr><td id="darker"><a href="./QandAcondition.qna">이용약관</a></td></tr>
 <tr><td><a href="./QandAprivacy.qna">개인정보 취급 방침</a></td></tr>
-<tr><td id="darker"><a href="./QandAWrite.qna">문의하기</a></td></tr>
+<tr><td id="darker">
+<%if(id!=null){ %>
+<a href="./QandAWrite.qna">문의하기</a>
+<%
+}else if(id==null){
+%>
+<a href="javascript:popupToggle()">문의하기</a>
+<%
+}
+%>
+</td></tr>
 <tr><td><a href="./Memberintro.qna">운영진소개</a></td></tr>
 <tr><td id="darkerlast"><a href="./QandAList.qna">목록으로</a></td></tr>
 

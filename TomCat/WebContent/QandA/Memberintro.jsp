@@ -3,7 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Header -->
 <jsp:include page="../inc/header.jsp" />
-<link rel="stylesheet" href="./assets/css/QandA/Memberintro.css?ver=1"/>	
+<link rel="stylesheet" href="./assets/css/QandA/Memberintro.css?ver=1"/>
+	<%
+	// 	QnA 글쓰는곳
+	String nick = (String)session.getAttribute("nick");	// 닉네임
+	String id = (String)session.getAttribute("id"); //id
+	%>		
 
 	<div id="combine">
 	<h1 class="combine_logo"><span>BEFORE</span> YOU GO</h1>
@@ -37,6 +42,10 @@ e-mail : overtimearmy@gmail.com
 
 <tr>
 <td><h1 id="h1">강수현</h1>
+안녕하세요 조원 강수현입니다.
+저는 여행 일정만들기에서 일정수정 부분을 담당했습니다. 
+실력있는 조원들의 도움이 아니었다면 혼자서 감당하지 못했을 상황이라 조원들에게도 고마운 마음을 전합니다.  
+서비스를 이용하시면서 문제점을 발견하시면 surulru44@naver.com 으로 연락주시기 바랍니다.
 </td>
 <td>
 	<img src="./images/QandA/ksh.jpg" width="300" height="300">
@@ -91,12 +100,25 @@ phone : 010.1111.1111<br>
 	
 
 <table id="banner">
+
 <tr><td><a href="./QandACompanyIntro.qna">회사소개</a></td></tr>
 <tr><td id="darker"><a href="./QandAHowToUse.qna">이용방법</a></td></tr>
 <tr><td><a href="./QandAadvertise.qna">광고 및 제휴</a></td></tr>
 <tr><td id="darker"><a href="./QandAcondition.qna">이용약관</a></td></tr>
 <tr><td><a href="./QandAprivacy.qna">개인정보 취급 방침</a></td></tr>
-<tr><td id="darker"><a href="./QandAWrite.qna">문의하기</a></td></tr>
+
+<tr><td id="darker">
+<%if(id!=null){ %>
+<a href="./QandAWrite.qna">문의하기</a>
+<%
+}else if(id==null){
+%>
+<a href="javascript:popupToggle()">문의하기</a>
+<%
+}
+%>
+</td></tr>
+
 <tr><td><a href="./Memberintro.qna">운영진소개</a></td></tr>
 <tr><td id="darkerlast"><a href="./QandAList.qna">목록으로</a></td></tr>
 
