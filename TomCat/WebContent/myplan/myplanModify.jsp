@@ -58,6 +58,8 @@
 		//diff_day 일간
 		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
 	
+		int mdf = 0; //기존 일정 수정이면 1 아니면 0
+		
 		if(diff_day == 9999){
 			
 			for (int i = 0; i < basketList.size(); i++) {
@@ -91,6 +93,8 @@
 				//기 저장된 일정이 몇일짜리인지 불러온다.
 				diff_day = (int) diffDays;
 				
+				
+				if(mpbb2.getPlan_nr() != null){
 				//myplans 의 i행에 몇 열까지 있는지.
 				for(int k=0; k < mpbb2.getPlan_nr().split("@").length; k++){
 					
@@ -116,11 +120,12 @@
 						
 						<%
 						
-
+						mdf = 1;
 						
 					}
 					
 				}
+			}
 				
 				
 				
@@ -139,7 +144,7 @@
 
 
 
-	<form action="./MyPlanModifyAction.pln" method="post"
+	<form action="./MyPlanModifyAction.pln?mdf=<%=mdf %>" method="post"
 			style="background-color: white; color: black;" name=reg id="reg">
 		<div style="width: 900px; margin: 1em;">
 			<table>
@@ -163,12 +168,14 @@
 					<td class="set_plan" id="set_plan" onchange="from_to()">
 						<select
 							name="plan_nr" id="plan_nr" required="required">
-								<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
-									A</option>
-								<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
-									B</option>
-								<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
-									C</option>
+							<option value='100'>일정 선택</option>
+							<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
+								A</option>
+							<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
+								B</option>
+							<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
+								C</option>
+							
 						</select>
 					</td>
 					<td class="td_last">
@@ -235,9 +242,9 @@
 						</select>
 					</div>
 
-					<input type='text' name='res<%=i%>' placeholder="myplans_id">
-					<input type='text' name='plan_nr<%=i%>' placeholder="plan_nr">
-					<input type='text' name='day_nr<%=i%>' placeholder="day_nr">
+					<input type='hidden' name='res<%=i%>' placeholder="myplans_id">
+					<input type='hidden' name='plan_nr<%=i%>' placeholder="plan_nr">
+					<input type='hidden' name='day_nr<%=i%>' placeholder="day_nr">
 
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '

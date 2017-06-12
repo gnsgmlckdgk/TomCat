@@ -26,12 +26,24 @@ public class MyPlanModifyAction implements Action {
 
 		String id = (String) session.getAttribute("id");
 
+		// 디비객체 생성
+		MyPlanBasketDAO mpbd = new MyPlanBasketDAO();
+		
+		//수정인지 확인한다.
+		int mdf = Integer.parseInt(request.getParameter("mdf"));
+		System.out.println("mdf = " + mdf);
+		if(mdf == 1){
+			mpbd.nullAction(id);
+		}
+		
+		
+		
+		
 		// 폼 => 자바빈 멤버변수 저장.
 		
 		// mpbb.setPlan_nr(request.getParameter("plan_nr"));// plan a or b or c
 
-		// 디비객체 생성
-		MyPlanBasketDAO mpbd = new MyPlanBasketDAO();
+
 
 		// 여행일정 day
 		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
@@ -77,7 +89,7 @@ public class MyPlanModifyAction implements Action {
 				
 				if (mpbb2.getPlan_nr() == null) { // 3. 비었으면 이쪽으로.
 					
-					System.out.println("비었네");
+//					System.out.println("비었네");
 					
 					fin_p_nr = pplan_nr[i].split("@")[k] + "@";
 					fin_d_nr = dday_nr[i].split("@")[k] + "@";
@@ -85,7 +97,7 @@ public class MyPlanModifyAction implements Action {
 
 				} else if (mpbb2.getPlan_nr() != null){ // 4. 안비었으면 이쪽으로.
 					
-					System.out.println("안비었네.");
+//					System.out.println("안비었네.");
 					
 					fin_p_nr = mpbb2.getPlan_nr() + pplan_nr[i].split("@")[k] + "@";
 					fin_d_nr = mpbb2.getDay_nr() + dday_nr[i].split("@")[k] + "@";
@@ -100,9 +112,9 @@ public class MyPlanModifyAction implements Action {
 				// 메서드호출
 				mpbd.modifyMyPlan(mpbb, fin_mpln_id);
 
-				System.out.println(fin_mpln_id + "에 plan_nr은 " + fin_p_nr + "이고, ");
-				System.out.println("day_nr은 " + fin_d_nr + ", item_nr은 " + fin_i_nr);
-				System.out.println("");
+//				System.out.println(fin_mpln_id + "에 plan_nr은 " + fin_p_nr + "이고, ");
+//				System.out.println("day_nr은 " + fin_d_nr + ", item_nr은 " + fin_i_nr);
+//				System.out.println("");
 				
 
 			}//그날의 몇번째 일정인지 구분. 끝.
