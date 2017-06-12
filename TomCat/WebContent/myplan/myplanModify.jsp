@@ -220,7 +220,7 @@ form#reg, td.tr_head {
 
 
 
-			<div style="position: absolute; left: 1px; width: 300px; height: 500px; background-color: #f0f0f5;  padding:5px 20px 20px 50px;">
+			<div style="position: absolute; left: 1px; width: 300px; height: 500px; background-color: #f0f0f5;  padding:60px 20px 20px 50px;">
 				<select name=a style="width: 100%; height: 500px; margin-right: 10px; background-color: white;" multiple>
 
 
@@ -247,8 +247,8 @@ form#reg, td.tr_head {
 			</div>
 
 
-			<div border=0 cellpadding=0 cellspacing=0 class="x_wrap"
-				style="position: relative; width: 500px; overflow: auto; left: 270px; height: 610px;">
+				<div border=0 cellpadding=0 cellspacing=0 class="x_wrap"
+				style="position: relative; width: 666px; overflow: auto; left: 322px; height: 700px;">
 
 
 				<%
@@ -257,49 +257,52 @@ form#reg, td.tr_head {
 				%>
 
 
-				<div class="inner_x_wrap" style="border: 1px solid blue; padding:10px 25px 0 25px ;  background-color: white;">
-					<div style="color: #333; font-size: 1.2em; text-shadow: 1px 1px 3px #abc"> ▶ <%=i%>
-
+				<div class="inner_x_wrap" >
+					<div style="color: #333; font-size: 1.2em; text-shadow: 1px 1px 3px #abc"> <%-- ▶ <%=i%> --%>
 					<div
 						style="color: #333; font-size: 1.2em; text-shadow: 1px 1px 3px #abc">
 						▶
 						<%=i%>
-
 						일차 ◀
 					</div>
-
-
-
+					
 					<div
-						style="width: 12%; float: left; vertical-align: middle; margin: auto;">
-						&nbsp; <input class=button type=button value=' > '
-							onclick="gor('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
-						<br> &nbsp; <input class=button type=button value=' < '
-							onclick="gol('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
+						style="width: 12%; float: left; vertical-align: middle; margin: 2em; ">
+						&nbsp; 
+						<input class=button type=button style="padding: 0 1.2em; height: 3.1em;" 
+								value=' > ' onclick ="gor('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
+						<br> 
+						&nbsp; 
+						<input class=button type=button style="padding: 0 1.2em; height: 3.1em;" 
+								value=' < ' onclick="gol('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;			
 					</div>
 
 
 
-					<div style="width: 70%; float: left; margin: 35px 0 0 50px;">
-						<select name="b<%=i%>" size=5 style="width: 100%; height: 10em;">
-
-						</select>
+					<div style="width: 41%; float: left; margin: 1em;">
+						<select name="b<%=i%>" size=5 style="width: 100%; height: 120px; margin:17px 20px 0 2px;"></select>
+					</div>
+					
+					
+					<div style="width: 12%; float: left; margin: 2em;">
+							&nbsp;&nbsp;<input class=button type=button style="padding: 0 1.2em; height: 3.1em;" 
+								value=' ↑ ' onclick="gou('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
+							<br> 
+							&nbsp;&nbsp;<input class=button type=button style="padding: 0 1.2em; height: 3.1em;"
+								value=' ↓ ' onclick="god('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
 					</div>
 
-					<input type='text' name='res<%=i%>' placeholder="myplans_id">
-					<input type='text' name='plan_nr<%=i%>' placeholder="plan_nr">
-					<input type='text' name='day_nr<%=i%>' placeholder="day_nr">
 
-					<div style="width: 12%; float: left; margin: auto;">
-						&nbsp;<input class=button type=button value=' ↑ '
-							onclick="gou('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
-						<br> &nbsp; <input class=button type=button value=' ↓ '
-							onclick="god('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
+					<input type='hidden' name='res<%=i%>' placeholder="myplans_id">
+					<input type='hidden' name='plan_nr<%=i%>' placeholder="plan_nr">
+					<input type='hidden' name='day_nr<%=i%>' placeholder="day_nr">
+					
 					</div>
-				</div>
+				
+			
 
-				<hr>
-
+			
+				<br><br>
 				<div class="clear"></div>
 
 				<%
@@ -309,7 +312,6 @@ form#reg, td.tr_head {
 
 
 			</div>
-
 			<!-- 장소 넣고 빼고 들어갈 공간. 끝.-->
 		</div>
 	</form>
@@ -317,4 +319,3 @@ form#reg, td.tr_head {
 </body>
 
 </html>
-
