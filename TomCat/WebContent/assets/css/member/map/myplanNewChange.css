@@ -63,10 +63,10 @@
 
 .myplanContainer #pln_list {
 /* 	width: 800px; */
-	max-height:800px;
+	max-height:1100px;
 	position: absolute;
 /* 	top: 10em; */
-	left:360px;
+	left:380px;
 	z-index: 10000;
 	background: #fff;
 	border-radius: 5px;
