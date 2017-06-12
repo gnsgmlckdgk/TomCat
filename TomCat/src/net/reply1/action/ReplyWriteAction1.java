@@ -22,7 +22,7 @@ public class ReplyWriteAction1 implements Action {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		String nick_name = (String) session.getAttribute("nick_name");
+		String nick = (String) session.getAttribute("nick");
 
 		Reply1DAO rdao = new Reply1DAO();
 		Reply1Bean rr = new Reply1Bean();
@@ -31,24 +31,21 @@ public class ReplyWriteAction1 implements Action {
 		bb.setSubject(request.getParameter("subject"));
 
 		String pageNum = request.getParameter("pageNum");
-		int num = Integer.parseInt(request.getParameter("num"));
+		int num = Integer.parseInt(request.getParameter("re_num"));
 		rr.setNum(num);
 
 //		System.out.println("ReplyWrite액션에서num의 값" + num);
-		System.out.println("ReplyWrite액션에서nick의 값" + nick_name);
+		System.out.println("ReplyWrite액션에서nick의 값" + nick);
 
 		rr.setContent(request.getParameter("content"));
-		rr.setNick(nick_name);
+		rr.setNick(nick);
 
-		rr.setRe_lev(Integer.parseInt(request.getParameter("re_ref")));
-		rr.setRe_lev(Integer.parseInt(request.getParameter("re_lev")));
 		rr.setRe_num(Integer.parseInt(request.getParameter("re_num")));
-		rr.setRe_seq(Integer.parseInt(request.getParameter("re_seq")));
 
 		rdao.insertRepley(rr);
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("./BoardContent1.bb?num=" + num + "&pageNum=" + pageNum);
+		forward.setPath("./BoardList1.bb?num=" + num + "&pageNum=" + pageNum);
 		forward.setRedirect(true);
 		return forward;
 	}

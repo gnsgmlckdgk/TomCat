@@ -179,14 +179,6 @@ form#reg, td.tr_head {
 					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" style="width: 180px; margin-right: 20px;">
 					도착일 : <input type="date" name="toDate" id="toDate" required="required" style="width: 180px; margin-right: 20px;;">
 
-					<td class="setdate" onchange="from_to()">출발일 : <input
-						type="date" name="fromDate" id="fromDate" required="required"
-						value="<%=from%>" style="width: 150px; margin-right: 10px;">
-						도착일 : <input type="date" name="toDate" id="toDate"
-						required="required" value="<%=to%>"
-						style="width: 150px; margin-right: 10px;"> <%
- 	
- %>
 					
 					</td>
 					<%

@@ -32,7 +32,7 @@
 
 <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 
-<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(206,223,251,0.8)"></div>
+<div id="messageWindow2" style="max-width:20em; padding:10px 0; height:35em; overflow: auto; background-color: rgba(0, 188, 212, 0.54); border-radius:15px;"></div>
 
 <%if(gold.equals("유료회원")){ %>
 <div style="background-color: white; max-width: 20em;">
