@@ -20,6 +20,8 @@ public class MyPlanBasketAddAction implements Action {
 		String id = (String) session.getAttribute("id");
 		int travel_id = Integer.parseInt(request.getParameter("travel_id"));
 
+		
+		
 		ActionForward forward = new ActionForward();
 		if (id == null) {
 			forward.setRedirect(true);

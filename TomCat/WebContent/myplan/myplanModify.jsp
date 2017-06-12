@@ -30,6 +30,16 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+ <style type="text/css">
+	form#reg, td.tr_head {
+		font-family: "나눔고딕", "맑은 고딕", sans-serif;
+		font-weight: bolder; 
+	}
+	
+
+</style>
+
 </head>
 <body>
 
@@ -58,11 +68,15 @@
 		//diff_day 일간
 		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
 	
+		int mdf = 0; //기존 일정 수정이면 1 아니면 0
+		
 		if(diff_day == 9999){
 			
 			for (int i = 0; i < basketList.size(); i++) {
 				
 				MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
+				TravelBean tb = (TravelBean) goodsList.get(i);
+				
 				from = mpbb2.getFirstday();
 				to = mpbb2.getLastday();
 				
@@ -89,6 +103,8 @@
 				//기 저장된 일정이 몇일짜리인지 불러온다.
 				diff_day = (int) diffDays;
 				
+				
+				if(mpbb2.getPlan_nr() != null){
 				//myplans 의 i행에 몇 열까지 있는지.
 				for(int k=0; k < mpbb2.getPlan_nr().split("@").length; k++){
 					
@@ -103,7 +119,9 @@
 						%>
 						<script type="text/javascript">
 						
-							
+						$('select[name=b<%=mpbb2.getDay_nr().split("@")[k]%>]').append("<option value='<%=mpbb2.getMyplans_id()%>'><%=tb.getName()%></option>");
+						
+<%-- 						attr('option',$('select[name=b<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getTravel_id()%>'+'@'); --%>
 						$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getMyplans_id()%>'+'@');
 							$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getPlan_nr().split("@")[k]%>'+'@');
 							$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getDay_nr().split("@")[k]%>'+'@');
@@ -112,11 +130,12 @@
 						
 						<%
 						
-
+						mdf = 1;
 						
 					}
 					
 				}
+			}
 				
 				
 				
@@ -135,41 +154,46 @@
 
 
 
-	<form action="./MyPlanModifyAction.pln" method="post"
+	<form action="./MyPlanModifyAction.pln?mdf=<%=mdf %>" method="post"
 			style="background-color: white; color: black;" name=reg id="reg">
 		<div style="width: 900px; margin: 1em;">
+
 			<table>
 				<tr id="tr_head" style="background-color: #fff;"> 
 					<%
 						if (from != null & to != null) {
 					%>
 					<td class="setdate" onchange="from_to()">
-					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" value="<%=from%>">
-					도착일 : <input type="date" name="toDate" id="toDate" required="required" value="<%=to%>">
+					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" value="<%=from%>" style="width: 150px; margin-right: 10px; ">
+					도착일 : <input type="date" name="toDate" id="toDate" required="required" value="<%=to%>" style="width: 150px; margin-right: 10px;">
 						<%
 							} else {
 						%>
 					<td class="setdate" onchange="from_to()">
-					출발일 : <input type="date" name="fromDate" id="fromDate" required="required">
-					도착일 : <input type="date" name="toDate" id="toDate" required="required">
+					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" style="width: 150px; margin-right: 10px;">
+					도착일 : <input type="date" name="toDate" id="toDate" required="required" style="width: 150px; margin-right: 10px;;">
 					</td>
 					<%
-						}
+						}//
 					%>
 					<td class="set_plan" id="set_plan" onchange="from_to()">
 						<select
 							name="plan_nr" id="plan_nr" required="required">
-								<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
-									A</option>
-								<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
-									B</option>
-								<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
-									C</option>
+							<option value='100'>일정 선택</option>
+							<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
+								A</option>
+							<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
+								B</option>
+							<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
+								C</option>
+							
 						</select>
 					</td>
 					<td class="td_last">
-						<input type="image" name="submit" src="./images/myplans/일정수정.png" width="50px" height="50px" style="vertical-align:bottom" value="" />&nbsp;&nbsp; 
+				
+						<input type="image" name="submit" src="./images/myplans/일정수정.png" width="50px" height="50px" style="vertical-align:bottom; " value="" />&nbsp;&nbsp; 
 						<!-- <input type="image" name="reset" src="./images/myplans/다시등록.png" width="50px" height="50px" style="vertical-align:bottom;" value=""  /> -->
+				
 					</td>
 				</tr>
 				<input type="hidden" value="<%=diff_day%>" name="diff_day">
@@ -177,8 +201,8 @@
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
 
-			<div style="position: absolute; left: 1px; width: 250px; height: 500px; background-color: white; padding:20px;">
-				<select name=a style="width: 100%; height: 35em;" multiple>
+			<div style="position: absolute; left: 1px; width: 300px; height: 500px; background-color: white; padding:5px 20px 20px 50px;">
+				<select name=a style="width: 100%; height: 35em; margin-right: 10px;" multiple>
 
 					<%
 						if (basketList != null) {
@@ -188,7 +212,7 @@
 								MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
 								/*  여행지(상품) DB Bean */
 					%>
-					<option value="<%=mpbb2.getMyplans_id()%>"><%=tb.getName()%></option>
+					<option value="<%=mpbb2.getMyplans_id()%>" style="margin-top:10px;"><%=tb.getName()%></option>
 					<%
 						}
 						}
@@ -208,32 +232,34 @@
 						for (int i = 1; i <= diff_day; i++) {
 				%>
 
-				<div class="inner_x_wrap" style="border: 1px solid blue">
-					<div><%=i%>
-						일차. css가 필요합니다.
+				<div class="inner_x_wrap" style="border: 1px solid blue; padding:10px 25px 0 25px ;">
+					<div style="color: #333; font-size: 1.2em; text-shadow: 1px 1px 3px #abc"> ▶ <%=i%>
+						일차 ◀
 					</div>
 
 
 
 					<div
 						style="width: 12%; float: left; vertical-align: middle; margin: auto;">
-						&nbsp;<input class=button type=button value=' > '
+						&nbsp;
+						<input class=button type=button value=' > '
 							onclick="gor('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
-						<br> &nbsp;<input class=button type=button value=' < '
+						<br> &nbsp;
+						<input class=button type=button value=' < '
 							onclick="gol('b<%=i%>','res<%=i%>', 'plan_nr<%=i%>', '<%=plan%>', 'day_nr<%=i%>', '<%=i%>')">&nbsp;
 					</div>
 
 
 
-					<div style="width: 70%; float: left;">
+					<div style="width: 70%; float: left; margin:35px 0 0 50px; ">
 						<select name="b<%=i%>" size=5 style="width: 100%; height: 10em;">
 
 						</select>
 					</div>
 
-					<input type='text' name='res<%=i%>' placeholder="myplans_id">
-					<input type='text' name='plan_nr<%=i%>' placeholder="plan_nr">
-					<input type='text' name='day_nr<%=i%>' placeholder="day_nr">
+					<input type='hidden' name='res<%=i%>' placeholder="myplans_id">
+					<input type='hidden' name='plan_nr<%=i%>' placeholder="plan_nr">
+					<input type='hidden' name='day_nr<%=i%>' placeholder="day_nr">
 
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '
