@@ -68,11 +68,15 @@
 		//diff_day 일간
 		int diff_day = Integer.parseInt(request.getParameter("diff_day"));
 	
+		int mdf = 0; //기존 일정 수정이면 1 아니면 0
+		
 		if(diff_day == 9999){
 			
 			for (int i = 0; i < basketList.size(); i++) {
 				
 				MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
+				TravelBean tb = (TravelBean) goodsList.get(i);
+				
 				from = mpbb2.getFirstday();
 				to = mpbb2.getLastday();
 				
@@ -99,6 +103,8 @@
 				//기 저장된 일정이 몇일짜리인지 불러온다.
 				diff_day = (int) diffDays;
 				
+				
+				if(mpbb2.getPlan_nr() != null){
 				//myplans 의 i행에 몇 열까지 있는지.
 				for(int k=0; k < mpbb2.getPlan_nr().split("@").length; k++){
 					
@@ -113,7 +119,9 @@
 						%>
 						<script type="text/javascript">
 						
-							
+						$('select[name=b<%=mpbb2.getDay_nr().split("@")[k]%>]').append("<option value='<%=mpbb2.getMyplans_id()%>'><%=tb.getName()%></option>");
+						
+<%-- 						attr('option',$('select[name=b<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getTravel_id()%>'+'@'); --%>
 						$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getMyplans_id()%>'+'@');
 							$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getPlan_nr().split("@")[k]%>'+'@');
 							$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getDay_nr().split("@")[k]%>'+'@');
@@ -122,11 +130,12 @@
 						
 						<%
 						
-
+						mdf = 1;
 						
 					}
 					
 				}
+			}
 				
 				
 				
@@ -143,9 +152,12 @@
 	%>
 
 
-	<form action="./MyPlanModifyAction.pln" method="post"
-			style="background-color: white; color: black; border: 1px solid red;" name=reg id="reg">
-		<div style="width: 900px; margin: 1em; border: 1px solid green;" >
+
+
+	<form action="./MyPlanModifyAction.pln?mdf=<%=mdf %>" method="post"
+			style="background-color: white; color: black;" name=reg id="reg">
+		<div style="width: 900px; margin: 1em;">
+
 			<table>
 				<tr id="tr_head" style="background-color: #fff;"> 
 					<%
@@ -162,17 +174,19 @@
 					도착일 : <input type="date" name="toDate" id="toDate" required="required" style="width: 150px; margin-right: 10px;;">
 					</td>
 					<%
-						}
+						}//
 					%>
 					<td class="set_plan" id="set_plan" onchange="from_to()">
 						<select
 							name="plan_nr" id="plan_nr" required="required">
-								<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
-									A</option>
-								<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
-									B</option>
-								<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
-									C</option>
+							<option value='100'>일정 선택</option>
+							<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
+								A</option>
+							<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
+								B</option>
+							<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
+								C</option>
+							
 						</select>
 					</td>
 					<td class="td_last">
@@ -243,9 +257,9 @@
 						</select>
 					</div>
 
-					<input type='text' name='res<%=i%>' placeholder="myplans_id">
-					<input type='text' name='plan_nr<%=i%>' placeholder="plan_nr">
-					<input type='text' name='day_nr<%=i%>' placeholder="day_nr">
+					<input type='hidden' name='res<%=i%>' placeholder="myplans_id">
+					<input type='hidden' name='plan_nr<%=i%>' placeholder="plan_nr">
+					<input type='hidden' name='day_nr<%=i%>' placeholder="day_nr">
 
 					<div style="width: 12%; float: left; margin: auto;">
 						&nbsp;<input class=button type=button value=' ↑ '
