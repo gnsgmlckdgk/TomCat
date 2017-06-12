@@ -199,11 +199,28 @@ if(likecount%2==0){
 	</td></tr>
 	<tr><td>	
 
-<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/<%=bb.getImage1()%>" width=180 height=200 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img src="./upload/images/gram/<%=bb.getImage1()%>" width=180 height=200 onerror="this.src='./images/instagram/noimage.png'"></a>
 	</td></tr>
 	<tr><td id="paddingnone">좋아요<%=likecountall %>개</td></tr>
 	</table>
 </div>	
+	
+	
+<!-- 	광고배너~ -->
+<div class="advertize">
+
+<a href="http://modetour.com"><img src="./images/instagram/modetour.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+</div>
+<div class="advertize2">
+<a href="#"><img src="./images/instagram/crazyfortr.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+</div>
+
+<div class="advertize3">
+<a href="#"><img src="./images/instagram/naver.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+</div>
+
+
+	
 	
 	<!-- 	화면 상단/ 하단 이동 아이콘 -->
 	<div class="topBottomBtn">
