@@ -401,7 +401,8 @@
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 Date date = sdf.parse(pfirstday);
-System.out.println("이고이고"+date);
+
+// System.out.println("이고이고"+date);
 
 Calendar cal = Calendar.getInstance();
 cal.setTime(date);
@@ -409,7 +410,7 @@ cal.setTime(date);
 cal.add(Calendar.DATE,+z);	         
 today = sdf.format(cal.getTime());
 
-System.out.println("이고이고2"+today);
+// System.out.println("이고이고2"+today);
 
 %>
 	       	
@@ -437,11 +438,11 @@ System.out.println("이고이고2"+today);
            			
 
                for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
-					System.out.println("첫번째for문의 증가하는 k값"+k);
+// 					System.out.println("첫번째for문의 증가하는 k값"+k);
 					
 					int ar2=Integer.parseInt(Array2[k]);
 					if (plan_nr.equals(Array1[k])&&ar2==z){
-		           		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
+// 		           		   System.out.println("첫번째 if문안에서의 증가하는 k값"+k);
 		           		
 		   %>
 		     <tr>
