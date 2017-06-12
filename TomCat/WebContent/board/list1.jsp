@@ -14,7 +14,7 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
-<link href="./assets/css/list.css?ver=8" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=10" rel="stylesheet" type="text/css">
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
