@@ -63,6 +63,8 @@
 			for (int i = 0; i < basketList.size(); i++) {
 				
 				MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
+				TravelBean tb = (TravelBean) goodsList.get(i);
+				
 				from = mpbb2.getFirstday();
 				to = mpbb2.getLastday();
 				
@@ -103,7 +105,9 @@
 						%>
 						<script type="text/javascript">
 						
-							
+						$('select[name=b<%=mpbb2.getDay_nr().split("@")[k]%>]').append("<option value='<%=mpbb2.getMyplans_id()%>'><%=tb.getName()%></option>");
+						
+<%-- 						attr('option',$('select[name=b<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getTravel_id()%>'+'@'); --%>
 						$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=res<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getMyplans_id()%>'+'@');
 							$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=plan_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getPlan_nr().split("@")[k]%>'+'@');
 							$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').attr('value',$('input[name=day_nr<%=mpbb2.getDay_nr().split("@")[k]%>]').val()+'<%=mpbb2.getDay_nr().split("@")[k]%>'+'@');
