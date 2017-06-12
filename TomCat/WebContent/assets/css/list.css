@@ -59,11 +59,7 @@
 
 
 #ima{
-<<<<<<< HEAD
 	background-image: url("./beach2.jpg");
-=======
-	background-image: url("../../../images/beach.jpg");
->>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -270,7 +266,7 @@ to {
 	text-decoration: color:black;
 	background-color: rgba(246, 246, 246, 0.5);
 	border-radius:30px;
-	width: 220px;
+	width: 180px;
 }
 #page2:hover{
 	color: white;
@@ -289,7 +285,7 @@ to {
 	color: rgb(255, 255, 255);
 }
 .re_id{
-	margin-top: 430px;
+	margin-top: 370px;
 	width: 300px;
 	margin-left: 8px;
 	border-radius:30px;
