@@ -39,7 +39,7 @@
 	position: absolute;
 	top: 10px;
 	border-radius:50px;
-	background-color: #2196f3;
+	background-color: rgba(0, 188, 212, 0.5);
 	}
 .upde input[type=button]:nth-of-type(1){
 	left:0px;
@@ -59,7 +59,11 @@
 
 
 #ima{
+<<<<<<< HEAD
+	background-image: url("./beach2.jpg");
+=======
 	background-image: url("../../../images/beach.jpg");
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -212,7 +216,7 @@ to {
 }
 
 	#mit{
-	background-color:#2196F3;
+	background-color:rgba(0, 188, 212, 0.5);
 	border-radius:20px;
 	opcity:0.85;
 	}
@@ -289,6 +293,7 @@ to {
 	width: 300px;
 	margin-left: 8px;
 	border-radius:30px;
+	color: white;
 }
 #txt1{
 	margin-left: 320px;

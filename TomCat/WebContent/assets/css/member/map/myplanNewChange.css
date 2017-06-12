@@ -64,7 +64,8 @@
 /* 	width: 800px; */
 	max-height:800px;
 	position: absolute;
-	top: 10em;
+/* 	top: 10em; */
+	left:360px;
 	z-index: 10000;
 	background: #fff;
 	border-radius: 5px;

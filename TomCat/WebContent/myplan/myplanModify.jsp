@@ -95,7 +95,8 @@ form#reg, td.tr_head {
 					long diff = endDate.getTime() - beginDate.getTime();
 					diffDays = diff / (24 * 60 * 60 * 1000) + 1;
 
-// 					out.println("날짜차이=" + diffDays);
+// 					out.println("날짜차이=" + diffDays);;;;
+//
 
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -153,34 +154,42 @@ form#reg, td.tr_head {
 
 
 
-	<form action="./MyPlanModifyAction.pln?mdf=<%=mdf%>" method="post"
-		style="background-color: white; color: black;" name=reg id="reg">
-		<div style="width: 900px; margin: 1em;">
+
+	<form action="./MyPlanModifyAction.pln?mdf=<%=mdf %>" method="post"
+			style="background-color: #f0f0f5; color: #222; font-weight: bold; text-shadow: 1px 1px 1px #abc; " name=reg id="reg">
+		<div style="width: 1000px; margin: 1em;">
+
 
 			<table>
-				<tr id="tr_head" style="background-color: #fff;">
+
+				<tr id="tr_head" style="background-color: #f0f0f5;"> 
+
+
 					<%
 						if (from != null & to != null) {
 					%>
-					<td class="setdate" onchange="from_to()">출발일 : <input
-						type="date" name="fromDate" id="fromDate" required="required"
-						value="<%=from%>" style="width: 150px; margin-right: 10px;">
-						도착일 : <input type="date" name="toDate" id="toDate"
-						required="required" value="<%=to%>"
-						style="width: 150px; margin-right: 10px;"> <%
- 	} else {
- %>
-					<td class="setdate" onchange="from_to()">출발일 : <input
-						type="date" name="fromDate" id="fromDate" required="required"
-						style="width: 150px; margin-right: 10px;"> 도착일 : <input
-						type="date" name="toDate" id="toDate" required="required"
-						style="width: 150px; margin-right: 10px;">
+
+					<td class="setdate" onchange="from_to()">
+					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" value="<%=from%>" style="width: 180px; margin-right: 20px; ">
+					도착일 : <input type="date" name="toDate" id="toDate" required="required" value="<%=to%>" style="width: 180px; margin-right: 20px;">
+						<%
+							} else {
+						%>
+					<td class="setdate" onchange="from_to()">
+					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" style="width: 180px; margin-right: 20px;">
+					도착일 : <input type="date" name="toDate" id="toDate" required="required" style="width: 180px; margin-right: 20px;;">
+
+					
 					</td>
 					<%
 						} //
 					%>
-					<td class="set_plan" id="set_plan" onchange="from_to()"><select
-						name="plan_nr" id="plan_nr" required="required">
+
+					<td class="set_plan" id="set_plan" onchange="from_to()">
+						<select
+							name="plan_nr" id="plan_nr" required="required" style="background-color: white;">
+
+					
 							<option value='100'>일정 선택</option>
 							<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
 								A</option>
@@ -189,10 +198,19 @@ form#reg, td.tr_head {
 							<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
 								C</option>
 
+							
+						</select>
+					</td>
+					<td class="td_last">
+				
+						<input type="image" name="submit" src="./images/myplans/일정수정.png" width="50px" height="50px" style="vertical-align:bottom; "/>&nbsp;&nbsp; 
+						<!-- <input type="image" name="reset" src="./images/myplans/다시등록.png" width="50px" height="50px" style="vertical-align:bottom;" value=""  /> -->
+				
+
+
 					</select></td>
-					<td class="td_last"><input type="image" name="submit"
-						src="./images/myplans/일정수정.png" width="50px" height="50px"
-						style="vertical-align: bottom;" value="" />&nbsp;&nbsp; <!-- <input type="image" name="reset" src="./images/myplans/다시등록.png" width="50px" height="50px" style="vertical-align:bottom;" value=""  /> -->
+
+
 
 					</td>
 				</tr>
@@ -201,10 +219,12 @@ form#reg, td.tr_head {
 			<!-- 장소 넣고 빼고 들어갈 공간. -->
 
 
-			<div
-				style="position: absolute; left: 1px; width: 300px; height: 500px; background-color: white; padding: 5px 20px 20px 50px;">
-				<select name=a
-					style="width: 100%; height: 35em; margin-right: 10px;" multiple>
+
+			<div style="position: absolute; left: 1px; width: 300px; height: 500px; background-color: #f0f0f5;  padding:5px 20px 20px 50px;">
+				<select name=a style="width: 100%; height: 500px; margin-right: 10px; background-color: white;" multiple>
+
+
+
 
 					<%
 						if (basketList != null) {
@@ -235,12 +255,15 @@ form#reg, td.tr_head {
 						for (int i = 1; i <= diff_day; i++) {
 				%>
 
-				<div class="inner_x_wrap"
-					style="border: 1px solid blue; padding: 10px 25px 0 25px;">
+
+				<div class="inner_x_wrap" style="border: 1px solid blue; padding:10px 25px 0 25px ;  background-color: white;">
+					<div style="color: #333; font-size: 1.2em; text-shadow: 1px 1px 3px #abc"> ▶ <%=i%>
+
 					<div
 						style="color: #333; font-size: 1.2em; text-shadow: 1px 1px 3px #abc">
 						▶
 						<%=i%>
+
 						일차 ◀
 					</div>
 
