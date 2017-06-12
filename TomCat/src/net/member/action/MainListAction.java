@@ -17,6 +17,7 @@ public class MainListAction implements Action{
 		BoardDAO bdao = new BoardDAO();
 		
 		int count = bdao.getBoardcount();
+
 		int pageSize = 10;
 
 		String pageNum = request.getParameter("pageNum");
@@ -33,9 +34,9 @@ public class MainListAction implements Action{
 		List boardList=null;
 		if(count!=0){
 			boardList=bdao.getBoardList(startrow, pageSize);
+			request.setAttribute("bl", boardList);
 		}
 		
-		request.setAttribute("bl", boardList);
 		request.setAttribute("count", count);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
@@ -43,8 +44,6 @@ public class MainListAction implements Action{
 		request.setAttribute("startrow", startrow);
 		request.setAttribute("endRow", endRow);		
 		
-				
-			
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./main/main.jsp");

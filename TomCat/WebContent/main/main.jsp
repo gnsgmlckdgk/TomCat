@@ -1,3 +1,4 @@
+<%@page import="net.member.action.MainListAction"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="net.board.db.boardBean"%>
 <%@page import="java.util.List"%>
@@ -141,7 +142,13 @@
 	</header>
 
 	<%
-	List boardList = (List)request.getAttribute("bl");
+	int count = Integer.parseInt(request.getAttribute("count").toString());
+	
+	List boardList = null;
+	if(count!=0) {
+		boardList = (List)request.getAttribute("bl");
+	}
+	
 	
 	%>
 	 <!-- Swiper -->
@@ -149,7 +156,7 @@
         <div class="swiper-wrapper imgs">
         <%
         
-        if(boardList.size() != 0){
+        if(count != 0){
         
     	for(int i=0; i<boardList.size(); i++) {
     		boardBean bb = (boardBean) boardList.get(i);
@@ -161,6 +168,10 @@
 			</div>
     	<%
     	}
+        }else {
+        	%>
+        	<div class="swiper-slide"><span style="color: #fff; font-size: 28px;">이미지 정보가 없습니다.</span></div>
+    		<%
         }
         
    		%>
@@ -198,6 +209,7 @@
 </script> -->
 
 <script type="text/javascript">
+	
 	$(window).load(function(){
 		$.ajax({
 			type:'post',
@@ -232,7 +244,7 @@
 <!-- Four -->
 <section class="sectionFour">
 	
-	<!-- 인기여행지 리스트(대륙별 도시추천) -->
+	인기여행지 리스트(대륙별 도시추천)
 		<div class="bestTrip">
 		<h1 style="font-size: 2.2em;text-align: center;margin:50px 0 10px 0;"> 인기 여행지</h1>
 			<h3 style="text-align: center;font-size: 1.3em;"><span style="color: #f44066">대륙별</span> 추천도시로 <span style="color: #f44066">여행</span>을 떠나보세요!</h3>
@@ -249,7 +261,7 @@
 
 			<div class="clear"></div>
 
-			<!-- 인기여행지 이미지리스트(대륙별 도시추천) -->
+			인기여행지 이미지리스트(대륙별 도시추천)
 			<div class="bestTripimg">
 				
 			</div>

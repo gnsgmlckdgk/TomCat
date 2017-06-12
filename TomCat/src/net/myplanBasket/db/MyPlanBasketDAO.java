@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.mail.search.IntegerComparisonTerm;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -810,6 +811,133 @@ public class MyPlanBasketDAO {
 		}
 
 		return MyPlanBasketBean;
+	}
+	
+	
+	// 일정 삭제(일정 하나)
+	public void deletePlan(String id, String plan_nr) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		List<String> planList = new ArrayList<String>();	// DB의 plan_nr 값
+		List<String> itemList = new ArrayList<String>();	// DB의 item_nr 값
+		List<String> dayList = new ArrayList<String>();			// DB의 day_nr 값
+		List<Integer> travelIdList = new ArrayList<Integer>();	// DB의 travle_id 값
+		
+		try {
+			
+			con = getConnection();
+			
+			// plan_nr, item_nr, day_nr, travel_id 값 가져오기
+				// travel_id는 각 행을 구별하기 위해 필요
+			sql = "select plan_nr, item_nr, day_nr, travel_id from myplans where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				planList.add(rs.getString("plan_nr"));
+				itemList.add(rs.getString("item_nr"));
+				dayList.add(rs.getString("day_nr"));
+				travelIdList.add(rs.getInt("travel_id"));
+			}
+			
+			String[][] plan = new String[planList.size()][];
+			String[][] item = new String[itemList.size()][];
+			String[][] day = new String[dayList.size()][];
+			
+			for(int i=0; i<planList.size(); i++) {
+				plan[i] = planList.get(i).split("@");
+				item[i] = itemList.get(i).split("@");
+				day[i] = dayList.get(i).split("@");
+			}
+			
+			// 한 일정의 item, day 컬럼의 인덱스 값 구해서 저장, 그후 최종값 계산
+			String[] plan_nr_result = new String[travelIdList.size()];
+			String[] item_nr_result = new String[travelIdList.size()];
+			String[] day_nr_result = new String[travelIdList.size()];
+			
+			for(int i=0; i < plan.length; i++) {
+				
+				// 삭제될 거 빼고 StringBuffer에 계속 추가한다.
+				StringBuffer planBuf = new StringBuffer();
+				StringBuffer itemBuf = new StringBuffer();
+				StringBuffer dayBuf = new StringBuffer();
+				
+				for(int j=0; j < plan[i].length; j++) {
+					
+					if(plan[i][j].equals(plan_nr)) {	// plan_nr@부분은 삭제 될 예정이라 StringBuffer에 넣지 않음
+						
+						// plan_nr 부분은 저장하지 않는다.
+						
+					}else {
+						// 삭제가 안될 부분 StringBuffer에 계속해서 추가
+						planBuf.append(plan[i][j]+"@");
+						itemBuf.append(item[i][j]+"@");
+						dayBuf.append(day[i][j]+"@");
+					}
+				}
+				
+				// 값이 없으면
+				if(planBuf.length()==0) {
+					
+					// 값이 없으면 아무것도 넣지 않는다.
+					
+				}else {	// 값이 있으면
+					// 각행에 넣을 완성된 값들을 저장
+					plan_nr_result[i] = planBuf.toString();
+					item_nr_result[i] = itemBuf.toString();
+					day_nr_result[i] = dayBuf.toString();
+				}	
+			}
+			
+			/*
+			// 확인용
+			for(int i=0; i<plan_nr_result.length; i++) {
+				System.out.println("plan_nr_result["+i+"]: "+plan_nr_result[i]);
+			}
+			*/
+			
+			// DB 처리	
+			for(int i=0; i<travelIdList.size(); i++) {
+				
+				if(plan_nr_result.length == 0) {
+					sql = "update myplans set plan_nr=?, item_nr=?, day_nr=?, firstday=, lastday= where id=? and travel_id=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, null);
+					pstmt.setString(2, null);
+					pstmt.setString(3, null);
+					pstmt.setString(4, id);
+					pstmt.setInt(5, travelIdList.get(i));
+				}else {
+					sql = "update myplans set plan_nr=?, item_nr=?, day_nr=? where id=? and travel_id=?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, plan_nr_result[i]);
+					pstmt.setString(2, item_nr_result[i]);
+					pstmt.setString(3, day_nr_result[i]);
+					pstmt.setString(4, id);
+					pstmt.setInt(5, travelIdList.get(i));
+				}
+				pstmt.executeUpdate();	
+			}
+			System.out.println("일정 삭제 완료");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

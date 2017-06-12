@@ -1,5 +1,9 @@
 package net.myplanBasket.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,8 +23,6 @@ public class MyPlanBasketAddAction implements Action {
 
 		String id = (String) session.getAttribute("id");
 		int travel_id = Integer.parseInt(request.getParameter("travel_id"));
-
-		
 		
 		ActionForward forward = new ActionForward();
 		if (id == null) {
@@ -40,8 +42,18 @@ public class MyPlanBasketAddAction implements Action {
 		basketbean.setTravel_id(travel_id);
 		
 		
+		SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyy-MM-dd", Locale.KOREA );
+		Date currentTime = new Date ();
+		String mTime = mSimpleDateFormat.format (currentTime);
 
+		// 확인용
+		System.out.println(mTime);
+
+		basketbean.setFirstday(mTime);
+		basketbean.setLastday(mTime);
+		
 		if (request.getParameter("plan_nr") != null) {
+			
 			basketbean.setPlan_nr(request.getParameter("plan_nr"));
 			basketbean.setItem_nr(request.getParameter("item_nr"));
 			basketbean.setFirstday(request.getParameter("firstday"));
@@ -53,7 +65,7 @@ public class MyPlanBasketAddAction implements Action {
 			basketbean.setDate(request.getParameter("date"));
 			basketbean.setMemo(request.getParameter("memo"));
 			basketbean.setPlan_done_nr(Integer.parseInt(request.getParameter("plan_done_nr")));
-		}		
+		}
 		
 		// 디비 파일 만들기 net.basket.db BasketDAO
 		// 객체 생성 basketdao

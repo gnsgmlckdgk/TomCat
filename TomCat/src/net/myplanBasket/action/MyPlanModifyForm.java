@@ -56,7 +56,7 @@ public class MyPlanModifyForm implements Action {
 			int tt = t.getDiffDay(fromdate, todate);
 
 			System.out.println("t.getDiffDay(fromdate, todate) : " + tt);
-
+			
 			List datelist;
 
 			if (tt > 1) {

@@ -228,12 +228,8 @@
 					<td><%=discount_price%>원</td>
 				</tr>
 				<tr>
-					<th>배송비</th>
-					<td><%=send_fee%>원</td>
-				</tr>
-				<tr>
 					<th><span class="final_price"> 총 결제금액 </span></th>
-					<td><span class="final_price"><%=gold_price - discount_price + send_fee%>원</span></td>
+					<td><span class="final_price"><%=gold_price - discount_price%>원</span></td>
 				</tr>
 
 			</table>
