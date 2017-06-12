@@ -111,7 +111,7 @@ function textLimit() {
 	<table class="table1">
 		<tr>	<!-- 글 정보 행 -->
 			<td id="titlecolor" colspan="2"><%=bb.getSubject()%></td>
-			<td ><%=nick%></td>
+			<td ><%=bb.getNick()%></td>
 			<td id="datecolor"><%=bb.getDate()%></td>
 		</tr>
 		
