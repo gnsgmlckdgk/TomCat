@@ -59,7 +59,11 @@
 
 
 #ima{
+<<<<<<< HEAD
 	background-image: url("./beach2.jpg");
+=======
+	background-image: url("../../../images/beach.jpg");
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;

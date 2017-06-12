@@ -31,16 +31,11 @@ public class MyPlanModifyAction implements Action {
 		
 		//수정인지 확인한다.
 		int mdf = Integer.parseInt(request.getParameter("mdf"));
-		System.out.println("mdf = " + mdf);
 		
 		if(mdf == 1){
-			System.out.println("ttttttttttttest");
-			System.out.println(id);
+
 			mpbd.nullAction(id);
 		}
-		
-		
-		
 		
 		// 폼 => 자바빈 멤버변수 저장.
 		
