@@ -49,7 +49,7 @@
 				type : "post",
 				jsonp : "callback",
 				data : {
-					apikey : "5aad815bb793e165b8de68b1d3e26d3467e96367", //다음 API KEY 입력
+					apikey : "af5cbf965f941333b61a479c5e89113a", //다음 API KEY 입력
 					q : $("#q").val(), // search keyword
 					result : "16", // result set length
 					pageno : $("#pageno").val(), // pageNo
@@ -74,7 +74,7 @@
 				type : "post",
 				jsonp : "callback",
 				data : {
-					apikey : "5aad815bb793e165b8de68b1d3e26d3467e96367", //다음 API KEY 입력
+					apikey : "af5cbf965f941333b61a479c5e89113a", //다음 API KEY 입력
 					q : $("#q").val(), // search keyword
 					result : "16", // result set length
 					pageno : $("#pageno2").val(), // pageNo

@@ -183,7 +183,7 @@
                            if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
                                  
                   %>
-                              <%=cal.get(Calendar.HOUR) %>시에 작성
+                             	오늘
                   <%
                            } else {
                   %>
