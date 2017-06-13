@@ -138,6 +138,13 @@
 					//자바빈(BoardBean) 변수 =배열한칸 접근   배열변수.get()
 					BoardBean bb = (BoardBean) boardList.get(i);
 					
+			         System.out.println("이고이고2"+bb.getNum());
+			         System.out.println("보드리스트사이즈:"+boardList.size());
+
+					
+			         
+			         
+			         
 					String content=bb.getContent();
 					if(content!=null){
 					content=bb.getContent().replace("\r\n", "<br>");
@@ -248,7 +255,7 @@ function button_event(){
 
 <%} %>
 
-<input type="button" value="댓글" id="dat">
+<input type="button" value="댓글" id="dat" class="comment<%=i%>">
    
 </div>																										
          <div id="plybb<%=bb.getNum()%>" class="replybb animated slideInLeft"   style="display: none">
@@ -287,6 +294,22 @@ function button_event(){
          
          </div>
          </div>	
+         <%System.out.println("이고이고"+bb.getNum()); %>
+         
+         <script type="text/javascript">
+			$(document).ready(function(){
+				$(".comment<%=i%>").click(function(){
+				$.ajax('./board/replyAjax1.jsp',{
+					data:{num:<%=bb.getNum()%>},
+					success:function(data){
+						$('#dat1').append(data);
+					}
+				});
+			});
+				});
+			 </script>	         
+         
+         
 			
 			<%
 			}		
@@ -357,19 +380,7 @@ $(".upde").click(function(){
 });
 </script> 
 
-<%BoardBean bbb = new BoardBean(); %>
-<script type="text/javascript">
-			$(document).ready(function(){
-				$(".upde").click(function(){
-				$.ajax('./board/replyAjax1.jsp',{
-					data:{num:<%=bbb.getNum()%>},
-					success:function(data){
-						$('#dat1').append(data);
-					}
-				});
-			});
-				});
-			 </script>	
+
 <!-- Footer -->
  <jsp:include page="../inc/footer.jsp" />
 </body>     
