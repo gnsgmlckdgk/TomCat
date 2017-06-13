@@ -752,6 +752,38 @@ public class MyPlanBasketDAO {
 		
 	}
 	
+	// 특정 아이디의 모든 찜목록 삭제
+	public void deleteAllBasket(String id) {
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="";
+		
+		try {
+			
+			con = getConnection();
+			
+			sql = "delete from myplans where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();			
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	
 	public MyPlanBasketBean get(int myplans_id) {
 		// TODO Auto-generated method stub

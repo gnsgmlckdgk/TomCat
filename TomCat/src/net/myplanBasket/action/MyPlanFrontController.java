@@ -88,6 +88,16 @@ public class MyPlanFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/MyPlanBasketAllDelete.pln")) {	// 찜목록 모두 삭제
+			
+			action = new MyPlanBasketAllDelete();
+			try {
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		

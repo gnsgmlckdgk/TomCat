@@ -79,6 +79,15 @@
 	}); */
 });  
 //날짜 선택하기 
+
+// 모든 찜목록 삭제
+function allBasketDelete() {
+	var con = confirm("모든 찜목록을 삭제하시겠습니까?");
+	if(con) {
+		location.href="./MyPlanBasketAllDelete.pln";
+	}
+}
+
 </script>
 
 
@@ -141,6 +150,15 @@
 		
 	 -->	
 <!-- 드래그 삽입 종료-->
+
+<style type="text/css">
+	.allDeleteBtn:hover {
+		cursor: pointer;
+	}
+	.myplan-list .btn:hover {
+		cursor: pointer;
+	}
+</style>
 
 </head>
 <body>
@@ -400,7 +418,7 @@
      	<tr width="100px" align="center">
 			<th width="100px" align="center">찜순</th>        
          	<th width="400px" align="center">찜목록 </th>
-         	<th width="100px" align="center">삭제</th>
+         	<th width="100px" align="center" class="allDeleteBtn" title="전체 삭제" onclick="allBasketDelete();">삭제</th>
          </tr><% 
 	         for (int p = 0; p < basketList.size(); p++) {
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(p); /* 찜목록 DB Bean */ 
@@ -440,7 +458,7 @@ if(!pfirstday.equals("")) {
 Calendar cal = Calendar.getInstance();
 cal.setTime(date);
 
-cal.add(Calendar.DATE,+z);	         
+cal.add(Calendar.DATE,+z-1);	         
 today = sdf.format(cal.getTime());
 
 // System.out.println("이고이고2"+today);
