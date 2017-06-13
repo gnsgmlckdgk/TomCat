@@ -1,3 +1,4 @@
+<%@page import="net.member.action.MainListAction"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="net.board.db.boardBean"%>
 <%@page import="java.util.List"%>
@@ -120,6 +121,153 @@
 	</div>
 </section>
 
+<<<<<<< HEAD
+=======
+<%if(second==3) {%>
+<section id="banner" class="b_back<%=second%> sectionThree">
+<%} else if(second==2) {%>
+<section id="banner" class="b_back<%=second%> sectionThree">
+<%} else if(second==1) {%>
+<section id="banner" class="b_back<%=second%> sectionThree">
+<%} else { %>
+<section id="banner" class="b_back sectionThree">
+<%} %>
+
+	<header>
+		<h1><a href="./BoardList.bo">인생샷그램</a>에서</h1>
+		<h2>당신의 여행을 공유하세요!</h2>
+	</header>
+
+	<%
+	int count = Integer.parseInt(request.getAttribute("count").toString());
+	
+	List boardList = null;
+	if(count!=0) {
+		boardList = (List)request.getAttribute("bl");
+	}
+	
+	
+	%>
+	 <!-- Swiper -->
+    <div class="swiper-container imgContainer">
+        <div class="swiper-wrapper imgs">
+        <%
+        
+        if(count != 0){
+        
+    	for(int i=0; i<boardList.size(); i++) {
+    		boardBean bb = (boardBean) boardList.get(i);
+    	%>
+    		<div class="swiper-slide"><a href="./BoardContent.bo?num=<%=bb.getNum()%>&pageNum=1"><img
+				src="./upload/images/gram/<%=bb.getImage1()%>" width="300" height="300"
+				onerror="this.src='./images/instagram/noimage.png'">
+				<span class="imgsSubject"><%=bb.getSubject() %></span></a>
+			</div>
+    	<%
+    	}
+        }else {
+        	%>
+        	<div class="swiper-slide"><span style="color: #fff; font-size: 28px;">이미지 정보가 없습니다.</span></div>
+    		<%
+        }
+        
+   		%>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> 
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="./assets/dist/js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        paginationClickable: true,
+        spaceBetween: 30,
+        autoplay: 1500
+    });
+    </script>
+
+
+</section>
+
+<!-- <script>
+	window.onload=CountryList();
+</script> -->
+
+<script type="text/javascript">
+	
+	$(window).load(function(){
+		$.ajax({
+			type:'post',
+			url:'./plan/planMainCityList.jsp',
+			data:{continent:'All'},
+			success:function(data){
+				$('div.bestTripimg').append(data);
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
+		});
+	});
+	
+	function cityListchange(continent) {
+		$.ajax({
+			type:'post',
+			url:'./plan/planMainCityList.jsp',
+			data:{continent : continent},
+			success:function(data){
+				$('div.bestTripimg').empty();
+				$('div.bestTripimg').append(data);
+			},
+			error:function(xhr, status, error){
+				alert(error);
+			}
+		});
+	
+	}
+</script>
+
+<!-- Four -->
+<section class="sectionFour">
+	
+	인기여행지 리스트(대륙별 도시추천)
+		<div class="bestTrip">
+		<h1 style="font-size: 2.2em;text-align: center;margin:50px 0 10px 0;"> 인기 여행지</h1>
+			<h3 style="text-align: center;font-size: 1.3em;"><span style="color: #f44066">대륙별</span> 추천도시로 <span style="color: #f44066">여행</span>을 떠나보세요!</h3>
+			<div class="bestTripMenu">
+				<ul class="bestTrip_cont">
+					<li><a href="javascript:cityListchange('All');">추천</a></li>
+					<li><a href="javascript:cityListchange('asia');">아시아</a></li>
+					<li><a href="javascript:cityListchange('europe');">유럽</a></li>
+					<li><a href="javascript:cityListchange('oceania');">남태평양</a></li>
+					<li><a href="javascript:cityListchange('south');">중남미</a></li>
+					<li><a href="javascript:cityListchange('north');">북미</a></li>
+				</ul>
+			</div>
+
+			<div class="clear"></div>
+
+			인기여행지 이미지리스트(대륙별 도시추천)
+			<div class="bestTripimg">
+				
+			</div>
+		</div>
+
+		<div class="clear"></div>
+
+</section>
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

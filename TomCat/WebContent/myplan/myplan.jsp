@@ -35,7 +35,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
  $(function(){
-	$(".btn").click(function(){
+	$(".btn, .planUpdateBtn").click(function(){
 		var effect = 'slide';
 		var options ='left';
 		var duration = 500;
@@ -149,6 +149,10 @@
 	<%
 		String gold = (String) request.getAttribute("gold");
 		String id = (String) session.getAttribute("id");
+		if(id==null) {
+			response.sendRedirect("./Main.me");
+			return;
+		}
 
 		List basketList = (List) request.getAttribute("basketList"); //여행지찜리스트 myplans List
 		List goodsList = (List) request.getAttribute("goodsList"); //상품 travel List
@@ -365,6 +369,31 @@
       
          }
          
+         // 일정 삭제
+         if(!plan_nr.equals("100")&&basketList.size()!=0){
+        	 %>
+        	 <tr class="planManageTr">
+        	 	<th colspan="3">
+        	 		<input type="button" value="일정삭제" class="planDeleteBtn" onclick="planDelete()">
+        	 		<input type="button" value="일정수정" class="planUpdateBtn" onclick="planUpdate()">
+        	 		
+        	 		<script type="text/javascript">
+        	 			
+        	 			// 일정 삭제
+        	 			function planDelete() {
+        	 				var con = confirm("일정을 삭제하시겠습니까?");
+        	 				if(con) {
+        	 					location.href="./MyPlanDelete.pln?plan_nr=<%=plan_nr%>";
+        	 				}
+        	 			}
+        	 			
+        	 		</script>
+        	 		
+        	 	</th>
+        	 </tr>
+        	 <%
+         }
+         
   	
      	if(plan_nr.equals("100")&&basketList.size()!=0){%>
      	<tr width="100px" align="center">
@@ -372,8 +401,6 @@
          	<th width="400px" align="center">찜목록 </th>
          	<th width="100px" align="center">삭제</th>
          </tr><% 
-     	
-     	
 	         for (int p = 0; p < basketList.size(); p++) {
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(p); /* 찜목록 DB Bean */ 
 					TravelBean tb = (TravelBean) goodsList.get(p); /*  여행지(상품) DB Bean */
@@ -400,7 +427,12 @@
 <%
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-Date date = sdf.parse(pfirstday);
+Date date = new Date();
+if(!pfirstday.equals("")) {
+	date = sdf.parse(pfirstday);
+}else {	// 오류 제어
+	date.setDate(0);
+}
 
 // System.out.println("이고이고"+date);
 
@@ -416,7 +448,7 @@ today = sdf.format(cal.getTime());
 	       	
 	        <th width="400px" align="center"><%=today%></th>
 	        <th width="100px" align="center">경로</th>
-	        </tr>	
+	       </tr>	
 <%-- 	         <tr><td colspan="4"><%=z %>일차</td></tr> --%>
          <%
 }//basketList.size()!=0
@@ -435,7 +467,7 @@ today = sdf.format(cal.getTime());
                String[] Array2 = b.split("@");
                String[] Array3 = c.split("@");
   //             System.out.println("길이"+Array1.length+"값"+Array1[i]);            
-           			
+              
 
                for (int k = 0; k < Array1.length; k++) {//어짜피 배열의 크기는 같으니 Array1한개로 맞춰주면됨
 // 					System.out.println("첫번째for문의 증가하는 k값"+k);

@@ -76,7 +76,21 @@ public class MyPlanFrontController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("./myplan/payPlanC.jsp");
 			forward.setRedirect(false);
+			
+		}else if(command.equals("/MyPlanDelete.pln")) {	// 일정 삭제 처리
+			
+			action = new MyPlanDelete();
+			try {
+				
+				forward = action.execute(request, response);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
+		
+		
 		
 		//이동
 		if(forward!=null){

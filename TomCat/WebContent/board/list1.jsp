@@ -109,6 +109,7 @@
 			int pageBlock = ((Integer) request.getAttribute("pageBlock")).intValue();
 			int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 			int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+			List<Reply1Bean> replyList = (List<Reply1Bean>) request.getAttribute("replyList");
 
 			//jsp 날짜 구하기
 			Calendar cal = Calendar.getInstance();
@@ -129,7 +130,8 @@
 			<%
 				//  boardList 
 				MemberDAO mdao = new MemberDAO();	
-				mdao.getMember(session.getId());
+				mdao.getMember(id);
+				
 				MemberBean mb = new MemberBean();
 				
 				for (int i = 0; i < boardList.size(); i++) {
@@ -246,35 +248,36 @@ function button_event(){
 
 <%} %>
 
-<%
-Reply1Bean rr=new Reply1Bean();
-
-													// 댓글 
-%>
-<input type="button" value="댓글">   
+<input type="button" value="댓글" id="dat">
+   
 </div>																										
          <div id="plybb<%=bb.getNum()%>" class="replybb animated slideInLeft"   style="display: none">
          				
-         				
+<%--          	<%for(int q=0; q<replyList.size(); q++){ %>		 --%>
+         		<%
+//          		Reply1Bean rr=replyList.get(q);
+         		%>	
+         		<div id="dat1">
 <!--          		댓글 닉네임 -->
          		<div id="rp_nick">
-        		<%=rr.getNick()%>
+<%--         		<%=rr.getNick()%> --%>
         		</div>
         		
 <!--         		댓글 날짜      -->
         		<div id="rp_date">
-        		<%=rr.getDate() %>
+<%--         		<%=rr.getDate() %> --%>
         		</div>
         		
 <!--         		댓글 내용      -->
         		<div id="rp_con">
-        		<%=rr.getContent()%>
+<%--         		<%=rr.getContent()%> --%>
        		    </div>
-        						
+       		    </div>
+<%--         				<% }%>		 --%>
 <!--  		    	num값 id값  textarea-->
          <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr" >			
 					<input type="hidden" value="<%=session.getAttribute("id")%>" name="nick"> 						
-					<input type="hidden" value="<%=bb.getNum() %>" name="re_num">
+					<input type="hidden" value="<%=bb.getNum() %>" name="num">
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					      
          <textarea rows="2" cols="80" name="content"  class="re_id"> </textarea>
@@ -283,8 +286,8 @@ Reply1Bean rr=new Reply1Bean();
          
          
          </div>
-         </div>
-
+         </div>	
+			
 			<%
 			}		
 			%>
@@ -350,8 +353,23 @@ $(".upde").click(function(){
 	   }else{
 		   $(this).parents(".e").find(".replybb").css("display","none");
 	   }
+
 });
 </script> 
+
+<%BoardBean bbb = new BoardBean(); %>
+<script type="text/javascript">
+			$(document).ready(function(){
+				$(".upde").click(function(){
+				$.ajax('./board/replyAjax1.jsp',{
+					data:{num:<%=bbb.getNum()%>},
+					success:function(data){
+						$('#dat1').append(data);
+					}
+				});
+			});
+				});
+			 </script>	
 <!-- Footer -->
  <jsp:include page="../inc/footer.jsp" />
 </body>     
