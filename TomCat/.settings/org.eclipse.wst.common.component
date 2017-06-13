@@ -2,6 +2,7 @@
     <wb-module deploy-name="TomCat">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebContent/upload"/>
         <property name="context-root" value="TomCat"/>
         <property name="java-output-path" value="/TomCat/build/classes"/>
     </wb-module>
