@@ -38,6 +38,7 @@ public class CityAddAction implements Action{
 		pcb.setCountry_code(multi.getParameter("country_code"));
 		pcb.setName(multi.getParameter("name"));
 		pcb.setEn_name(multi.getParameter("en_name"));
+		
 		pcb.setInfo(content);
 		pcb.setCity_code(multi.getParameter("en_name"));
 		
@@ -50,6 +51,9 @@ public class CityAddAction implements Action{
 		File curFile = new File(realPath+"\\"+fileName);
 		String curFileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());	// 확장자 가져오기
 		File newFile = new File(realPath+"\\"+multi.getParameter("country_code")+"\\"+multi.getParameter("en_name")+curFileType);
+		
+		System.out.println("newFile: " + newFile);
+		
 		if(curFile.exists()){curFile.renameTo(newFile);};
 		
 		// 이미지 관리 테이블에 넣기

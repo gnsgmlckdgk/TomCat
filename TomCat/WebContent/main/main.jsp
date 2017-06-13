@@ -241,7 +241,6 @@
 <!-- Four -->
 <section class="sectionFour">
 	
-	인기여행지 리스트(대륙별 도시추천)
 		<div class="bestTrip">
 		<h1 style="font-size: 2.2em;text-align: center;margin:50px 0 10px 0;"> 인기 여행지</h1>
 			<h3 style="text-align: center;font-size: 1.3em;"><span style="color: #f44066">대륙별</span> 추천도시로 <span style="color: #f44066">여행</span>을 떠나보세요!</h3>
@@ -258,7 +257,6 @@
 
 			<div class="clear"></div>
 
-			인기여행지 이미지리스트(대륙별 도시추천)
 			<div class="bestTripimg">
 				
 			</div>

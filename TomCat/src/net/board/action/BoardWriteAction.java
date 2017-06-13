@@ -20,6 +20,7 @@ public class BoardWriteAction implements Action{
 		request.setCharacterEncoding("utf-8");
 		String realPath = request.getRealPath("/upload/images/gram/");
 		int maxSize=5*1024*1024;	//5MB
+		System.out.println("리얼패쓰"+realPath);
 
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 
@@ -30,7 +31,7 @@ public class BoardWriteAction implements Action{
 		bb.setSubject(multi.getParameter("subject"));
 		bb.setContent(multi.getParameter("content"));
 		bb.setImage1(multi.getFilesystemName("image1"));
-
+		System.out.println("이고"+multi.getFilesystemName("image1"));
 		bdao.insertBoard(bb);
 		
 
