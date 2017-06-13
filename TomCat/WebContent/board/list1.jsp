@@ -1,3 +1,5 @@
+<%@page import="net.board.db.boardBean"%>
+<%@page import="net.member.db.MemberDAO"%>
 <%@page import="net.reply1.db.Reply1Bean"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="net.Board1.db.BoardBean"%>
@@ -11,7 +13,7 @@
 
 <head>
 
-<link href="./assets/css/list.css?ver=32" rel="stylesheet" type="text/css">
+<link href="./assets/css/list.css?ver=1" rel="stylesheet" type="text/css">
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
@@ -88,7 +90,7 @@
 </script>
 <!-- giolocation 위치값 받기 끝-->
 	
-
+<!--  							세션값을 가져옵니다 -->
 	<div class="q">
 		<%
 			// request.setAttribute("boardList", boardList);
@@ -107,6 +109,7 @@
 			int pageBlock = ((Integer) request.getAttribute("pageBlock")).intValue();
 			int startPage = ((Integer) request.getAttribute("startPage")).intValue();
 			int endPage = ((Integer) request.getAttribute("endPage")).intValue();
+			List<Reply1Bean> replyList = (List<Reply1Bean>) request.getAttribute("replyList");
 
 			//jsp 날짜 구하기
 			Calendar cal = Calendar.getInstance();
@@ -116,7 +119,7 @@
 			
 			if(id!=null){
 		%>
-		
+<!-- 									글쓰기 버튼 -->
 		<form method="post" action="./BoardWrite1.bb" class="write">
 			<input type="hidden" id="location" name="location" value="aaa">
 			<input type="submit" value="글쓰기"  id="mit">
@@ -126,9 +129,11 @@
 		<div class="w">
 			<%
 				//  boardList 
-
+				MemberDAO mdao = new MemberDAO();	
+// 				mdao.getMember();
+				
 				MemberBean mb = new MemberBean();
-
+				
 				for (int i = 0; i < boardList.size(); i++) {
 					//자바빈(BoardBean) 변수 =배열한칸 접근   배열변수.get()
 					BoardBean bb = (BoardBean) boardList.get(i);
@@ -158,8 +163,9 @@
 				<div id="2_inner_left" style="width: 30%;">
 					<!-- 프로필 -->
 					<div id="file">
-						<img src="./upload/images/profileImg/pl.png">
-<%-- 											<img src="./upload/images/profileImg/<%=mb.getProfile()%>"> --%>
+<!-- 						<img src="./upload/images/profileImg/pl.png"> -->
+
+				<img src="./upload/images/profileImg/<%=mb.getProfile()%>">
 					</div>
 
 					<!-- 닉네임,날짜 -->
@@ -211,7 +217,6 @@
 				<%} %>
 				<!-- 수현씨 지도 부분 끝 -->
 			</div>
-<%-- 			<%if(id==null){%> --%>
 <!-- 			세션에 있는 닉값  -->
 <!-- 			글에있는 닉값 비교 -->
 			
@@ -243,25 +248,46 @@ function button_event(){
 
 <%} %>
 
-
-<input type="button" value="댓글">   
-</div>
-		<div class="aa"></div>
-         <div id="plybb<%=bb.getNum()%>" class="replybb animated flip"   style="display: none">
-         <%=bb.getNum()%>
+<input type="button" value="댓글" id="dat">
+   
+</div>																										
+         <div id="plybb<%=bb.getNum()%>" class="replybb animated slideInLeft"   style="display: none">
+         				
+<%--          	<%for(int q=0; q<replyList.size(); q++){ %>		 --%>
+         		<%
+//          		Reply1Bean rr=replyList.get(q);
+         		%>	
+         		<div id="dat1">
+<!--          		댓글 닉네임 -->
+         		<div id="rp_nick">
+<%--         		<%=rr.getNick()%> --%>
+        		</div>
+        		
+<!--         		댓글 날짜      -->
+        		<div id="rp_date">
+<%--         		<%=rr.getDate() %> --%>
+        		</div>
+        		
+<!--         		댓글 내용      -->
+        		<div id="rp_con">
+<%--         		<%=rr.getContent()%> --%>
+       		    </div>
+       		    </div>
+<%--         				<% }%>		 --%>
+<!--  		    	num값 id값  textarea-->
          <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr" >			
 					<input type="hidden" value="<%=session.getAttribute("id")%>" name="nick"> 						
-					<input type="hidden" value="<%=bb.getNum() %>" name="re_num">
+					<input type="hidden" value="<%=bb.getNum() %>" name="num">
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
-         
+					      
          <textarea rows="2" cols="80" name="content"  class="re_id"> </textarea>
          <input type="submit"  id="txt1"  value="입력" >
          </form>
          
          
          </div>
-         </div>
-
+         </div>	
+			
 			<%
 			}		
 			%>
@@ -317,7 +343,7 @@ if(count!=0){
       });
 
  		</script>
-		<%} %>
+		<%}%>
 </div>
 <!-- 댓글 슬라이드 -->
 <script type="text/javascript">
@@ -326,9 +352,24 @@ $(".upde").click(function(){
 		$(this).parents(".e").find(".replybb").css("display","block");
 	   }else{
 		   $(this).parents(".e").find(".replybb").css("display","none");
-	   } 
-    });
+	   }
+
+});
 </script> 
+
+<%BoardBean bbb = new BoardBean(); %>
+<script type="text/javascript">
+			$(document).ready(function(){
+				$(".upde").click(function(){
+				$.ajax('./board/replyAjax1.jsp',{
+					data:{num:<%=bbb.getNum()%>},
+					success:function(data){
+						$('#dat1').append(data);
+					}
+				});
+			});
+				});
+			 </script>	
 <!-- Footer -->
  <jsp:include page="../inc/footer.jsp" />
 </body>     

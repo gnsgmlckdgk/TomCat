@@ -31,7 +31,7 @@ public class ReplyWriteAction1 implements Action {
 		bb.setSubject(request.getParameter("subject"));
 
 		String pageNum = request.getParameter("pageNum");
-		int num = Integer.parseInt(request.getParameter("re_num"));
+		int num = Integer.parseInt(request.getParameter("num"));
 		rr.setNum(num);
 
 //		System.out.println("ReplyWrite액션에서num의 값" + num);
@@ -39,8 +39,6 @@ public class ReplyWriteAction1 implements Action {
 
 		rr.setContent(request.getParameter("content"));
 		rr.setNick(nick);
-
-		rr.setRe_num(Integer.parseInt(request.getParameter("re_num")));
 
 		rdao.insertRepley(rr);
 
@@ -51,3 +49,4 @@ public class ReplyWriteAction1 implements Action {
 	}
 
 }
+

@@ -70,12 +70,7 @@
 		</div>
 	</div>
 
-
-
-
-
 </section>
-
 
 <!-- Two -->
 <section class="sectionTwo">
@@ -126,6 +121,8 @@
 	</div>
 </section>
 
+<<<<<<< HEAD
+=======
 <%if(second==3) {%>
 <section id="banner" class="b_back<%=second%> sectionThree">
 <%} else if(second==2) {%>
@@ -268,6 +265,7 @@
 		<div class="clear"></div>
 
 </section>
+>>>>>>> branch 'master' of https://github.com/gnsgmlckdgk/TomCat
 
 <!-- Footer -->
 <jsp:include page="../inc/footer.jsp" />

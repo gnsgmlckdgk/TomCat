@@ -5,6 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.Board1.db.BoardDAO;
+import net.reply1.db.Reply1Bean;
+import net.reply1.db.Reply1DAO;
+
 
 public class BoardList1 implements Action1{
 	@Override
@@ -19,13 +23,15 @@ public class BoardList1 implements Action1{
 		int pageSize=10;
 		//현페이지가  몇페이지 인지 가져오기 없으면 1페이지 설정
 		String pageNum=request.getParameter("pageNum");
+//		int num= Integer.parseInt(request.getParameter("num"));
+//		System.out.println("num");
 		if(pageNum==null){
 			pageNum="1";
 		}
 		
 		//시작행구하기   1    11    21   31 ..  <= pageNum, pageSize 조합
 		int currentPage=Integer.parseInt(pageNum);
-		int startRow=(currentPage-1)*pageSize+1;
+		int startRow=(currentPage-1)*pageSize+1; 
 		//끝행구하기
 		int endRow=currentPage*pageSize;
 		//List boardList =    메서드호출 getBoardList(시작행,몇개)
@@ -52,7 +58,11 @@ public class BoardList1 implements Action1{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		
-		
+//		//댓글
+//		Reply1DAO rdao = new Reply1DAO();
+//		List<Reply1Bean> replyList=rdao.getReplyList(startRow, pageSize, num);
+//		request.setAttribute("replyList", replyList);
+//		System.out.println(replyList.size());
 		// 이동  ./board/list.jsp
 		ActionForward1 forward=new ActionForward1();
 		forward.setPath("./board/list1.jsp?pageNum="+pageNum);

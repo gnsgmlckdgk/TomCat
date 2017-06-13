@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import net.reply.action.Action;
 import net.reply.action.ActionForward;
 
@@ -35,7 +36,16 @@ public class ReplyFrontController1 extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();}	
 			
-		} /*else if (command.equals("/RreplyUpdateAction.re")) {
+		}else if(command.equals("/replyAjax.rr")){
+			action = new replyAjax();
+			try{
+				forward= action.execute(request, response);
+			}catch(Exception e){
+				e.printStackTrace();}
+			
+		}
+		
+		/*else if (command.equals("/RreplyUpdateAction.re")) {
 			action= new RreplyUpdateAction1();
 			try {
 				forward = action.execute(request, response);

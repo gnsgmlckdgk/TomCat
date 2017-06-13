@@ -136,7 +136,7 @@ form#reg, td.tr_head {
 				if(mpbb2.getPlan_nr() != null){
 				//myplans 의 i행에 몇 열까지 있는지.
 				for(int k=0; k < mpbb2.getPlan_nr().split("@").length; k++){
-					
+					//
 // 					out.println(k + " a " + mpbb2.getPlan_nr().split("@")[k] + "<br>");
 					
 					//myplans의 i행, k열의 plan_nr이 선택한 plan과 같은지.
