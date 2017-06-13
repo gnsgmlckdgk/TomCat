@@ -285,13 +285,31 @@ to {
 	color: rgb(255, 255, 255);
 }
 .re_id{
-	margin-top: 370px;
-	width: 300px;
-	margin-left: 8px;
+	margin-top: 65px;
+	width: 260px;
+	margin-left: 60px;
 	border-radius:30px;
 	color: white;
+	height: 80px;
 }
 #txt1{
-	margin-left: 320px;
+	float:right;
 	margin-bottom: 30px;
+	font-size:0.8em;
+	border-radius:200px;
+}
+#rp_con{
+	background-color: white;
+	color: black;
+	border-radius:200px;
+	width: 85%;
+	text-align: center;
+	margin-left: 30px;
+	font-weight: bold;
+}
+#rp_nick{
+	margin-left: 20px;
+}
+.page1{
+	margin-left:130px; 
 }
