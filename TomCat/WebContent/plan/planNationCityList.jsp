@@ -91,6 +91,8 @@
 				
 				cityPath = idao.getCityImgPath(pcb.getCity_code());
 				cityPath = cityPath.replace("\\", "/");	// css는 \아닌 /로 인식되서 바꿔줌
+				
+				System.out.println("도시 이미지 경로: " + cityPath);
 	%>
 	<tr onclick="location.href='./PlanRegion.pl?region=<%=pcb.getName()%>';">
 		<td class="img_td"
