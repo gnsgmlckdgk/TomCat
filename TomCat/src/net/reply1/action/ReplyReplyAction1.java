@@ -5,11 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.Board1.db.BoardBean;
 import net.board.db.BoardDAO;
 import net.board.db.boardBean;
 import net.reply.action.ActionForward;
 import net.reply.db.ReplyBean;
 import net.reply.db.ReplyDAO;
+import net.reply1.db.Reply1DAO;
 
 public class ReplyReplyAction1 implements Action1{
 
@@ -24,9 +26,9 @@ public class ReplyReplyAction1 implements Action1{
 		String pageNum=request.getParameter("pageNum");
 
 		
-		BoardDAO bdao=new BoardDAO();
+		net.Board1.db.BoardDAO bdao=new net.Board1.db.BoardDAO();
 				
-		boardBean bb=bdao.getBoard(num);		
+		BoardBean bb=bdao.getBoard(num);		
 
 		
 		request.setAttribute("bb", bb);
@@ -35,7 +37,7 @@ public class ReplyReplyAction1 implements Action1{
 		
 //============================댓글 Action=====================
 		
-		ReplyDAO rdao = new ReplyDAO();
+		Reply1DAO rdao = new Reply1DAO();
 		int count = rdao.replyCount(num);
 		int pageSize = 5;
 		
@@ -62,7 +64,7 @@ public class ReplyReplyAction1 implements Action1{
 		request.setAttribute("endRow", endRow);		
 		
 		
-		forward.setPath("./instagram/content.jsp");
+		forward.setPath("./board/list1.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

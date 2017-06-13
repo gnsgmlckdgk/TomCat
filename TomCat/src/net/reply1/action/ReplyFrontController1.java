@@ -36,7 +36,7 @@ public class ReplyFrontController1 extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();}	
 			
-		}else if(command.equals("/replyAjax.rr")){
+		}else if(command.equals("/replyAjax1.rr")){
 			action = new replyAjax();
 			try{
 				forward= action.execute(request, response);
