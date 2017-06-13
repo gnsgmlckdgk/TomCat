@@ -81,8 +81,11 @@ public class TravelAdminUpdateAction implements Action {
 				
 			// 바뀐 이미지 경로 구하기(새로운 경로에 이미지 이동)
 			String en_name = pdao.getCityEnName(city_code);	// 영어 도시이름
+			System.out.println("city_code: " + city_code);
 			String fileType = file.substring(file.lastIndexOf("."), file.length());	// 파일 확장자 명
 			String newImgPath = realPath + country_code + "\\" + en_name + "\\" + travel_id + fileType;	// 새로운 이미지 경로
+			
+			System.out.println("새 경로: " + newImgPath);
 			
 			File newFile = new File(newImgPath);	// 이동할 경로
 			File curFile = new File(realPath + file);	// 새로운 이미지 현재 저장되어 있는 경로

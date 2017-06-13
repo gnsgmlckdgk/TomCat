@@ -471,7 +471,7 @@ public class ImagesDAO {
 			
 			con = getConnection();
 			
-			sql = "update images set file = ?, city_code = ? where city_code = ?";
+			sql = "update images set file = ?, city_code = ? where city_code = ? and travel_id=0";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, newFileName);
 			ps.setString(2, newEnName);

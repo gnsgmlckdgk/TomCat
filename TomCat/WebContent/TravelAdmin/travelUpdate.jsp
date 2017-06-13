@@ -130,7 +130,7 @@
 				}
 				%>
 			</select> --%>
-			<input type="text" name="<%=tb.getCity_code() %>" value="<%=tb.getName() %>" readonly="readonly">
+			<input type="text" name="city_code" value="<%=tb.getCity_code() %>" readonly="readonly">
 			
 			<label>여행지 이미지</label>
 				<script type="text/javascript">
