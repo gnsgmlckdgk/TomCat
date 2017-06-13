@@ -1,7 +1,7 @@
  var daumSearch = {
         /** 초기화. **/
         init : function(){
-            this.apikey = "5aad815bb793e165b8de68b1d3e26d3467e96367";
+            this.apikey = "af5cbf965f941333b61a479c5e89113a";
             this.q = document.getElementById('daumSearch');
             
             //검색 객체들 초기화.
