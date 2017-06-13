@@ -790,11 +790,11 @@ $(window).load(function() {
 		
 		%>
 		
-		if(a == true){
+		/*	if(a == true){
 		if(from.value != "" & to.value != ""){
 			
-			/* var arr1 = from.value.split('-');
-	    	var arr2 = to.value.split('-'); */
+			 var arr1 = from.value.split('-');
+	    	var arr2 = to.value.split('-');
 	    	
 	    	var arr1 = from_date.split('-');
 	    	var arr2 = to_date.split('-');
@@ -829,7 +829,7 @@ $(window).load(function() {
 					
 			}
 		}
-		}
+		} */
 		
  		
 	}

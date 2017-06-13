@@ -80,22 +80,31 @@ form#reg, td.tr_head {
 				TravelBean tb = (TravelBean) goodsList.get(i);
 				
 				if(mdf==0) {
-					from = mpbb2.getFirstday();
-					to = mpbb2.getLastday();
-					
-					System.out.println("mdf0자리");
-				}else {
+
 					from = request.getParameter("from");
-					if(from.equals("")) {
+					if(from.equals("") || from == null) {
 						from = mpbb2.getFirstday();
 					}
 					to = request.getParameter("to");
-					if(to.equals("")) {
+					if(to.equals("") || to == null) {
+						to = mpbb2.getLastday();
+					}
+
+					System.out.println("mdf0자리");
+
+				}else {
+					from = request.getParameter("from");
+					if(from.equals("") || from == null) {
+						from = mpbb2.getFirstday();
+					}
+					to = request.getParameter("to");
+					if(to.equals("") || to == null) {
 						to = mpbb2.getLastday();
 					}
 					
 					System.out.println("mdf1자리");
 				}
+				
 				
 // 				out.println("출발일=" + from);
 // 				out.println("도착일=" + to);
