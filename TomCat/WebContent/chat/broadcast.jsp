@@ -253,7 +253,7 @@
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="rgba(254, 234, 24, 0.9)";
+			div.style["background-color"]="rgba(255, 255, 255, 0.9)";
 			div.style["padding"]="3px";
 			div.style["border-radius"]="30px";
 			div.style["margin-right"]="3px";
