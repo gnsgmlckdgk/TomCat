@@ -3,7 +3,7 @@ var src = "";
 var daumSearch = { 
         /** 초기화. **/ 
         init : function(){ 
-            this.apikey = "5aad815bb793e165b8de68b1d3e26d3467e96367"//"645154cac2a46c0d3275a8026e3746e77a7266da"; //DAUM_SEARCH_DEMO_APIKEY 
+            this.apikey = "0096b8c3f1ece19504610a7dc6a339bc"//"645154cac2a46c0d3275a8026e3746e77a7266da"; //DAUM_SEARCH_DEMO_APIKEY 
             this.q = document.getElementById('daumSearch'); 
              
             daumImage.init(10); //한번에 출력할 그림의 갯수. 20까지 가능한듯.
