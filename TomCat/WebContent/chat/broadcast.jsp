@@ -65,7 +65,7 @@
 	//같은 이가 여러번 보낼때 이름 판별할 변수
 	var re_send = "";
 	
-	var gold = <%=gold%>;
+<%-- 	var gold = <%=gold%>; --%>
 
 	webSocket.onerror = function(event) {
 		onError(event)
