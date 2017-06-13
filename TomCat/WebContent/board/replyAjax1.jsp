@@ -45,15 +45,15 @@ Reply1DAO rdao = new Reply1DAO();
               </div>
 
               <%} %>
-           <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr"  style="width: 50%;">         
+           <form action="./ReplyWriteAction1.rr?pageNum=<%=pageNum %>" method="post" name="fr"  style="width: 50%;" onsubmit="return reSubmit()">         
                <input type="hidden" value="<%=session.getAttribute("id")%>" name="nick">                   
                <input type="hidden" value="<%=num%>" name="num">
                <input type="hidden" value="<%=pageNum%>" name="pageNum"> 
                      
-         <textarea rows="2" cols="80" name="content"  class="re_id"  required> </textarea>
+         <textarea rows="2" cols="80" name="content"  class="re_id" > </textarea>
          <input type="submit"  id="txt1"  value="입력"  required>
          </form>
-         
+
     <div class="page1">
 	<%
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -115,7 +115,7 @@ Reply1DAO rdao = new Reply1DAO();
 		for (int i = startPage; i <= endPage; i++) {
 	%>
 	<a href="javascript:pageChange_tog(<%=i%>);" <%if (currentPage == i) {%>
-		style="color: #1a7ad9; border: 1px solid #1a7ad9;" <%}%>><%=i%></a>
+		style="color: #1a7ad9; border: 1px solid #1a7ad9; text-decoration: none; color: skyblus;" <%}%>><%=i%></a>
 	<%
 		}
 			// 다음 페이지

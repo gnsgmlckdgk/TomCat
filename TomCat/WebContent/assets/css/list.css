@@ -226,7 +226,7 @@ to {
 	border: 2px solid #e2dfdf;
 	border-radius: 40px;
 	width: 400px;
-	height: 600px; /* 수정부분 */
+	height: 620px; /* 수정부분 */
 	display: none;
 	background-color: rgba(0, 0, 0, 0.8)  !important;
 	/* 아래가 수정부분  */
@@ -285,18 +285,23 @@ to {
 	color: rgb(255, 255, 255);
 }
 .re_id{
-	margin-top: 65px;
+	margin-top: 15px;
 	width: 260px;
 	margin-left: 60px;
 	border-radius:30px;
 	color: white;
 	height: 80px;
+	position: absolute;
+	bottom:55px;
+	left:-40px;
 }
 #txt1{
 	float:right;
-	margin-bottom: 30px;
 	font-size:0.8em;
 	border-radius:200px;
+	position: absolute;
+	bottom:55px;
+	left:290px;
 }
 #rp_con{
 	background-color: white;
@@ -308,8 +313,17 @@ to {
 	font-weight: bold;
 }
 #rp_nick{
-	margin-left: 20px;
+	margin-left: 30px;
+	color:rgb(20, 200, 232);
+	font-weight: bold;
 }
 .page1{
-	margin-left:130px; 
+position: absolute;
+bottom:20px;
+left:160px;
+text-decoration:none;
+color: skyblue;
+}
+#rp_nick,#rp_con{
+	margin-top: 4px;
 }

@@ -183,7 +183,7 @@
                            if (cal.get(Calendar.DATE) == bb.getDate().getDate()) {
                                  
                   %>
-                              <%=cal.get(Calendar.HOUR) - bb.getDate().getHours()%>시간전
+                             	오늘
                   <%
                            } else {
                   %>

@@ -162,6 +162,7 @@
 
 				who.style["padding"]="3px";
 				who.style["margin-left"]="3px";
+				who.style["color"]="white";
 
 				who.innerHTML = message[0];
 				document.getElementById('messageWindow2').appendChild(who);
@@ -176,6 +177,7 @@
 			//세번째 구분자에 입장이 있을경우 입장했다 문구 출력
 			if(message[2] == "입장"){
 				message[1] = message[0] + "님이 입장하셨습니다.";
+				div.style["color"]="white";
 				div.style["text-align"]="center";
 				
 			//세번째 구분자가 없을 경우 메시지 출력.
@@ -221,6 +223,7 @@
 		div.style["text-align"]="center";
 		
 		div.innerHTML = "반갑습니다.";
+		div.style["color"]="white";
 		document.getElementById('messageWindow2').appendChild(div);
 		
 		var clear=document.createElement('div');
@@ -253,7 +256,7 @@
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="rgba(254, 234, 24, 0.9)";
+			div.style["background-color"]="rgba(255, 255, 255, 0.9)";
 			div.style["padding"]="3px";
 			div.style["border-radius"]="30px";
 			div.style["margin-right"]="3px";
