@@ -65,7 +65,7 @@
 	//같은 이가 여러번 보낼때 이름 판별할 변수
 	var re_send = "";
 	
-	var gold = <%=gold%>;
+<%-- 	var gold = <%=gold%>; --%>
 
 	webSocket.onerror = function(event) {
 		onError(event)
@@ -129,7 +129,7 @@
 
 				//3번째 구분자가 존재 할 경우, background 제거
 				if(message[2] == null){
-					div.style["background-color"]="rgba(95,132,242,0.3)";
+					div.style["background-color"]="rgba(255,255,255,0.9)";
 				}
 
 				div.style["border-radius"]="3px";
@@ -188,7 +188,7 @@
 
 				//3번째 구분자가 존재 할 경우, background 제거
 				if(message[2] == null){
-					div.style["background-color"]="rgba(95,132,242,0.3)";
+					div.style["background-color"]="rgba(255,255,255,0.9)";
 				}
 
 				div.style["border-radius"]="3px";
@@ -253,7 +253,7 @@
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="rgba(255, 255, 255, 0.95)";
+			div.style["background-color"]="rgba(254, 234, 24, 0.9)";
 			div.style["padding"]="3px";
 			div.style["border-radius"]="30px";
 			div.style["margin-right"]="3px";
