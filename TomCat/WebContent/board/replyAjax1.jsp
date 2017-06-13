@@ -12,22 +12,42 @@
 <body>
 <%
 int num= Integer.parseInt(request.getParameter("num"));
-System.out.print("넘버값이 들어오나 확인창"+num);
+	System.out.print("넘버값이 들어오나 확인창"+num);
+	
 	String pageNum=request.getParameter("pageNum");
+	int currentPage = Integer.parseInt(pageNum);
+	
+	Reply1DAO r1dao = new Reply1DAO();
+	
+	int count = r1dao.replyCount(num);
+	int pageSize = 5;
+	int startRow = (currentPage - 1) * pageSize + 1;
 	
 		Reply1DAO rdao = new Reply1DAO();
-		List<Reply1Bean> replyList=rdao.getReplyList(1,10,num);
-		request.setAttribute("replyList", replyList);
-		System.out.println(replyList.size());
-		for(int i=0; i<replyList.size(); i++){
-			Reply1Bean rr = replyList.get(i);
+		List<Reply1Bean> replyList=rdao.getReplyList(startRow,pageSize,num);
+		
+		System.out.println("사이즈: " + replyList.size());
+		
+		if(count!=0) {
+			for(int i=0; i<replyList.size(); i++){
+				Reply1Bean rr = replyList.get(i);
+		
 %>
-
+<div id="dat2">
 	<div id="rp_nick">
         		<%=rr.getNick()%>
-        		s
         		</div>
         		
-        		<%} %>
+     <div id="rp_date">
+        		<%=rr.getDate() %>
+        		</div>
+        		
+      <div id="rp_con">
+        		<%=rr.getContent()%>
+       		    </div>
+       		     		
+        	<%} 
+        	}%>
+        		</div>
 </body>
 </html>

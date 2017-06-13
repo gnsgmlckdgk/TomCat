@@ -129,14 +129,14 @@
 		<div class="w">
 			<%
 				//  boardList 
-				MemberDAO mdao = new MemberDAO();	
-// 				mdao.getMember();
-				
-				MemberBean mb = new MemberBean();
-				
+
 				for (int i = 0; i < boardList.size(); i++) {
 					//자바빈(BoardBean) 변수 =배열한칸 접근   배열변수.get()
 					BoardBean bb = (BoardBean) boardList.get(i);
+
+					MemberDAO mdao = new MemberDAO();
+					String boNick = bb.getNick_name();
+					MemberBean mb = mdao.getMemberNick(boNick);
 					
 					String content=bb.getContent();
 					if(content!=null){
@@ -246,9 +246,22 @@ function button_event(){
 
 </script>
 
+
 <%} %>
 
 <input type="button" value="댓글" id="dat">
+<script type="text/javascript">
+
+				$(".upde").click(function(){
+				$.ajax('./board/replyAjax1.jsp',{
+					data:{num:<%=bb.getNum()%>},
+					success:function(data){
+						$('#dat1').empty();
+						$('#dat1').append(data);
+					}
+				});
+			});
+</script>	
    
 </div>																										
          <div id="plybb<%=bb.getNum()%>" class="replybb animated slideInLeft"   style="display: none">
@@ -357,19 +370,6 @@ $(".upde").click(function(){
 });
 </script> 
 
-<%BoardBean bbb = new BoardBean(); %>
-<script type="text/javascript">
-			$(document).ready(function(){
-				$(".upde").click(function(){
-				$.ajax('./board/replyAjax1.jsp',{
-					data:{num:<%=bbb.getNum()%>},
-					success:function(data){
-						$('#dat1').append(data);
-					}
-				});
-			});
-				});
-			 </script>	
 <!-- Footer -->
  <jsp:include page="../inc/footer.jsp" />
 </body>     
