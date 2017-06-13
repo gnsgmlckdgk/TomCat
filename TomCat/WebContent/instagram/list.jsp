@@ -51,7 +51,6 @@
 	<div class="table-wrapper">
 			<table class="alt" id="table1">
 		<%
-		if(id==null){
 		//글의 갯수가 0이 아닐경우 하기실행(글 게시)	
 		if(count!=0){
 			//boardList(boardListAction에서 받아온 값)의 갯수만큼 for문 반복
@@ -235,7 +234,7 @@ if(likecount%2==0){
 	
 	</div>
 </section>
-	<%} %>
+	
 	<!-- Footer -->
 	<jsp:include page="../inc/footer.jsp" />
 	
