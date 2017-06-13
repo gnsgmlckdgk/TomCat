@@ -302,7 +302,18 @@ if(	id!=null){%>
 					<input type="hidden" value="<%=pageNum%>" name="pageNum"> 
 					
 					<textarea rows="2" cols="80" name="content" class="replyWrite2" onkeyup="textLimit()" placeholder="100자이내로 입력해주세요."></textarea>
+					<%if(id!=null){%>
 					<input type="submit" id="txt2" value="입력">
+					<%}
+					else if(id==null){
+					%>
+					<input type="button" id="txt2" value="입력" onclick="popupToggle()">
+					<%} %>
+					
+					
+					
+					
+					
 				</form>
 				
 				<%

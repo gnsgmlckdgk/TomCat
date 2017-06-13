@@ -210,14 +210,14 @@ if(likecount%2==0){
 <div class="adver">
 <div class="advertize">
 
-<a href="http://modetour.com"><img src="./images/instagram/modetour.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="http://modetour.com" target="_blank"><img src="./images/instagram/modetour.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
 </div>
 <div class="advertize2">
-<a href="#"><img src="./images/instagram/teamk.png" width=150 height=180 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="http://192.168.2.15:8080/TeamK/main.fo" target="_blank"><img src="./images/instagram/teamk.png" width=150 height=180 onerror="this.src='./images/instagram/noimage.png'"></a>
 </div>
 
 <div class="advertize3">
-<a href="http://www.naver.com"><img src="./images/instagram/naver.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="http://www.naver.com" target="_blank"><img src="./images/instagram/naver.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
 </div>
 
 </div>
