@@ -129,7 +129,7 @@
 
 				//3번째 구분자가 존재 할 경우, background 제거
 				if(message[2] == null){
-					div.style["background-color"]="rgba(95,132,242,0.3)";
+					div.style["background-color"]="orange";
 				}
 
 				div.style["border-radius"]="3px";
