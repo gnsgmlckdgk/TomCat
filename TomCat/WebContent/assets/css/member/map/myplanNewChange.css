@@ -54,6 +54,7 @@
   width: 365px;
   height: 1045px; /* height: 100%; */
 /*   border: 1px solid #999999; */
+  overflow-y: auto;
 }
 
 
