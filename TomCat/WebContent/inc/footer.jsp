@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="footer_logo">
-			<a href="./Main.me"><strong style="color: yellow;">Before</strong> you go...</a>
+			<a href="http://www.mangoboard.net/MangoPublish.do?id=USRTPL_000125568" target="blank"><strong style="color: yellow;">Before</strong> you go...</a>
 		</div>
 		
 		<div class="clear"></div>
