@@ -130,7 +130,7 @@
 			<%
 				//  boardList 
 				MemberDAO mdao = new MemberDAO();	
-				mdao.getMember(id);
+// 				mdao.getMember();
 				
 				MemberBean mb = new MemberBean();
 				

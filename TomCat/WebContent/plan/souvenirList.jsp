@@ -26,6 +26,7 @@
 <section>
 	<%
 		String city_code=(String)request.getAttribute("city_code");
+		String city_code2="";
 		List souvenirList = (List)request.getAttribute("souvenirList");
 		String pageNum=(String)request.getAttribute("pageNum");
 		if(pageNum==null){
@@ -49,13 +50,15 @@
 			%>
 			</table>
 			<div>기념품 정보가 없습니다.</div>	
+			<table>
 			<%		
 		}else{
 			for(int i=0;i<souvenirList.size();i++){
 				PlanSouvenirBean psb=(PlanSouvenirBean)souvenirList.get(i);
-				city_code=psb.getCity_code();
+				city_code2=psb.getCity_code();
 				
 		%>
+		
 			<tr>
 				<td><%=psb.getCity_code() %></td>
 				<td><%=psb.getName() %></td>
@@ -63,8 +66,8 @@
 				<td><%=psb.getRanking() %>위</td>
 				<td><%=psb.getInfo() %></td>
 				<td>
-					<input type="button" value="수정" onclick="location.href='./SouvenirUpdate.pl?city_code=<%=city_code%>&num=<%=psb.getNum()%>'">
-					<input type="button" value="삭제" onclick="location.href='./SouvenirDelete.pl?city_code=<%=city_code%>&num=<%=psb.getNum()%>'">
+					<input type="button" value="수정" onclick="location.href='./SouvenirUpdate.pl?city_code=<%=city_code2%>&num=<%=psb.getNum()%>'">
+					<input type="button" value="삭제" onclick="location.href='./SouvenirDelete.pl?city_code=<%=city_code2%>&num=<%=psb.getNum()%>'">
 				</td>
 			</tr>
 		<%
@@ -73,6 +76,7 @@
 			</table>
 			<%
 		}
+	
 		%>
 		
 		<input type="button" value="기념품 추가" onclick="location.href='./SouvenirAdd.pl?city_code=<%=city_code%>'">

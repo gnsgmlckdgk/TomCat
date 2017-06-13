@@ -30,6 +30,7 @@ public class SouvenirList implements Action{
 		
 		System.out.println(souvenirList.size());
 		
+		request.setAttribute("city_code", city_code);
 		request.setAttribute("souvenirList", souvenirList);
 		request.setAttribute("pageNum", pageNum);
 		

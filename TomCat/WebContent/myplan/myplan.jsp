@@ -40,44 +40,54 @@
 		var options ='left';
 		var duration = 500;
 		$('#pln_list').toggle(effect, options, duration);
+		
 	}); 
 });  
-//일정수정 버튼 클릭시 오른쪽으로 슬라이드  
+ //일정수정 버튼 클릭시 오른쪽으로 슬라이드  
  $(function(){
 	 //datepicker 한국어로 사용하기 위한 언어설정
-   	$.datepicker.setDefaults($.datepicker.regional['ko']); 
+   //	$.datepicker.setDefaults($.datepicker.regional['ko']); 
     // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
     // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
 
 	//시작일
 	$('#fromDate').datepicker({
-		showOn: "focus",
-		dateFormat:"yy-mm-dd",
-		changeMonth:true,
-		onClose: function(selectedDate){
+	  	 showOn: "focus",
+		 dateFormat:"yy-mm-dd",
+		 changeMonth:true,
+		 onClose: function(selectedDate){
             // 시작일(fromDate) datepicker가 닫힐때
             // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
             $("#toDate").datepicker( "option", "minDate", selectedDate );
 		}
 	});
 
-    
     //종료일
     $('#toDate').datepicker({
-   	 	 showOn: "focus", 
+       	 showOn: "focus", 
          dateFormat: "yy-mm-dd",
          changeMonth: true,
          onClose: function( selectedDate ) {
              // 종료일(toDate) datepicker가 닫힐때
              // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
              $("#fromDate").datepicker( "option", "maxDate", selectedDate );
-         } 
+         }
    	});
+
 	/* $( '.datepicker').datepicker({
 		altField: ".selecter"
 	}); */
 });  
 //날짜 선택하기 
+
+// 모든 찜목록 삭제
+function allBasketDelete() {
+	var con = confirm("모든 찜목록을 삭제하시겠습니까?");
+	if(con) {
+		location.href="./MyPlanBasketAllDelete.pln";
+	}
+}
+
 </script>
 
 
@@ -140,6 +150,15 @@
 		
 	 -->	
 <!-- 드래그 삽입 종료-->
+
+<style type="text/css">
+	.allDeleteBtn:hover {
+		cursor: pointer;
+	}
+	.myplan-list .btn:hover {
+		cursor: pointer;
+	}
+</style>
 
 </head>
 <body>
@@ -399,7 +418,7 @@
      	<tr width="100px" align="center">
 			<th width="100px" align="center">찜순</th>        
          	<th width="400px" align="center">찜목록 </th>
-         	<th width="100px" align="center">삭제</th>
+         	<th width="100px" align="center" class="allDeleteBtn" title="전체 삭제" onclick="allBasketDelete();">삭제</th>
          </tr><% 
 	         for (int p = 0; p < basketList.size(); p++) {
 					MyPlanBasketBean mpbb = (MyPlanBasketBean) basketList.get(p); /* 찜목록 DB Bean */ 
@@ -439,7 +458,7 @@ if(!pfirstday.equals("")) {
 Calendar cal = Calendar.getInstance();
 cal.setTime(date);
 
-cal.add(Calendar.DATE,+z);	         
+cal.add(Calendar.DATE,+z-1);	         
 today = sdf.format(cal.getTime());
 
 // System.out.println("이고이고2"+today);
@@ -728,18 +747,27 @@ $(window).load(function() {
 </script>
 <script type="text/javascript">
 	// 날짜를 입력하면 찜 목록을 넣을 수 있도록 하는 자바스크립트.
-	function from_to(){
+	
+	function from_to() {
+		
+		a = true;
 		
 		from = document.getElementById("fromDate");
 		to = document.getElementById("toDate");
-		plan = $("#set_plan option:selected").val();
-		a = true;
+		
+		var from_date = from.value;
+		var to_date = to.value;
+		
+		$('#from_date').val(from_date);
+		$('#to_date').val(to_date);
 
+		plan = $("#set_plan option:selected").val();
+		
 		<%
 		MyPlanBasketDAO mpbdao = new MyPlanBasketDAO();
 		Vector vector = mpbdao.getBasketList(id);
 		List basket_l = (List) vector.get(0);
-		
+
 		//myplans에 담긴 세션아이디가 몇 행인지.
 		for(int i=0; i < basket_l.size(); i++){
 			
@@ -748,19 +776,18 @@ $(window).load(function() {
 			if(mpbb2.getFirstday() != null ){
 			
 				%>
-				
 				//여기까지 왔다면 분명히 계산해야될 값이 있는 것.
-				
+
 // 				alert("//여기까지 왔다면 분명히 계산해야될 값이 있는 것.");
-				
 					a = false;
-				
+					
 					$('#pln_list').empty();
 					
 					$.ajax({
 						type: 'post',
 						url: './myplan/myplanModify.jsp',
-						data : {diff_day:9999, plan:plan},
+						data : {diff_day:9999, plan:plan, 'from':from_date, 'to':to_date},
+						async: false,
 						success: function(data) {
 							$('#pln_list').append(data);
 						},
@@ -781,17 +808,17 @@ $(window).load(function() {
 		
 		%>
 		
-		
-		
-		if(a == true){
+		/*	if(a == true){
 		if(from.value != "" & to.value != ""){
-					
-			var arr1 = from.value.split('-');
+			
+			 var arr1 = from.value.split('-');
 	    	var arr2 = to.value.split('-');
+	    	
+	    	var arr1 = from_date.split('-');
+	    	var arr2 = to_date.split('-');
 		    var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
 		    var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
-		
-		
+
 			var diff = dat2 - dat1;
 			var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 			
@@ -803,11 +830,12 @@ $(window).load(function() {
 // 				alert(diff_day+1 + "일간 " + plan + "에 저장");
 				
 				$('#pln_list').empty();
-				
+
 				$.ajax({
 					type: 'post',
 					url: './myplan/myplanModify.jsp',
-					data : {diff_day:diff_day+1, plan:plan, from:from.value, to:to.value},
+					data : {diff_day:diff_day+1, plan:plan, 'from': from_date, 'to': to_date},
+					async: false,
 					success: function(data) {
 						$('#pln_list').append(data);
 					},
@@ -819,7 +847,7 @@ $(window).load(function() {
 					
 			}
 		}
-		}
+		} */
 		
  		
 	}

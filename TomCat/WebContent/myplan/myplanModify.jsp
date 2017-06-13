@@ -1,3 +1,4 @@
+<%@page import="com.sun.media.sound.AlawCodec"%>
 <%@page import="org.jsoup.nodes.Document"%>
 <%@page
 	import="com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException"%>
@@ -78,8 +79,32 @@ form#reg, td.tr_head {
 				MyPlanBasketBean mpbb2 = (MyPlanBasketBean) basketList.get(i);
 				TravelBean tb = (TravelBean) goodsList.get(i);
 				
-				from = mpbb2.getFirstday();
-				to = mpbb2.getLastday();
+				if(mdf==0) {
+
+					from = request.getParameter("from");
+					if(from.equals("") || from == null) {
+						from = mpbb2.getFirstday();
+					}
+					to = request.getParameter("to");
+					if(to.equals("") || to == null) {
+						to = mpbb2.getLastday();
+					}
+
+					System.out.println("mdf0자리");
+
+				}else {
+					from = request.getParameter("from");
+					if(from.equals("") || from == null) {
+						from = mpbb2.getFirstday();
+					}
+					to = request.getParameter("to");
+					if(to.equals("") || to == null) {
+						to = mpbb2.getLastday();
+					}
+					
+					System.out.println("mdf1자리");
+				}
+				
 				
 // 				out.println("출발일=" + from);
 // 				out.println("도착일=" + to);
@@ -87,6 +112,8 @@ form#reg, td.tr_head {
 				long diffDays = 0;
 
 				try {
+					System.out.println("from: "+from);
+					
 					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 					Date beginDate = formatter.parse(from);
 					Date endDate = formatter.parse(to);
@@ -95,7 +122,7 @@ form#reg, td.tr_head {
 					long diff = endDate.getTime() - beginDate.getTime();
 					diffDays = diff / (24 * 60 * 60 * 1000) + 1;
 
-// 					out.println("날짜차이=" + diffDays);;;;
+// 					out.println("날짜차이=" + diffDays);
 //
 
 				} catch (ParseException e) {
@@ -109,7 +136,7 @@ form#reg, td.tr_head {
 				if(mpbb2.getPlan_nr() != null){
 				//myplans 의 i행에 몇 열까지 있는지.
 				for(int k=0; k < mpbb2.getPlan_nr().split("@").length; k++){
-					
+					//
 // 					out.println(k + " a " + mpbb2.getPlan_nr().split("@")[k] + "<br>");
 					
 					//myplans의 i행, k열의 plan_nr이 선택한 plan과 같은지.
@@ -147,14 +174,9 @@ form#reg, td.tr_head {
 			//from, to 날짜값 받아오기.
 			from = request.getParameter("from");
 			to = request.getParameter("to");
-
 		}
 	%>
-
-
-
-
-
+	
 	<form action="./MyPlanModifyAction.pln?mdf=<%=mdf %>" method="post"
 			style="background-color: #f0f0f5; color: #222; font-weight: bold; text-shadow: 1px 1px 1px #abc; " name=reg id="reg">
 		<div style="width: 1000px; margin: 1em;">
@@ -170,19 +192,22 @@ form#reg, td.tr_head {
 					%>
 
 					<td class="setdate" onchange="from_to()">
-					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" value="<%=from%>" style="width: 180px; margin-right: 20px; ">
-					도착일 : <input type="date" name="toDate" id="toDate" required="required" value="<%=to%>" style="width: 180px; margin-right: 20px;">
+					출발일 : 
+					<input type="date" name="fromDate" id="fromDate" required="required" value="<%=from%>" style="width: 180px; margin-right: 20px;">
+					도착일 : 
+					<input type="date" name="toDate" id="toDate" required="required" value="<%=to%>" style="width: 180px; margin-right: 20px;">
 						<%
 							} else {
 						%>
 					<td class="setdate" onchange="from_to()">
-					출발일 : <input type="date" name="fromDate" id="fromDate" required="required" style="width: 180px; margin-right: 20px;">
-					도착일 : <input type="date" name="toDate" id="toDate" required="required" style="width: 180px; margin-right: 20px;;">
-
-					
+					출발일 : 
+					<input type="date" name="fromDate" id="fromDate" required="required" style="width: 180px; margin-right: 20px;">
+					도착일 : 
+					<input type="date" name="toDate" id="toDate" required="required" style="width: 180px; margin-right: 20px;">
 					</td>
+					
 					<%
-						} //
+						}
 					%>
 
 					<td class="set_plan" id="set_plan" onchange="from_to()">
@@ -190,14 +215,14 @@ form#reg, td.tr_head {
 							name="plan_nr" id="plan_nr" required="required" style="background-color: white;">
 
 					
-							<option value='100'>일정 선택</option>
+							<optgroup label="일정 선택">
 							<option value="1" <%if (plan == 1) {%> selected <%}%>>Plan
 								A</option>
 							<option value="2" <%if (plan == 2) {%> selected <%}%>>Plan
 								B</option>
 							<option value="3" <%if (plan == 3) {%> selected <%}%>>Plan
 								C</option>
-
+							</optgroup>
 							
 						</select>
 					</td>
@@ -205,8 +230,6 @@ form#reg, td.tr_head {
 				
 						<input type="image" name="submit" src="./images/myplans/일정수정.png" width="50px" height="50px" style="vertical-align:bottom; "/>&nbsp;&nbsp; 
 						<!-- <input type="image" name="reset" src="./images/myplans/다시등록.png" width="50px" height="50px" style="vertical-align:bottom;" value=""  /> -->
-				
-
 
 					</select></td>
 
