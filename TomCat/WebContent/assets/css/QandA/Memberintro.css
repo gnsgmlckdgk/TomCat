@@ -14,8 +14,8 @@ body {
 	width: 1400px;
 	height: 50%;
 	position: relative;
-	color: white;
-	text-shadow: 1px 1px 1px #222;
+	color: black;
+/* 	text-shadow: 1px 1px 1px #222; */
 }
 
 h1.combine_logo {
@@ -83,7 +83,8 @@ background-color: rgba(77, 77, 77,0.3);
 }
 
 #table1 td {
-	font-weight:bold;
-	text-shadow:1px 1px 2px black;
+	background-color:rgba(255,255,255,0.5);
+/* 	font-weight:bold; */
+/* 	text-shadow:1px 1px 2px black; */
 	vertical-align: middle;
 }

@@ -13,6 +13,8 @@
 <%
 int num= Integer.parseInt(request.getParameter("num"));
 System.out.print("넘버값이 들어오나 확인창"+num);
+
+
 	String pageNum=request.getParameter("pageNum");
 	
 		Reply1DAO rdao = new Reply1DAO();
@@ -25,7 +27,7 @@ System.out.print("넘버값이 들어오나 확인창"+num);
 
 	<div id="rp_nick">
         		<%=rr.getNick()%>
-        		s
+        		<%=rr.getContent() %>
         		</div>
         		
         		<%} %>

@@ -207,19 +207,20 @@ if(likecount%2==0){
 	
 	
 <!-- 	광고배너~ -->
+<div class="adver">
 <div class="advertize">
 
 <a href="http://modetour.com"><img src="./images/instagram/modetour.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
 </div>
 <div class="advertize2">
-<a href="#"><img src="./images/instagram/crazyfortr.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="#"><img src="./images/instagram/teamk.png" width=150 height=180 onerror="this.src='./images/instagram/noimage.png'"></a>
 </div>
 
 <div class="advertize3">
-<a href="#"><img src="./images/instagram/naver.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
+<a href="http://www.naver.com"><img src="./images/instagram/naver.png" width=150 height=150 onerror="this.src='./images/instagram/noimage.png'"></a>
 </div>
 
-
+</div>
 	
 	
 	<!-- 	화면 상단/ 하단 이동 아이콘 -->
