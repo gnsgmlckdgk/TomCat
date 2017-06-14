@@ -282,7 +282,7 @@
 
 		<!-- 이미지 서치 시작.-->
 		<div class="feature-grid">
-			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
+			<script src="./assets/js/plan/daumSearch3.js?ver=12"></script>
 
 			<div id="daumForm">
 				<input id="daumSearch" type="hidden" value="<%=region%>+여행" onkeydown="javascript:if(event.keyCode == 13) daumSearch.search();" />

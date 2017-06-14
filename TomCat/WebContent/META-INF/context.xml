@@ -1,4 +1,29 @@
- <Context>
+<!-- <Context>
+	<Resource
+		name = "jdbc/mySQL"
+		auth = "Container"
+		type = "javax.sql.DataSource"
+		driverClassName = "com.mysql.jdbc.Driver"
+		url = "jdbc:mysql://localhost/itwillbs6"
+		username = "itwillbs6"
+		password = "itwillbs8030909"
+	/>
+</Context> -->
+
+ 
+<Context>
+	<Resource
+		name = "jdbc/mySQL"
+		auth = "Container"
+		type = "javax.sql.DataSource"
+		driverClassName = "com.mysql.jdbc.Driver"
+		url = "jdbc:mysql://localhost:3306/tomcat"
+		username = "root"
+		password = "1234"
+	/>
+</Context>
+
+<!-- <Context>
 	<Resource
 		name = "jdbc/mySQL"
 		auth = "Container"
@@ -8,4 +33,4 @@
 		username = "root"
 		password = "1234"
 	/>
-</Context>
+</Context> -->

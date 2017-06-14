@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 /* SMTP서버와 관련된 정보를 지정 */
 public class MailAuthentication {
 
+	// 구글 SMTP
 	public int sendMail(String email) throws MessagingException {
 		
 		int certificationNumber = (int)(Math.random() * 90000 + 10000);	// 인증번호
@@ -73,6 +74,51 @@ public class MailAuthentication {
 		
 		return certificationNumber;
 	}
+	
+	// 카페24 호스팅 용
+	public int sendMail(String content, String email, String subject) throws com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException {
+
+		int certificationNumber = (int)(Math.random() * 90000 + 10000);	// 인증번호
+		
+		content += certificationNumber;
+		
+		final String id = "admin@itwillbs6.cafe24.com";
+		final String pass = "itwillbs8030909";
+		int port = 587;
+		String host = "smtp.cafe24.com";
+		String from = "admin@itwillbs6.cafe24.com";
+		
+		try {
+			Properties props = new Properties();
+			props.put("mail.stmp.starttls.enable", "true");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", port);
+
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(id, pass);
+				}
+			});
+			
+			session.setDebug(true);
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+			
+			message.setSubject(subject);
+			message.setContent(content, "text/html; charset=EUC-KR");
+			message.setText(content);
+
+			Transport.send(message);
+				
+		} catch (Exception e) {e.printStackTrace();}
+	
+		return certificationNumber;
+	}	
+	
+	
+	
 }
 
 /* 보내는 메일 인증 */

@@ -327,7 +327,7 @@ if(souvenirList.size()==0){
 		<div class="feature-grid">
 
 			<!-- 이미지 서치 시작.-->
-			<script src="./assets/js/plan/daumSearch3.js?ver=1"></script>
+			<script src="./assets/js/plan/daumSearch3.js?ver=12"></script>
 			<div id="daumForm">
 				<input id="daumSearch" type="hidden"
 					value="<%=ptb.getName()%>+여행후기"

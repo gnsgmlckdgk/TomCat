@@ -4,7 +4,7 @@ var daumSearch = {
         /** 초기화. **/ 
         init : function(){ 
 
-            this.apikey = "af5cbf965f941333b61a479c5e89113a "
+            this.apikey = "af5cbf965f941333b61a479c5e89113a"
             	           //"645154cac2a46c0d3275a8026e3746e77a7266da"; //DAUM_SEARCH_DEMO_APIKEY 
 
             this.q = document.getElementById('daumSearch'); 
